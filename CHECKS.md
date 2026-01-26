@@ -32,3 +32,145 @@ graph LR
 
     style V01 fill:#FFE4B5
 ```
+
+---
+
+## 🎯 MGMT-Specific Project Checks
+
+> **Note:** This section contains checks specific to MGMT as a project, not universal checks.
+> Universal checks live in [global/CHECKS.md](global/CHECKS.md)
+
+**MGMT is meta:** It's both a framework (global/) AND a project using that framework (root files).
+
+---
+
+### 📂 Dual-Layer Structure
+
+**Test: Global and project files coexist properly**
+
+```bash
+# Global framework files must exist
+test -d global && \
+test -f global/POLICY.md && \
+test -f global/CHECKS.md && \
+test -f global/update-MGMT.py && \
+echo '✅ Global framework files exist' || echo '❌ Missing global framework'
+```
+
+Expected: Global framework complete
+Pass: ✅ Global framework files exist
+
+**Test: Project status files exist at root**
+
+```bash
+test -f README.md && \
+test -f ROADMAP.md && \
+test -f CHANGELOG.md && \
+test -f POLICY.md && \
+test -f CHECKS.md && \
+echo '✅ Project status files exist' || echo '❌ Missing project files'
+```
+
+Expected: Project files at root level
+Pass: ✅ Project status files exist
+
+---
+
+### 🔄 Self-Reference Consistency
+
+**Test: MGMT follows its own rules**
+
+```bash
+# MGMT must have navigation blocks (per its own global/CHECKS.md)
+grep -q '> 🤖' README.md && \
+grep -q '> 🤖' ROADMAP.md && \
+grep -q '> 🤖' CHANGELOG.md && \
+echo '✅ MGMT follows navigation block rule' || echo '❌ MGMT violates its own rules'
+```
+
+Expected: MGMT practices what it preaches
+Pass: ✅ Self-consistent
+
+**Test: MGMT has epics in ROADMAP**
+
+```bash
+grep -E "^## v[0-9]+\.[0-9]+\.[0-9]+" ROADMAP.md >/dev/null && \
+echo '✅ MGMT tracks its own development' || echo '⚠️ No epics - MGMT not using epic format'
+```
+
+Expected: MGMT uses epic format for its own development
+Pass: ✅ Epics exist
+
+---
+
+### 📝 Documentation Clarity
+
+**Test: Global vs Project distinction is clear**
+
+```bash
+# global/POLICY.md should say "universal" or "all projects"
+# POLICY.md should reference global or say "MGMT-specific"
+grep -qi "universal\|all projects" global/POLICY.md && \
+echo '✅ Clear global vs project distinction' || echo '⚠️ Clarify what is universal vs project-specific'
+```
+
+Expected: Documentation makes layering clear
+Pass: ✅ Distinction documented
+
+---
+
+### 🔗 Prompt Files Reference Correct Paths
+
+**Test: MGMT-start prompt references global files correctly**
+
+```bash
+# MGMT-start should tell AIs to read global/POLICY.md for epic format
+grep -q "global/POLICY.md" .github/prompts/MGMT-start.prompt.md && \
+echo '✅ Prompt references global policy' || echo '⚠️ Prompt may have hardcoded paths'
+```
+
+Expected: Prompts reference global/ for universal rules
+Pass: ✅ Prompts reference framework correctly
+
+---
+
+### 🎯 Meta-Awareness
+
+**Test: README explains the meta nature**
+
+```bash
+grep -qi "framework\|polycentric\|meta" README.md && \
+echo '✅ README explains MGMT is both framework and project' || echo '⚠️ Add explanation of meta nature'
+```
+
+Expected: Users understand MGMT's dual role
+Pass: ✅ Meta nature documented
+
+---
+
+## Summary
+
+**MGMT project-specific checks ensure:**
+
+- ✅ Dual-layer structure (global framework + project files)
+- ✅ MGMT follows its own rules (dogfooding)
+- ✅ Clear documentation of what's universal vs project-specific
+- ✅ Prompts reference the framework correctly
+- ✅ Meta nature is explained to users
+
+---
+
+**Run all checks:**
+
+````bash
+# Universal checks (apply to all MGMT projects)
+bash -c "$(grep -A 1 '^```bash' global/CHECKS.md | grep -v '^```' | grep -v '^--$')"
+
+# MGMT-specific checks (this project only)
+bash -c "$(grep -A 1 '^```bash' CHECKS.md | grep -v '^```' | grep -v '^--$')"
+````
+
+---
+
+**Last updated:** 2026-01-26
+**Version:** 0.1.0 (MGMT tracking its own development)
