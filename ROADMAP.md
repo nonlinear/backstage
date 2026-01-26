@@ -75,3 +75,66 @@ graph LR
 - [ ] Update MGMT-start prompt to reference global/POLICY.md for syntax
 
 ---
+
+## v0.3.0
+
+### Update Script
+
+⏳ Smart update script to fetch MGMT framework updates from GitHub
+
+**Problem:** Projects need easy way to update MGMT framework files
+**Solution:** Interactive script compares versions, shows changes, gets user approval
+
+**Tasks:**
+
+- [ ] Fetch remote CHANGELOG from GitHub
+- [ ] Compare local vs remote version
+- [ ] Enumerate improvements per version (from CHANGELOG epics)
+- [ ] Show user what changed
+- [ ] User confirms yes/no to update
+- [ ] Download and overwrite global/ files on approval
+- [ ] Download and overwrite .github/prompts/MGMT-\* files
+- [ ] Preserve project-specific files (ROADMAP, CHANGELOG, POLICY, CHECKS at root)
+
+---
+
+## v0.4.0
+
+### Project Templates
+
+⏳ Create template for new projects with starter structure
+
+**Problem:** New projects need boilerplate setup
+**Solution:** Template with default structure and optional starter epics
+
+**Tasks:**
+
+- [ ] Create empty ROADMAP template structure
+- [ ] Include v0.1.0 Environment Setup as default first epic in template
+- [ ] Create empty CHANGELOG template
+- [ ] Create empty POLICY template (references global/POLICY.md)
+- [ ] Create empty CHECKS template (references global/CHECKS.md)
+- [ ] Add template README with navigation block
+- [ ] Document how update-MGMT.py creates missing files from templates
+- [ ] Add option: create with/without starter epics
+
+---
+
+## v0.5.0
+
+### Documentation & Diagrams
+
+⏳ Improve README value proposition and create better diagrams
+
+**Problem:** MGMT needs clearer benefits and more useful visualizations
+**Solution:** Enhanced README, dynamic diagrams generated from local files
+
+**Tasks:**
+
+- [ ] Add "why it's good" section to README (benefits, use cases)
+- [ ] Research better diagram types (timeline? dependency graph? progress tracker?)
+- [ ] Implement chosen diagram format in mermaid
+- [ ] Add diagram generation logic to global/POLICY.md
+- [ ] Update all status files with new diagram
+
+---
