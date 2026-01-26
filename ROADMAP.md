@@ -51,8 +51,8 @@ graph LR
 - [x] Create/verify .gitignore
 - [x] Fix README navigation paths
 - [ ] Configure IDE project settings (VS Code workspace)
-- [ ] Initial commit
-- [ ] Push to GitHub
+- [x] Initial commit
+- [x] Push to GitHub
 
 ---
 
