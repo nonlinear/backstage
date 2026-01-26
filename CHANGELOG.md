@@ -14,8 +14,11 @@
 ```mermaid
 %%{init: {'theme':'base', 'themeVariables': { 'fontSize':'14px'}}}%%
 graph LR
-    subgraph "🎯 Ready"
+    subgraph "✅ Done"
         V01[v0.1.0<br/>Environment Setup]
+    end
+
+    subgraph "🎯 Ready"
         V02[v0.2.0<br/>Navigation Logic]
     end
 
@@ -30,5 +33,26 @@ graph LR
     V03 --> V04
     V04 --> V05
 
-    style V01 fill:#FFE4B5
+    style V01 fill:#90EE90
 ```
+
+---
+
+## v0.1.0
+
+### Environment Setup
+
+✅ Initialize MGMT repository with git, ignore rules, and IDE configuration
+
+**Problem:** Starting fresh MGMT repo needs foundational infrastructure
+**Solution:** Set up version control, configure what to track/ignore, prepare IDE
+
+**Tasks:**
+
+- [x] Initialize git repository
+- [x] Add remote (git@github.com:nonlinear/MGMT.git)
+- [x] Create/verify .gitignore
+- [x] Fix README navigation paths
+- [x] Configure IDE project settings (VS Code workspace)
+- [x] Initial commit
+- [x] Push to GitHub

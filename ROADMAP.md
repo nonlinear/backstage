@@ -15,7 +15,6 @@
 %%{init: {'theme':'base', 'themeVariables': { 'fontSize':'14px'}}}%%
 graph LR
     subgraph "🎯 Ready"
-        V01[v0.1.0<br/>Environment Setup]
         V02[v0.2.0<br/>Navigation Logic]
     end
 
@@ -25,34 +24,10 @@ graph LR
         V05[v0.5.0<br/>Documentation]
     end
 
-    V01 --> V02
     V02 --> V03
     V03 --> V04
     V04 --> V05
-
-    style V01 fill:#FFE4B5
 ```
-
----
-
-## v0.1.0
-
-### Environment Setup
-
-⏳ Initialize MGMT repository with git, ignore rules, and IDE configuration
-
-**Problem:** Starting fresh MGMT repo needs foundational infrastructure
-**Solution:** Set up version control, configure what to track/ignore, prepare IDE
-
-**Tasks:**
-
-- [x] Initialize git repository
-- [x] Add remote (git@github.com:nonlinear/MGMT.git)
-- [x] Create/verify .gitignore
-- [x] Fix README navigation paths
-- [ ] Configure IDE project settings (VS Code workspace)
-- [x] Initial commit
-- [x] Push to GitHub
 
 ---
 
