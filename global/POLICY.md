@@ -37,6 +37,85 @@ Pass: ✅ Dependencies OK
 
 ---
 
+## Navigation Block & Status File Index
+
+**Every status file must have a navigation block** (`> 🤖 ... 🤖`) with links to all status files.
+
+**Purpose:** Provides consistent navigation and makes backstage-start workflow aware of file locations.
+
+**Precedence:** When global and project rules conflict:
+
+- **Project POLICY.md** > global/POLICY.md
+- **Project CHECKS.md** > global/CHECKS.md
+- Local knowledge always wins (polycentric governance)
+
+### Placement Rules
+
+**AI: The backstage-start prompt enforces these rules by appending/updating the navigation block automatically:**
+
+**README.md:**
+
+- Navigation block at **END** (before final line)
+- Includes mermaid roadmap diagram (source of truth from ROADMAP.md)
+
+**ROADMAP.md, CHANGELOG.md, CHECKS.md, POLICY.md:**
+
+- Navigation block at **TOP** (right after `# Title`)
+- Includes same mermaid roadmap diagram (copied from ROADMAP.md)
+
+### Format
+
+```markdown
+> 🤖
+>
+> - [README](path/to/README.md) - Our project
+> - [CHANGELOG](path/to/CHANGELOG.md) — What we did
+> - [ROADMAP](path/to/ROADMAP.md) — What we wanna do
+> - POLICY ([project](path/to/POLICY.md), [global](path/to/global/POLICY.md)) — How we do it
+> - CHECKS ([project](path/to/CHECKS.md), [global](path/to/global/CHECKS.md)) — What we accept
+>
+> 🤖
+```
+
+### Path Adjustment
+
+**Paths must be relative to each file's location:**
+
+**Example 1: Files at root level**
+
+```markdown
+> - [README](README.md)
+> - [CHANGELOG](CHANGELOG.md)
+```
+
+**Example 2: Files in subdirectory**
+
+```markdown
+> - [README](../README.md)
+> - [CHANGELOG](CHANGELOG.md)
+```
+
+**Example 3: POLICY/CHECKS with global versions**
+
+```markdown
+> - POLICY ([project](POLICY.md), [global](global/POLICY.md)) — How we do it
+```
+
+### Mermaid Diagram Distribution
+
+**Source of truth:** ROADMAP.md contains the canonical mermaid roadmap diagram
+
+**backstage-start workflow copies it to:**
+
+- README.md (at end, after navigation block)
+- All other status files (at top, after navigation block)
+
+**When to update:** Any time epics are added, moved, or completed
+
+> 🤖 **AI: backstage-start workflow maintains navigation blocks and diagrams. Don't manually copy—let the workflow enforce consistency.**
+
+---
+
 ## Branch Strategy
 
 **One branch per epic:**

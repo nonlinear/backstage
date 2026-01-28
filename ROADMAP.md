@@ -62,7 +62,7 @@ Rebrand framework from MGMT to "backstage" and document navigation logic in glob
 
 **Navigation Logic:**
 
-- [ ] Document 🤖 navigation block rules in global/POLICY.md
+- [x] Document 🤖 navigation block rules in global/POLICY.md
 - [ ] Document mermaid diagram placement rules in global/POLICY.md
 - [ ] Document path adjustment logic in global/POLICY.md
 - [ ] Add examples of proper navigation blocks
