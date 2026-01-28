@@ -1,4 +1,4 @@
-# MGMT - Roadmap
+# Backstage - Roadmap
 
 > 🤖
 >
@@ -33,21 +33,32 @@ graph LR
 
 ## v0.2.0
 
-### Navigation Logic to Global Policy
+### [🚧](https://github.com/nonlinear/backstage/tree/v0.2.0) Rebrand to Backstage + Navigation Logic
 
-⏳ Move navigation block & diagram creation logic from README to global/POLICY.md
+Rebrand framework from MGMT to "backstage" and document navigation logic in global/POLICY.md
 
-**Problem:** Navigation/diagram syntax scattered in README, should be in global POLICY as universal rule
-**Solution:** Document in global/POLICY.md how to create/distribute 🤖 blocks and mermaid diagrams
+**Problem:** "MGMT" is too generic and vague. "backstage" better captures the behind-the-scenes workflow system
+**Solution:** Systematic rename across repo, docs, and prompts
 
 **Tasks:**
+
+**Rebranding:**
+
+- [ ] Rename GitHub repo: nonlinear/MGMT → nonlinear/backstage
+- [ ] Update all documentation: MGMT → backstage (README, POLICY, CHECKS, CHANGELOG, ROADMAP)
+- [ ] Rename prompts: MGMT-start → backstage-start, MGMT-end → backstage-close, MGMT-update → backstage-update
+- [ ] Update prompt instructions to reference "backstage" framework
+- [ ] Update folder references in documentation
+- [ ] Update global/update-MGMT.py → global/update-backstage.py
+
+**Navigation Logic:**
 
 - [ ] Document 🤖 navigation block rules in global/POLICY.md
 - [ ] Document mermaid diagram placement rules in global/POLICY.md
 - [ ] Document path adjustment logic in global/POLICY.md
 - [ ] Add examples of proper navigation blocks
 - [ ] Clarify README vs status files (where each goes)
-- [ ] Update MGMT-start prompt to reference global/POLICY.md for syntax
+- [ ] Update admin-start prompt to reference global/POLICY.md for syntax
 
 ---
 
@@ -55,9 +66,9 @@ graph LR
 
 ### Update Script
 
-⏳ Smart update script to fetch MGMT framework updates from GitHub
+⏳ Smart update script to fetch backstage framework updates from GitHub
 
-**Problem:** Projects need easy way to update MGMT framework files
+**Problem:** Projects need easy way to update backstage framework files
 **Solution:** Interactive script compares versions, shows changes, gets user approval
 
 **Tasks:**
@@ -68,7 +79,7 @@ graph LR
 - [ ] Show user what changed
 - [ ] User confirms yes/no to update
 - [ ] Download and overwrite global/ files on approval
-- [ ] Download and overwrite .github/prompts/MGMT-\* files
+- [ ] Download and overwrite .github/prompts/backstage-\* files
 - [ ] Preserve project-specific files (ROADMAP, CHANGELOG, POLICY, CHECKS at root)
 
 ---
@@ -90,7 +101,7 @@ graph LR
 - [ ] Create empty POLICY template (references global/POLICY.md)
 - [ ] Create empty CHECKS template (references global/CHECKS.md)
 - [ ] Add template README with navigation block
-- [ ] Document how update-MGMT.py creates missing files from templates
+- [ ] Document how update-backstage.py creates missing files from templates
 - [ ] Add option: create with/without starter epics
 
 ---
@@ -101,7 +112,7 @@ graph LR
 
 ⏳ Improve README value proposition and create better diagrams
 
-**Problem:** MGMT needs clearer benefits and more useful visualizations
+**Problem:** Backstage needs clearer benefits and more useful visualizations
 **Solution:** Enhanced README, dynamic diagrams generated from local files
 
 **Tasks:**

@@ -1,10 +1,10 @@
-# MGMT System
+# Backstage System
 
 > Universal project management system for AI-assisted development.
 
-**Version:** 1.0.0 (placeholder - will track actual MGMT repo versions)
+**Version:** 1.0.0 (placeholder - will track actual backstage repo versions)
 
-**Source:** https://github.com/nonlinear/MGMT (not yet published)
+**Source:** https://github.com/nonlinear/backstage (not yet published)
 
 ---
 
@@ -27,11 +27,11 @@ Instead, polycentric governance recognizes:
 
 **Key insight from Ostrom:** "There is no hierarchy of governments" in effective federal systems. Different arenas (local, regional, national) are **available simultaneously** to citizens, who choose which level to engage based on their needs.
 
-### How MGMT Implements Polycentricity
+### How Backstage Implements Polycentricity
 
 **Two centers of authority:**
 
-1. **Global MGMT** (universal framework) - Defines workflow patterns, epic syntax, validation rules
+1. **Global backstage** (universal framework) - Defines workflow patterns, epic syntax, validation rules
 2. **Your project** (local implementation) - Chooses which rules to adopt, when to deviate, how to extend
 
 **Overlapping concerns:**
@@ -90,7 +90,7 @@ Ostrom showed that commons (shared resources) thrive under polycentric governanc
 2. **Flexibility beats rigidity** - Adapt patterns instead of forcing compliance
 3. **Innovation happens everywhere** - Best practices emerge from experiments, not mandates
 
-**MGMT as commons:** The workflow patterns are shared infrastructure. You benefit from others' discoveries (via MGMT updates) while contributing your own (via gaps documentation). Polycentric structure keeps this sustainable.
+**Backstage as commons:** The workflow patterns are shared infrastructure. You benefit from others' discoveries (via backstage updates) while contributing your own (via gaps documentation). Polycentric structure keeps this sustainable.
 
 ---
 
@@ -125,14 +125,14 @@ Ostrom showed that commons (shared resources) thrive under polycentric governanc
 
 ---
 
-## What is MGMT?
+## What is Backstage?
 
 A meta-documentation system that provides:
 
-1. **Workflow prompts** (MGMT-start, MGMT-end, MGMT-update)
+1. **Workflow prompts** (backstage-start, backstage-close, backstage-update)
 2. **Universal policies** (epic dance, semantic versioning, branch strategy)
 3. **Validation checks** (documentation sync, navigation blocks, formatting)
-4. **Update mechanism** (fetch latest MGMT system from repo)
+4. **Update mechanism** (fetch latest backstage system from repo)
 
 ---
 
@@ -220,7 +220,7 @@ When new MGMT versions are released:
 
 ## Philosophy
 
-**MGMT provides structure, you provide content.**
+**Backstage provides structure, you provide content.**
 
 Global files are like a framework - they define patterns and workflows.
 Project files implement those patterns for your specific project.
@@ -242,8 +242,8 @@ Example:
 
 ---
 
-**Last updated:** 2026-01-26
-**MGMT Repo:** https://github.com/nonlinear/MGMT (coming soon)
+**Last updated:** 2026-01-28
+**Backstage Repo:** https://github.com/nonlinear/backstage
 
 ---
 

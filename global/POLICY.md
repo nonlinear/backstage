@@ -1,6 +1,6 @@
 # Global Policy
 
-> Universal workflow rules that apply across all projects using this MGMT system.
+> Universal workflow rules that apply across all projects using this backstage system.
 
 **Inspired by:** Elinor Ostrom's polycentric governance framework—multiple centers of power (global/project) with overlapping, not hierarchical, jurisdictions.
 
@@ -51,11 +51,13 @@ v0.5-third-feature (feature branch)
 
 ### Branch Naming
 
+**Format:** `v0.X.0` (version number only, no descriptive names)
+
 **Examples:**
 
-- `v0.3-delta-indexing`
-- `v0.4-provider-integration`
-- `v1.0-breaking-changes`
+- `v0.3.0`
+- `v0.4.0`
+- `v1.0.0`
 
 ### Workflow
 
@@ -76,10 +78,10 @@ v0.5-third-feature (feature branch)
 
 ```bash
 # List all epic notes
-ls MGMT/epic-notes/
+ls epic-notes/
 
 # Search for relevant keywords
-grep -r "keyword" MGMT/epic-notes/
+grep -r "keyword" epic-notes/
 ```
 
 **Why epic notes matter:**
@@ -172,13 +174,13 @@ Replace ⏳ with 🚧 and add branch link:
 **Structure (v0.4.0 and earlier):**
 
 ```
-MGMT/epic-notes/v0.X.0.md  # Single file for all notes
+epic-notes/v0.X.0.md  # Single file for all notes
 ```
 
 **Structure (v0.5.0+):**
 
 ```
-MGMT/epic-notes/v0.X.0/
+epic-notes/v0.X.0/
   ├── MAIN.md                      # Primary epic documentation
   ├── specific-finding.md          # Specific finding/experiment
   └── another-finding.md           # Another finding

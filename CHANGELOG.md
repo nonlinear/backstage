@@ -1,4 +1,4 @@
-# MGMT - Changelog
+# Backstage - Changelog
 
 > 🤖
 >
@@ -42,9 +42,9 @@ graph LR
 
 ### Environment Setup
 
-✅ Initialize MGMT repository with git, ignore rules, and IDE configuration
+✅ Initialize backstage repository with git, ignore rules, and IDE configuration
 
-**Problem:** Starting fresh MGMT repo needs foundational infrastructure
+**Problem:** Starting fresh backstage repo needs foundational infrastructure
 **Solution:** Set up version control, configure what to track/ignore, prepare IDE
 
 **Tasks:**

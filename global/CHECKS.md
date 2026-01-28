@@ -95,7 +95,6 @@ Pass: ✅ All required files present
 **Test: Global MGMT files exist**
 
 ```bash
-test -f MGMT/global/README.md && \
 test -f MGMT/global/POLICY.md && \
 test -f MGMT/global/CHECKS.md && \
 test -f MGMT/global/update-MGMT.py && \
@@ -103,7 +102,7 @@ echo '✅ Global MGMT files exist' || echo '❌ Missing global files'
 ```
 
 Expected: Prints '✅ Global MGMT files exist'
-Pass: ✅ Global files present
+Pass: ✅ Global files present (README.md lives at root, not in global/)
 
 ---
 

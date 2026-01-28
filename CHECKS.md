@@ -1,4 +1,4 @@
-# MGMT - Stability Checks
+# Backstage - Stability Checks
 
 > 🤖
 >
@@ -35,12 +35,12 @@ graph LR
 
 ---
 
-## 🎯 MGMT-Specific Project Checks
+## 🎯 Backstage-Specific Project Checks
 
-> **Note:** This section contains checks specific to MGMT as a project, not universal checks.
+> **Note:** This section contains checks specific to backstage as a project, not universal checks.
 > Universal checks live in [global/CHECKS.md](global/CHECKS.md)
 
-**MGMT is meta:** It's both a framework (global/) AND a project using that framework (root files).
+**Backstage is meta:** It's both a framework (global/) AND a project using that framework (root files).
 
 ---
 
@@ -53,7 +53,7 @@ graph LR
 test -d global && \
 test -f global/POLICY.md && \
 test -f global/CHECKS.md && \
-test -f global/update-MGMT.py && \
+test -f global/update-backstage.py && \
 echo '✅ Global framework files exist' || echo '❌ Missing global framework'
 ```
 
@@ -78,27 +78,27 @@ Pass: ✅ Project status files exist
 
 ### 🔄 Self-Reference Consistency
 
-**Test: MGMT follows its own rules**
+**Test: Backstage follows its own rules**
 
 ```bash
-# MGMT must have navigation blocks (per its own global/CHECKS.md)
+# backstage must have navigation blocks (per its own global/CHECKS.md)
 grep -q '> 🤖' README.md && \
 grep -q '> 🤖' ROADMAP.md && \
 grep -q '> 🤖' CHANGELOG.md && \
-echo '✅ MGMT follows navigation block rule' || echo '❌ MGMT violates its own rules'
+echo '✅ Backstage follows navigation block rule' || echo '❌ Backstage violates its own rules'
 ```
 
-Expected: MGMT practices what it preaches
+Expected: Backstage practices what it preaches
 Pass: ✅ Self-consistent
 
-**Test: MGMT has epics in ROADMAP**
+**Test: Backstage has epics in ROADMAP**
 
 ```bash
 grep -E "^## v[0-9]+\.[0-9]+\.[0-9]+" ROADMAP.md >/dev/null && \
-echo '✅ MGMT tracks its own development' || echo '⚠️ No epics - MGMT not using epic format'
+echo '✅ Backstage tracks its own development' || echo '⚠️ No epics - backstage not using epic format'
 ```
 
-Expected: MGMT uses epic format for its own development
+Expected: Backstage uses epic format for its own development
 Pass: ✅ Epics exist
 
 ---
@@ -109,7 +109,7 @@ Pass: ✅ Epics exist
 
 ```bash
 # global/POLICY.md should say "universal" or "all projects"
-# POLICY.md should reference global or say "MGMT-specific"
+# POLICY.md should reference global or say "backstage-specific"
 grep -qi "universal\|all projects" global/POLICY.md && \
 echo '✅ Clear global vs project distinction' || echo '⚠️ Clarify what is universal vs project-specific'
 ```
@@ -121,11 +121,11 @@ Pass: ✅ Distinction documented
 
 ### 🔗 Prompt Files Reference Correct Paths
 
-**Test: MGMT-start prompt references global files correctly**
+**Test: backstage-start prompt references global files correctly**
 
 ```bash
-# MGMT-start should tell AIs to read global/POLICY.md for epic format
-grep -q "global/POLICY.md" .github/prompts/MGMT-start.prompt.md && \
+# backstage-start should tell AIs to read global/POLICY.md for epic format
+grep -q "global/POLICY.md" .github/prompts/backstage-start.prompt.md && \
 echo '✅ Prompt references global policy' || echo '⚠️ Prompt may have hardcoded paths'
 ```
 
@@ -140,20 +140,20 @@ Pass: ✅ Prompts reference framework correctly
 
 ```bash
 grep -qi "framework\|polycentric\|meta" README.md && \
-echo '✅ README explains MGMT is both framework and project' || echo '⚠️ Add explanation of meta nature'
+echo '✅ README explains backstage is both framework and project' || echo '⚠️ Add explanation of meta nature'
 ```
 
-Expected: Users understand MGMT's dual role
+Expected: Users understand backstage's dual role
 Pass: ✅ Meta nature documented
 
 ---
 
 ## Summary
 
-**MGMT project-specific checks ensure:**
+**Backstage project-specific checks ensure:**
 
 - ✅ Dual-layer structure (global framework + project files)
-- ✅ MGMT follows its own rules (dogfooding)
+- ✅ Backstage follows its own rules (dogfooding)
 - ✅ Clear documentation of what's universal vs project-specific
 - ✅ Prompts reference the framework correctly
 - ✅ Meta nature is explained to users
@@ -163,14 +163,14 @@ Pass: ✅ Meta nature documented
 **Run all checks:**
 
 ````bash
-# Universal checks (apply to all MGMT projects)
+# Universal checks (apply to all backstage projects)
 bash -c "$(grep -A 1 '^```bash' global/CHECKS.md | grep -v '^```' | grep -v '^--$')"
 
-# MGMT-specific checks (this project only)
+# Backstage-specific checks (this project only)
 bash -c "$(grep -A 1 '^```bash' CHECKS.md | grep -v '^```' | grep -v '^--$')"
 ````
 
 ---
 
-**Last updated:** 2026-01-26
-**Version:** 0.1.0 (MGMT tracking its own development)
+**Last updated:** 2026-01-28
+**Version:** 0.1.0 (backstage tracking its own development)

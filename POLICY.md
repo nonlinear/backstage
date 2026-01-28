@@ -37,7 +37,7 @@ graph LR
 
 ## Universal Workflow
 
-**This project follows the [global MGMT policy](global/POLICY.md)** for:
+**This project follows the [global backstage policy](global/POLICY.md)** for:
 
 - Epic/branch workflow ("Epic Dance")
 - Semantic versioning
@@ -46,7 +46,7 @@ graph LR
 - Rebase vs merge rules
 - Pre-commit workflow
 
-**This file contains only Librarian-specific rules and deviations.**
+**This file contains only backstage-specific rules and deviations.**
 
 ---
 
@@ -195,10 +195,10 @@ v0.5-automation (feature branch)
 
 ```bash
 # List all epic notes
-ls MGMT/epic-notes/
+ls epic-notes/
 
 # Search for relevant keywords
-grep -r "keyword" MGMT/epic-notes/
+grep -r "keyword" epic-notes/
 ```
 
 **Why epic notes matter:**
@@ -293,13 +293,13 @@ Replace ⏳ with 🚧 and add branch link:
 **Structure (v0.4.0 and earlier):**
 
 ```
-MGMT/epic-notes/v0.X.0.md  # Single file for all notes
+epic-notes/v0.X.0.md  # Single file for all notes
 ```
 
 **Structure (v0.5.0+):**
 
 ```
-MGMT/epic-notes/v0.X.0/
+epic-notes/v0.X.0/
   ├── MAIN.md                      # Primary epic documentation
   ├── pill-validation.md           # Specific finding/experiment
   └── autocomplete-fix.md          # Another finding
