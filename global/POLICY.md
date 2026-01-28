@@ -65,41 +65,30 @@ Pass: ✅ Dependencies OK
 
 ### Format
 
+**Navigation block template:**
+
 ```markdown
-> 🤖
->
-> - [README](path/to/README.md) - Our project
-> - [CHANGELOG](path/to/CHANGELOG.md) — What we did
-> - [ROADMAP](path/to/ROADMAP.md) — What we wanna do
-> - POLICY ([project](path/to/POLICY.md), [global](path/to/global/POLICY.md)) — How we do it
-> - CHECKS ([project](path/to/CHECKS.md), [global](path/to/global/CHECKS.md)) — What we accept
->
-> 🤖
+| Backstage files                                                              | Description        |
+| ---------------------------------------------------------------------------- | ------------------ |
+| [README](path/to/README.md)                                                  | Our project        |
+| [CHANGELOG](path/to/CHANGELOG.md)                                            | What we did        |
+| [ROADMAP](path/to/ROADMAP.md)                                                | What we wanna do   |
+| POLICY: [project](path/to/POLICY.md), [global](path/to/global/POLICY.md)     | How we go about it |
+| CHECKS: [project](path/to/CHECKS.md), [global](path/to/global/CHECKS.md)     | What we accept     |
+| We use **[backstage rules](https://github.com/nonlinear/backstage)**, v0.2.0 |                    |
 ```
 
 ### Path Adjustment
 
-**Paths must be relative to each file's location:**
+**All paths in the navigation block are relative to each file's location.**
 
-**Example 1: Files at root level**
+The navigation block appears in multiple files across the project. The backstage-start workflow automatically calculates correct paths when updating navigation blocks based on:
 
-```markdown
-> - [README](README.md)
-> - [CHANGELOG](CHANGELOG.md)
-```
+- **File's directory level** (root vs subdirectory)
+- **Distance to target files** (same dir, parent dir, child dir)
+- **Global file references** (POLICY/CHECKS point to both project and global versions)
 
-**Example 2: Files in subdirectory**
-
-```markdown
-> - [README](../README.md)
-> - [CHANGELOG](CHANGELOG.md)
-```
-
-**Example 3: POLICY/CHECKS with global versions**
-
-```markdown
-> - POLICY ([project](POLICY.md), [global](global/POLICY.md)) — How we do it
-```
+No manual path calculation needed—the workflow handles this automatically.
 
 ### Mermaid Diagram Distribution
 
@@ -543,3 +532,4 @@ refactor: consolidate folder structure
 **Last updated:** 2026-01-26
 **Version:** 1.0 (Extracted from Librarian project)
 **Source:** Elinor Ostrom's polycentric governance principles
+````
