@@ -51,6 +51,15 @@ Rebrand framework from MGMT to "backstage" and document navigation logic in glob
 - [ ] Update folder references in documentation
 - [ ] Update global/update-MGMT.py → global/update-backstage.py
 
+**Templates:**
+
+- [ ] Create global/templates/ folder
+- [ ] Create ROADMAP-template.md (empty with optional v0.1.0 starter)
+- [ ] Create CHANGELOG-template.md (empty - starts when project starts)
+- [ ] Create POLICY-template.md (empty)
+- [ ] Create CHECKS-template.md (empty)
+- [ ] Document template usage in project POLICY.md (what to do when files missing)
+
 **Navigation Logic:**
 
 - [ ] Document 🤖 navigation block rules in global/POLICY.md
@@ -58,7 +67,7 @@ Rebrand framework from MGMT to "backstage" and document navigation logic in glob
 - [ ] Document path adjustment logic in global/POLICY.md
 - [ ] Add examples of proper navigation blocks
 - [ ] Clarify README vs status files (where each goes)
-- [ ] Update admin-start prompt to reference global/POLICY.md for syntax
+- [ ] Update backstage-start prompt to reference global/POLICY.md for syntax
 
 ---
 

@@ -50,6 +50,45 @@ graph LR
 
 ---
 
+## Template System (Backstage-Specific)
+
+**When backstage-start prompt doesn't find status files:**
+
+Templates live in `global/templates/` and provide starter structure:
+
+### ROADMAP-template.md
+
+- Empty roadmap with v0.1.0 Environment Setup starter epic
+- Copy to project root as `ROADMAP.md`
+- Customize for your project's planned features
+
+### CHANGELOG-template.md
+
+- Empty changelog (starts when project starts)
+- If you have existing changelog, paste it here
+- Run backstage-start to groom format per POLICY
+
+### POLICY-template.md
+
+- References global/POLICY.md
+- Add project-specific rules here
+- Document any deviations from global workflow
+
+### CHECKS-template.md
+
+- Empty project checks structure
+- Add your project-specific validation tests
+- Inherits global/CHECKS.md universal tests
+
+**Workflow:**
+
+1. backstage-start detects missing file
+2. Copies from global/templates/ to project root
+3. Explains what the file does
+4. Guides you to populate it
+
+---
+
 ## 🚨 About This Project
 
 **This is a personal library management system - NOT a collaborative repository.**
