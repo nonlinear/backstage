@@ -256,16 +256,16 @@ git push --force-with-lease origin v0.X.0
 - Before creating PR
 - After major main updates
 
-### Step 9: Before Merging - Use MGMT-start Workflow
+### Step 9: Before Merging - Use backstage-start Workflow
 
 ```bash
 # Run pre-commit workflow (does steps 10-11 automatically)
-# See .github/prompts/MGMT-start.prompt.md
+# See .github/prompts/backstage-start.prompt.md
 ```
 
-**The MGMT-start workflow will:**
+**The backstage-start workflow will:**
 
-- ✅ Run all CHECKS (see MGMT/CHECKS.md)
+- ✅ Run all CHECKS (see CHECKS.md)
 - ✅ Update ROADMAP (mark completed checkboxes)
 - ✅ Move epic to CHANGELOG (if complete)
 - ✅ Bump version number (semantic versioning)

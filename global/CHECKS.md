@@ -66,11 +66,11 @@ Pass: ✅ All navigation blocks present
 if git diff --quiet; then
   echo '✅ No uncommitted changes'
 else
-  echo '⚠️ Uncommitted changes - run /MGMT-start to sync docs'
+  echo '⚠️ Uncommitted changes - run /backstage-start to sync docs'
 fi
 ```
 
-Expected: Either no changes or reminder to run /MGMT-start
+Expected: Either no changes or reminder to run /backstage-start
 Pass: ✅ Clean state or acknowledged pending sync
 
 ---
@@ -97,8 +97,8 @@ Pass: ✅ All required files present
 ```bash
 test -f MGMT/global/POLICY.md && \
 test -f MGMT/global/CHECKS.md && \
-test -f MGMT/global/update-MGMT.py && \
-echo '✅ Global MGMT files exist' || echo '❌ Missing global files'
+test -f MGMT/global/update-backstage.py && \
+echo '✅ Global backstage files exist' || echo '❌ Missing global files'
 ```
 
 Expected: Prints '✅ Global MGMT files exist'

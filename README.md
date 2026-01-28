@@ -152,12 +152,12 @@ MGMT/
   schemas/           # Your data structures
   epic-notes/        # Your session logs
 
-  # Global files (imported from MGMT repo)
+  # Global files (imported from backstage repo)
   global/
     README.md        # This file
     POLICY.md        # Universal workflow rules
     CHECKS.md        # Universal validation tests
-    update-MGMT.py   # Update script
+    update-backstage.py   # Update script
 ```
 
 ---
@@ -183,30 +183,30 @@ Universal validation tests:
 - Formatting standards
 - Status file completeness
 
-### update-MGMT.py
+### update-backstage.py
 
-Script to update global MGMT files from repo:
+Script to update global backstage files from repo:
 
 ```bash
-python3.11 MGMT/global/update-MGMT.py
+python3.11 global/update-backstage.py
 ```
 
 ---
 
 ## Updating MGMT
 
-When new MGMT versions are released:
+When new backstage versions are released:
 
-1. Run `/MGMT-update` prompt (or `python3.11 MGMT/global/update-MGMT.py`)
-2. Script fetches MGMT repo CHANGELOG
+1. Run `/backstage-update` prompt (or `python3.11 global/update-backstage.py`)
+2. Script fetches backstage repo CHANGELOG
 3. Shows what changed per version
-4. If you confirm, overwrites files in `MGMT/global/`
+4. If you confirm, overwrites files in `global/`
 5. Your project files stay untouched
 
 **Files that update:**
 
-- `MGMT/global/*` (all global files)
-- `.github/prompts/MGMT-*.prompt.md` (workflow prompts)
+- `global/*` (all global files)
+- `.github/prompts/backstage-*.prompt.md` (workflow prompts)
 
 **Files that stay:**
 
