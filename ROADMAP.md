@@ -44,21 +44,21 @@ Rebrand framework from MGMT to "backstage" and document navigation logic in glob
 
 **Rebranding:**
 
-- [ ] Rename GitHub repo: nonlinear/MGMT → nonlinear/backstage
-- [ ] Update all documentation: MGMT → backstage (README, POLICY, CHECKS, CHANGELOG, ROADMAP)
-- [ ] Rename prompts: MGMT-start → backstage-start, MGMT-end → backstage-close, MGMT-update → backstage-update
-- [ ] Update prompt instructions to reference "backstage" framework
-- [ ] Update folder references in documentation
-- [ ] Update global/update-MGMT.py → global/update-backstage.py
+- [x] Rename GitHub repo: nonlinear/MGMT → nonlinear/backstage
+- [x] Update all documentation: MGMT → backstage (README, POLICY, CHECKS, CHANGELOG, ROADMAP)
+- [x] Rename prompts: MGMT-start → backstage-start, MGMT-end → backstage-close, MGMT-update → backstage-update
+- [x] Update prompt instructions to reference "backstage" framework
+- [x] Update folder references in documentation
+- [x] Update global/update-MGMT.py → global/update-backstage.py
 
 **Templates:**
 
-- [ ] Create global/templates/ folder
-- [ ] Create ROADMAP-template.md (empty with optional v0.1.0 starter)
-- [ ] Create CHANGELOG-template.md (empty - starts when project starts)
-- [ ] Create POLICY-template.md (empty)
-- [ ] Create CHECKS-template.md (empty)
-- [ ] Document template usage in project POLICY.md (what to do when files missing)
+- [x] Create global/templates/ folder
+- [x] Create ROADMAP-template.md (empty with optional v0.1.0 starter)
+- [x] Create CHANGELOG-template.md (empty - starts when project starts)
+- [x] Create POLICY-template.md (empty)
+- [x] Create CHECKS-template.md (empty)
+- [x] Document template usage in project POLICY.md (what to do when files missing)
 
 **Navigation Logic:**
 
