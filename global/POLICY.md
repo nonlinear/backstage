@@ -44,11 +44,13 @@ Pass: ✅ Dependencies OK
 ### 1. Initial Scaffolding (First Install)
 
 **Run from project root:**
+
 ```bash
 python backstage/global/backstage-update.py
 ```
 
 **Creates complete structure:**
+
 - `backstage/ROADMAP.md` (from templates/ROADMAP-template.md)
 - `backstage/CHANGELOG.md` (from templates/CHANGELOG-template.md)
 - `backstage/POLICY.md` (from templates/POLICY-template.md)
@@ -61,11 +63,13 @@ python backstage/global/backstage-update.py
 ### 2. Framework Updates (Existing Projects)
 
 **Run from existing installation:**
+
 ```bash
 python backstage/global/backstage-update.py
 ```
 
 **Updates 6 files:**
+
 - `backstage/global/POLICY.md`
 - `backstage/global/CHECKS.md`
 - `backstage/global/backstage-update.py` (self-update)
@@ -74,6 +78,7 @@ python backstage/global/backstage-update.py
 - `.github/prompts/backstage-update.prompt.md`
 
 **Preserves:**
+
 - `backstage/ROADMAP.md` (your epics)
 - `backstage/CHANGELOG.md` (your history)
 - `backstage/POLICY.md` (your rules)
