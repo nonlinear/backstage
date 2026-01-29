@@ -69,6 +69,13 @@ Rebrand framework from MGMT to "backstage" and document navigation logic in glob
 - [x] Clarify README vs backstage files (README is spine/public, others are production)
 - [ ] Update backstage-start prompt to reference global/POLICY.md for syntax
 
+**Backstage Update System:**
+
+- [ ] Document backstage-update workflow in global/POLICY.md
+- [ ] Create .github/prompts/backstage-update.prompt.md
+- [ ] Implement global/update-backstage.py fetch logic
+- [ ] Add version comparison and changelog display
+
 ---
 
 ## v0.3.0

@@ -60,6 +60,7 @@ Pass: ✅ Dependencies OK
 **Global rule:** backstage-start can append navigation block but **NOT rewrite README content** without explicit confirmation.
 
 **What needs confirmation:**
+
 - What will change (specific sections/lines)
 - How it will change (show before/after)
 - Where it will change (exact line numbers)
@@ -109,6 +110,18 @@ The navigation block appears in multiple files across the project. The backstage
 
 No manual path calculation needed—the workflow handles this automatically.
 
+### Mermaid Roadmap Diagram
+
+**Source of truth:** ROADMAP.md contains the canonical mermaid roadmap diagram showing epic status.
+
+**backstage-start workflow:**
+
+1. Reads diagram from ROADMAP.md
+2. Copies it to README.md (at end, after navigation block)
+3. Copies it to all other backstage files (at top, after navigation block)
+
+**When to update:** Any time epics are added, moved, or completed—backstage-start handles distribution automatically.
+
 > 🤖 **AI: backstage-start workflow maintains navigation blocks and diagrams. Don't manually copy—let the workflow enforce consistency.**
 
 ---
@@ -150,22 +163,36 @@ v0.5-third-feature (feature branch)
 
 ### 🔍 Before Starting New Work: Review Epic Notes
 
-**CRITICAL:** Always check existing epic notes before starting similar work to avoid reinventing the wheel.
+**CRITICAL:** Always check existing documentation before starting similar work to avoid reinventing the wheel.
+
+**Read before starting epic:**
+
+1. **epic-notes/** — Session logs from previous work (what we did)
+2. **gaps/** — Failed experiments, hidden tricks, community discoveries (what we learned NOT to do, or what works that others don't know)
 
 ```bash
 # List all epic notes
 ls epic-notes/
 
-# Search for relevant keywords
+# Search for relevant keywords in epic notes
 grep -r "keyword" epic-notes/
+
+# Check gaps for related discoveries
+ls gaps/
+grep -r "keyword" gaps/
 ```
 
-**Why epic notes matter:**
+**Why gaps/ matters:**
 
-- **Discovered blockers:** Previous epics may have hit technical limitations
-- **Tested solutions:** Multiple approaches already tried and documented
-- **Documented workarounds:** Pragmatic solutions when ideal ones don't work
-- **Deferred features:** Features intentionally postponed with reasoning
+- **Failed experiments:** Avoid repeating fruitless tasks
+- **Hidden tricks:** Apply techniques that worked but aren't documented elsewhere
+- **Community contributions:** Share novel discoveries with others
+
+**Write to gaps/ after epic:**
+
+- Found something that didn't work? Document it (save others the pain)
+- Found a trick nowhere else documents? Share it (community value)
+- Researched deeply but went nowhere? Capture it (prevent wheel reinvention)
 
 **When to check:**
 
@@ -174,7 +201,8 @@ grep -r "keyword" epic-notes/
 - Considering a feature that "feels like it was tried before"
 - Planning technical approaches
 
-**Epic notes = knowledge base** - Treat them as first-class documentation, not just session logs.
+**epic-notes/ = session logs** — Track what we did during development
+**gaps/ = knowledge base** — Prevent mistakes, share discoveries
 
 ---
 
