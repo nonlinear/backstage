@@ -83,9 +83,27 @@ Only **surgical, pointed changes** allowed—no wholesale rewrites.
 - Navigation block at **TOP** (right after `# Title`)
 - Includes same mermaid roadmap diagram (copied from ROADMAP.md)
 
+### Why 🤖 Markers Exist: Future-Proof Format Changes
+
+**The markers are format-agnostic boundaries.**
+
+In the future, navigation block format may change:
+- Table → list
+- New diagram types
+- Different syntax entirely
+
+**How backstage-start handles this:**
+
+1. Find `> 🤖` (start marker)
+2. Find `> 🤖` (end marker)
+3. Delete everything between
+4. Insert current format from POLICY.md
+
+**Works regardless of old format** - the script doesn't need to know what the old syntax was. Markers are the stable contract, content between them evolves freely.
+
 ### Format
 
-**Navigation block template:**
+**Navigation block template (current version):**
 
 ```markdown
 | Backstage files                                                              | Description        |
