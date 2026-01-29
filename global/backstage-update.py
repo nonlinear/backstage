@@ -5,7 +5,7 @@ Backstage System Updater
 Fetches latest backstage system files from GitHub repo and updates global/ folder.
 
 Usage:
-    python3.11 global/update-backstage.py
+    python3.11 backstage/global/backstage-update.py
 
 Or use the /backstage-update prompt for guided workflow.
 """

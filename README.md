@@ -8,6 +8,59 @@
 
 ---
 
+## Installation
+
+**For new projects:**
+
+1. **Clone backstage as sibling to your README:**
+
+   ```bash
+   # From your project root (where README.md lives)
+   git clone https://github.com/nonlinear/backstage.git backstage
+   ```
+
+2. **Run initial setup:**
+
+   ```bash
+   python backstage/global/backstage-update.py
+   ```
+
+   This will:
+   - Create backstage files (ROADMAP, CHANGELOG, POLICY, CHECKS)
+   - Copy global/ framework to your project
+   - Copy .github/prompts/ workflow files
+   - Delete bootstrap version (global/ now has the real one)
+
+3. **Commit backstage framework:**
+   ```bash
+   git add backstage/ .github/
+   git commit -m "chore: add backstage framework"
+   ```
+
+**Your project structure:**
+
+```
+your-project/
+├── README.md              # Your project (public)
+├── backstage/
+│   ├── ROADMAP.md        # What you wanna do
+│   ├── CHANGELOG.md      # What you did
+│   ├── POLICY.md         # How you work (extends global)
+│   ├── CHECKS.md         # What you accept (extends global)
+│   └── global/           # Framework (updates via backstage-update.py)
+│       ├── POLICY.md
+│       ├── CHECKS.md
+│       ├── backstage-update.py
+│       └── templates/
+└── .github/
+    └── prompts/
+        ├── backstage-start.prompt.md
+        ├── backstage-close.prompt.md
+        └── backstage-update.prompt.md
+```
+
+---
+
 ## Philosophy: Polycentric Governance
 
 **Inspired by Elinor Ostrom's work on commons management.**
@@ -132,7 +185,7 @@ A meta-documentation system that provides:
 1. **Workflow prompts** (backstage-start, backstage-close, backstage-update)
 2. **Universal policies** (epic dance, semantic versioning, branch strategy)
 3. **Validation checks** (documentation sync, navigation blocks, formatting)
-4. **Update mechanism** (fetch latest backstage system from repo)
+4. **Update mechanism** (backstage-update.py fetches latest from repo)
 
 ---
 
@@ -157,7 +210,7 @@ MGMT/
     README.md        # This file
     POLICY.md        # Universal workflow rules
     CHECKS.md        # Universal validation tests
-    update-backstage.py   # Update script
+    backstage-update.py   # Update script
 ```
 
 ---
@@ -183,12 +236,12 @@ Universal validation tests:
 - Formatting standards
 - Status file completeness
 
-### update-backstage.py
+### backstage-update.py
 
 Script to update global backstage files from repo:
 
 ```bash
-python3.11 global/update-backstage.py
+python3.11 backstage/global/backstage-update.py
 ```
 
 ---
@@ -197,7 +250,7 @@ python3.11 global/update-backstage.py
 
 When new backstage versions are released:
 
-1. Run `/backstage-update` prompt (or `python3.11 global/update-backstage.py`)
+1. Run `/backstage-update` prompt (or `python3.11 backstage/global/backstage-update.py`)
 2. Script fetches backstage repo CHANGELOG
 3. Shows what changed per version
 4. If you confirm, overwrites files in `global/`

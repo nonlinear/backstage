@@ -49,7 +49,7 @@ Rebrand framework from MGMT to "backstage" and document navigation logic in glob
 - [x] Rename prompts: MGMT-start → backstage-start, MGMT-end → backstage-close, MGMT-update → backstage-update
 - [x] Update prompt instructions to reference "backstage" framework
 - [x] Update folder references in documentation
-- [x] Update global/update-MGMT.py → global/update-backstage.py
+- [x] Rename global/update-MGMT.py → global/backstage-update.py
 
 **Templates:**
 
@@ -73,8 +73,9 @@ Rebrand framework from MGMT to "backstage" and document navigation logic in glob
 
 - [ ] Document backstage-update workflow in global/POLICY.md
 - [ ] Create .github/prompts/backstage-update.prompt.md
-- [ ] Implement global/update-backstage.py fetch logic
+- [ ] Implement global/backstage-update.py fetch logic (existing files only)
 - [ ] Add version comparison and changelog display
+- [ ] Add onboarding logic (handle projects without global/ or .github/ yet)
 
 ---
 
@@ -117,7 +118,7 @@ Rebrand framework from MGMT to "backstage" and document navigation logic in glob
 - [ ] Create empty POLICY template (references global/POLICY.md)
 - [ ] Create empty CHECKS template (references global/CHECKS.md)
 - [ ] Add template README with navigation block
-- [ ] Document how update-backstage.py creates missing files from templates
+- [ ] Document how backstage-update.py creates missing files from templates
 - [ ] Add option: create with/without starter epics
 
 ---

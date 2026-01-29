@@ -112,7 +112,7 @@ Pass: ✅ All required files present
 ```bash
 test -f MGMT/global/POLICY.md && \
 test -f MGMT/global/CHECKS.md && \
-test -f MGMT/global/update-backstage.py && \
+test -f MGMT/global/backstage-update.py && \
 echo '✅ Global backstage files exist' || echo '❌ Missing global files'
 ```
 

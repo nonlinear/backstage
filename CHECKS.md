@@ -53,7 +53,7 @@ graph LR
 test -d global && \
 test -f global/POLICY.md && \
 test -f global/CHECKS.md && \
-test -f global/update-backstage.py && \
+test -f global/backstage-update.py && \
 echo '✅ Global framework files exist' || echo '❌ Missing global framework'
 ```
 
