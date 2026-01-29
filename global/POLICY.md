@@ -116,8 +116,10 @@ In the future, navigation block format may change:
 > | POLICY: [project](path/to/POLICY.md), [global](path/to/global/POLICY.md) | How we go about it |
 > | CHECKS: [project](path/to/CHECKS.md), [global](path/to/global/CHECKS.md) | What we accept |
 > | We use **[backstage rules](https://github.com/nonlinear/backstage)**, v0.2.0 |
-> 🤖 |
+> 🤖
 ```
+
+**Note:** Markdown tables don't support width attributes natively. The long dashes in the separator row (76 characters) create visual width, but actual rendering width depends on your markdown viewer.
 
 ### Path Adjustment
 
