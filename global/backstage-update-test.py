@@ -5,7 +5,10 @@ Backstage System Updater - TEST VERSION
 Fetches from v0.2.0 branch instead of main for testing purposes.
 
 Usage:
-    python3 backstage/global/backstage-update-test.py
+    python3 backstage/global/backstage-update-test.py [--yes]
+
+Options:
+    --yes    Skip confirmation prompts (auto-confirm)
 """
 
 import sys
@@ -32,17 +35,17 @@ PROMPT_FILES = [
 ]
 
 TEMPLATE_FILES = [
-    "global/templates/ROADMAP-template.md",
-    "global/templates/CHANGELOG-template.md",
-    "global/templates/POLICY-template.md",
-    "global/templates/HEALTH-template.md",
+    "templates/ROADMAP-template.md",
+    "templates/CHANGELOG-template.md",
+    "templates/POLICY-template.md",
+    "templates/HEALTH-template.md",
 ]
 
 def fetch_file(repo_owner, repo_name, branch, file_path):
     """Fetch a single file from GitHub."""
     url = f"https://raw.githubusercontent.com/{repo_owner}/{repo_name}/{branch}/{file_path}"
     print(f"  Fetching: {file_path}")
-    
+
     try:
         with urllib.request.urlopen(url) as response:
             content = response.read().decode('utf-8')
@@ -63,15 +66,15 @@ def scaffold_project():
     """Initial setup: Create project files from templates."""
     print("\n🏗️  SCAFFOLDING MODE: Creating project structure")
     print("=" * 50)
-    
+
     # Create project files from templates
     files_to_create = {
-        "ROADMAP.md": "global/templates/ROADMAP-template.md",
-        "CHANGELOG.md": "global/templates/CHANGELOG-template.md",
-        "POLICY.md": "global/templates/POLICY-template.md",
-        "HEALTH.md": "global/templates/HEALTH-template.md",
+        "ROADMAP.md": "templates/ROADMAP-template.md",
+        "CHANGELOG.md": "templates/CHANGELOG-template.md",
+        "POLICY.md": "templates/POLICY-template.md",
+        "HEALTH.md": "templates/HEALTH-template.md",
     }
-    
+
     for dest, template_path in files_to_create.items():
         print(f"\n📝 Creating {dest}...")
         content = fetch_file(REPO_OWNER, REPO_NAME, BRANCH, template_path)
@@ -80,12 +83,12 @@ def scaffold_project():
             print(f"  ✅ Created")
         else:
             print(f"  ❌ Failed to fetch template")
-    
+
     # Create .github/prompts/ directory and copy prompts
     print(f"\n📁 Creating .github/prompts/...")
     prompts_dir = Path(".github/prompts")
     prompts_dir.mkdir(parents=True, exist_ok=True)
-    
+
     for prompt_file in PROMPT_FILES:
         print(f"\n📝 Copying {prompt_file}...")
         content = fetch_file(REPO_OWNER, REPO_NAME, BRANCH, prompt_file)
@@ -94,7 +97,7 @@ def scaffold_project():
             dest.parent.mkdir(parents=True, exist_ok=True)
             dest.write_text(content)
             print(f"  ✅ Created")
-    
+
     print("\n✅ Scaffolding complete!")
     print("\nNext steps:")
     print("1. Customize ROADMAP.md with your project's epics")
@@ -106,16 +109,16 @@ def update_framework():
     """Update mode: Fetch and overwrite framework files."""
     print("\n🔄 UPDATE MODE: Refreshing framework files")
     print("=" * 50)
-    
+
     all_files = GLOBAL_FILES + PROMPT_FILES + TEMPLATE_FILES
-    
+
     updated = []
     failed = []
-    
+
     for file_path in all_files:
         print(f"\n📥 Updating {file_path}...")
         content = fetch_file(REPO_OWNER, REPO_NAME, BRANCH, file_path)
-        
+
         if content:
             dest = Path(file_path)
             dest.parent.mkdir(parents=True, exist_ok=True)
@@ -125,48 +128,57 @@ def update_framework():
         else:
             print(f"  ❌ Failed")
             failed.append(file_path)
-    
+
     print("\n" + "=" * 50)
     print(f"✅ Updated: {len(updated)} files")
     if failed:
         print(f"❌ Failed: {len(failed)} files")
         for f in failed:
             print(f"  - {f}")
-    
+
     print("\n📋 Project files preserved:")
     print("  - ROADMAP.md (your epics)")
     print("  - CHANGELOG.md (your history)")
     print("  - POLICY.md (your rules)")
     print("  - HEALTH.md (your checks)")
-    
+
     print("\nNext step: Run /backstage-start to validate changes")
 
 def main():
     """Main entry point."""
-    
+
+    # Check for --yes flag
+    auto_confirm = '--yes' in sys.argv or '-y' in sys.argv
+
     print("🎯 Backstage Update - TEST VERSION")
     print(f"📍 Fetching from: {REPO_OWNER}/{REPO_NAME}@{BRANCH}")
     print("⚠️  This is a TEST script - fetches from v0.2.0 branch")
     print()
-    
+
     # Detect mode
     mode = detect_mode()
-    
+
     if mode == "scaffold":
         print("🔍 No ROADMAP.md found - running in SCAFFOLD mode")
-        response = input("\nCreate new project structure? (yes/no): ")
-        if response.lower() not in ['yes', 'y']:
-            print("Cancelled.")
-            return 0
+        if not auto_confirm:
+            response = input("\nCreate new project structure? (yes/no): ")
+            if response.lower() not in ['yes', 'y']:
+                print("Cancelled.")
+                return 0
+        else:
+            print("\n🤖 Auto-confirming (--yes flag)")
         scaffold_project()
     else:
         print("🔍 ROADMAP.md exists - running in UPDATE mode")
-        response = input(f"\nUpdate framework files from {BRANCH}? (yes/no): ")
-        if response.lower() not in ['yes', 'y']:
-            print("Cancelled.")
-            return 0
+        if not auto_confirm:
+            response = input(f"\nUpdate framework files from {BRANCH}? (yes/no): ")
+            if response.lower() not in ['yes', 'y']:
+                print("Cancelled.")
+                return 0
+        else:
+            print(f"\n🤖 Auto-confirming update from {BRANCH}")
         update_framework()
-    
+
     return 0
 
 if __name__ == '__main__':

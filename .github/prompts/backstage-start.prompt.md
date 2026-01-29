@@ -420,7 +420,7 @@ cat [STATUS_FILES_LOCATION]/HEALTH.md
 **If project HEALTH.md doesn't exist:**
 
 - ❌ **STOP:** "I don't see HEALTH.md. What tests must pass before pushing?"
-- ✅ Create HEALTH.md from user input (use template from global/templates/)
+- ✅ Create HEALTH.md from user input (use template from templates/)
 
 ### 2B. Execute Tests from HEALTH (Run ALL from Both Files)
 

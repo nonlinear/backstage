@@ -186,10 +186,10 @@ print("⚠️  This script is a placeholder.")
 # Detect: Does ROADMAP.md exist?
 if not Path("ROADMAP.md").exists():
     # Initial setup
-    copy("global/templates/ROADMAP-template.md", "ROADMAP.md")
-    copy("global/templates/CHANGELOG-template.md", "CHANGELOG.md")
-    copy("global/templates/POLICY-template.md", "POLICY.md")
-    copy("global/templates/HEALTH-template.md", "HEALTH.md")
+    copy("templates/ROADMAP-template.md", "ROADMAP.md")
+    copy("templates/CHANGELOG-template.md", "CHANGELOG.md")
+    copy("templates/POLICY-template.md", "POLICY.md")
+    copy("templates/HEALTH-template.md", "HEALTH.md")
     # Copy prompts
     copy("global/../.github/prompts/*.prompt.md", ".github/prompts/")
 ```

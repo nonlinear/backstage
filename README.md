@@ -49,11 +49,11 @@ your-project/
 │   ├── CHANGELOG.md      # What you did
 │   ├── POLICY.md         # How you work (extends global)
 │   ├── HEALTH.md         # What you accept (extends global)
+│   ├── templates/        # Seeds for new projects
 │   └── global/           # Framework (updates via backstage-update.py)
 │       ├── POLICY.md
 │       ├── HEALTH.md
-│       ├── backstage-update.py
-│       └── templates/
+│       └── backstage-update.py
 └── .github/
     └── prompts/
         ├── backstage-start.prompt.md
@@ -214,6 +214,27 @@ MGMT/
     HEALTH.md        # Universal validation tests
     backstage-update.py   # Update script
 ```
+
+---
+
+## Workflow Prompts
+
+**When to use each prompt:**
+
+| Prompt                                                         | When to Use                              | What It Does                                                                                                              |
+| -------------------------------------------------------------- | ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| [backstage-start](.github/prompts/backstage-start.prompt.md)   | Before starting work session             | Validates project health, checks navigation blocks, runs all health checks (global + project), identifies epic to work on |
+| [backstage-close](.github/prompts/backstage-close.prompt.md)   | When pausing/ending session              | Runs health checks, commits progress on pass (adds fixes to ROADMAP on fail), victory lap, body check reminder            |
+| [backstage-update](.github/prompts/backstage-update.prompt.md) | When backstage framework has new version | Fetches CHANGELOG from repo, shows what changed, runs `backstage-update.py` to refresh global/ and .github/prompts/       |
+
+**Typical workflow:**
+
+1. `/backstage-start` → validates setup, picks epic
+2. Work on epic tasks
+3. `/backstage-close` → validates, commits, celebrates
+4. Repeat
+
+When backstage updates: `/backstage-update` → refresh framework files → `/backstage-start` to validate
 
 ---
 

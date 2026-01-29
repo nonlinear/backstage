@@ -85,7 +85,7 @@ When completing an epic and merging to main:
 
 **When backstage-start prompt doesn't find status files:**
 
-Templates live in `global/templates/` and provide starter structure:
+Templates live in `templates/` and provide starter structure:
 
 ### ROADMAP-template.md
 
@@ -114,7 +114,7 @@ Templates live in `global/templates/` and provide starter structure:
 **Workflow:**
 
 1. backstage-start detects missing file
-2. Copies from global/templates/ to project root
+2. Copies from templates/ to project root
 3. Explains what the file does
 4. Guides you to populate it
 

@@ -12,12 +12,14 @@
 
 ---
 
-## Project-Specific Checks
-
-> **Note:** This file contains checks specific to YOUR project.
-> Universal checks live in [global/HEALTH.md](global/HEALTH.md)
-
----
+> 🌟
+>
+> This project follows the [global backstage HEALTH](global/HEALTH.md)
+> Do write all tests here as explained below
+> [/backstage-start](.github/prompts/backstage-start.prompt.md) trigger tests
+> For more policies, see [POLICY.md](POLICY.md)
+>
+> 🌟
 
 ### Test: [Your Test Name]
 
@@ -50,7 +52,3 @@ bash -c "$(grep -A 1 '^```bash' global/HEALTH.md | grep -v '^```' | grep -v '^--
 # Project-specific checks (this project only)
 bash -c "$(grep -A 1 '^```bash' HEALTH.md | grep -v '^```' | grep -v '^--$')"
 ````
-
----
-
-**Last updated:** [Date]

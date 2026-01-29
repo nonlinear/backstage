@@ -282,10 +282,10 @@ Pass: 🚧 Blocked on GitHub repo publication
 | #   | Metric                  | Type   | Test                        |
 | --- | ----------------------- | ------ | --------------------------- |
 | 1   | Detect missing files    | MUST   | Checks if ROADMAP.md exists |
-| 2   | Copy ROADMAP template   | MUST   | From global/templates/      |
-| 3   | Copy CHANGELOG template | MUST   | From global/templates/      |
-| 4   | Copy POLICY template    | MUST   | From global/templates/      |
-| 5   | Copy CHECKS template    | MUST   | From global/templates/      |
+| 2   | Copy ROADMAP template   | MUST   | From templates/             |
+| 3   | Copy CHANGELOG template | MUST   | From templates/             |
+| 4   | Copy POLICY template    | MUST   | From templates/             |
+| 5   | Copy CHECKS template    | MUST   | From templates/             |
 | 6   | Copy .github/prompts    | MUST   | All 3 workflow prompts      |
 | 7   | Explain what files do   | SHOULD | User guidance               |
 

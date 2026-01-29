@@ -14,73 +14,15 @@
 ```mermaid
 %%{init: {'theme':'base', 'themeVariables': { 'fontSize':'14px'}}}%%
 graph LR
-    subgraph "🎯 Ready"
-        V02[v0.2.0<br/>Navigation Logic]
-    end
-
-    subgraph "📅 Future"
+    subgraph "📞 Future"
         V03[v0.3.0<br/>Update Script]
         V04[v0.4.0<br/>Templates]
         V05[v0.5.0<br/>Documentation]
     end
 
-    V02 --> V03
     V03 --> V04
     V04 --> V05
 ```
-
----
-
-## v0.2.0
-
-### [🚧](https://github.com/nonlinear/backstage/tree/v0.2.0) Rebrand to Backstage + Navigation Logic
-
-Rebrand framework from MGMT to "backstage" and document navigation logic in global/POLICY.md
-
-**Problem:** "MGMT" is too generic and vague. "backstage" better captures the behind-the-scenes workflow system
-**Solution:** Systematic rename across repo, docs, and prompts
-
-**Tasks:**
-
-**Rebranding:**
-
-- [x] Rename GitHub repo: nonlinear/MGMT → nonlinear/backstage
-- [x] Update all documentation: MGMT → backstage (README, POLICY, HEALTH, CHANGELOG, ROADMAP)
-- [x] Rename prompts: MGMT-start → backstage-start, MGMT-end → backstage-close, MGMT-update → backstage-update
-- [x] Update prompt instructions to reference "backstage" framework
-- [x] Update folder references in documentation
-- [x] Rename global/update-MGMT.py → global/backstage-update.py
-
-**Templates:**
-
-- [x] Create global/templates/ folder
-- [x] Create ROADMAP-template.md (empty with optional v0.1.0 starter)
-- [x] Create CHANGELOG-template.md (empty - starts when project starts)
-- [x] Create POLICY-template.md (empty)
-- [x] Create HEALTH-template.md (empty)
-- [x] Document template usage in project POLICY.md (what to do when files missing)
-
-**Navigation Logic:**
-
-- [x] Document 🤖 navigation block rules in global/POLICY.md
-- [x] Document mermaid diagram placement rules in global/POLICY.md
-- [x] Document path adjustment logic in global/POLICY.md
-- [x] Add examples of proper navigation blocks
-- [x] Clarify README vs backstage files (README is spine/public, others are production)
-- [x] Update backstage-start prompt to reference global/POLICY.md for syntax (removed hardcoded examples)
-- [x] Add product health metrics to HEALTH.md (8+6+7+13 = 34 metrics)
-- [x] Rename CHECKS → HEALTH (clearer purpose: "definition of healthy system")
-- [x] Update HEALTH titles and descriptions in all files
-- [x] Fix backstage-start STEP 2: Read BOTH global + project HEALTH files
-- [ ] HEALTH validation py logic (update and scaffolding)
-
-**Backstage Update System:**
-
-- [ ] Document backstage-update workflow in global/POLICY.md
-- [ ] Create .github/prompts/backstage-update.prompt.md
-- [ ] Implement global/backstage-update.py fetch logic (existing files only)
-- [ ] Add version comparison and changelog display
-- [ ] Add onboarding logic (handle projects without global/ or .github/ yet)
 
 ---
 
