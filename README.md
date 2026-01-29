@@ -10,7 +10,11 @@
 
 ## Installation
 
-**For new projects:**
+**Requirements:** VS Code with prompt support (for `.github/prompts/` workflow)
+
+**Note:** If not using VS Code, manually move `.github/prompts/backstage-*.prompt.md` files to your editor's prompt folder after installation.
+
+**For new projects:****
 
 1. **Clone backstage as sibling to your README:**
 
@@ -246,19 +250,21 @@ python3.11 backstage/global/backstage-update.py
 
 ---
 
-## Updating MGMT
+## Updating Backstage
 
 When new backstage versions are released:
 
-1. Run `/backstage-update` prompt (or `python3.11 backstage/global/backstage-update.py`)
-2. Script fetches backstage repo CHANGELOG
+1. Run `/backstage-update` prompt
+2. Prompt fetches backstage repo CHANGELOG
 3. Shows what changed per version
-4. If you confirm, overwrites files in `global/`
-5. Your project files stay untouched
+4. If you confirm "yes", activates `backstage-update.py`
+5. Script overwrites files in `global/` and `.github/prompts/`
+6. Suggests running `/backstage-start` to validate changes
+7. Your project files stay untouched
 
 **Files that update:**
 
-- `global/*` (all global files)
+- `backstage/global/*` (all global framework files)
 - `.github/prompts/backstage-*.prompt.md` (workflow prompts)
 
 **Files that stay:**
