@@ -625,11 +625,43 @@ refactor: consolidate folder structure
 
 ---
 
+## Typo Checking
+
+**Run during backstage-start workflow:**
+
+**Easy to detect typos:** Fix automatically
+
+- Common misspellings (e.g., "runing" → "running", "inform" → "informs")
+- Missing plurals/verb agreement
+- Obvious grammatical errors
+
+**Voice choice:** Keep as-is
+
+- Intentional informal language
+- Project-specific terminology
+- Stylistic decisions
+
+**Unknown/uncertain typos:** Present to user with context
+
+- Show quoted text with surrounding context
+- Include file link with line number
+- Let user decide whether to fix
+
+**Example output:**
+
+```
+Possible typo in [README.md](README.md#L42):
+> "...allows you to be in your zone while AI ensure best practices..."
+Did you mean "ensures"?
+```
+
+---
+
 ## Pre-Commit Workflow
 
 **ALWAYS run before merging to main:**
 
-1. **Use MGMT-start prompt** (see `.github/prompts/MGMT-start.prompt.md`)
+1. **Use backstage-start prompt** (see `.github/prompts/backstage-start.prompt.md`)
 2. **Check HEALTH.md** for stability requirements
 3. **Update ROADMAP** - mark completed checkboxes
 4. **Move to CHANGELOG** - if epic complete
