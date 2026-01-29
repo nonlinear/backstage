@@ -55,7 +55,22 @@ Pass: ✅ All navigation blocks present
 
 ---
 
-## 📊 Documentation Sync Check
+## � Knowledge Base Check (gaps/)
+
+**Purpose:** Make AI mindful of existing gaps before starting work. During epic, if relevant pattern emerges, AI can suggest reading specific gap.
+
+**Test: List existing gaps**
+
+```bash
+ls -lt gaps/ 2>/dev/null | head -10 || echo "No gaps/ directory yet"
+```
+
+Expected: Shows gap files (newest first) or message if directory doesn't exist
+Pass: ✅ AI now aware of documented gaps
+
+---
+
+## �📊 Documentation Sync Check
 
 **Changes in code must be reflected in ROADMAP/CHANGELOG.**
 
