@@ -10,11 +10,7 @@
 
 ## Installation
 
-**Requirements:** VS Code with prompt support (for `.github/prompts/` workflow)
-
-**Note:** If not using VS Code, manually move `.github/prompts/backstage-*.prompt.md` files to your editor's prompt folder after installation.
-
-**For new projects:****
+**For new projects:**
 
 1. **Clone backstage as sibling to your README:**
 
@@ -32,10 +28,12 @@
    This will:
    - Create backstage files (ROADMAP, CHANGELOG, POLICY, CHECKS)
    - Copy global/ framework to your project
-   - Copy .github/prompts/ workflow files
+   - Add .github/prompts/ workflow files (backstage-start, backstage-close, backstage-update)
    - Delete bootstrap version (global/ now has the real one)
 
-3. **Commit backstage framework:**
+3. **If not using VS Code:** Manually move prompts from `.github/prompts/` to your IDE's prompt folder
+
+4. **Commit backstage framework:**
    ```bash
    git add backstage/ .github/
    git commit -m "chore: add backstage framework"
