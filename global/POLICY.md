@@ -88,6 +88,7 @@ Only **surgical, pointed changes** allowed—no wholesale rewrites.
 **The markers are format-agnostic boundaries.**
 
 In the future, navigation block format may change:
+
 - Table → list
 - New diagram types
 - Different syntax entirely
@@ -106,14 +107,16 @@ In the future, navigation block format may change:
 **Navigation block template (current version):**
 
 ```markdown
-| Backstage files                                                              | Description        |
-| ---------------------------------------------------------------------------- | ------------------ |
-| [README](path/to/README.md)                                                  | Our project        |
-| [CHANGELOG](path/to/CHANGELOG.md)                                            | What we did        |
-| [ROADMAP](path/to/ROADMAP.md)                                                | What we wanna do   |
-| POLICY: [project](path/to/POLICY.md), [global](path/to/global/POLICY.md)     | How we go about it |
-| CHECKS: [project](path/to/CHECKS.md), [global](path/to/global/CHECKS.md)     | What we accept     |
-| We use **[backstage rules](https://github.com/nonlinear/backstage)**, v0.2.0 |                    |
+> 🤖
+> | Backstage files | Description |
+> | ---------------------------------------------------------------------------- | ------------------ |
+> | [README](path/to/README.md) | Our project |
+> | [CHANGELOG](path/to/CHANGELOG.md) | What we did |
+> | [ROADMAP](path/to/ROADMAP.md) | What we wanna do |
+> | POLICY: [project](path/to/POLICY.md), [global](path/to/global/POLICY.md) | How we go about it |
+> | CHECKS: [project](path/to/CHECKS.md), [global](path/to/global/CHECKS.md) | What we accept |
+> | We use **[backstage rules](https://github.com/nonlinear/backstage)**, v0.2.0 |
+> 🤖 |
 ```
 
 ### Path Adjustment
@@ -140,7 +143,7 @@ No manual path calculation needed—the workflow handles this automatically.
 
 **When to update:** Any time epics are added, moved, or completed—backstage-start handles distribution automatically.
 
-> 🤖 **AI: backstage-start workflow maintains navigation blocks and diagrams. Don't manually copy—let the workflow enforce consistency.**
+**AI Note:** backstage-start workflow maintains navigation blocks and diagrams. Don't manually copy—let the workflow enforce consistency.
 
 ---
 
@@ -242,7 +245,7 @@ grep -r "keyword" gaps/
    - Task checklist
 5. **Review and refine** tasks (can spend time here)
 
-> 🤖 **AI: Always update mermaid graph when adding/moving/completing epics**
+**AI Note:** Always update mermaid graph when adding/moving/completing epics
 
 **Example:**
 
@@ -434,7 +437,7 @@ git push origin --delete v0.3.0
 
 ## Epic Format
 
-> 🤖 **AI: Use this syntax when writing epics in ROADMAP or CHANGELOG**
+**AI Note:** Use this syntax when writing epics in ROADMAP or CHANGELOG
 
 **Syntax:**
 
