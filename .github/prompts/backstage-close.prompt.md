@@ -10,7 +10,7 @@
 
 ## How It Works
 
-1. **Check stability** → Run CHECKS.md validation
+1. **Check stability** → Run HEALTH.md validation
 2. **Handle failures** → Add fixes to epic task list (if checks fail)
 3. **Push if clean** → Commit + push if all checks pass
 4. **Victory lap** → Brief reminder of what you just did
@@ -24,8 +24,8 @@
 ### Step 1: Run Checks
 
 ```bash
-# Run all checks from CHECKS.md
-# See MGMT/CHECKS.md for current stability requirements
+# Run all checks from HEALTH.md
+# See MGMT/HEALTH.md for current stability requirements
 ```
 
 **If all pass:** ✅ Proceed to push
@@ -115,7 +115,7 @@ echo "🌙 Closing VS Code in 5 seconds... (Ctrl+C to cancel)" && sleep 5 && osa
 
 ## Check Policy
 
-**From CHECKS.md:**
+**From HEALTH.md:**
 
 - **Epic branches:** Soft fail (warn but allow)
 - **Main branch:** Hard fail (block merge)

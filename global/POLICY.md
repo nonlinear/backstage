@@ -54,7 +54,7 @@ python backstage/global/backstage-update.py
 - `backstage/ROADMAP.md` (from templates/ROADMAP-template.md)
 - `backstage/CHANGELOG.md` (from templates/CHANGELOG-template.md)
 - `backstage/POLICY.md` (from templates/POLICY-template.md)
-- `backstage/CHECKS.md` (from templates/CHECKS-template.md)
+- `backstage/HEALTH.md` (from templates/HEALTH-template.md)
 - `backstage/global/*` (already in place from clone)
 - `.github/prompts/backstage-*.prompt.md` (all 3 workflow prompts)
 
@@ -71,7 +71,7 @@ python backstage/global/backstage-update.py
 **Updates 6 files:**
 
 - `backstage/global/POLICY.md`
-- `backstage/global/CHECKS.md`
+- `backstage/global/HEALTH.md`
 - `backstage/global/backstage-update.py` (self-update)
 - `.github/prompts/backstage-start.prompt.md`
 - `.github/prompts/backstage-close.prompt.md`
@@ -82,7 +82,7 @@ python backstage/global/backstage-update.py
 - `backstage/ROADMAP.md` (your epics)
 - `backstage/CHANGELOG.md` (your history)
 - `backstage/POLICY.md` (your rules)
-- `backstage/CHECKS.md` (your tests)
+- `backstage/HEALTH.md` (your tests)
 
 **Workflow:** Use `/backstage-update` prompt → shows changes → user confirms → script runs → suggests `/backstage-start`
 
@@ -97,7 +97,7 @@ python backstage/global/backstage-update.py
 **Precedence:** When global and project rules conflict:
 
 - **Project POLICY.md** > global/POLICY.md
-- **Project CHECKS.md** > global/CHECKS.md
+- **Project HEALTH.md** > global/HEALTH.md
 - Local knowledge always wins (polycentric governance)
 
 ### README Protection
@@ -129,7 +129,7 @@ Only **surgical, pointed changes** allowed—no wholesale rewrites.
 - Navigation block at **END** (before final line)
 - Includes mermaid roadmap diagram (source of truth from ROADMAP.md)
 
-**ROADMAP.md, CHANGELOG.md, CHECKS.md, POLICY.md:**
+**ROADMAP.md, CHANGELOG.md, HEALTH.md, POLICY.md:**
 
 - Navigation block at **TOP** (right after `# Title`)
 - Includes same mermaid roadmap diagram (copied from ROADMAP.md)
@@ -165,7 +165,7 @@ In the future, navigation block format may change:
 > | [CHANGELOG](path/to/CHANGELOG.md) | What we did |
 > | [ROADMAP](path/to/ROADMAP.md) | What we wanna do |
 > | POLICY: [project](path/to/POLICY.md), [global](path/to/global/POLICY.md) | How we go about it |
-> | CHECKS: [project](path/to/CHECKS.md), [global](path/to/global/CHECKS.md) | What we accept |
+> | CHECKS: [project](path/to/HEALTH.md), [global](path/to/global/HEALTH.md) | What we accept |
 > | We use **[backstage rules](https://github.com/nonlinear/backstage)**, v0.2.0 |
 > 🤖
 ```
@@ -441,7 +441,7 @@ git push --force-with-lease origin v0.X.0
 
 **The backstage-start workflow will:**
 
-- ✅ Run all CHECKS (see CHECKS.md)
+- ✅ Run all CHECKS (see HEALTH.md)
 - ✅ Update ROADMAP (mark completed checkboxes)
 - ✅ Move epic to CHANGELOG (if complete)
 - ✅ Bump version number (semantic versioning)
@@ -630,7 +630,7 @@ refactor: consolidate folder structure
 **ALWAYS run before merging to main:**
 
 1. **Use MGMT-start prompt** (see `.github/prompts/MGMT-start.prompt.md`)
-2. **Check CHECKS.md** for stability requirements
+2. **Check HEALTH.md** for stability requirements
 3. **Update ROADMAP** - mark completed checkboxes
 4. **Move to CHANGELOG** - if epic complete
 5. **Run all tests** - ensure nothing broke

@@ -1,4 +1,4 @@
-# [Project Name] - Stability Checks
+# [Project Name] - Health Metrics
 
 > 🤖
 >
@@ -6,7 +6,7 @@
 > - [CHANGELOG](CHANGELOG.md) — What we did
 > - [ROADMAP](ROADMAP.md) — What we wanna do
 > - [POLICY](POLICY.md) — How we do it
-> - [CHECKS](CHECKS.md) — What we accept
+> - [HEALTH](HEALTH.md) — What we accept
 >
 > 🤖
 
@@ -15,7 +15,7 @@
 ## Project-Specific Checks
 
 > **Note:** This file contains checks specific to YOUR project.
-> Universal checks live in [global/CHECKS.md](global/CHECKS.md)
+> Universal checks live in [global/HEALTH.md](global/HEALTH.md)
 
 ---
 
@@ -45,10 +45,10 @@ Pass: ✅ [Success criteria]
 
 ````bash
 # Universal checks (apply to all backstage projects)
-bash -c "$(grep -A 1 '^```bash' global/CHECKS.md | grep -v '^```' | grep -v '^--$')"
+bash -c "$(grep -A 1 '^```bash' global/HEALTH.md | grep -v '^```' | grep -v '^--$')"
 
 # Project-specific checks (this project only)
-bash -c "$(grep -A 1 '^```bash' CHECKS.md | grep -v '^```' | grep -v '^--$')"
+bash -c "$(grep -A 1 '^```bash' HEALTH.md | grep -v '^```' | grep -v '^--$')"
 ````
 
 ---

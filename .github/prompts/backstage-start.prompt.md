@@ -47,7 +47,7 @@ flowchart TD
 
 1. **Read README** to find where status files live (always project-specific)
 2. **Compare** actual work with documented plans
-3. **Validate** stability using CHECKS (check [README](/README.md) for location)
+3. **Validate** stability using HEALTH (check [README](/README.md) for location)
 4. **Update** docs automatically (ROADMAP → CHANGELOG)
 5. **Determine outcome** (1 of 5 possible states)
 6. **Act** (push, fix, or groom)
@@ -75,7 +75,7 @@ flowchart TD
 > - [CHANGELOG](path/to/CHANGELOG.md) — What we did
 > - [ROADMAP](path/to/ROADMAP.md) — What we wanna do
 > - [POLICY](path/to/POLICY.md) — How we do it
-> - [CHECKS](path/to/CHECKS.md) — What we accept
+> - [CHECKS](path/to/HEALTH.md) — What we accept
 > - [/MGMT-start](path/to/MGMT-start.prompt.md) — The prompt that keeps us sane
 >
 > 🤖
@@ -104,10 +104,10 @@ cat README.md
 1. **Global defaults** (`MGMT/global/`) - Universal rules from MGMT framework
 2. **Project overrides** (`MGMT/`) - Project-specific rules that take precedence
 
-**For CHECKS.md:**
+**For HEALTH.md:**
 
-- Read `MGMT/global/CHECKS.md` first (universal validation)
-- Then read `MGMT/CHECKS.md` (project-specific checks)
+- Read `MGMT/global/HEALTH.md` first (universal validation)
+- Then read `MGMT/HEALTH.md` (project-specific checks)
 - Run ALL checks from both files
 - If conflict, project check wins
 
@@ -141,7 +141,7 @@ cat README.md
 
 **Each status file is an instruction set for AI:**
 
-- **CHECKS.md** → Executable tests/validation (treat as test suite)
+- **HEALTH.md** → Executable tests/validation (treat as test suite)
 - **POLICY.md** → Workflow rules and conventions (treat as process spec)
 - **ROADMAP.md** → Planned features with epic format (treat as backlog)
 - **CHANGELOG.md** → Version history (treat as append-only log)
@@ -178,7 +178,7 @@ cat ./MGMT/CHANGELOG.md
 
 ### Distributing the 🤖 Block + Mermaid Roadmap
 
-**🚨 WHEN TO UPDATE: Every time you groom ROADMAP (add/complete/move epics) in CHECKS.md**
+**🚨 WHEN TO UPDATE: Every time you groom ROADMAP (add/complete/move epics) in HEALTH.md**
 
 **Process:**
 
@@ -325,7 +325,7 @@ Options:
 
 ---
 
-> Note: This prompt orchestrates the workflow defined in the status files (POLICY.md, ROADMAP.md, CHANGELOG.md, CHECKS.md). All workflow rules and epic/branch conventions live in POLICY.md. If you see redundant or outdated workflow details here, update or remove them in favor of the status files as the single source of truth.
+> Note: This prompt orchestrates the workflow defined in the status files (POLICY.md, ROADMAP.md, CHANGELOG.md, HEALTH.md). All workflow rules and epic/branch conventions live in POLICY.md. If you see redundant or outdated workflow details here, update or remove them in favor of the status files as the single source of truth.
 
 ### 1A. Analyze Actual Changes
 
@@ -397,13 +397,13 @@ cat ROADMAP.md | grep -Ei "in progress|planned|todo" -A 20
 
 **🚨 CRITICAL:** Do NOT proceed to STEP 3 unless ALL checks pass.
 
-### 2A. Read CHECKS
+### 2A. Read HEALTH
 
 **AI: CHECKS contains all project-specific tests (check [README](/README.md) for location):**
 
 ```bash
 # Read from location specified in README
-cat [STATUS_FILES_LOCATION]/CHECKS.md
+cat [STATUS_FILES_LOCATION]/HEALTH.md
 
 # Look for "For AI:" or "Automated test sequence" section
 # It will contain exact commands to run
@@ -411,10 +411,10 @@ cat [STATUS_FILES_LOCATION]/CHECKS.md
 
 **If CHECKS doesn't exist (check [README](/README.md) for location):**
 
-- ❌ **STOP:** "I don't see CHECKS. What tests must pass before pushing?"
-- ✅ Create CHECKS from user input (use template below)
+- ❌ **STOP:** "I don't see HEALTH. What tests must pass before pushing?"
+- ✅ Create HEALTH from user input (use template below)
 
-### 2B. Execute Tests from CHECKS
+### 2B. Execute Tests from HEALTH
 
 **Run the test script found in CHECKS:**
 
@@ -533,15 +533,15 @@ Every status file (ROADMAP, CHANGELOG, CHECKS) must end with this navigation men
 
 > 🤖: See [ROADMAP](path/to/ROADMAP.md) for planned features & in-progress work
 > 🤖: See [CHANGELOG](path/to/CHANGELOG.md) for version history & completed features
-> 🤖: See [CHECKS](path/to/CHECKS.md) for stability requirements & testing
+> 🤖: See [CHECKS](path/to/HEALTH.md) for stability requirements & testing
 > 👷: Consider using [/MGMT-start prompt](https://github.com/nonlinear/nonlinear.github.io/blob/main/.github/prompts/MGMT-start.prompt.md) for updates
 ```
 
 **Important:** Adjust paths relative to each file's location:
 
-- If file is in `/MGMT/ROADMAP.md`, links are: `ROADMAP.md`, `CHANGELOG.md`, `CHECKS.md`, `../.github/prompts/MGMT-start.prompt.md`
-- If file is in `/docs/ROADMAP.md`, links are: `ROADMAP.md`, `CHANGELOG.md`, `CHECKS.md`, `../.github/prompts/MGMT-start.prompt.md`
-- If file is in root `/ROADMAP.md`, links are: `ROADMAP.md`, `CHANGELOG.md`, `CHECKS.md`, `.github/prompts/MGMT-start.prompt.md`
+- If file is in `/MGMT/ROADMAP.md`, links are: `ROADMAP.md`, `CHANGELOG.md`, `HEALTH.md`, `../.github/prompts/MGMT-start.prompt.md`
+- If file is in `/docs/ROADMAP.md`, links are: `ROADMAP.md`, `CHANGELOG.md`, `HEALTH.md`, `../.github/prompts/MGMT-start.prompt.md`
+- If file is in root `/ROADMAP.md`, links are: `ROADMAP.md`, `CHANGELOG.md`, `HEALTH.md`, `.github/prompts/MGMT-start.prompt.md`
 
 **When to add menu:**
 
@@ -1016,7 +1016,7 @@ Return to STEP 2 after fixes.
 
 **Gets from all files:** (check [README](/README.md) for locations)
 
-- Code state: [from CHECKS tests]
+- Code state: [from HEALTH tests]
 - Planned work: [from ROADMAP]
 - Completed work: [from CHANGELOG]
 - Truth source: [documentation matches code]

@@ -1,4 +1,4 @@
-# MGMT - Universal Validation Checks
+# MGMT - Universal Health Metrics
 
 > Validation tests that apply to ALL projects using MGMT system.
 
@@ -8,7 +8,7 @@
 
 ## 📐 Backstage File Formatting (MANDATORY)
 
-All backstage files (CHECKS.md, ROADMAP.md, CHANGELOG.md, POLICY.md) must be both **human-readable** and **machine-readable**.
+All backstage files (HEALTH.md, ROADMAP.md, CHANGELOG.md, POLICY.md) must be both **human-readable** and **machine-readable**.
 
 **Rules:**
 
@@ -45,7 +45,7 @@ Pass: ✅ Navigation block exists
 **Test: All status files have navigation block**
 
 ```bash
-for file in MGMT/CHANGELOG.md MGMT/ROADMAP.md MGMT/POLICY.md MGMT/CHECKS.md; do
+for file in MGMT/CHANGELOG.md MGMT/ROADMAP.md MGMT/POLICY.md MGMT/HEALTH.md; do
   grep -q '> 🤖' "$file" || echo "❌ Missing in $file"
 done && echo '✅ All files have navigation blocks'
 ```
@@ -99,7 +99,7 @@ test -f README.md && \
 test -f MGMT/ROADMAP.md && \
 test -f MGMT/CHANGELOG.md && \
 test -f MGMT/POLICY.md && \
-test -f MGMT/CHECKS.md && \
+test -f MGMT/HEALTH.md && \
 test -d MGMT/global && \
 echo '✅ Required MGMT files exist' || echo '❌ Missing required files'
 ```
@@ -111,7 +111,7 @@ Pass: ✅ All required files present
 
 ```bash
 test -f MGMT/global/POLICY.md && \
-test -f MGMT/global/CHECKS.md && \
+test -f MGMT/global/HEALTH.md && \
 test -f MGMT/global/backstage-update.py && \
 echo '✅ Global backstage files exist' || echo '❌ Missing global files'
 ```
@@ -149,7 +149,7 @@ Pass: ✅ Epics follow format
 test -f MGMT/CHANGELOG.md && \
 test -f MGMT/ROADMAP.md && \
 test -f MGMT/POLICY.md && \
-test -f MGMT/CHECKS.md && \
+test -f MGMT/HEALTH.md && \
 echo '✅ README links valid' || echo '❌ Broken links in README'
 ```
 
@@ -189,7 +189,7 @@ Pass: ✅ Semantic versioning
 
 ````bash
 # From project root
-bash -c "$(grep -A 1 '^```bash' MGMT/global/CHECKS.md | grep -v '^```' | grep -v '^--$')"
+bash -c "$(grep -A 1 '^```bash' MGMT/global/HEALTH.md | grep -v '^```' | grep -v '^--$')"
 ````
 
 ---

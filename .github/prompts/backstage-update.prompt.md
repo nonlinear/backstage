@@ -73,7 +73,7 @@ python3.11 MGMT/global/update-MGMT.py
 
 - `MGMT/global/README.md`
 - `MGMT/global/POLICY.md`
-- `MGMT/global/CHECKS.md`
+- `MGMT/global/HEALTH.md`
 - `MGMT/global/update-MGMT.py`
 - `.github/prompts/MGMT-start.prompt.md`
 - `.github/prompts/MGMT-end.prompt.md`
@@ -84,7 +84,7 @@ python3.11 MGMT/global/update-MGMT.py
 - `MGMT/CHANGELOG.md`
 - `MGMT/ROADMAP.md`
 - `MGMT/POLICY.md`
-- `MGMT/CHECKS.md`
+- `MGMT/HEALTH.md`
 - `MGMT/gaps/`, `schemas/`, `epic-notes/`
 
 ### Step 5: Verification

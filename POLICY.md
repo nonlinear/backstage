@@ -6,7 +6,7 @@
 > - [CHANGELOG](CHANGELOG.md) — What we did
 > - [ROADMAP](ROADMAP.md) — What we wanna do
 > - [POLICY](POLICY.md) [project](POLICY.md) / [global](global/POLICY.md) — How we do it
-> - [CHECKS](CHECKS.md) — What we accept
+> - [HEALTH](HEALTH.md) — What we accept
 > - 👷 Wanna collaborate? Connect via [signal group](https://signal.group/#CjQKIKD7zJjxP9sryI9vE5ATQZVqYsWGN_3yYURA5giGogh3EhAWfvK2Fw_kaFtt-MQ6Jlp8)
 >
 > 🤖
@@ -74,11 +74,11 @@ Templates live in `global/templates/` and provide starter structure:
 - Add project-specific rules here
 - Document any deviations from global workflow
 
-### CHECKS-template.md
+### HEALTH-template.md
 
 - Empty project checks structure
 - Add your project-specific validation tests
-- Inherits global/CHECKS.md universal tests
+- Inherits global/HEALTH.md universal tests
 
 **Workflow:**
 
@@ -421,7 +421,7 @@ git push --force-with-lease origin v0.X.0
    ```
 
    **The `/whatsup` workflow will:**
-   - ✅ Run all CHECKS (see MGMT/CHECKS.md)
+   - ✅ Run all CHECKS (see MGMT/HEALTH.md)
    - ✅ Update ROADMAP (mark completed checkboxes)
    - ✅ Move epic to CHANGELOG (if complete)
    - ✅ Bump version number (semantic versioning)
@@ -628,7 +628,7 @@ refactor: consolidate storage to books/ only
 **ALWAYS run before merging to main:**
 
 1. **Use `/whatsup` prompt** (see [.github/prompts/whatsup.prompt.md](prompts/whatsup.prompt.md))
-2. **Check CHECKS.md** for stability requirements (location in [README](/README.md))
+2. **Check HEALTH.md** for stability requirements (location in [README](/README.md))
 3. **Update ROADMAP** - mark completed checkboxes
 4. **Move to CHANGELOG** - if epic complete
 5. **Run all tests** - ensure nothing broke

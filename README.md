@@ -26,7 +26,7 @@
    ```
 
    This will:
-   - Create backstage files (ROADMAP, CHANGELOG, POLICY, CHECKS)
+   - Create backstage files (ROADMAP, CHANGELOG, POLICY, HEALTH)
    - Copy global/ framework to your project
    - Add .github/prompts/ workflow files (backstage-start, backstage-close, backstage-update)
    - Delete bootstrap version (global/ now has the real one)
@@ -48,10 +48,10 @@ your-project/
 │   ├── ROADMAP.md        # What you wanna do
 │   ├── CHANGELOG.md      # What you did
 │   ├── POLICY.md         # How you work (extends global)
-│   ├── CHECKS.md         # What you accept (extends global)
+│   ├── HEALTH.md         # What you accept (extends global)
 │   └── global/           # Framework (updates via backstage-update.py)
 │       ├── POLICY.md
-│       ├── CHECKS.md
+│       ├── HEALTH.md
 │       ├── backstage-update.py
 │       └── templates/
 └── .github/
@@ -202,7 +202,7 @@ MGMT/
   CHANGELOG.md       # Your version history
   ROADMAP.md         # Your planned features
   POLICY.md          # Extends global/POLICY.md
-  CHECKS.md          # Includes global/CHECKS.md
+  HEALTH.md          # Includes global/HEALTH.md
   gaps/              # Your discoveries
   schemas/           # Your data structures
   epic-notes/        # Your session logs
@@ -211,7 +211,7 @@ MGMT/
   global/
     README.md        # This file
     POLICY.md        # Universal workflow rules
-    CHECKS.md        # Universal validation tests
+    HEALTH.md        # Universal validation tests
     backstage-update.py   # Update script
 ```
 
@@ -229,7 +229,7 @@ Universal workflow rules that apply to ALL projects:
 - Commit message format
 - Rebase vs merge policies
 
-### CHECKS.md
+### HEALTH.md
 
 Universal validation tests:
 
@@ -270,7 +270,7 @@ When new backstage versions are released:
 - `MGMT/CHANGELOG.md` (your version history)
 - `MGMT/ROADMAP.md` (your features)
 - `MGMT/POLICY.md` (your extensions)
-- `MGMT/CHECKS.md` (your tests)
+- `MGMT/HEALTH.md` (your tests)
 - `MGMT/gaps/`, `schemas/`, `epic-notes/` (your content)
 
 ---
@@ -310,7 +310,7 @@ Example:
 > - [CHANGELOG](CHANGELOG.md) — What we did
 > - [ROADMAP](ROADMAP.md) — What we wanna do
 > - POLICY ([project](POLICY.md), [global](global/POLICY.md)) — How we do it
-> - CHECKS ([project](CHECKS.md), [global](global/CHECKS.md)) — What we accept
+> - HEALTH ([project](HEALTH.md), [global](global/HEALTH.md)) — What we accept
 >
 > 🤖
 
