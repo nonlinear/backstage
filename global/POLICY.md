@@ -37,6 +37,52 @@ Pass: ✅ Dependencies OK
 
 ---
 
+## Backstage Update System
+
+**backstage-update.py serves dual purpose:**
+
+### 1. Initial Scaffolding (First Install)
+
+**Run from project root:**
+```bash
+python backstage/global/backstage-update.py
+```
+
+**Creates complete structure:**
+- `backstage/ROADMAP.md` (from templates/ROADMAP-template.md)
+- `backstage/CHANGELOG.md` (from templates/CHANGELOG-template.md)
+- `backstage/POLICY.md` (from templates/POLICY-template.md)
+- `backstage/CHECKS.md` (from templates/CHECKS-template.md)
+- `backstage/global/*` (already in place from clone)
+- `.github/prompts/backstage-*.prompt.md` (all 3 workflow prompts)
+
+**Result:** Complete backstage framework ready to use. User then grooms ROADMAP, customizes POLICY/CHECKS.
+
+### 2. Framework Updates (Existing Projects)
+
+**Run from existing installation:**
+```bash
+python backstage/global/backstage-update.py
+```
+
+**Updates 6 files:**
+- `backstage/global/POLICY.md`
+- `backstage/global/CHECKS.md`
+- `backstage/global/backstage-update.py` (self-update)
+- `.github/prompts/backstage-start.prompt.md`
+- `.github/prompts/backstage-close.prompt.md`
+- `.github/prompts/backstage-update.prompt.md`
+
+**Preserves:**
+- `backstage/ROADMAP.md` (your epics)
+- `backstage/CHANGELOG.md` (your history)
+- `backstage/POLICY.md` (your rules)
+- `backstage/CHECKS.md` (your tests)
+
+**Workflow:** Use `/backstage-update` prompt → shows changes → user confirms → script runs → suggests `/backstage-start`
+
+---
+
 ## Navigation Block & Backstage Files Index
 
 **Every backstage file must have a navigation block** (`> 🤖 ... 🤖`) with links to all backstage files.
@@ -118,8 +164,6 @@ In the future, navigation block format may change:
 > | We use **[backstage rules](https://github.com/nonlinear/backstage)**, v0.2.0 |
 > 🤖
 ```
-
-**Note:** Markdown tables don't support width attributes natively. The long dashes in the separator row (76 characters) create visual width, but actual rendering width depends on your markdown viewer.
 
 ### Path Adjustment
 
