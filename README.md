@@ -1,327 +1,16 @@
-# Backstage System
+# Backstage
 
-> Universal project management system for AI-assisted development.
+A project management system for AI-assisted development that allows you to be in your zone while AI ensure best practices:
 
-**Version:** 1.0.0 (placeholder - will track actual backstage repo versions)
+- sandboxing ideas on epics, sandboxing experimentations on branches (no more messy fixes going all places at once)
+- enforcing policies for documentation
+- checks for stability
+- automatic documentation of epic notes
+- automatic documentation for these pesky knowledge gaps (no more your AI runing in circles on same failed experiments)
 
-**Source:** https://github.com/nonlinear/backstage (not yet published)
+> Main is protected with only stable, vetted code + documentation. Branches allow free experimentation to dig in. Get your hyperfocus AND stability.
 
----
-
-## Installation
-
-**For new projects:**
-
-1. **Clone backstage as sibling to your README:**
-
-   ```bash
-   # From your project root (where README.md lives)
-   git clone https://github.com/nonlinear/backstage.git backstage
-   ```
-
-2. **Run initial setup:**
-
-   ```bash
-   python backstage/global/backstage-update.py
-   ```
-
-   This will:
-   - Create backstage files (ROADMAP, CHANGELOG, POLICY, HEALTH)
-   - Copy global/ framework to your project
-   - Add .github/prompts/ workflow files (backstage-start, backstage-close, backstage-update)
-   - Delete bootstrap version (global/ now has the real one)
-
-3. **If not using VS Code:** Manually move prompts from `.github/prompts/` to your IDE's prompt folder
-
-4. **Commit backstage framework:**
-   ```bash
-   git add backstage/ .github/
-   git commit -m "chore: add backstage framework"
-   ```
-
-**Your project structure:**
-
-```
-your-project/
-├── README.md              # Your project (public)
-├── backstage/
-│   ├── ROADMAP.md        # What you wanna do
-│   ├── CHANGELOG.md      # What you did
-│   ├── POLICY.md         # How you work (extends global)
-│   ├── HEALTH.md         # What you accept (extends global)
-│   ├── templates/        # Seeds for new projects
-│   └── global/           # Framework (updates via backstage-update.py)
-│       ├── POLICY.md
-│       ├── HEALTH.md
-│       └── backstage-update.py
-└── .github/
-    └── prompts/
-        ├── backstage-start.prompt.md
-        ├── backstage-close.prompt.md
-        └── backstage-update.prompt.md
-```
-
----
-
-## Philosophy: Polycentric Governance
-
-**Inspired by Elinor Ostrom's work on commons management.**
-
-MGMT uses a **polycentric structure**—not hierarchical "levels" but **overlapping jurisdictions** where global and project concerns coexist.
-
-### What is Polycentric Governance?
-
-Traditional hierarchical systems assume clear separation: federal → state → local, with each level having distinct authority. **Polycentric systems reject this model.**
-
-Instead, polycentric governance recognizes:
-
-- **Multiple simultaneous centers of authority** operating at different scales
-- **Overlapping jurisdictions** rather than cleanly separated domains
-- **No single hierarchy** - conflicts and negotiations are normal, not bugs
-- **Self-organized innovation** at all scales, not just top-down mandates
-
-**Key insight from Ostrom:** "There is no hierarchy of governments" in effective federal systems. Different arenas (local, regional, national) are **available simultaneously** to citizens, who choose which level to engage based on their needs.
-
-### How Backstage Implements Polycentricity
-
-**Two centers of authority:**
-
-1. **Global backstage** (universal framework) - Defines workflow patterns, epic syntax, validation rules
-2. **Your project** (local implementation) - Chooses which rules to adopt, when to deviate, how to extend
-
-**Overlapping concerns:**
-
-- Epic format lives in `global/POLICY.md` (universal)
-- Your epic _content_ lives in `ROADMAP.md` (project-specific)
-- Project `POLICY.md` can **extend** global rules (e.g., "requires reindexing?" for database projects)
-
-**Self-organized correction:**
-
-- When MGMT updates, YOU decide whether/when to adopt changes
-- No forced upgrades - you evaluate if new patterns fit your context
-- Can stay on older MGMT version if it works better for your project
-
-**Bottom-up participation:**
-
-- Global MGMT improves based on lessons from real projects
-- Your discoveries in `gaps/` inform future MGMT updates
-- Community learns from each other's implementations
-
-### Precedence Rules (When Global and Project Conflict)
-
-**Project ALWAYS wins over global.**
-
-When the same rule exists in both:
-
-- `MGMT/global/POLICY.md` (default workflow)
-- `MGMT/POLICY.md` (project-specific)
-
-**→ Use the project version.**
-
-Think of global as **defaults**, project as **overrides**:
-
-- Global: "All epics require tests"
-- Project: "Epics marked [skip-tests] exempt"
-- **Result:** Project rule applies
-
-**For AI assistants:**
-
-1. Read global files first (understand defaults)
-2. Read project files second (learn overrides)
-3. Follow project rules when executing
-4. Cite which level when explaining ("per project POLICY" vs "per global POLICY")
-
-### Why This Matters for AI-Assisted Development
-
-Traditional project management assumes **one source of truth** controlled top-down. AI collaboration requires **distributed authority**:
-
-- **AI agent** suggests changes following global MGMT patterns
-- **Human developer** evaluates fit for project context
-- **Both** can be right simultaneously - AI follows framework, human adapts to reality
-
-Ostrom showed that commons (shared resources) thrive under polycentric governance because:
-
-1. **Local knowledge matters** - Your project's constraints aren't in any global rulebook
-2. **Flexibility beats rigidity** - Adapt patterns instead of forcing compliance
-3. **Innovation happens everywhere** - Best practices emerge from experiments, not mandates
-
-**Backstage as commons:** The workflow patterns are shared infrastructure. You benefit from others' discoveries (via backstage updates) while contributing your own (via gaps documentation). Polycentric structure keeps this sustainable.
-
----
-
-### Key Principles
-
-1. **Multiple centers of power:** Global MGMT defines framework, projects adapt to context
-2. **Overlapping not separate:** Project POLICY.md **extends** (not replaces) global/POLICY.md
-3. **Self-organized correction:** When MGMT updates, projects decide whether/when to adopt
-4. **No top-down mandates:** Global provides patterns, projects choose implementations
-
-**Example:** Epic format syntax lives in global/POLICY.md, but Librarian's "requires reindexing?" column lives in project POLICY.md. Both valid simultaneously.
-
----
-
-### Further Reading
-
-**Elinor Ostrom:**
-
-- [Governing the Commons (1990)](https://wtf.tw/ref/ostrom_1990.pdf) - Foundational work on polycentric governance of common-pool resources
-- [Beyond Markets and States: Polycentric Governance of Complex Economic Systems (2009)](https://www.nobelprize.org/prizes/economic-sciences/2009/ostrom/lecture/) - Nobel Prize lecture explaining polycentricity
-- [Understanding Institutional Diversity (2005)](https://press.princeton.edu/books/paperback/9780691122380/understanding-institutional-diversity) - Framework for analyzing institutions
-
-**Vincent Ostrom:**
-
-- [The Meaning of American Federalism (1991)](https://ics.press/books/meaning-of-american-federalism/) - How federalism creates polycentric order
-- [The Political Theory of a Compound Republic (1987)](https://www.google.com/books/edition/The_Political_Theory_of_a_Compound_Repub/4r8bAAAAQBAJ) - Foundations of polycentric political systems
-
-**Accessible Overview:**
-
-- [Polycentric Governance (Ostrom Workshop)](https://ostromworkshop.indiana.edu/research/polycentric-governance.html) - Indiana University research center named after the Ostroms
-- [Wikipedia: Elinor Ostrom](https://en.wikipedia.org/wiki/Elinor_Ostrom) - Overview of her work and Nobel Prize
-
----
-
-## What is Backstage?
-
-A meta-documentation system that provides:
-
-1. **Workflow prompts** (backstage-start, backstage-close, backstage-update)
-2. **Universal policies** (epic dance, semantic versioning, branch strategy)
-3. **Validation checks** (documentation sync, navigation blocks, formatting)
-4. **Update mechanism** (backstage-update.py fetches latest from repo)
-
----
-
-## How It Works
-
-**Global files** (in this folder) define **HOW** to manage projects.
-**Project files** (in parent MGMT/) are created **BY FOLLOWING** global prompts.
-
-```
-MGMT/
-  # Project files (you create by following prompts)
-  CHANGELOG.md       # Your version history
-  ROADMAP.md         # Your planned features
-  POLICY.md          # Extends global/POLICY.md
-  HEALTH.md          # Includes global/HEALTH.md
-  gaps/              # Your discoveries
-  schemas/           # Your data structures
-  epic-notes/        # Your session logs
-
-  # Global files (imported from backstage repo)
-  global/
-    README.md        # This file
-    POLICY.md        # Universal workflow rules
-    HEALTH.md        # Universal validation tests
-    backstage-update.py   # Update script
-```
-
----
-
-## Workflow Prompts
-
-**When to use each prompt:**
-
-| Prompt                                                         | When to Use                              | What It Does                                                                                                              |
-| -------------------------------------------------------------- | ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
-| [backstage-start](.github/prompts/backstage-start.prompt.md)   | Before starting work session             | Validates project health, checks navigation blocks, runs all health checks (global + project), identifies epic to work on |
-| [backstage-close](.github/prompts/backstage-close.prompt.md)   | When pausing/ending session              | Runs health checks, commits progress on pass (adds fixes to ROADMAP on fail), victory lap, body check reminder            |
-| [backstage-update](.github/prompts/backstage-update.prompt.md) | When backstage framework has new version | Fetches CHANGELOG from repo, shows what changed, runs `backstage-update.py` to refresh global/ and .github/prompts/       |
-
-**Typical workflow:**
-
-1. `/backstage-start` → validates setup, picks epic
-2. Work on epic tasks
-3. `/backstage-close` → validates, commits, celebrates
-4. Repeat
-
-When backstage updates: `/backstage-update` → refresh framework files → `/backstage-start` to validate
-
----
-
-## Files in This Folder
-
-### POLICY.md
-
-Universal workflow rules that apply to ALL projects:
-
-- Epic format syntax
-- Branch strategy (epic dance)
-- Semantic versioning
-- Commit message format
-- Rebase vs merge policies
-
-### HEALTH.md
-
-Universal validation tests:
-
-- Navigation block validation
-- Documentation sync checks
-- Formatting standards
-- Status file completeness
-
-### backstage-update.py
-
-Script to update global backstage files from repo:
-
-```bash
-python3.11 backstage/global/backstage-update.py
-```
-
----
-
-## Updating Backstage
-
-When new backstage versions are released:
-
-1. Run `/backstage-update` prompt
-2. Prompt fetches backstage repo CHANGELOG
-3. Shows what changed per version
-4. If you confirm "yes", activates `backstage-update.py`
-5. Script overwrites files in `global/` and `.github/prompts/`
-6. Suggests running `/backstage-start` to validate changes
-7. Your project files stay untouched
-
-**Files that update:**
-
-- `backstage/global/*` (all global framework files)
-- `.github/prompts/backstage-*.prompt.md` (workflow prompts)
-
-**Files that stay:**
-
-- `MGMT/CHANGELOG.md` (your version history)
-- `MGMT/ROADMAP.md` (your features)
-- `MGMT/POLICY.md` (your extensions)
-- `MGMT/HEALTH.md` (your tests)
-- `MGMT/gaps/`, `schemas/`, `epic-notes/` (your content)
-
----
-
-## Philosophy
-
-**Backstage provides structure, you provide content.**
-
-Global files are like a framework - they define patterns and workflows.
-Project files implement those patterns for your specific project.
-
-Example:
-
-- `global/POLICY.md` says "Use epic format: `[🚧](link) Title`"
-- Your `ROADMAP.md` follows that format for YOUR epics
-
----
-
-## Version History
-
-**v1.0.0** (2026-01-26)
-
-- Initial extraction from Librarian MCP
-- Created global/ folder structure
-- Decoupled MGMT from project files
-
----
-
-**Last updated:** 2026-01-28
-**Backstage Repo:** https://github.com/nonlinear/backstage
+> Make AI your secretary: "I had this idea about XYZ, create a new epic for it" (instead of coding it now, getting confused because mixing priorities)
 
 ---
 
@@ -356,3 +45,43 @@ graph LR
 
     style V01 fill:#FFE4B5
 ```
+
+---
+
+## Installation
+
+1. Download [backstage-update.py](global/backstage-update.py) to your project root (same level as README.md)
+2. Run `python backstage-update.py` (creates backstage/ folder with everything)
+3. Run [/backstage-start](.github/prompts/backstage-start.prompt.md) prompt to validate setup
+4. Start grooming your [ROADMAP](templates/ROADMAP-template.md). Big picture first, then code in epic branches. Measure twice, cut once.
+5. We use VSCode logic for prompts. If you're using another IDE, manually move to your corresponding IDE prompt logic:
+   - [backstage-start.prompt.md](.github/prompts/backstage-start.prompt.md)
+   - [backstage-close.prompt.md](.github/prompts/backstage-close.prompt.md)
+   - [backstage-update.prompt.md](.github/prompts/backstage-update.prompt.md)
+
+---
+
+## Workflow Prompts
+
+| Prompt                                                         | When to Use                    | What It Does                                                                                                              |
+| -------------------------------------------------------------- | ------------------------------ | ------------------------------------------------------------------------------------------------------------------------- |
+| [backstage-start](.github/prompts/backstage-start.prompt.md)   | Before starting work session   | Validates project health, checks navigation blocks, runs all health checks (global + project), identifies epic to work on |
+| [backstage-close](.github/prompts/backstage-close.prompt.md)   | When pausing/ending session    | Runs health checks, commits progress on pass (adds fixes to ROADMAP on fail), victory lap, body check reminder            |
+| [backstage-update](.github/prompts/backstage-update.prompt.md) | When you want latest backstage | Fetches CHANGELOG from repo, shows what changed, runs `backstage-update.py` to refresh global/ and .github/prompts/       |
+
+**Typical workflow:**
+
+1. `/backstage-start` → AI does all checks and inform you what we did last time + what we can do today
+2. **the zone**
+3. `/backstage-close` → AI wraps up and celebrates progress, **turns off your app** (Get a life, hydrate, fuck!)
+
+---
+
+## Philosophy: Polycentric Governance
+
+Backstage follows a **polycentric structure**—not hierarchical "levels" but **overlapping jurisdictions** where global and project concerns coexist with two centers of authority: global (universal) and project (local, free to extend or deviate)
+
+- 📗 Learn more about [polycentric governance here](polycentric-governance.md)
+- 👷 Join [backstage signal group](https://signal.group/#CjQKIAinD80_cDPyyVP0xRDUQ9Io2PMN9DeJSBzKM1mrXpEYEhAMdewh5mBrTUcmujYApgMx)
+
+---
