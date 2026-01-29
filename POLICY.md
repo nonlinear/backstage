@@ -6,7 +6,7 @@
 > - [CHANGELOG](CHANGELOG.md) — What we did
 > - [ROADMAP](ROADMAP.md) — What we wanna do
 > - [POLICY](POLICY.md) [project](POLICY.md) / [global](global/POLICY.md) — How we do it
-> - [CHECKS](CHECKS.md) — What we accept
+> - [HEALTH](HEALTH.md) — What we accept
 > - 👷 Wanna collaborate? Connect via [signal group](https://signal.group/#CjQKIKD7zJjxP9sryI9vE5ATQZVqYsWGN_3yYURA5giGogh3EhAWfvK2Fw_kaFtt-MQ6Jlp8)
 >
 > 🤖
@@ -37,7 +37,7 @@ graph LR
 
 ## Universal Workflow
 
-**This project follows the [global MGMT policy](global/POLICY.md)** for:
+**This project follows the [global backstage policy](global/POLICY.md)** for:
 
 - Epic/branch workflow ("Epic Dance")
 - Semantic versioning
@@ -46,7 +46,77 @@ graph LR
 - Rebase vs merge rules
 - Pre-commit workflow
 
-**This file contains only Librarian-specific rules and deviations.**
+**This file contains only backstage-specific rules and deviations.**
+
+---
+
+## Version Tracking in Navigation Block
+
+**🚨 CRITICAL: Backstage framework version must stay in sync with CHANGELOG**
+
+When completing an epic and merging to main:
+
+1. Move epic from ROADMAP → CHANGELOG (standard workflow)
+2. **Also update version number in global/POLICY.md navigation template**
+   - Template location: `global/POLICY.md` line ~168
+   - Update: `v0.2.0` → `v0.3.0` (new completed version)
+
+**Why this matters:**
+
+- Projects using backstage check navigation block version to know what framework version they're on
+- The `/backstage-update` prompt compares their version vs latest CHANGELOG to show available updates
+- If template version ≠ latest CHANGELOG epic, version detection breaks
+
+**Health check enforces this:** See HEALTH.md → "Version Sync Check"
+
+**Example:**
+
+```markdown
+# When completing v0.2.0:
+
+1. ROADMAP: Move v0.2.0 epic → CHANGELOG ✅
+2. CHANGELOG: Add completion date ✅
+3. global/POLICY.md: Update "v0.2.0" → "v0.3.0" in navigation template ✅
+```
+
+---
+
+## Template System (Backstage-Specific)
+
+**When backstage-start prompt doesn't find status files:**
+
+Templates live in `templates/` and provide starter structure:
+
+### ROADMAP-template.md
+
+- Empty roadmap with v0.1.0 Environment Setup starter epic
+- Copy to project root as `ROADMAP.md`
+- Customize for your project's planned features
+
+### CHANGELOG-template.md
+
+- Empty changelog (starts when project starts)
+- If you have existing changelog, paste it here
+- Run backstage-start to groom format per POLICY
+
+### POLICY-template.md
+
+- References global/POLICY.md
+- Add project-specific rules here
+- Document any deviations from global workflow
+
+### HEALTH-template.md
+
+- Empty project checks structure
+- Add your project-specific validation tests
+- Inherits global/HEALTH.md universal tests
+
+**Workflow:**
+
+1. backstage-start detects missing file
+2. Copies from templates/ to project root
+3. Explains what the file does
+4. Guides you to populate it
 
 ---
 
@@ -195,10 +265,10 @@ v0.5-automation (feature branch)
 
 ```bash
 # List all epic notes
-ls MGMT/epic-notes/
+ls epic-notes/
 
 # Search for relevant keywords
-grep -r "keyword" MGMT/epic-notes/
+grep -r "keyword" epic-notes/
 ```
 
 **Why epic notes matter:**
@@ -293,13 +363,13 @@ Replace ⏳ with 🚧 and add branch link:
 **Structure (v0.4.0 and earlier):**
 
 ```
-MGMT/epic-notes/v0.X.0.md  # Single file for all notes
+epic-notes/v0.X.0.md  # Single file for all notes
 ```
 
 **Structure (v0.5.0+):**
 
 ```
-MGMT/epic-notes/v0.X.0/
+epic-notes/v0.X.0/
   ├── MAIN.md                      # Primary epic documentation
   ├── pill-validation.md           # Specific finding/experiment
   └── autocomplete-fix.md          # Another finding
@@ -382,7 +452,7 @@ git push --force-with-lease origin v0.X.0
    ```
 
    **The `/whatsup` workflow will:**
-   - ✅ Run all CHECKS (see MGMT/CHECKS.md)
+   - ✅ Run all CHECKS (see MGMT/HEALTH.md)
    - ✅ Update ROADMAP (mark completed checkboxes)
    - ✅ Move epic to CHANGELOG (if complete)
    - ✅ Bump version number (semantic versioning)
@@ -589,7 +659,7 @@ refactor: consolidate storage to books/ only
 **ALWAYS run before merging to main:**
 
 1. **Use `/whatsup` prompt** (see [.github/prompts/whatsup.prompt.md](prompts/whatsup.prompt.md))
-2. **Check CHECKS.md** for stability requirements (location in [README](/README.md))
+2. **Check HEALTH.md** for stability requirements (location in [README](/README.md))
 3. **Update ROADMAP** - mark completed checkboxes
 4. **Move to CHANGELOG** - if epic complete
 5. **Run all tests** - ensure nothing broke

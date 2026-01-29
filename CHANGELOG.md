@@ -1,4 +1,4 @@
-# MGMT - Changelog
+# Backstage - Changelog
 
 > 🤖
 >
@@ -6,7 +6,7 @@
 > - [CHANGELOG](CHANGELOG.md) — What we did
 > - [ROADMAP](ROADMAP.md) — What we wanna do
 > - [POLICY](POLICY.md) [project](POLICY.md) / [global](global/POLICY.md) — How we do it
-> - [CHECKS](CHECKS.md) — What we accept
+> - [HEALTH](HEALTH.md) — What we accept
 > - 👷 Wanna collaborate? Connect via [signal group](https://signal.group/#CjQKIKD7zJjxP9sryI9vE5ATQZVqYsWGN_3yYURA5giGogh3EhAWfvK2Fw_kaFtt-MQ6Jlp8)
 >
 > 🤖
@@ -16,9 +16,6 @@
 graph LR
     subgraph "✅ Done"
         V01[v0.1.0<br/>Environment Setup]
-    end
-
-    subgraph "🎯 Ready"
         V02[v0.2.0<br/>Navigation Logic]
     end
 
@@ -34,7 +31,100 @@ graph LR
     V04 --> V05
 
     style V01 fill:#90EE90
+    style V02 fill:#90EE90
 ```
+
+---
+
+## v0.2.0
+
+### [✅](https://github.com/nonlinear/backstage/tree/v0.2.0) Rebrand to Backstage + Navigation Logic
+
+Rebrand framework from MGMT to "backstage" and document navigation logic in global/POLICY.md
+
+**Problem:** "MGMT" is too generic and vague. "backstage" better captures the behind-the-scenes workflow system
+**Solution:** Systematic rename across repo, docs, and prompts
+
+**Completed:**
+
+**Rebranding:**
+
+- ✅ Rename GitHub repo: nonlinear/MGMT → nonlinear/backstage
+- ✅ Update all documentation: MGMT → backstage (README, POLICY, HEALTH, CHANGELOG, ROADMAP)
+- ✅ Rename prompts: MGMT-start → backstage-start, MGMT-end → backstage-close, MGMT-update → backstage-update
+- ✅ Update prompt instructions to reference "backstage" framework
+- ✅ Update folder references in documentation
+- ✅ Rename global/update-MGMT.py → global/backstage-update.py
+
+**Templates:**
+
+- ✅ Create templates/ folder
+- ✅ Create ROADMAP-template.md (empty with optional v0.1.0 starter)
+- ✅ Create CHANGELOG-template.md (empty - starts when project starts)
+- ✅ Create POLICY-template.md (empty)
+- ✅ Create HEALTH-template.md (empty)
+- ✅ Document template usage in project POLICY.md (what to do when files missing)
+
+**Navigation Logic:**
+
+- ✅ Document 🤖 navigation block rules in global/POLICY.md
+- ✅ Document mermaid diagram placement rules in global/POLICY.md
+- ✅ Document path adjustment logic in global/POLICY.md
+- ✅ Add examples of proper navigation blocks
+- ✅ Clarify README vs backstage files (README is spine/public, others are production)
+- ✅ Update backstage-start prompt to reference global/POLICY.md for syntax (removed hardcoded examples)
+- ✅ Add product health metrics to HEALTH.md (8+6+7+13 = 34 metrics)
+- ✅ Rename CHECKS → HEALTH (clearer purpose: "definition of healthy system")
+- ✅ Update HEALTH titles and descriptions in all files
+- ✅ Fix backstage-start STEP 2: Read BOTH global + project HEALTH files
+- ✅ Implement global/backstage-update.py fetch logic (scaffold + update modes)
+- ✅ Add prompt usage table to README (when to use each prompt)
+
+---
+
+## v0.2.0
+
+### [✅](https://github.com/nonlinear/backstage/tree/v0.2.0) Rebrand to Backstage + Navigation Logic
+
+Rebrand framework from MGMT to "backstage" and document navigation logic in global/POLICY.md
+
+**Problem:** "MGMT" is too generic and vague. "backstage" better captures the behind-the-scenes workflow system
+**Solution:** Systematic rename across repo, docs, and prompts
+
+**Completed:**
+
+**Rebranding:**
+
+- ✅ Rename GitHub repo: nonlinear/MGMT → nonlinear/backstage
+- ✅ Update all documentation: MGMT → backstage (README, POLICY, HEALTH, CHANGELOG, ROADMAP)
+- ✅ Rename prompts: MGMT-start → backstage-start, MGMT-end → backstage-close, MGMT-update → backstage-update
+- ✅ Update prompt instructions to reference "backstage" framework
+- ✅ Update folder references in documentation
+- ✅ Rename global/update-MGMT.py → global/backstage-update.py
+
+**Templates:**
+
+- ✅ Create templates/ folder
+- ✅ Create ROADMAP-template.md (empty with optional v0.1.0 starter)
+- ✅ Create CHANGELOG-template.md (empty - starts when project starts)
+- ✅ Create POLICY-template.md (empty)
+- ✅ Create HEALTH-template.md (empty)
+- ✅ Document template usage in project POLICY.md (what to do when files missing)
+
+**Navigation Logic:**
+
+- ✅ Document 🤖 navigation block rules in global/POLICY.md
+- ✅ Document mermaid diagram placement rules in global/POLICY.md
+- ✅ Document path adjustment logic in global/POLICY.md
+- ✅ Add examples of proper navigation blocks
+- ✅ Clarify README vs backstage files (README is spine/public, others are production)
+- ✅ Update backstage-start prompt to reference global/POLICY.md for syntax (removed hardcoded examples)
+- ✅ Add product health metrics to HEALTH.md (8+6+7+13 = 34 metrics)
+- ✅ Rename CHECKS → HEALTH (clearer purpose: "definition of healthy system")
+- ✅ Update HEALTH titles and descriptions in all files
+- ✅ Fix backstage-start STEP 2: Read BOTH global + project HEALTH files
+- ✅ Implement global/backstage-update.py fetch logic (scaffold + update modes)
+- ✅ Add prompt usage table to README (when to use each prompt)
 
 ---
 
@@ -42,9 +132,9 @@ graph LR
 
 ### Environment Setup
 
-✅ Initialize MGMT repository with git, ignore rules, and IDE configuration
+✅ Initialize backstage repository with git, ignore rules, and IDE configuration
 
-**Problem:** Starting fresh MGMT repo needs foundational infrastructure
+**Problem:** Starting fresh backstage repo needs foundational infrastructure
 **Solution:** Set up version control, configure what to track/ignore, prepare IDE
 
 **Tasks:**

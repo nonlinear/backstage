@@ -1,0 +1,54 @@
+# [Project Name] - Health Metrics
+
+> 🤖
+>
+> - [README](../README.md) - Our project
+> - [CHANGELOG](CHANGELOG.md) — What we did
+> - [ROADMAP](ROADMAP.md) — What we wanna do
+> - [POLICY](POLICY.md) — How we do it
+> - [HEALTH](HEALTH.md) — What we accept
+>
+> 🤖
+
+---
+
+> 🌟
+>
+> This project follows the [global backstage HEALTH](global/HEALTH.md)
+> Do write all tests here as explained below
+> [/backstage-start](.github/prompts/backstage-start.prompt.md) trigger tests
+> For more policies, see [POLICY.md](POLICY.md)
+>
+> 🌟
+
+### Test: [Your Test Name]
+
+```bash
+# Your test command here
+echo "Test passed"
+```
+
+Expected: [What should happen]
+Pass: ✅ [Success criteria]
+
+---
+
+## Summary
+
+**Project-specific checks ensure:**
+
+- ✅ [Your requirement 1]
+- ✅ [Your requirement 2]
+- ✅ [Your requirement 3]
+
+---
+
+**Run all checks:**
+
+````bash
+# Universal checks (apply to all backstage projects)
+bash -c "$(grep -A 1 '^```bash' global/HEALTH.md | grep -v '^```' | grep -v '^--$')"
+
+# Project-specific checks (this project only)
+bash -c "$(grep -A 1 '^```bash' HEALTH.md | grep -v '^```' | grep -v '^--$')"
+````

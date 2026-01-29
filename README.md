@@ -1,10 +1,65 @@
-# MGMT System
+# Backstage System
 
 > Universal project management system for AI-assisted development.
 
-**Version:** 1.0.0 (placeholder - will track actual MGMT repo versions)
+**Version:** 1.0.0 (placeholder - will track actual backstage repo versions)
 
-**Source:** https://github.com/nonlinear/MGMT (not yet published)
+**Source:** https://github.com/nonlinear/backstage (not yet published)
+
+---
+
+## Installation
+
+**For new projects:**
+
+1. **Clone backstage as sibling to your README:**
+
+   ```bash
+   # From your project root (where README.md lives)
+   git clone https://github.com/nonlinear/backstage.git backstage
+   ```
+
+2. **Run initial setup:**
+
+   ```bash
+   python backstage/global/backstage-update.py
+   ```
+
+   This will:
+   - Create backstage files (ROADMAP, CHANGELOG, POLICY, HEALTH)
+   - Copy global/ framework to your project
+   - Add .github/prompts/ workflow files (backstage-start, backstage-close, backstage-update)
+   - Delete bootstrap version (global/ now has the real one)
+
+3. **If not using VS Code:** Manually move prompts from `.github/prompts/` to your IDE's prompt folder
+
+4. **Commit backstage framework:**
+   ```bash
+   git add backstage/ .github/
+   git commit -m "chore: add backstage framework"
+   ```
+
+**Your project structure:**
+
+```
+your-project/
+├── README.md              # Your project (public)
+├── backstage/
+│   ├── ROADMAP.md        # What you wanna do
+│   ├── CHANGELOG.md      # What you did
+│   ├── POLICY.md         # How you work (extends global)
+│   ├── HEALTH.md         # What you accept (extends global)
+│   ├── templates/        # Seeds for new projects
+│   └── global/           # Framework (updates via backstage-update.py)
+│       ├── POLICY.md
+│       ├── HEALTH.md
+│       └── backstage-update.py
+└── .github/
+    └── prompts/
+        ├── backstage-start.prompt.md
+        ├── backstage-close.prompt.md
+        └── backstage-update.prompt.md
+```
 
 ---
 
@@ -27,11 +82,11 @@ Instead, polycentric governance recognizes:
 
 **Key insight from Ostrom:** "There is no hierarchy of governments" in effective federal systems. Different arenas (local, regional, national) are **available simultaneously** to citizens, who choose which level to engage based on their needs.
 
-### How MGMT Implements Polycentricity
+### How Backstage Implements Polycentricity
 
 **Two centers of authority:**
 
-1. **Global MGMT** (universal framework) - Defines workflow patterns, epic syntax, validation rules
+1. **Global backstage** (universal framework) - Defines workflow patterns, epic syntax, validation rules
 2. **Your project** (local implementation) - Chooses which rules to adopt, when to deviate, how to extend
 
 **Overlapping concerns:**
@@ -90,7 +145,7 @@ Ostrom showed that commons (shared resources) thrive under polycentric governanc
 2. **Flexibility beats rigidity** - Adapt patterns instead of forcing compliance
 3. **Innovation happens everywhere** - Best practices emerge from experiments, not mandates
 
-**MGMT as commons:** The workflow patterns are shared infrastructure. You benefit from others' discoveries (via MGMT updates) while contributing your own (via gaps documentation). Polycentric structure keeps this sustainable.
+**Backstage as commons:** The workflow patterns are shared infrastructure. You benefit from others' discoveries (via backstage updates) while contributing your own (via gaps documentation). Polycentric structure keeps this sustainable.
 
 ---
 
@@ -125,14 +180,14 @@ Ostrom showed that commons (shared resources) thrive under polycentric governanc
 
 ---
 
-## What is MGMT?
+## What is Backstage?
 
 A meta-documentation system that provides:
 
-1. **Workflow prompts** (MGMT-start, MGMT-end, MGMT-update)
+1. **Workflow prompts** (backstage-start, backstage-close, backstage-update)
 2. **Universal policies** (epic dance, semantic versioning, branch strategy)
 3. **Validation checks** (documentation sync, navigation blocks, formatting)
-4. **Update mechanism** (fetch latest MGMT system from repo)
+4. **Update mechanism** (backstage-update.py fetches latest from repo)
 
 ---
 
@@ -147,18 +202,39 @@ MGMT/
   CHANGELOG.md       # Your version history
   ROADMAP.md         # Your planned features
   POLICY.md          # Extends global/POLICY.md
-  CHECKS.md          # Includes global/CHECKS.md
+  HEALTH.md          # Includes global/HEALTH.md
   gaps/              # Your discoveries
   schemas/           # Your data structures
   epic-notes/        # Your session logs
 
-  # Global files (imported from MGMT repo)
+  # Global files (imported from backstage repo)
   global/
     README.md        # This file
     POLICY.md        # Universal workflow rules
-    CHECKS.md        # Universal validation tests
-    update-MGMT.py   # Update script
+    HEALTH.md        # Universal validation tests
+    backstage-update.py   # Update script
 ```
+
+---
+
+## Workflow Prompts
+
+**When to use each prompt:**
+
+| Prompt                                                         | When to Use                              | What It Does                                                                                                              |
+| -------------------------------------------------------------- | ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| [backstage-start](.github/prompts/backstage-start.prompt.md)   | Before starting work session             | Validates project health, checks navigation blocks, runs all health checks (global + project), identifies epic to work on |
+| [backstage-close](.github/prompts/backstage-close.prompt.md)   | When pausing/ending session              | Runs health checks, commits progress on pass (adds fixes to ROADMAP on fail), victory lap, body check reminder            |
+| [backstage-update](.github/prompts/backstage-update.prompt.md) | When backstage framework has new version | Fetches CHANGELOG from repo, shows what changed, runs `backstage-update.py` to refresh global/ and .github/prompts/       |
+
+**Typical workflow:**
+
+1. `/backstage-start` → validates setup, picks epic
+2. Work on epic tasks
+3. `/backstage-close` → validates, commits, celebrates
+4. Repeat
+
+When backstage updates: `/backstage-update` → refresh framework files → `/backstage-start` to validate
 
 ---
 
@@ -174,7 +250,7 @@ Universal workflow rules that apply to ALL projects:
 - Commit message format
 - Rebase vs merge policies
 
-### CHECKS.md
+### HEALTH.md
 
 Universal validation tests:
 
@@ -183,44 +259,46 @@ Universal validation tests:
 - Formatting standards
 - Status file completeness
 
-### update-MGMT.py
+### backstage-update.py
 
-Script to update global MGMT files from repo:
+Script to update global backstage files from repo:
 
 ```bash
-python3.11 MGMT/global/update-MGMT.py
+python3.11 backstage/global/backstage-update.py
 ```
 
 ---
 
-## Updating MGMT
+## Updating Backstage
 
-When new MGMT versions are released:
+When new backstage versions are released:
 
-1. Run `/MGMT-update` prompt (or `python3.11 MGMT/global/update-MGMT.py`)
-2. Script fetches MGMT repo CHANGELOG
+1. Run `/backstage-update` prompt
+2. Prompt fetches backstage repo CHANGELOG
 3. Shows what changed per version
-4. If you confirm, overwrites files in `MGMT/global/`
-5. Your project files stay untouched
+4. If you confirm "yes", activates `backstage-update.py`
+5. Script overwrites files in `global/` and `.github/prompts/`
+6. Suggests running `/backstage-start` to validate changes
+7. Your project files stay untouched
 
 **Files that update:**
 
-- `MGMT/global/*` (all global files)
-- `.github/prompts/MGMT-*.prompt.md` (workflow prompts)
+- `backstage/global/*` (all global framework files)
+- `.github/prompts/backstage-*.prompt.md` (workflow prompts)
 
 **Files that stay:**
 
 - `MGMT/CHANGELOG.md` (your version history)
 - `MGMT/ROADMAP.md` (your features)
 - `MGMT/POLICY.md` (your extensions)
-- `MGMT/CHECKS.md` (your tests)
+- `MGMT/HEALTH.md` (your tests)
 - `MGMT/gaps/`, `schemas/`, `epic-notes/` (your content)
 
 ---
 
 ## Philosophy
 
-**MGMT provides structure, you provide content.**
+**Backstage provides structure, you provide content.**
 
 Global files are like a framework - they define patterns and workflows.
 Project files implement those patterns for your specific project.
@@ -242,8 +320,8 @@ Example:
 
 ---
 
-**Last updated:** 2026-01-26
-**MGMT Repo:** https://github.com/nonlinear/MGMT (coming soon)
+**Last updated:** 2026-01-28
+**Backstage Repo:** https://github.com/nonlinear/backstage
 
 ---
 
@@ -253,7 +331,7 @@ Example:
 > - [CHANGELOG](CHANGELOG.md) — What we did
 > - [ROADMAP](ROADMAP.md) — What we wanna do
 > - POLICY ([project](POLICY.md), [global](global/POLICY.md)) — How we do it
-> - CHECKS ([project](CHECKS.md), [global](global/CHECKS.md)) — What we accept
+> - HEALTH ([project](HEALTH.md), [global](global/HEALTH.md)) — What we accept
 >
 > 🤖
 

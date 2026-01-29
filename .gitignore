@@ -3,16 +3,11 @@
 .env.local
 
 # IDE and editor
-.github
-!.github/promptsMGMT-*
 .vscode
 .idea/
 *.swp
 *.swo
 *~
-
-# IMPORTANT: Track MGMT-* files in prompts
-!**/MGMT-*
 
 # Python
 __pycache__/

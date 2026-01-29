@@ -41,5 +41,5 @@
 
 > 🤖: See [ROADMAP](ROADMAP.md) for planned features & in-progress work
 > 🤖: See [CHANGELOG](CHANGELOG.md) for version history & completed features
-> 🤖: See [CHECKS](CHECKS.md) for stability requirements & testing
+> 🤖: See [HEALTH](HEALTH.md) for stability requirements & testing
 > 👷: Consider using [/whatsup prompt](https://github.com/nonlinear/nonlinear.github.io/blob/main/.github/prompts/whatsup.prompt.md) for updates
