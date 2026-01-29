@@ -16,7 +16,7 @@ This file contains **universal, project-agnostic** workflow rules and convention
 
 ## Formatting Standard
 
-All status files (CHECKS, ROADMAP, CHANGELOG, POLICY) must be both **human-readable** (clear, prompt-like, easy to follow) and **machine-readable** (easy for scripts or AI to parse and execute).
+All backstage files (CHECKS, ROADMAP, CHANGELOG, POLICY) must be both **human-readable** (clear, prompt-like, easy to follow) and **machine-readable** (easy for scripts or AI to parse and execute).
 
 **How to format tests and checklists:**
 
@@ -24,7 +24,7 @@ All status files (CHECKS, ROADMAP, CHANGELOG, POLICY) must be both **human-reada
 2. **No large, monolithic scripts**—keep each check atomic and self-contained.
 3. **No markdown formatting or prose inside code blocks.**
 4. **All explanations, expected output, and pass criteria must be outside code blocks.**
-5. **Status files should be easy for both humans and automation to read, extract, and run.**
+5. **Backstage files should be easy for both humans and automation to read, extract, and run.**
 
 _Example:_
 
@@ -37,9 +37,9 @@ Pass: ✅ Dependencies OK
 
 ---
 
-## Navigation Block & Status File Index
+## Navigation Block & Backstage Files Index
 
-**Every status file must have a navigation block** (`> 🤖 ... 🤖`) with links to all status files.
+**Every backstage file must have a navigation block** (`> 🤖 ... 🤖`) with links to all backstage files.
 
 **Purpose:** Provides consistent navigation and makes backstage-start workflow aware of file locations.
 
@@ -48,6 +48,25 @@ Pass: ✅ Dependencies OK
 - **Project POLICY.md** > global/POLICY.md
 - **Project CHECKS.md** > global/CHECKS.md
 - Local knowledge always wins (polycentric governance)
+
+### README Protection
+
+**README is special** — it's the "spine" of your project:
+
+- **Public-facing:** Outsiders read this to understand your project
+- **Vision statement:** Who you are AND who you aim to be
+- **People are watching:** Changes are visible to community
+
+**Global rule:** backstage-start can append navigation block but **NOT rewrite README content** without explicit confirmation.
+
+**What needs confirmation:**
+- What will change (specific sections/lines)
+- How it will change (show before/after)
+- Where it will change (exact line numbers)
+
+Only **surgical, pointed changes** allowed—no wholesale rewrites.
+
+**Project can override:** Add to your project POLICY.md if you want to allow automatic README edits (e.g., "allow auto-update of version badges").
 
 ### Placement Rules
 
@@ -89,17 +108,6 @@ The navigation block appears in multiple files across the project. The backstage
 - **Global file references** (POLICY/CHECKS point to both project and global versions)
 
 No manual path calculation needed—the workflow handles this automatically.
-
-### Mermaid Diagram Distribution
-
-**Source of truth:** ROADMAP.md contains the canonical mermaid roadmap diagram
-
-**backstage-start workflow copies it to:**
-
-- README.md (at end, after navigation block)
-- All other status files (at top, after navigation block)
-
-**When to update:** Any time epics are added, moved, or completed
 
 > 🤖 **AI: backstage-start workflow maintains navigation blocks and diagrams. Don't manually copy—let the workflow enforce consistency.**
 
@@ -532,4 +540,7 @@ refactor: consolidate folder structure
 **Last updated:** 2026-01-26
 **Version:** 1.0 (Extracted from Librarian project)
 **Source:** Elinor Ostrom's polycentric governance principles
-````
+
+```
+
+```

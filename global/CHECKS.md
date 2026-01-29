@@ -6,9 +6,9 @@
 
 ---
 
-## 📐 Status File Formatting (MANDATORY)
+## 📐 Backstage File Formatting (MANDATORY)
 
-All status files (CHECKS.md, ROADMAP.md, CHANGELOG.md, POLICY.md) must be both **human-readable** and **machine-readable**.
+All backstage files (CHECKS.md, ROADMAP.md, CHANGELOG.md, POLICY.md) must be both **human-readable** and **machine-readable**.
 
 **Rules:**
 
@@ -31,7 +31,7 @@ Pass: ✅ Python 3.11+
 
 ## 🤖 Navigation Block Validation
 
-**Every status file must have 🤖 navigation block.**
+**Every backstage file must have 🤖 navigation block.**
 
 **Test: README has navigation block**
 
@@ -50,7 +50,7 @@ for file in MGMT/CHANGELOG.md MGMT/ROADMAP.md MGMT/POLICY.md MGMT/CHECKS.md; do
 done && echo '✅ All files have navigation blocks'
 ```
 
-Expected: Prints '✅ All files have navigation blocks'
+Expected: Prints '✅ All backstage files have navigation blocks'
 Pass: ✅ All navigation blocks present
 
 ---

@@ -66,7 +66,7 @@ Rebrand framework from MGMT to "backstage" and document navigation logic in glob
 - [x] Document mermaid diagram placement rules in global/POLICY.md
 - [x] Document path adjustment logic in global/POLICY.md
 - [x] Add examples of proper navigation blocks
-- [ ] Clarify README vs status files (where each goes)
+- [x] Clarify README vs backstage files (README is spine/public, others are production)
 - [ ] Update backstage-start prompt to reference global/POLICY.md for syntax
 
 ---
