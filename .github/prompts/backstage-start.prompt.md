@@ -397,46 +397,69 @@ cat ROADMAP.md | grep -Ei "in progress|planned|todo" -A 20
 
 **🚨 CRITICAL:** Do NOT proceed to STEP 3 unless ALL checks pass.
 
-### 2A. Read HEALTH
+### 2A. Read HEALTH (Polycentric: Global + Project)
 
-**AI: CHECKS contains all project-specific tests (check [README](/README.md) for location):**
+**AI: Read BOTH global and project HEALTH files (polycentric governance):**
 
 ```bash
-# Read from location specified in README
+# 1. Read universal checks from global framework
+cat [STATUS_FILES_LOCATION]/global/HEALTH.md
+
+# 2. Read project-specific checks
 cat [STATUS_FILES_LOCATION]/HEALTH.md
 
-# Look for "For AI:" or "Automated test sequence" section
-# It will contain exact commands to run
+# Both files contain checks to run
+# If same check exists in both, project version wins
 ```
 
-**If CHECKS doesn't exist (check [README](/README.md) for location):**
+**If global/HEALTH.md doesn't exist:**
 
-- ❌ **STOP:** "I don't see HEALTH. What tests must pass before pushing?"
-- ✅ Create HEALTH from user input (use template below)
+- This is fine - not all projects use backstage framework
+- Skip to project HEALTH.md only
 
-### 2B. Execute Tests from HEALTH
+**If project HEALTH.md doesn't exist:**
 
-**Run the test script found in CHECKS:**
+- ❌ **STOP:** "I don't see HEALTH.md. What tests must pass before pushing?"
+- ✅ Create HEALTH.md from user input (use template from global/templates/)
 
-- Look for bash script block
-- Execute it
-- Capture all output
+### 2B. Execute Tests from HEALTH (Run ALL from Both Files)
+
+**Run checks from BOTH files in order:**
+
+1. **Global checks first** (universal framework validation)
+   - Look for bash script blocks in global/HEALTH.md
+   - Execute each test
+   - Track results
+
+2. **Project checks second** (project-specific validation)
+   - Look for bash script blocks in HEALTH.md
+   - Execute each test
+   - Track results
+
+3. **Merge results:**
+   - If same test name appears in both → use project result (project wins)
+   - Otherwise combine all unique tests
 
 **Example output:**
 
 ```
 🔍 Running stability checks...
 
-1️⃣ Server startup test...
-✅ Server starts
+📂 Global checks (from global/HEALTH.md):
+1️⃣ Navigation block exists...
+✅ Pass
 
-2️⃣ Dependencies test...
-✅ Dependencies OK
+2️⃣ File structure valid...
+✅ Pass
 
-3️⃣ File structure test...
-✅ Files exist
+🎯 Project checks (from HEALTH.md):
+3️⃣ Server startup test...
+✅ Pass
 
-✅ All checks complete.
+4️⃣ Dependencies installed...
+✅ Pass
+
+✅ All checks complete (2 global + 2 project = 4 total)
 ```
 
 **Note:** CHECKS location specified in [README](/README.md)
@@ -488,40 +511,33 @@ cat [STATUS_FILES_LOCATION]/HEALTH.md
 
 **Epic Format:**
 
-> 🤖 **CRITICAL:** Always read epic format from [POLICY.md](../.github/POLICY.md#epic-format)
+> 🤖 **CRITICAL:** Always read epic format from global/POLICY.md#epic-format
 > User may customize syntax - NEVER use hardcoded format
 
 **To write epics correctly:**
 
-1. Read POLICY.md section "Epic Format"
-2. Find the `> 🤖 **AI: Use this syntax when writing epics` marker
+1. Read global/POLICY.md section "Epic Format" (check [README](/README.md) for location)
+2. Find the `**AI Note:** Use this syntax when writing epics` marker
 3. Use that exact syntax for all epic writes
-4. Respect status indicators (🚧 with link, ⏳ without link, ✅ completed)
+4. Respect status indicators defined in POLICY.md:
+   - 🚧 with link = active branch exists
+   - ⏳ no link = planned, no branch yet
+   - ✅ completed (changelog only)
 
 **If feature completed:**
 
 ```markdown
-# Before (in ROADMAP):
+# Read current epic format from global/POLICY.md
 
-> **v0.3**
-> [🚧](link) **Delta Indexing**
+# Mark checkbox as [x] in ROADMAP
 
-- [x] Topic-partitioned storage
-- [ ] Automated change detection ← THIS WAS DONE
-
-# After (AI updates):
-
-> **v0.3**
-> [🚧](link) **Delta Indexing**
-
-- [x] Topic-partitioned storage
-- [x] Automated change detection ← MARKED COMPLETE
+# If all checkboxes done, move entire epic to CHANGELOG
 ```
 
 **If version fully complete:**
 
 - Move entire section from ROADMAP to CHANGELOG (check [README](/README.md) for locations)
-- Change status emoji: `🚧` → `✅`
+- Update status indicator per global/POLICY.md rules
 - Add completion date
 
 **🤖 CRITICAL: Add Navigation Menu to ALL Status Files**
@@ -580,21 +596,13 @@ Every status file (ROADMAP, CHANGELOG, CHECKS) must end with this navigation men
 **AI: Add new entry following project format:**
 
 ```markdown
-## v0.3: Delta Indexing ✅ (Jan 19, 2026)
+# Read CHANGELOG format from existing entries or global/POLICY.md
 
-**👥 Who needs to know:**
+# Follow the established pattern for version headers and content
 
-- Users with large libraries who reindex frequently
+# Add new entry at TOP (newest first)
 
-**📦 What's new:**
-
-- [x] Automated change detection (engine/scripts/update_delta.py)
-- [x] Compare filesystem vs metadata.json
-- [x] Incremental reindexing (23× faster)
-
-**Impact:** Only changed books reindex, saves time
-
-**🔧 Migration:** None (backward compatible)
+# Include completion date, who benefits, what's new, impact
 ```
 
 ### 3C. Version Bumping

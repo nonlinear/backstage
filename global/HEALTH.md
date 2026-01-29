@@ -1,8 +1,8 @@
-# MGMT - Universal Health Metrics
+# Backstage - Universal Health Metrics
 
-> Validation tests that apply to ALL projects using MGMT system.
+> Health metrics that apply to ALL projects using backstage system.
 
-**Purpose:** Ensure project follows MGMT conventions and documentation stays in sync.
+**Purpose:** Define what "healthy" means for your project - validation tests, product metrics, and system wellness indicators.
 
 ---
 

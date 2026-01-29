@@ -50,6 +50,37 @@ graph LR
 
 ---
 
+## Version Tracking in Navigation Block
+
+**🚨 CRITICAL: Backstage framework version must stay in sync with CHANGELOG**
+
+When completing an epic and merging to main:
+
+1. Move epic from ROADMAP → CHANGELOG (standard workflow)
+2. **Also update version number in global/POLICY.md navigation template**
+   - Template location: `global/POLICY.md` line ~168
+   - Update: `v0.2.0` → `v0.3.0` (new completed version)
+
+**Why this matters:**
+
+- Projects using backstage check navigation block version to know what framework version they're on
+- The `/backstage-update` prompt compares their version vs latest CHANGELOG to show available updates
+- If template version ≠ latest CHANGELOG epic, version detection breaks
+
+**Health check enforces this:** See HEALTH.md → "Version Sync Check"
+
+**Example:**
+
+```markdown
+# When completing v0.2.0:
+
+1. ROADMAP: Move v0.2.0 epic → CHANGELOG ✅
+2. CHANGELOG: Add completion date ✅
+3. global/POLICY.md: Update "v0.2.0" → "v0.3.0" in navigation template ✅
+```
+
+---
+
 ## Template System (Backstage-Specific)
 
 **When backstage-start prompt doesn't find status files:**

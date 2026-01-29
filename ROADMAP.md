@@ -67,10 +67,12 @@ Rebrand framework from MGMT to "backstage" and document navigation logic in glob
 - [x] Document path adjustment logic in global/POLICY.md
 - [x] Add examples of proper navigation blocks
 - [x] Clarify README vs backstage files (README is spine/public, others are production)
-- [ ] Update backstage-start prompt to reference global/POLICY.md for syntax
+- [x] Update backstage-start prompt to reference global/POLICY.md for syntax (removed hardcoded examples)
 - [x] Add product health metrics to HEALTH.md (8+6+7+13 = 34 metrics)
+- [x] Rename CHECKS → HEALTH (clearer purpose: "definition of healthy system")
+- [x] Update HEALTH titles and descriptions in all files
+- [x] Fix backstage-start STEP 2: Read BOTH global + project HEALTH files
 - [ ] HEALTH validation py logic (update and scaffolding)
-- [x] Rename HEALTH → HEALTH (clearer purpose: "definition of healthy system")
 
 **Backstage Update System:**
 
@@ -142,5 +144,51 @@ Rebrand framework from MGMT to "backstage" and document navigation logic in glob
 - [ ] Implement chosen diagram format in mermaid
 - [ ] Add diagram generation logic to global/POLICY.md
 - [ ] Update all status files with new diagram
+
+---
+
+## v0.6.0
+
+### Multi-Project Backstage (Monorepo Support)
+
+⏳ Support multiple mini-products under one parent project, each with independent backstage files
+
+**Problem:** Large projects have multiple products/modules that need separate roadmaps/changelogs but share a repo
+**Solution:** Nested backstage structure with parent coordination
+
+**Use cases:**
+
+- Monorepo with multiple apps (e.g., web app + mobile app + API)
+- Product suite (e.g., core library + plugins)
+- Multi-tenant systems (each tenant has own roadmap)
+
+**Tasks:**
+
+**Structure Design:**
+
+- [ ] Define nested backstage folder convention (e.g., `apps/web/backstage/`, `apps/mobile/backstage/`)
+- [ ] Decide: Parent backstage aggregates children, or children are independent?
+- [ ] Document parent-child relationship rules in global/POLICY.md
+- [ ] Create example monorepo structure in templates/
+
+**Parent Coordination:**
+
+- [ ] Parent ROADMAP shows cross-cutting epics (affect multiple children)
+- [ ] Parent CHANGELOG aggregates major milestones from children
+- [ ] Children reference parent for shared policies (polycentric at 3 levels: global → parent → child)
+- [ ] Navigation blocks point to both parent and sibling backstage files
+
+**Tooling:**
+
+- [ ] Update backstage-start to detect nested structure (look for parent backstage/)
+- [ ] backstage-update.py handles multiple backstage folders
+- [ ] Health checks validate parent-child consistency
+- [ ] Optional: Aggregate view (parent dashboard showing all child statuses)
+
+**Migration:**
+
+- [ ] Document how to split existing backstage into multi-project
+- [ ] Provide migration script (copy backstage/ → apps/\*/backstage/)
+- [ ] Backward compatibility: single backstage/ still works
 
 ---

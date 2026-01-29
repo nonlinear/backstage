@@ -91,6 +91,33 @@ echo '✅ Backstage follows navigation block rule' || echo '❌ Backstage violat
 Expected: Backstage practices what it preaches
 Pass: ✅ Self-consistent
 
+**Test: Version in navigation block matches latest CHANGELOG epic**
+
+```bash
+# Extract version from global/POLICY.md navigation template
+NAV_VERSION=$(grep "backstage rules.*v[0-9]" global/POLICY.md | sed 's/.*v\([0-9.]*\).*/\1/')
+
+# Extract latest version from CHANGELOG
+CHANGELOG_VERSION=$(grep -m1 "^## v[0-9]" CHANGELOG.md | sed 's/^## v//' | cut -d' ' -f1)
+
+# Compare
+if [ "$NAV_VERSION" = "$CHANGELOG_VERSION" ]; then
+  echo "✅ Version sync correct: v$NAV_VERSION"
+else
+  echo "❌ FAIL: Nav template has v$NAV_VERSION but CHANGELOG latest is v$CHANGELOG_VERSION"
+  echo "Fix: Update global/POLICY.md navigation template version"
+fi
+```
+
+Expected: Versions match (navigation template = latest CHANGELOG epic)
+Pass: 🚨 **CRITICAL** - Must pass before merging epic to main
+
+**Why this matters:**
+
+- Projects check nav block version to know framework version
+- `/backstage-update` compares project version vs latest to show updates
+- Mismatch breaks version detection for all projects using backstage
+
 **Test: Backstage has epics in ROADMAP**
 
 ```bash
