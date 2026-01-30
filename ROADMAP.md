@@ -47,6 +47,7 @@ Make backstage workflow accessible through AI agent conversations.
 ✅ AI can update ROADMAP/CHANGELOG via conversation  
 🗒️ Must handle git operations (branch, commit, merge)  
 🗒️ Should prompt for user confirmation on destructive actions  
+🗒️ **Placeholder published:** `clawdhub install backstage` reserves name (v0.0.1)
 
 **Example use case:**
 ```
