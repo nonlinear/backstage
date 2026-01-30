@@ -26,27 +26,27 @@ graph LR
 
 ---
 
-## 🚧 v0.2.0: OpenClaw Integration
+### v0.2
 
-**Priority:** HIGH  
-**Target:** 2026-01-31  
-**Status:** ⏳ Paused - documented for future continuation
+#### ⏳ OpenClaw Integration
+
+Make backstage workflow accessible through AI agent conversations.
 
 **Who benefits:** OpenClaw users managing projects with backstage framework
 
-**Why it matters:** Makes backstage workflow accessible through AI agent conversations, not just manual git/markdown editing
+**Why it matters:** No more manual git/markdown editing - just talk to your agent
 
 **Tasks:**
+
 - [ ] Create OpenClaw skill wrapper for backstage-start.prompt.md
 - [ ] Add examples to README (agent updating ROADMAP, running HEALTH checks)
 - [ ] Document how to use with OpenClaw in global/POLICY.md
 - [ ] Verify navigation block updates work through agent
 
-**Technical notes:**
-- Skill reads backstage-start.prompt.md and executes workflow
-- AI can update ROADMAP/CHANGELOG via conversation
-- Must handle git operations (branch, commit, merge)
-- Should prompt for user confirmation on destructive actions
+✅ Skill reads backstage-start.prompt.md and executes workflow  
+✅ AI can update ROADMAP/CHANGELOG via conversation  
+🗒️ Must handle git operations (branch, commit, merge)  
+🗒️ Should prompt for user confirmation on destructive actions  
 
 **Example use case:**
 ```
@@ -59,6 +59,8 @@ Agent: *updates ROADMAP checkbox*
        *commits change*
        *shows updated status*
 ```
+
+**Status:** ⏳ Paused - documented for future continuation
 
 ---
 
