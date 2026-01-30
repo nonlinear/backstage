@@ -38,7 +38,6 @@ graph LR
 
 **Tasks:**
 - [ ] Create OpenClaw skill wrapper for backstage-start.prompt.md
-- [ ] Test AI running backstage-start workflow in conversation
 - [ ] Add examples to README (agent updating ROADMAP, running HEALTH checks)
 - [ ] Document how to use with OpenClaw in global/POLICY.md
 - [ ] Verify navigation block updates work through agent

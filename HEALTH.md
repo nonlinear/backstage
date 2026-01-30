@@ -314,6 +314,56 @@ Pass: ❌ Currently 0% implemented - **BLOCKS v0.2.0 RELEASE**
 
 ---
 
+## OpenClaw Integration Tests
+
+**Test: AI agent can run backstage-start workflow**
+
+```bash
+# In OpenClaw session with backstage project context, ask:
+# "What's the status of this project?"
+
+# Expected flow:
+# 1. Agent reads .github/prompts/backstage-start.prompt.md
+# 2. Reads README navigation block
+# 3. Finds backstage/ status files
+# 4. Runs HEALTH checks
+# 5. Reports current epic, progress, next steps
+
+# Success criteria:
+# ✅ Agent locates all status files correctly
+# ✅ HEALTH checks execute without errors
+# ✅ Agent reports meaningful status summary
+# ✅ Git operations work (branch detection, etc.)
+```
+
+**Test: AI can update ROADMAP via conversation**
+
+```bash
+# User: "Mark task 3 in v0.2.0 as complete"
+# Expected:
+# 1. Agent finds v0.2.0 in ROADMAP.md
+# 2. Updates checkbox: [ ] → [x]
+# 3. Commits change with proper message
+# 4. Reports updated status
+
+# Manual verification:
+git log -1 --oneline  # Should show backstage update commit
+grep -A 20 "v0.2.0" ROADMAP.md  # Should show [x] checkbox
+```
+
+**Test: AI handles polycentric structure (global + project)**
+
+```bash
+# Agent should distinguish:
+# - global/POLICY.md (universal rules)
+# - POLICY.md (backstage-specific rules)
+
+# When asked "What are the workflow rules?":
+# Agent should cite BOTH levels and explain precedence
+```
+
+---
+
 ### Overall System Health
 
 **Ship criteria:**
