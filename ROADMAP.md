@@ -26,6 +26,43 @@ graph LR
 
 ---
 
+## 🚧 v0.2.0: OpenClaw Integration
+
+**Priority:** HIGH  
+**Target:** 2026-01-31  
+**Status:** 0/5 tasks complete
+
+**Who benefits:** OpenClaw users managing projects with backstage framework
+
+**Why it matters:** Makes backstage workflow accessible through AI agent conversations, not just manual git/markdown editing
+
+**Tasks:**
+- [ ] Create OpenClaw skill wrapper for backstage-start.prompt.md
+- [ ] Test AI running backstage-start workflow in conversation
+- [ ] Add examples to README (agent updating ROADMAP, running HEALTH checks)
+- [ ] Document how to use with OpenClaw in global/POLICY.md
+- [ ] Verify navigation block updates work through agent
+
+**Technical notes:**
+- Skill reads backstage-start.prompt.md and executes workflow
+- AI can update ROADMAP/CHANGELOG via conversation
+- Must handle git operations (branch, commit, merge)
+- Should prompt for user confirmation on destructive actions
+
+**Example use case:**
+```
+User: "What's the status of the project?"
+Agent: *runs backstage-start workflow*
+       *reports current epic, progress, next steps*
+
+User: "Mark that task as complete"
+Agent: *updates ROADMAP checkbox*
+       *commits change*
+       *shows updated status*
+```
+
+---
+
 ## v0.3.0
 
 ### Update Script
