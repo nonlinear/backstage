@@ -1,12 +1,12 @@
 # Backstage
 
-A project management system for AI-assisted development that allows you to be in your zone while AI ensure best practices:
+A project management system for AI-assisted development that allows you to be in your zone while AI ensures best practices:
 
 - sandboxing ideas on epics, sandboxing experimentations on branches (no more messy fixes going all places at once)
 - enforcing policies for documentation
 - checks for stability
 - automatic documentation of epic notes
-- automatic documentation for these pesky knowledge gaps (no more your AI runing in circles on same failed experiments)
+- automatic documentation for these pesky knowledge gaps (no more your AI running in circles on same failed experiments)
 
 > Main is protected with only stable, vetted code + documentation. Branches allow free experimentation to dig in. Get your hyperfocus AND stability.
 
@@ -71,7 +71,7 @@ graph LR
 
 **Typical workflow:**
 
-1. `/backstage-start` → AI does all checks and inform you what we did last time + what we can do today
+1. `/backstage-start` → AI does all checks and informs you what we did last time + what we can do today
 2. **the zone**
 3. `/backstage-close` → AI wraps up and celebrates progress, **turns off your app** (Get a life, hydrate, fuck!)
 
