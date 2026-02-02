@@ -86,6 +86,7 @@ graph LR
 - [ ] Implement chosen diagram format in mermaid
 - [ ] Add diagram generation logic to global/POLICY.md
 - [ ] Update all status files with new diagram
+- [ ] **Fast-pass for typos:** Allow direct commits to main for typo-only fixes (no epic/branch workflow needed)
 
 ---
 
