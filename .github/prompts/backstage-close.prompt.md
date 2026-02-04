@@ -1,4 +1,4 @@
-# 🌙 MGMT End Prompt
+# 🌙 backstage End Prompt
 
 **Purpose:** Safely pause work, share progress, and preserve context for next session.
 
@@ -25,7 +25,7 @@
 
 ```bash
 # Run all checks from HEALTH.md
-# See MGMT/HEALTH.md for current stability requirements
+# See backstage/HEALTH.md for current stability requirements
 ```
 
 **If all pass:** ✅ Proceed to push
@@ -36,7 +36,7 @@
 **If checks fail, add fixes to top of epic task list:**
 
 ```markdown
-# In MGMT/ROADMAP.md (current epic section)
+# In backstage/ROADMAP.md (current epic section)
 
 ## v0.4.0
 
@@ -136,7 +136,7 @@ echo "🌙 Closing VS Code in 5 seconds... (Ctrl+C to cancel)" && sleep 5 && osa
 
 🎯 What you just did:
 1. Hidden database files
-2. MGMT system generalization
+2. backstage system generalization
 3. Repository cleanup
 
 📊 21 commits

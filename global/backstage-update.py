@@ -25,9 +25,9 @@ BRANCH = "main"
 
 # Files to update
 GLOBAL_FILES = [
-    "global/POLICY.md",
-    "global/HEALTH.md",
-    "global/backstage-update.py",
+    "backstage/global/POLICY.md",
+    "backstage/global/HEALTH.md",
+    "backstage/global/backstage-update.py",
 ]
 
 PROMPT_FILES = [
@@ -58,7 +58,7 @@ def fetch_file(repo_owner, repo_name, branch, file_path):
 
 def detect_mode():
     """Detect if this is initial scaffolding or framework update."""
-    roadmap = Path("ROADMAP.md")
+    roadmap = Path("backstage/ROADMAP.md")
     if roadmap.exists():
         return "update"
     else:
@@ -69,12 +69,16 @@ def scaffold_project():
     print("\n🏗️  SCAFFOLDING MODE: Creating project structure")
     print("=" * 50)
 
-    # Create project files from templates
+    # Create backstage/ directory
+    backstage_dir = Path("backstage")
+    backstage_dir.mkdir(exist_ok=True)
+
+    # Create project files from templates inside backstage/
     files_to_create = {
-        "ROADMAP.md": "templates/ROADMAP-template.md",
-        "CHANGELOG.md": "templates/CHANGELOG-template.md",
-        "POLICY.md": "templates/POLICY-template.md",
-        "HEALTH.md": "templates/HEALTH-template.md",
+        "backstage/ROADMAP.md": "templates/ROADMAP-template.md",
+        "backstage/CHANGELOG.md": "templates/CHANGELOG-template.md",
+        "backstage/POLICY.md": "templates/POLICY-template.md",
+        "backstage/HEALTH.md": "templates/HEALTH-template.md",
     }
 
     for dest, template_path in files_to_create.items():
@@ -102,9 +106,9 @@ def scaffold_project():
 
     print("\n✅ Scaffolding complete!")
     print("\nNext steps:")
-    print("1. Customize ROADMAP.md with your project's epics")
-    print("2. Update POLICY.md with project-specific rules")
-    print("3. Add project-specific health checks to HEALTH.md")
+    print("1. Customize backstage/ROADMAP.md with your project's epics")
+    print("2. Update backstage/POLICY.md with project-specific rules")
+    print("3. Add project-specific health checks to backstage/HEALTH.md")
     print("4. Run /backstage-start to validate setup")
 
 def update_framework():
@@ -139,10 +143,10 @@ def update_framework():
             print(f"  - {f}")
 
     print("\n📋 Project files preserved:")
-    print("  - ROADMAP.md (your epics)")
-    print("  - CHANGELOG.md (your history)")
-    print("  - POLICY.md (your rules)")
-    print("  - HEALTH.md (your checks)")
+    print("  - backstage/ROADMAP.md (your epics)")
+    print("  - backstage/CHANGELOG.md (your history)")
+    print("  - backstage/POLICY.md (your rules)")
+    print("  - backstage/HEALTH.md (your checks)")
 
     print("\nNext step: Run /backstage-start to validate changes")
 
@@ -160,7 +164,7 @@ def main():
     mode = detect_mode()
 
     if mode == "scaffold":
-        print("🔍 No ROADMAP.md found - running in SCAFFOLD mode")
+        print("🔍 No backstage/ROADMAP.md found - running in SCAFFOLD mode")
         if not auto_confirm:
             response = input("\nCreate new project structure? (yes/no): ")
             if response.lower() not in ['yes', 'y']:
@@ -170,7 +174,7 @@ def main():
             print("\n🤖 Auto-confirming (--yes flag)")
         scaffold_project()
     else:
-        print("🔍 ROADMAP.md exists - running in UPDATE mode")
+        print("🔍 backstage/ROADMAP.md exists - running in UPDATE mode")
         if not auto_confirm:
             response = input(f"\nUpdate framework files from {BRANCH}? (yes/no): ")
             if response.lower() not in ['yes', 'y']:

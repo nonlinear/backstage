@@ -404,7 +404,7 @@ Add notes link to ROADMAP on same line as branch:
 
 ```bash
 git checkout main
-git add MGMT/ROADMAP.md  # Updated with links
+git add backstage/ROADMAP.md  # Updated with links
 git commit -m "docs: add v0.X.0 epic to roadmap"
 git push origin main
 ```
@@ -452,7 +452,7 @@ git push --force-with-lease origin v0.X.0
    ```
 
    **The `/whatsup` workflow will:**
-   - ✅ Run all CHECKS (see MGMT/HEALTH.md)
+   - ✅ Run all CHECKS (see backstage/HEALTH.md)
    - ✅ Update ROADMAP (mark completed checkboxes)
    - ✅ Move epic to CHANGELOG (if complete)
    - ✅ Bump version number (semantic versioning)

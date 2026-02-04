@@ -45,7 +45,7 @@ Pass: ✅ Navigation block exists
 **Test: All status files have navigation block**
 
 ```bash
-for file in MGMT/CHANGELOG.md MGMT/ROADMAP.md MGMT/POLICY.md MGMT/HEALTH.md; do
+for file in backstage/CHANGELOG.md backstage/ROADMAP.md backstage/POLICY.md backstage/HEALTH.md; do
   grep -q '> 🤖' "$file" || echo "❌ Missing in $file"
 done && echo '✅ All files have navigation blocks'
 ```
@@ -92,31 +92,31 @@ Pass: ✅ Clean state or acknowledged pending sync
 
 ## 🗂️ File Structure Validation
 
-**Test: Required MGMT files exist**
+**Test: Required backstage files exist**
 
 ```bash
 test -f README.md && \
-test -f MGMT/ROADMAP.md && \
-test -f MGMT/CHANGELOG.md && \
-test -f MGMT/POLICY.md && \
-test -f MGMT/HEALTH.md && \
-test -d MGMT/global && \
-echo '✅ Required MGMT files exist' || echo '❌ Missing required files'
+test -f backstage/ROADMAP.md && \
+test -f backstage/CHANGELOG.md && \
+test -f backstage/POLICY.md && \
+test -f backstage/HEALTH.md && \
+test -d backstage/global && \
+echo '✅ Required backstage files exist' || echo '❌ Missing required files'
 ```
 
-Expected: Prints '✅ Required MGMT files exist'
+Expected: Prints '✅ Required backstage files exist'
 Pass: ✅ All required files present
 
-**Test: Global MGMT files exist**
+**Test: Global backstage files exist**
 
 ```bash
-test -f MGMT/global/POLICY.md && \
-test -f MGMT/global/HEALTH.md && \
-test -f MGMT/global/backstage-update.py && \
+test -f backstage/global/POLICY.md && \
+test -f backstage/global/HEALTH.md && \
+test -f backstage/global/backstage-update.py && \
 echo '✅ Global backstage files exist' || echo '❌ Missing global files'
 ```
 
-Expected: Prints '✅ Global MGMT files exist'
+Expected: Prints '✅ Global backstage files exist'
 Pass: ✅ Global files present (README.md lives at root, not in global/)
 
 ---
@@ -128,7 +128,7 @@ Pass: ✅ Global files present (README.md lives at root, not in global/)
 **Test: ROADMAP epics use correct syntax**
 
 ```bash
-grep -E '\[🚧\]\(.*\).*\*\*|⏳.*\*\*|✅.*\*\*' MGMT/ROADMAP.md >/dev/null && \
+grep -E '\[🚧\]\(.*\).*\*\*|⏳.*\*\*|✅.*\*\*' backstage/ROADMAP.md >/dev/null && \
 echo '✅ Epic format correct' || echo '⚠️ Check epic syntax'
 ```
 
@@ -146,10 +146,10 @@ Pass: ✅ Epics follow format
 ```bash
 # Extract file paths from README navigation block
 # (This is a simplified check - full implementation would parse markdown links)
-test -f MGMT/CHANGELOG.md && \
-test -f MGMT/ROADMAP.md && \
-test -f MGMT/POLICY.md && \
-test -f MGMT/HEALTH.md && \
+test -f backstage/CHANGELOG.md && \
+test -f backstage/ROADMAP.md && \
+test -f backstage/POLICY.md && \
+test -f backstage/HEALTH.md && \
 echo '✅ README links valid' || echo '❌ Broken links in README'
 ```
 
@@ -165,7 +165,7 @@ Pass: ✅ Links valid
 **Test: Version format validation**
 
 ```bash
-grep -E '^## v[0-9]+\.[0-9]+\.[0-9]+' MGMT/CHANGELOG.md >/dev/null && \
+grep -E '^## v[0-9]+\.[0-9]+\.[0-9]+' backstage/CHANGELOG.md >/dev/null && \
 echo '✅ Versions follow semver' || echo '⚠️ Check version format'
 ```
 
@@ -189,7 +189,7 @@ Pass: ✅ Semantic versioning
 
 ````bash
 # From project root
-bash -c "$(grep -A 1 '^```bash' MGMT/global/HEALTH.md | grep -v '^```' | grep -v '^--$')"
+bash -c "$(grep -A 1 '^```bash' backstage/global/HEALTH.md | grep -v '^```' | grep -v '^--$')"
 ````
 
 ---

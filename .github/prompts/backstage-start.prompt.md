@@ -1,4 +1,4 @@
-# MGMT Start (Project Status Check)
+# backstage Start (Project Status Check)
 
 > **Universal pre-commit workflow for AI-assisted development.** Ensures documentation matches reality before every push.
 
@@ -76,7 +76,7 @@ flowchart TD
 > - [ROADMAP](path/to/ROADMAP.md) — What we wanna do
 > - [POLICY](path/to/POLICY.md) — How we do it
 > - [CHECKS](path/to/HEALTH.md) — What we accept
-> - [/MGMT-start](path/to/MGMT-start.prompt.md) — The prompt that keeps us sane
+> - [/backstage-start](path/to/backstage-start.prompt.md) — The prompt that keeps us sane
 >
 > 🤖
 ```
@@ -93,28 +93,28 @@ cat README.md
 
 # Step 2: Look for lines between > 🤖 markers
 # Extract all paths from markdown links
-# Example: > - [CHANGELOG](./MGMT/CHANGELOG.md) — What we did
-#          └─ Path is: ./MGMT/CHANGELOG.md
+# Example: > - [CHANGELOG](./backstage/CHANGELOG.md) — What we did
+#          └─ Path is: ./backstage/CHANGELOG.md
 ```
 
 ### Polycentric Governance: Global + Project
 
-**MGMT uses overlapping jurisdictions - check BOTH levels:**
+**backstage uses overlapping jurisdictions - check BOTH levels:**
 
-1. **Global defaults** (`MGMT/global/`) - Universal rules from MGMT framework
-2. **Project overrides** (`MGMT/`) - Project-specific rules that take precedence
+1. **Global defaults** (`backstage/global/`) - Universal rules from backstage framework
+2. **Project overrides** (`backstage/`) - Project-specific rules that take precedence
 
 **For HEALTH.md:**
 
-- Read `MGMT/global/HEALTH.md` first (universal validation)
-- Then read `MGMT/HEALTH.md` (project-specific checks)
+- Read `backstage/global/HEALTH.md` first (universal validation)
+- Then read `backstage/HEALTH.md` (project-specific checks)
 - Run ALL checks from both files
 - If conflict, project check wins
 
 **For POLICY.md:**
 
-- Read `MGMT/global/POLICY.md` first (workflow defaults)
-- Then read `MGMT/POLICY.md` (project rules)
+- Read `backstage/global/POLICY.md` first (workflow defaults)
+- Then read `backstage/POLICY.md` (project rules)
 - Project rules extend/override global rules
 - When documenting: cite which level (e.g., "per project POLICY" or "per global POLICY")
 
@@ -167,13 +167,13 @@ cat README.md
 ```markdown
 From README:
 
-> - [CHANGELOG](./MGMT/CHANGELOG.md) — What we did
+> - [CHANGELOG](./backstage/CHANGELOG.md) — What we did
 
 Extracted path:
-./MGMT/CHANGELOG.md
+./backstage/CHANGELOG.md
 
 Use for:
-cat ./MGMT/CHANGELOG.md
+cat ./backstage/CHANGELOG.md
 ```
 
 ### Distributing the 🤖 Block + Mermaid Roadmap
@@ -202,8 +202,8 @@ cat ./MGMT/CHANGELOG.md
 
 > 🤖
 >
-> - [CHANGELOG](./MGMT/CHANGELOG.md) — What we did
-> - [ROADMAP](./MGMT/ROADMAP.md) — What we wanna do
+> - [CHANGELOG](./backstage/CHANGELOG.md) — What we did
+> - [ROADMAP](./backstage/ROADMAP.md) — What we wanna do
 > - etc...
 >
 > 🤖
@@ -214,7 +214,7 @@ graph LR
     ... (roadmap diagram from ROADMAP.md)
 ```
 
-# In MGMT/CHANGELOG.md (at TOP after title):
+# In backstage/CHANGELOG.md (at TOP after title):
 
 # Librarian MCP - Changelog
 
@@ -237,7 +237,7 @@ graph LR
 
 ... content ...
 
-# In MGMT/ROADMAP.md (at TOP after title):
+# In backstage/ROADMAP.md (at TOP after title):
 
 # Librarian MCP - Roadmap
 
@@ -301,7 +301,7 @@ Reading epic notes from ROADMAP.md...
 ```
 Continue working? Or:
 1. Run CHECKS and commit
-2. /MGMT-end (pause session)
+2. /backstage-end (pause session)
 3. Switch to different epic
 ```
 
@@ -353,7 +353,7 @@ git log --oneline "${LAST_VERSION}..HEAD" || git log --oneline -5
 
 ```bash
 # For Personal Library:
-cat MGMT/ROADMAP.md | grep "🔶 (IN PROGRESS)\|❌ (PLANNED)" -A 20
+cat backstage/ROADMAP.md | grep "🔶 (IN PROGRESS)\|❌ (PLANNED)" -A 20
 
 # Generic:
 cat ROADMAP.md | grep -Ei "in progress|planned|todo" -A 20
@@ -550,14 +550,14 @@ Every status file (ROADMAP, CHANGELOG, CHECKS) must end with this navigation men
 > 🤖: See [ROADMAP](path/to/ROADMAP.md) for planned features & in-progress work
 > 🤖: See [CHANGELOG](path/to/CHANGELOG.md) for version history & completed features
 > 🤖: See [CHECKS](path/to/HEALTH.md) for stability requirements & testing
-> 👷: Consider using [/MGMT-start prompt](https://github.com/nonlinear/nonlinear.github.io/blob/main/.github/prompts/MGMT-start.prompt.md) for updates
+> 👷: Consider using [/backstage-start prompt](https://github.com/nonlinear/nonlinear.github.io/blob/main/.github/prompts/backstage-start.prompt.md) for updates
 ```
 
 **Important:** Adjust paths relative to each file's location:
 
-- If file is in `/MGMT/ROADMAP.md`, links are: `ROADMAP.md`, `CHANGELOG.md`, `HEALTH.md`, `../.github/prompts/MGMT-start.prompt.md`
-- If file is in `/docs/ROADMAP.md`, links are: `ROADMAP.md`, `CHANGELOG.md`, `HEALTH.md`, `../.github/prompts/MGMT-start.prompt.md`
-- If file is in root `/ROADMAP.md`, links are: `ROADMAP.md`, `CHANGELOG.md`, `HEALTH.md`, `.github/prompts/MGMT-start.prompt.md`
+- If file is in `/backstage/ROADMAP.md`, links are: `ROADMAP.md`, `CHANGELOG.md`, `HEALTH.md`, `../.github/prompts/backstage-start.prompt.md`
+- If file is in `/docs/ROADMAP.md`, links are: `ROADMAP.md`, `CHANGELOG.md`, `HEALTH.md`, `../.github/prompts/backstage-start.prompt.md`
+- If file is in root `/ROADMAP.md`, links are: `ROADMAP.md`, `CHANGELOG.md`, `HEALTH.md`, `.github/prompts/backstage-start.prompt.md`
 
 **When to add menu:**
 
@@ -657,14 +657,14 @@ CURRENT=$(grep -m1 "^## v" CHANGELOG.md | sed 's/^## v//' | cut -d':' -f1 | tr -
 
 **Options:**
 
-- Fix the issue and re-run /MGMT-start
+- Fix the issue and re-run /backstage-start
 - Ask me to clarify the requirement
 - Document as known issue in ROADMAP
 
 What would you like to do?
 ```
 
-**After fixes → Re-run /MGMT-start → Continues to stable state**
+**After fixes → Re-run /backstage-start → Continues to stable state**
 
 ---
 
@@ -1061,7 +1061,7 @@ All status files should include navigation menu pointing to actual location:
 - CHECKS - Stability tests (check README for links)
 ```
 
-**No hardcoded paths in MGMT-start.prompt.md** - README is the only source of truth for all file locations.
+**No hardcoded paths in backstage-start.prompt.md** - README is the only source of truth for all file locations.
 
 ---
 
@@ -1083,7 +1083,7 @@ This prompt is **Level 3** - the most abstract layer:
 - AI retrieval via `/research` prompt
 - **Example flagship project for Level 3**
 
-### Level 3: Meta-Workflow (MGMT-start.prompt.md)
+### Level 3: Meta-Workflow (backstage-start.prompt.md)
 
 - **This file** - works for ANY project
 - Uses Personal Library as working example
@@ -1094,7 +1094,7 @@ This prompt is **Level 3** - the most abstract layer:
 **The Hierarchy:**
 
 ```
-MGMT-start.prompt.md (agnostic workflow)
+backstage-start.prompt.md (agnostic workflow)
   ↓ Uses as example ↓
 Personal Library MCP (project with status files)
   ↓ User-specific ↓
@@ -1108,7 +1108,7 @@ Your books (not tracked, personal)
 **The Model:**
 
 1. **README** → ONLY source of truth for file locations
-2. **MGMT-start.prompt.md** → Reads README, stays agnostic, works everywhere
+2. **backstage-start.prompt.md** → Reads README, stays agnostic, works everywhere
 3. **Status Files** → Project-specific (tests, versioning, features)
 
 **Flow:**
@@ -1142,5 +1142,5 @@ Run workflow (5 steps → 5 outcomes)
 ---
 
 **Last updated:** 2026-01-26
-**Version:** 5.0 (Renamed to MGMT-start, updated CONTRIBUTING→POLICY)
+**Version:** 5.0 (Renamed to backstage-start, updated CONTRIBUTING→POLICY)
 **Flagship example:** Librarian MCP (Level 2 project)
