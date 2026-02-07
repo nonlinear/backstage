@@ -28,6 +28,30 @@ graph LR
 
 ## v0.3.0
 
+### ⏳ OpenClaw Skill
+
+AI-powered orchestration layer for backstage protocol.
+
+**Problem:** Need executable skill to manifest backstage protocol in OpenClaw sessions
+**Solution:** backstage.sh skill with install, update, protocol execution, and next-step display
+
+**Tasks:**
+
+- [ ] Foundation epic in ROADMAP template
+- [ ] Update README - "Backstage = PROTOCOL" framing
+- [ ] Protocol diagrams (skill flow, epic dance, polycentric governance)
+- [ ] Move approved skill diagram to `skill/` or `README.md`
+- [ ] Publish placeholder skill on ClawdHub (reserve "backstage" name)
+- [ ] Install logic (templates → backstage/, global/ from repo main)
+- [ ] Update logic (compare versions, download from main)
+- [ ] POLICY protocol execution (read global + project, project wins)
+- [ ] HEALTH protocol execution (run checks, auto-fix, report)
+- [ ] "What's next?" display (epic list, commands)
+
+---
+
+## v0.4.0 (was v0.3.0)
+
 ### Update Script
 
 ⏳ Smart update script to fetch backstage framework updates from GitHub

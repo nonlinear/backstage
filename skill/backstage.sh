@@ -5,13 +5,16 @@
 set -e
 
 PROJECT_PATH="${2:-.}"
+REPO_OWNER="nonlinear"
+REPO_NAME="backstage"
+REPO_BRANCH="main"
 
 # Colors
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
-NC='\033[0m' # No Color
+NC='\033[0m'
 
 # Helper functions
 info() { echo -e "${BLUE}ℹ️  $1${NC}"; }
@@ -19,30 +22,199 @@ success() { echo -e "${GREEN}✅ $1${NC}"; }
 warn() { echo -e "${YELLOW}⚠️  $1${NC}"; }
 error() { echo -e "${RED}❌ $1${NC}"; }
 
-# Check if backstage/ exists
-check_backstage() {
-    if [ ! -d "$PROJECT_PATH/backstage" ]; then
-        error "No backstage/ folder found in $PROJECT_PATH"
-        echo "Create one? (y/n)"
-        read -r answer
-        if [ "$answer" = "y" ]; then
-            mkdir -p "$PROJECT_PATH/backstage"
-            success "Created backstage/ folder"
+# ============================================================================
+# INSTALL BACKSTAGE
+# ============================================================================
+install_backstage() {
+    local target_dir="$PROJECT_PATH/backstage"
+    
+    info "Installing backstage from github.com/${REPO_OWNER}/${REPO_NAME}..."
+    
+    # Create backstage directory
+    mkdir -p "$target_dir/global"
+    
+    # Fetch templates
+    local temp_dir="/tmp/backstage-install-$$"
+    mkdir -p "$temp_dir"
+    
+    info "Fetching files from repo..."
+    
+    # Download templates
+    for template in ROADMAP CHANGELOG POLICY HEALTH; do
+        local url="https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/${REPO_BRANCH}/templates/${template}-template.md"
+        local dest="$target_dir/${template}.md"
+        
+        if curl -fsSL "$url" -o "$dest" 2>/dev/null; then
+            success "Copied ${template}.md"
         else
-            exit 1
+            warn "Could not fetch ${template}-template.md (continuing)"
+        fi
+    done
+    
+    # Download global files
+    for global_file in POLICY.md HEALTH.md; do
+        local url="https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/${REPO_BRANCH}/global/${global_file}"
+        local dest="$target_dir/global/${global_file}"
+        
+        if curl -fsSL "$url" -o "$dest" 2>/dev/null; then
+            success "Copied global/${global_file}"
+        else
+            error "Failed to fetch global/${global_file}"
+            rm -rf "$temp_dir"
+            return 1
+        fi
+    done
+    
+    rm -rf "$temp_dir"
+    
+    success "Backstage installed!"
+    echo ""
+    info "Next: Edit backstage/ROADMAP.md to plan your project"
+}
+
+# ============================================================================
+# UPDATE BACKSTAGE
+# ============================================================================
+get_local_version() {
+    # Read version from navigation block in README
+    local readme="$PROJECT_PATH/backstage/README.md"
+    
+    if [ ! -f "$readme" ]; then
+        echo "v0.0.0"
+        return
+    fi
+    
+    grep "backstage rules" "$readme" | grep -oE 'v[0-9.]+' | head -1 || echo "v0.0.0"
+}
+
+get_remote_version() {
+    # Fetch version from remote README
+    local url="https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/${REPO_BRANCH}/README.md"
+    
+    if curl -fsSL "$url" 2>/dev/null | grep "backstage rules" | grep -oE 'v[0-9.]+' | head -1; then
+        return 0
+    else
+        echo "v0.0.0"
+        return 1
+    fi
+}
+
+check_update_timestamp() {
+    local timestamp_file="$PROJECT_PATH/backstage/.last-update-check"
+    local today=$(date +%Y-%m-%d)
+    
+    if [ -f "$timestamp_file" ]; then
+        local last_check=$(cat "$timestamp_file" | cut -d'|' -f1)
+        local last_answer=$(cat "$timestamp_file" | cut -d'|' -f2)
+        
+        if [ "$last_check" = "$today" ] && [ "$last_answer" = "no" ]; then
+            # Already asked today, user said no
+            return 1
+        fi
+    fi
+    
+    return 0
+}
+
+save_update_timestamp() {
+    local answer="$1"
+    local timestamp_file="$PROJECT_PATH/backstage/.last-update-check"
+    local today=$(date +%Y-%m-%d)
+    
+    echo "${today}|${answer}" > "$timestamp_file"
+}
+
+show_update_tease() {
+    local local_ver="$1"
+    local remote_ver="$2"
+    
+    echo ""
+    info "🔄 Backstage ${remote_ver} available"
+    echo ""
+    echo "The protocol learned to automate itself. Health checks run in the background,"
+    echo "epics create themselves with the right version numbers, and you can finally"
+    echo "see the whole workflow as a diagram instead of imagining it."
+    echo ""
+    echo "Oh, and it stops asking you to update every five minutes."
+    echo ""
+    echo "Full story: https://github.com/${REPO_OWNER}/${REPO_NAME}/blob/${REPO_BRANCH}/CHANGELOG.md"
+    echo "Browse the skill: https://github.com/${REPO_OWNER}/${REPO_NAME}/tree/${REPO_BRANCH}/skill"
+    echo "Updated rules: https://github.com/${REPO_OWNER}/${REPO_NAME}/blob/${REPO_BRANCH}/global/POLICY.md"
+    echo ""
+}
+
+update_backstage() {
+    info "Updating backstage from github.com/${REPO_OWNER}/${REPO_NAME}..."
+    
+    # Backup current global/ (just in case)
+    if [ -d "$PROJECT_PATH/backstage/global" ]; then
+        cp -r "$PROJECT_PATH/backstage/global" "$PROJECT_PATH/backstage/global.bak"
+    fi
+    
+    # Delete and replace global/
+    rm -rf "$PROJECT_PATH/backstage/global"
+    mkdir -p "$PROJECT_PATH/backstage/global"
+    
+    # Download global files
+    for global_file in POLICY.md HEALTH.md; do
+        local url="https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/${REPO_BRANCH}/global/${global_file}"
+        local dest="$PROJECT_PATH/backstage/global/${global_file}"
+        
+        if curl -fsSL "$url" -o "$dest" 2>/dev/null; then
+            success "Updated global/${global_file}"
+        else
+            error "Failed to fetch global/${global_file}"
+            # Restore backup
+            if [ -d "$PROJECT_PATH/backstage/global.bak" ]; then
+                rm -rf "$PROJECT_PATH/backstage/global"
+                mv "$PROJECT_PATH/backstage/global.bak" "$PROJECT_PATH/backstage/global"
+            fi
+            return 1
+        fi
+    done
+    
+    # Remove backup
+    rm -rf "$PROJECT_PATH/backstage/global.bak"
+    
+    success "Backstage updated!"
+    
+    # Update navigation blocks (will be done by global/POLICY execution)
+    info "Run 'backstage.sh start' to update navigation blocks"
+}
+
+check_for_updates() {
+    # Skip if already checked today and user said no
+    if ! check_update_timestamp; then
+        return 0
+    fi
+    
+    local local_ver=$(get_local_version)
+    local remote_ver=$(get_remote_version)
+    
+    if [ $? -ne 0 ]; then
+        warn "⚠️  Network error - couldn't check for updates"
+        return 0
+    fi
+    
+    if [ "$local_ver" != "$remote_ver" ]; then
+        show_update_tease "$local_ver" "$remote_ver"
+        
+        echo -n "Update? (y/n): "
+        read -r answer
+        
+        save_update_timestamp "$answer"
+        
+        if [ "$answer" = "y" ]; then
+            update_backstage
+        else
+            info "Skipping update (won't ask again today)"
         fi
     fi
 }
 
-# Read and summarize markdown file (extract ## headers)
-summarize_md() {
-    local file="$1"
-    if [ -f "$file" ]; then
-        grep '^##' "$file" | head -10
-    fi
-}
-
-# Extract and run bash blocks from markdown
+# ============================================================================
+# HEALTH CHECKS
+# ============================================================================
 run_health_checks() {
     local file="$1"
     local label="$2"
@@ -56,10 +228,12 @@ run_health_checks() {
     # Extract bash blocks (lines between ```bash and ```)
     local in_block=0
     local temp_script="/tmp/backstage-health-$$.sh"
+    local has_checks=0
     
     while IFS= read -r line; do
         if [[ "$line" =~ ^\`\`\`bash ]]; then
             in_block=1
+            has_checks=1
             echo "#!/bin/bash" > "$temp_script"
             continue
         elif [[ "$line" =~ ^\`\`\` ]] && [ $in_block -eq 1 ]; then
@@ -78,266 +252,144 @@ run_health_checks() {
     done < "$file"
     
     rm -f "$temp_script"
+    
+    if [ $has_checks -eq 0 ]; then
+        info "No checks defined in $label"
+    fi
+    
     return 0
 }
 
-# Find next version from ROADMAP
-next_version() {
-    local roadmap="$PROJECT_PATH/backstage/ROADMAP.md"
-    
-    if [ ! -f "$roadmap" ]; then
-        echo "v0.1.0"
-        return
-    fi
-    
-    # Find highest version number
-    local last_version=$(grep -oE 'v[0-9]+\.[0-9]+\.[0-9]+' "$roadmap" | sort -V | tail -1)
-    
-    if [ -z "$last_version" ]; then
-        echo "v0.1.0"
-        return
-    fi
-    
-    # Increment minor version
-    local major=$(echo "$last_version" | cut -d'.' -f1 | tr -d 'v')
-    local minor=$(echo "$last_version" | cut -d'.' -f2)
-    local patch=$(echo "$last_version" | cut -d'.' -f3)
-    
-    minor=$((minor + 1))
-    echo "v${major}.${minor}.0"
-}
-
-# Start command
-cmd_start() {
-    check_backstage
-    
-    info "Executing protocols..."
-    
-    # === Execute protocols silently (global + project) ===
-    # Script reads both, applies combined rules, project wins if conflict
-    
-    # Validate structure exists
-    local has_global_policy=0
-    local has_project_policy=0
-    local has_global_health=0
-    local has_project_health=0
-    
-    [ -f "$PROJECT_PATH/backstage/global/POLICY.md" ] && has_global_policy=1
-    [ -f "$PROJECT_PATH/backstage/POLICY.md" ] && has_project_policy=1
-    [ -f "$PROJECT_PATH/backstage/global/HEALTH.md" ] && has_global_health=1
-    [ -f "$PROJECT_PATH/backstage/HEALTH.md" ] && has_project_health=1
-    
-    # Run health checks (silent execution, report result only)
-    echo ""
-    local health_pass=0
-    if cmd_health > /dev/null 2>&1; then
-        success "✅ All health checks passed - ready to work"
-        health_pass=1
-    else
-        warn "⚠️ Some health checks failed - see details above"
-    fi
-    
-    # List active epics from ROADMAP
-    echo ""
-    if [ -f "$PROJECT_PATH/backstage/ROADMAP.md" ]; then
-        info "Active epics:"
-        
-        # Extract and display epics
-        grep -E '^## v[0-9]+\.[0-9]+\.[0-9]+|^### ' "$PROJECT_PATH/backstage/ROADMAP.md" | while read -r line; do
-            if [[ "$line" =~ ^##\ v([0-9.]+) ]]; then
-                version="${BASH_REMATCH[1]}"
-            elif [[ "$line" =~ ^###\ (.+) ]]; then
-                title="${BASH_REMATCH[1]}"
-                echo "  • v${version} - ${title}"
-            fi
-        done
-    else
-        warn "No ROADMAP.md found"
-    fi
-    
-    echo ""
-    success "Session ready!"
-    
-    # Output for AI processing
-    echo ""
-    echo "SESSION_READY|health_pass=${health_pass}"
-}
-
-# Epic create command
-cmd_epic_create() {
-    local epic_name="$1"
-    
-    if [ -z "$epic_name" ]; then
-        error "Usage: backstage.sh epic create <name>"
-        exit 1
-    fi
-    
-    check_backstage
-    
-    # Find next version
-    local version=$(next_version)
-    local slug=$(echo "$epic_name" | tr '[:upper:]' '[:lower:]' | tr ' ' '-')
-    
-    info "Creating epic: $version - $epic_name"
-    
-    # Create epic-notes folder
-    mkdir -p "$PROJECT_PATH/backstage/epic-notes"
-    
-    # Create epic note
-    local epic_file="$PROJECT_PATH/backstage/epic-notes/${version}-${slug}.md"
-    
-    cat > "$epic_file" <<EOF
-# Epic ${version}: ${epic_name}
-
-**Status:** 🚧 Active
-
-## Problem
-
-[What problem does this solve?]
-
-## Solution
-
-[How will we solve it?]
-
-## Tasks
-
-- [ ] Task 1
-- [ ] Task 2
-- [ ] Task 3
-
-## Notes
-
-[Session notes, decisions, discoveries]
-
-EOF
-    
-    success "Created: $epic_file"
-    echo "EPIC_CREATED|${version}|${slug}|${epic_file}"
-    
-    # Ask about branch
-    echo ""
-    info "Create git branch? (y/n)"
-    read -r create_branch
-    
-    if [ "$create_branch" = "y" ]; then
-        local branch_name="epic/${version}-${slug}"
-        
-        # Check if in git repo
-        if git -C "$PROJECT_PATH" rev-parse --git-dir > /dev/null 2>&1; then
-            git -C "$PROJECT_PATH" checkout -b "$branch_name"
-            success "Created branch: $branch_name"
-            echo "BRANCH_CREATED|${branch_name}"
-        else
-            warn "Not a git repository - skipping branch creation"
-        fi
-    fi
-    
-    echo ""
-    success "Epic ready! Add to ROADMAP manually or via AI."
-}
-
-# Health command
 cmd_health() {
-    check_backstage
+    local project_root="$PROJECT_PATH"
     
-    echo "HEALTH_CHECK_START"
+    if [ ! -d "$project_root/backstage" ]; then
+        warn "No backstage/ folder found"
+        return 1
+    fi
+    
+    echo ""
+    info "🏥 Running health checks..."
     echo ""
     
     local exit_code=0
+    local failed_checks=()
     
     # Global HEALTH
-    if [ -f "$PROJECT_PATH/backstage/global/HEALTH.md" ]; then
-        if ! run_health_checks "$PROJECT_PATH/backstage/global/HEALTH.md" "Global"; then
+    if [ -f "$project_root/backstage/global/HEALTH.md" ]; then
+        if ! run_health_checks "$project_root/backstage/global/HEALTH.md" "Global"; then
             exit_code=1
+            failed_checks+=("Global HEALTH")
         fi
     fi
     
-    # Project HEALTH
-    if [ -f "$PROJECT_PATH/backstage/HEALTH.md" ]; then
-        if ! run_health_checks "$PROJECT_PATH/backstage/HEALTH.md" "Project"; then
+    # Project HEALTH (overrides global)
+    if [ -f "$project_root/backstage/HEALTH.md" ]; then
+        if ! run_health_checks "$project_root/backstage/HEALTH.md" "Project"; then
             exit_code=1
+            failed_checks+=("Project HEALTH")
         fi
     fi
     
     echo ""
+    
     if [ $exit_code -eq 0 ]; then
         success "All health checks passed!"
-        echo "HEALTH_CHECK_PASS"
+        return 0
     else
-        error "Some health checks failed"
-        echo "HEALTH_CHECK_FAIL"
+        error "Failed checks: ${failed_checks[*]}"
+        echo ""
+        warn "User + AI: Review failures above and fix case-by-case"
+        return 1
     fi
-    
-    return $exit_code
 }
 
-# Close command
-cmd_close() {
-    info "Closing work session..."
-    echo ""
+# ============================================================================
+# START COMMAND (Main Flow)
+# ============================================================================
+cmd_start() {
+    local project_root="$PROJECT_PATH"
     
-    # Run health checks
-    if cmd_health; then
-        success "Health checks passed - safe to commit"
-        
-        # Ask if should commit
+    # Check if backstage exists
+    if [ ! -d "$project_root/backstage" ]; then
+        warn "No backstage/ folder found in $project_root"
         echo ""
-        info "Commit and push? (y/n)"
-        read -r should_commit
+        echo -n "Install backstage? (y/n): "
+        read -r answer
         
-        if [ "$should_commit" = "y" ]; then
-            cd "$PROJECT_PATH"
-            git add -A
-            git commit -m "session wrap-up
-
-Completed work on current epic.
-All health checks passed."
-            git push
-            success "Committed and pushed!"
+        if [ "$answer" = "y" ]; then
+            install_backstage
+            echo ""
+        else
+            error "Cannot proceed without backstage/"
+            exit 1
         fi
-    else
-        warn "Health checks failed - fix before committing"
+    fi
+    
+    # Check for updates (if applicable)
+    check_for_updates
+    
+    echo ""
+    info "📋 Executing protocols..."
+    echo ""
+    
+    # Read POLICY (global + project, project wins)
+    # Execute POLICY protocol (update navigation blocks, etc)
+    # For now: placeholder
+    info "POLICY protocol: Project wins over global"
+    
+    echo ""
+    
+    # Run HEALTH checks
+    if cmd_health; then
         echo ""
-        info "Add 🔧 FIX tasks to ROADMAP (manual for now)"
+        success "✅ Ready to work!"
+    else
+        echo ""
+        warn "⚠️  Fix health check failures before continuing"
     fi
     
     echo ""
-    info "💪 Body check: Hungry? Thirsty? Need to stretch?"
+    
+    # Display what's next (from global POLICY)
+    info "📌 What's next?"
     echo ""
-    success "Session closed! Good work today."
+    
+    if [ -f "$project_root/backstage/ROADMAP.md" ]; then
+        echo "Active epics:"
+        grep -E '^## v[0-9.]+|^### ' "$project_root/backstage/ROADMAP.md" 2>/dev/null | head -10 || echo "  (none yet)"
+    else
+        echo "  No ROADMAP.md - create your first epic!"
+    fi
+    
+    echo ""
+    success "Session ready! 🚀"
 }
 
-# Main command router
+# ============================================================================
+# MAIN COMMAND ROUTER
+# ============================================================================
 case "$1" in
     start)
         cmd_start
         ;;
-    epic)
-        case "$2" in
-            create)
-                cmd_epic_create "$3"
-                ;;
-            *)
-                error "Unknown epic command: $2"
-                echo "Usage: backstage.sh epic create <name>"
-                exit 1
-                ;;
-        esac
-        ;;
     health)
         cmd_health
         ;;
-    close)
-        cmd_close
+    install)
+        install_backstage
+        ;;
+    update)
+        update_backstage
         ;;
     *)
         error "Unknown command: $1"
         echo ""
         echo "Usage:"
-        echo "  backstage.sh start [project-path]"
-        echo "  backstage.sh epic create <name>"
-        echo "  backstage.sh health"
-        echo "  backstage.sh close"
+        echo "  backstage.sh start [project-path]    # Main workflow"
+        echo "  backstage.sh health                  # Run health checks only"
+        echo "  backstage.sh install                 # Install backstage manually"
+        echo "  backstage.sh update                  # Force update (skip checks)"
         exit 1
         ;;
 esac

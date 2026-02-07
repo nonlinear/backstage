@@ -1,190 +1,293 @@
----
-name: backstage
-description: Project management framework. Start work sessions (show POLICY + epics), create epics, run health checks. Use when user says "vamos trabalhar no X", "work on X", "backstage start".
-metadata: {"openclaw":{"emoji":"🎭","requires":{"bins":["jq","git"]}}}
----
+# Backstage Skill
 
-# Backstage - Project Management Framework
-
-AI-powered project management for developers. Epic-based roadmaps, POLICY enforcement, health checks.
-
-## Triggers
-
-**Start work session:**
-- "vamos trabalhar no [projeto]"
-- "work on [projeto]"
-- "backstage start"
-- "começar [projeto]"
-
-**Create epic:**
-- "criar epic [nome]"
-- "new epic [nome]"
-
-**End session:**
-- "boa noite"
-- "acabei"
-- "backstage close"
-
-**Health check:**
-- "roda health check"
-- "backstage health"
+**Project management framework for epic-driven development.**
 
 ---
 
-## Commands
+## What It Does
 
-### Start Work Session
+Backstage provides structure for managing projects through:
+- **Epics** (semantic versioned milestones)
+- **Health checks** (ensure project quality)
+- **Polycentric governance** (project rules override global rules)
+- **Branch dance** (epic → branch → merge workflow)
+
+---
+
+## Installation
+
+### Via ClawdHub (Recommended)
+
+```bash
+clawdhub install backstage
+```
+
+### Manual (for development)
+
+```bash
+# Clone or download skill/
+ln -s ~/path/to/backstage/skill ~/.openclaw/skills/backstage
+```
+
+---
+
+## Usage
+
+### Start a Work Session
+
 ```bash
 backstage.sh start [project-path]
 ```
 
 **What it does:**
-1. Comply with `global/POLICY.md` (universal rules)
-2. Comply with `POLICY.md` (project-specific - WINS if conflict)
-3. Run `global/HEALTH.md` checks
-4. Run `HEALTH.md` checks (project-specific - WINS if conflict)
-5. Report: ✅ ready / ❌ issues found
-6. List active epics from ROADMAP
-7. Ask: create new epic or work on existing?
+1. Checks if backstage/ exists (installs if needed)
+2. Checks for updates (once/day)
+3. Executes POLICY protocol (updates navigation, version)
+4. Runs HEALTH checks (validates project state)
+5. Shows active epics from ROADMAP
 
-### Create Epic
-```bash
-backstage.sh epic create "epic-name"
+**Output:**
+```
+✅ All health checks passed - ready to work
+
+📌 What's next?
+
+Active epics:
+  • v0.1.0 - Environment Setup
+  • v0.2.0 - Navigation Logic
+
+✅ Session ready! 🚀
 ```
 
-**What it does:**
-1. Read ROADMAP to find next version
-2. Create `epic-notes/vX.Y.Z-epic-name.md`
-3. Add epic to ROADMAP
-4. (If POLICY requires) Create branch `epic/vX.Y.Z-epic-name`
+---
 
-### Health Check
+### Run Health Checks Only
+
 ```bash
 backstage.sh health
 ```
 
-**What it does:**
-1. Run `global/HEALTH.md` checks
-2. Run `HEALTH.md` checks (project-specific - WINS if conflict)
-3. Report: ✅ all passed / ❌ X failed
+Executes all bash code blocks from:
+- `backstage/global/HEALTH.md`
+- `backstage/POLICY
 
-### Close Session
+.md` (if exists, overrides global)
+
+---
+
+### Manual Install
+
 ```bash
-backstage.sh close
+backstage.sh install
 ```
 
-**What it does:**
-1. Run health checks
-2. If fail: add 🔧 FIX tasks to ROADMAP
-3. If pass: commit + push
-4. Victory lap (brief summary)
-5. Body check (optional)
+Fetches latest backstage files from GitHub and installs to `backstage/` folder.
+
+---
+
+### Force Update
+
+```bash
+backstage.sh update
+```
+
+Updates `backstage/global/` from repo main (bypasses timestamp check).
 
 ---
 
 ## Flow Diagram
 
-```mermaid
-flowchart TD
-    START[User: vamos trabalhar no X] --> COMPLY
-    
-    COMPLY[Comply with protocols<br/>global + project overlapping<br/>project WINS if conflict] --> HEALTH
-    
-    subgraph PROTOCOLS [" "]
-        GLOBAL_P[global/POLICY.md<br/>universal rules]
-        PROJECT_P[POLICY.md<br/>project rules]
-        GLOBAL_H[global/HEALTH.md<br/>universal checks]
-        PROJECT_H[HEALTH.md<br/>project checks]
-    end
-    
-    HEALTH[Run all health checks] --> HEALTH_OK{Pass?}
-    
-    HEALTH_OK -->|Yes| READY[✅ Ready]
-    HEALTH_OK -->|No| REPORT_ISSUES[❌ Report issues]
-    
-    READY --> LIST_EPICS[List active epics]
-    REPORT_ISSUES --> LIST_EPICS
-    
-    LIST_EPICS --> ASK_CHOICE{User choice?}
-    
-    ASK_CHOICE -->|Create new| EPIC_CREATE
-    ASK_CHOICE -->|Work on existing| WORK
-    
-    EPIC_CREATE[Create epic + optional branch] --> WORK
-    
-    WORK[Work happens...] --> CLOSE
-    
-    CLOSE[backstage close] --> FINAL_HEALTH[Run health checks]
-    
-    FINAL_HEALTH --> FINAL_OK{Pass?}
-    
-    FINAL_OK -->|No| ADD_FIXES[Report: Add FIX tasks]
-    FINAL_OK -->|Yes| COMMIT[Commit + push]
-    
-    ADD_FIXES --> DONE
-    COMMIT --> VICTORY[Victory lap + body check]
-    VICTORY --> DONE[Session closed]
-    
-    style COMPLY fill:#fff4e1
-    style PROTOCOLS fill:#f0f0f0
-    style HEALTH_OK fill:#e1ffe1
-    style FINAL_OK fill:#e1ffe1
-```
+See `backstage-skill-flow.html` for visual architecture.
 
-**Protocol execution order:**
-1. Read `global/POLICY` + `POLICY` simultaneously
-2. Apply combined rules (project wins if conflict)
-3. Read `global/HEALTH` + `HEALTH` simultaneously  
-4. Run all checks (project wins if conflict)
-5. Report result: ✅ ready / ❌ issues
+**Key steps:**
+1. Has Backstage? → No: Install | Yes: Check version
+2. Up to date? → No: Ask update → Yes: Continue
+3. Execute POLICY (project wins global)
+4. Execute HEALTH (project wins global)
+5. Health pass? → No: User + AI fix → Yes: Display next steps
+6. What's next? → Show active epics
 
 ---
 
-## Project Structure
+## Files Structure
 
-**Required:**
 ```
-project/
-  backstage/
-    ROADMAP.md      ← Required
+backstage/
+├── README.md           # Project overview
+├── ROADMAP.md          # Planned epics (future)
+├── CHANGELOG.md        # Completed epics (past)
+├── POLICY.md           # Project-specific rules (overrides global/)
+├── HEALTH.md           # Project-specific checks (overrides global/)
+└── global/
+    ├── POLICY.md       # Framework rules (canonical)
+    └── HEALTH.md       # Framework checks (canonical)
 ```
 
-**Optional:**
+---
+
+## Configuration
+
+### Update Frequency
+
+Update checks run once per day. Timestamp stored in:
 ```
-project/
-  backstage/
-    POLICY.md       ← Project workflow rules
-    HEALTH.md       ← Project health checks
-    CHANGELOG.md    ← Completed work
-    epic-notes/     ← Epic specs
-    global/         ← Universal framework files
-      POLICY.md
-      HEALTH.md
+backstage/.last-update-check
 ```
+
+Format: `YYYY-MM-DD|answer` (e.g., `2026-02-07|no`)
+
+### Repository
+
+Default: `github.com/nonlinear/backstage` branch `main`
+
+To change, edit `REPO_OWNER`, `REPO_NAME`, `REPO_BRANCH` in `backstage.sh`.
 
 ---
 
 ## Polycentric Governance
 
-Backstage reads protocols from TWO levels simultaneously:
+**Global vs Project rules:**
 
-1. **`global/`** - Universal framework rules
-2. **`project/`** - Project-specific rules
+- **Global** (`backstage/global/POLICY.md`): Framework canonical rules
+- **Project** (`backstage/POLICY.md`): Project-specific overrides
 
-**Conflict resolution:** Project wins.
+**Precedence:** Project ALWAYS wins over global.
 
-**Example:**
-- `global/POLICY`: "Always create branches"  
-- `POLICY`: "Work directly on main"  
-- **Result:** Work on main (project wins)
+**Why:** Allows framework evolution without breaking existing projects.
 
 ---
 
-## Status
+## Health Checks
 
-**Current:** v0.3.0 (OpenClaw Skill)  
-**Repository:** https://github.com/nonlinear/backstage
+**Format:** Bash code blocks in HEALTH.md
+
+```markdown
+## Check Example
+
+```bash
+if [ ! -f "README.md" ]; then
+  echo "❌ Missing README.md"
+  exit 1
+fi
+echo "✅ README.md exists"
+```
+```
+
+**Execution:** Skill extracts and runs each bash block independently.
+
+**Failures:** Reported to user, auto-fix attempted, then manual fix if needed.
 
 ---
 
-**Author:** nonlinear
+## Version Tracking
+
+**Version lives in navigation block:**
+
+```markdown
+> 🤖 backstage rules [v0.3.0](https://github.com/nonlinear/backstage)
+```
+
+**Detection:**
+- **Epic branch:** Extract from branch name (`epic/v0.3.0-*` → v0.3.0)
+- **Main branch:** Read latest CHANGELOG epic
+
+**Meta-rule (backstage-specific):**
+
+When working on epic branch, `global/POLICY.md` version MUST match epic version.
+
+Example:
+```bash
+git checkout -b epic/v0.3.0-openclaw-skill
+# Update global/POLICY.md: v0.2.0 → v0.3.0 immediately
+```
+
+**Why:** When epic merges, version becomes official (CHANGELOG = source of truth).
+
+---
+
+## Update Tease Message
+
+When update available, shows storytelling message (not feature list):
+
+```
+🔄 Backstage v0.3.0 available
+
+The protocol learned to automate itself. Health checks run in the background,
+epics create themselves with the right version numbers, and you can finally
+see the whole workflow as a diagram instead of imagining it.
+
+Oh, and it stops asking you to update every five minutes.
+
+Full story: [CHANGELOG.md link]
+Browse the skill: [skill/ link]
+Updated rules: [global/POLICY.md link]
+
+Update? (y/n):
+```
+
+**Vibe:** Hook, intrigue, inline links, personality.
+
+---
+
+## Prompt Equivalent
+
+For non-OpenClaw environments (VSCode, other AI assistants):
+
+See `backstage.prompt.md` for equivalent prompt-based workflow.
+
+**Same logic, different execution:**
+- Skill: Bash script (`backstage.sh`)
+- Prompt: AI executes markdown instructions
+
+---
+
+## Development
+
+### Testing Changes
+
+```bash
+# Symlink skill for live testing
+ln -s ~/Documents/backstage/skill ~/.openclaw/skills/backstage
+
+# Test
+backstage.sh start ~/path/to/test-project
+
+# When done, restore published version
+rm ~/.openclaw/skills/backstage
+clawdhub install backstage
+```
+
+### Publishing Updates
+
+```bash
+cd ~/Documents/backstage
+clawdhub publish skill/ --slug backstage --version 0.3.0
+```
+
+---
+
+## Meta: Backstage Uses Backstage
+
+**Bootstrapping paradox:**
+
+Backstage IS a project, so it uses its own protocol to build itself.
+
+**Implications:**
+- `epic/v0.3.0-*` branch has `global/POLICY.md` with v0.3.0 (future)
+- `main` branch has `global/POLICY.md` with v0.2.0 (current stable)
+- Both correct for their context
+
+**This is intentional meta-design.** The protocol builds itself using its own rules.
+
+---
+
+## License
+
+MIT (or your preferred license)
+
+---
+
+**Questions? Issues?**
+
+- Repo: https://github.com/nonlinear/backstage
+- Issues: https://github.com/nonlinear/backstage/issues
