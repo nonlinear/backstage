@@ -48,32 +48,24 @@ graph LR
 
 ---
 
-## Installation
+## Installation & Usage
 
-1. Download [backstage-update.py](global/backstage-update.py) to your project root (same level as README.md)
-2. Run `python backstage-update.py` (creates backstage/ folder with everything)
-3. Run [/backstage-start](.github/prompts/backstage-start.prompt.md) prompt to validate setup
-4. Start grooming your [ROADMAP](templates/ROADMAP-template.md). Big picture first, then code in epic branches. Measure twice, cut once.
-5. We use VSCode logic for prompts. If you're using another IDE, manually move to your corresponding IDE prompt logic:
-   - [backstage-start.prompt.md](.github/prompts/backstage-start.prompt.md)
-   - [backstage-close.prompt.md](.github/prompts/backstage-close.prompt.md)
-   - [backstage-update.prompt.md](.github/prompts/backstage-update.prompt.md)
+### Via Prompt
+1. Install backstage prompt in your AI assistant
+2. Run `/backstage-start` in your project
+3. Prompt auto-installs backstage if needed, then starts workflow
 
----
+### Via Skill (OpenClaw)
+1. Install skill: `clawdhub install backstage` or `ln -s ~/path/to/backstage/skill ~/.openclaw/skills/backstage`
+2. Run `backstage start` in your project
+3. Skill auto-installs backstage if needed, then starts workflow
 
-## Workflow Prompts
-
-| Prompt                                                         | When to Use                    | What It Does                                                                                                              |
-| -------------------------------------------------------------- | ------------------------------ | ------------------------------------------------------------------------------------------------------------------------- |
-| [backstage-start](.github/prompts/backstage-start.prompt.md)   | Before starting work session   | Validates project health, checks navigation blocks, runs all health checks (global + project), identifies epic to work on |
-| [backstage-close](.github/prompts/backstage-close.prompt.md)   | When pausing/ending session    | Runs health checks, commits progress on pass (adds fixes to ROADMAP on fail), victory lap, body check reminder            |
-| [backstage-update](.github/prompts/backstage-update.prompt.md) | When you want latest backstage | Fetches CHANGELOG from repo, shows what changed, runs `backstage-update.py` to refresh global/ and .github/prompts/       |
-
-**Typical workflow:**
-
-1. `/backstage-start` → AI does all checks and informs you what we did last time + what we can do today
-2. **the zone**
-3. `/backstage-close` → AI wraps up and celebrates progress, **turns off your app** (Get a life, hydrate, fuck!)
+**Both methods:**
+- Detect if project has backstage
+- Install templates + global/ if missing
+- Check for updates (once/day)
+- Run POLICY + HEALTH protocols
+- Show active epics
 
 ---
 
@@ -83,5 +75,3 @@ Backstage follows a **polycentric structure**—not hierarchical "levels" but **
 
 - 📗 Learn more about [polycentric governance here](polycentric-governance.md)
 - 👷 Join [backstage signal group](https://signal.group/#CjQKIAinD80_cDPyyVP0xRDUQ9Io2PMN9DeJSBzKM1mrXpEYEhAMdewh5mBrTUcmujYApgMx)
-
----
