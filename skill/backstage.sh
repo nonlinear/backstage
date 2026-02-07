@@ -337,15 +337,15 @@ NAVEOF
         
         [ ! -f "$file" ] && return
         
-        # Create nav block with correct paths
+        # Create nav block with correct paths (global first to avoid partial matches)
         local nav_block=$(cat "$nav_temp")
+        nav_block="${nav_block//GLOBALPOLICYPATH/${others_rel}global/POLICY.md}"
+        nav_block="${nav_block//GLOBALHEALTHPATH/${others_rel}global/HEALTH.md}"
         nav_block="${nav_block//READMEPATH/${readme_rel}README.md}"
         nav_block="${nav_block//CHANGELOGPATH/${others_rel}CHANGELOG.md}"
         nav_block="${nav_block//ROADMAPPATH/${others_rel}ROADMAP.md}"
         nav_block="${nav_block//POLICYPATH/${others_rel}POLICY.md}"
-        nav_block="${nav_block//GLOBALPOLICYPATH/${others_rel}global/POLICY.md}"
         nav_block="${nav_block//HEALTHPATH/${others_rel}HEALTH.md}"
-        nav_block="${nav_block//GLOBALHEALTHPATH/${others_rel}global/HEALTH.md}"
         
         # Remove old nav block
         local temp="${file}.navtmp"
