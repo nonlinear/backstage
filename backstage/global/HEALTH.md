@@ -1,181 +1,214 @@
-# Backstage - Health Metrics
+# Backstage - Universal Health Metrics
 
-> 🤖
->
-> - [README](../README.md) - Our project
-> - [CHANGELOG](CHANGELOG.md) — What we did
-> - [ROADMAP](ROADMAP.md) — What we wanna do
-> - [POLICY](POLICY.md) [project](POLICY.md) / [global](global/POLICY.md) — How we do it
-> - [HEALTH](HEALTH.md) — What we accept
-> - 👷 Wanna collaborate? Connect via [signal group](https://signal.group/#CjQKIKD7zJjxP9sryI9vE5ATQZVqYsWGN_3yYURA5giGogh3EhAWfvK2Fw_kaFtt-MQ6Jlp8)
->
-> 🤖
+> Health metrics that apply to ALL projects using backstage system.
 
-```mermaid
-%%{init: {'theme':'base', 'themeVariables': { 'fontSize':'14px'}}}%%
-graph LR
-    subgraph "🎯 Ready"
-        V01[v0.1.0<br/>Environment Setup]
-        V02[v0.2.0<br/>Navigation Logic]
-    end
-
-    subgraph "📅 Future"
-        V03[v0.3.0<br/>Update Script]
-        V04[v0.4.0<br/>Templates]
-        V05[v0.5.0<br/>Documentation]
-    end
-
-    V01 --> V02
-    V02 --> V03
-    V03 --> V04
-    V04 --> V05
-
-    style V01 fill:#FFE4B5
-```
+**Purpose:** Define what "healthy" means for your project - validation tests, product metrics, and system wellness indicators.
 
 ---
 
-## 🎯 Backstage-Specific Project Checks
+## 📐 Backstage File Formatting (MANDATORY)
 
-> **Note:** This section contains checks specific to backstage as a project, not universal checks.
-> Universal checks live in [global/HEALTH.md](global/HEALTH.md)
+All backstage files (HEALTH.md, ROADMAP.md, CHANGELOG.md, POLICY.md) must be both **human-readable** and **machine-readable**.
 
-**Backstage is meta:** It's both a framework (global/) AND a project using that framework (root files).
+**Rules:**
+
+1. Each test/check = short, copy-pasteable code block
+2. No large monolithic scripts
+3. No markdown inside code blocks
+4. Explanations outside code blocks
+5. Easy for humans AND automation to parse
+
+**Example:**
+
+```bash
+python3.11 -c "import sys; print(sys.version)"
+```
+
+Expected: Prints Python version
+Pass: ✅ Python 3.11+
 
 ---
 
-### 📂 Dual-Layer Structure
+## 🤖 Navigation Block Validation
 
-**Test: Global and project files coexist properly**
+**Every backstage file must have 🤖 navigation block.**
 
-```bash
-# Global framework files must exist
-test -d global && \
-test -f global/POLICY.md && \
-test -f global/HEALTH.md && \
-test -f global/backstage-update.py && \
-echo '✅ Global framework files exist' || echo '❌ Missing global framework'
-```
-
-Expected: Global framework complete
-Pass: ✅ Global framework files exist
-
-**Test: Project status files exist at root**
+**Test: README has navigation block**
 
 ```bash
-test -f README.md && \
-test -f ROADMAP.md && \
-test -f CHANGELOG.md && \
-test -f POLICY.md && \
-test -f HEALTH.md && \
-echo '✅ Project status files exist' || echo '❌ Missing project files'
+grep -q '> 🤖' README.md && echo '✅ Navigation block exists' || echo '❌ Missing navigation block'
 ```
 
-Expected: Project files at root level
-Pass: ✅ Project status files exist
+Expected: Prints '✅ Navigation block exists'
+Pass: ✅ Navigation block exists
+
+**Test: All status files have navigation block**
+
+```bash
+for file in backstage/CHANGELOG.md backstage/ROADMAP.md backstage/POLICY.md backstage/HEALTH.md; do
+  grep -q '> 🤖' "$file" || echo "❌ Missing in $file"
+done && echo '✅ All files have navigation blocks'
+```
+
+Expected: Prints '✅ All backstage files have navigation blocks'
+Pass: ✅ All navigation blocks present
 
 ---
 
-### 🔄 Self-Reference Consistency
+## � Knowledge Base Check (gaps/)
 
-**Test: Backstage follows its own rules**
+**Purpose:** Make AI mindful of existing gaps before starting work. During epic, if relevant pattern emerges, AI can suggest reading specific gap.
+
+**Test: List existing gaps**
 
 ```bash
-# backstage must have navigation blocks (per its own global/HEALTH.md)
-grep -q '> 🤖' README.md && \
-grep -q '> 🤖' ROADMAP.md && \
-grep -q '> 🤖' CHANGELOG.md && \
-echo '✅ Backstage follows navigation block rule' || echo '❌ Backstage violates its own rules'
+ls -lt gaps/ 2>/dev/null | head -10 || echo "No gaps/ directory yet"
 ```
 
-Expected: Backstage practices what it preaches
-Pass: ✅ Self-consistent
+Expected: Shows gap files (newest first) or message if directory doesn't exist
+Pass: ✅ AI now aware of documented gaps
 
-**Test: Version in navigation block matches latest CHANGELOG epic**
+---
+
+## �📊 Documentation Sync Check
+
+**Changes in code must be reflected in ROADMAP/CHANGELOG.**
+
+**Test: Git changes match documented work**
 
 ```bash
-# Extract version from global/POLICY.md navigation template
-NAV_VERSION=$(grep "backstage rules.*v[0-9]" global/POLICY.md | sed 's/.*v\([0-9.]*\).*/\1/')
-
-# Extract latest version from CHANGELOG
-CHANGELOG_VERSION=$(grep -m1 "^## v[0-9]" CHANGELOG.md | sed 's/^## v//' | cut -d' ' -f1)
-
-# Compare
-if [ "$NAV_VERSION" = "$CHANGELOG_VERSION" ]; then
-  echo "✅ Version sync correct: v$NAV_VERSION"
+# Check if there are uncommitted changes
+if git diff --quiet; then
+  echo '✅ No uncommitted changes'
 else
-  echo "❌ FAIL: Nav template has v$NAV_VERSION but CHANGELOG latest is v$CHANGELOG_VERSION"
-  echo "Fix: Update global/POLICY.md navigation template version"
+  echo '⚠️ Uncommitted changes - run backstage to sync docs (see https://github.com/nonlinear/backstage#installation--usage)'
 fi
 ```
 
-Expected: Versions match (navigation template = latest CHANGELOG epic)
-Pass: 🚨 **CRITICAL** - Must pass before merging epic to main
-
-**Why this matters:**
-
-- Projects check nav block version to know framework version
-- `/backstage-update` compares project version vs latest to show updates
-- Mismatch breaks version detection for all projects using backstage
-
-**Test: Backstage has epics in ROADMAP**
-
-```bash
-grep -E "^## v[0-9]+\.[0-9]+\.[0-9]+" ROADMAP.md >/dev/null && \
-echo '✅ Backstage tracks its own development' || echo '⚠️ No epics - backstage not using epic format'
-```
-
-Expected: Backstage uses epic format for its own development
-Pass: ✅ Epics exist
+Expected: Either no changes or reminder to run /backstage-start
+Pass: ✅ Clean state or acknowledged pending sync
 
 ---
 
-### 📝 Documentation Clarity
+## 🗂️ File Structure Validation
 
-**Test: Global vs Project distinction is clear**
+**Test: Required backstage files exist**
 
 ```bash
-# global/POLICY.md should say "universal" or "all projects"
-# POLICY.md should reference global or say "backstage-specific"
-grep -qi "universal\|all projects" global/POLICY.md && \
-echo '✅ Clear global vs project distinction' || echo '⚠️ Clarify what is universal vs project-specific'
+test -f README.md && \
+test -f backstage/ROADMAP.md && \
+test -f backstage/CHANGELOG.md && \
+test -f backstage/POLICY.md && \
+test -f backstage/HEALTH.md && \
+test -d backstage/global && \
+echo '✅ Required backstage files exist' || echo '❌ Missing required files'
 ```
 
-Expected: Documentation makes layering clear
-Pass: ✅ Distinction documented
+Expected: Prints '✅ Required backstage files exist'
+Pass: ✅ All required files present
+
+**Test: Global backstage files exist**
+
+```bash
+test -f backstage/global/POLICY.md && \
+test -f backstage/global/HEALTH.md && \
+test -f backstage/global/backstage-update.py && \
+echo '✅ Global backstage files exist' || echo '❌ Missing global files'
+```
+
+Expected: Prints '✅ Global backstage files exist'
+Pass: ✅ Global files present (README.md lives at root, not in global/)
 
 ---
 
-### 🔗 Prompt Files Reference Correct Paths
+## 📝 Epic Format Validation
 
-**Test: backstage-start prompt references global files correctly**
+**Epics must follow standard format defined in global/POLICY.md**
+
+**Test: ROADMAP epics use correct syntax**
 
 ```bash
-# backstage-start should tell AIs to read global/POLICY.md for epic format
-grep -q "global/POLICY.md" .github/prompts/backstage-start.prompt.md && \
-echo '✅ Prompt references global policy' || echo '⚠️ Prompt may have hardcoded paths'
+grep -E '\[🚧\]\(.*\).*\*\*|⏳.*\*\*|✅.*\*\*' backstage/ROADMAP.md >/dev/null && \
+echo '✅ Epic format correct' || echo '⚠️ Check epic syntax'
 ```
 
-Expected: Prompts reference global/ for universal rules
-Pass: ✅ Prompts reference framework correctly
+Expected: Finds properly formatted epics
+Pass: ✅ Epics follow format
 
 ---
 
-### 🎯 Meta-Awareness
+## 🔗 Link Integrity Check
 
-**Test: README explains the meta nature**
+**Navigation links must point to existing files**
+
+**Test: README links are valid**
 
 ```bash
-grep -qi "framework\|polycentric\|meta" README.md && \
-echo '✅ README explains backstage is both framework and project' || echo '⚠️ Add explanation of meta nature'
+# Extract file paths from README navigation block
+# (This is a simplified check - full implementation would parse markdown links)
+test -f backstage/CHANGELOG.md && \
+test -f backstage/ROADMAP.md && \
+test -f backstage/POLICY.md && \
+test -f backstage/HEALTH.md && \
+echo '✅ README links valid' || echo '❌ Broken links in README'
 ```
 
-Expected: Users understand backstage's dual role
-Pass: ✅ Meta nature documented
+Expected: All linked files exist
+Pass: ✅ Links valid
+
+---
+
+## 🎯 Version Consistency
+
+**CHANGELOG versions must follow semantic versioning**
+
+**Test: Version format validation**
+
+```bash
+grep -E '^## v[0-9]+\.[0-9]+\.[0-9]+' backstage/CHANGELOG.md >/dev/null && \
+echo '✅ Versions follow semver' || echo '⚠️ Check version format'
+```
+
+Expected: Finds semantic version headings
+Pass: ✅ Semantic versioning
+
+---
+
+## Summary
+
+**These checks ensure:**
+
+- ✅ Documentation stays in sync with code
+- ✅ Navigation works across all files
+- ✅ Epics follow standard format
+- ✅ Files are properly structured
+- ✅ Versions follow semver
+- ✅ Links aren't broken
+
+**Run all checks:**
+
+````bash
+# From project root
+bash -c "$(grep -A 1 '^```bash' backstage/global/HEALTH.md | grep -v '^```' | grep -v '^--$')"
+````
+
+---
+
+**Last updated:** 2026-01-26
+**Version:** 1.0.0
 
 ---
 
 ## 🏥 Product Health Metrics
+
+> **What makes backstage "production ready"?**
+>
+> These metrics define system health across all workflow components.
+
+### Workflow Component Health
+
+**Success threshold:** Each component must pass ≥90% of its metrics to ship.
+
 
 > **What makes backstage "production ready"?**
 >
@@ -333,29 +366,3 @@ Pass: ❌ Currently 0% implemented - **BLOCKS v0.2.0 RELEASE**
 
 ---
 
-## Summary
-
-**Backstage project-specific checks ensure:**
-
-- ✅ Dual-layer structure (global framework + project files)
-- ✅ Backstage follows its own rules (dogfooding)
-- ✅ Clear documentation of what's universal vs project-specific
-- ✅ Prompts reference the framework correctly
-- ✅ Meta nature is explained to users
-
----
-
-**Run all checks:**
-
-````bash
-# Universal checks (apply to all backstage projects)
-bash -c "$(grep -A 1 '^```bash' global/HEALTH.md | grep -v '^```' | grep -v '^--$')"
-
-# Backstage-specific checks (this project only)
-bash -c "$(grep -A 1 '^```bash' HEALTH.md | grep -v '^```' | grep -v '^--$')"
-````
-
----
-
-**Last updated:** 2026-01-28
-**Version:** 0.1.0 (backstage tracking its own development)

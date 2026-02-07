@@ -14,66 +14,16 @@ A project management system for AI-assisted development that allows you to be in
 
 ---
 
-> 🤖
->
-> - [README](README.md) - Our project
-> - [CHANGELOG](CHANGELOG.md) — What we did
-> - [ROADMAP](ROADMAP.md) — What we wanna do
-> - POLICY ([project](POLICY.md), [global](global/POLICY.md)) — How we do it
-> - HEALTH ([project](HEALTH.md), [global](global/HEALTH.md)) — What we accept
->
-> 🤖
+## Installation & usage
 
-```mermaid
-%%{init: {'theme':'base', 'themeVariables': { 'fontSize':'14px'}}}%%
-graph LR
-    subgraph "🎯 Ready"
-        V01[v0.1.0<br/>Environment Setup]
-        V02[v0.2.0<br/>Navigation Logic]
-    end
+1. **Via Prompt**
+   1. Install [backstage prompt](https://github.com/nonlinear/backstage/blob/main/.github/prompts/backstage.prompt.md)
+   2. Run `/backstage` in your project
+2. **Via OpenClaw Skill**
+   1. Install skill: `clawdhub install backstage` 
+   2. Say `backstage <project-path>` to start the workflow
 
-    subgraph "📅 Future"
-        V03[v0.3.0<br/>Update Script]
-        V04[v0.4.0<br/>Templates]
-        V05[v0.5.0<br/>Documentation]
-    end
-
-    V01 --> V02
-    V02 --> V03
-    V03 --> V04
-    V04 --> V05
-
-    style V01 fill:#FFE4B5
-```
-
----
-
-## Installation
-
-1. Download [backstage-update.py](global/backstage-update.py) to your project root (same level as README.md)
-2. Run `python backstage-update.py` (creates backstage/ folder with everything)
-3. Run [/backstage-start](.github/prompts/backstage-start.prompt.md) prompt to validate setup
-4. Start grooming your [ROADMAP](templates/ROADMAP-template.md). Big picture first, then code in epic branches. Measure twice, cut once.
-5. We use VSCode logic for prompts. If you're using another IDE, manually move to your corresponding IDE prompt logic:
-   - [backstage-start.prompt.md](.github/prompts/backstage-start.prompt.md)
-   - [backstage-close.prompt.md](.github/prompts/backstage-close.prompt.md)
-   - [backstage-update.prompt.md](.github/prompts/backstage-update.prompt.md)
-
----
-
-## Workflow Prompts
-
-| Prompt                                                         | When to Use                    | What It Does                                                                                                              |
-| -------------------------------------------------------------- | ------------------------------ | ------------------------------------------------------------------------------------------------------------------------- |
-| [backstage-start](.github/prompts/backstage-start.prompt.md)   | Before starting work session   | Validates project health, checks navigation blocks, runs all health checks (global + project), identifies epic to work on |
-| [backstage-close](.github/prompts/backstage-close.prompt.md)   | When pausing/ending session    | Runs health checks, commits progress on pass (adds fixes to ROADMAP on fail), victory lap, body check reminder            |
-| [backstage-update](.github/prompts/backstage-update.prompt.md) | When you want latest backstage | Fetches CHANGELOG from repo, shows what changed, runs `backstage-update.py` to refresh global/ and .github/prompts/       |
-
-**Typical workflow:**
-
-1. `/backstage-start` → AI does all checks and informs you what we did last time + what we can do today
-2. **the zone**
-3. `/backstage-close` → AI wraps up and celebrates progress, **turns off your app** (Get a life, hydrate, fuck!)
+Prompt/skill auto-installs backstage if needed, then [starts workflow](backstage/epic-notes/v0.3.0-openclaw-skill.md#workflow-diagram)
 
 ---
 
@@ -85,3 +35,32 @@ Backstage follows a **polycentric structure**—not hierarchical "levels" but **
 - 👷 Join [backstage signal group](https://signal.group/#CjQKIAinD80_cDPyyVP0xRDUQ9Io2PMN9DeJSBzKM1mrXpEYEhAMdewh5mBrTUcmujYApgMx)
 
 ---
+
+> 🤖
+> | Backstage files | Description |
+> | ---------------------------------------------------------------------------- | ------------------ |
+> | [README](backstage/README.md) | Our project |
+> | [CHANGELOG](backstage/CHANGELOG.md) | What we did |
+> | [ROADMAP](backstage/ROADMAP.md) | What we wanna do |
+> | POLICY: [project](backstage/POLICY.md), [global](backstage/global/POLICY.md) | How we go about it |
+> | HEALTH: [project](backstage/HEALTH.md), [global](backstage/global/HEALTH.md) | What we accept |
+> | We use **[backstage rules](https://github.com/nonlinear/backstage)**, v0.3.0 |
+> 🤖
+
+```mermaid
+%%{init: {'theme':'base', 'themeVariables': { 'fontSize':'14px'}}}%%
+graph LR
+    subgraph "🚧 Active"
+        V03[v0.3.0<br/>OpenClaw Skill]
+    end
+    
+    subgraph "📞 Future"
+        V04[v0.4.0<br/>Templates]
+        V05[v0.5.0<br/>Documentation]
+    end
+
+    V03 --> V04
+    V04 --> V05
+    
+    style V03 fill:#4CAF50
+```
