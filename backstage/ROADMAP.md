@@ -32,7 +32,10 @@
 - [ ] Create templates/CHANGELOG-template.md
 - [ ] Create templates/POLICY-template.md
 - [ ] Create templates/HEALTH-template.md
-- [ ] **Exercise:** Create POLICY design architecture diagram (Skill → POLICY → AI flow)
+- [ ] **OPTIONAL:** Document when to use design-architecture exercise
+  - Complex systems (APIs, integrations, workflows)
+  - Architectural changes (not simple fixes)
+  - Deliverable = approved diagram BEFORE implementation
 
 ---
 
