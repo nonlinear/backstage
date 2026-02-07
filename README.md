@@ -48,24 +48,19 @@ graph LR
 
 ---
 
-## Installation
+## Installation & usage
 
-### Via Prompt
-1. Install backstage prompt in your AI assistant
-2. Run `/backstage-start` in your project
-3. Prompt auto-installs backstage if needed, then starts workflow
+1. **Via Prompt**
+   1. Install [backstage prompt]({link here to main version})
+   2. Run `/backstage` in your project
+2. **Via OpenClaw Skill**
+   1. Install skill: `clawdhub install backstage` 
+   1. Say `backstage project` {wuats the rtrigger for backstage? can we FOR SURE SAY if they say it, it will run protocol?} (Backstage needs a `README.md` to orient itself)
 
-### Via Skill (OpenClaw)
-1. Install skill: `clawdhub install backstage` or `ln -s ~/path/to/backstage/skill ~/.openclaw/skills/backstage`
-2. Run `backstage start` in your project
-3. Skill auto-installs backstage if needed, then starts workflow
 
-**Both methods:**
-- Detect if project has backstage
-- Install templates + global/ if missing
-- Check for updates (once/day)
-- Run POLICY + HEALTH protocols
-- Show active epics
+Prompt/skills auto-installs backstage if needed, then [starts workflow]({link pro diagrama que criamos aqui, mas relative pr servir pra branch e main})
+
+
 
 ---
 

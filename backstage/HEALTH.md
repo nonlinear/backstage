@@ -83,17 +83,19 @@ Pass: ✅ Project status files exist
 **Setup (at epic start):**
 
 ```bash
-# Replace placeholder with symlink to source
-rm -rf ~/.openclaw/skills/backstage-placeholder
-ln -s ~/Documents/backstage/skill ~/.openclaw/skills/backstage
+# Only create if on epic branch AND symlink doesn't exist
+if git branch --show-current | grep -q "^epic/" && [ ! -L ~/.openclaw/skills/backstage ]; then
+  rm -rf ~/.openclaw/skills/backstage-placeholder
+  ln -s ~/Documents/backstage/skill ~/.openclaw/skills/backstage
+fi
 ```
 
 **Verify:**
 
 ```bash
-ls -la ~/.openclaw/skills/backstage | grep -q "skill$" && \
+ls -la ~/.openclaw/skills/backstage 2>/dev/null | grep -q "skill$" && \
 echo '✅ Symlink active (edit source, test instantly)' || \
-echo '❌ Symlink missing or wrong target'
+echo 'ℹ️  No symlink (not on epic branch or already exists)'
 ```
 
 **Teardown (before merge to main OR backstage close):**

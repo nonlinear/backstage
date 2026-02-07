@@ -2,6 +2,10 @@
 
 **Project management framework for epic-driven development.**
 
+**Trigger:** `backstage [project-path]`
+- `backstage` → uses current directory
+- `backstage Documents/myproject` → specific project
+
 ---
 
 ## What It Does

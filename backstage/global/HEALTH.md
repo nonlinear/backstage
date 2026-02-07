@@ -81,7 +81,7 @@ Pass: ✅ AI now aware of documented gaps
 if git diff --quiet; then
   echo '✅ No uncommitted changes'
 else
-  echo '⚠️ Uncommitted changes - run /backstage-start to sync docs'
+  echo '⚠️ Uncommitted changes - run backstage to sync docs (see https://github.com/nonlinear/backstage#installation--usage)'
 fi
 ```
 
