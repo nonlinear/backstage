@@ -122,17 +122,13 @@ Only **surgical, pointed changes** allowed—no wholesale rewrites.
 
 ### Placement Rules
 
-**AI: The backstage-start prompt enforces these rules by appending/updating the navigation block automatically:**
+**AI: The backstage skill/prompt enforces these rules by appending/updating the navigation block automatically:**
 
-**README.md:**
+**All files (README.md, ROADMAP.md, CHANGELOG.md, HEALTH.md, POLICY.md):**
 
-- Navigation block at **END** (before final line)
+- Navigation block at **END** (after content, before final line)
+- Simpler: no special cases, all files follow same pattern
 - Includes mermaid roadmap diagram (source of truth from ROADMAP.md)
-
-**ROADMAP.md, CHANGELOG.md, HEALTH.md, POLICY.md:**
-
-- Navigation block at **TOP** (right after `# Title`)
-- Includes same mermaid roadmap diagram (copied from ROADMAP.md)
 
 ### Why 🤖 Markers Exist: Future-Proof Format Changes
 

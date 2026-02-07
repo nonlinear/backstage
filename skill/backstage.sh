@@ -364,12 +364,12 @@ NAVEOF
         rm -f "$temp"
     }
     
-    # Update README (nav at end, backstage/ prefix)
+    # Update README (nav at end)
     update_file_nav "$project_root/README.md" "end" "backstage/" "backstage/"
     
-    # Update backstage files (nav at top, no prefix)
+    # Update backstage files (nav at end too, not top)
     for file in ROADMAP CHANGELOG POLICY HEALTH; do
-        update_file_nav "$backstage_dir/${file}.md" "top" "../" ""
+        update_file_nav "$backstage_dir/${file}.md" "end" "../" ""
     done
     
     rm -f "$nav_temp"
