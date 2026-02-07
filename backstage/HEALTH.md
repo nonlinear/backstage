@@ -46,6 +46,65 @@ Pass: ✅ Project status files exist
 
 ---
 
+### 🔀 Merge to Main Workflow (Backstage Project)
+
+**Context:** When merging epic to main, backstage project has specific requirements beyond global POLICY.
+
+**Pre-Merge Checks (mirrors global POLICY Step 9):**
+
+```bash
+# 1. Run backstage-start (HEALTH checks + update docs)
+# See global/POLICY.md "Step 9: Before Merging"
+
+# 2. Ensure all tasks complete in ROADMAP
+grep "^- \[ \]" ROADMAP.md && echo "❌ Incomplete tasks" || echo "✅ All tasks done"
+
+# 3. Version sync check (CRITICAL for backstage)
+NAV_VERSION=$(grep "backstage rules.*v[0-9]" global/POLICY.md | sed 's/.*v\([0-9.]*\).*/\1/')
+EPIC_VERSION=$(grep -m1 "^## v[0-9]" ROADMAP.md | sed 's/^## v//' | cut -d' ' -f1)
+[ "$NAV_VERSION" = "$EPIC_VERSION" ] && echo "✅ Version ready to merge" || echo "❌ Update global/POLICY.md version first"
+```
+
+**Merge Steps (mirrors global POLICY Step 10):**
+
+```bash
+# 1. Move epic from ROADMAP to CHANGELOG
+# (backstage-start does this automatically if all tasks done)
+
+# 2. Checkout main and merge
+git checkout main
+git pull origin main
+git merge epic/v0.X.0-epicname --no-ff
+
+# 3. Tag release
+git tag v0.X.0 -m "Epic v0.X.0 complete"
+
+# 4. Push
+git push origin main
+git push origin v0.X.0
+```
+
+**Post-Merge: Update OpenClaw Skill (Backstage-Specific)**
+
+```bash
+# Remove dev symlink
+rm ~/.openclaw/skills/backstage
+
+# Install updated skill
+ln -s ~/Documents/backstage/skill ~/.openclaw/skills/backstage
+
+# Test
+cd ~/Documents/backstage
+backstage start .
+```
+
+Expected: Skill works with updated framework
+Pass: ✅ Skill updated and functional
+
+**Why backstage-specific:** Most projects don't have OpenClaw skills. Backstage does.
+
+---
+
 ### 🔗 Skill Symlink (Epic Development Only)
 
 **Context:** When developing the OpenClaw skill (`epic/v0.3.0-openclaw-skill`), we need to edit source and test instantly.
