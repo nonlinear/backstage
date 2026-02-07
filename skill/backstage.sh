@@ -312,67 +312,67 @@ update_navigation_blocks() {
     local backstage_dir="$project_root/backstage"
     
     # Extract version from global/POLICY.md
-    local version=$(grep -m1 "backstage rules.*v[0-9]" "$backstage_dir/global/POLICY.md" | sed 's/.*v\([0-9.]*\).*/\1/' || echo "0.0.0")
+    local version=$(grep -m1 "backstage rules.*v[0-9]" "$backstage_dir/global/POLICY.md" | sed 's/.*v\([0-9.]*\).*/\1/' 2>/dev/null || echo "0.0.0")
     
-    # Extract mermaid diagram from ROADMAP.md
-    local mermaid_diagram=""
-    if [ -f "$backstage_dir/ROADMAP.md" ]; then
-        mermaid_diagram=$(awk '/```mermaid/,/```/' "$backstage_dir/ROADMAP.md" | grep -v '```')
-    fi
-    
-    # Generate navigation block template
-    generate_nav_block() {
-        local rel_path="$1"
-        cat <<EOF
+    # Generate navigation block and save to temp file
+    local nav_temp="/tmp/backstage_nav_$$.md"
+    cat > "$nav_temp" <<'NAVEOF'
 > 🤖
 >
-> - [README](${rel_path}README.md) - Our project
-> - [CHANGELOG](${rel_path}CHANGELOG.md) — What we did
-> - [ROADMAP](${rel_path}ROADMAP.md) — What we wanna do
-> - POLICY ([project](${rel_path}POLICY.md), [global](${rel_path}global/POLICY.md)) — How we do it
-> - HEALTH ([project](${rel_path}HEALTH.md), [global](${rel_path}global/HEALTH.md)) — What we accept
+> - [README](READMEPATH) - Our project
+> - [CHANGELOG](CHANGELOGPATH) — What we did
+> - [ROADMAP](ROADMAPPATH) — What we wanna do
+> - POLICY ([project](POLICYPATH), [global](GLOBALPOLICYPATH)) — How we do it
+> - HEALTH ([project](HEALTHPATH), [global](GLOBALHEALTHPATH)) — What we accept
 >
 > 🤖
-EOF
-    }
+NAVEOF
     
     # Update file with navigation block
     update_file_nav() {
         local file="$1"
         local position="$2"  # "top" or "end"
-        local rel_path="$3"
+        local readme_rel="$3"
+        local others_rel="$4"
         
-        if [ ! -f "$file" ]; then
-            return
-        fi
+        [ ! -f "$file" ] && return
         
-        local nav_block=$(generate_nav_block "$rel_path")
+        # Create nav block with correct paths
+        local nav_block=$(cat "$nav_temp")
+        nav_block="${nav_block//READMEPATH/${readme_rel}README.md}"
+        nav_block="${nav_block//CHANGELOGPATH/${others_rel}CHANGELOG.md}"
+        nav_block="${nav_block//ROADMAPPATH/${others_rel}ROADMAP.md}"
+        nav_block="${nav_block//POLICYPATH/${others_rel}POLICY.md}"
+        nav_block="${nav_block//GLOBALPOLICYPATH/${others_rel}global/POLICY.md}"
+        nav_block="${nav_block//HEALTHPATH/${others_rel}HEALTH.md}"
+        nav_block="${nav_block//GLOBALHEALTHPATH/${others_rel}global/HEALTH.md}"
         
-        # Remove old nav block (between 🤖 markers)
-        local temp_file="${file}.tmp"
-        awk '/> 🤖/{flag=1; next} flag && /> 🤖/{flag=0; next} !flag' "$file" > "$temp_file"
+        # Remove old nav block
+        local temp="${file}.navtmp"
+        awk 'BEGIN{skip=0} /^> 🤖/{skip=1; next} skip && /^> 🤖/{skip=0; next} !skip' "$file" > "$temp"
         
         if [ "$position" = "top" ]; then
-            # Insert after title (first # line)
-            awk -v nav="$nav_block" 'NR==1{print; print ""; print nav; print ""; next}1' "$temp_file" > "$file"
+            # After first line (title)
+            { head -1 "$temp"; echo ""; echo "$nav_block"; echo ""; tail -n +2 "$temp"; } > "$file"
         else
-            # Insert at end
-            cat "$temp_file" > "$file"
+            # At end
+            cat "$temp" > "$file"
             echo "" >> "$file"
             echo "$nav_block" >> "$file"
         fi
         
-        rm -f "$temp_file"
+        rm -f "$temp"
     }
     
-    # Update README (navigation at end)
-    update_file_nav "$project_root/README.md" "end" "backstage/"
+    # Update README (nav at end, backstage/ prefix)
+    update_file_nav "$project_root/README.md" "end" "backstage/" "backstage/"
     
-    # Update backstage files (navigation at top)
+    # Update backstage files (nav at top, no prefix)
     for file in ROADMAP CHANGELOG POLICY HEALTH; do
-        update_file_nav "$backstage_dir/${file}.md" "top" ""
+        update_file_nav "$backstage_dir/${file}.md" "top" "../" ""
     done
     
+    rm -f "$nav_temp"
     info "Navigation blocks updated (v${version})"
 }
 
