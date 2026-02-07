@@ -2,73 +2,121 @@
 
 **OpenClaw skill for backstage project management framework.**
 
+---
+
+## What It Does
+
+Thin wrapper that dumps POLICY + HEALTH for AI to execute.
+
+**Backstage = AI-driven protocol.** Skill just loads context, AI reads and follows POLICY.
+
+---
+
 ## Installation
 
-```bash
-# Via symlink (for development)
-ln -s ~/Documents/backstage/skill ~/.openclaw/skills/backstage
+### For OpenClaw Users
 
-# Or copy (for production)
-cp -r ~/Documents/backstage/skill ~/.openclaw/skills/backstage
+```bash
+# Via ClawdHub (when published)
+clawdhub install backstage
+
+# Or symlink (development)
+ln -s ~/Documents/backstage/skill ~/.openclaw/skills/backstage
 ```
+
+### For Other Systems
+
+**Use the prompt, not the skill:**
+
+```bash
+# Install prompt in your LLM tool (Cursor, Aider, etc)
+cp ~/Documents/backstage/backstage.prompt.md ~/.prompts/
+
+# Then use backstage/ structure in your projects
+```
+
+**Skill is OpenClaw-specific.** Prompt + POLICY/HEALTH structure works anywhere.
+
+---
 
 ## Usage
 
-### Start work session
+### Start Workflow
+
 ```
-User: "vamos trabalhar no nonlinear"
-Claw: [reads POLICY, HEALTH, ROADMAP, offers to create epic or work on existing]
+User: "backstage start"
+Skill: [dumps POLICY + HEALTH]
+AI: [reads protocol, executes checks, updates docs, reports next steps]
 ```
 
-### Create epic
+### Merge Epic
+
 ```
-User: "criar epic data-driven-links"
-Claw: [creates v0.6.0-data-driven-links.md, adds to ROADMAP, optionally creates branch]
+User: "epic is completed, merge"
+User: "backstage start"
+AI: [reads POLICY merge workflow, executes merge to main]
 ```
 
-### Health check
+### Health Checks Only
+
 ```
-User: "roda health check"
-Claw: [runs global + project HEALTH checks, reports pass/fail]
+User: "backstage health"
+Skill: [dumps HEALTH only]
+AI: [runs checks, reports pass/fail]
 ```
 
-### Close session
-```
-User: "boa noite"
-Claw: [runs health, commits if pass, victory lap, body check]
-```
+---
 
 ## Commands
 
-All commands via `backstage.sh`:
-
 ```bash
-backstage.sh start [project-path]     # Start work session
-backstage.sh epic create <name>       # Create new epic
-backstage.sh health                   # Run health checks
-backstage.sh close                    # Close session
+backstage start [path]    # Main workflow (pre-commit OR merge)
+backstage health [path]   # Health checks only
 ```
+
+**That's it.** Two commands. Logic lives in POLICY/HEALTH, not skill code.
+
+---
 
 ## Project Structure
 
-Required:
-- `backstage/ROADMAP.md`
-
-Optional:
-- `backstage/POLICY.md` (project workflow rules)
-- `backstage/HEALTH.md` (project health checks)
+**Required:**
+- `backstage/ROADMAP.md` (your epics)
 - `backstage/global/POLICY.md` (universal rules)
 - `backstage/global/HEALTH.md` (universal checks)
 
-## Polycentric Governance
+**Optional:**
+- `backstage/POLICY.md` (project-specific overrides)
+- `backstage/HEALTH.md` (project-specific checks)
 
-Project rules win over global rules. Read both levels, project takes precedence.
+**Polycentric governance:** Project rules win over global rules.
+
+---
+
+## Portability
+
+**OpenClaw-specific:**
+- `skill/backstage.sh` (wrapper for OpenClaw)
+- `skill/SKILL.md` (OpenClaw skill docs)
+
+**Universal (works anywhere):**
+- `backstage.prompt.md` (root prompt)
+- `backstage/` structure (POLICY, HEALTH, ROADMAP)
+
+**Use backstage with ANY LLM tool** via prompt + structure. Skill is just OpenClaw convenience.
+
+---
 
 ## Version
 
-**0.3.0** - OpenClaw Skill (initial release)
+**0.3.1** - Prompt Cleanup (current)
+
+**Changelog:** See `backstage/CHANGELOG.md`
+
+---
 
 ## Links
 
 - **Repository:** https://github.com/nonlinear/backstage
 - **Issues:** https://github.com/nonlinear/backstage/issues
+- **Docs:** See `backstage/global/POLICY.md` for full workflow
