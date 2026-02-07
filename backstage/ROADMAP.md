@@ -1,28 +1,3 @@
-# Backstage Roadmap
-
-## v0.3.1
-
-### 🚧 Prompt Cleanup
-
-**Problem:** backstage-close still exists (should be deleted), skill/prompts not groomed
-
-**Solution:** Remove backstage-close, groom all prompts
-
-**Tasks:**
-
-- [x] Remove `merge` case from skill/backstage.sh (already clean!)
-- [x] Verify backstage-close.prompt.md references POLICY/HEALTH (fixed - no hardcoded steps)
-- [x] **FIX:** README backstage prompt link (fixed: backstage.prompt.md in root)
-- [x] **FIX:** README "starts workflow" link (fixed: epic-notes path + anchor)
-- [x] **FIX:** Move workflow diagram to epic-notes (already there, just added anchor)
-- [x] **DELETE:** backstage-close.prompt.md (DELETED!)
-- [x] **DELETE:** backstage-update.prompt.md (DELETED!)
-- [x] **GROOM:** Skill only has start+health commands (close/update removed)
-- [x] **RENAME:** backstage-start → backstage.prompt.md (root, same name as skill)
-- [ ] **TODO:** Publish skill to clawdhub (v0.4.0 task)
-
----
-
 ## v0.3.2
 
 ### 📝 Prompt Grooming
