@@ -1,0 +1,25 @@
+{
+  "name": "backstage",
+  "version": "0.3.0",
+  "description": "Project management framework with epics, roadmaps, POLICY enforcement, and health checks for AI-assisted development",
+  "author": "nonlinear",
+  "license": "MIT",
+  "keywords": [
+    "project-management",
+    "roadmap",
+    "changelog",
+    "workflow",
+    "epics",
+    "git",
+    "documentation",
+    "health-checks"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nonlinear/backstage"
+  },
+  "bugs": {
+    "url": "https://github.com/nonlinear/backstage/issues"
+  },
+  "homepage": "https://github.com/nonlinear/backstage#readme"
+}

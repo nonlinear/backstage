@@ -257,6 +257,74 @@ v0.5-automation (feature branch)
 
 1. **Create branch from main:**
 
+---
+
+## OpenClaw Skill Workflow
+
+**Context:** The `skill/` folder contains the OpenClaw skill for backstage project management.
+
+### Skill Flow Design Decisions (v0.3.0)
+
+**1. Output Format: Structured (AI processes)**
+
+Scripts output machine-readable format:
+```
+POLICY_FOUND|global|/path/to/POLICY.md
+EPIC|v0.5.0|Self-Promotion|planned
+HEALTH_CHECK_PASS
+```
+
+**Why:** AI can format contextually, add details, personalize response.
+
+**2. POLICY/HEALTH Display: Paths + Summary**
+
+Show file paths + extract `## headers` (structure overview).
+
+**Why:** AI sees organization, reads full content only if needed (token efficiency).
+
+**3. Epic Creation: Always Ask About Branch**
+
+Script asks "Create branch? (y/n)" - manual, explicit.
+
+**Why:** Safe default. Ship today, automate later. Different projects have different branch strategies.
+
+**4. Health Checks: Hybrid Execution**
+
+- Extract ````bash` blocks from HEALTH.md → run automatically
+- List other checks (manual verification)
+
+**Why:** Automation where possible, flexibility where needed. Hugo check example:
+
+```markdown
+## Hugo Build
+
+```bash
+rm -rf public/ docs/
+hugo --config config.toml
+[ -d "docs/" ] || exit 1
+```
+```
+
+**5. Victory Lap: Minimal**
+
+Show: health status + body check.
+
+**Why:** Ship today. Can add git stats later (commits, files changed, epic progress).
+
+### Polycentric Governance in Code
+
+**Read order:**
+1. `backstage/global/POLICY.md` (universal rules)
+2. `backstage/POLICY.md` (project-specific - WINS)
+
+**Same for HEALTH:**
+1. `backstage/global/HEALTH.md` (universal checks)
+2. `backstage/HEALTH.md` (project checks - WINS)
+
+**Implementation:** `backstage.sh` reads both, shows both, executes both. Project overrides global when conflict.
+
+---
+
 ## Epic/Branch Workflow ("Epic Dance")
 
 ### 🔍 Before Starting New Work: Review Epic Notes

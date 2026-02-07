@@ -76,6 +76,42 @@ Pass: ✅ Project status files exist
 
 ---
 
+### 🔗 Skill Symlink (Epic Development Only)
+
+**Context:** When developing the OpenClaw skill (`epic/v0.3.0-openclaw-skill`), we need to edit source and test instantly.
+
+**Setup (at epic start):**
+
+```bash
+# Replace placeholder with symlink to source
+rm -rf ~/.openclaw/skills/backstage-placeholder
+ln -s ~/Documents/backstage/skill ~/.openclaw/skills/backstage
+```
+
+**Verify:**
+
+```bash
+ls -la ~/.openclaw/skills/backstage | grep -q "skill$" && \
+echo '✅ Symlink active (edit source, test instantly)' || \
+echo '❌ Symlink missing or wrong target'
+```
+
+**Teardown (before merge to main OR backstage close):**
+
+```bash
+# Remove symlink
+rm ~/.openclaw/skills/backstage
+
+# Restore original placeholder (until skill is published)
+git checkout ~/.openclaw/skills/backstage-placeholder
+```
+
+**Why:** Edit `~/Documents/backstage/skill/`, test via OpenClaw instantly. Keep `.openclaw/skills/` clean when epic closes.
+
+**🚨 CRITICAL:** Remove symlink before merging to main. Other users shouldn't have dev symlinks.
+
+---
+
 ### 🔄 Self-Reference Consistency
 
 **Test: Backstage follows its own rules**
