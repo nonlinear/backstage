@@ -354,9 +354,15 @@ NAVEOF
         nav_block="${nav_block//HEALTHPATH/${others_rel}HEALTH.md}"
         nav_block="${nav_block//VERSION/${version}}"
         
-        # Remove old nav block (if exists)
+        # Remove old nav block (only if markers exist)
         local temp="${file}.navtmp"
-        awk 'BEGIN{skip=0} /^> 🤖/{skip=1; next} skip && /^> 🤖/{skip=0; next} !skip' "$file" > "$temp"
+        if grep -q "^> 🤖" "$file"; then
+            # Has markers, remove content between them
+            awk 'BEGIN{skip=0} /^> 🤖/{skip=1; next} skip && /^> 🤖/{skip=0; next} !skip' "$file" > "$temp"
+        else
+            # No markers, keep everything
+            cp "$file" "$temp"
+        fi
         
         # Always append at end (nav block + mermaid if exists)
         cat "$temp" > "$file"
