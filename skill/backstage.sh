@@ -358,7 +358,7 @@ NAVEOF
         local temp="${file}.navtmp"
         if grep -q "^> 🤖" "$file"; then
             # Has markers, remove content between them
-            awk 'BEGIN{skip=0} /^> 🤖/{skip=1; next} skip && /^> 🤖/{skip=0; next} !skip' "$file" > "$temp"
+            awk 'BEGIN{skip=0} /^> 🤖/{if(skip==0){skip=1}else{skip=0}; next} !skip' "$file" > "$temp"
         else
             # No markers, keep everything
             cp "$file" "$temp"
