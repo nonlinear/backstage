@@ -15,12 +15,12 @@
 - [x] **FIX:** README backstage prompt link (fixed: backstage-start.prompt.md)
 - [x] **FIX:** README "starts workflow" link (fixed: epic-notes path + anchor)
 - [x] **FIX:** Move workflow diagram to epic-notes (already there, just added anchor)
-- [ ] **DELETE:** backstage-close.prompt.md (shouldn't exist - only backstage-start needed)
-- [ ] **DELETE:** backstage-update.prompt.md (shouldn't exist - logic in POLICY)
-- [ ] **GROOM:** Review all backstage prompts (only keep backstage-start)
+- [x] **DELETE:** backstage-close.prompt.md (DELETED!)
+- [x] **DELETE:** backstage-update.prompt.md (DELETED!)
+- [x] **GROOM:** Skill only has start+health commands (close/update removed)
 - [ ] **TODO:** Publish skill to clawdhub (not published yet)
 - [ ] **TEST:** `backstage start` (pre-commit workflow)
-- [ ] **TEST:** User says "epic is completed, merge" → backstage-start handles it via POLICY
+- [ ] **TEST:** User says "epic is completed, merge" + `backstage start` → handles merge
 
 ---
 
