@@ -69,6 +69,41 @@ When completing an epic and merging to main:
 
 **Health check enforces this:** See HEALTH.md → "Version Sync Check"
 
+---
+
+### 🔄 Meta-Complexity: Global Version Must Match Epic Branch
+
+**Backstage-specific constraint:** When working on an epic (e.g., `epic/v0.3.0-openclaw-skill`), the `global/POLICY.md` version in THAT BRANCH must reflect the version being developed.
+
+**Problem:** If epic v0.3.0 is in progress but `global/POLICY.md` still says v0.2.0, the nav block version will be wrong when the epic merges.
+
+**Solution - UPDATE global/POLICY.md version immediately when creating epic:**
+
+```bash
+# When creating epic/v0.3.0-openclaw-skill:
+1. Create branch: git checkout -b epic/v0.3.0-openclaw-skill
+2. Update global/POLICY.md navigation template: v0.2.0 → v0.3.0
+3. Commit: "chore: update global/POLICY version to v0.3.0"
+```
+
+**During epic development:** Keep global/ in sync with epic version
+
+**On merge to main:** Version is already correct (becomes "official" via CHANGELOG latest epic)
+
+---
+
+**Why it's tricky:**
+
+- Other projects update global/ FROM main (stable)
+- Backstage updates global/ IN epic branch (development)
+- Both are correct for their context
+
+**This is meta because:** Backstage uses its own protocol to build the protocol itself.
+
+**When epic merges to main:** That version becomes the official version (latest CHANGELOG epic = source of truth).
+
+---
+
 **Example:**
 
 ```markdown
