@@ -1,5 +1,25 @@
 # Backstage - Changelog
 
+## v0.3.1 - 2026-02-07
+
+### ✅ Prompt Cleanup
+
+**Completed:** Removed redundant prompts, renamed to match skill
+
+**What we did:**
+
+- Deleted backstage-close.prompt.md (logic in POLICY, not separate prompt)
+- Deleted backstage-update.prompt.md (logic in POLICY, not separate prompt)
+- Renamed backstage-start.prompt.md → backstage.prompt.md (root, matches skill name)
+- Removed close/update commands from skill (only start+health remain)
+- Fixed README links (backstage.prompt.md path)
+- Added workflow anchor to epic-notes
+
+**Impact:** One prompt (backstage.prompt.md), one skill (backstage.sh), both in sync. Logic lives in POLICY/HEALTH.
+
+---
+
+
 ## v0.3.0 - 2026-02-07
 
 ### [✅](https://github.com/nonlinear/backstage/tree/epic/v0.3.0-openclaw-skill) OpenClaw Skill
