@@ -307,6 +307,18 @@ cmd_health() {
 # ============================================================================
 # START COMMAND (Main Flow)
 # ============================================================================
+update_navigation_blocks() {
+    local project_root="$1"
+    
+    # TODO: Implement navigation block update logic
+    # Per global/POLICY.md specification
+    # 1. Extract mermaid diagram from ROADMAP.md
+    # 2. Generate navigation block with correct relative paths
+    # 3. Update all backstage files (README at end, others at top)
+    
+    info "Navigation block update: Not yet implemented (v0.4.0)"
+}
+
 cmd_start() {
     local project_root="$PROJECT_PATH"
     
@@ -335,8 +347,10 @@ cmd_start() {
     
     # Read POLICY (global + project, project wins)
     # Execute POLICY protocol (update navigation blocks, etc)
-    # For now: placeholder
     info "POLICY protocol: Project wins over global"
+    
+    # Update navigation blocks in all backstage files
+    update_navigation_blocks "$PROJECT_PATH"
     
     echo ""
     

@@ -35,6 +35,18 @@ graph LR
 
 ---
 
+## 🎯 Skill/Prompt Workflow Contract
+
+**CRITICAL:** Skill and prompt MUST follow the agreed workflow diagram.
+
+**Flow diagram (source of truth):** [epic-notes/v0.3.0-openclaw-skill.md](epic-notes/v0.3.0-openclaw-skill.md)
+
+**If skill/prompt deviates from diagram = BROKEN.**
+
+This diagram is a **contract**, not a suggestion. All implementation must match agreed logic, colors, and flow.
+
+---
+
 ## Universal Workflow
 
 **This project follows the [global backstage policy](global/POLICY.md)** for:
