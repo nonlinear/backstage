@@ -110,6 +110,18 @@ git checkout ~/.openclaw/skills/backstage-placeholder
 
 **🚨 CRITICAL:** Remove symlink before merging to main. Other users shouldn't have dev symlinks.
 
+**On merge to main:**
+
+```bash
+# Publish skill to OpenClaw system
+# (Remove placeholder, make skill official)
+rm -rf ~/.openclaw/skills/backstage-placeholder
+ln -s ~/Documents/backstage/skill ~/.openclaw/skills/backstage
+
+# Or install via npm/clawdhub (when ready)
+# clawdhub install backstage
+```
+
 ---
 
 ### 🔄 Self-Reference Consistency
