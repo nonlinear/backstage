@@ -10,10 +10,14 @@
 
 **Tasks:**
 
-- [ ] Remove `merge` case from skill/backstage.sh
-- [ ] Verify backstage-close.prompt.md references POLICY/HEALTH (not hardcoded steps)
-- [ ] Test: `backstage close` + "epic is completed, merge" → AI executes merge
-- [ ] Test: `backstage close` (regular) → AI executes regular close
+- [x] Remove `merge` case from skill/backstage.sh (already clean!)
+- [x] Verify backstage-close.prompt.md references POLICY/HEALTH (fixed - no hardcoded steps)
+- [ ] **FIX:** README backstage prompt link (404)
+- [ ] **FIX:** README "starts workflow" link (404)
+- [ ] **FIX:** Move workflow diagram to epic-notes (missing from epic notes?)
+- [ ] **TEST:** Uninstall + reinstall via `clawdhub install backstage`
+- [ ] **TEST:** `backstage close` + "epic is completed, merge" → AI executes merge
+- [ ] **TEST:** `backstage close` (regular) → AI executes regular close
 
 ---
 
