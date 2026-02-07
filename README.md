@@ -23,7 +23,7 @@ A project management system for AI-assisted development that allows you to be in
    1. Install skill: `clawdhub install backstage` 
    2. Say `backstage <project-path>` to start the workflow
 
-Prompt/skill auto-installs backstage if needed, then [starts workflow](epic-notes/v0.3.0-openclaw-skill.md#workflow)
+Prompt/skill auto-installs backstage if needed, then [starts workflow](epic-notes/v0.3.0-openclaw-skill-prompt.md#workflow)
 
 ---
 
