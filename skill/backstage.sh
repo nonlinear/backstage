@@ -65,6 +65,22 @@ case "$COMMAND" in
         [ -f "$BACKSTAGE_DIR/POLICY.md" ] && cat "$BACKSTAGE_DIR/POLICY.md"
         ;;
         
+    merge)
+        echo "🔀 AI will execute: backstage-merge workflow"
+        echo ""
+        echo "Steps (defined in POLICY + HEALTH):"
+        echo "  1. Pre-merge checks (HEALTH + tasks + version sync)"
+        echo "  2. Move epic to CHANGELOG"
+        echo "  3. Merge to main + tag"
+        echo "  4. Post-merge updates (skill if applicable)"
+        echo ""
+        info "Reading POLICY + HEALTH context..."
+        cat "$BACKSTAGE_DIR/global/POLICY.md"
+        [ -f "$BACKSTAGE_DIR/POLICY.md" ] && cat "$BACKSTAGE_DIR/POLICY.md"
+        cat "$BACKSTAGE_DIR/global/HEALTH.md"
+        [ -f "$BACKSTAGE_DIR/HEALTH.md" ] && cat "$BACKSTAGE_DIR/HEALTH.md"
+        ;;
+        
     update)
         echo "🔄 AI will execute: backstage-update workflow"
         echo ""
@@ -79,6 +95,7 @@ case "$COMMAND" in
         echo "  backstage.sh start [path]   # Main workflow (AI executes)"
         echo "  backstage.sh health [path]  # Health checks only"
         echo "  backstage.sh close [path]   # Close workflow"
+        echo "  backstage.sh merge [path]   # Merge epic to main"
         echo "  backstage.sh update [path]  # Update framework"
         exit 1
         ;;
