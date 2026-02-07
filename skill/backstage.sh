@@ -53,7 +53,7 @@ install_backstage() {
     
     # Download global files
     for global_file in POLICY.md HEALTH.md; do
-        local url="https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/${REPO_BRANCH}/global/${global_file}"
+        local url="https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/${REPO_BRANCH}/backstage/global/${global_file}"
         local dest="$target_dir/global/${global_file}"
         
         if curl -fsSL "$url" -o "$dest" 2>/dev/null; then
@@ -139,7 +139,7 @@ show_update_tease() {
     echo ""
     echo "Full story: https://github.com/${REPO_OWNER}/${REPO_NAME}/blob/${REPO_BRANCH}/CHANGELOG.md"
     echo "Browse the skill: https://github.com/${REPO_OWNER}/${REPO_NAME}/tree/${REPO_BRANCH}/skill"
-    echo "Updated rules: https://github.com/${REPO_OWNER}/${REPO_NAME}/blob/${REPO_BRANCH}/global/POLICY.md"
+    echo "Updated rules: https://github.com/${REPO_OWNER}/${REPO_NAME}/blob/${REPO_BRANCH}/backstage/global/POLICY.md"
     echo ""
 }
 
@@ -157,7 +157,7 @@ update_backstage() {
     
     # Download global files
     for global_file in POLICY.md HEALTH.md; do
-        local url="https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/${REPO_BRANCH}/global/${global_file}"
+        local url="https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/${REPO_BRANCH}/backstage/global/${global_file}"
         local dest="$PROJECT_PATH/backstage/global/${global_file}"
         
         if curl -fsSL "$url" -o "$dest" 2>/dev/null; then

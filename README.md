@@ -48,7 +48,7 @@ graph LR
 
 ---
 
-## Installation & Usage
+## Installation
 
 ### Via Prompt
 1. Install backstage prompt in your AI assistant
