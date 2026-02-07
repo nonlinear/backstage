@@ -1,15 +1,5 @@
 # Project Policy
 
-> 🤖
->
-> - [README](../README.md) - Our project
-> - [CHANGELOG](CHANGELOG.md) — What we did
-> - [ROADMAP](ROADMAP.md) — What we wanna do
-> - [POLICY](POLICY.md) [project](POLICY.md) / [global](global/POLICY.md) — How we do it
-> - [HEALTH](HEALTH.md) — What we accept
-> - 👷 Wanna collaborate? Connect via [signal group](https://signal.group/#CjQKIKD7zJjxP9sryI9vE5ATQZVqYsWGN_3yYURA5giGogh3EhAWfvK2Fw_kaFtt-MQ6Jlp8)
->
-> 🤖
 
 ```mermaid
 %%{init: {'theme':'base', 'themeVariables': { 'fontSize':'14px'}}}%%
@@ -412,195 +402,6 @@ grep -r "keyword" epic-notes/
    - Task checklist
 5. **Review and refine** tasks (can spend time here)
 
-> 🤖 **AI: Always update mermaid graph when adding/moving/completing epics**
-
-**Example:**
-
-```markdown
-## v0.4.0
-
-### Source Granularity
-
-⏳ Add page/chapter granularity to citations
-
-**Problem:** Citations require manual Ctrl+F
-**Solution:** PDF `#page=N`, EPUB chapter links
-
-**Tasks:**
-
-- [ ] Test VS Code extensions
-- [ ] Extract page numbers during PDF chunking
-      ...
-```
-
-### Step 2: Name Conversation
-
-**AI conversation title:** `v0.X.0: Epic Title`
-
-Example: `v0.4.0: Source Granularity`
-
-### Step 3: Create Branch
-
-```bash
-git checkout main
-git pull origin main
-git checkout -b v0.X.0  # Just version number, no descriptive name
-```
-
-**Branch naming:** `v0.X.0` (no epic name, just version)
-
-### Step 4: Update ROADMAP with Branch Link
-
-Replace ⏳ with 🚧 and add branch link:
-
-```markdown
-## v0.4.0
-
-### [🚧](https://github.com/user/repo/tree/v0.4.0) Source Granularity
-```
-
-**Format:** `### [🚧](branch-url) Epic Title`
-
-### Step 5: Create Epic Notes
-
-**Structure (v0.4.0 and earlier):**
-
-```
-epic-notes/v0.X.0.md  # Single file for all notes
-```
-
-**Structure (v0.5.0+):**
-
-```
-epic-notes/v0.X.0/
-  ├── MAIN.md                      # Primary epic documentation
-  ├── pill-validation.md           # Specific finding/experiment
-  └── autocomplete-fix.md          # Another finding
-```
-
-Add notes link to ROADMAP on same line as branch:
-
-```markdown
-### [🚧](branch-link) Source Granularity | [notes](epic-notes/v0.4.0.md)
-
-# OR for folder structure:
-
-### [🚧](branch-link) Source Granularity | [notes](epic-notes/v0.4.0/)
-```
-
-**Notes purpose:**
-
-- Session summaries (in MAIN.md)
-- Experiments and discoveries (separate files in v0.5.0+)
-- Testing results and root cause analysis
-- Implementation blockers and workarounds
-
-**When to use folder structure:**
-
-- Epic has multiple distinct findings (>3)
-- Single file exceeds ~500 lines
-- Findings are independent enough to reference separately
-
-**Migration:** When converting v0.X.0.md → v0.X.0/, rename to MAIN.md and extract major findings to separate files.
-
-### Step 6: Push Main Changes
-
-```bash
-git checkout main
-git add backstage/ROADMAP.md  # Updated with links
-git commit -m "docs: add v0.X.0 epic to roadmap"
-git push origin main
-```
-
-**Typical main changes when starting epic:**
-
-- ROADMAP.md (epic + renumbering + links)
-- Sometimes: prompts (if epic requires new prompt)
-
-### Step 7: Work on Epic (in branch)
-
-```bash
-git checkout v0.X.0
-git add .
-git commit -m "feat: implement feature"
-git push origin v0.X.0
-```
-
-### Step 8: Stay Current - Rebase Regularly
-
-```bash
-git checkout main
-git pull origin main
-git checkout v0.X.0
-git rebase main
-git push --force-with-lease origin v0.X.0
-```
-
-**Why rebase?**
-
-- Keeps linear history
-- Easier to review
-- Cleaner when merging back to main
-
-  **When to rebase?**
-  - Daily if main is active
-  - Before creating PR
-  - After major main updates
-
-5. **Before merging - use `/whatsup`:**
-
-   ```bash
-   # Run pre-commit workflow (does steps 6-7 automatically)
-   # See .github/prompts/whatsup.prompt.md
-   ```
-
-   **The `/whatsup` workflow will:**
-   - ✅ Run all CHECKS (see backstage/HEALTH.md)
-   - ✅ Update ROADMAP (mark completed checkboxes)
-   - ✅ Move epic to CHANGELOG (if complete)
-   - ✅ Bump version number (semantic versioning)
-   - ✅ Generate commit message
-
-6. **Merge to main when epic complete:**
-
-   ```bash
-   git checkout main
-   git pull origin main
-   git merge v0.3-delta-indexing --no-ff
-
-   # Tag the release
-   git tag v0.3.0 -m "Epic v0.3: Delta Indexing complete"
-
-   git push origin main
-   git push origin v0.3.0
-   ```
-
-7. **Delete feature branch (recommended):**
-
-   ```bash
-   # Local
-   git branch -d v0.3-delta-indexing
-
-   # Remote (optional - keeps history clean)
-   git push origin --delete v0.3-delta-indexing
-   ```
-
-   **Branch deletion policy:**
-   - ✅ **DO delete** after successful merge (keeps branch list clean)
-   - ✅ Git history preserved via tags
-   - ✅ Can recreate from tag if needed: `git checkout -b v0.3-delta-indexing v0.3.0`
-   - ❌ **DON'T delete** if you plan to make hotfixes on that version
-
-8. **Announce release:**
-   - Update [README.md](../README.md) status section (links to new CHANGELOG entry)
-   - Post in [Signal group](https://signal.group/#CjQKIKD7zJjxP9sryI9vE5ATQZVqYsWGN_3yYURA5giGogh3EhAWfvK2Fw_kaFtt-MQ6Jlp8)
-   - Tweet/share if public release
-
----
-
-## Epic Format
-
-> 🤖 **AI: Use this syntax when writing epics in ROADMAP or CHANGELOG**
 
 **Syntax:**
 
@@ -771,3 +572,27 @@ refactor: consolidate storage to books/ only
 
 **Last updated:** 2026-01-20
 **Version:** 1.0 (Initial workflow definition)
+
+> 🤖
+> | Backstage files | Description |
+> | ---------------------------------------------------------------------------- | ------------------ |
+> | [README](../README.md) | Our project |
+> | [CHANGELOG](CHANGELOG.md) | What we did |
+> | [ROADMAP](ROADMAP.md) | What we wanna do |
+> | POLICY: [project](POLICY.md), [global](global/POLICY.md) | How we go about it |
+> | CHECKS: [project](HEALTH.md), [global](global/HEALTH.md) | What we accept |
+> | We use **[backstage rules](https://github.com/nonlinear/backstage)**, v0.3.0 |
+> 🤖
+
+```mermaid
+%%{init: {'theme':'base', 'themeVariables': { 'fontSize':'14px'}}}%%
+graph LR
+    subgraph "📞 Future"
+        V03[v0.3.0<br/>Update Script]
+        V04[v0.4.0<br/>Templates]
+        V05[v0.5.0<br/>Documentation]
+    end
+
+    V03 --> V04
+    V04 --> V05
+```

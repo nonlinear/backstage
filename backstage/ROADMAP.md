@@ -1,6 +1,20 @@
 # Backstage - Roadmap
 
 
+
+```mermaid
+%%{init: {'theme':'base', 'themeVariables': { 'fontSize':'14px'}}}%%
+graph LR
+    subgraph "📞 Future"
+        V03[v0.3.0<br/>Update Script]
+        V04[v0.4.0<br/>Templates]
+        V05[v0.5.0<br/>Documentation]
+    end
+
+    V03 --> V04
+    V04 --> V05
+```
+
 > 🤖
 > | Backstage files | Description |
 > | ---------------------------------------------------------------------------- | ------------------ |
