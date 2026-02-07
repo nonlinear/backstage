@@ -359,10 +359,18 @@ NAVEOF
     }
     
     # Update all files (nav at end, no exceptions)
-    update_file_nav "$project_root/README.md" "backstage/" "backstage/"
+    # README uses backstage/ prefix, others use relative paths
+    local files_and_paths=(
+        "$project_root/README.md:backstage/:backstage/"
+        "$backstage_dir/ROADMAP.md:../::"
+        "$backstage_dir/CHANGELOG.md:../::"
+        "$backstage_dir/POLICY.md:../::"
+        "$backstage_dir/HEALTH.md:../::"
+    )
     
-    for file in ROADMAP CHANGELOG POLICY HEALTH; do
-        update_file_nav "$backstage_dir/${file}.md" "../" ""
+    for entry in "${files_and_paths[@]}"; do
+        IFS=':' read -r file readme_rel others_rel <<< "$entry"
+        update_file_nav "$file" "$readme_rel" "$others_rel"
     done
     
     rm -f "$nav_temp"
