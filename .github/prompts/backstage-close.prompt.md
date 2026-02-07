@@ -43,46 +43,16 @@ grep "^- \[ \]" backstage/ROADMAP.md
 
 ## STEP 2A: Merge Workflow (If Epic Complete)
 
-**Pre-merge checks:**
+**Follow merge protocol from POLICY + HEALTH:**
 
-```bash
-# Version sync (CRITICAL for backstage project)
-NAV_VERSION=$(grep "backstage rules.*v[0-9]" backstage/global/POLICY.md | sed 's/.*v\([0-9.]*\).*/\1/')
-EPIC_VERSION=$(grep -m1 "^## v[0-9]" backstage/ROADMAP.md | sed 's/^## v//')
-```
+1. **Read backstage/HEALTH.md** "Merge to Main Workflow" section
+2. Execute pre-merge checks (defined in HEALTH)
+3. Execute merge steps (defined in POLICY Step 10)
+4. Execute post-merge updates (defined in HEALTH if applicable)
 
-- If versions don't match → warn user, add to ROADMAP as fix task
-- If match → proceed
+**All merge logic lives in POLICY.md (Step 9-10) and HEALTH.md (project-specific).**
 
-**Move epic to CHANGELOG:**
-
-- Extract `## vX.Y.Z` section from ROADMAP
-- Paste at TOP of CHANGELOG (after header)
-- Change status: 🚧 → ✅, add date
-- Remove from ROADMAP
-
-**Merge to main:**
-
-```bash
-git checkout main
-git pull origin main
-git merge epic/vX.Y.Z-name --no-ff
-git tag vX.Y.Z -m "Epic vX.Y.Z complete"
-git push origin main
-git push origin vX.Y.Z
-git branch -d epic/vX.Y.Z-name
-git push origin --delete epic/vX.Y.Z-name
-```
-
-**Post-merge (backstage project only):**
-
-If `skill/` folder exists:
-
-```bash
-# Remove dev symlink, restore official
-rm ~/.openclaw/skills/backstage
-ln -s ~/Documents/backstage/skill ~/.openclaw/skills/backstage
-```
+**DO NOT hardcode steps here - read and follow POLICY/HEALTH!**
 
 **Victory lap:**
 
@@ -91,7 +61,7 @@ ln -s ~/Documents/backstage/skill ~/.openclaw/skills/backstage
 ✅ CHANGELOG updated
 ✅ Tag created
 ✅ Branch deleted
-[✅ Skill updated]
+[✅ Skill updated (if applicable)]
 
 📌 Next epic: [suggest from ROADMAP]
 ```
