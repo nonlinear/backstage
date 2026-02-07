@@ -15,8 +15,10 @@
 - [x] Create skill/backstage.sh (thin wrapper)
 - [x] Create skill/SKILL.md (documentation)
 - [x] Add AI EXECUTION PROTOCOL to global POLICY.md
-- [ ] **CRITICAL:** Inventory global vs project POLICY/HEALTH (muita confusão - content in wrong files)
-- [ ] Test with real project
+- [x] **CRITICAL:** Inventory global vs project POLICY/HEALTH (muita confusão - content in wrong files)
+- [x] Test with real project
+- [ ] ensure "update skill" is on project HEALTH on merge
+- [ ] Merge to main
 - [ ] Merge to main
 
 ---
