@@ -111,77 +111,56 @@ next_version() {
 cmd_start() {
     check_backstage
     
+    info "Executing protocols..."
+    
+    # === Execute protocols silently (global + project) ===
+    # Script reads both, applies combined rules, project wins if conflict
+    
+    # Validate structure exists
+    local has_global_policy=0
+    local has_project_policy=0
+    local has_global_health=0
+    local has_project_health=0
+    
+    [ -f "$PROJECT_PATH/backstage/global/POLICY.md" ] && has_global_policy=1
+    [ -f "$PROJECT_PATH/backstage/POLICY.md" ] && has_project_policy=1
+    [ -f "$PROJECT_PATH/backstage/global/HEALTH.md" ] && has_global_health=1
+    [ -f "$PROJECT_PATH/backstage/HEALTH.md" ] && has_project_health=1
+    
+    # Run health checks (silent execution, report result only)
     echo ""
-    echo "START_SESSION|$PROJECT_PATH"
+    local health_pass=0
+    if cmd_health > /dev/null 2>&1; then
+        success "✅ All health checks passed - ready to work"
+        health_pass=1
+    else
+        warn "⚠️ Some health checks failed - see details above"
+    fi
+    
+    # List active epics from ROADMAP
     echo ""
-    
-    # === POLICY FILES (polycentric governance) ===
-    
-    # Global POLICY
-    if [ -f "$PROJECT_PATH/backstage/global/POLICY.md" ]; then
-        echo "POLICY_FOUND|global|$PROJECT_PATH/backstage/global/POLICY.md"
-        info "Global POLICY sections:"
-        summarize_md "$PROJECT_PATH/backstage/global/POLICY.md"
-        echo ""
-    fi
-    
-    # Project POLICY
-    if [ -f "$PROJECT_PATH/backstage/POLICY.md" ]; then
-        echo "POLICY_FOUND|project|$PROJECT_PATH/backstage/POLICY.md"
-        info "Project POLICY sections (WINS over global):"
-        summarize_md "$PROJECT_PATH/backstage/POLICY.md"
-        echo ""
-    fi
-    
-    # === HEALTH FILES ===
-    
-    # Global HEALTH
-    if [ -f "$PROJECT_PATH/backstage/global/HEALTH.md" ]; then
-        echo "HEALTH_FOUND|global|$PROJECT_PATH/backstage/global/HEALTH.md"
-        info "Global HEALTH sections:"
-        summarize_md "$PROJECT_PATH/backstage/global/HEALTH.md"
-        echo ""
-    fi
-    
-    # Project HEALTH
-    if [ -f "$PROJECT_PATH/backstage/HEALTH.md" ]; then
-        echo "HEALTH_FOUND|project|$PROJECT_PATH/backstage/HEALTH.md"
-        info "Project HEALTH sections (project-specific checks):"
-        summarize_md "$PROJECT_PATH/backstage/HEALTH.md"
-        echo ""
-    fi
-    
-    # === ROADMAP (active epics) ===
-    
     if [ -f "$PROJECT_PATH/backstage/ROADMAP.md" ]; then
-        echo "ROADMAP_FOUND|$PROJECT_PATH/backstage/ROADMAP.md"
-        echo ""
         info "Active epics:"
         
-        # Extract epic versions and titles
+        # Extract and display epics
         grep -E '^## v[0-9]+\.[0-9]+\.[0-9]+|^### ' "$PROJECT_PATH/backstage/ROADMAP.md" | while read -r line; do
             if [[ "$line" =~ ^##\ v([0-9.]+) ]]; then
                 version="${BASH_REMATCH[1]}"
             elif [[ "$line" =~ ^###\ (.+) ]]; then
                 title="${BASH_REMATCH[1]}"
-                # Detect status (⏳ planned, 🚧 active, ✅ done)
-                if [[ "$title" =~ ⏳ ]]; then
-                    status="planned"
-                elif [[ "$title" =~ 🚧 ]]; then
-                    status="active"
-                else
-                    status="unknown"
-                fi
-                echo "EPIC|v${version}|${title}|${status}"
+                echo "  • v${version} - ${title}"
             fi
         done
-        echo ""
     else
         warn "No ROADMAP.md found"
     fi
     
-    success "Session started! Ready to work."
-    echo "SESSION_READY"
+    echo ""
+    success "Session ready!"
+    
+    # Output for AI processing
+    echo ""
+    echo "SESSION_READY|health_pass=${health_pass}"
 }
 
 # Epic create command

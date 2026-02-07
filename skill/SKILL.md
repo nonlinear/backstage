@@ -39,12 +39,12 @@ backstage.sh start [project-path]
 ```
 
 **What it does:**
-1. Read `backstage/global/POLICY.md` (if exists - universal rules)
-2. Read `backstage/POLICY.md` (project-specific - WINS)
-3. Show POLICY summary
-4. Read `backstage/global/HEALTH.md` (if exists)
-5. Read `backstage/HEALTH.md` (project checks)
-6. Read `backstage/ROADMAP.md` (list epics)
+1. Comply with `global/POLICY.md` (universal rules)
+2. Comply with `POLICY.md` (project-specific - WINS if conflict)
+3. Run `global/HEALTH.md` checks
+4. Run `HEALTH.md` checks (project-specific - WINS if conflict)
+5. Report: ✅ ready / ❌ issues found
+6. List active epics from ROADMAP
 7. Ask: create new epic or work on existing?
 
 ### Create Epic
@@ -64,9 +64,9 @@ backstage.sh health
 ```
 
 **What it does:**
-1. Run `backstage/global/HEALTH.md` checks (if exists)
-2. Run `backstage/HEALTH.md` checks (project-specific)
-3. Report pass/fail
+1. Run `global/HEALTH.md` checks
+2. Run `HEALTH.md` checks (project-specific - WINS if conflict)
+3. Report: ✅ all passed / ❌ X failed
 
 ### Close Session
 ```bash
@@ -86,30 +86,57 @@ backstage.sh close
 
 ```mermaid
 flowchart TD
-    START[User: vamos trabalhar no X] --> READ_POLICY
-    READ_POLICY[Read global + project POLICY] --> SHOW_POLICY
-    SHOW_POLICY[Show POLICY summary] --> READ_HEALTH
-    READ_HEALTH[Read global + project HEALTH] --> READ_ROADMAP
-    READ_ROADMAP[Read ROADMAP epics] --> ASK_CHOICE
+    START[User: vamos trabalhar no X] --> COMPLY
     
-    ASK_CHOICE{User choice?} -->|Create new| EPIC_CREATE
-    ASK_CHOICE -->|Work on existing| EPIC_SWITCH
+    COMPLY[Comply with protocols<br/>global + project overlapping<br/>project WINS if conflict] --> HEALTH
     
-    EPIC_CREATE[Create epic] --> WORK
-    EPIC_SWITCH[Load epic] --> WORK
+    subgraph PROTOCOLS [" "]
+        GLOBAL_P[global/POLICY.md<br/>universal rules]
+        PROJECT_P[POLICY.md<br/>project rules]
+        GLOBAL_H[global/HEALTH.md<br/>universal checks]
+        PROJECT_H[HEALTH.md<br/>project checks]
+    end
+    
+    HEALTH[Run all health checks] --> HEALTH_OK{Pass?}
+    
+    HEALTH_OK -->|Yes| READY[✅ Ready]
+    HEALTH_OK -->|No| REPORT_ISSUES[❌ Report issues]
+    
+    READY --> LIST_EPICS[List active epics]
+    REPORT_ISSUES --> LIST_EPICS
+    
+    LIST_EPICS --> ASK_CHOICE{User choice?}
+    
+    ASK_CHOICE -->|Create new| EPIC_CREATE
+    ASK_CHOICE -->|Work on existing| WORK
+    
+    EPIC_CREATE[Create epic + optional branch] --> WORK
     
     WORK[Work happens...] --> CLOSE
     
-    CLOSE[backstage close] --> RUN_HEALTH
-    RUN_HEALTH[Run health checks] --> HEALTH_OK{Pass?}
+    CLOSE[backstage close] --> FINAL_HEALTH[Run health checks]
     
-    HEALTH_OK -->|No| ADD_FIXES[Add FIX tasks]
-    HEALTH_OK -->|Yes| COMMIT[Commit + push]
+    FINAL_HEALTH --> FINAL_OK{Pass?}
+    
+    FINAL_OK -->|No| ADD_FIXES[Report: Add FIX tasks]
+    FINAL_OK -->|Yes| COMMIT[Commit + push]
     
     ADD_FIXES --> DONE
-    COMMIT --> VICTORY[Victory lap]
+    COMMIT --> VICTORY[Victory lap + body check]
     VICTORY --> DONE[Session closed]
+    
+    style COMPLY fill:#fff4e1
+    style PROTOCOLS fill:#f0f0f0
+    style HEALTH_OK fill:#e1ffe1
+    style FINAL_OK fill:#e1ffe1
 ```
+
+**Protocol execution order:**
+1. Read `global/POLICY` + `POLICY` simultaneously
+2. Apply combined rules (project wins if conflict)
+3. Read `global/HEALTH` + `HEALTH` simultaneously  
+4. Run all checks (project wins if conflict)
+5. Report result: ✅ ready / ❌ issues
 
 ---
 
@@ -139,15 +166,17 @@ project/
 
 ## Polycentric Governance
 
-**Backstage uses overlapping jurisdictions - check BOTH levels:**
+Backstage reads protocols from TWO levels simultaneously:
 
-1. **Global defaults** (`backstage/global/`) - Universal rules
-2. **Project overrides** (`backstage/`) - Project-specific (WINS)
+1. **`global/`** - Universal framework rules
+2. **`project/`** - Project-specific rules
+
+**Conflict resolution:** Project wins.
 
 **Example:**
-- `backstage/global/POLICY.md` says: "Always create branches"
-- `backstage/POLICY.md` says: "Work directly on main"
-- **Result:** Project rule wins, work on main
+- `global/POLICY`: "Always create branches"  
+- `POLICY`: "Work directly on main"  
+- **Result:** Work on main (project wins)
 
 ---
 
