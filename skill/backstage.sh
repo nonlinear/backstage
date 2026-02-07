@@ -354,28 +354,18 @@ NAVEOF
         nav_block="${nav_block//HEALTHPATH/${others_rel}HEALTH.md}"
         nav_block="${nav_block//VERSION/${version}}"
         
-        # Remove old nav block AND old mermaid diagram
+        # Remove old nav block AND old mermaid diagrams
         local temp="${file}.navtmp"
+        
+        # Step 1: Remove everything between > 🤖 markers
         if grep -q "^> 🤖" "$file"; then
-            # Has markers, remove nav block content between them AND any mermaid blocks
-            awk '
-                BEGIN{skip=0; in_mermaid=0} 
-                /^```mermaid$/{in_mermaid=1; next}
-                in_mermaid && /^```$/{in_mermaid=0; next}
-                in_mermaid {next}
-                /^> 🤖/{if(skip==0){skip=1}else{skip=0}; next} 
-                !skip
-            ' "$file" > "$temp"
+            awk 'BEGIN{skip=0} /^> 🤖/{if(skip==0){skip=1}else{skip=0}; next} !skip' "$file" > "$temp"
         else
-            # No markers, but still remove mermaid blocks
-            awk '
-                BEGIN{in_mermaid=0}
-                /^```mermaid$/{in_mermaid=1; next}
-                in_mermaid && /^```$/{in_mermaid=0; next}
-                in_mermaid {next}
-                {print}
-            ' "$file" > "$temp"
+            cp "$file" "$temp"
         fi
+        
+        # Step 2: Remove ALL mermaid blocks (```mermaid ... ```)
+        perl -i -0pe 's/```mermaid.*?```\n*//gs' "$temp"
         
         # Always append at end (nav block + mermaid if exists)
         cat "$temp" > "$file"
