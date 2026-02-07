@@ -17,9 +17,7 @@
 - [x] Add AI EXECUTION PROTOCOL to global POLICY.md
 - [x] **CRITICAL:** Inventory global vs project POLICY/HEALTH (muita confusão - content in wrong files)
 - [x] Test with real project
-- [ ] ensure "update skill" is on project HEALTH on merge
-- [ ] Merge to main
-- [ ] Merge to main
+- [x] ensure "update skill" is on project HEALTH on merge
 
 ---
 
