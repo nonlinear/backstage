@@ -309,14 +309,71 @@ cmd_health() {
 # ============================================================================
 update_navigation_blocks() {
     local project_root="$1"
+    local backstage_dir="$project_root/backstage"
     
-    # TODO: Implement navigation block update logic
-    # Per global/POLICY.md specification
-    # 1. Extract mermaid diagram from ROADMAP.md
-    # 2. Generate navigation block with correct relative paths
-    # 3. Update all backstage files (README at end, others at top)
+    # Extract version from global/POLICY.md
+    local version=$(grep -m1 "backstage rules.*v[0-9]" "$backstage_dir/global/POLICY.md" | sed 's/.*v\([0-9.]*\).*/\1/' || echo "0.0.0")
     
-    info "Navigation block update: Not yet implemented (v0.4.0)"
+    # Extract mermaid diagram from ROADMAP.md
+    local mermaid_diagram=""
+    if [ -f "$backstage_dir/ROADMAP.md" ]; then
+        mermaid_diagram=$(awk '/```mermaid/,/```/' "$backstage_dir/ROADMAP.md" | grep -v '```')
+    fi
+    
+    # Generate navigation block template
+    generate_nav_block() {
+        local rel_path="$1"
+        cat <<EOF
+> 🤖
+>
+> - [README](${rel_path}README.md) - Our project
+> - [CHANGELOG](${rel_path}CHANGELOG.md) — What we did
+> - [ROADMAP](${rel_path}ROADMAP.md) — What we wanna do
+> - POLICY ([project](${rel_path}POLICY.md), [global](${rel_path}global/POLICY.md)) — How we do it
+> - HEALTH ([project](${rel_path}HEALTH.md), [global](${rel_path}global/HEALTH.md)) — What we accept
+>
+> 🤖
+EOF
+    }
+    
+    # Update file with navigation block
+    update_file_nav() {
+        local file="$1"
+        local position="$2"  # "top" or "end"
+        local rel_path="$3"
+        
+        if [ ! -f "$file" ]; then
+            return
+        fi
+        
+        local nav_block=$(generate_nav_block "$rel_path")
+        
+        # Remove old nav block (between 🤖 markers)
+        local temp_file="${file}.tmp"
+        awk '/> 🤖/{flag=1; next} flag && /> 🤖/{flag=0; next} !flag' "$file" > "$temp_file"
+        
+        if [ "$position" = "top" ]; then
+            # Insert after title (first # line)
+            awk -v nav="$nav_block" 'NR==1{print; print ""; print nav; print ""; next}1' "$temp_file" > "$file"
+        else
+            # Insert at end
+            cat "$temp_file" > "$file"
+            echo "" >> "$file"
+            echo "$nav_block" >> "$file"
+        fi
+        
+        rm -f "$temp_file"
+    }
+    
+    # Update README (navigation at end)
+    update_file_nav "$project_root/README.md" "end" "backstage/"
+    
+    # Update backstage files (navigation at top)
+    for file in ROADMAP CHANGELOG POLICY HEALTH; do
+        update_file_nav "$backstage_dir/${file}.md" "top" ""
+    done
+    
+    info "Navigation blocks updated (v${version})"
 }
 
 cmd_start() {
@@ -350,7 +407,10 @@ cmd_start() {
     info "POLICY protocol: Project wins over global"
     
     # Update navigation blocks in all backstage files
-    update_navigation_blocks "$PROJECT_PATH"
+    if ! update_navigation_blocks "$PROJECT_PATH"; then
+        error "Failed to update navigation blocks"
+        return 1
+    fi
     
     echo ""
     
