@@ -314,17 +314,24 @@ update_navigation_blocks() {
     # Extract version from global/POLICY.md
     local version=$(grep -m1 "backstage rules.*v[0-9]" "$backstage_dir/global/POLICY.md" | sed 's/.*v\([0-9.]*\).*/\1/' 2>/dev/null || echo "0.0.0")
     
+    # Extract mermaid diagram from ROADMAP.md
+    local mermaid_diagram=""
+    if [ -f "$backstage_dir/ROADMAP.md" ]; then
+        mermaid_diagram=$(awk '/^```mermaid$/,/^```$/' "$backstage_dir/ROADMAP.md")
+    fi
+    
     # Generate navigation block and save to temp file
     local nav_temp="/tmp/backstage_nav_$$.md"
     cat > "$nav_temp" <<'NAVEOF'
 > 🤖
->
-> - [README](READMEPATH) - Our project
-> - [CHANGELOG](CHANGELOGPATH) — What we did
-> - [ROADMAP](ROADMAPPATH) — What we wanna do
-> - POLICY ([project](POLICYPATH), [global](GLOBALPOLICYPATH)) — How we do it
-> - HEALTH ([project](HEALTHPATH), [global](GLOBALHEALTHPATH)) — What we accept
->
+> | Backstage files | Description |
+> | ---------------------------------------------------------------------------- | ------------------ |
+> | [README](READMEPATH) | Our project |
+> | [CHANGELOG](CHANGELOGPATH) | What we did |
+> | [ROADMAP](ROADMAPPATH) | What we wanna do |
+> | POLICY: [project](POLICYPATH), [global](GLOBALPOLICYPATH) | How we go about it |
+> | CHECKS: [project](HEALTHPATH), [global](GLOBALHEALTHPATH) | What we accept |
+> | We use **[backstage rules](https://github.com/nonlinear/backstage)**, vVERSION |
 > 🤖
 NAVEOF
     
@@ -345,15 +352,22 @@ NAVEOF
         nav_block="${nav_block//ROADMAPPATH/${others_rel}ROADMAP.md}"
         nav_block="${nav_block//POLICYPATH/${others_rel}POLICY.md}"
         nav_block="${nav_block//HEALTHPATH/${others_rel}HEALTH.md}"
+        nav_block="${nav_block//VERSION/${version}}"
         
         # Remove old nav block (if exists)
         local temp="${file}.navtmp"
         awk 'BEGIN{skip=0} /^> 🤖/{skip=1; next} skip && /^> 🤖/{skip=0; next} !skip' "$file" > "$temp"
         
-        # Always append at end
+        # Always append at end (nav block + mermaid if exists)
         cat "$temp" > "$file"
         echo "" >> "$file"
         echo "$nav_block" >> "$file"
+        
+        # Add mermaid diagram after navigation block (if exists)
+        if [ -n "$mermaid_diagram" ]; then
+            echo "" >> "$file"
+            echo "$mermaid_diagram" >> "$file"
+        fi
         
         rm -f "$temp"
     }
