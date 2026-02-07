@@ -87,21 +87,27 @@ git push origin v0.X.0
 **Post-Merge: Update OpenClaw Skill (Backstage-Specific)**
 
 ```bash
-# Remove dev symlink
+# 1. Remove dev symlink
 rm ~/.openclaw/skills/backstage
 
-# Install updated skill
+# 2. Restore official skill (from merged main)
+# Option A: Copy skill folder to OpenClaw
+cp -r ~/Documents/backstage/skill ~/.openclaw/skills/backstage
+
+# Option B: Symlink to main branch (not dev branch)
 ln -s ~/Documents/backstage/skill ~/.openclaw/skills/backstage
 
-# Test
+# 3. Test
 cd ~/Documents/backstage
 backstage start .
 ```
 
-Expected: Skill works with updated framework
+Expected: Skill works with updated framework from main
 Pass: ✅ Skill updated and functional
 
 **Why backstage-specific:** Most projects don't have OpenClaw skills. Backstage does.
+
+**Critical:** Remove dev symlink (points to epic branch) → restore official (points to main or installed version)
 
 ---
 
