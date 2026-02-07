@@ -98,7 +98,7 @@ Rebrand framework to "backstage" and document navigation logic in global/POLICY.
 > | [CHANGELOG](CHANGELOG.md) | What we did |
 > | [ROADMAP](ROADMAP.md) | What we wanna do |
 > | POLICY: [project](POLICY.md), [global](global/POLICY.md) | How we go about it |
-> | CHECKS: [project](HEALTH.md), [global](global/HEALTH.md) | What we accept |
+> | HEALTH: [project](HEALTH.md), [global](global/HEALTH.md) | What we accept |
 > | We use **[backstage rules](https://github.com/nonlinear/backstage)**, v0.3.0 |
 > 🤖
 

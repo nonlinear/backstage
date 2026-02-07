@@ -59,7 +59,7 @@ graph LR
 > | [CHANGELOG](backstage/CHANGELOG.md) | What we did |
 > | [ROADMAP](backstage/ROADMAP.md) | What we wanna do |
 > | POLICY: [project](backstage/POLICY.md), [global](backstage/global/POLICY.md) | How we go about it |
-> | CHECKS: [project](backstage/HEALTH.md), [global](backstage/global/HEALTH.md) | What we accept |
+> | HEALTH: [project](backstage/HEALTH.md), [global](backstage/global/HEALTH.md) | What we accept |
 > | We use **[backstage rules](https://github.com/nonlinear/backstage)**, v0.3.0 |
 > 🤖
 

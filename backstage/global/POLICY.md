@@ -37,54 +37,57 @@ Pass: ✅ Dependencies OK
 
 ---
 
-## Backstage Update System
+## Backstage Installation & Updates
 
-**backstage-update.py serves dual purpose:**
+**Backstage is AI-driven - no install scripts.**
 
-### 1. Initial Scaffolding (First Install)
+### Initial Install
 
-**Run from project root:**
-
-```bash
-python backstage/global/backstage-update.py
-```
-
-**Creates complete structure:**
-
-- `backstage/ROADMAP.md` (from templates/ROADMAP-template.md)
-- `backstage/CHANGELOG.md` (from templates/CHANGELOG-template.md)
-- `backstage/POLICY.md` (from templates/POLICY-template.md)
-- `backstage/HEALTH.md` (from templates/HEALTH-template.md)
-- `backstage/global/*` (already in place from clone)
-- `.github/prompts/backstage-*.prompt.md` (all 3 workflow prompts)
-
-**Result:** Complete backstage framework ready to use. User then grooms ROADMAP, customizes POLICY/CHECKS.
-
-### 2. Framework Updates (Existing Projects)
-
-**Run from existing installation:**
+**Clone templates from GitHub:**
 
 ```bash
-python backstage/global/backstage-update.py
+# Create backstage folder
+mkdir -p backstage/global
+
+# Download templates
+for file in ROADMAP CHANGELOG POLICY HEALTH; do
+  curl -fsSL "https://raw.githubusercontent.com/nonlinear/backstage/main/templates/${file}-template.md" \
+    -o "backstage/${file}.md"
+done
+
+# Download global files
+curl -fsSL "https://raw.githubusercontent.com/nonlinear/backstage/main/backstage/global/POLICY.md" \
+  -o "backstage/global/POLICY.md"
+curl -fsSL "https://raw.githubusercontent.com/nonlinear/backstage/main/backstage/global/HEALTH.md" \
+  -o "backstage/global/HEALTH.md"
 ```
 
-**Updates 6 files:**
+**OR: Clone entire repo and copy backstage/ folder**
 
-- `backstage/global/POLICY.md`
-- `backstage/global/HEALTH.md`
-- `backstage/global/backstage-update.py` (self-update)
-- `.github/prompts/backstage-start.prompt.md`
-- `.github/prompts/backstage-close.prompt.md`
-- `.github/prompts/backstage-update.prompt.md`
+### Framework Updates
 
-**Preserves:**
+**Pull latest global files:**
 
+```bash
+# Update global POLICY/HEALTH
+curl -fsSL "https://raw.githubusercontent.com/nonlinear/backstage/main/backstage/global/POLICY.md" \
+  -o "backstage/global/POLICY.md"
+curl -fsSL "https://raw.githubusercontent.com/nonlinear/backstage/main/backstage/global/HEALTH.md" \
+  -o "backstage/global/HEALTH.md"
+
+# Update prompts (if using OpenClaw)
+curl -fsSL "https://raw.githubusercontent.com/nonlinear/backstage/main/.github/prompts/backstage-start.prompt.md" \
+  -o ".github/prompts/backstage-start.prompt.md"
+# ... repeat for other prompts
+```
+
+**What stays unchanged:**
 - `backstage/ROADMAP.md` (your epics)
-- `backstage/CHANGELOG.md` (your history)
+- `backstage/CHANGELOG.md` (your history)  
 - `backstage/POLICY.md` (your rules)
 - `backstage/HEALTH.md` (your tests)
 
-**Workflow:** Use `/backstage-update` prompt → shows changes → user confirms → script runs → suggests `/backstage-start`
+**Why no install script:** Backstage = files + AI protocol. Just copy files, AI reads POLICY and executes.
 
 ---
 
@@ -169,7 +172,7 @@ In the future, navigation block format may change:
 > | [CHANGELOG](path/to/CHANGELOG.md) | What we did |
 > | [ROADMAP](path/to/ROADMAP.md) | What we wanna do |
 > | POLICY: [project](path/to/POLICY.md), [global](path/to/global/POLICY.md) | How we go about it |
-> | CHECKS: [project](path/to/HEALTH.md), [global](path/to/global/HEALTH.md) | What we accept |
+> | HEALTH: [project](path/to/HEALTH.md), [global](path/to/global/HEALTH.md) | What we accept |
 > | We use **[backstage rules](https://github.com/nonlinear/backstage)**, v0.3.0 |
 > 🤖
 ```
