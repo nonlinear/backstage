@@ -4,9 +4,9 @@
 
 ### 🚧 Prompt Cleanup
 
-**Problem:** backstage-close still has `merge` command in skill, prompt has duplicated logic
+**Problem:** backstage-close still exists (should be deleted), skill/prompts not groomed
 
-**Solution:** Remove merge command from skill, ensure POLICY/HEALTH contain ALL merge logic
+**Solution:** Remove backstage-close, groom all prompts
 
 **Tasks:**
 
@@ -15,9 +15,12 @@
 - [x] **FIX:** README backstage prompt link (fixed: backstage-start.prompt.md)
 - [x] **FIX:** README "starts workflow" link (fixed: epic-notes path + anchor)
 - [x] **FIX:** Move workflow diagram to epic-notes (already there, just added anchor)
-- [ ] **TODO:** Publish skill to clawdhub (not published yet - can't test install)
-- [ ] **TEST:** `backstage close` + "epic is completed, merge" → AI executes merge
-- [ ] **TEST:** `backstage close` (regular) → AI executes regular close
+- [ ] **DELETE:** backstage-close.prompt.md (shouldn't exist - only backstage-start needed)
+- [ ] **DELETE:** backstage-update.prompt.md (shouldn't exist - logic in POLICY)
+- [ ] **GROOM:** Review all backstage prompts (only keep backstage-start)
+- [ ] **TODO:** Publish skill to clawdhub (not published yet)
+- [ ] **TEST:** `backstage start` (pre-commit workflow)
+- [ ] **TEST:** User says "epic is completed, merge" → backstage-start handles it via POLICY
 
 ---
 

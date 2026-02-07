@@ -42,11 +42,14 @@ case "$COMMAND" in
         echo "  1. Run HEALTH checks (global + project)"
         echo "  2. Update navigation blocks (table + mermaid)"
         echo "  3. Sync ROADMAP with work done"
-        echo "  4. Display 'What's next'"
+        echo "  4. Check user intent (regular commit vs merge)"
+        echo "  5. Display 'What's next' OR execute merge"
         echo ""
-        info "Reading POLICY context..."
+        info "Reading POLICY + HEALTH context..."
         cat "$BACKSTAGE_DIR/global/POLICY.md"
         [ -f "$BACKSTAGE_DIR/POLICY.md" ] && cat "$BACKSTAGE_DIR/POLICY.md"
+        cat "$BACKSTAGE_DIR/global/HEALTH.md"
+        [ -f "$BACKSTAGE_DIR/HEALTH.md" ] && cat "$BACKSTAGE_DIR/HEALTH.md"
         ;;
         
     health)
@@ -57,34 +60,16 @@ case "$COMMAND" in
         [ -f "$BACKSTAGE_DIR/HEALTH.md" ] && cat "$BACKSTAGE_DIR/HEALTH.md"
         ;;
         
-    close)
-        echo "📌 AI will execute: backstage-close workflow"
-        echo ""
-        echo "Modes:"
-        echo "  - Regular: commit + push + victory lap"
-        echo "  - Merge: if user says 'epic is completed, merge'"
-        echo ""
-        info "Reading POLICY + HEALTH context..."
-        cat "$BACKSTAGE_DIR/global/POLICY.md"
-        [ -f "$BACKSTAGE_DIR/POLICY.md" ] && cat "$BACKSTAGE_DIR/POLICY.md"
-        [ -f "$BACKSTAGE_DIR/HEALTH.md" ] && cat "$BACKSTAGE_DIR/HEALTH.md"
-        ;;
-        
-    update)
-        echo "🔄 AI will execute: backstage-update workflow"
-        echo ""
-        info "Reading POLICY context..."
-        cat "$BACKSTAGE_DIR/global/POLICY.md"
-        ;;
-        
     *)
         error "Unknown command: $COMMAND"
         echo ""
         echo "Usage:"
-        echo "  backstage.sh start [path]   # Main workflow (AI executes)"
+        echo "  backstage.sh start [path]   # Main workflow (pre-commit OR merge)"
         echo "  backstage.sh health [path]  # Health checks only"
-        echo "  backstage.sh close [path]   # Close workflow (includes merge if epic done)"
-        echo "  backstage.sh update [path]  # Update framework"
+        echo ""
+        echo "AI reads user intent from context:"
+        echo "  - Regular: 'backstage start' → commit + push"
+        echo "  - Merge: 'epic is completed, merge' + 'backstage start' → merge to main"
         exit 1
         ;;
 esac
