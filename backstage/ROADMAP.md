@@ -1,3 +1,22 @@
+# Backstage Roadmap
+
+## v0.3.1
+
+### 🚧 Prompt Cleanup
+
+**Problem:** backstage-close still has `merge` command in skill, prompt has duplicated logic
+
+**Solution:** Remove merge command from skill, ensure POLICY/HEALTH contain ALL merge logic
+
+**Tasks:**
+
+- [ ] Remove `merge` case from skill/backstage.sh
+- [ ] Verify backstage-close.prompt.md references POLICY/HEALTH (not hardcoded steps)
+- [ ] Test: `backstage close` + "epic is completed, merge" → AI executes merge
+- [ ] Test: `backstage close` (regular) → AI executes regular close
+
+---
+
 ## v0.4.0
 
 ### Templates
@@ -14,6 +33,7 @@
 - [ ] Create templates/CHANGELOG-template.md
 - [ ] Create templates/POLICY-template.md
 - [ ] Create templates/HEALTH-template.md
+- [ ] **Exercise:** Create POLICY design architecture diagram (Skill → POLICY → AI flow)
 
 ---
 
@@ -50,8 +70,12 @@
 ```mermaid
 %%{init: {'theme':'base', 'themeVariables': { 'fontSize':'14px'}}}%%
 graph LR
-    subgraph "🚧 Active"
+    subgraph "✅ Shipped"
         V03[v0.3.0<br/>OpenClaw Skill]
+    end
+    
+    subgraph "🚧 Active"
+        V031[v0.3.1<br/>Prompt Cleanup]
     end
     
     subgraph "📞 Future"
@@ -59,8 +83,10 @@ graph LR
         V05[v0.5.0<br/>Documentation]
     end
 
-    V03 --> V04
+    V03 --> V031
+    V031 --> V04
     V04 --> V05
     
     style V03 fill:#4CAF50
+    style V031 fill:#FFC107
 ```
