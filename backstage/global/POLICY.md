@@ -190,15 +190,30 @@ No manual path calculation needed—the workflow handles this automatically.
 
 **Source of truth:** ROADMAP.md contains the canonical mermaid roadmap diagram showing epic status.
 
-**backstage-start workflow:**
+**Location:** Mermaid diagram appears ONLY ONCE per file, immediately AFTER the navigation block closing marker (`> 🤖`).
 
-1. Reads diagram from ROADMAP.md
-2. Copies it to README.md (at end, after navigation block)
-3. Copies it to all other backstage files (at top, after navigation block)
+**Structure:**
+```
+[file content]
 
-**When to update:** Any time epics are added, moved, or completed—backstage-start handles distribution automatically.
+> 🤖
+[navigation table]
+> 🤖
 
-**AI Note:** backstage-start workflow maintains navigation blocks and diagrams. Don't manually copy—let the workflow enforce consistency.
+```mermaid
+[diagram here]
+```
+```
+
+**backstage workflow:**
+
+1. Reads diagram from ROADMAP.md (after navigation block)
+2. Removes any OLD mermaid diagrams (including duplicates before navigation block)
+3. Copies diagram to all backstage files (after navigation block)
+
+**When to update:** Any time epics are added, moved, or completed—backstage skill/prompt handles distribution automatically.
+
+**AI Note:** backstage workflow maintains navigation blocks and diagrams. Don't manually copy—let the workflow enforce consistency.
 
 ---
 
