@@ -328,12 +328,11 @@ update_navigation_blocks() {
 > 🤖
 NAVEOF
     
-    # Update file with navigation block
+    # Update file with navigation block (always at end)
     update_file_nav() {
         local file="$1"
-        local position="$2"  # "top" or "end"
-        local readme_rel="$3"
-        local others_rel="$4"
+        local readme_rel="$2"
+        local others_rel="$3"
         
         [ ! -f "$file" ] && return
         
@@ -347,29 +346,23 @@ NAVEOF
         nav_block="${nav_block//POLICYPATH/${others_rel}POLICY.md}"
         nav_block="${nav_block//HEALTHPATH/${others_rel}HEALTH.md}"
         
-        # Remove old nav block
+        # Remove old nav block (if exists)
         local temp="${file}.navtmp"
         awk 'BEGIN{skip=0} /^> 🤖/{skip=1; next} skip && /^> 🤖/{skip=0; next} !skip' "$file" > "$temp"
         
-        if [ "$position" = "top" ]; then
-            # After first line (title)
-            { head -1 "$temp"; echo ""; echo "$nav_block"; echo ""; tail -n +2 "$temp"; } > "$file"
-        else
-            # At end
-            cat "$temp" > "$file"
-            echo "" >> "$file"
-            echo "$nav_block" >> "$file"
-        fi
+        # Always append at end
+        cat "$temp" > "$file"
+        echo "" >> "$file"
+        echo "$nav_block" >> "$file"
         
         rm -f "$temp"
     }
     
-    # Update README (nav at end)
-    update_file_nav "$project_root/README.md" "end" "backstage/" "backstage/"
+    # Update all files (nav at end, no exceptions)
+    update_file_nav "$project_root/README.md" "backstage/" "backstage/"
     
-    # Update backstage files (nav at end too, not top)
     for file in ROADMAP CHANGELOG POLICY HEALTH; do
-        update_file_nav "$backstage_dir/${file}.md" "end" "../" ""
+        update_file_nav "$backstage_dir/${file}.md" "../" ""
     done
     
     rm -f "$nav_temp"

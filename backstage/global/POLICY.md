@@ -126,9 +126,17 @@ Only **surgical, pointed changes** allowed—no wholesale rewrites.
 
 **All files (README.md, ROADMAP.md, CHANGELOG.md, HEALTH.md, POLICY.md):**
 
-- Navigation block at **END** (after content, before final line)
-- Simpler: no special cases, all files follow same pattern
+- **Navigation block at END** (after all content, before final line)
+- **No special cases:** All files follow same pattern
+- **If `> 🤖` markers exist:** Update content between them
+- **If no markers exist:** Append new navigation block at end
 - Includes mermaid roadmap diagram (source of truth from ROADMAP.md)
+
+**Logic:**
+1. Check if file has `> 🤖` markers
+2. If yes: Replace content between markers
+3. If no: Append navigation block at end
+4. No exceptions, no "top vs end" logic
 
 ### Why 🤖 Markers Exist: Future-Proof Format Changes
 
