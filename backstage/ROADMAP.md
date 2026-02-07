@@ -1,26 +1,3 @@
-# Backstage - Roadmap
-
----
-
-## v0.3.0
-
-### [🚧](https://github.com/nonlinear/backstage/tree/epic/v0.3.0-openclaw-skill) OpenClaw Skill
-
-**Problem:** Backstage needs OpenClaw integration (skill + prompt)
-
-**Solution:** Create skill that reads POLICY and executes via AI
-
-**Tasks:**
-
-- [x] Create skill/backstage.sh (thin wrapper)
-- [x] Create skill/SKILL.md (documentation)
-- [x] Add AI EXECUTION PROTOCOL to global POLICY.md
-- [x] **CRITICAL:** Inventory global vs project POLICY/HEALTH (muita confusão - content in wrong files)
-- [x] Test with real project
-- [x] ensure "update skill" is on project HEALTH on merge
-
----
-
 ## v0.4.0
 
 ### Templates
