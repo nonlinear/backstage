@@ -1,9 +1,9 @@
 ---
-name: backstage-start
-description: Pre-commit validation, doc sync, determine next steps
+name: backstage
+description: Pre-commit validation, doc sync, determine next steps (or merge if epic complete)
 ---
 
-# Backstage Start Workflow
+# Backstage Workflow
 
 **Read POLICY first, then execute:**
 

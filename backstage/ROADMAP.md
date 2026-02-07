@@ -19,8 +19,24 @@
 - [x] **DELETE:** backstage-update.prompt.md (DELETED!)
 - [x] **GROOM:** Skill only has start+health commands (close/update removed)
 - [ ] **TODO:** Publish skill to clawdhub (not published yet)
-- [ ] **TEST:** `backstage start` (pre-commit workflow)
-- [ ] **TEST:** User says "epic is completed, merge" + `backstage start` → handles merge
+
+---
+
+## v0.3.2
+
+### 📝 Prompt Grooming
+
+**Problem:** .github/prompts/ has 30+ prompts, many outdated/unused
+
+**Solution:** Review, archive, and document active prompts
+
+**Tasks:**
+
+- [ ] Inventory all prompts in .github/prompts/
+- [ ] Identify active vs unused prompts
+- [ ] Archive unused prompts (move to _archived/)
+- [ ] Document remaining prompts in PROMPTS.md
+- [ ] Update README with prompt usage guide
 
 ---
 

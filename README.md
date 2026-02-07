@@ -17,8 +17,8 @@ A project management system for AI-assisted development that allows you to be in
 ## Installation & usage
 
 1. **Via Prompt**
-   1. Install [backstage-start prompt](https://github.com/nonlinear/backstage/blob/main/.github/prompts/backstage-start.prompt.md)
-   2. Run `/backstage-start` in your project
+   1. Install [backstage prompt](https://github.com/nonlinear/backstage/blob/main/backstage.prompt.md)
+   2. Run `/backstage` in your project
 2. **Via OpenClaw Skill**
    1. Install skill: `clawdhub install backstage` 
    2. Say `backstage <project-path>` to start the workflow
