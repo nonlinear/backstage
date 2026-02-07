@@ -166,7 +166,7 @@ In the future, navigation block format may change:
 > | [ROADMAP](path/to/ROADMAP.md) | What we wanna do |
 > | POLICY: [project](path/to/POLICY.md), [global](path/to/global/POLICY.md) | How we go about it |
 > | CHECKS: [project](path/to/HEALTH.md), [global](path/to/global/HEALTH.md) | What we accept |
-> | We use **[backstage rules](https://github.com/nonlinear/backstage)**, v0.2.0 |
+> | We use **[backstage rules](https://github.com/nonlinear/backstage)**, v0.3.0 |
 > 🤖
 ```
 
