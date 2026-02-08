@@ -20,11 +20,18 @@
 
 ### 🏗️ Arch Protocol | [notes](https://github.com/nonlinear/librarian/blob/epic/v0.15.0-skill-protocol/backstage/epic-notes/v0.15.0-skill-protocol.md)
 
-**Diagram-driven architecture for epics**
+**arch: = PARIDADE - O COMO familiar e mage comunicam**
+
+**Definition:** Shared language (visual = text = code) for architecture decisions
 
 **Problem:** Todos epics mudam estrutura, precisa de arch (diagrama antes de código)
 
 **Solution:** `arch:` prefix protocol - Nicholas says "arch: X" → I implement + document in diagram
+
+**Paridade = same map, same territory:**
+- Nicholas olha diagrama → sabe exatamente o que vai acontecer
+- Claw olha diagrama → sabe exatamente o que fazer
+- Screenshots → provam mapa = território (always)
 
 **Key insight:**
 - **First epic:** Create diagram from scratch (hard - 29 commits, 4 hours)
@@ -33,8 +40,8 @@
 - **Sandbox = safe** - epics isolated (branch), diagrams versioned (epic-notes/), nodes explicit (mermaid)
 
 **Workflow:**
-1. Planning (arch:) - I opine freely, suggest, debate → diagram agreement
-2. Execution (post-diagram) - I execute without errors, everything agreed
+1. Planning (arch:) - Familiar opines freely, suggests, debates → diagram agreement
+2. Execution (post-diagram) - Familiar executes without errors, everything agreed
 
 **Learning source:** `~/Documents/librarian/backstage/epic-notes/arch-session-2026-02-08.md`
 
