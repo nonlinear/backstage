@@ -44,7 +44,9 @@ Backstage follows a **polycentric structure**—not hierarchical "levels" but **
 > | [ROADMAP](backstage/ROADMAP.md) | What we wanna do |
 > | POLICY: [project](backstage/POLICY.md), [global](backstage/global/POLICY.md) | How we go about it |
 > | HEALTH: [project](backstage/HEALTH.md), [global](backstage/global/HEALTH.md) | What we accept |
-> | We use **[backstage protocol](https://github.com/nonlinear/backstage)**, v0.3.4 |
+>
+> We use **[backstage protocol](https://github.com/nonlinear/backstage)**, v0.3.4
+>
 > 🤖
 
 ```mermaid
