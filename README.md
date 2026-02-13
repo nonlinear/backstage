@@ -47,25 +47,3 @@ Backstage follows a **polycentric structure**—not hierarchical "levels" but **
 > | We use **[backstage protocol](https://github.com/nonlinear/backstage)**, v0.3.4 |
 > 🤖
 
-```mermaid
-graph LR
-    A[📋 v0.3.2 Prompt Grooming] --> B[📋 v0.4.0 Templates]
-    B --> C[📋 v0.4.1 Arch Protocol]
-    C --> D[📋 v0.5.0 Documentation]
-```
-%%{init: {'theme':'base', 'themeVariables': { 'fontSize':'14px'}}}%%
-graph LR
-    subgraph "🚧 Active"
-        V03[v0.3.0<br/>OpenClaw Skill]
-    end
-    
-    subgraph "📞 Future"
-        V04[v0.4.0<br/>Templates]
-        V05[v0.5.0<br/>Documentation]
-    end
-
-    V03 --> V04
-    V04 --> V05
-    
-    style V03 fill:#4CAF50
-```
