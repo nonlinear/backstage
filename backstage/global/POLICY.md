@@ -22,6 +22,14 @@ This file contains **universal, project-agnostic** workflow rules and convention
 
 **POLICY.md** (project-specific) extends or overrides these global rules for specific projects.
 
+**How this works:**
+- **Global POLICY** = Foundation (universal rules, all projects)
+- **Project POLICY** = Customization (local needs, context-specific)
+- **Project wins on conflict** (polycentric governance)
+- **AI reads both** (merges when compatible, prefers project when not)
+
+**Enforced by:** [backstage-skill](https://clawhub.com/skills/backstage) (runs on "good morning" / "good night")
+
 ---
 
 ## Formatting Standard
@@ -183,7 +191,7 @@ In the future, navigation block format may change:
 > | [ROADMAP](path/to/ROADMAP.md) | What we wanna do |
 > | POLICY: [project](path/to/POLICY.md), [global](path/to/global/POLICY.md) | How we go about it |
 > | HEALTH: [project](path/to/HEALTH.md), [global](path/to/global/HEALTH.md) | What we accept |
-> | We use **[backstage rules](https://github.com/nonlinear/backstage)**, v0.3.0 |
+> | We use **[backstage rules](https://github.com/nonlinear/backstage)**, v0.3.1 |
 > 🤖
 ```
 
@@ -232,34 +240,62 @@ No manual path calculation needed—the workflow handles this automatically.
 
 ## Branch Strategy
 
+**Semantic Versioning Governance:**
+
+**Format:** vA.B.C
+
+- **A (major):** Breaking changes, structural redesign → REQUIRES epic + branch + ROADMAP
+- **B (minor):** New features, incremental improvements → REQUIRES epic + branch + ROADMAP
+- **C (patch):** Bug fixes, quick fixes, typos → FAST TRACK (no branch, no ROADMAP, straight to CHANGELOG)
+
+**Fast Track (Patch) Rule:**
+- Create entry directly in CHANGELOG (no ROADMAP epic needed)
+- Commit to main (no feature branch)
+- Must still answer: "What type of change is this?" (patch = bug/quick fix)
+- Use for: typos, broken links, dependency updates, small corrections
+
+**Example:**
+```
+v0.3.1 → v0.3.2 (patch) - Fix diagram in global POLICY, update version number
+```
+
+**Traditional Epic Flow (Major/Minor):**
+
 **One branch per epic:**
 
 ```
 main (stable releases only)
   ↓
-v0.3-feature-name (feature branch)
-v0.4-another-feature (feature branch)
-v0.5-third-feature (feature branch)
+v0.3.0 (minor - feature branch)
+v0.4.0 (minor - feature branch)
+v1.0.0 (major - breaking changes)
 ```
 
 ### Branch Naming
 
-**Format:** `v0.X.0` (version number only, no descriptive names)
+**Format:** `vA.B.C` (version number only, no descriptive names)
 
 **Examples:**
 
-- `v0.3.0`
-- `v0.4.0`
-- `v1.0.0`
+- `v0.3.0` (minor feature)
+- `v0.4.0` (minor feature)
+- `v1.0.0` (major rewrite)
 
 ### Workflow
 
+**Major/Minor (Traditional):**
 1. **Create branch from main**
 2. **Work on epic in branch**
 3. **Rebase regularly from main**
 4. **Merge to main when complete**
 5. **Tag release**
 6. **Delete feature branch (recommended)**
+
+**Patch (Fast Track):**
+1. **Work directly on main** (or short-lived branch if nervous)
+2. **Add entry to CHANGELOG** (skip ROADMAP)
+3. **Commit with patch description**
+4. **Tag release** (vA.B.C+1)
 
 ---
 

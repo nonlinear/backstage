@@ -1,5 +1,30 @@
 # Backstage - Changelog
 
+## v0.3.2 - 2026-02-13
+
+### 🔧 Patch: POLICY Cleanup + Fast Track Rule
+
+**Type:** Patch (bug fix / quick fix)
+
+**What we did:**
+
+- Removed incorrect diagram from global/POLICY.md (showed backstage-skill workflow, not POLICY content)
+- Added semantic versioning fast-track rule to global/POLICY.md:
+  - Major/Minor = epic + branch + ROADMAP (traditional flow)
+  - Patch = straight to CHANGELOG (no branch, no ROADMAP needed)
+- Updated navigation block template version: v0.3.0 → v0.3.1
+- **Meta:** This CHANGELOG entry uses the fast-track rule it documents
+
+**Why patch?**
+- Small corrections (diagram placement, version number)
+- No breaking changes
+- No new features
+- Fixes documentation accuracy
+
+**Impact:** POLICY now correctly separates governance structure (in POLICY text) from enforcement mechanism (in backstage-skill SKILL.md). Fast-track rule enables quick fixes without epic overhead.
+
+---
+
 ## v0.3.1 - 2026-02-07
 
 ### ✅ Prompt Cleanup
