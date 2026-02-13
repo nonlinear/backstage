@@ -192,7 +192,7 @@ In the future, navigation block format may change:
 > | POLICY: [project](path/to/POLICY.md), [global](path/to/global/POLICY.md) | How we go about it |
 > | HEALTH: [project](path/to/HEALTH.md), [global](path/to/global/HEALTH.md) | What we accept |
 > 
-> We use **[backstage protocol](https://github.com/nonlinear/backstage)**, v0.3.1
+> We use **[backstageeee protocol](https://github.com/nonlinear/backstage)**, v0.3.4
 > 🤖
 ```
 
