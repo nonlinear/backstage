@@ -44,10 +44,15 @@ Backstage follows a **polycentric structure**—not hierarchical "levels" but **
 > | [ROADMAP](backstage/ROADMAP.md) | What we wanna do |
 > | POLICY: [project](backstage/POLICY.md), [global](backstage/global/POLICY.md) | How we go about it |
 > | HEALTH: [project](backstage/HEALTH.md), [global](backstage/global/HEALTH.md) | What we accept |
-> | We use **[backstage rules](https://github.com/nonlinear/backstage)**, v0.3.0 |
+> | We use **[backstage protocol](https://github.com/nonlinear/backstage)**, v0.3.4 |
 > 🤖
 
 ```mermaid
+graph LR
+    A[📋 v0.3.2 Prompt Grooming] --> B[📋 v0.4.0 Templates]
+    B --> C[📋 v0.4.1 Arch Protocol]
+    C --> D[📋 v0.5.0 Documentation]
+```
 %%{init: {'theme':'base', 'themeVariables': { 'fontSize':'14px'}}}%%
 graph LR
     subgraph "🚧 Active"
