@@ -122,12 +122,11 @@ Pass: ✅ All required files present
 ```bash
 test -f backstage/global/POLICY.md && \
 test -f backstage/global/HEALTH.md && \
-test -f backstage/global/backstage-update.py && \
 echo '✅ Global backstage files exist' || echo '❌ Missing global files'
 ```
 
 Expected: Prints '✅ Global backstage files exist'
-Pass: ✅ Global files present (README.md lives at root, not in global/)
+Pass: ✅ Global files present (symlinked for admins, copied for external users)
 
 ---
 
@@ -288,91 +287,17 @@ Pass: ✅ backstage-close is production ready
 
 ---
 
-#### backstage-update (prompt) Health (7 metrics)
-
-**Purpose:** Update global backstage files from GitHub repo
-
-| #   | Metric                   | Type   | Test                               |
-| --- | ------------------------ | ------ | ---------------------------------- |
-| 1   | Check current version    | MUST   | Step 1 reads from global/README.md |
-| 2   | Fetch remote CHANGELOG   | MUST   | Step 2 has fetch logic             |
-| 3   | Compare versions         | MUST   | Step 3 shows version diff          |
-| 4   | Show changes per epic    | SHOULD | Step 3 lists improvements          |
-| 5   | User confirmation        | MUST   | Step 4 asks yes/no                 |
-| 6   | Calls .py script         | MUST   | Step 5 runs backstage-update.py    |
-| 7   | Suggests backstage-start | SHOULD | Step 6 reminds validation          |
-
-**Test:**
-
-```bash
-# Blocked until repo published
-test -f .github/prompts/backstage-update.prompt.md && \
-echo '✅ Prompt exists (blocked on repo publication)' || \
-echo '❌ FAIL: Prompt missing'
-```
-
-Expected: Prompt exists with all steps
-Pass: 🚧 Blocked on GitHub repo publication
-
----
-
-#### backstage-update.py Health (13 metrics)
-
-**Purpose:** Download and overwrite global framework files
-
-**Scaffolding mode (7 metrics):**
-
-| #   | Metric                  | Type   | Test                        |
-| --- | ----------------------- | ------ | --------------------------- |
-| 1   | Detect missing files    | MUST   | Checks if ROADMAP.md exists |
-| 2   | Copy ROADMAP template   | MUST   | From templates/             |
-| 3   | Copy CHANGELOG template | MUST   | From templates/             |
-| 4   | Copy POLICY template    | MUST   | From templates/             |
-| 5   | Copy CHECKS template    | MUST   | From templates/             |
-| 6   | Copy .github/prompts    | MUST   | All 3 workflow prompts      |
-| 7   | Explain what files do   | SHOULD | User guidance               |
-
-**Update mode (6 metrics):**
-
-| #   | Metric                    | Type   | Test                          |
-| --- | ------------------------- | ------ | ----------------------------- |
-| 1   | Fetch global/POLICY.md    | MUST   | From GitHub raw URL           |
-| 2   | Fetch global/HEALTH.md    | MUST   | From GitHub raw URL           |
-| 3   | Fetch backstage-update.py | MUST   | Self-update capability        |
-| 4   | Fetch 3 prompt files      | MUST   | All backstage-\*.prompt.md    |
-| 5   | Preserve project files    | MUST   | Never touch ROADMAP/CHANGELOG |
-| 6   | Show progress             | SHOULD | Download indicators           |
-
-**Test:**
-
-```bash
-# Check if it's still a placeholder
-grep -q "This script is a placeholder" global/backstage-update.py && \
-echo '❌ FAIL: Still placeholder (0% implementation)' || \
-echo '✅ Implementation exists'
-```
-
-Expected: No placeholder message, has real implementation
-Pass: ❌ Currently 0% implemented - **BLOCKS v0.2.0 RELEASE**
-
----
-
 ### Overall System Health
 
 **Ship criteria:**
 
 - [ ] backstage-start: ≥90% (currently 87.5% - needs metric 6 fix)
 - [x] backstage-close: ≥90% (currently 100% ✅)
-- [ ] backstage-update (prompt): ≥90% (currently 86% - blocked on infra)
-- [ ] backstage-update.py: ≥90% (currently 0% - not implemented)
-
-**v0.2.0 Shippability:** ❌ **2 of 4 components failing**
 
 **Action items:**
 
 1. Fix backstage-start metric 6 (remove hardcoded epic format)
-2. Implement backstage-update.py (0% → 100%)
-3. Publish backstage repo to GitHub (unblocks update testing)
+2. Publish backstage repo to GitHub (public visibility)
 
 ---
 

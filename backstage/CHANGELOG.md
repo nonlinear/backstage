@@ -1,5 +1,31 @@
 # Backstage - Changelog
 
+## v0.3.3 - 2026-02-13
+
+### 🔧 Patch: Remove Deprecated Update Scripts
+
+**Type:** Patch (cleanup)
+
+**What we did:**
+
+- Deleted `global/backstage-update.py` (deprecated - symlinks replace sync scripts)
+- Deleted `global/backstage-update-test.py` (test file for deprecated script)
+- Removed all references from `global/HEALTH.md`:
+  - Removed backstage-update.py existence check
+  - Removed backstage-update prompt health metrics
+  - Removed backstage-update.py implementation metrics
+  - Updated ship criteria (2 components, not 4)
+
+**Why deprecated?**
+
+- **For admins (Nicholas):** Symlink `backstage/global/` → instant sync, no script needed
+- **For external users:** Epic exists to construct backstage folder if missing (future)
+- **Self-contained skill:** backstage-skill has all prompts in SKILL.md, no external files
+
+**Impact:** Cleaner global/ folder, no confusion about which files to follow. Anti-drift via symlinks (admins) or initial construction (external users).
+
+---
+
 ## v0.3.2 - 2026-02-13
 
 ### 🔧 Patch: POLICY Cleanup + Fast Track Rule
