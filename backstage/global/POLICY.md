@@ -226,15 +226,47 @@ No manual path calculation needed—the workflow handles this automatically.
 ```
 ```
 
-**backstage workflow:**
+**Diagram Generation Rules (Global Defaults):**
 
-1. Reads diagram from ROADMAP.md (after navigation block)
-2. Removes any OLD mermaid diagrams (including duplicates before navigation block)
-3. Copies diagram to all backstage files (after navigation block)
+**Type:** Linear graph (`graph LR`)
 
-**When to update:** Any time epics are added, moved, or completed—backstage skill/prompt handles distribution automatically.
+**Include:**
+- All epics from ROADMAP.md (version + status emoji + name)
+- Sequential order (sorted by epic version)
+- Status emoji before version number
 
-**AI Note:** backstage workflow maintains navigation blocks and diagrams. Don't manually copy—let the workflow enforce consistency.
+**Format:**
+```mermaid
+graph LR
+    A[🏗️ v0.1.0 Epic Name] --> B[📋 v0.2.0 Next Epic]
+    B --> C[📋 v0.3.0 Future Epic]
+```
+
+**Status emoji mapping:**
+- 🏗️ ACTIVE (currently working)
+- 📋 BACKLOG (planned, not started)
+- ✅ DONE (completed, moved to CHANGELOG)
+
+**Completed epics:**
+- Remove from ROADMAP diagram
+- Show in CHANGELOG "Latest" section
+- Keep audit trail via git history
+
+**Project overrides:**
+- Project POLICY.md can specify different diagram type (gantt, flowchart, etc.)
+- Can disable diagram entirely: `diagram: none`
+- Can customize include/exclude logic
+
+**backstage-skill workflow:**
+
+1. **Parse ROADMAP.md** (via `parse-roadmap.sh` - extracts version|status|name)
+2. **Read POLICY diagram rules** (global + project, project wins)
+3. **Generate mermaid** (AI applies rules to parsed data)
+4. **Propagate to all files** (README, ROADMAP, CHANGELOG, POLICY, HEALTH)
+
+**When to update:** Any time epics are added, moved, or completed—backstage-skill handles distribution automatically.
+
+**AI Note:** backstage-skill maintains navigation blocks and diagrams. Don't manually copy—let the workflow enforce consistency.
 
 ---
 

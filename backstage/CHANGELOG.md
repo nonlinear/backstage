@@ -1,5 +1,39 @@
 # Backstage - Changelog
 
+## v0.3.4 - 2026-02-13
+
+### 🔧 Patch: Mermaid Diagram Generation Rules
+
+**Type:** Patch (documentation + tooling)
+
+**What we did:**
+
+- Added mermaid diagram generation rules to global/POLICY.md:
+  - Default format: Linear graph (`graph LR`)
+  - Include: All epics (version + status emoji + name)
+  - Status mapping: 🏗️ ACTIVE, 📋 BACKLOG, ✅ DONE, ⏳ WAITING
+  - Project overrides: Can customize diagram type or disable (`diagram: none`)
+- Created `parse-roadmap.sh` in backstage-skill (extract version|status|name from ROADMAP.md)
+- Updated backstage-skill/SKILL.md:
+  - Added mermaid diagram generation workflow
+  - Documented AI prompt for diagram enforcement
+  - Hybrid approach (SH parsing + AI generation)
+
+**Why patch?**
+
+- No breaking changes (diagrams optional, project can disable)
+- Adds automation rules (not new feature)
+- Polycentric governance: global suggests, project decides
+
+**Impact:** 
+
+- Backstage-skill now auto-generates + propagates roadmap diagrams
+- POLICY defines diagram format (single source of truth)
+- Projects can customize or opt-out (polycentric governance)
+- Anti-drift: diagram always matches current ROADMAP
+
+---
+
 ## v0.3.3 - 2026-02-13
 
 ### 🔧 Patch: Remove Deprecated Update Scripts
