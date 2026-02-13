@@ -1,5 +1,22 @@
 # Project Policy
 
+> 🤖
+>
+> - [README](../README.md) - Our project
+> - [CHANGELOG](CHANGELOG.md) — What we did
+> - [ROADMAP](ROADMAP.md) — What we wanna do
+> - [POLICY](POLICY.md) — How we do it
+> - [HEALTH](HEALTH.md) — What we accept
+>
+> 🤖
+
+```mermaid
+graph LR
+    A[📋 v0.3.2 Prompt Grooming] --> B[📋 v0.4.0 Templates]
+    B --> C[📋 v0.4.1 Arch Protocol]
+    C --> D[📋 v0.5.0 Documentation]
+```
+
 ---
 
 ## 🚨 CRITICAL: Understanding Global vs Project Files
