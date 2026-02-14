@@ -18,6 +18,39 @@
 
 ---
 
+## v0.3.3
+
+### 🏴 Backstage to Win
+
+**Description:** Merge context-switch + roadmap skills into backstage-skill
+
+**Problem:**
+- context-switch (project/epic transitions + HEALTH checks) should be part of backstage
+- roadmap (epic planning, grooming, emoji shortcuts) should be part of backstage
+- Three separate skills = fragmented workflow
+
+**Solution:** Merge both into single backstage-skill (universal project management)
+
+**Tasks:**
+- [ ] Merge context-switch logic into backstage-skill
+  - [ ] Morning/evening workflows ("bom dia", "boa noite")
+  - [ ] Project/epic transitions with HEALTH checks
+  - [ ] Context state tracking (.current-context.json)
+- [ ] Merge roadmap logic into backstage-skill
+  - [ ] Epic creation, grooming, emoji shortcuts
+  - [ ] Roadmap management across projects
+  - [ ] Task reordering, merging
+- [ ] Update backstage-skill SKILL.md (new triggers, features)
+- [ ] Test on multiple projects (life, librarian, wiley, skills)
+- [ ] Archive context-switch + roadmap skills (mark deprecated in skills/)
+
+**Success:**
+- Single skill handles full project workflow
+- context-switch + roadmap features accessible via backstage commands
+- No workflow fragmentation
+
+---
+
 ## v0.4.1
 
 ### 🏗️ Arch Protocol | [notes](https://github.com/nonlinear/librarian/blob/epic/v0.15.0-skill-protocol/backstage/epic-notes/v0.15.0-skill-protocol.md)
