@@ -101,6 +101,42 @@
 
 ## v0.3.4
 
+### 📊 Diagram Redesign - Beyond Linear
+
+**Problem:** Current diagrams = single linear chain (A → B → C)
+
+**Reality:** Epics have richer relationships
+- **Parallel work:** Multiple epics active simultaneously
+- **Dependencies:** Some epics block others
+- **Changelog context:** Completed work informs future planning
+
+**Proposed evolution:**
+- **ROADMAP diagram:** Show active + backlog (linear OK for now)
+- **CHANGELOG diagram:** Show completed epics (timeline/grouped by version)
+- **Combined view:** ROADMAP + CHANGELOG = full project lifecycle
+
+**Questions to explore:**
+- Should CHANGELOG have its own diagram?
+- Gantt chart for parallel epics?
+- Dependency arrows (epic A blocks epic B)?
+- Timeline vs priority-based ordering?
+
+**Tasks:**
+- [ ] Research mermaid diagram types (gantt, timeline, graph with clusters)
+- [ ] Prototype CHANGELOG diagram (completed epics visualization)
+- [ ] Test combined ROADMAP + CHANGELOG view
+- [ ] Document when to use which diagram type
+- [ ] Add examples to POLICY.md
+
+**Success:**
+- Diagrams reflect reality (not just linear progression)
+- CHANGELOG has visual context (what we accomplished)
+- Clear when to use each diagram type
+
+---
+
+## v0.3.5
+
 ### 📝 Prompt Grooming
 
 **Problem:** .github/prompts/ has 30+ prompts, many outdated/unused
