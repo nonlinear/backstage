@@ -328,7 +328,7 @@ check_approve_to_merge() {
     # Extract epic section (escape dots in version)
     local epic_section
     local version_pattern
-    version_pattern=$(echo "$branch_version" | sed 's/\./\\./g')
+    version_pattern=$(printf "%s" "$branch_version" | sed 's/\./\\./g')
     epic_section=$(awk "/^## $version_pattern$/,/^---$/" "$roadmap")
     
     # Check if all tasks except "Approve to merge" are done
