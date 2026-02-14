@@ -693,10 +693,17 @@ git push origin --delete v0.3.0
 
 **How it works:**
 
-1. **backstage-start auto-adds** if missing from ROADMAP epic
-2. **User checks task** when epic is ready to merge: `- [x] **Approve to merge**`
-3. **Next backstage-start run** detects approval → triggers pre-merge validation
-4. **After validation passes** → prompts to merge to main
+1. **backstage-start auto-adds** `- [ ] **Approve to merge**` if missing from ROADMAP epic
+2. **When on active branch:** If only "Approve to merge" is unchecked, repeatedly offer to check it
+3. **User checks OR accepts offer:** `- [x] **Approve to merge**` = approval granted
+4. **Auto-merge sequence:** backstage-start immediately runs:
+   - Pre-merge validation (HEALTH checks)
+   - Merge to main
+   - Post-merge validation (integration checks)
+   - Tag release (if applicable)
+   - Delete branch (optional)
+
+**Checking "Approve to merge" = automatic merge approval.**
 
 **Example:**
 
@@ -705,17 +712,37 @@ git push origin --delete v0.3.0
 - [x] Feature implemented
 - [x] Tests passing
 - [x] Documentation updated
-- [x] **Approve to merge** ← User checked this
+- [ ] **Approve to merge** ← Only task left
 
-**Next backstage-start:** "✅ Epic approved for merge. Run pre-merge validation now?"
+**backstage-start:** "All tasks done except approval. Ready to merge? [Y/n]"
+→ User says "yes" → Kin checks box → auto-merge runs
 ```
+
+**Auto-merge sequence:**
+
+```bash
+# When - [x] **Approve to merge** detected:
+1. Run HEALTH checks (pre-merge validation)
+2. If pass → git checkout main && git merge epic/vX.Y.Z
+3. Run HEALTH checks again (post-merge validation)
+4. If pass → git tag vX.Y.Z (if applicable)
+5. Delete branch: git branch -d epic/vX.Y.Z
+6. Update ROADMAP → move epic to CHANGELOG
+```
+
+**User control:**
+
+- **Check manually:** User ticks box → auto-merge on next backstage-start
+- **Accept offer:** backstage-start asks → user says yes → Kin ticks → auto-merge immediately
+- **Uncheck to pause:** If issues found, uncheck box → stops auto-merge
 
 **Why this works:**
 
 - **Explicit approval** (user decides when ready)
-- **No extra fields** (just another task)
+- **No extra fields** (just another task checkbox)
 - **Auto-detected** (backstage-start knows when to merge)
-- **Flexible** (can uncheck if issues found)
+- **Automatic execution** (checking = permission to merge)
+- **Reversible** (uncheck if problems appear)
 - [ ] Main task 2
 
 **Success:**
