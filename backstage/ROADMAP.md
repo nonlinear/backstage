@@ -268,6 +268,100 @@
 - [ ] Add workflow diagrams (mermaid)
 - [ ] Document epic dance
 - [ ] Add examples from real projects
+- [ ] **Approve to merge**
+
+**Success:**
+- Clear onboarding guide
+- Visual workflow diagrams
+- Real-world examples
+
+---
+
+## v0.6.0
+
+### Branch Lifecycle Management
+
+**Problem:** What to do with branches after merge?
+
+**Current state:**
+- Branches merged to main stay forever → pollution
+- No automation for cleanup
+- No guidance for single-user vs multi-user workflows
+
+**Options explored:**
+
+1. **Auto-delete after merge**
+   - Pros: Clean, forces discipline
+   - Cons: Loses visual history in UI
+
+2. **Archive with tag before delete**
+   - Pros: Preserves recovery point, clean branches
+   - Cons: Tags don't show in UI like branches
+
+3. **Keep indefinitely**
+   - Pros: GitHub/GitLab shows merged branches
+   - Cons: 50+ branches = noise
+
+**Pull Request consideration:**
+
+- **Single-user:** No PRs needed (overhead without benefit)
+- **Multi-user:** PRs required (code review, CI/CD gates)
+- **Automation:** backstage-start can auto-create PR when "Approve to merge" checked
+
+**Proposed solution:**
+
+**Default (single-user):**
+- No PRs (merge direto via git)
+- Delete branch after merge
+- Archive with tag if epic was significant
+- Command: `backstage-cleanup` after merge
+
+**Opt-in (multi-user, via project POLICY):**
+- Auto-create PR when "Approve to merge" checked
+- CI runs HEALTH checks
+- Auto-merge when passes
+- Delete branch after merge
+
+**Tasks:**
+
+- [ ] Document branch cleanup policy in global POLICY
+- [ ] Add `backstage-cleanup` command (delete + tag option)
+- [ ] Implement auto-delete after merge (default: ask first)
+- [ ] Add multi-user PR workflow (opt-in via project POLICY)
+- [ ] Document when to keep vs delete branches
+- [ ] Add archive tagging convention (`archive/epic-vX.Y.Z`)
+- [ ] **Approve to merge**
+
+**Success:**
+- Clear branch lifecycle rules
+- Automated cleanup (configurable)
+- Multi-user PR support (opt-in)
+- No branch pollution after 10+ epics
+
+---
+
+## v0.5.0
+
+### Documentation
+
+⏳ Write comprehensive usage guide
+
+**Problem:** People don't know how to use backstage
+
+**Solution:** README with examples, philosophy, workflow diagrams
+
+**Tasks:**
+
+- [ ] Write README.md (philosophy + quick start)
+- [ ] Add workflow diagrams (mermaid)
+- [ ] Document epic dance
+- [ ] Add examples from real projects
+- [ ] **Approve to merge**
+
+**Success:**
+- Clear onboarding guide
+- Visual workflow diagrams
+- Real-world examples
 
 ---
 
