@@ -73,9 +73,10 @@ graph LR
 - [x] v0.7.0 - Back to Main Rituals
 
 **Finalization:**
-- [ ] Republish backstage skill on ClawHub (AFTER merge + tag v0.3.5)
+- [ ] Republish backstage skill on ClawHub (manual, not automated yet)
+  - **Command:** `clawhub publish /path/to/backstage/skill --version X.Y.Z --changelog "text"`
   - **Order:** merge → tag → publish (ClawHub points to stable tag, not branch)
-  - **Why:** Skills must point to main branch stable commits, not epic branches
+  - **Future:** Automate in v0.7.0 or later (add to merge protocol)
 - [ ] **Approve to merge**
 
 **Success:**
