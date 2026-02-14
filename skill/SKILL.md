@@ -6,6 +6,8 @@ version: 0.3.5
 status: production
 author: nonlinear
 license: MIT
+requires:
+  - https://github.com/nonlinear/backstage
 dependencies:
   - bash
   - awk
