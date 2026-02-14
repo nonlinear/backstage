@@ -266,19 +266,26 @@ update_backstage_diagrams() {
         
         # Insert new diagram after closing nav block
         awk -v diagram_file="$diagram_file" '
-            BEGIN { inserted=0 }
+            BEGIN { in_nav=0; inserted=0 }
             /^> 🤖$/ {
-                if (inserted == 0) {
+                if (in_nav == 0) {
+                    # First 🤖 - start nav block
+                    in_nav = 1
                     print
-                    getline
+                    next
+                } else {
+                    # Second 🤖 - end nav block, insert diagram
                     print
-                    print ""
-                    while ((getline line < diagram_file) > 0) {
-                        print line
+                    if (inserted == 0) {
+                        print ""
+                        while ((getline line < diagram_file) > 0) {
+                            print line
+                        }
+                        close(diagram_file)
+                        print ""
+                        inserted = 1
                     }
-                    close(diagram_file)
-                    print ""
-                    inserted = 1
+                    in_nav = 0
                     next
                 }
             }
