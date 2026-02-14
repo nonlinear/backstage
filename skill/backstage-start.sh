@@ -300,11 +300,148 @@ update_backstage_diagrams() {
 # Update ROADMAP checkboxes
 update_roadmap_tasks() {
     local roadmap="$1"
-    echo -e "${BLUE}✅ Updating ROADMAP checkboxes...${NC}"
+    echo -e "${BLUE}✅ Updating ROADMAP tasks...${NC}"
     
-    # TODO: Implement auto-checkbox update
-    # Parse tasks, detect completed work, update [ ] → [x]
-    echo -e "${YELLOW}⚠️  ROADMAP auto-update not yet implemented${NC}"
+    # Add "Approve to merge" to all epics if missing
+    local temp_roadmap="/tmp/roadmap_update_$$.md"
+    local in_epic=0
+    local epic_version=""
+    local has_approve=0
+    local tasks_section=0
+    
+    while IFS= read -r line; do
+        echo "$line" >> "$temp_roadmap"
+        
+        # Detect epic start (## vX.Y.Z)
+        if [[ "$line" =~ ^##[[:space:]]+v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            in_epic=1
+            epic_version="$line"
+            has_approve=0
+            tasks_section=0
+        fi
+        
+        # Detect tasks section
+        if [[ "$in_epic" -eq 1 ]] && [[ "$line" =~ ^\*\*Tasks:\*\*$ ]]; then
+            tasks_section=1
+        fi
+        
+        # Check if "Approve to merge" exists
+        if [[ "$tasks_section" -eq 1 ]] && [[ "$line" =~ \*\*Approve\ to\ merge\*\* ]]; then
+            has_approve=1
+        fi
+        
+        # End of epic (next ## or ---)
+        if [[ "$in_epic" -eq 1 ]] && [[ "$line" =~ ^(##[[:space:]]|---$) ]] && [[ ! "$line" =~ ^##[[:space:]]+v[0-9] ]]; then
+            # If tasks section found but no "Approve to merge", add it
+            if [[ "$tasks_section" -eq 1 ]] && [[ "$has_approve" -eq 0 ]]; then
+                # Insert before epic end marker
+                sed -i.bak '$d' "$temp_roadmap"  # Remove last line (--- or next ##)
+                echo "- [ ] **Approve to merge**" >> "$temp_roadmap"
+                echo "" >> "$temp_roadmap"
+                echo "$line" >> "$temp_roadmap"  # Re-add separator
+                echo -e "${GREEN}  ✅ Added 'Approve to merge' to $epic_version${NC}"
+            fi
+            in_epic=0
+        fi
+    done < "$roadmap"
+    
+    # Replace original if changes made
+    if [[ -f "$temp_roadmap" ]]; then
+        mv "$temp_roadmap" "$roadmap"
+        rm -f "${roadmap}.bak"
+    fi
+}
+
+# Check if "Approve to merge" is checked on current branch
+check_approve_to_merge() {
+    local roadmap="$1"
+    local current_branch="$2"
+    
+    # Extract version from branch name (epic/vX.Y.Z or epic/TYPE-vX.Y.Z)
+    local branch_version
+    branch_version=$(echo "$current_branch" | grep -oE 'v[0-9]+\.[0-9]+\.[0-9]+' || echo "")
+    
+    if [[ -z "$branch_version" ]]; then
+        return 1  # Not on epic branch
+    fi
+    
+    # Check if epic exists in ROADMAP
+    if ! grep -q "^## $branch_version$" "$roadmap"; then
+        return 1  # Epic not in ROADMAP
+    fi
+    
+    # Extract epic section
+    local epic_section
+    epic_section=$(awk "/^## $branch_version$/,/^(##[[:space:]]|---$)/" "$roadmap")
+    
+    # Check if all tasks except "Approve to merge" are done
+    local total_tasks
+    local done_tasks
+    local approve_checked
+    
+    total_tasks=$(echo "$epic_section" | grep -c "^- \[" || echo "0")
+    done_tasks=$(echo "$epic_section" | grep -c "^- \[x\]" || echo "0")
+    approve_checked=$(echo "$epic_section" | grep -c "^- \[x\] \*\*Approve to merge\*\*" || echo "0")
+    
+    # If only "Approve to merge" is unchecked
+    if [[ "$approve_checked" -eq 0 ]] && [[ $((done_tasks + 1)) -eq "$total_tasks" ]]; then
+        echo "OFFER"  # Offer to check
+        return 0
+    fi
+    
+    # If "Approve to merge" is checked
+    if [[ "$approve_checked" -eq 1 ]]; then
+        echo "APPROVED"  # Auto-merge
+        return 0
+    fi
+    
+    echo "NOT_READY"  # Still has unchecked tasks
+    return 1
+}
+
+# Auto-merge to main
+auto_merge_to_main() {
+    local roadmap="$1"
+    local current_branch="$2"
+    
+    echo -e "\n${GREEN}🚀 Auto-merge approved! Running merge sequence...${NC}"
+    
+    # Extract version
+    local version
+    version=$(echo "$current_branch" | grep -oE 'v[0-9]+\.[0-9]+\.[0-9]+')
+    
+    # Pre-merge validation
+    echo -e "${BLUE}1️⃣ Pre-merge validation (HEALTH checks)...${NC}"
+    if [[ -f "backstage/HEALTH.md" ]]; then
+        run_health_checks "backstage/HEALTH.md"
+    fi
+    
+    # Merge to main
+    echo -e "${BLUE}2️⃣ Merging to main...${NC}"
+    git checkout main
+    git merge --no-ff "$current_branch" -m "Merge $current_branch: $(grep -A 1 "^## $version$" "$roadmap" | tail -1 | sed 's/^### //')"
+    
+    # Post-merge validation
+    echo -e "${BLUE}3️⃣ Post-merge validation (integration checks)...${NC}"
+    if [[ -f "backstage/HEALTH.md" ]]; then
+        run_health_checks "backstage/HEALTH.md"
+    fi
+    
+    # Tag release (optional, based on CHANGELOG)
+    if grep -q "^## $version" "backstage/CHANGELOG.md" 2>/dev/null; then
+        echo -e "${BLUE}4️⃣ Tagging release $version...${NC}"
+        git tag -a "$version" -m "Release $version"
+    fi
+    
+    # Delete branch (ask first)
+    echo -e "${YELLOW}5️⃣ Delete branch $current_branch? [Y/n]${NC}"
+    read -r response
+    if [[ "$response" =~ ^[Yy]?$ ]]; then
+        git branch -d "$current_branch"
+        echo -e "${GREEN}✅ Branch deleted${NC}"
+    fi
+    
+    echo -e "\n${GREEN}✅ Auto-merge complete! Now on main branch.${NC}"
 }
 
 # Node 4️⃣: Check git branch
@@ -445,6 +582,28 @@ main() {
     
     # Node 4️⃣: Check git branch
     branch=$(check_branch)
+    
+    # Check if "Approve to merge" workflow applies
+    approve_status=$(check_approve_to_merge "$ROADMAP" "$branch")
+    
+    if [[ "$approve_status" == "OFFER" ]]; then
+        echo -e "\n${YELLOW}📋 All tasks complete except 'Approve to merge'${NC}"
+        echo -e "${YELLOW}Ready to merge to main? [Y/n]${NC}"
+        read -r response
+        if [[ "$response" =~ ^[Yy]?$ ]]; then
+            # Check the box
+            sed -i.bak 's/^- \[ \] \*\*Approve to merge\*\*/- [x] **Approve to merge**/' "$ROADMAP"
+            rm -f "${ROADMAP}.bak"
+            git add "$ROADMAP"
+            git commit -m "✅ Approve to merge (auto-checked)"
+            approve_status="APPROVED"
+        fi
+    fi
+    
+    if [[ "$approve_status" == "APPROVED" ]]; then
+        auto_merge_to_main "$ROADMAP" "$branch"
+        exit 0
+    fi
     
     # Node 5️⃣: Analyze changes
     analyze_changes "$CHANGELOG"
