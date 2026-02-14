@@ -1,6 +1,75 @@
 # Backstage - Roadmap
 
+## v0.3.1
+
+### 📜 VISION Core Prompt
+
+**Problem:** VISION.md exists in workspace, but belongs in backstage protocol
+
+**Context:**
+- Each project has its own VISION.md (ethics, principles, decision framework)
+- Currently: VISION.md lives in workspace (workspace-specific)
+- Should: VISION.md lives in project/backstage/ (project-specific)
+
+**Solution:** Move VISION.md to backstage protocol, make it per-project
+
+**Tasks:**
+- [ ] Document VISION.md structure in backstage/POLICY.md
+- [ ] Create VISION.md template (ethics, principles, decision tree)
+- [ ] Move workspace VISION.md → life/backstage/VISION.md
+- [ ] Update backstage-start.sh to read project VISION.md
+- [ ] Add VISION.md to navigation block (🤖)
+- [ ] Test with multiple projects
+
+**Success:**
+- Each project has its own VISION.md
+- backstage-start reminds of project ethics/principles
+- Workspace VISION.md deprecated (project-specific now)
+
+---
+
 ## v0.3.2
+
+### 🌳 Parent Project Support
+
+**Problem:** Policentric structure needs hierarchy: Global < Parent < Project
+
+**Current:** Global < Project (two layers only)
+
+**Future:** Global < Parent Project < Project (three layers)
+
+**Examples:**
+- **Global:** `~/Documents/backstage/` (universal rules)
+- **Parent:** `~/Documents/life/` (Nicholas's umbrella project)
+- **Projects:** `~/Documents/life/fitness/`, `~/Documents/life/habits/`, etc.
+
+**Parent project features:**
+- Shared VISION.md (inherited by child projects)
+- Shared POLICY.md (parent rules + global rules)
+- Shared resources (scripts, templates, configs)
+- Cross-project roadmap (parent-level epics)
+
+**Resolution order:**
+1. Project POLICY.md (most specific)
+2. Parent POLICY.md (if exists)
+3. Global POLICY.md (universal)
+
+**Tasks:**
+- [ ] Detect parent project (search up tree for backstage/)
+- [ ] Cascade VISION.md (parent → project)
+- [ ] Cascade POLICY.md (global → parent → project)
+- [ ] Update backstage-start to show parent context
+- [ ] Document parent project structure in POLICY.md
+- [ ] Create example parent project (life/)
+
+**Success:**
+- Projects can inherit from parent
+- Parent policies override global (when defined)
+- Clear resolution order documented
+
+---
+
+## v0.3.3
 
 ### 📝 Prompt Grooming
 
