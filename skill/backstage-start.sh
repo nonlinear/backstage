@@ -372,7 +372,7 @@ check_approve_to_merge() {
     
     # Extract epic section
     local epic_section
-    epic_section=$(awk "/^## $branch_version$/,/^(##[[:space:]]|---$)/" "$roadmap")
+    epic_section=$(awk "/^## $branch_version$/,/^##[[:space:]]|^---/" "$roadmap")
     
     # Check if all tasks except "Approve to merge" are done
     local total_tasks
