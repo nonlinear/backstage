@@ -687,62 +687,78 @@ git push origin --delete v0.3.0
 - **Success criteria:** Measurable outcomes (not tasks)
 - **Auto-generated task:** `- [ ] **Approve to merge**` added by backstage-start if missing
 
-### Approve to Merge Workflow
+### Approve to Merge Workflow (Manual)
 
 **Every epic MUST have final task:** `- [ ] **Approve to merge**`
 
-**How it works:**
+**Manual merge protocol (when auto-merge not implemented):**
 
-1. **backstage-start auto-adds** `- [ ] **Approve to merge**` if missing from ROADMAP epic
-2. **When on active branch:** If only "Approve to merge" is unchecked, repeatedly offer to check it
-3. **User checks OR accepts offer:** `- [x] **Approve to merge**` = approval granted
-4. **Auto-merge sequence:** backstage-start immediately runs:
-   - Pre-merge validation (HEALTH checks)
-   - Merge to main
-   - Post-merge validation (integration checks)
-   - Tag release (if applicable)
-   - Delete branch (optional)
+1. **Check all tasks done** (including `- [x] **Approve to merge**`)
+2. **Run pre-merge validation:** `backstage-start` (HEALTH checks)
+3. **Merge to main:**
+   ```bash
+   git checkout main
+   git merge --no-ff epic/vX.Y.Z -m "Merge epic/vX.Y.Z: Epic Title"
+   ```
+4. **Move epic from ROADMAP to CHANGELOG:**
+   - Cut epic section from ROADMAP (## vX.Y.Z + content)
+   - Paste at TOP of CHANGELOG (after navigation block, before last stable version)
+   - Convert tasks: `- [x] Task` → `- Task` (remove checkboxes, past tense)
+   - Remove "Approve to merge" task (not relevant in CHANGELOG)
+   - Add date: `## vX.Y.Z - YYYY-MM-DD`
+5. **Commit ROADMAP + CHANGELOG:**
+   ```bash
+   git add backstage/ROADMAP.md backstage/CHANGELOG.md
+   git commit -m "Release vX.Y.Z: Epic Title
 
-**Checking "Approve to merge" = automatic merge approval.**
+   - Task 1 completed
+   - Task 2 completed
+   - Task 3 completed"
+   ```
+6. **Run post-merge validation:** `backstage-start` (integration checks)
+7. **Tag release:**
+   ```bash
+   git tag -a vX.Y.Z -m "Release vX.Y.Z: Epic Title"
+   ```
+8. **Delete branch:**
+   ```bash
+   git branch -d epic/vX.Y.Z
+   ```
 
-**Example:**
+**Commit message format:**
+- **Subject:** `Release vX.Y.Z: Epic Title`
+- **Body:** Bullet list of completed tasks (past tense, no checkboxes)
 
+**CHANGELOG entry format:**
 ```markdown
-**Tasks:**
-- [x] Feature implemented
-- [x] Tests passing
-- [x] Documentation updated
-- [ ] **Approve to merge** ← Only task left
+## vX.Y.Z - YYYY-MM-DD
 
-**backstage-start:** "All tasks done except approval. Ready to merge? [Y/n]"
-→ User says "yes" → Kin checks box → auto-merge runs
+### Epic Title
+
+**Description:** What was accomplished
+
+- Task 1 completed
+- Task 2 completed
+
+**Success:**
+- Outcome 1 achieved
+- Outcome 2 achieved
+
+---
 ```
 
-**Auto-merge sequence:**
+**Auto-merge (future):**
 
-```bash
-# When - [x] **Approve to merge** detected:
-1. Run HEALTH checks (pre-merge validation)
-2. If pass → git checkout main && git merge epic/vX.Y.Z
-3. Run HEALTH checks again (post-merge validation)
-4. If pass → git tag vX.Y.Z (if applicable)
-5. Delete branch: git branch -d epic/vX.Y.Z
-6. Update ROADMAP → move epic to CHANGELOG
-```
+When implemented, backstage-start will:
+1. Detect `- [x] **Approve to merge**`
+2. Run pre-merge validation
+3. Merge to main automatically
+4. Move epic ROADMAP → CHANGELOG
+5. Commit with proper format
+6. Tag release
+7. Delete branch
 
-**User control:**
-
-- **Check manually:** User ticks box → auto-merge on next backstage-start
-- **Accept offer:** backstage-start asks → user says yes → Kin ticks → auto-merge immediately
-- **Uncheck to pause:** If issues found, uncheck box → stops auto-merge
-
-**Why this works:**
-
-- **Explicit approval** (user decides when ready)
-- **No extra fields** (just another task checkbox)
-- **Auto-detected** (backstage-start knows when to merge)
-- **Automatic execution** (checking = permission to merge)
-- **Reversible** (uncheck if problems appear)
+**Status:** Auto-merge documented in POLICY but not yet implemented (needs BSD awk fix).
 - [ ] Main task 2
 
 **Success:**
