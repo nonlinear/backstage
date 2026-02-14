@@ -160,6 +160,132 @@ ensure_skill_diagrams() {
     echo -e "${YELLOW}⚠️  Diagram generation not yet implemented${NC}"
 }
 
+# Generate mermaid diagram from ROADMAP
+generate_roadmap_diagram() {
+    local roadmap="$1"
+    local script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+    
+    echo -e "${BLUE}📊 Generating roadmap diagram...${NC}" >&2
+    
+    if [[ ! -f "$roadmap" ]]; then
+        echo -e "${RED}❌ ROADMAP not found: $roadmap${NC}" >&2
+        return 1
+    fi
+    
+    # Parse ROADMAP via parse-roadmap.sh
+    local parsed
+    parsed=$("$script_dir/parse-roadmap.sh" "$roadmap" 2>/dev/null)
+    
+    if [[ -z "$parsed" ]]; then
+        echo -e "${YELLOW}⚠️  No epics found in ROADMAP${NC}" >&2
+        return 0
+    fi
+    
+    # Build mermaid graph
+    echo '```mermaid'
+    echo 'graph LR'
+    
+    local node_id="A"
+    local prev_node=""
+    
+    while IFS='|' read -r version status name; do
+        # Create node: A[🏗️ v0.1.0 Epic Name]
+        echo "    $node_id[$status $version $name]"
+        
+        # Link to previous node
+        if [[ -n "$prev_node" ]]; then
+            echo "    $prev_node --> $node_id"
+        fi
+        
+        prev_node="$node_id"
+        # Increment node_id (A → B → C ...)
+        node_id=$(echo "$node_id" | tr 'A-Z' 'B-ZA')
+    done <<< "$parsed"
+    
+    echo '```'
+}
+
+# Update mermaid diagram in backstage files
+update_backstage_diagrams() {
+    local roadmap="$1"
+    
+    echo -e "${BLUE}🎨 Updating backstage diagrams...${NC}"
+    
+    # Generate diagram
+    local diagram
+    diagram=$(generate_roadmap_diagram "$roadmap")
+    
+    if [[ -z "$diagram" ]]; then
+        echo -e "${YELLOW}⚠️  No diagram generated (empty ROADMAP?)${NC}"
+        return 0
+    fi
+    
+    # Files to update
+    local files=(
+        "README.md"
+        "backstage/ROADMAP.md"
+        "backstage/CHANGELOG.md"
+        "backstage/POLICY.md"
+        "backstage/HEALTH.md"
+    )
+    
+    for file in "${files[@]}"; do
+        if [[ ! -f "$file" ]]; then
+            continue
+        fi
+        
+        # Check if file has navigation block
+        if ! grep -q "> 🤖" "$file"; then
+            continue
+        fi
+        
+        echo -e "${BLUE}  Updating $file...${NC}"
+        
+        # Remove old mermaid block (after nav block)
+        # Find line after closing 🤖, remove mermaid block if present
+        awk '
+            BEGIN { after_nav=0; in_mermaid=0 }
+            /^> 🤖$/ {
+                if (after_nav == 1) after_nav = 2
+                else after_nav = 1
+                print
+                next
+            }
+            after_nav == 2 && /^```mermaid/ {
+                in_mermaid = 1
+                next
+            }
+            in_mermaid && /^```$/ {
+                in_mermaid = 0
+                after_nav = 0
+                next
+            }
+            in_mermaid { next }
+            { print }
+        ' "$file" > "$file.tmp" && mv "$file.tmp" "$file"
+        
+        # Insert new diagram after closing nav block
+        awk -v diagram="$diagram" '
+            BEGIN { inserted=0 }
+            /^> 🤖$/ {
+                if (inserted == 0) {
+                    print
+                    getline
+                    print
+                    print ""
+                    print diagram
+                    print ""
+                    inserted = 1
+                    next
+                }
+            }
+            { print }
+        ' "$file" > "$file.tmp" && mv "$file.tmp" "$file"
+    done
+    
+    echo -e "${GREEN}✅ Diagrams updated${NC}"
+}
+
 # Update ROADMAP checkboxes
 update_roadmap_tasks() {
     local roadmap="$1"
@@ -301,6 +427,7 @@ main() {
     IFS='|' read -r ROADMAP CHANGELOG HEALTH POLICY <<< "$paths"
     
     # Node 3.5: Update automation
+    update_backstage_diagrams "$ROADMAP"
     update_readme_tables
     ensure_skill_diagrams
     update_roadmap_tasks "$ROADMAP"
