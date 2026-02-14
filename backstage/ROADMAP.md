@@ -19,57 +19,6 @@ graph LR
 
 
 
-## v0.3.8
-
-### Type Enforcement & Version Sync
-
-**Description:** Auto-calculate and enforce Type field in epics (Major/Minor/Patch)
-
-**Problem:**
-- Epics don't show semantic version type explicitly
-- Version numbers can mismatch with intended type
-- Manual grooming needed to ensure version consistency
-
-**Solution:**
-Implement `add_epic_types()` in backstage-start.sh:
-
-1. **Auto-add Type field** after `### Epic Title`:
-   ```markdown
-   ## v1.2.3
-   ### Epic Title
-   **Type:** Minor  ← AUTO-CALCULATED
-   ```
-
-2. **Calculate type from version number:**
-   - Compare epic version vs last CHANGELOG version
-   - `vX.0.0` (MAJOR changed) → Type: Major
-   - `v0.Y.0` (MINOR changed) → Type: Minor
-   - `v0.0.Z` (PATCH changed) → Type: Patch
-
-3. **Parity check:**
-   - If Type exists but doesn't match version → adjust version to comply with Type
-   - Example: Type: Major but v0.1.0 → change to v1.0.0
-
-**Tasks:**
-- [ ] Implement add_epic_types() function in backstage-start.sh
-- [ ] Parse ROADMAP → extract all epics (## vX.Y.Z)
-- [ ] Read last CHANGELOG version
-- [ ] Calculate type (which number changed: X, Y, or Z)
-- [ ] Insert **Type:** field after ### Epic Title
-- [ ] Handle existing Type field (parity check)
-- [ ] Adjust version if Type/version mismatch
-- [ ] Update POLICY.md epic format (add Type field example)
-- [ ] Test on multiple epics (major/minor/patch scenarios)
-- [ ] Handle edge cases (v0.0.0, first epic, missing CHANGELOG)
-
-**Success:**
-- Every epic has **Type:** field auto-calculated
-- Version numbers match semantic meaning
-- No manual type annotation needed
-- Grooming enforces version consistency
-
----
-
 ## v0.3.5
 
 ### Protocol Stabilization
@@ -130,6 +79,58 @@ Implement `add_epic_types()` in backstage-start.sh:
 - Clear decision: manual > auto (when cost > benefit)
 
 ---
+
+## v0.3.8
+
+### Type Enforcement & Version Sync
+
+**Description:** Auto-calculate and enforce Type field in epics (Major/Minor/Patch)
+
+**Problem:**
+- Epics don't show semantic version type explicitly
+- Version numbers can mismatch with intended type
+- Manual grooming needed to ensure version consistency
+
+**Solution:**
+Implement `add_epic_types()` in backstage-start.sh:
+
+1. **Auto-add Type field** after `### Epic Title`:
+   ```markdown
+   ## v1.2.3
+   ### Epic Title
+   **Type:** Minor  ← AUTO-CALCULATED
+   ```
+
+2. **Calculate type from version number:**
+   - Compare epic version vs last CHANGELOG version
+   - `vX.0.0` (MAJOR changed) → Type: Major
+   - `v0.Y.0` (MINOR changed) → Type: Minor
+   - `v0.0.Z` (PATCH changed) → Type: Patch
+
+3. **Parity check:**
+   - If Type exists but doesn't match version → adjust version to comply with Type
+   - Example: Type: Major but v0.1.0 → change to v1.0.0
+
+**Tasks:**
+- [ ] Implement add_epic_types() function in backstage-start.sh
+- [ ] Parse ROADMAP → extract all epics (## vX.Y.Z)
+- [ ] Read last CHANGELOG version
+- [ ] Calculate type (which number changed: X, Y, or Z)
+- [ ] Insert **Type:** field after ### Epic Title
+- [ ] Handle existing Type field (parity check)
+- [ ] Adjust version if Type/version mismatch
+- [ ] Update POLICY.md epic format (add Type field example)
+- [ ] Test on multiple epics (major/minor/patch scenarios)
+- [ ] Handle edge cases (v0.0.0, first epic, missing CHANGELOG)
+
+**Success:**
+- Every epic has **Type:** field auto-calculated
+- Version numbers match semantic meaning
+- No manual type annotation needed
+- Grooming enforces version consistency
+
+---
+
 
 ## v0.7.0
 
