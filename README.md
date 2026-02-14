@@ -52,7 +52,7 @@ Backstage follows a **polycentric structure**—not hierarchical "levels" but **
 ```mermaid
 graph LR
     A[📋 v0.3.8 Type Enforcement & Version Sync]
-    B[📋 v0.7.0 \"Back to Main\" rites]
+    B[📋 v0.7.0 Back to Main rites]
     A --> B
     C[📋 v0.3.1 VISION Core Prompt]
     B --> C
@@ -75,6 +75,8 @@ graph LR
     L[📋 v0.6.0 Branch Lifecycle Management]
     K --> L
 ```
+
+
 
 
 
