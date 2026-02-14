@@ -645,6 +645,7 @@ git push origin --delete v0.3.0
 **Tasks:**
 - [ ] Task to complete (roadmap only)
 - [x] Completed task (roadmap only)
+- [ ] **Approve to merge** (auto-generated, check when ready)
 - Completed task (changelog only, in past tense)
 
 **Success:**
@@ -667,6 +668,54 @@ git push origin --delete v0.3.0
 
 **Tasks:**
 - [ ] Main task 1
+- [ ] Main task 2
+- [ ] **Approve to merge** (auto-generated, check when ready)
+
+**Success:**
+- Criteria 1
+- Criteria 2
+
+---
+```
+
+**Key rules:**
+
+- **Version header:** `## vX.Y.Z` (NOT `## vX.Y.Z - Epic Title`)
+- **Epic title:** `### Epic Title` (underneath version header)
+- **No status field:** Status inferred from ROADMAP vs CHANGELOG presence
+- **Description OR Problem+Solution:** Choose one pattern, be consistent
+- **Success criteria:** Measurable outcomes (not tasks)
+- **Auto-generated task:** `- [ ] **Approve to merge**` added by backstage-start if missing
+
+### Approve to Merge Workflow
+
+**Every epic MUST have final task:** `- [ ] **Approve to merge**`
+
+**How it works:**
+
+1. **backstage-start auto-adds** if missing from ROADMAP epic
+2. **User checks task** when epic is ready to merge: `- [x] **Approve to merge**`
+3. **Next backstage-start run** detects approval → triggers pre-merge validation
+4. **After validation passes** → prompts to merge to main
+
+**Example:**
+
+```markdown
+**Tasks:**
+- [x] Feature implemented
+- [x] Tests passing
+- [x] Documentation updated
+- [x] **Approve to merge** ← User checked this
+
+**Next backstage-start:** "✅ Epic approved for merge. Run pre-merge validation now?"
+```
+
+**Why this works:**
+
+- **Explicit approval** (user decides when ready)
+- **No extra fields** (just another task)
+- **Auto-detected** (backstage-start knows when to merge)
+- **Flexible** (can uncheck if issues found)
 - [ ] Main task 2
 
 **Success:**
