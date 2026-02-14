@@ -150,6 +150,42 @@
 - [ ] Archive unused prompts (move to _archived/)
 - [ ] Document remaining prompts in PROMPTS.md
 - [ ] Update README with prompt usage guide
+- [ ] **Approve to merge**
+
+**Success:**
+- Clean prompt inventory
+- Active prompts documented
+- Unused prompts archived
+
+---
+
+## v0.3.6
+
+### 🔄 Auto-Update Navigation Version
+
+**Problem:** Navigation blocks say "backstage protocol v0.3.4" but version is hardcoded
+
+**Current behavior:**
+- Version number is manual (users must update)
+- Drifts from CHANGELOG stable version
+
+**Proposed solution:**
+- backstage-start reads CHANGELOG → extracts last stable version
+- Updates navigation block automatically: `> We use **[backstage protocol](...)**, vX.Y.Z`
+
+**Tasks:**
+- [ ] Parse CHANGELOG.md → extract latest version (## vX.Y.Z)
+- [ ] Update navigation block regex (find "We use **[backstage")
+- [ ] Replace version automatically during backstage-start
+- [ ] Test with multiple projects (backstage, skills, life)
+- [ ] Add version detection to pre-commit validation
+- [ ] Document in POLICY.md (navigation version = auto-synced)
+- [ ] **Approve to merge**
+
+**Success:**
+- Navigation version auto-updates from CHANGELOG
+- No manual version edits needed
+- Version always matches stable release
 
 ---
 
