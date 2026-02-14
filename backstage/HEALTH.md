@@ -14,8 +14,32 @@
 
 ```mermaid
 graph LR
-    A[Placeholder]
+    A[📋 v0.3.8 Type Enforcement & Version Sync]
+    B[📋 v0.7.0 "Back to Main" rites]
+    A --> B
+    C[📋 v0.3.1 VISION Core Prompt]
+    B --> C
+    D[📋 v0.8.0 Backstage from zero]
+    C --> D
+    E[📋 v0.3.2 🌳 Parent Project Support]
+    D --> E
+    F[📋 v0.3.3 Auto-Generate Mermaid Diagrams]
+    E --> F
+    G[📋 v0.3.4 Diagram Redesign - Beyond Linear]
+    F --> G
+    H[📋 v0.3.6 Navigation Branding]
+    G --> H
+    I[📋 v0.4.1 Arch Protocol]
+    H --> I
+    J[📋 v0.4.0 Templates]
+    I --> J
+    K[📋 v0.5.0 Documentation]
+    J --> K
+    L[📋 v0.6.0 Branch Lifecycle Management]
+    K --> L
 ```
+
+
 
 
 
