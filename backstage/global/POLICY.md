@@ -192,7 +192,7 @@ In the future, navigation block format may change:
 > | POLICY: [project](path/to/POLICY.md), [global](path/to/global/POLICY.md) | How we go about it |
 > | HEALTH: [project](path/to/HEALTH.md), [global](path/to/global/HEALTH.md) | What we accept |
 > 
-> We use **[backstageeee protocol](https://github.com/nonlinear/backstage)**, v0.3.4
+> We use **[backstage protocol](https://github.com/nonlinear/backstage)**, v0.3.4
 > 🤖
 ```
 
@@ -317,12 +317,15 @@ v1.0.0 (major - breaking changes)
 ### Workflow
 
 **Major/Minor (Traditional):**
-1. **Create branch from main**
-2. **Work on epic in branch**
-3. **Rebase regularly from main**
-4. **Merge to main when complete**
-5. **Tag release**
-6. **Delete feature branch (recommended)**
+1. **Create branch from main** (`epic/vX.Y.Z`)
+2. **Work on epic in branch** (commits, tests, documentation)
+3. **Rebase regularly from main** (keep up to date)
+4. **Before merge: backstage-start** (pre-commit validation)
+5. **Merge to main** (when ready)
+6. **After merge: backstage-start** (post-merge validation, catch integration issues)
+7. **Tag release** (if applicable)
+8. **Publish** (if applicable: npm, skill registry, etc.)
+9. **Delete feature branch** (recommended)
 
 **Patch (Fast Track):**
 1. **Work directly on main** (or short-lived branch if nervous)
@@ -587,6 +590,45 @@ git push origin --delete v0.3.0
 
 ---
 
+## Semantic Versioning (Backstage Epics)
+
+**Version format:** MAJOR.MINOR.PATCH (based on [semver.org](https://semver.org))
+
+- **MAJOR (X.0.0):** Breaking changes, incompatible API, major restructuring
+- **MINOR (0.Y.0):** New features, backward compatible additions
+- **PATCH (0.0.Z):** Bug fixes, backward compatible corrections
+
+### Auto-Renumbering (backstage-start)
+
+**Policy enforces version continuity:**
+
+1. **Read last stable version** from CHANGELOG.md
+2. **Renumber ROADMAP epics** starting at +1 from CHANGELOG
+3. **Detect branch type** from epic content (major/minor/patch)
+4. **Rename branch** if type changed (e.g., `epic/v1.0.0` → `epic/major-v2.0.0`)
+
+**Branch naming convention:**
+
+- `epic/major-vX.0.0` → Breaking changes
+- `epic/minor-v0.Y.0` → New features
+- `epic/patch-v0.0.Z` → Bug fixes
+- `epic/vX.Y.Z` → Type unspecified (auto-detect)
+
+**Philosophy:**
+
+- **ROADMAP = promises** (can change, can reorder, can renumber)
+- **CHANGELOG = immutable** (versions frozen, no edits after merge)
+- **Branch names follow version type** (explicit intent)
+
+**When backstage-start runs:**
+
+- Compares ROADMAP versions vs CHANGELOG stable
+- Renumbers gaps (v0.1.0, v0.3.0 → v0.1.0, v0.2.0)
+- Warns if active branch version conflicts with ROADMAP
+- Suggests branch rename if type changed
+
+---
+
 ## Epic Format
 
 **AI Note:** Use this syntax when writing epics in ROADMAP or CHANGELOG
@@ -594,43 +636,139 @@ git push origin --delete v0.3.0
 **Syntax:**
 
 ```markdown
-### v0.X
+## vX.Y.Z
 
-#### [🚧](link-to-branch) Epic Title
+### Epic Title
 
-Epic description (what problem does this solve?)
+**Description:** One-line summary of what this epic accomplishes
 
+**Tasks:**
 - [ ] Task to complete (roadmap only)
 - [x] Completed task (roadmap only)
 - Completed task (changelog only, in past tense)
 
-❌ Anti-pattern (what NOT to do)
-✅ Best practice (with link if applicable)
-🗒️ Note
+**Success:**
+- Measurable outcome 1
+- Measurable outcome 2
 
 ---
 ```
 
-**Status indicators:**
-
-- `🚧` with link = active branch exists (in-progress epic)
-- `⏳` no link = planned, no branch yet
-- `✅` completed (changelog only)
-
-**Examples:**
+**Alternative format (with Problem/Solution):**
 
 ```markdown
-> **v0.3**
-> [🚧](https://github.com/user/repo/tree/v0.3.0) **Feature Name**
+## vX.Y.Z
 
-Description of what this epic accomplishes
+### Epic Title
 
-- [x] Completed task
-- [ ] Pending task
+**Problem:** What problem does this solve?
 
-✅ Use best practice approach
-❌ Don't use anti-pattern
+**Solution:** How we're solving it (executive summary)
+
+**Tasks:**
+- [ ] Main task 1
+- [ ] Main task 2
+
+**Success:**
+- Criteria 1
+- Criteria 2
+
+---
 ```
+
+**Key rules:**
+
+- **Version header:** `## vX.Y.Z` (NOT `## vX.Y.Z - Epic Title`)
+- **Epic title:** `### Epic Title` (underneath version header)
+- **No status field:** Status inferred from ROADMAP vs CHANGELOG presence
+- **Description OR Problem+Solution:** Choose one pattern, be consistent
+- **Success criteria:** Measurable outcomes (not tasks)
+
+### Approve to Merge Workflow (Manual)
+
+
+**Manual merge protocol (when auto-merge not implemented):**
+
+2. **Run pre-merge validation:** `backstage-start` (HEALTH checks)
+3. **Merge to main:**
+   ```bash
+   git checkout main
+   git merge --no-ff epic/vX.Y.Z -m "Merge epic/vX.Y.Z: Epic Title"
+   ```
+4. **Move epic from ROADMAP to CHANGELOG:**
+   - Cut epic section from ROADMAP (## vX.Y.Z + content)
+   - Paste at TOP of CHANGELOG (after navigation block, before last stable version)
+   - Convert tasks: `- [x] Task` → `- Task` (remove checkboxes, past tense)
+   - Remove "Approve to merge" task (not relevant in CHANGELOG)
+   - Add date: `## vX.Y.Z - YYYY-MM-DD`
+5. **Commit ROADMAP + CHANGELOG:**
+   ```bash
+   git add backstage/ROADMAP.md backstage/CHANGELOG.md
+   git commit -m "Release vX.Y.Z: Epic Title
+
+   - Task 1 completed
+   - Task 2 completed
+   - Task 3 completed"
+   ```
+6. **Run post-merge validation:** `backstage-start` (integration checks)
+7. **Tag release:**
+   ```bash
+   git tag -a vX.Y.Z -m "Release vX.Y.Z: Epic Title"
+   ```
+8. **Delete branch:**
+   ```bash
+   git branch -d epic/vX.Y.Z
+   ```
+
+**Commit message format:**
+- **Subject:** `Release vX.Y.Z: Epic Title`
+- **Body:** Bullet list of completed tasks (past tense, no checkboxes)
+
+**CHANGELOG entry format:**
+```markdown
+## vX.Y.Z - YYYY-MM-DD
+
+### Epic Title
+
+**Description:** What was accomplished
+
+- Task 1 completed
+- Task 2 completed
+
+**Success:**
+- Outcome 1 achieved
+- Outcome 2 achieved
+
+---
+```
+
+**Auto-merge (future):**
+
+When implemented, backstage-start will:
+2. Run pre-merge validation
+3. Merge to main automatically
+4. Move epic ROADMAP → CHANGELOG
+5. Commit with proper format
+6. Tag release
+7. Delete branch
+
+**Status:** Auto-merge documented in POLICY but not yet implemented (needs BSD awk fix).
+- [ ] Main task 2
+
+**Success:**
+- Criteria 1
+- Criteria 2
+
+---
+```
+
+**Key rules:**
+
+- **Version header:** `## vX.Y.Z` (NOT `## vX.Y.Z - Epic Title`)
+- **Epic title:** `### Epic Title` (underneath version header)
+- **No status field:** Status inferred from ROADMAP vs CHANGELOG presence
+- **Description OR Problem+Solution:** Choose one pattern, be consistent
+- **Success criteria:** Measurable outcomes (not tasks)
 
 ---
 
