@@ -21,6 +21,67 @@ graph LR
 
 ---
 
+## v0.3.5 - 2026-02-14
+
+### Protocol Stabilization
+
+**Description:** Major protocol evolution day - semantic versioning, manual merge protocol, automation improvements
+
+**Context:**
+- 30 commits in one day implementing core backstage features
+- Skills v0.1.0 needed merge → discovered manual better than auto
+- Diagram generation + navigation blocks automation
+- Epic format standardization
+
+**Accomplished (retrospective):**
+
+**Semantic Versioning + Epic Format:**
+- Add semantic versioning rules to global POLICY (MAJOR.MINOR.PATCH)
+- Standardize epic format (## vX.Y.Z + ### Epic Title, separate)
+- Add "Approve to merge" task to epic workflow
+- Add post-merge validation step to epic protocol
+
+**Manual Merge Protocol:**
+- Document manual merge protocol (ROADMAP→CHANGELOG format)
+- Create commit message format (Release vX.Y.Z: Title + bullets)
+- Define CHANGELOG entry format (date, past tense tasks, no checkboxes)
+- Test protocol with skills v0.1.0 (successful merge)
+
+**Auto-Merge Attempt (implemented → removed):**
+- Implement auto-merge workflow detection
+- Add auto-add "Approve to merge" logic
+- Debug BSD awk compatibility issues (7 commits)
+- Decide manual > auto (simpler, more control)
+- Remove all auto-merge code (160 lines deleted)
+
+**Mermaid Diagram Auto-Generation:**
+- Implement ROADMAP parser → mermaid syntax
+- Auto-insert diagrams after 🤖 navigation block
+- Fix BSD awk temp file pattern (diagram insertion)
+- Update all backstage files with diagrams
+
+**Navigation Blocks:**
+- Implement ensure_navigation_blocks() in backstage-start.sh
+- Auto-create 🤖 blocks in README/ROADMAP/CHANGELOG/POLICY/HEALTH
+- Fix BSD sed compatibility (awk + cat method)
+
+**New Epics Created:**
+- v0.3.1 - VISION Core Prompt
+- v0.3.2 - Parent Project Support
+- v0.3.3 - Auto-generate Mermaid Diagrams
+- v0.3.4 - Diagram Redesign
+- v0.3.6 - Auto-Update Navigation Version
+- v0.6.0 - Branch Lifecycle Management
+- v0.7.0 - Back to Main Rituals
+
+**Success:**
+- Manual merge protocol proven (skills v0.1.0 released)
+- Backstage-start.sh robust (navigation blocks, diagrams, BSD awk compatible)
+- Epic format standardized across all projects
+- Clear decision: manual > auto (when cost > benefit)
+
+---
+
 ## v0.3.4 - 2026-02-13
 
 ### 🔧 Patch: Mermaid Diagram Generation Rules

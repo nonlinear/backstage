@@ -19,66 +19,6 @@ graph LR
 
 
 
-## v0.3.5
-
-### Protocol Stabilization
-
-**Description:** Major protocol evolution day - semantic versioning, manual merge protocol, automation improvements
-
-**Context:**
-- 30 commits in one day implementing core backstage features
-- Skills v0.1.0 needed merge → discovered manual better than auto
-- Diagram generation + navigation blocks automation
-- Epic format standardization
-
-**Accomplished (retrospective):**
-
-**Semantic Versioning + Epic Format:**
-- [x] Add semantic versioning rules to global POLICY (MAJOR.MINOR.PATCH)
-- [x] Standardize epic format (## vX.Y.Z + ### Epic Title, separate)
-- [x] Add "Approve to merge" task to epic workflow
-- [x] Add post-merge validation step to epic protocol
-
-**Manual Merge Protocol:**
-- [x] Document manual merge protocol (ROADMAP→CHANGELOG format)
-- [x] Create commit message format (Release vX.Y.Z: Title + bullets)
-- [x] Define CHANGELOG entry format (date, past tense tasks, no checkboxes)
-- [x] Test protocol with skills v0.1.0 (successful merge)
-
-**Auto-Merge Attempt (implemented → removed):**
-- [x] Implement auto-merge workflow detection
-- [x] Add auto-add "Approve to merge" logic
-- [x] Debug BSD awk compatibility issues (7 commits)
-- [x] Decide manual > auto (simpler, more control)
-- [x] Remove all auto-merge code (160 lines deleted)
-
-**Mermaid Diagram Auto-Generation:**
-- [x] Implement ROADMAP parser → mermaid syntax
-- [x] Auto-insert diagrams after 🤖 navigation block
-- [x] Fix BSD awk temp file pattern (diagram insertion)
-- [x] Update all backstage files with diagrams
-
-**Navigation Blocks:**
-- [x] Implement ensure_navigation_blocks() in backstage-start.sh
-- [x] Auto-create 🤖 blocks in README/ROADMAP/CHANGELOG/POLICY/HEALTH
-- [x] Fix BSD sed compatibility (awk + cat method)
-
-**New Epics Created:**
-- [x] v0.3.1 - VISION Core Prompt
-- [x] v0.3.2 - Parent Project Support
-- [x] v0.3.3 - Auto-generate Mermaid Diagrams
-- [x] v0.3.4 - Diagram Redesign
-- [x] v0.3.6 - Auto-Update Navigation Version
-- [x] v0.6.0 - Branch Lifecycle Management
-- [x] v0.7.0 - Back to Main Rituals
-
-**Success:**
-- Manual merge protocol proven (skills v0.1.0 released)
-- Backstage-start.sh robust (navigation blocks, diagrams, BSD awk compatible)
-- Epic format standardized across all projects
-- Clear decision: manual > auto (when cost > benefit)
-
----
 
 ## v0.3.8
 
