@@ -211,12 +211,13 @@ update_backstage_diagrams() {
     
     echo -e "${BLUE}🎨 Updating backstage diagrams...${NC}"
     
-    # Generate diagram
-    local diagram
-    diagram=$(generate_roadmap_diagram "$roadmap")
+    # Generate diagram to temp file
+    local diagram_file="/tmp/roadmap_diagram_$$.md"
+    generate_roadmap_diagram "$roadmap" > "$diagram_file"
     
-    if [[ -z "$diagram" ]]; then
+    if [[ ! -s "$diagram_file" ]]; then
         echo -e "${YELLOW}⚠️  No diagram generated (empty ROADMAP?)${NC}"
+        rm -f "$diagram_file"
         return 0
     fi
     
@@ -241,8 +242,7 @@ update_backstage_diagrams() {
         
         echo -e "${BLUE}  Updating $file...${NC}"
         
-        # Remove old mermaid block (after nav block)
-        # Find line after closing 🤖, remove mermaid block if present
+        # Remove old mermaid block (between nav blocks, if exists)
         awk '
             BEGIN { after_nav=0; in_mermaid=0 }
             /^> 🤖$/ {
@@ -265,7 +265,7 @@ update_backstage_diagrams() {
         ' "$file" > "$file.tmp" && mv "$file.tmp" "$file"
         
         # Insert new diagram after closing nav block
-        awk -v diagram="$diagram" '
+        awk -v diagram_file="$diagram_file" '
             BEGIN { inserted=0 }
             /^> 🤖$/ {
                 if (inserted == 0) {
@@ -273,7 +273,10 @@ update_backstage_diagrams() {
                     getline
                     print
                     print ""
-                    print diagram
+                    while ((getline line < diagram_file) > 0) {
+                        print line
+                    }
+                    close(diagram_file)
                     print ""
                     inserted = 1
                     next
@@ -283,6 +286,7 @@ update_backstage_diagrams() {
         ' "$file" > "$file.tmp" && mv "$file.tmp" "$file"
     done
     
+    rm -f "$diagram_file"
     echo -e "${GREEN}✅ Diagrams updated${NC}"
 }
 
