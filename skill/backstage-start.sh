@@ -302,147 +302,11 @@ update_roadmap_tasks() {
     local roadmap="$1"
     echo -e "${BLUE}✅ Updating ROADMAP tasks...${NC}"
     
-    # TODO: Fix BSD awk compatibility for auto-add "Approve to merge"
-    # Currently disabled due to loop crash
-    echo -e "${YELLOW}⚠️  Auto-add 'Approve to merge' disabled (needs fix)${NC}"
-}
-
-# Check if "Approve to merge" is checked on current branch
-check_approve_to_merge() {
-    local roadmap="$1"
-    local current_branch="$2"
-    
-    # Extract version from branch name (epic/vX.Y.Z or epic/TYPE-vX.Y.Z)
-    local branch_version
-    branch_version=$(echo "$current_branch" | grep -oE 'v[0-9]+\.[0-9]+\.[0-9]+' || echo "")
-    
-    if [[ -z "$branch_version" ]]; then
-        return 1  # Not on epic branch
-    fi
-    
-    # Check if epic exists in ROADMAP
-    if ! grep -q "^## $branch_version$" "$roadmap"; then
-        return 1  # Epic not in ROADMAP
-    fi
-    
-    # Extract epic section (escape dots in version, use file to avoid BSD awk newline bug)
-    local epic_section
-    local version_pattern
-    version_pattern=$(printf "%s" "$branch_version" | sed 's/\./\\./g')
-    
-    # Write pattern to temp file and use awk with file read
-    local temp_pattern="/tmp/epic_pattern_$$.txt"
-    printf "/^## %s$/,/^---$/" "$version_pattern" > "$temp_pattern"
-    epic_section=$(awk "$(cat "$temp_pattern")" "$roadmap")
-    rm -f "$temp_pattern"
-    
-    # Check if all tasks except "Approve to merge" are done
-    local total_tasks
-    local done_tasks
-    local approve_checked
-    
-    total_tasks=$(echo "$epic_section" | grep -c "^- \[" || echo "0")
-    done_tasks=$(echo "$epic_section" | grep -c "^- \[x\]" || echo "0")
-    approve_checked=$(echo "$epic_section" | grep -c "^- \[x\] \*\*Approve to merge\*\*" || echo "0")
-    
-    # If "Approve to merge" is checked → APPROVED
-    if [[ "$approve_checked" -eq 1 ]]; then
-        echo "APPROVED"
-        return 0
-    fi
-    
-    # If only "Approve to merge" is unchecked (all others done)
-    if [[ "$total_tasks" -gt 0 ]] && [[ $((done_tasks + 1)) -eq "$total_tasks" ]]; then
-        # Check if the one unchecked task IS "Approve to merge"
-        if echo "$epic_section" | grep -q "^- \[ \] \*\*Approve to merge\*\*"; then
-            echo "OFFER"
-            return 0
-        fi
-    fi
-    
-    echo "NOT_READY"  # Still has unchecked tasks
-    return 1
-}
-
-# Auto-merge to main
-auto_merge_to_main() {
-    local roadmap="$1"
-    local current_branch="$2"
-    
-    echo -e "\n${GREEN}🚀 Auto-merge approved! Running merge sequence...${NC}"
-    
-    # Extract version
-    local version
-    version=$(echo "$current_branch" | grep -oE 'v[0-9]+\.[0-9]+\.[0-9]+')
-    
-    # Pre-merge validation
-    echo -e "${BLUE}1️⃣ Pre-merge validation (HEALTH checks)...${NC}"
-    if [[ -f "backstage/HEALTH.md" ]]; then
-        run_health_checks "backstage/HEALTH.md"
-    fi
-    
-    # Merge to main
-    echo -e "${BLUE}2️⃣ Merging to main...${NC}"
-    git checkout main
-    git merge --no-ff "$current_branch" -m "Merge $current_branch: $(grep -A 1 "^## $version$" "$roadmap" | tail -1 | sed 's/^### //')"
-    
-    # Post-merge validation
-    echo -e "${BLUE}3️⃣ Post-merge validation (integration checks)...${NC}"
-    if [[ -f "backstage/HEALTH.md" ]]; then
-        run_health_checks "backstage/HEALTH.md"
-    fi
-    
-    # Tag release (optional, based on CHANGELOG)
-    if grep -q "^## $version" "backstage/CHANGELOG.md" 2>/dev/null; then
-        echo -e "${BLUE}4️⃣ Tagging release $version...${NC}"
-        git tag -a "$version" -m "Release $version"
-    fi
-    
-    # Delete branch (ask first)
-    echo -e "${YELLOW}5️⃣ Delete branch $current_branch? [Y/n]${NC}"
-    read -r response
-    if [[ "$response" =~ ^[Yy]?$ ]]; then
-        git branch -d "$current_branch"
-        echo -e "${GREEN}✅ Branch deleted${NC}"
-    fi
-    
-    echo -e "\n${GREEN}✅ Auto-merge complete! Now on main branch.${NC}"
+    # Manual merge only - see POLICY.md for merge protocol
+    echo -e "${YELLOW}ℹ️  Manual merge workflow (ROADMAP → CHANGELOG)${NC}"
 }
 
 # Node 4️⃣: Check git branch
-check_branch() {
-    echo -e "${BLUE}🌿 Checking git branch...${NC}"
-    
-    if ! git rev-parse --git-dir > /dev/null 2>&1; then
-        echo -e "${RED}❌ Not a git repository${NC}"
-        exit 1
-    fi
-    
-    local branch
-    branch=$(git branch --show-current)
-    echo -e "${GREEN}Branch: $branch${NC}"
-    echo "$branch"
-}
-
-# Node 5️⃣: Analyze changes
-analyze_changes() {
-    local changelog="$1"
-    
-    echo -e "${BLUE}🔍 Analyzing changes...${NC}"
-    
-    # Get last version from CHANGELOG
-    local last_version
-    last_version=$(grep -m1 "^## v" "$changelog" | sed 's/^## v//' | cut -d':' -f1 | tr -d ' ' || echo "HEAD~10")
-    
-    echo -e "${YELLOW}Since version: $last_version${NC}"
-    
-    # Show git diff stats
-    git diff --stat "${last_version}..HEAD" 2>/dev/null || git diff --stat -5
-    
-    # Show commits
-    echo -e "\n${BLUE}Recent commits:${NC}"
-    git log --oneline "${last_version}..HEAD" 2>/dev/null || git log --oneline -5
-}
 
 # Node 6️⃣: Run HEALTH checks
 run_health_checks() {
@@ -547,28 +411,6 @@ main() {
     
     # Node 4️⃣: Check git branch
     branch=$(check_branch)
-    
-    # Check if "Approve to merge" workflow applies
-    approve_status=$(check_approve_to_merge "$ROADMAP" "$branch")
-    
-    if [[ "$approve_status" == "OFFER" ]]; then
-        echo -e "\n${YELLOW}📋 All tasks complete except 'Approve to merge'${NC}"
-        echo -e "${YELLOW}Ready to merge to main? [Y/n]${NC}"
-        read -r response
-        if [[ "$response" =~ ^[Yy]?$ ]]; then
-            # Check the box
-            sed -i.bak 's/^- \[ \] \*\*Approve to merge\*\*/- [x] **Approve to merge**/' "$ROADMAP"
-            rm -f "${ROADMAP}.bak"
-            git add "$ROADMAP"
-            git commit -m "✅ Approve to merge (auto-checked)"
-            approve_status="APPROVED"
-        fi
-    fi
-    
-    if [[ "$approve_status" == "APPROVED" ]]; then
-        auto_merge_to_main "$ROADMAP" "$branch"
-        exit 0
-    fi
     
     # Node 5️⃣: Analyze changes
     analyze_changes "$CHANGELOG"
