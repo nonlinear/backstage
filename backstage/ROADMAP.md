@@ -88,6 +88,41 @@ Implement `add_epic_types()` in backstage-start.sh:
 
 ---
 
+## v0.3.9
+
+### Diagram Generation Bootstrap
+
+**Type:** Patch
+
+**Description:** Initial diagram generation implementation (completing v0.3.3)
+
+**Problem:**
+- v0.3.3 implemented diagram auto-update logic but parser was broken
+- parse-roadmap.sh expected old epic format (### v0.3.5 - Name)
+- ROADMAP uses new format (## vX.Y.Z + ### Name separated)
+- Diagrams showed "No epics found" error
+
+**Solution:**
+- Fixed parse-roadmap.sh to support new epic format
+- Sanitized epic names (removed quotes for mermaid compatibility)
+- Limited diagram to 4 nodes (readability)
+- Generated initial diagrams in all backstage files
+
+**Accomplished:**
+- Fixed parse-roadmap.sh regex (## vX.Y.Z pattern)
+- Removed quotes from epic names in mermaid output
+- Added max_nodes limit (4) to diagram generation
+- Regenerated diagrams in README, ROADMAP, CHANGELOG, POLICY, HEALTH
+
+**Success:**
+- Diagrams auto-generate on backstage-start
+- All backstage files have current roadmap snapshot
+- Mermaid syntax valid (no quote errors)
+- Compact view (4 nodes max)
+
+---
+
+
 ## v0.7.0
 
 ### "Back to Main" rites
