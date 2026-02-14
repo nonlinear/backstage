@@ -61,7 +61,6 @@ Implement `add_epic_types()` in backstage-start.sh:
 - [ ] Update POLICY.md epic format (add Type field example)
 - [ ] Test on multiple epics (major/minor/patch scenarios)
 - [ ] Handle edge cases (v0.0.0, first epic, missing CHANGELOG)
-- [ ] **Approve to merge**
 
 **Success:**
 - Every epic has **Type:** field auto-calculated
@@ -124,13 +123,6 @@ Implement `add_epic_types()` in backstage-start.sh:
 - [x] v0.6.0 - Branch Lifecycle Management
 - [x] v0.7.0 - Back to Main Rituals
 
-**Finalization:**
-- [ ] Republish backstage skill on ClawHub (manual, not automated yet)
-  - **Command:** `clawhub publish /path/to/backstage/skill --version X.Y.Z --changelog "text"`
-  - **Order:** merge → tag → publish (ClawHub points to stable tag, not branch)
-  - **Future:** Automate in v0.7.0 or later (add to merge protocol)
-- [ ] **Approve to merge**
-
 **Success:**
 - Manual merge protocol proven (skills v0.1.0 released)
 - Backstage-start.sh robust (navigation blocks, diagrams, BSD awk compatible)
@@ -171,7 +163,6 @@ Implement `add_epic_types()` in backstage-start.sh:
 - [ ] Update life/backstage diagram (remove agenda/exercise nodes)
 - [ ] Test backstage-start in agenda/ project
 - [ ] Test backstage-start in exercise/ project
-- [ ] **Approve to merge**
 
 **Success:**
 - Agenda and exercise are independent projects
@@ -276,7 +267,6 @@ Implement `add_epic_types()` in backstage-start.sh:
 - [x] Document diagram format rules in POLICY.md
 - [x] Support project-specific diagram overrides
 - [x] Handle empty ROADMAPs gracefully
-- [ ] **Approve to merge**
 
 **Success:**
 - Diagrams auto-update on every backstage-start
@@ -350,7 +340,6 @@ Implement `add_epic_types()` in backstage-start.sh:
 - [ ] Support project-specific logos/icons
 - [ ] Auto-update version badge from CHANGELOG
 - [ ] Document badge format in POLICY.md
-- [ ] **Approve to merge**
 
 **Success:**
 - Navigation blocks have visual badges
@@ -444,7 +433,6 @@ Implement `add_epic_types()` in backstage-start.sh:
 - [ ] Add workflow diagrams (mermaid)
 - [ ] Document epic dance
 - [ ] Add examples from real projects
-- [ ] **Approve to merge**
 
 **Success:**
 - Clear onboarding guide
@@ -506,7 +494,6 @@ Implement `add_epic_types()` in backstage-start.sh:
 - [ ] Add multi-user PR workflow (opt-in via project POLICY)
 - [ ] Document when to keep vs delete branches
 - [ ] Add archive tagging convention (`archive/epic-vX.Y.Z`)
-- [ ] **Approve to merge**
 
 **Success:**
 - Clear branch lifecycle rules
@@ -514,15 +501,3 @@ Implement `add_epic_types()` in backstage-start.sh:
 - Multi-user PR support (opt-in)
 - No branch pollution after 10+ epics
 
----
-
-    end
-
-    V03 --> V031
-    V031 --> V04
-    V04 --> V041
-    V041 --> V05
-    
-    style V03 fill:#4CAF50
-    style V031 fill:#FFC107
-```

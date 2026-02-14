@@ -645,7 +645,6 @@ git push origin --delete v0.3.0
 **Tasks:**
 - [ ] Task to complete (roadmap only)
 - [x] Completed task (roadmap only)
-- [ ] **Approve to merge** (auto-generated, check when ready)
 - Completed task (changelog only, in past tense)
 
 **Success:**
@@ -669,7 +668,6 @@ git push origin --delete v0.3.0
 **Tasks:**
 - [ ] Main task 1
 - [ ] Main task 2
-- [ ] **Approve to merge** (auto-generated, check when ready)
 
 **Success:**
 - Criteria 1
@@ -685,15 +683,12 @@ git push origin --delete v0.3.0
 - **No status field:** Status inferred from ROADMAP vs CHANGELOG presence
 - **Description OR Problem+Solution:** Choose one pattern, be consistent
 - **Success criteria:** Measurable outcomes (not tasks)
-- **Auto-generated task:** `- [ ] **Approve to merge**` added by backstage-start if missing
 
 ### Approve to Merge Workflow (Manual)
 
-**Every epic MUST have final task:** `- [ ] **Approve to merge**`
 
 **Manual merge protocol (when auto-merge not implemented):**
 
-1. **Check all tasks done** (including `- [x] **Approve to merge**`)
 2. **Run pre-merge validation:** `backstage-start` (HEALTH checks)
 3. **Merge to main:**
    ```bash
@@ -750,7 +745,6 @@ git push origin --delete v0.3.0
 **Auto-merge (future):**
 
 When implemented, backstage-start will:
-1. Detect `- [x] **Approve to merge**`
 2. Run pre-merge validation
 3. Merge to main automatically
 4. Move epic ROADMAP → CHANGELOG
