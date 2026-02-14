@@ -12,6 +12,12 @@
 > We use **[backstage protocol](https://github.com/nonlinear/backstage)**, v0.3.4
 > 🤖
 
+```mermaid
+graph LR
+    A[Placeholder]
+```
+
+
 
 
 ---
