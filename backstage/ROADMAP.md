@@ -1,5 +1,18 @@
 # Backstage - Roadmap
 
+> 🤖
+> | Backstage files | Description |
+> | ---------------------------------------------------------------------------- | ------------------ |
+> | [README](../README.md) | Our project |
+> | [CHANGELOG](CHANGELOG.md) | What we did |
+> | [ROADMAP](ROADMAP.md) | What we wanna do |
+> | POLICY: [project](POLICY.md), [global](global/POLICY.md) | How we go about it |
+> | HEALTH: [project](HEALTH.md), [global](global/HEALTH.md) | What we accept |
+>
+> We use **[backstage protocol](https://github.com/nonlinear/backstage)**, v0.3.4
+> 🤖
+
+
 ## v0.3.5
 
 ### Protocol Stabilization (2026-02-14)
@@ -504,16 +517,6 @@
 
 ---
 
-> 🤖
-> | Backstage files | Description |
-> | ---------------------------------------------------------------------------- | ------------------ |
-> | [README](../README.md) | Our project |
-> | [CHANGELOG](CHANGELOG.md) | What we did |
-> | [ROADMAP](ROADMAP.md) | What we wanna do |
-> | POLICY: [project](POLICY.md), [global](global/POLICY.md) | How we go about it |
-> | HEALTH: [project](HEALTH.md), [global](global/HEALTH.md) | What we accept |
-> | We use **[backstage rules](https://github.com/nonlinear/backstage)**, v0.3.0 |
-> 🤖
 
 ```mermaid
 %%{init: {'theme':'base', 'themeVariables': { 'fontSize':'14px'}}}%%
