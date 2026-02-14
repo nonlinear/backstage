@@ -36,6 +36,28 @@ graph LR
 
 
 
+
+## v0.4.0
+
+### Skill Security Fixes
+
+**Problem:** ClawHub security scan flagged skill as "Suspicious" (high confidence) - 3 major issues: undeclared $HOME access, arbitrary code execution via eval, file modification without explicit warnings.
+
+**Goal:** Pass ClawHub security scan OR justify current design with explicit documentation/warnings.
+
+**Tasks:**
+- [ ] Discuss: Is eval execution core to backstage or removable?
+- [ ] Decide: Configurable $HOME paths vs hardcoded (env var?)
+- [ ] Document: Add explicit warnings about HEALTH.md code execution
+- [ ] Metadata: Declare required paths/permissions in skill manifest
+- [ ] Consider: Sandbox eval (restricted bash, whitelist commands?)
+- [ ] Alternative: Remove eval entirely, use separate test scripts?
+- [ ] Hybrid approach: Keep eval for project HEALTH, remove for global?
+- [ ] Re-publish skill after fixes, verify scan result
+
+**Details:** [epic-notes/v0.4.0-skill-security-fixes.md](epic-notes/v0.4.0-skill-security-fixes.md)
+
+---
 ## v0.3.8
 
 ### Type Enforcement & Version Sync
