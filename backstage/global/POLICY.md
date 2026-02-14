@@ -587,6 +587,45 @@ git push origin --delete v0.3.0
 
 ---
 
+## Semantic Versioning (Backstage Epics)
+
+**Version format:** MAJOR.MINOR.PATCH (based on [semver.org](https://semver.org))
+
+- **MAJOR (X.0.0):** Breaking changes, incompatible API, major restructuring
+- **MINOR (0.Y.0):** New features, backward compatible additions
+- **PATCH (0.0.Z):** Bug fixes, backward compatible corrections
+
+### Auto-Renumbering (backstage-start)
+
+**Policy enforces version continuity:**
+
+1. **Read last stable version** from CHANGELOG.md
+2. **Renumber ROADMAP epics** starting at +1 from CHANGELOG
+3. **Detect branch type** from epic content (major/minor/patch)
+4. **Rename branch** if type changed (e.g., `epic/v1.0.0` → `epic/major-v2.0.0`)
+
+**Branch naming convention:**
+
+- `epic/major-vX.0.0` → Breaking changes
+- `epic/minor-v0.Y.0` → New features
+- `epic/patch-v0.0.Z` → Bug fixes
+- `epic/vX.Y.Z` → Type unspecified (auto-detect)
+
+**Philosophy:**
+
+- **ROADMAP = promises** (can change, can reorder, can renumber)
+- **CHANGELOG = immutable** (versions frozen, no edits after merge)
+- **Branch names follow version type** (explicit intent)
+
+**When backstage-start runs:**
+
+- Compares ROADMAP versions vs CHANGELOG stable
+- Renumbers gaps (v0.1.0, v0.3.0 → v0.1.0, v0.2.0)
+- Warns if active branch version conflicts with ROADMAP
+- Suggests branch rename if type changed
+
+---
+
 ## Epic Format
 
 **AI Note:** Use this syntax when writing epics in ROADMAP or CHANGELOG
@@ -594,43 +633,53 @@ git push origin --delete v0.3.0
 **Syntax:**
 
 ```markdown
-### v0.X
+## vX.Y.Z
 
-#### [🚧](link-to-branch) Epic Title
+### Epic Title
 
-Epic description (what problem does this solve?)
+**Description:** One-line summary of what this epic accomplishes
 
+**Tasks:**
 - [ ] Task to complete (roadmap only)
 - [x] Completed task (roadmap only)
 - Completed task (changelog only, in past tense)
 
-❌ Anti-pattern (what NOT to do)
-✅ Best practice (with link if applicable)
-🗒️ Note
+**Success:**
+- Measurable outcome 1
+- Measurable outcome 2
 
 ---
 ```
 
-**Status indicators:**
-
-- `🚧` with link = active branch exists (in-progress epic)
-- `⏳` no link = planned, no branch yet
-- `✅` completed (changelog only)
-
-**Examples:**
+**Alternative format (with Problem/Solution):**
 
 ```markdown
-> **v0.3**
-> [🚧](https://github.com/user/repo/tree/v0.3.0) **Feature Name**
+## vX.Y.Z
 
-Description of what this epic accomplishes
+### Epic Title
 
-- [x] Completed task
-- [ ] Pending task
+**Problem:** What problem does this solve?
 
-✅ Use best practice approach
-❌ Don't use anti-pattern
+**Solution:** How we're solving it (executive summary)
+
+**Tasks:**
+- [ ] Main task 1
+- [ ] Main task 2
+
+**Success:**
+- Criteria 1
+- Criteria 2
+
+---
 ```
+
+**Key rules:**
+
+- **Version header:** `## vX.Y.Z` (NOT `## vX.Y.Z - Epic Title`)
+- **Epic title:** `### Epic Title` (underneath version header)
+- **No status field:** Status inferred from ROADMAP vs CHANGELOG presence
+- **Description OR Problem+Solution:** Choose one pattern, be consistent
+- **Success criteria:** Measurable outcomes (not tasks)
 
 ---
 
