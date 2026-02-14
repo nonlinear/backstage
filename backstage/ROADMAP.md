@@ -140,6 +140,7 @@ Implement `add_epic_types()` in backstage-start.sh:
 
 **Tasks:**
 
+- [ ] Fix backstage-start.sh: `check_branch: command not found` (deleted during auto-merge removal)
 - [ ] Merge to main auto task on all epics
 - [ ] fortify ritual
 - [ ] teat, merge, test
