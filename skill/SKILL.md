@@ -2,10 +2,15 @@
 name: backstage
 description: "Manage backstage workflow in projects (ROADMAP, POLICY, HEALTH, CHANGELOG). Triggers: 'backstage start', 'vamos trabalhar no X', 'backstage health'. Installs protocol if missing, updates global rules, runs health checks, shows active epics. Use for: epic planning, project setup, quality enforcement, context switching."
 type: public
-version: 1.0.0
-status: draft
+version: 0.3.5
+status: production
 author: nonlinear
 license: MIT
+dependencies:
+  - bash
+  - awk
+  - sed
+  - git
 ---
 
 # Backstage Skill
