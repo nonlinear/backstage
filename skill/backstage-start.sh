@@ -11,6 +11,111 @@ YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
+# Ensure navigation blocks in all backstage files
+ensure_navigation_blocks() {
+    echo -e "${BLUE}🤖 Ensuring navigation blocks...${NC}" >&2
+    
+    # README.md navigation block
+    if [[ -f README.md ]] && ! grep -q "> 🤖" README.md; then
+        echo -e "${YELLOW}⚠️  Creating navigation block in README.md${NC}" >&2
+        cat > /tmp/nav_readme.md << 'EOF'
+
+> 🤖
+>
+> - [README](README.md)
+> - [ROADMAP](backstage/ROADMAP.md)
+> - [CHANGELOG](backstage/CHANGELOG.md)
+> - [POLICY](backstage/POLICY.md)
+> - [HEALTH](backstage/HEALTH.md)
+>
+> 🤖
+
+EOF
+        if grep -q "^#" README.md; then
+            sed -i.bak '0,/^#/s/^\(#.*\)$/\1\n'"$(cat /tmp/nav_readme.md | sed 's/$/\\n/' | tr -d '\n')"'/' README.md && rm README.md.bak
+        else
+            cat /tmp/nav_readme.md README.md > /tmp/readme_new.md && mv /tmp/readme_new.md README.md
+        fi
+        rm /tmp/nav_readme.md
+    fi
+    
+    # backstage/ROADMAP.md
+    if [[ -f backstage/ROADMAP.md ]] && ! grep -q "> 🤖" backstage/ROADMAP.md; then
+        echo -e "${YELLOW}⚠️  Creating navigation block in ROADMAP.md${NC}" >&2
+        cat > /tmp/nav_block.txt << 'EOF'
+> 🤖
+>
+> - [README](../README.md) - Our project
+> - [CHANGELOG](CHANGELOG.md) — What we did
+> - [ROADMAP](ROADMAP.md) — What we wanna do
+> - [POLICY](POLICY.md) — How we do it
+> - [HEALTH](HEALTH.md) — What we accept
+>
+> 🤖
+
+EOF
+        sed -i.bak '1r /tmp/nav_block.txt' backstage/ROADMAP.md && rm backstage/ROADMAP.md.bak
+        rm /tmp/nav_block.txt
+    fi
+    
+    # backstage/CHANGELOG.md
+    if [[ -f backstage/CHANGELOG.md ]] && ! grep -q "> 🤖" backstage/CHANGELOG.md; then
+        echo -e "${YELLOW}⚠️  Creating navigation block in CHANGELOG.md${NC}" >&2
+        cat > /tmp/nav_block.txt << 'EOF'
+> 🤖
+>
+> - [README](../README.md) - Our project
+> - [CHANGELOG](CHANGELOG.md) — What we did
+> - [ROADMAP](ROADMAP.md) — What we wanna do
+> - [POLICY](POLICY.md) — How we do it
+> - [HEALTH](HEALTH.md) — What we accept
+>
+> 🤖
+
+EOF
+        sed -i.bak '1r /tmp/nav_block.txt' backstage/CHANGELOG.md && rm backstage/CHANGELOG.md.bak
+        rm /tmp/nav_block.txt
+    fi
+    
+    # backstage/POLICY.md
+    if [[ -f backstage/POLICY.md ]] && ! grep -q "> 🤖" backstage/POLICY.md; then
+        echo -e "${YELLOW}⚠️  Creating navigation block in POLICY.md${NC}" >&2
+        cat > /tmp/nav_block.txt << 'EOF'
+> 🤖
+>
+> - [README](../README.md) - Our project
+> - [CHANGELOG](CHANGELOG.md) — What we did
+> - [ROADMAP](ROADMAP.md) — What we wanna do
+> - [POLICY](POLICY.md) — How we do it
+> - [HEALTH](HEALTH.md) — What we accept
+>
+> 🤖
+
+EOF
+        sed -i.bak '1r /tmp/nav_block.txt' backstage/POLICY.md && rm backstage/POLICY.md.bak
+        rm /tmp/nav_block.txt
+    fi
+    
+    # backstage/HEALTH.md
+    if [[ -f backstage/HEALTH.md ]] && ! grep -q "> 🤖" backstage/HEALTH.md; then
+        echo -e "${YELLOW}⚠️  Creating navigation block in HEALTH.md${NC}" >&2
+        cat > /tmp/nav_block.txt << 'EOF'
+> 🤖
+>
+> - [README](../README.md) - Our project
+> - [CHANGELOG](CHANGELOG.md) — What we did
+> - [ROADMAP](ROADMAP.md) — What we wanna do
+> - [POLICY](POLICY.md) — How we do it
+> - [HEALTH](HEALTH.md) — What we accept
+>
+> 🤖
+
+EOF
+        sed -i.bak '1r /tmp/nav_block.txt' backstage/HEALTH.md && rm backstage/HEALTH.md.bak
+        rm /tmp/nav_block.txt
+    fi
+}
+
 # Node 2️⃣: Read README 🤖 block
 read_navigation_block() {
     echo -e "${BLUE}📖 Reading README navigation block...${NC}" >&2
@@ -195,6 +300,9 @@ main() {
     echo -e "${BLUE}╔════════════════════════════════════╗${NC}"
     echo -e "${BLUE}║  Backstage Start - Pre-commit     ║${NC}"
     echo -e "${BLUE}╚════════════════════════════════════╝${NC}\n"
+    
+    # Node 1️⃣: Ensure navigation blocks
+    ensure_navigation_blocks
     
     # Node 2️⃣: Read README 🤖 block
     paths=$(read_navigation_block)
