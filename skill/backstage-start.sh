@@ -11,6 +11,35 @@ YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
+# Create navigation block in README if missing
+create_navigation_block() {
+    local nav_block="
+> 🤖
+>
+> - [README](README.md)
+> - [ROADMAP](backstage/ROADMAP.md)
+> - [CHANGELOG](backstage/CHANGELOG.md)
+> - [POLICY](backstage/POLICY.md)
+> - [HEALTH](backstage/HEALTH.md)
+>
+> 🤖
+
+"
+    
+    # Insert after first heading or at top
+    if grep -q "^#" README.md; then
+        # Insert after first heading
+        awk '/^#/ && !found {print; print "'"$nav_block"'"; found=1; next} 1' README.md > README.md.tmp
+        mv README.md.tmp README.md
+    else
+        # Prepend to file
+        echo "$nav_block" | cat - README.md > README.md.tmp
+        mv README.md.tmp README.md
+    fi
+    
+    echo -e "${GREEN}✅ Created navigation block in README.md${NC}" >&2
+}
+
 # Node 2️⃣: Read README 🤖 block
 read_navigation_block() {
     echo -e "${BLUE}📖 Reading README navigation block...${NC}" >&2
@@ -18,6 +47,12 @@ read_navigation_block() {
     if [[ ! -f README.md ]]; then
         echo -e "${RED}❌ No README.md found${NC}" >&2
         exit 1
+    fi
+    
+    # Check if navigation block exists
+    if ! grep -q "> 🤖" README.md; then
+        echo -e "${YELLOW}⚠️  No 🤖 navigation block found, creating...${NC}" >&2
+        create_navigation_block
     fi
     
     # Extract paths between > 🤖 markers
