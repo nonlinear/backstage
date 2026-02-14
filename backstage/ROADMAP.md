@@ -1,5 +1,47 @@
 # Backstage - Roadmap
 
+## v0.7.0
+
+### Back to Main Rituals
+
+**Description:** Promote agenda and exercise to full projects with backstage protocol
+
+**Context:**
+- Agenda and exercise have grown beyond simple life/ subfolders
+- Both need proper roadmaps, changelogs, and epic management
+- Currently live as subfolders in life/ project
+- Should be independent projects in ~/Documents/
+
+**Solution:**
+1. Move `~/Documents/life/agenda/` → `~/Documents/agenda/`
+2. Create `~/Documents/exercise/` (fitness tracking project)
+3. Copy gevulot backstage/ (empty template) to both
+4. Extract epics from life/ROADMAP → respective project ROADMAPs:
+   - v0.5.0 Home Augmented Calendar → agenda/ROADMAP
+   - v0.6.0 Fitness Tracker → exercise/ROADMAP
+5. Update life/ROADMAP (remove migrated epics, renumber if needed)
+
+**Tasks:**
+- [ ] Move agenda/ from life/ to Documents/
+- [ ] Create exercise/ project in Documents/
+- [ ] Copy gevulot backstage/ template to agenda/
+- [ ] Copy gevulot backstage/ template to exercise/
+- [ ] Extract v0.5.0 epic from life/ROADMAP → agenda/ROADMAP
+- [ ] Extract v0.6.0 epic from life/ROADMAP → exercise/ROADMAP
+- [ ] Update life/ROADMAP (remove migrated epics)
+- [ ] Update life/backstage diagram (remove agenda/exercise nodes)
+- [ ] Test backstage-start in agenda/ project
+- [ ] Test backstage-start in exercise/ project
+- [ ] **Approve to merge**
+
+**Success:**
+- Agenda and exercise are independent projects
+- Each has own backstage/ (ROADMAP, CHANGELOG, POLICY, HEALTH)
+- life/ project focuses on life-wide concerns (not sub-projects)
+- Clear separation: life = meta-project, agenda/exercise = focused projects
+
+---
+
 ## v0.3.1
 
 ### 📜 VISION Core Prompt
