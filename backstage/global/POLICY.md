@@ -317,12 +317,15 @@ v1.0.0 (major - breaking changes)
 ### Workflow
 
 **Major/Minor (Traditional):**
-1. **Create branch from main**
-2. **Work on epic in branch**
-3. **Rebase regularly from main**
-4. **Merge to main when complete**
-5. **Tag release**
-6. **Delete feature branch (recommended)**
+1. **Create branch from main** (`epic/vX.Y.Z`)
+2. **Work on epic in branch** (commits, tests, documentation)
+3. **Rebase regularly from main** (keep up to date)
+4. **Before merge: backstage-start** (pre-commit validation)
+5. **Merge to main** (when ready)
+6. **After merge: backstage-start** (post-merge validation, catch integration issues)
+7. **Tag release** (if applicable)
+8. **Publish** (if applicable: npm, skill registry, etc.)
+9. **Delete feature branch** (recommended)
 
 **Patch (Fast Track):**
 1. **Work directly on main** (or short-lived branch if nervous)
