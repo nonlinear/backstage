@@ -72,6 +72,10 @@ graph LR
 - [x] v0.6.0 - Branch Lifecycle Management
 - [x] v0.7.0 - Back to Main Rituals
 
+**Finalization:**
+- [ ] Republish backstage skill on ClawHub
+- [ ] **Approve to merge**
+
 **Success:**
 - Manual merge protocol proven (skills v0.1.0 released)
 - Backstage-start.sh robust (navigation blocks, diagrams, BSD awk compatible)
