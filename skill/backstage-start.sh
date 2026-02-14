@@ -187,8 +187,15 @@ generate_roadmap_diagram() {
     
     local node_id="A"
     local prev_node=""
+    local count=0
+    local max_nodes=4
     
     while IFS='|' read -r version status name; do
+        # Limit to max nodes
+        if [[ $count -ge $max_nodes ]]; then
+            break
+        fi
+        
         # Sanitize name (remove quotes for mermaid compatibility)
         name=$(echo "$name" | tr -d '"')
         
@@ -201,6 +208,7 @@ generate_roadmap_diagram() {
         fi
         
         prev_node="$node_id"
+        count=$((count + 1))
         # Increment node_id (A → B → C ...)
         node_id=$(echo "$node_id" | tr 'A-Z' 'B-ZA')
     done <<< "$parsed"
