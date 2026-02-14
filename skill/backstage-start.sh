@@ -325,11 +325,16 @@ check_approve_to_merge() {
         return 1  # Epic not in ROADMAP
     fi
     
-    # Extract epic section (escape dots in version)
+    # Extract epic section (escape dots in version, use file to avoid BSD awk newline bug)
     local epic_section
     local version_pattern
     version_pattern=$(printf "%s" "$branch_version" | sed 's/\./\\./g')
-    epic_section=$(awk "/^## $version_pattern$/,/^---$/" "$roadmap")
+    
+    # Write pattern to temp file and use awk with file read
+    local temp_pattern="/tmp/epic_pattern_$$.txt"
+    printf "/^## %s$/,/^---$/" "$version_pattern" > "$temp_pattern"
+    epic_section=$(awk "$(cat "$temp_pattern")" "$roadmap")
+    rm -f "$temp_pattern"
     
     # Check if all tasks except "Approve to merge" are done
     local total_tasks
