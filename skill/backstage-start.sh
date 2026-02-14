@@ -385,16 +385,19 @@ check_approve_to_merge() {
     done_tasks=$(echo "$epic_section" | grep -c "^- \[x\]" || echo "0")
     approve_checked=$(echo "$epic_section" | grep -c "^- \[x\] \*\*Approve to merge\*\*" || echo "0")
     
-    # If only "Approve to merge" is unchecked
-    if [[ "$approve_checked" -eq 0 ]] && [[ $((done_tasks + 1)) -eq "$total_tasks" ]]; then
-        echo "OFFER"  # Offer to check
+    # If "Approve to merge" is checked → APPROVED
+    if [[ "$approve_checked" -eq 1 ]]; then
+        echo "APPROVED"
         return 0
     fi
     
-    # If "Approve to merge" is checked
-    if [[ "$approve_checked" -eq 1 ]]; then
-        echo "APPROVED"  # Auto-merge
-        return 0
+    # If only "Approve to merge" is unchecked (all others done)
+    if [[ "$total_tasks" -gt 0 ]] && [[ $((done_tasks + 1)) -eq "$total_tasks" ]]; then
+        # Check if the one unchecked task IS "Approve to merge"
+        if echo "$epic_section" | grep -q "^- \[ \] \*\*Approve to merge\*\*"; then
+            echo "OFFER"
+            return 0
+        fi
     fi
     
     echo "NOT_READY"  # Still has unchecked tasks
