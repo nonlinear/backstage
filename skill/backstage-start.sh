@@ -141,6 +141,35 @@ locate_status_files() {
     echo -e "${GREEN}✅ All status files located${NC}"
 }
 
+# Update README tables from SKILL.md frontmatter
+update_readme_tables() {
+    echo -e "${BLUE}📊 Updating README tables from frontmatter...${NC}"
+    
+    # TODO: Implement table regeneration
+    # Scan */SKILL.md, extract frontmatter, rebuild tables
+    echo -e "${YELLOW}⚠️  Table update not yet implemented${NC}"
+}
+
+# Ensure diagrams in all SKILL.md files
+ensure_skill_diagrams() {
+    echo -e "${BLUE}📐 Ensuring skill diagrams...${NC}"
+    
+    # TODO: Implement diagram generation
+    # Check each */SKILL.md for ## Diagram or mermaid block
+    # If missing, generate from skill description/triggers/workflow
+    echo -e "${YELLOW}⚠️  Diagram generation not yet implemented${NC}"
+}
+
+# Update ROADMAP checkboxes
+update_roadmap_tasks() {
+    local roadmap="$1"
+    echo -e "${BLUE}✅ Updating ROADMAP checkboxes...${NC}"
+    
+    # TODO: Implement auto-checkbox update
+    # Parse tasks, detect completed work, update [ ] → [x]
+    echo -e "${YELLOW}⚠️  ROADMAP auto-update not yet implemented${NC}"
+}
+
 # Node 4️⃣: Check git branch
 check_branch() {
     echo -e "${BLUE}🌿 Checking git branch...${NC}"
@@ -270,6 +299,11 @@ main() {
     # Node 3️⃣: Locate status files
     locate_status_files "$paths"
     IFS='|' read -r ROADMAP CHANGELOG HEALTH POLICY <<< "$paths"
+    
+    # Node 3.5: Update automation
+    update_readme_tables
+    ensure_skill_diagrams
+    update_roadmap_tasks "$ROADMAP"
     
     # Node 4️⃣: Check git branch
     branch=$(check_branch)
