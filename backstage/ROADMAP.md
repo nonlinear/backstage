@@ -21,7 +21,7 @@ graph LR
 
 ## v0.3.5
 
-### Protocol Stabilization (2026-02-14)
+### Protocol Stabilization
 
 **Description:** Major protocol evolution day - semantic versioning, manual merge protocol, automation improvements
 
@@ -73,7 +73,9 @@ graph LR
 - [x] v0.7.0 - Back to Main Rituals
 
 **Finalization:**
-- [ ] Republish backstage skill on ClawHub
+- [ ] Republish backstage skill on ClawHub (AFTER merge + tag v0.3.5)
+  - **Order:** merge → tag → publish (ClawHub points to stable tag, not branch)
+  - **Why:** Skills must point to main branch stable commits, not epic branches
 - [ ] **Approve to merge**
 
 **Success:**
