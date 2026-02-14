@@ -18,7 +18,9 @@ ensure_navigation_blocks() {
     # README.md navigation block
     if [[ -f README.md ]] && ! grep -q "> 🤖" README.md; then
         echo -e "${YELLOW}⚠️  Creating navigation block in README.md${NC}" >&2
-        cat > /tmp/nav_readme.md << 'EOF'
+        
+        # Create temp file with navigation block
+        cat > /tmp/nav_readme.txt << 'EOF'
 
 > 🤖
 >
@@ -31,18 +33,25 @@ ensure_navigation_blocks() {
 > 🤖
 
 EOF
+        
+        # Insert after first heading
         if grep -q "^#" README.md; then
-            sed -i.bak '0,/^#/s/^\(#.*\)$/\1\n'"$(cat /tmp/nav_readme.md | sed 's/$/\\n/' | tr -d '\n')"'/' README.md && rm README.md.bak
+            awk '/^#/ && !done {print; system("cat /tmp/nav_readme.txt"); done=1; next} 1' README.md > /tmp/readme_new.md
+            mv /tmp/readme_new.md README.md
         else
-            cat /tmp/nav_readme.md README.md > /tmp/readme_new.md && mv /tmp/readme_new.md README.md
+            cat /tmp/nav_readme.txt README.md > /tmp/readme_new.md
+            mv /tmp/readme_new.md README.md
         fi
-        rm /tmp/nav_readme.md
+        rm /tmp/nav_readme.txt
     fi
     
-    # backstage/ROADMAP.md
-    if [[ -f backstage/ROADMAP.md ]] && ! grep -q "> 🤖" backstage/ROADMAP.md; then
-        echo -e "${YELLOW}⚠️  Creating navigation block in ROADMAP.md${NC}" >&2
-        cat > /tmp/nav_block.txt << 'EOF'
+    # Helper function for backstage files
+    add_nav_to_file() {
+        local file="$1"
+        if [[ -f "$file" ]] && ! grep -q "> 🤖" "$file"; then
+            echo -e "${YELLOW}⚠️  Creating navigation block in $(basename $file)${NC}" >&2
+            
+            cat > /tmp/nav_block.txt << 'EOF'
 > 🤖
 >
 > - [README](../README.md) - Our project
@@ -54,66 +63,17 @@ EOF
 > 🤖
 
 EOF
-        sed -i.bak '1r /tmp/nav_block.txt' backstage/ROADMAP.md && rm backstage/ROADMAP.md.bak
-        rm /tmp/nav_block.txt
-    fi
+            cat /tmp/nav_block.txt "$file" > /tmp/file_new.md
+            mv /tmp/file_new.md "$file"
+            rm /tmp/nav_block.txt
+        fi
+    }
     
-    # backstage/CHANGELOG.md
-    if [[ -f backstage/CHANGELOG.md ]] && ! grep -q "> 🤖" backstage/CHANGELOG.md; then
-        echo -e "${YELLOW}⚠️  Creating navigation block in CHANGELOG.md${NC}" >&2
-        cat > /tmp/nav_block.txt << 'EOF'
-> 🤖
->
-> - [README](../README.md) - Our project
-> - [CHANGELOG](CHANGELOG.md) — What we did
-> - [ROADMAP](ROADMAP.md) — What we wanna do
-> - [POLICY](POLICY.md) — How we do it
-> - [HEALTH](HEALTH.md) — What we accept
->
-> 🤖
-
-EOF
-        sed -i.bak '1r /tmp/nav_block.txt' backstage/CHANGELOG.md && rm backstage/CHANGELOG.md.bak
-        rm /tmp/nav_block.txt
-    fi
-    
-    # backstage/POLICY.md
-    if [[ -f backstage/POLICY.md ]] && ! grep -q "> 🤖" backstage/POLICY.md; then
-        echo -e "${YELLOW}⚠️  Creating navigation block in POLICY.md${NC}" >&2
-        cat > /tmp/nav_block.txt << 'EOF'
-> 🤖
->
-> - [README](../README.md) - Our project
-> - [CHANGELOG](CHANGELOG.md) — What we did
-> - [ROADMAP](ROADMAP.md) — What we wanna do
-> - [POLICY](POLICY.md) — How we do it
-> - [HEALTH](HEALTH.md) — What we accept
->
-> 🤖
-
-EOF
-        sed -i.bak '1r /tmp/nav_block.txt' backstage/POLICY.md && rm backstage/POLICY.md.bak
-        rm /tmp/nav_block.txt
-    fi
-    
-    # backstage/HEALTH.md
-    if [[ -f backstage/HEALTH.md ]] && ! grep -q "> 🤖" backstage/HEALTH.md; then
-        echo -e "${YELLOW}⚠️  Creating navigation block in HEALTH.md${NC}" >&2
-        cat > /tmp/nav_block.txt << 'EOF'
-> 🤖
->
-> - [README](../README.md) - Our project
-> - [CHANGELOG](CHANGELOG.md) — What we did
-> - [ROADMAP](ROADMAP.md) — What we wanna do
-> - [POLICY](POLICY.md) — How we do it
-> - [HEALTH](HEALTH.md) — What we accept
->
-> 🤖
-
-EOF
-        sed -i.bak '1r /tmp/nav_block.txt' backstage/HEALTH.md && rm backstage/HEALTH.md.bak
-        rm /tmp/nav_block.txt
-    fi
+    # Add to all backstage files
+    add_nav_to_file "backstage/ROADMAP.md"
+    add_nav_to_file "backstage/CHANGELOG.md"
+    add_nav_to_file "backstage/POLICY.md"
+    add_nav_to_file "backstage/HEALTH.md"
 }
 
 # Node 2️⃣: Read README 🤖 block
