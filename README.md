@@ -58,23 +58,9 @@ graph LR
     B --> C
     D[📋 v0.8.0 Backstage from zero]
     C --> D
-    E[📋 v0.3.2 🌳 Parent Project Support]
-    D --> E
-    F[📋 v0.3.3 Auto-Generate Mermaid Diagrams]
-    E --> F
-    G[📋 v0.3.4 Diagram Redesign - Beyond Linear]
-    F --> G
-    H[📋 v0.3.6 Navigation Branding]
-    G --> H
-    I[📋 v0.4.1 Arch Protocol]
-    H --> I
-    J[📋 v0.4.0 Templates]
-    I --> J
-    K[📋 v0.5.0 Documentation]
-    J --> K
-    L[📋 v0.6.0 Branch Lifecycle Management]
-    K --> L
 ```
+
+
 
 
 
