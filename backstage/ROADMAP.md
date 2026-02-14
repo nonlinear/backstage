@@ -71,6 +71,36 @@
 
 ## v0.3.3
 
+### 📊 Auto-Generate Mermaid Diagrams
+
+**Problem:** Roadmap diagrams are hardcoded, high maintenance, go stale
+
+**Current state:**
+- Each backstage file has mermaid diagram (after 🤖 nav block)
+- Manual updates every time epic added/removed/completed
+- Easy to forget → diagram diverges from ROADMAP
+
+**Future state:**
+- Parse ROADMAP.md (via parse-roadmap.sh)
+- Generate mermaid graph (version → status → name)
+- Auto-update all backstage files on backstage-start run
+
+**Tasks:**
+- [ ] Fix BSD awk multi-line bug (use temp files, not variables)
+- [ ] Test diagram generation on multiple projects
+- [ ] Document diagram format rules in POLICY.md
+- [ ] Support project-specific diagram overrides
+- [ ] Handle empty ROADMAPs gracefully
+
+**Success:**
+- Diagrams auto-update on every backstage-start
+- No manual maintenance needed
+- Diagrams always match ROADMAP state
+
+---
+
+## v0.3.4
+
 ### 📝 Prompt Grooming
 
 **Problem:** .github/prompts/ has 30+ prompts, many outdated/unused
