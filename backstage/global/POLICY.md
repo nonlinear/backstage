@@ -989,3 +989,67 @@ git push origin main
 ```
 
 ```
+
+---
+
+## Retrospective Epic Protocol
+
+**When to use:** Work happened on main without epic branch (many commits, forgot to branch)
+
+**Problem:**
+- Made 30+ commits directly to main
+- Should have been on epic branch
+- Main is now ahead of origin/main
+- Need to preserve work but restore main
+
+**Solution: Create retrospective epic**
+
+**Steps:**
+
+1. **Create epic in ROADMAP** (on current main):
+   ```bash
+   # Document what was done (past tense, [x] checkboxes)
+   # Epic describes completed work retrospectively
+   ```
+
+2. **Create branch from current main:**
+   ```bash
+   git branch epic/vX.Y.Z
+   git checkout epic/vX.Y.Z
+   ```
+
+3. **Reset main to origin/main:**
+   ```bash
+   git checkout main
+   git reset --hard origin/main
+   ```
+
+4. **Now you have:**
+   - `main` = clean (matches origin/main)
+   - `epic/vX.Y.Z` = all your work (ready to merge properly)
+
+5. **Follow normal merge protocol:**
+   - Check all tasks in ROADMAP epic
+   - Run backstage-start (HEALTH checks)
+   - Merge epic → main (manual merge protocol)
+   - Move epic ROADMAP → CHANGELOG
+   - Tag release
+   - Delete branch
+
+**Why this works:**
+- Preserves all work (nothing lost)
+- Restores main to clean state
+- Forces proper epic review before merge
+- Documents what was accomplished
+- Follows normal workflow from here
+
+**Philosophy:**
+- Mistakes happen (forgot to branch, hyperfocus mode)
+- Retrospective epic = accountability without punishment
+- Work gets reviewed, docs get updated, main stays clean
+
+---
+
+**Last updated:** 2026-02-14
+**Version:** 1.2 (Added retrospective epic protocol)
+
