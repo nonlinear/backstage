@@ -189,8 +189,8 @@ generate_roadmap_diagram() {
     local prev_node=""
     
     while IFS='|' read -r version status name; do
-        # Sanitize name (escape quotes for mermaid)
-        name=$(echo "$name" | sed 's/"/\\"/g')
+        # Sanitize name (remove quotes for mermaid compatibility)
+        name=$(echo "$name" | tr -d '"')
         
         # Create node: A[🏗️ v0.1.0 Epic Name]
         echo "    $node_id[$status $version $name]"
