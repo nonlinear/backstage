@@ -725,12 +725,6 @@ git push origin --delete v0.3.0
    git branch -d epic/vX.Y.Z
    ```
 
-9. **If project has ClawHub skill:**
-   - **Publish AFTER merge + tag** (not before)
-   - ClawHub points to stable tag (vX.Y.Z on main), not epic branch
-   - Order: merge → tag → `clawhub publish`
-   - **Why:** Skills must reference stable commits, not WIP branches
-
 **Commit message format:**
 - **Subject:** `Release vX.Y.Z: Epic Title`
 - **Body:** Bullet list of completed tasks (past tense, no checkboxes)
