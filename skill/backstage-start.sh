@@ -370,9 +370,11 @@ check_approve_to_merge() {
         return 1  # Epic not in ROADMAP
     fi
     
-    # Extract epic section
+    # Extract epic section (escape dots in version)
     local epic_section
-    epic_section=$(awk "/^## $branch_version$/,/^##[[:space:]]|^---/" "$roadmap")
+    local version_pattern
+    version_pattern=$(echo "$branch_version" | sed 's/\./\\./g')
+    epic_section=$(awk "/^## $version_pattern$/,/^---$/" "$roadmap")
     
     # Check if all tasks except "Approve to merge" are done
     local total_tasks
