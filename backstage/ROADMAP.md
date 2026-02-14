@@ -183,7 +183,7 @@ Implement `add_epic_types()` in backstage-start.sh:
 
 ## v0.3.1
 
-### 📜 VISION Core Prompt
+### VISION Core Prompt
 
 **Problem:** VISION.md exists in workspace, but belongs in backstage protocol
 
@@ -252,7 +252,7 @@ Implement `add_epic_types()` in backstage-start.sh:
 
 ## v0.3.3
 
-### 📊 Auto-Generate Mermaid Diagrams
+### Auto-Generate Mermaid Diagrams
 
 **Problem:** Roadmap diagrams are hardcoded, high maintenance, go stale
 
@@ -267,11 +267,16 @@ Implement `add_epic_types()` in backstage-start.sh:
 - Auto-update all backstage files on backstage-start run
 
 **Tasks:**
-- [ ] Fix BSD awk multi-line bug (use temp files, not variables)
-- [ ] Test diagram generation on multiple projects
-- [ ] Document diagram format rules in POLICY.md
-- [ ] Support project-specific diagram overrides
-- [ ] Handle empty ROADMAPs gracefully
+- [x] Fix BSD awk multi-line bug (use temp files, not variables)
+- [x] Parse ROADMAP.md (via parse-roadmap.sh)
+- [x] Generate mermaid graph (version → status → name)
+- [x] Auto-update all backstage files on backstage-start run
+- [ ] Generate initial diagram when ROADMAP created (bootstrap)
+- [x] Test diagram generation on multiple projects
+- [x] Document diagram format rules in POLICY.md
+- [x] Support project-specific diagram overrides
+- [x] Handle empty ROADMAPs gracefully
+- [ ] **Approve to merge**
 
 **Success:**
 - Diagrams auto-update on every backstage-start
@@ -282,7 +287,7 @@ Implement `add_epic_types()` in backstage-start.sh:
 
 ## v0.3.4
 
-### 📊 Diagram Redesign - Beyond Linear
+### Diagram Redesign - Beyond Linear
 
 **Problem:** Current diagrams = single linear chain (A → B → C)
 
@@ -316,96 +321,50 @@ Implement `add_epic_types()` in backstage-start.sh:
 
 ---
 
-## v0.3.5
-
-### 📝 Prompt Grooming
-
-**Problem:** .github/prompts/ has 30+ prompts, many outdated/unused
-
-**Solution:** Review, archive, and document active prompts
-
-**Tasks:**
-
-- [ ] Inventory all prompts in .github/prompts/
-- [ ] Identify active vs unused prompts
-- [ ] Archive unused prompts (move to _archived/)
-- [ ] Document remaining prompts in PROMPTS.md
-- [ ] Update README with prompt usage guide
-- [ ] **Approve to merge**
-
-**Success:**
-- Clean prompt inventory
-- Active prompts documented
-- Unused prompts archived
-
----
-
 ## v0.3.6
 
-### 🔄 Auto-Update Navigation Version
+### Navigation Branding
 
-**Problem:** Navigation blocks say "backstage protocol v0.3.4" but version is hardcoded
+**Problem:** Navigation blocks + GitHub social preview need visual identity
 
-**Current behavior:**
-- Version number is manual (users must update)
-- Drifts from CHANGELOG stable version
+**Current state:**
+- Navigation 🤖 blocks are text-only
+- GitHub shows generic preview on shares
+- No visual branding across backstage projects
 
 **Proposed solution:**
-- backstage-start reads CHANGELOG → extracts last stable version
-- Updates navigation block automatically: `> We use **[backstage protocol](...)**, vX.Y.Z`
+1. **SVG badges for navigation blocks** (version, status, project type)
+2. **GitHub social preview image** (og:image meta tag)
+3. **Brandable navigation** (project logo/icon support)
+
+**Context from reminders:**
+- Discussed SVG generation for GitHub social cards
+- Want consistent branding across projects
+- Auto-update version badges from CHANGELOG
 
 **Tasks:**
-- [ ] Parse CHANGELOG.md → extract latest version (## vX.Y.Z)
-- [ ] Update navigation block regex (find "We use **[backstage")
-- [ ] Replace version automatically during backstage-start
-- [ ] Test with multiple projects (backstage, skills, life)
-- [ ] Add version detection to pre-commit validation
-- [ ] Document in POLICY.md (navigation version = auto-synced)
+- [ ] Design SVG badge format (version, status, custom text)
+- [ ] Generate badges in backstage-start (or separate script)
+- [ ] Update navigation blocks with badge links
+- [ ] Create GitHub social preview template (og:image)
+- [ ] Support project-specific logos/icons
+- [ ] Auto-update version badge from CHANGELOG
+- [ ] Document badge format in POLICY.md
 - [ ] **Approve to merge**
 
 **Success:**
-- Navigation version auto-updates from CHANGELOG
-- No manual version edits needed
-- Version always matches stable release
-
----
-
-## v0.3.3
-
-### 🏴 Backstage to Win
-
-**Description:** Merge context-switch + roadmap skills into backstage-skill
-
-**Problem:**
-- context-switch (project/epic transitions + HEALTH checks) should be part of backstage
-- roadmap (epic planning, grooming, emoji shortcuts) should be part of backstage
-- Three separate skills = fragmented workflow
-
-**Solution:** Merge both into single backstage-skill (universal project management)
-
-**Tasks:**
-- [ ] Merge context-switch logic into backstage-skill
-  - [ ] Morning/evening workflows ("bom dia", "boa noite")
-  - [ ] Project/epic transitions with HEALTH checks
-  - [ ] Context state tracking (.current-context.json)
-- [ ] Merge roadmap logic into backstage-skill
-  - [ ] Epic creation, grooming, emoji shortcuts
-  - [ ] Roadmap management across projects
-  - [ ] Task reordering, merging
-- [ ] Update backstage-skill SKILL.md (new triggers, features)
-- [ ] Test on multiple projects (life, librarian, wiley, skills)
-- [ ] Archive context-switch + roadmap skills (mark deprecated in skills/)
-
-**Success:**
-- Single skill handles full project workflow
-- context-switch + roadmap features accessible via backstage commands
-- No workflow fragmentation
+- Navigation blocks have visual badges
+- GitHub shares show branded preview
+- Version badges auto-update from CHANGELOG
+- Projects can customize branding
 
 ---
 
 ## v0.4.1
 
-### 🏗️ Arch Protocol | [notes](https://github.com/nonlinear/librarian/blob/epic/v0.15.0-skill-protocol/backstage/epic-notes/v0.15.0-skill-protocol.md)
+### Arch Protocol
+
+**Note:** This may become a skill companion (arch skill in librarian or standalone). If so, change to skill companion status.
 
 **arch: = PARIDADE - O COMO familiar e mage comunicam**
 
@@ -557,47 +516,6 @@ Implement `add_epic_types()` in backstage-start.sh:
 
 ---
 
-## v0.5.0
-
-### Documentation
-
-⏳ Write comprehensive usage guide
-
-**Problem:** People don't know how to use backstage
-
-**Solution:** README with examples, philosophy, workflow diagrams
-
-**Tasks:**
-
-- [ ] Write README.md (philosophy + quick start)
-- [ ] Add workflow diagrams (mermaid)
-- [ ] Document epic dance
-- [ ] Add examples from real projects
-- [ ] **Approve to merge**
-
-**Success:**
-- Clear onboarding guide
-- Visual workflow diagrams
-- Real-world examples
-
----
-
-
-```mermaid
-%%{init: {'theme':'base', 'themeVariables': { 'fontSize':'14px'}}}%%
-graph LR
-    subgraph "✅ Shipped"
-        V03[v0.3.0<br/>OpenClaw Skill]
-    end
-    
-    subgraph "🚧 Active"
-        V031[v0.3.1<br/>Prompt Cleanup]
-    end
-    
-    subgraph "📞 Future"
-        V04[v0.4.0<br/>Templates]
-        V041[v0.4.1<br/>Arch Protocol]
-        V05[v0.5.0<br/>Documentation]
     end
 
     V03 --> V031
