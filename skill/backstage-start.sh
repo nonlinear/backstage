@@ -302,54 +302,9 @@ update_roadmap_tasks() {
     local roadmap="$1"
     echo -e "${BLUE}✅ Updating ROADMAP tasks...${NC}"
     
-    # Add "Approve to merge" to all epics if missing
-    local temp_roadmap="/tmp/roadmap_update_$$.md"
-    local in_epic=0
-    local epic_version=""
-    local has_approve=0
-    local tasks_section=0
-    
-    while IFS= read -r line; do
-        echo "$line" >> "$temp_roadmap"
-        
-        # Detect epic start (## vX.Y.Z)
-        if [[ "$line" =~ ^##[[:space:]]+v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
-            in_epic=1
-            epic_version="$line"
-            has_approve=0
-            tasks_section=0
-        fi
-        
-        # Detect tasks section
-        if [[ "$in_epic" -eq 1 ]] && [[ "$line" =~ ^\*\*Tasks:\*\*$ ]]; then
-            tasks_section=1
-        fi
-        
-        # Check if "Approve to merge" exists
-        if [[ "$tasks_section" -eq 1 ]] && [[ "$line" =~ \*\*Approve\ to\ merge\*\* ]]; then
-            has_approve=1
-        fi
-        
-        # End of epic (next ## or ---)
-        if [[ "$in_epic" -eq 1 ]] && [[ "$line" =~ ^(##[[:space:]]|---$) ]] && [[ ! "$line" =~ ^##[[:space:]]+v[0-9] ]]; then
-            # If tasks section found but no "Approve to merge", add it
-            if [[ "$tasks_section" -eq 1 ]] && [[ "$has_approve" -eq 0 ]]; then
-                # Insert before epic end marker
-                sed -i.bak '$d' "$temp_roadmap"  # Remove last line (--- or next ##)
-                echo "- [ ] **Approve to merge**" >> "$temp_roadmap"
-                echo "" >> "$temp_roadmap"
-                echo "$line" >> "$temp_roadmap"  # Re-add separator
-                echo -e "${GREEN}  ✅ Added 'Approve to merge' to $epic_version${NC}"
-            fi
-            in_epic=0
-        fi
-    done < "$roadmap"
-    
-    # Replace original if changes made
-    if [[ -f "$temp_roadmap" ]]; then
-        mv "$temp_roadmap" "$roadmap"
-        rm -f "${roadmap}.bak"
-    fi
+    # TODO: Fix BSD awk compatibility for auto-add "Approve to merge"
+    # Currently disabled due to loop crash
+    echo -e "${YELLOW}⚠️  Auto-add 'Approve to merge' disabled (needs fix)${NC}"
 }
 
 # Check if "Approve to merge" is checked on current branch
