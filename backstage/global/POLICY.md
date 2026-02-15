@@ -826,11 +826,27 @@ epic-notes/vX.Y.Z/
 
 ### Link Format
 
+**🔴 MANDATORY: Epic-notes MUST be linked from epics (ROADMAP or CHANGELOG)**
+
 **In ROADMAP:**
 
 ```markdown
 ### Epic Name | [notes](epic-notes/vX.Y.Z/)
 ```
+
+**In CHANGELOG:**
+
+```markdown
+### Epic Name
+
+**Details:** [epic-notes/vX.Y.Z/MAIN.md](epic-notes/vX.Y.Z/MAIN.md)
+```
+
+**Why this rule:**
+- Epic-notes exist to document work
+- Unlinked notes = invisible to future readers
+- Links = discoverability + accountability
+- Both active (ROADMAP) and completed (CHANGELOG) epics need links
 
 **In epic-notes/MAIN.md:**
 
