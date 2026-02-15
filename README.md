@@ -1,6 +1,6 @@
 # Backstage
 
-A project management system for AI-assisted development that allows you to be in your zone while AI ensures best practices:
+A protocol for AI-assisted development that allows you to be in your zone while AI ensures best practices:
 
 - sandboxing ideas on epics, sandboxing experimentations on branches (no more messy fixes going all places at once)
 - enforcing policies for documentation
