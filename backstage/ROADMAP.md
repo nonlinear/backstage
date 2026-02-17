@@ -21,23 +21,38 @@ graph LR
     B --> C
     D[📋 v0.8.0 Backstage from zero]
     C --> D
+    E[📋 v0.9.0 Pattern Research]
+    D --> E
 ```
 
+---
 
+## v0.9.0
 
+### Pattern Research (Backstage vs Open Source Standards)
 
+**Goal:** Evaluate if backstage protocol is reinventing the wheel vs existing open source standards
 
+**Questions:**
+- Should we adopt Keep a Changelog, Conventional Commits, or other standards?
+- What's unique about backstage? (HEALTH, mermaid, epic-notes)
+- Hybrid approach (standards + custom features) or full migration?
 
+**Tasks:**
+- [x] Research existing protocols (Keep a Changelog, Semantic Versioning, Conventional Commits, ADR, Shape Up)
+- [x] Compare features (table: Visual roadmap, Health checks, Tooling, Adoption)
+- [ ] Prototype: Generate CHANGELOG from Conventional Commits
+- [ ] Measure: Does HEALTH.md prevent issues?
+- [ ] Decide: Keep, hybrid, or abandon backstage?
 
+**Details:** [epic-notes/v0.9.0-pattern-research.md](epic-notes/v0.9.0-pattern-research.md)
 
+**Success Criteria:**
+- Clear recommendation (keep, hybrid, or replace)
+- If hybrid: Changelog auto-generation working
+- If replace: Migration plan documented
 
-
-
-
-
-
-
-## v0.4.0
+---
 
 ### Skill Security Fixes
 
