@@ -1275,3 +1275,40 @@ git push origin main
 **Last updated:** 2026-02-14
 **Version:** 1.2 (Added retrospective epic protocol)
 
+
+
+## Epic Metadata Links
+
+**MANDATORY: Every epic in ROADMAP must link to:**
+
+1. **Epic-notes** (if exist):
+   - Single file: `[notes](epic-notes/vX.Y.Z.md)`
+   - Folder: `[notes](epic-notes/vX.Y.Z/)`
+   - Can have multiple notes files (list all)
+
+2. **Branch** (if exists):
+   - Format: `[branch](https://github.com/user/repo/tree/epic/vX.Y.Z)`
+   - Or short: `[🚧](branch-url)`
+
+**Syntax:**
+
+```markdown
+### Epic Title | [notes](epic-notes/vX.Y.Z/) | [branch](branch-url)
+```
+
+**Examples:**
+
+```markdown
+### Dashboard | [notes](../dashboard/README.md) | [🚧](https://github.com/nonlinear/skills/tree/epic/v1.11.0-dashboard)
+
+### Pattern Research | [notes](epic-notes/v0.9.0-pattern-research.md)
+```
+
+**Why this matters:**
+- Epic-notes exist to document work → unlinked = invisible
+- Branch link = shows active development
+- Discoverability + accountability
+
+**Auto-enforcement:** backstage-start validates links exist when merging.
+
+---
