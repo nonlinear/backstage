@@ -6,15 +6,20 @@
 
 
 
+
+
+
+
 > 🤖
+> This project follows [backstage protocol](https://github.com/nonlinear/backstage) v1.0.0
 >
-> - [README](../README.md) - Our project
-> - [CHANGELOG](CHANGELOG.md) — What we did
-> - [ROADMAP](ROADMAP.md) — What we wanna do
-> - policies: [local](policies/local/), [global](policies/global/) — How we do it
-> - checks: [local](checks/local/), [global](checks/global/) — What we accept
+> - [README](../README.md) 👏 [ROADMAP](ROADMAP.md) 👏  [CHANGELOG](CHANGELOG.md) 👏 policies: [local](policies/local/) <sup>5</sup>, [global](policies/global/) <sup>11</sup> 👏 checks: [local](checks/local/) <sup>4</sup>, [global](checks/global/) <sup>11</sup>
 >
 > 🤖
+
+
+
+
 
 
 
@@ -29,7 +34,7 @@ graph LR
     A --> B
     C[📋 v0.4.0 Roadmap Skill]
     B --> C
-    D[📋 v0.5.0 Pattern Research (Backstage vs Open Source Standards)]
+    D["📋 v0.5.0 Pattern Research (Backstage vs Open Source Standards)"]
     C --> D
 ```
 
@@ -63,8 +68,8 @@ graph LR
 - [x] Generalize epic notes (remove POLICY.md/HEALTH.md refs)
 - [x] Test enforcement (all passed!)
 - [x] Rename branch v0.3.8 → v1.0.0
-- [ ] Delete old POLICY.md/HEALTH.md files
-- [ ] Update navigation blocks (manual or via bom dia)
+- [x] Delete old POLICY.md/HEALTH.md files
+- [x] Update navigation blocks (manual or via bom dia)
 
 **Success:**
 - ✅ Modular structure works (checks + policies separated)

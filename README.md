@@ -42,12 +42,21 @@ Backstage follows a **polycentric structure**—not hierarchical "levels" but **
 
 
 
+
+
+
+
 > 🤖
-> This project follows [backstage protocol](https://github.com/nonlinear/backstage) v0.3.4
 >
-> - [README](README.md) 👏 [ROADMAP](backstage/ROADMAP.md) 👏  [CHANGELOG](backstage/CHANGELOG.md) 👏 policies: [local](backstage/policies/local/), [global](backstage/policies/global/) 👏 checks: [local](backstage/checks/local/), [global](backstage/checks/global/)
+> This project follows [backstage protocol](https://github.com/nonlinear/backstage) v1.0.0
+>
+> [README](README.md) 👏 [ROADMAP](backstage/ROADMAP.md) 👏  [CHANGELOG](backstage/CHANGELOG.md) 👏 policies: [local](backstage/policies/local/) <sup>5</sup>, [global](backstage/policies/global/) <sup>11</sup> 👏 checks: [local](backstage/checks/local/) <sup>4</sup>, [global](backstage/checks/global/) <sup>11</sup>
 >
 > 🤖
+
+
+
+
 
 
 
@@ -62,7 +71,7 @@ graph LR
     A --> B
     C[📋 v0.4.0 Roadmap Skill]
     B --> C
-    D[📋 v0.5.0 Pattern Research (Backstage vs Open Source Standards)]
+    D["📋 v0.5.0 Pattern Research (Backstage vs Open Source Standards)"]
     C --> D
 ```
 
