@@ -67,7 +67,7 @@ graph LR
 
 ---
 
-## v0.3.9
+## v0.4.0
 
 ### Roadmap Skill
 
@@ -91,7 +91,7 @@ graph LR
 
 ---
 
-## v0.3.9
+## v0.5.0
 
 ### Pattern Research (Backstage vs Open Source Standards)
 
@@ -118,7 +118,7 @@ graph LR
 
 ---
 
-## v0.11.0
+## v0.6.0
 
 ### Skill Security Fixes
 
@@ -140,7 +140,7 @@ graph LR
 
 ---
 
-## v0.4.0
+## v0.7.0
 
 ### Type Enforcement & Version Sync
 
@@ -192,7 +192,7 @@ Implement `add_epic_types()` in backstage-start.sh:
 
 ---
 
-## v0.3.9
+## v0.8.0
 
 ### Diagram Generation Bootstrap
 
@@ -227,7 +227,7 @@ Implement `add_epic_types()` in backstage-start.sh:
 ---
 
 
-## v0.7.0
+## v0.9.0
 
 ### "Back to Main" rites
 
@@ -249,7 +249,7 @@ Implement `add_epic_types()` in backstage-start.sh:
 ---
 
 
-## v0.3.1
+## v0.10.0
 
 ### VISION Core Prompt
 
@@ -277,7 +277,7 @@ Implement `add_epic_types()` in backstage-start.sh:
 
 ---
 
-## v0.8.0
+## v0.11.0
 
 ### Backstage from zero
 
@@ -290,7 +290,7 @@ Implement `add_epic_types()` in backstage-start.sh:
 
 ---
 
-## v0.3.2
+## v0.12.0
 
 ### 🌳 Parent Project Support
 
@@ -331,7 +331,7 @@ Implement `add_epic_types()` in backstage-start.sh:
 
 ---
 
-## v0.3.3
+## v0.13.0
 
 ### Auto-Generate Mermaid Diagrams
 
@@ -365,7 +365,7 @@ Implement `add_epic_types()` in backstage-start.sh:
 
 ---
 
-## v0.3.4
+## v0.14.0
 
 ### Diagram Redesign - Beyond Linear
 
@@ -401,7 +401,7 @@ Implement `add_epic_types()` in backstage-start.sh:
 
 ---
 
-## v0.3.6
+## v0.15.0
 
 ### Navigation Branding
 
@@ -439,7 +439,7 @@ Implement `add_epic_types()` in backstage-start.sh:
 
 ---
 
-## v0.4.1
+## v0.16.0
 
 ### Arch Protocol
 
@@ -484,7 +484,7 @@ Implement `add_epic_types()` in backstage-start.sh:
 
 ---
 
-## v0.4.0
+## v0.17.0
 
 ### Templates
 
@@ -507,7 +507,7 @@ Implement `add_epic_types()` in backstage-start.sh:
 
 ---
 
-## v0.5.0
+## v0.18.0
 
 ### Documentation
 
@@ -531,7 +531,7 @@ Implement `add_epic_types()` in backstage-start.sh:
 
 ---
 
-## v0.6.0
+## v0.19.0
 
 ### Branch Lifecycle Management
 
