@@ -233,18 +233,6 @@ update_backstage_diagrams() {
     echo -e "${YELLOW}⚠️  Diagram update temporarily disabled (debugging)${NC}"
     return 0
 }
-                    }
-                    in_nav = 0
-                    next
-                }
-            }
-            { print }
-        ' "$file" > "$file.tmp" && mv "$file.tmp" "$file"
-    done
-    
-    rm -f "$diagram_file"
-    echo -e "${GREEN}✅ Diagrams updated${NC}"
-}
 
 # Update ROADMAP checkboxes
 update_roadmap_tasks() {
