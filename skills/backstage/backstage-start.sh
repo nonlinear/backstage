@@ -27,8 +27,8 @@ ensure_navigation_blocks() {
 > - [README](README.md)
 > - [ROADMAP](backstage/ROADMAP.md)
 > - [CHANGELOG](backstage/CHANGELOG.md)
-> - [POLICY](backstage/POLICY.md)
-> - [HEALTH](backstage/HEALTH.md)
+> - policies: [local](backstage/policies/local/), [global](backstage/policies/global/)
+> - checks: [local](backstage/checks/local/), [global](backstage/checks/global/)
 >
 > 🤖
 
@@ -57,8 +57,8 @@ EOF
 > - [README](../README.md) - Our project
 > - [CHANGELOG](CHANGELOG.md) — What we did
 > - [ROADMAP](ROADMAP.md) — What we wanna do
-> - [POLICY](POLICY.md) — How we do it
-> - [HEALTH](HEALTH.md) — What we accept
+> - policies: [local](policies/local/), [global](policies/global/) — How we do it
+> - checks: [local](checks/local/), [global](checks/global/) — What we accept
 >
 > 🤖
 
@@ -72,8 +72,6 @@ EOF
     # Add to all backstage files
     add_nav_to_file "backstage/ROADMAP.md"
     add_nav_to_file "backstage/CHANGELOG.md"
-    add_nav_to_file "backstage/POLICY.md"
-    add_nav_to_file "backstage/HEALTH.md"
 }
 
 # Node 2️⃣: Read README 🤖 block
@@ -89,8 +87,8 @@ read_navigation_block() {
     local in_block=0
     local roadmap_path=""
     local changelog_path=""
-    local health_path=""
-    local policy_path=""
+    local checks_dir=""
+    local policies_dir=""
     
     while IFS= read -r line; do
         if [[ "$line" =~ ^\>\ 🤖 ]]; then
@@ -106,12 +104,13 @@ read_navigation_block() {
                 roadmap_path=$(echo "$line" | sed -n 's/.*\[ROADMAP\](\([^)]*\)).*/\1/p')
             elif echo "$line" | grep -q "\[CHANGELOG\]"; then
                 changelog_path=$(echo "$line" | sed -n 's/.*\[CHANGELOG\](\([^)]*\)).*/\1/p')
-            elif echo "$line" | grep -q "\[CHECKS\]"; then
-                health_path=$(echo "$line" | sed -n 's/.*\[CHECKS\](\([^)]*\)).*/\1/p')
-            elif echo "$line" | grep -q "\[HEALTH\]"; then
-                health_path=$(echo "$line" | sed -n 's/.*\[HEALTH\](\([^)]*\)).*/\1/p')
-            elif echo "$line" | grep -q "\[POLICY\]"; then
-                policy_path=$(echo "$line" | sed -n 's/.*\[POLICY\](\([^)]*\)).*/\1/p')
+            elif echo "$line" | grep -q "checks:"; then
+                # Parse "checks: [local](path/), [global](path/)"
+                # Just extract base directory (e.g., "backstage/checks")
+                checks_dir=$(echo "$line" | sed -n 's/.*\[local\](\([^)]*\)).*/\1/p' | sed 's|/local/||')
+            elif echo "$line" | grep -q "policies:"; then
+                # Parse "policies: [local](path/), [global](path/)"
+                policies_dir=$(echo "$line" | sed -n 's/.*\[local\](\([^)]*\)).*/\1/p' | sed 's|/local/||')
             fi
         fi
     done < README.md
@@ -121,22 +120,32 @@ read_navigation_block() {
         exit 1
     fi
     
-    echo "$roadmap_path|$changelog_path|$health_path|$policy_path"
+    echo "$roadmap_path|$changelog_path|$checks_dir|$policies_dir"
 }
 
 # Node 3️⃣: Locate status files
 locate_status_files() {
     local paths="$1"
-    IFS='|' read -r ROADMAP CHANGELOG HEALTH POLICY <<< "$paths"
+    IFS='|' read -r ROADMAP CHANGELOG CHECKS_DIR POLICIES_DIR <<< "$paths"
     
     echo -e "${BLUE}📁 Locating status files...${NC}"
     
-    for file in "$ROADMAP" "$CHANGELOG" "$HEALTH" "$POLICY"; do
+    # Validate required files
+    for file in "$ROADMAP" "$CHANGELOG"; do
         if [[ -n "$file" ]] && [[ ! -f "$file" ]]; then
             echo -e "${RED}❌ File not found: $file${NC}"
             exit 1
         fi
     done
+    
+    # Validate directories
+    if [[ -n "$CHECKS_DIR" ]] && [[ ! -d "$CHECKS_DIR" ]]; then
+        echo -e "${YELLOW}⚠️  checks/ directory not found: $CHECKS_DIR (will create)${NC}"
+    fi
+    
+    if [[ -n "$POLICIES_DIR" ]] && [[ ! -d "$POLICIES_DIR" ]]; then
+        echo -e "${YELLOW}⚠️  policies/ directory not found: $POLICIES_DIR (will create)${NC}"
+    fi
     
     echo -e "${GREEN}✅ All status files located${NC}"
 }
@@ -237,8 +246,6 @@ update_backstage_diagrams() {
         "README.md"
         "backstage/ROADMAP.md"
         "backstage/CHANGELOG.md"
-        "backstage/POLICY.md"
-        "backstage/HEALTH.md"
     )
     
     for file in "${files[@]}"; do
@@ -313,29 +320,27 @@ update_roadmap_tasks() {
     local roadmap="$1"
     echo -e "${BLUE}✅ Updating ROADMAP tasks...${NC}"
     
-    # Manual merge only - see POLICY.md for merge protocol
+    # Manual merge only - see policies/global/branch-workflow.md for merge protocol
     echo -e "${YELLOW}ℹ️  Manual merge workflow (ROADMAP → CHANGELOG)${NC}"
 }
 
 # Node 4️⃣: Check git branch
 
-# Node 6️⃣: Run HEALTH checks
-run_health_checks() {
-    local health="$1"
+# Node 6️⃣: Run checks/ enforcement
+run_enforcement() {
+    local script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+    local mode="${1:-start}"
     
-    echo -e "\n${BLUE}🏥 Running HEALTH checks...${NC}"
+    echo -e "\n${BLUE}🔍 Running enforcement (checks + policies)...${NC}"
     
-    if [[ ! -f "$health" ]]; then
-        echo -e "${YELLOW}⚠️  No HEALTH.md found${NC}"
+    # Call checks.sh (handles both checks/ and policies/)
+    if bash "$script_dir/checks.sh" "." "$mode"; then
+        echo -e "${GREEN}✅ Enforcement passed${NC}"
         return 0
+    else
+        echo -e "${RED}❌ Enforcement failed${NC}"
+        return 1
     fi
-    
-    # TODO: Parse HEALTH.md and execute tests
-    # For now, just show what checks exist
-    echo -e "${YELLOW}📋 Checks defined in $health:${NC}"
-    grep -E "^###|^-" "$health" || true
-    
-    echo -e "\n${GREEN}✅ All checks passed (TODO: implement actual checks)${NC}"
 }
 
 # Node 7️⃣: Update docs
@@ -412,7 +417,7 @@ main() {
     
     # Node 3️⃣: Locate status files
     locate_status_files "$paths"
-    IFS='|' read -r ROADMAP CHANGELOG HEALTH POLICY <<< "$paths"
+    IFS='|' read -r ROADMAP CHANGELOG CHECKS_DIR POLICIES_DIR <<< "$paths"
     
     # Node 3.5: Update automation
     update_backstage_diagrams "$ROADMAP"
@@ -426,8 +431,8 @@ main() {
     # Node 5️⃣: Analyze changes
     analyze_changes "$CHANGELOG"
     
-    # Node 6️⃣: Run HEALTH checks
-    run_health_checks "$HEALTH"
+    # Node 6️⃣: Run enforcement (checks + policies)
+    run_enforcement "start"
     
     # Node 7️⃣: Update docs
     update_docs "$ROADMAP"
