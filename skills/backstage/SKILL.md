@@ -1,8 +1,8 @@
 ---
 name: backstage
-description: "Manage backstage workflow in projects (ROADMAP, POLICY, HEALTH, CHANGELOG). Triggers: 'backstage start', 'vamos trabalhar no X', 'backstage health'. Installs protocol if missing, updates global rules, runs health checks, shows active epics. Use for: epic planning, project setup, quality enforcement, context switching."
+description: "Manage backstage workflow in projects (ROADMAP, policies/, checks/, CHANGELOG). Triggers: 'backstage start', 'vamos trabalhar no X', 'backstage health'. Installs protocol if missing, updates global rules, runs health checks, shows active epics. Use for: epic planning, project setup, quality enforcement, context switching."
 type: public
-version: 0.3.5
+version: 1.0.0
 status: production
 author: nonlinear
 license: MIT
@@ -27,7 +27,7 @@ dependencies:
 
 **Backstage-skill = ANTI-DRIFT:**
 - ✅ Force context awareness (project/epic)
-- ✅ HEALTH checks prevent chaos
+- ✅ Health checks prevent chaos
 - ✅ Architecture-first workflow
 - ✅ Roadmap visibility = no surprises
 
@@ -60,74 +60,83 @@ Force context awareness (project/epic/design architecture) to prevent drift.
 
 ---
 
-## POLICY & HEALTH Enforcement
+## Policies & Checks Enforcement
 
-**Backstage-skill enforces ALL rules in POLICY.md and HEALTH.md (global + project).**
+**Backstage-skill enforces ALL rules in policies/ and checks/ (global + local).**
 
 ### Enforcement Model
 
 ```mermaid
 flowchart TD
-    START[Read POLICY + HEALTH<br/>global + project]
+    READ_POL["Read policies/<br/>global + local<br/>[AI reads MD]"]
+    READ_CHK["Read checks/<br/>global + local<br/>[Bash executes SH]"]
+    
     CONFLICT{Conflict?}
     MERGE[Merge compatible rules]
-    PROJECT[Project wins]
+    LOCAL[Local wins]
     
-    SEPARATE[Separate enforcement types]
-    EXEC[Executable<br/>Deterministic rules]
-    INTERP[Interpretive<br/>Contextual rules]
+    AI["AI interprets policies/<br/>[Contextual enforcement]"]
+    SH["Bash executes checks/<br/>[Deterministic validation]"]
     
-    SH[checks.sh executes]
-    SH_OK[✅ Enforced]
-    SH_FAIL[❌ Error reported]
-    
-    AI[AI interprets + acts]
     AI_ACT[✅ Enforce or discuss]
     AI_AMBIG[⚠️ Ask user]
-    AI_FAIL[❌ Needs rewrite]
     
-    REPORT[Integrated report]
+    SH_OK[✅ All checks pass]
+    SH_FAIL[❌ Checks failed]
     
-    START --> CONFLICT
+    REPORT["Report:<br/>📋 Policies (always ✅)<br/>🔍 Checks (✅/❌)"]
+    
+    READ_POL --> CONFLICT
     CONFLICT -->|No| MERGE
-    CONFLICT -->|Yes| PROJECT
-    MERGE --> SEPARATE
-    PROJECT --> SEPARATE
+    CONFLICT -->|Yes| LOCAL
+    MERGE --> AI
+    LOCAL --> AI
     
-    SEPARATE --> EXEC
-    SEPARATE --> INTERP
-    
-    EXEC --> SH
-    SH -->|Success| SH_OK
-    SH -->|Fail| SH_FAIL
-    
-    INTERP --> AI
     AI -->|Clear| AI_ACT
     AI -->|Ambiguous| AI_AMBIG
-    AI -->|Can't parse| AI_FAIL
     
-    SH_OK --> REPORT
-    SH_FAIL --> REPORT
+    READ_CHK --> SH
+    SH -->|Pass| SH_OK
+    SH -->|Fail| SH_FAIL
+    
     AI_ACT --> REPORT
     AI_AMBIG --> REPORT
-    AI_FAIL --> REPORT
+    SH_OK --> REPORT
+    SH_FAIL --> REPORT
 ```
 
 **Two enforcement domains:**
 
-1. **Executable (Deterministic)**
-   - Code blocks in HEALTH.md
-   - Templates in POLICY.md (navigation blocks, versions)
-   - File structure rules (must have 🤖 markers)
-   - **Enforced by:** checks.sh (extracts + executes)
+1. **Policies (Interpretive)**
+   - `policies/global/*.md` = Universal workflow rules
+   - `policies/local/*.md` = Project-specific overrides
+   - **Enforced by:** AI (reads markdown, interprets context, acts)
+   - **Always pass:** AI reads, understands, will act accordingly
 
-2. **Interpretive (Contextual)**
-   - Prose rules in POLICY.md
-   - Quality guidelines ("surgical changes", "clear and prompt-like")
-   - Context decisions ("README is special")
-   - **Enforced by:** AI (reads + interprets + acts/discusses)
+2. **Checks (Deterministic)**
+   - `checks/global/*.sh` = Universal validation tests
+   - `checks/local/*.sh` = Project-specific tests
+   - **Enforced by:** Bash (executes shell scripts, exit codes)
+   - **Pass or fail:** ✅ (exit 0) or ❌ (exit non-zero)
 
-**Guarantee:** EVERY rule is attempted (executable → SH, interpretive → AI). Failures reported to user.
+**Polycentric governance:**
+- Global + local rules coexist
+- Local wins on conflict
+- AI merges when compatible
+
+**Report format:**
+
+```
+📋 Policies (interpretive):
+  ✅ policies/global/branch-workflow.md (read)
+  ✅ policies/global/commit-style.md (read)
+  ✅ policies/local/dogfooding.md (read)
+
+🔍 Checks (deterministic):
+  ✅ checks/global/navigation-block-readme.sh
+  ✅ checks/global/semver-changelog.sh
+  ❌ checks/local/pre-merge-tasks.sh (incomplete tasks)
+```
 
 **Self-contained:** All prompts in SKILL.md (no external prompt files needed).
 
@@ -145,13 +154,13 @@ flowchart TD
    # Output: version|status_emoji|name
    ```
 
-2. **Read POLICY diagram rules** (interpretive - AI):
-   - Global POLICY.md defines default format (linear graph, all epics, sequential)
-   - Project POLICY.md can override (gantt, flowchart, or `diagram: none`)
-   - Project wins on conflict
+2. **Read policies/ diagram rules** (interpretive - AI):
+   - `policies/global/navigation-block.md` defines default format (linear graph, all epics, sequential)
+   - `policies/local/*.md` can override (gantt, flowchart, or `diagram: none`)
+   - Local wins on conflict
 
 3. **Generate mermaid** (interpretive - AI):
-   - Apply POLICY rules to parsed data
+   - Apply policies/ rules to parsed data
    - Create mermaid syntax matching specification
    - Example (default):
      ```mermaid
@@ -161,20 +170,20 @@ flowchart TD
 
 4. **Propagate to all files** (deterministic - SH):
    - Insert after `> 🤖` marker
-   - README.md, ROADMAP.md, CHANGELOG.md, POLICY.md, HEALTH.md
+   - README.md, ROADMAP.md, CHANGELOG.md
    - Remove old diagrams (anti-drift)
 
 **AI Prompt (when running backstage-start/end):**
 
-> Read global/POLICY.md and project/POLICY.md mermaid diagram rules.
+> Read policies/global/navigation-block.md and policies/local/*.md for diagram rules.
 > Run `parse-roadmap.sh` to extract epics.
-> Generate mermaid diagram following POLICY rules (prefer project over global).
+> Generate mermaid diagram following policies/ rules (prefer local over global).
 > Insert diagram after navigation block (`> 🤖`) in all backstage files.
-> If project POLICY says `diagram: none`, skip generation.
+> If local policies say `diagram: none`, skip generation.
 
 **Tools:**
 - `parse-roadmap.sh` - Extract version|status|name from ROADMAP.md
-- POLICY.md - Diagram format rules (type, include/exclude logic, status mapping)
+- `policies/` - Diagram format rules (type, include/exclude logic, status mapping)
 
 ---
 
@@ -182,33 +191,36 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-    GLOBAL[Global POLICY.md<br/>Universal rules]
-    PROJECT[Project POLICY.md<br/>Project-specific overrides]
+    GLOBAL_POL[policies/global/*.md<br/>Universal rules]
+    LOCAL_POL[policies/local/*.md<br/>Project-specific overrides]
     
-    GLOBAL_HEALTH[Global HEALTH.md<br/>Universal tests]
-    PROJECT_HEALTH[Project HEALTH.md<br/>Project-specific tests]
+    GLOBAL_CHK[checks/global/*.sh<br/>Universal tests]
+    LOCAL_CHK[checks/local/*.sh<br/>Project-specific tests]
     
-    AI[AI reads both]
+    AI[AI reads policies/]
+    BASH[Bash executes checks/]
     CONFLICT{Conflict?}
     
-    GLOBAL --> AI
-    PROJECT --> AI
-    GLOBAL_HEALTH --> AI
-    PROJECT_HEALTH --> AI
+    GLOBAL_POL --> AI
+    LOCAL_POL --> AI
+    GLOBAL_CHK --> BASH
+    LOCAL_CHK --> BASH
     
     AI --> CONFLICT
-    CONFLICT -->|Yes| PROJECT
+    CONFLICT -->|Yes| LOCAL_POL
     CONFLICT -->|No| MERGE[Merge rules]
     
     MERGE --> ACTION[Execute workflow]
-    PROJECT --> ACTION
+    LOCAL_POL --> ACTION
+    BASH --> ACTION
 ```
 
 **This skill enforces polycentric governance:**
-- Reads BOTH global + project POLICY/HEALTH files
-- Merges when compatible
-- Prefers project rules on conflict
-- Executes workflow based on merged understanding
+- Reads ALL `policies/**/*.md` files (global + local)
+- Executes ALL `checks/**/*.sh` files (global + local)
+- Merges policies when compatible
+- Prefers local policies on conflict
+- Reports deterministic check results (pass/fail)
 
 **Triggered by:** "good morning", "good night", "backstage start/end"
 
@@ -221,20 +233,12 @@ flowchart TD
     START["Trigger 1️⃣<br/>[SH]"]
     MODE{"Session mode?"}
     
-    %% Common checks module (expanded)
-    CHECKS["checks.sh 6️⃣"]
-    READ_POLICY["Read POLICY<br/>global + project<br/>[AI reads MD]"]
-    READ_HEALTH["Read HEALTH<br/>global + project<br/>[AI reads MD]"]
+    %% Common enforcement module
+    READ_POL["Read policies/<br/>global + local<br/>[AI interprets MD]"]
+    EXEC_CHK["Execute checks/<br/>global + local<br/>[Bash runs SH]"]
     
-    SEPARATE["Separate enforcement<br/>[AI logic]"]
-    EXEC["Executable rules<br/>[SH domain]"]
-    INTERP["Interpretive rules<br/>[AI domain]"]
-    
-    SH_EXEC["Execute deterministic<br/>[SH runs]"]
-    AI_INTERP["Interpret contextual<br/>[AI acts/discusses]"]
-    
-    INTEGRATE["Integrated report<br/>[AI formats]"]
-    CHECKS_GATE{"All pass?"}
+    REPORT["Report 6️⃣<br/>📋 Policies (✅)<br/>🔍 Checks (✅/❌)"]
+    CHECKS_GATE{"All checks<br/>passed?"}
     
     %% Start Branch
     START_BRANCH["Read README 🤖 block 2️⃣<br/>[MD → AI]"]
@@ -261,30 +265,21 @@ flowchart TD
     START_BRANCH --> START_FILES
     START_FILES --> START_GIT
     START_GIT --> START_WORK
-    START_WORK --> CHECKS
+    START_WORK --> READ_POL
+    START_WORK --> EXEC_CHK
     
-    CHECKS --> READ_POLICY
-    CHECKS --> READ_HEALTH
-    READ_POLICY --> SEPARATE
-    READ_HEALTH --> SEPARATE
-    
-    SEPARATE --> EXEC
-    SEPARATE --> INTERP
-    
-    EXEC --> SH_EXEC
-    INTERP --> AI_INTERP
-    
-    SH_EXEC --> INTEGRATE
-    AI_INTERP --> INTEGRATE
-    INTEGRATE --> CHECKS_GATE
+    READ_POL --> REPORT
+    EXEC_CHK --> REPORT
+    REPORT --> CHECKS_GATE
     
     CHECKS_GATE -->|No, start mode| START_FIX
-    START_FIX --> CHECKS
+    START_FIX --> READ_POL
     CHECKS_GATE -->|Yes| START_UPDATE
     START_UPDATE --> START_REPORT
     START_REPORT --> START_PUSH
     
-    MODE -->|End| CHECKS
+    MODE -->|End| READ_POL
+    MODE -->|End| EXEC_CHK
     CHECKS_GATE -->|No, end mode| END_FIXES
     CHECKS_GATE -->|Yes| END_PUSH
     END_FIXES --> END_VICTORY
@@ -295,29 +290,28 @@ flowchart TD
 ```
 
 **Domain labels:**
-- **[MD]** - Markdown file (POLICY.md, HEALTH.md, ROADMAP.md) = Human/AI prompts
-- **[SH]** - Shell script (checks.sh, backstage-start.sh) = Machine executables
+- **[MD]** - Markdown file (policies/*.md, ROADMAP.md) = Human/AI prompts
+- **[SH]** - Shell script (checks/*.sh, backstage-start.sh) = Machine executables
 - **[AI reads MD]** - AI parses markdown, understands rules/prompts
 - **[AI writes MD]** - AI generates markdown content
 - **[SH writes MD]** - Script modifies markdown files (checkboxes, navigation blocks)
-- **[SH runs]** - Script executes deterministic rules
-- **[AI acts/discusses]** - AI interprets contextual rules, enforces or asks user
-- **[AI logic]** - AI separates executable from interpretive
+- **[Bash runs SH]** - Bash executes shell scripts (deterministic validation)
+- **[AI interprets MD]** - AI reads policies/, acts contextually
 
 **Critical separation:**
-- **MD files are prompts** - AI reads, interprets, acts
-- **SH files are executors** - Bash runs commands directly
-- **AI intermediates** - Reads POLICY/HEALTH, separates enforcement types, calls SH for deterministic rules, handles contextual rules itself
+- **policies/ = prompts** - AI reads, interprets, acts
+- **checks/ = executors** - Bash runs commands, returns exit codes
+- **AI intermediates** - Reads policies/, executes checks/, integrates report
 
 **Notes:**
 
 **1️⃣ Trigger:** "backstage start", "vamos trabalhar no X", "whatsup" (start mode) OR "backstage end", "boa noite", "wrap up" (end mode)
 - **Code:** `backstage-start.sh` OR `backstage-end.sh`
 
-**2️⃣ Read README 🤖 block:** Find navigation block between `> 🤖` markers. Extract all status file paths (ROADMAP, CHANGELOG, HEALTH, POLICY). This is ONLY source of truth for file locations.
+**2️⃣ Read README 🤖 block:** Find navigation block between `> 🤖` markers. Extract all status file paths (ROADMAP, CHANGELOG, policies/, checks/). This is ONLY source of truth for file locations.
 - **Code:** `backstage-start.sh::read_navigation_block()`
 
-**3️⃣ Locate status files:** Use paths from 🤖 block. If missing, STOP and ask user where to create them. Check BOTH global (`backstage/global/`) and project (`backstage/`) for polycentric governance.
+**3️⃣ Locate status files:** Use paths from 🤖 block. If missing, STOP and ask user where to create them. Check BOTH global (`backstage/policies/global/`, `backstage/checks/global/`) and local (`backstage/policies/local/`, `backstage/checks/local/`) for polycentric governance.
 - **Code:** `backstage-start.sh::locate_status_files()`
 
 **4️⃣ Check git branch:** Run `git branch --show-current`. Determine work context.
@@ -333,19 +327,30 @@ git log --oneline "${LAST_VERSION}..HEAD"
 Categorize: patch/minor/major. Compare with ROADMAP. Match reality to plans.
 - **Code:** `backstage-start.sh::analyze_changes()`
 
-**6️⃣ checks.sh - Unified POLICY + HEALTH enforcement:**
-1. **Read POLICY** (global + project, project wins)
-2. **Enforce POLICY** - Detect doc drift (system ≠ docs), fix docs
-3. **Read HEALTH** (global + project, project wins)
-4. **Run HEALTH checks** - Execute tests
-5. **Fix what we can** (bugs, connection issues, missing files)
-6. **Report errors** (what we CAN'T fix)
+**6️⃣ Report - Policies + Checks:**
+
+**Report format:**
+```
+📋 Policies (interpretive):
+  ✅ policies/global/branch-workflow.md (read)
+  ✅ policies/global/commit-style.md (read)
+  ✅ policies/local/dogfooding.md (read)
+
+🔍 Checks (deterministic):
+  ✅ checks/global/navigation-block-readme.sh
+  ✅ checks/global/semver-changelog.sh
+  ❌ checks/local/pre-merge-tasks.sh (incomplete tasks)
+```
+
+**Policies always ✅:** AI reads, interprets, will act accordingly
+
+**Checks can fail ❌:** Exit code determines status
 
 **Mode behavior:**
 - **Start mode:** Hard fail (block commit if checks fail)
 - **End mode:** Soft fail (warn, add to ROADMAP)
 
-- **Code:** `checks.sh` (called by both start/end)
+- **Code:** `backstage-start.sh::report_enforcement()`
 
 **7️⃣ Update docs:** If checks pass, auto-update ROADMAP (mark checkboxes) and CHANGELOG (add new entries at TOP, append-only). Bump version. Add navigation menu to all status files.
 - **Code:** `backstage-start.sh::update_docs()`
@@ -392,8 +397,8 @@ Categorize: patch/minor/major. Compare with ROADMAP. Match reality to plans.
 ## Key Principles
 
 1. **README's 🤖 block = Single source of truth** for file locations
-2. **Status files = AI prompts** (HEALTH = tests, POLICY = rules, ROADMAP = backlog, CHANGELOG = history)
-3. **Polycentric governance** (global + project rules, project wins on conflict)
+2. **Status files = AI prompts** (checks/ = tests, policies/ = rules, ROADMAP = backlog, CHANGELOG = history)
+3. **Polycentric governance** (global + local rules, local wins on conflict)
 4. **Checks must pass** before commit (non-negotiable for start mode, soft fail for end mode)
 5. **CHANGELOG is append-only** (never edit old entries, add NEW entry for corrections)
 6. **5 possible outcomes** (Failed, Mismatch, Grooming, Progress, Complete)
@@ -418,7 +423,7 @@ Categorize: patch/minor/major. Compare with ROADMAP. Match reality to plans.
 
 ## Check Policy
 
-**From HEALTH.md:**
+**From checks/:**
 
 - **Epic branches:** Soft fail (warn but allow)
 - **Main branch:** Hard fail (block merge)
@@ -434,7 +439,7 @@ Categorize: patch/minor/major. Compare with ROADMAP. Match reality to plans.
 
 **Level 2: Project-Specific** (e.g., Librarian MCP)
 - Generic tool others can use
-- Has status files (ROADMAP, CHANGELOG, HEALTH, POLICY)
+- Has status files (ROADMAP, CHANGELOG, checks/, policies/)
 - Example flagship project for Level 3
 
 **Level 3: Meta-Workflow** (this skill)
@@ -459,8 +464,9 @@ Categorize: patch/minor/major. Compare with ROADMAP. Match reality to plans.
 
 ## TODO / Future Refinements
 
+- [ ] **Update .sh scripts** to read policies/ and checks/ folders
 - [ ] **Add emoji notes** (like design-discrepancy 1️⃣-8️⃣ format)
-- [ ] **Simplify diagram** (too many nodes, need consolidation)
+- [ ] **Simplify diagram** (consolidated enforcement, removed "separate" step)
 - [ ] **Add code execution points** (where scripts run, if any)
 - [ ] **Create templates** (for new projects without status files)
 - [ ] **Document edge cases** (no git, no README, corrupted files)
@@ -471,5 +477,6 @@ Categorize: patch/minor/major. Compare with ROADMAP. Match reality to plans.
 ---
 
 **Created:** 2026-02-12
-**Status:** DRAFT (needs refinement)
-**Location:** `~/Documents/skills/backstage/SKILL.md`
+**Updated:** 2026-02-18 (v1.0.0 - modular policies/checks)
+**Status:** Documentation updated, scripts pending
+**Location:** `~/Documents/backstage/skills/backstage/SKILL.md`
