@@ -100,6 +100,8 @@ graph LR
 
 ---
 
+## v0.11.0
+
 ### Skill Security Fixes
 
 **Problem:** ClawHub security scan flagged skill as "Suspicious" (high confidence) - 3 major issues: undeclared $HOME access, arbitrary code execution via eval, file modification without explicit warnings.
@@ -116,10 +118,11 @@ graph LR
 - [ ] Hybrid approach: Keep eval for project HEALTH, remove for global?
 - [ ] Re-publish skill after fixes, verify scan result
 
-**Details:** [epic-notes/v0.4.0-skill-security-fixes.md](epic-notes/v0.4.0-skill-security-fixes.md)
+**Details:** [epic-notes/v0.11.0-skill-security-fixes.md](epic-notes/v0.4.0-skill-security-fixes.md)
 
 ---
-## v0.3.8
+
+## v0.4.0
 
 ### Type Enforcement & Version Sync
 
