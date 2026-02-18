@@ -40,6 +40,9 @@ graph LR
 **Tasks:**
 - [ ] Move all skills inside skill folder (change symlinks)
 - [ ] Backstage skill "add to" function (add skill to project)
+- [ ] POLICY as folder
+- [ ] HEALTH as folder
+- [ ] Project/ global, same level
 - [ ] Skills section on README (list available skills)
 
 **Success:**
