@@ -12,7 +12,7 @@
 
 Current state:
 - AGENTS.md has backstage rules hardcoded
-- Rules duplicate what's in backstage/POLICY.md
+- Rules duplicate what's in backstage/policies (global/local)
 - No clear "defer to backstage" pattern
 - Other users won't have same AGENTS.md
 
@@ -29,15 +29,15 @@ Current state:
 ```markdown
 ## Code Changes (Backstage Protocol)
 
-**If repo uses backstage protocol → defer to project's backstage/POLICY.md**
+**If repo uses backstage protocol → defer to project's backstage/policies (global/local)**
 
 **Detection:**
 - Repo has `backstage/` folder
-- Contains: POLICY.md, HEALTH.md, ROADMAP.md, CHANGELOG.md
+- Contains: policies (global/local), checks (global/local), ROADMAP.md, CHANGELOG.md
 
 **When detected:**
-1. Read `backstage/POLICY.md` (project-specific rules)
-2. Read `backstage/global/POLICY.md` (universal rules, if exists)
+1. Read `backstage/policies (global/local)` (project-specific rules)
+2. Read `backstage/global/policies (global/local)` (universal rules, if exists)
 3. Follow epic planning protocol defined there
 4. Run HEALTH checks before/after code changes
 
@@ -59,11 +59,11 @@ Current state:
 
 This project uses [backstage protocol](https://github.com/nonlinear/backstage).
 
-**AI agents:** Read `backstage/POLICY.md` before making code changes.
+**AI agents:** Read `backstage/policies (global/local)` before making code changes.
 
 **Humans:** 
 - Every code change needs an epic (see `backstage/epic-notes/`)
-- Run HEALTH checks: `bash backstage/HEALTH.md`
+- Run HEALTH checks: `bash backstage/checks (global/local)`
 - Update ROADMAP when planning features
 ```
 
@@ -75,8 +75,8 @@ This project uses [backstage protocol](https://github.com/nonlinear/backstage).
 This project requires epic planning before code changes.
 
 1. **Create epic note:** `backstage/epic-notes/YOUR-EPIC.md`
-2. **Define problem + solution** (see `backstage/POLICY.md`)
-3. **Run HEALTH checks:** `bash backstage/HEALTH.md`
+2. **Define problem + solution** (see `backstage/policies (global/local)`)
+3. **Run HEALTH checks:** `bash backstage/checks (global/local)`
 4. **Submit PR** with epic note + implementation
 
 All contributions must follow [backstage protocol](https://github.com/nonlinear/backstage).
@@ -93,12 +93,12 @@ This codebase uses backstage protocol for development workflow.
 
 **Before any code change:**
 1. Check if `backstage/` folder exists
-2. Read `backstage/POLICY.md` for epic requirements
+2. Read `backstage/policies (global/local)` for epic requirements
 3. Create epic note in `backstage/epic-notes/`
 4. Follow planning protocol (definition → decision → execution)
 
 **After code changes:**
-1. Run `bash backstage/HEALTH.md` to verify compliance
+1. Run `bash backstage/checks (global/local)` to verify compliance
 2. Commit epic note + code together
 3. Update ROADMAP if adding new features
 ```
@@ -107,7 +107,7 @@ This codebase uses backstage protocol for development workflow.
 
 **Create `backstage-skill` (already in roadmap):**
 - Auto-detects backstage repos
-- Reads POLICY.md on session start
+- Reads policies (global/local) on session start
 - Enforces epic protocol
 - Runs HEALTH checks
 - Syncs global/ files
@@ -123,9 +123,9 @@ This codebase uses backstage protocol for development workflow.
 - **Consistency:** Same protocol across projects, rules live in each repo
 
 ### For Other Users
-- **Forkable:** Copy backstage/ to your repo, customize POLICY.md
+- **Forkable:** Copy backstage/ to your repo, customize policies (global/local)
 - **Agent-agnostic:** Works with OpenClaw, Cursor, Claude, any AI
-- **Teachable:** New contributors read POLICY.md, learn workflow
+- **Teachable:** New contributors read policies (global/local), learn workflow
 - **Versionable:** Rules evolve with project, tracked in git
 
 ### For Open Source
@@ -139,10 +139,10 @@ This codebase uses backstage protocol for development workflow.
 
 - [ ] **Update AGENTS.md: Add backstage delegation**
   - Remove hardcoded epic rules
-  - Add "detect backstage/ → defer to POLICY.md"
+  - Add "detect backstage/ → defer to policies (global/local)"
   - Keep general principles (Git Safety, Memory Recall, etc.)
 
-- [ ] **Add to global/POLICY.md: Epic Planning Protocol**
+- [ ] **Add to global/policies (global/local): Epic Planning Protocol**
   - Phase 1: Definition checklist
   - Phase 2: Execution decision (NOW/LATER criteria)
   - Phase 3: Architecture exercise triggers
@@ -174,7 +174,7 @@ This codebase uses backstage protocol for development workflow.
 ## Success Criteria
 
 **Agent compliance:**
-- ✅ OpenClaw reads POLICY.md before code changes
+- ✅ OpenClaw reads policies (global/local) before code changes
 - ✅ Epic required for all code (no exceptions)
 - ✅ HEALTH checks run automatically
 
@@ -184,7 +184,7 @@ This codebase uses backstage protocol for development workflow.
 - ✅ Other AI agents can use same workflow
 
 **Flexibility:**
-- ✅ Projects can customize POLICY.md
+- ✅ Projects can customize policies (global/local)
 - ✅ Global rules provide baseline
 - ✅ Project rules override when needed
 
@@ -196,9 +196,9 @@ This codebase uses backstage protocol for development workflow.
 graph TD
     A[AI Agent Starts Session] --> B{backstage/ exists?}
     B -->|no| C[Use default workflow]
-    B -->|yes| D[Read backstage/POLICY.md]
+    B -->|yes| D[Read backstage/policies (global/local)]
     
-    D --> E[Read backstage/global/POLICY.md]
+    D --> E[Read backstage/global/policies (global/local)]
     E --> F[Load Epic Planning Protocol]
     
     F --> G[User Requests Code Change]
@@ -244,10 +244,10 @@ Every code change needs:
 ```markdown
 ## Code Changes
 
-**If repo uses backstage → defer to backstage/POLICY.md**
+**If repo uses backstage → defer to backstage/policies (global/local)**
 
 Detection: Check for `backstage/` folder.
-Follow: Epic planning protocol in POLICY.md.
+Follow: Epic planning protocol in policies (global/local).
 ```
 
 ---

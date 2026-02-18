@@ -11,25 +11,20 @@ YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
-# Node 🔟: Run HEALTH checks (end mode - soft fail)
-run_health_checks() {
-    local health="$1"
+# Node 🔟: Run enforcement (end mode - soft fail)
+run_enforcement() {
+    local script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
     
-    echo -e "${BLUE}🏥 Running HEALTH checks...${NC}"
+    echo -e "${BLUE}🔍 Running enforcement (checks + policies)...${NC}"
     
-    if [[ ! -f "$health" ]]; then
-        echo -e "${YELLOW}⚠️  No HEALTH.md found${NC}"
+    # Call checks.sh in END mode (soft fail)
+    if bash "$script_dir/checks.sh" "." "end"; then
+        echo -e "${GREEN}✅ Enforcement passed${NC}"
         return 0
+    else
+        echo -e "${YELLOW}⚠️  Enforcement warnings (soft fail)${NC}"
+        return 0  # Don't block in end mode
     fi
-    
-    # TODO: Parse HEALTH.md and execute tests
-    # For now, just show what checks exist
-    echo -e "${YELLOW}📋 Checks defined in $health:${NC}"
-    grep -E "^###|^-" "$health" || true
-    
-    # Soft fail (warn but don't block)
-    echo -e "\n${GREEN}✅ All checks passed (soft fail mode)${NC}"
-    return 0
 }
 
 # Add fixes to roadmap
@@ -87,7 +82,6 @@ read_navigation_block() {
     
     local in_block=0
     local roadmap_path=""
-    local health_path=""
     
     while IFS= read -r line; do
         if [[ "$line" =~ ^\>\ 🤖 ]]; then
@@ -97,15 +91,13 @@ read_navigation_block() {
                 break
             fi
         elif [[ $in_block -eq 1 ]]; then
-            if [[ "$line" =~ ROADMAP.*'('[^')']+')'  ]]; then
-                roadmap_path="${BASH_REMATCH[1]:-}"
-            elif [[ "$line" =~ CHECKS.*'('[^')']+')'  ]] || [[ "$line" =~ HEALTH.*'('[^')']+')'  ]]; then
-                health_path="${BASH_REMATCH[1]:-}"
+            if echo "$line" | grep -q "\[ROADMAP\]"; then
+                roadmap_path=$(echo "$line" | sed -n 's/.*\[ROADMAP\](\([^)]*\)).*/\1/p')
             fi
         fi
     done < README.md
     
-    echo "$roadmap_path|$health_path"
+    echo "$roadmap_path"
 }
 
 # Main
@@ -116,10 +108,10 @@ main() {
     
     # Read README
     paths=$(read_navigation_block)
-    IFS='|' read -r ROADMAP HEALTH <<< "$paths"
+    ROADMAP="$paths"
     
-    # Node 🔟: Run HEALTH checks (soft fail)
-    if run_health_checks "$HEALTH"; then
+    # Node 🔟: Run enforcement (soft fail)
+    if run_enforcement; then
         # All checks passed
         echo -e "\n${GREEN}✅ All checks passed - safe to push${NC}"
         

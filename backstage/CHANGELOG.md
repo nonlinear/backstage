@@ -1,27 +1,50 @@
 # Backstage - Changelog
 
+
+
+
+
+
+
+
+
+
+
 > 🤖
-> | Backstage files | Description |
-> | ---------------------------------------------------------------------------- | ------------------ |
-> | [README](../README.md) | Our project |
-> | [CHANGELOG](CHANGELOG.md) | What we did |
-> | [ROADMAP](ROADMAP.md) | What we wanna do |
-> | POLICY: [project](POLICY.md), [global](global/POLICY.md) | How we go about it |
-> | HEALTH: [project](HEALTH.md), [global](global/HEALTH.md) | What we accept |
+> This project follows [backstage protocol](https://github.com/nonlinear/backstage) v1.0.0
 >
-> We use **[backstage protocol](https://github.com/nonlinear/backstage)**, v0.3.4
+> - [README](../README.md) 👏 [ROADMAP](ROADMAP.md) 👏  [CHANGELOG](CHANGELOG.md) 👏 policies: [local](policies/local/) <sup>5</sup>, [global](policies/global/) <sup>11</sup> 👏 checks: [local](checks/local/) <sup>4</sup>, [global](checks/global/) <sup>11</sup>
+>
 > 🤖
+
+
+
+
+
+
+
+
+
+
 
 ```mermaid
 graph LR
-    A[📋 v0.3.8 Type Enforcement & Version Sync]
-    B[📋 v0.7.0 Back to Main rites]
+    A[📋 v0.3.8 Major reordering]
+    B[📋 v0.3.9 Reordering rollout]
     A --> B
-    C[📋 v0.3.1 VISION Core Prompt]
+    C[📋 v0.4.0 Roadmap Skill]
     B --> C
-    D[📋 v0.8.0 Backstage from zero]
+    D["📋 v0.5.0 Pattern Research (Backstage vs Open Source Standards)"]
     C --> D
 ```
+
+
+
+
+
+
+
+
 
 
 

@@ -99,16 +99,16 @@ for file in ROADMAP CHANGELOG POLICY HEALTH README; do
 done
 
 # Download global files
-curl -fsSL "https://raw.githubusercontent.com/nonlinear/backstage/main/backstage/global/POLICY.md" \
-  -o "backstage/global/POLICY.md"
-curl -fsSL "https://raw.githubusercontent.com/nonlinear/backstage/main/backstage/global/HEALTH.md" \
-  -o "backstage/global/HEALTH.md"
+curl -fsSL "https://raw.githubusercontent.com/nonlinear/backstage/main/backstage/global/policies (global/local)" \
+  -o "backstage/global/policies (global/local)"
+curl -fsSL "https://raw.githubusercontent.com/nonlinear/backstage/main/backstage/global/checks (global/local)" \
+  -o "backstage/global/checks (global/local)"
 ```
 
 **6. Customize backstage files**
 - [ ] Edit `backstage/README.md` (project name, purpose, context)
-- [ ] Edit `backstage/POLICY.md` (project-specific rules, if needed)
-- [ ] Edit `backstage/HEALTH.md` (quality gates, if needed)
+- [ ] Edit `backstage/policies (global/local)` (project-specific rules, if needed)
+- [ ] Edit `backstage/checks (global/local)` (quality gates, if needed)
 
 **7. Initial commit**
 ```bash
@@ -370,8 +370,8 @@ graph LR
 
 ## Related Protocols
 
-- **Retrospective Epic Protocol** (global/POLICY.md) - For recovering commits without branch
-- **Manual Merge Protocol** (global/POLICY.md) - For merging promoted epic into new project
+- **Retrospective Epic Protocol** (global/policies (global/local)) - For recovering commits without branch
+- **Manual Merge Protocol** (global/policies (global/local)) - For merging promoted epic into new project
 - **Backlog Epic Concept** (this document) - Alternative to promotion for uncertain epics
 
 ---
@@ -393,7 +393,7 @@ graph LR
 1. Review this protocol with Nicholas
 2. Test on real epic (e.g., v0.14.0 Walkie-Talkie → apps/walkie/)
 3. Refine based on what breaks
-4. Add to global/POLICY.md when stable
+4. Add to global/policies (global/local) when stable
 
 ---
 
