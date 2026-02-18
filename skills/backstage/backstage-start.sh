@@ -230,78 +230,9 @@ update_backstage_diagrams() {
     local roadmap="$1"
     
     echo -e "${BLUE}🎨 Updating backstage diagrams...${NC}"
-    
-    # Generate diagram to temp file
-    local diagram_file="/tmp/roadmap_diagram_$$.md"
-    generate_roadmap_diagram "$roadmap" > "$diagram_file"
-    
-    if [[ ! -s "$diagram_file" ]]; then
-        echo -e "${YELLOW}⚠️  No diagram generated (empty ROADMAP?)${NC}"
-        rm -f "$diagram_file"
-        return 0
-    fi
-    
-    # Files to update
-    local files=(
-        "README.md"
-        "backstage/ROADMAP.md"
-        "backstage/CHANGELOG.md"
-    )
-    
-    for file in "${files[@]}"; do
-        if [[ ! -f "$file" ]]; then
-            continue
-        fi
-        
-        # Check if file has navigation block
-        if ! grep -q "> 🤖" "$file"; then
-            continue
-        fi
-        
-        echo -e "${BLUE}  Updating $file...${NC}"
-        
-        # Remove old mermaid block (between nav blocks, if exists)
-        awk '
-            BEGIN { after_nav=0; in_mermaid=0 }
-            /^> 🤖$/ {
-                if (after_nav == 1) after_nav = 2
-                else after_nav = 1
-                print
-                next
-            }
-            after_nav == 2 && /^```mermaid/ {
-                in_mermaid = 1
-                next
-            }
-            in_mermaid && /^```$/ {
-                in_mermaid = 0
-                after_nav = 0
-                next
-            }
-            in_mermaid { next }
-            { print }
-        ' "$file" > "$file.tmp" && mv "$file.tmp" "$file"
-        
-        # Insert new diagram after closing nav block
-        awk -v diagram_file="$diagram_file" '
-            BEGIN { in_nav=0; inserted=0 }
-            /^> 🤖$/ {
-                if (in_nav == 0) {
-                    # First 🤖 - start nav block
-                    in_nav = 1
-                    print
-                    next
-                } else {
-                    # Second 🤖 - end nav block, insert diagram
-                    print
-                    if (inserted == 0) {
-                        print ""
-                        while ((getline line < diagram_file) > 0) {
-                            print line
-                        }
-                        close(diagram_file)
-                        print ""
-                        inserted = 1
+    echo -e "${YELLOW}⚠️  Diagram update temporarily disabled (debugging)${NC}"
+    return 0
+}
                     }
                     in_nav = 0
                     next
