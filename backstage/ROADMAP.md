@@ -45,7 +45,6 @@ graph LR
 - [x] HEALTH as folder
 - [x] Project/ global, same level
 - [ ] Skills section on README (list available skills)
-- [ ] policy health types? frontmatter?
 
 **Success:**
 - All skills in `skill/` folder (no scattered symlinks)
@@ -59,6 +58,7 @@ graph LR
 ### Reordering rollout
 
 - [ ] list all projects (save?)
+- [ ] frontmatter for all policies and checks (title, description only)
 - [ ] change symlinks for global policies and checks
 - [ ] for each project, explode all project POLICY HEALTH em policies/local checks/local
 - [ ] rerun backstage on each
