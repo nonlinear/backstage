@@ -37,6 +37,7 @@ Backstage follows a **polycentric structure**—not hierarchical "levels" but **
 ---
 
 
+
 > 🤖
 >
 > - [README](README.md)
@@ -47,6 +48,7 @@ Backstage follows a **polycentric structure**—not hierarchical "levels" but **
 >
 > We use **[backstage protocol](https://github.com/nonlinear/backstage)**, v0.3.4
 > 🤖
+
 
 
 ```mermaid
