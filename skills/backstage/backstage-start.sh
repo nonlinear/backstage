@@ -325,6 +325,17 @@ update_roadmap_tasks() {
 }
 
 # Node 4️⃣: Check git branch
+check_branch() {
+    git rev-parse --abbrev-ref HEAD 2>/dev/null || echo "main"
+}
+
+# Node 5️⃣: Analyze changes
+analyze_changes() {
+    local changelog="$1"
+    echo -e "${BLUE}📊 Analyzing changes...${NC}"
+    # TODO: Implement change analysis
+    echo -e "${YELLOW}⚠️  Change analysis not yet implemented${NC}"
+}
 
 # Node 6️⃣: Run checks/ enforcement
 run_enforcement() {
