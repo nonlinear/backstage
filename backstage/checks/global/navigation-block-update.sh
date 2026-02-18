@@ -15,14 +15,10 @@ if [[ -f README.md ]] && grep -q "> 🤖" README.md; then
                 if (done == 0) {
                     print ""
                     print "> 🤖"
+                    print "> This project follows [backstage protocol](https://github.com/nonlinear/backstage) vN.N.N"
                     print ">"
-                    print "> - [README](README.md)"
-                    print "> - [ROADMAP](backstage/ROADMAP.md)"
-                    print "> - [CHANGELOG](backstage/CHANGELOG.md)"
-                    print "> - policies: [local](backstage/policies/local/), [global](backstage/policies/global/)"
-                    print "> - checks: [local](backstage/checks/local/), [global](backstage/checks/global/)"
+                    print "> - [README](README.md) 👏 [ROADMAP](backstage/ROADMAP.md) 👏  [CHANGELOG](backstage/CHANGELOG.md) 👏 policies: [local](backstage/policies/local/) <sup>N</sup>, [global](backstage/policies/global/) <sup>N</sup> 👏 checks: [local](backstage/checks/local/) <sup>N</sup>, [global](backstage/checks/global/) <sup>N</sup>"
                     print ">"
-                    print "> We use **[backstage protocol](https://github.com/nonlinear/backstage)**, v0.3.4"
                     print "> 🤖"
                     print ""
                     done = 1

@@ -38,16 +38,20 @@ Backstage follows a **polycentric structure**—not hierarchical "levels" but **
 
 
 
+
+
+
+
 > 🤖
+> This project follows [backstage protocol](https://github.com/nonlinear/backstage) v0.3.4
 >
-> - [README](README.md)
-> - [ROADMAP](backstage/ROADMAP.md)
-> - [CHANGELOG](backstage/CHANGELOG.md)
-> - policies: [local](backstage/policies/local/), [global](backstage/policies/global/)
-> - checks: [local](backstage/checks/local/), [global](backstage/checks/global/)
+> - [README](README.md) 👏 [ROADMAP](backstage/ROADMAP.md) 👏  [CHANGELOG](backstage/CHANGELOG.md) 👏 policies: [local](backstage/policies/local/), [global](backstage/policies/global/) 👏 checks: [local](backstage/checks/local/), [global](backstage/checks/global/)
 >
-> We use **[backstage protocol](https://github.com/nonlinear/backstage)**, v0.3.4
 > 🤖
+
+
+
+
 
 
 
