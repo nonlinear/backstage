@@ -25,14 +25,13 @@ LOCAL_CHECKS_DIR="backstage/checks/local"
 CHECKS_PASS=true
 CHECKS_RUN=0
 
-# Collect all check filenames (basenames only)
-declare -A LOCAL_CHECK_NAMES
-
+# Collect local check basenames (for override detection)
+LOCAL_CHECKS=""
 if [ -d "$LOCAL_CHECKS_DIR" ]; then
     for check in "$LOCAL_CHECKS_DIR"/*.sh; do
         if [ -f "$check" ]; then
             basename_check=$(basename "$check")
-            LOCAL_CHECK_NAMES["$basename_check"]=1
+            LOCAL_CHECKS="$LOCAL_CHECKS $basename_check "
         fi
     done
 fi
@@ -44,8 +43,8 @@ if [ -d "$GLOBAL_CHECKS_DIR" ]; then
         if [ -f "$check" ]; then
             basename_check=$(basename "$check")
             
-            # Skip if local overrides
-            if [ -n "${LOCAL_CHECK_NAMES[$basename_check]}" ]; then
+            # Skip if local overrides (check if basename is in LOCAL_CHECKS string)
+            if echo "$LOCAL_CHECKS" | grep -q " $basename_check "; then
                 echo "    ⏭️  $basename_check (local override)"
                 continue
             fi
@@ -103,14 +102,13 @@ LOCAL_POLICIES_DIR="backstage/policies/local"
 
 POLICIES_READ=0
 
-# Collect all policy filenames (basenames only)
-declare -A LOCAL_POLICY_NAMES
-
+# Collect local policy basenames (for override detection)
+LOCAL_POLICIES=""
 if [ -d "$LOCAL_POLICIES_DIR" ]; then
     for policy in "$LOCAL_POLICIES_DIR"/*.md; do
         if [ -f "$policy" ]; then
             basename_policy=$(basename "$policy")
-            LOCAL_POLICY_NAMES["$basename_policy"]=1
+            LOCAL_POLICIES="$LOCAL_POLICIES $basename_policy "
         fi
     done
 fi
@@ -122,8 +120,8 @@ if [ -d "$GLOBAL_POLICIES_DIR" ]; then
         if [ -f "$policy" ]; then
             basename_policy=$(basename "$policy")
             
-            # Skip if local overrides
-            if [ -n "${LOCAL_POLICY_NAMES[$basename_policy]}" ]; then
+            # Skip if local overrides (check if basename is in LOCAL_POLICIES string)
+            if echo "$LOCAL_POLICIES" | grep -q " $basename_policy "; then
                 echo "    ⏭️  $basename_policy (local override)"
                 continue
             fi
