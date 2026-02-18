@@ -20,7 +20,7 @@
 
 ```bash
 # From project root
-for check in backstage/health/global/*.sh; do
+for check in backstage/checks/global/*.sh; do
   bash "$check"
 done
 ```

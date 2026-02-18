@@ -14,12 +14,12 @@
 
 ```bash
 # From project root
-for check in backstage/health/local/*.sh; do
+for check in backstage/checks/local/*.sh; do
   bash "$check"
 done
 ```
 
-**Universal checks:** See `../global/HEALTH.md`
+**Universal checks:** See `../global/README.md`
 
 **Last updated:** 2026-02-18  
 **Version:** 2.0 (Exploded from monolithic HEALTH.md)
