@@ -14,14 +14,22 @@
 
 ```mermaid
 graph LR
-    A[📋 v0.3.8 Type Enforcement & Version Sync]
-    B[📋 v0.7.0 Back to Main rites]
+    A[📋 v0.3.8 Major reordering]
+    B[📋 v0.3.9 Reordering rollout]
     A --> B
-    C[📋 v0.3.1 VISION Core Prompt]
+    C[📋 v0.4.0 Roadmap Skill]
     B --> C
-    D[📋 v0.8.0 Backstage from zero]
+    D[📋 v0.5.0 Pattern Research (Backstage vs Open Source Standards)]
     C --> D
 ```
+
+
+
+
+
+
+
+
 
 
 
