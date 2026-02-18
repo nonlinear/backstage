@@ -1,16 +1,16 @@
 # Backstage - Changelog
 
+
 > 🤖
-> | Backstage files | Description |
-> | ---------------------------------------------------------------------------- | ------------------ |
-> | [README](../README.md) | Our project |
-> | [CHANGELOG](CHANGELOG.md) | What we did |
-> | [ROADMAP](ROADMAP.md) | What we wanna do |
-> | POLICY: [project](POLICY.md), [global](global/POLICY.md) | How we go about it |
-> | HEALTH: [project](HEALTH.md), [global](global/HEALTH.md) | What we accept |
 >
-> We use **[backstage protocol](https://github.com/nonlinear/backstage)**, v0.3.4
+> - [README](../README.md) - Our project
+> - [CHANGELOG](CHANGELOG.md) — What we did
+> - [ROADMAP](ROADMAP.md) — What we wanna do
+> - policies: [local](policies/local/), [global](policies/global/) — How we do it
+> - checks: [local](checks/local/), [global](checks/global/) — What we accept
+>
 > 🤖
+
 
 ```mermaid
 graph LR

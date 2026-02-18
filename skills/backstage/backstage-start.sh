@@ -74,6 +74,83 @@ EOF
     add_nav_to_file "backstage/CHANGELOG.md"
 }
 
+# Update navigation blocks content (if already exist)
+update_navigation_blocks() {
+    echo -e "${BLUE}🔄 Updating navigation blocks...${NC}" >&2
+    
+    # Update README.md navigation block
+    if [[ -f README.md ]] && grep -q "> 🤖" README.md; then
+        echo -e "${BLUE}  Updating README.md navigation block...${NC}" >&2
+        
+        # Remove old nav block and insert new one
+        awk '
+            BEGIN { in_nav=0; done=0 }
+            /^> 🤖$/ {
+                if (in_nav == 0) {
+                    in_nav = 1
+                    next
+                } else {
+                    in_nav = 0
+                    if (done == 0) {
+                        print ""
+                        print "> 🤖"
+                        print ">"
+                        print "> - [README](README.md)"
+                        print "> - [ROADMAP](backstage/ROADMAP.md)"
+                        print "> - [CHANGELOG](backstage/CHANGELOG.md)"
+                        print "> - policies: [local](backstage/policies/local/), [global](backstage/policies/global/)"
+                        print "> - checks: [local](backstage/checks/local/), [global](backstage/checks/global/)"
+                        print ">"
+                        print "> We use **[backstage protocol](https://github.com/nonlinear/backstage)**, v0.3.4"
+                        print "> 🤖"
+                        print ""
+                        done = 1
+                    }
+                    next
+                }
+            }
+            in_nav == 0 { print }
+        ' README.md > /tmp/readme_updated.md && mv /tmp/readme_updated.md README.md
+    fi
+    
+    # Update backstage files navigation blocks
+    for file in backstage/ROADMAP.md backstage/CHANGELOG.md; do
+        if [[ -f "$file" ]] && grep -q "> 🤖" "$file"; then
+            echo -e "${BLUE}  Updating $file navigation block...${NC}" >&2
+            
+            awk '
+                BEGIN { in_nav=0; done=0 }
+                /^> 🤖$/ {
+                    if (in_nav == 0) {
+                        in_nav = 1
+                        next
+                    } else {
+                        in_nav = 0
+                        if (done == 0) {
+                            print ""
+                            print "> 🤖"
+                            print ">"
+                            print "> - [README](../README.md) - Our project"
+                            print "> - [CHANGELOG](CHANGELOG.md) — What we did"
+                            print "> - [ROADMAP](ROADMAP.md) — What we wanna do"
+                            print "> - policies: [local](policies/local/), [global](policies/global/) — How we do it"
+                            print "> - checks: [local](checks/local/), [global](checks/global/) — What we accept"
+                            print ">"
+                            print "> 🤖"
+                            print ""
+                            done = 1
+                        }
+                        next
+                    }
+                }
+                in_nav == 0 { print }
+            ' "$file" > /tmp/file_updated.md && mv /tmp/file_updated.md "$file"
+        fi
+    done
+    
+    echo -e "${GREEN}✅ Navigation blocks updated${NC}" >&2
+}
+
 # Node 2️⃣: Read README 🤖 block
 read_navigation_block() {
     echo -e "${BLUE}📖 Reading README navigation block...${NC}" >&2
@@ -341,6 +418,9 @@ main() {
     
     # Node 1️⃣: Ensure navigation blocks
     ensure_navigation_blocks
+    
+    # Node 1.5: Update navigation blocks content
+    update_navigation_blocks
     
     # Node 2️⃣: Read README 🤖 block
     paths=$(read_navigation_block)

@@ -36,18 +36,18 @@ Backstage follows a **polycentric structure**—not hierarchical "levels" but **
 
 ---
 
+
 > 🤖
-> | Backstage files | Description |
-> | ---------------------------------------------------------------------------- | ------------------ |
-> | [README](backstage/README.md) | Our project |
-> | [CHANGELOG](backstage/CHANGELOG.md) | What we did |
-> | [ROADMAP](backstage/ROADMAP.md) | What we wanna do |
-> | POLICY: [project](backstage/POLICY.md), [global](backstage/global/POLICY.md) | How we go about it |
-> | HEALTH: [project](backstage/HEALTH.md), [global](backstage/global/HEALTH.md) | What we accept |
+>
+> - [README](README.md)
+> - [ROADMAP](backstage/ROADMAP.md)
+> - [CHANGELOG](backstage/CHANGELOG.md)
+> - policies: [local](backstage/policies/local/), [global](backstage/policies/global/)
+> - checks: [local](backstage/checks/local/), [global](backstage/checks/global/)
 >
 > We use **[backstage protocol](https://github.com/nonlinear/backstage)**, v0.3.4
->
 > 🤖
+
 
 ```mermaid
 graph LR
