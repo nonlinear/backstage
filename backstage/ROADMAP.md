@@ -14,42 +14,54 @@
 
 ```mermaid
 graph LR
-    A[📋 v0.3.8 Skill Reordering]
-    B[📋 v0.3.9 Roadmap Skill]
+    A[📋 v1.0.0 Modular Policies & Checks]
+    B[📋 v0.3.9 Reordering rollout]
     A --> B
-    C[📋 v0.4.0 Type Enforcement & Version Sync]
+    C[📋 v0.4.0 Roadmap Skill]
     B --> C
-    D[📋 v0.7.0 Back to Main rites]
+    D[📋 v0.5.0 Pattern Research (Backstage vs Open Source Standards)]
     C --> D
-    E[📋 v0.3.1 VISION Core Prompt]
-    D --> E
-    F[📋 v0.8.0 Backstage from zero]
-    E --> F
-    G[📋 v0.10.0 Pattern Research]
-    F --> G
 ```
+
+
+
+
+
+
+
+
 
 ---
 
-## v0.3.8
+## v1.0.0
 
-### Major reordering
+### Modular Policies & Checks (MAJOR)
 
-**Goal:** Organize skills inside skill folder, improve backstage skill "add to" function, document skills in README
+**Goal:** Explode monolithic POLICY/HEALTH files into modular folders - composable cards instead of 8000+ line files
 
 **Tasks:**
-- [x] Move all skills inside skill folder (change symlinks)
-- [ ] change symlinks
-- [ ] Backstage skill "add to" function (add skill to project)
-- [x] POLICY as folder
-- [x] HEALTH as folder
-- [x] Project/ global, same level
-- [ ] Skills section on README (list available skills)
+- [x] Explode global POLICY.md → policies/global/*.md (12 cards)
+- [x] Explode local POLICY.md → policies/local/*.md (5 cards)
+- [x] Explode global HEALTH.md → checks/global/*.sh (9 scripts)
+- [x] Explode local HEALTH.md → checks/local/*.sh (3 scripts)
+- [x] Rename health/ → checks/ (better semantics)
+- [x] Update SKILL.md diagrams (folders not files)
+- [x] Rewrite checks.sh (read from folders)
+- [x] Update backstage-start.sh (use checks.sh)
+- [x] Update backstage-end.sh (use checks.sh)
+- [x] Update all checks scripts (validate folders)
+- [x] Generalize epic notes (remove POLICY.md/HEALTH.md refs)
+- [x] Test enforcement (all passed!)
+- [x] Rename branch v0.3.8 → v1.0.0
+- [ ] Delete old POLICY.md/HEALTH.md files
+- [ ] Update navigation blocks (manual or via bom dia)
 
 **Success:**
-- All skills in `skill/` folder (no scattered symlinks)
-- `backstage-skill add <skill-name>` works
-- README documents available skills
+- ✅ Modular structure works (checks + policies separated)
+- ✅ Local override mechanism (same filename = takes precedence)
+- ✅ Old scheme completely obsolete
+- ✅ Enforcement passed (12 checks, 18 policies)
+- 🔲 Other projects can import/compose policies from backstage
 
 ---
 
