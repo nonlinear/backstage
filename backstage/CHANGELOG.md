@@ -16,6 +16,39 @@
 > - [README](../README.md) 👏 [ROADMAP](ROADMAP.md) 👏  [CHANGELOG](CHANGELOG.md) 👏 policies: [local](policies/local/) <sup>5</sup>, [global](policies/global/) <sup>11</sup> 👏 checks: [local](checks/local/) <sup>4</sup>, [global](checks/global/) <sup>11</sup>
 >
 > 🤖
+## v1.0.0 - 2026-02-18
+
+### Modular Policies & Checks (MAJOR)
+
+**Goal:** Explode monolithic POLICY/HEALTH files into modular folders - composable cards instead of 8000+ line files
+
+**Completed:**
+- Exploded global POLICY.md → policies/global/*.md (12 cards)
+- Exploded local POLICY.md → policies/local/*.md (5 cards)
+- Exploded global HEALTH.md → checks/global/*.sh (9 scripts)
+- Exploded local HEALTH.md → checks/local/*.sh (3 scripts)
+- Renamed health/ → checks/ (better semantics)
+- Updated SKILL.md diagrams (folders not files)
+- Rewrote checks.sh (read from folders)
+- Updated backstage-start.sh (use checks.sh)
+- Updated backstage-end.sh (use checks.sh)
+- Updated all checks scripts (validate folders)
+- Generalized epic notes (remove POLICY.md/HEALTH.md refs)
+- Tested enforcement (all passed!)
+- Renamed branch v0.3.8 → v1.0.0
+- Deleted old POLICY.md/HEALTH.md files
+- Navigation blocks auto-update (deterministic check)
+
+**Success:**
+- ✅ Modular structure works (checks + policies separated)
+- ✅ Local override mechanism (same filename = takes precedence)
+- ✅ Old scheme completely obsolete
+- ✅ Enforcement passed (15 checks, 17 policies)
+- ✅ Dynamic version from branch name
+- ✅ Auto-count policies/checks in navigation blocks
+
+---
+
 
 
 
