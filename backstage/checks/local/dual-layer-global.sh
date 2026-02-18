@@ -1,7 +1,7 @@
 #!/bin/bash
-# Dual-Layer Structure Check - Global framework files must exist
+# Dual-Layer Structure Check - Global framework folders must exist
 
 test -d global && \
-test -f global/POLICY.md && \
-test -f global/HEALTH.md && \
+test -d global/policies/global && \
+test -d global/checks/global && \
 echo '✅ Global framework files exist' || echo '❌ Missing global framework'

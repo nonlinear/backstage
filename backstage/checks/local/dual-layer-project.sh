@@ -4,6 +4,6 @@
 test -f README.md && \
 test -f ROADMAP.md && \
 test -f CHANGELOG.md && \
-test -f POLICY.md && \
-test -f HEALTH.md && \
+test -d policies && \
+test -d checks && \
 echo '✅ Project status files exist' || echo '❌ Missing project files'
