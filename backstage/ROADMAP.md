@@ -1,6 +1,7 @@
 # Backstage - Roadmap
 
 
+
 > 🤖
 >
 > - [README](../README.md) - Our project
@@ -10,6 +11,7 @@
 > - checks: [local](checks/local/), [global](checks/global/) — What we accept
 >
 > 🤖
+
 
 
 ```mermaid
@@ -70,7 +72,10 @@ graph LR
 ### Reordering rollout
 
 - [ ] list all projects (save?)
-- [ ] frontmatter for all policies and checks (title, description only)
+- [ ] frontmatter for all policies and checks (title, description, optional: diagram)
+  - [ ] Add description to all existing checks/policies
+  - [ ] Move deterministic policies → checks (epic-format, semver, formatting)
+  - [ ] Add mermaid diagrams to checks (show validation workflow)
 - [ ] change symlinks for global policies and checks
 - [ ] for each project, explode all project POLICY HEALTH em policies/local checks/local
 - [ ] rerun backstage on each
