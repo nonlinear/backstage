@@ -33,22 +33,37 @@ graph LR
 
 ## v0.3.8
 
-### Skill Reordering
+### Major reordering
 
 **Goal:** Organize skills inside skill folder, improve backstage skill "add to" function, document skills in README
 
 **Tasks:**
-- [ ] Move all skills inside skill folder (change symlinks)
+- [x] Move all skills inside skill folder (change symlinks)
+- [ ] change symlinks
 - [ ] Backstage skill "add to" function (add skill to project)
-- [ ] POLICY as folder
-- [ ] HEALTH as folder
-- [ ] Project/ global, same level
+- [x] POLICY as folder
+- [x] HEALTH as folder
+- [x] Project/ global, same level
 - [ ] Skills section on README (list available skills)
+- [ ] policy health types? frontmatter?
 
 **Success:**
 - All skills in `skill/` folder (no scattered symlinks)
 - `backstage-skill add <skill-name>` works
 - README documents available skills
+
+---
+
+## v0.3.9
+
+### Reordering rollout
+
+- [ ] list all projects (save?)
+- [ ] change symlinks for global policies and checks
+- [ ] for each project, explode all project POLICY HEALTH em policies/local checks/local
+- [ ] rerun backstage on each
+- [ ] check fixes (its just once)
+- [ ] move frontmatter skill rules to backstage, librarian (all with companions)
 
 ---
 

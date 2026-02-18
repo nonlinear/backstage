@@ -74,7 +74,7 @@ In the future, navigation block format may change:
 ```markdown
 > 🤖
 > This project follows [backstage protocol](https://github.com/nonlinear/backstage) v0.3.4
-> [README](path/to/README.md) 👏 [CHANGELOG](path/to/CHANGELOG.md) 👏 [ROADMAP](path/to/ROADMAP.md) 👏 POLICY: [project](path/to/POLICY.md), [global](path/to/global/POLICY.md) 👏 HEALTH: [project](path/to/HEALTH.md), [global](path/to/global/HEALTH.md)
+> [readme](path/to/README.md) 👏 [roadmap](path/to/ROADMAP.md) 👏 [changelog](path/to/CHANGELOG.md) 👏 [global](path/to/policy/global), [local](path/to/policy/local) policies 👏 [global](path/to/policy/global), [local](path/to/policy/local) checks
 > 🤖
 ```
 
