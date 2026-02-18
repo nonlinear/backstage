@@ -14,20 +14,46 @@
 
 ```mermaid
 graph LR
-    A[📋 v0.3.8 Type Enforcement & Version Sync]
-    B[📋 v0.7.0 Back to Main rites]
+    A[📋 v0.3.8 Roadmap Skill]
+    B[📋 v0.3.9 Type Enforcement & Version Sync]
     A --> B
-    C[📋 v0.3.1 VISION Core Prompt]
+    C[📋 v0.7.0 Back to Main rites]
     B --> C
-    D[📋 v0.8.0 Backstage from zero]
+    D[📋 v0.3.1 VISION Core Prompt]
     C --> D
-    E[📋 v0.9.0 Pattern Research]
+    E[📋 v0.8.0 Backstage from zero]
     D --> E
+    F[📋 v0.10.0 Pattern Research]
+    E --> F
 ```
 
 ---
 
-## v0.9.0
+## v0.3.8
+
+### Roadmap Skill
+
+**Description:** Localhost wrapper (like arch) that loads ROADMAP.md and displays as interactive to-do list organized by epics
+
+**Goal:** Visual epic management with automatic renumbering and task reordering
+
+**Tasks:**
+- [ ] Phase 1: Load ROADMAP.md (read-only viewer)
+- [ ] Phase 2: Check tasks (mark complete)
+- [ ] Phase 3: Add/remove/reorder tasks within epics
+- [ ] Phase 4: Reorder epics
+- [ ] Phase 5: Automatic renumbering (v0.X.0 → v0.Y.0 on reorder)
+
+**Success:**
+- Interactive ROADMAP viewer (localhost)
+- Task completion (checkboxes work)
+- Drag-and-drop epic reordering
+- Auto-renumber on epic move
+- Saves back to ROADMAP.md
+
+---
+
+## v0.3.9
 
 ### Pattern Research (Backstage vs Open Source Standards)
 
