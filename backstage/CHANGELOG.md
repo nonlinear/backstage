@@ -10,12 +10,18 @@
 
 
 
+
+
+
 > 🤖
 > This project follows [backstage protocol](https://github.com/nonlinear/backstage) v1.0.0
 >
 > - [README](../README.md) 👏 [ROADMAP](ROADMAP.md) 👏  [CHANGELOG](CHANGELOG.md) 👏 policies: [local](policies/local/) <sup>5</sup>, [global](policies/global/) <sup>11</sup> 👏 checks: [local](checks/local/) <sup>4</sup>, [global](checks/global/) <sup>11</sup>
 >
 > 🤖
+
+
+
 ## v1.0.0 - 2026-02-18
 
 ### Modular Policies & Checks (MAJOR)
