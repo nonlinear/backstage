@@ -14,22 +14,42 @@
 
 ```mermaid
 graph LR
-    A[📋 v0.3.8 Roadmap Skill]
-    B[📋 v0.3.9 Type Enforcement & Version Sync]
+    A[📋 v0.3.8 Skill Reordering]
+    B[📋 v0.3.9 Roadmap Skill]
     A --> B
-    C[📋 v0.7.0 Back to Main rites]
+    C[📋 v0.4.0 Type Enforcement & Version Sync]
     B --> C
-    D[📋 v0.3.1 VISION Core Prompt]
+    D[📋 v0.7.0 Back to Main rites]
     C --> D
-    E[📋 v0.8.0 Backstage from zero]
+    E[📋 v0.3.1 VISION Core Prompt]
     D --> E
-    F[📋 v0.10.0 Pattern Research]
+    F[📋 v0.8.0 Backstage from zero]
     E --> F
+    G[📋 v0.10.0 Pattern Research]
+    F --> G
 ```
 
 ---
 
 ## v0.3.8
+
+### Skill Reordering
+
+**Goal:** Organize skills inside skill folder, improve backstage skill "add to" function, document skills in README
+
+**Tasks:**
+- [ ] Move all skills inside skill folder (change symlinks)
+- [ ] Backstage skill "add to" function (add skill to project)
+- [ ] Skills section on README (list available skills)
+
+**Success:**
+- All skills in `skill/` folder (no scattered symlinks)
+- `backstage-skill add <skill-name>` works
+- README documents available skills
+
+---
+
+## v0.3.9
 
 ### Roadmap Skill
 
