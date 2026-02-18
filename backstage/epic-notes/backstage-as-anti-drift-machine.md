@@ -78,8 +78,8 @@ Backstage protocol exists, but **drift happens:**
 **Question:** Can we merge POLICY + HEALTH into single file?
 
 **Current split:**
-- **POLICY.md** = Interpretive rules (AI domain)
-- **HEALTH.md** = Executable rules (SH domain)
+- **policies (global/local)** = Interpretive rules (AI domain)
+- **checks (global/local)** = Executable rules (SH domain)
 
 **Why separate:**
 - Different consumption patterns (AI reads prose, SH extracts code)
@@ -105,9 +105,9 @@ Backstage protocol exists, but **drift happens:**
 **Rule:** Project-specific stuff lives in project folder, NOT global.
 
 **Examples:**
-- `life/backstage/POLICY.md` - Life-specific epic rules
-- `skills/backstage/POLICY.md` - Skills publication workflow
-- `backstage/backstage/POLICY.md` - Backstage meta-rules
+- `life/backstage/policies (global/local)` - Life-specific epic rules
+- `skills/backstage/policies (global/local)` - Skills publication workflow
+- `backstage/backstage/policies (global/local)` - Backstage meta-rules
 
 ---
 

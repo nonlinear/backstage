@@ -42,7 +42,7 @@ flowchart TD
     SKILL_DUMP["🟨 Skill: Dump POLICY + HEALTH<br/>(cat files to stdout)"]
     
     %% POLICY/HEALTH (INTELLIGENCE)
-    POLICY_READ(("🟩 POLICY.md<br/>HEALTH.md<br/>(protocol rules)"))
+    POLICY_READ(("🟩 policies (global/local)<br/>checks (global/local)<br/>(protocol rules)"))
     
     %% AI Reads Context
     AI_READ["🟧 AI: Read dumped context<br/>+ user message intent"]
@@ -127,12 +127,12 @@ flowchart TD
 
 ### 2. **POLICY = Intelligence**
 
-**POLICY.md contains:**
+**policies (global/local) contains:**
 - Workflow rules (when to commit, when to merge)
 - Step-by-step protocols (health checks, merge workflow)
 - Decision criteria (version sync, task completion)
 
-**HEALTH.md contains:**
+**checks (global/local) contains:**
 - Test commands (bash one-liners)
 - Pass/fail criteria
 - Auto-fix logic (if possible)
@@ -176,11 +176,11 @@ flowchart TD
 ```
 User: "backstage start"
   ↓
-Skill: cat backstage/global/POLICY.md backstage/POLICY.md
+Skill: cat backstage/global/policies (global/local) backstage/policies (global/local)
   ↓
 AI: Reads POLICY → sees "pre-commit workflow"
   ↓
-AI: Runs HEALTH checks (from HEALTH.md)
+AI: Runs HEALTH checks (from checks (global/local))
   ↓
 AI: Updates navigation blocks (per POLICY rules)
   ↓
@@ -195,7 +195,7 @@ AI: "✅ All checks pass. Next: [suggest from ROADMAP]"
 User: "epic is completed, merge"
 User: "backstage start"
   ↓
-Skill: cat backstage/global/POLICY.md backstage/HEALTH.md
+Skill: cat backstage/global/policies (global/local) backstage/checks (global/local)
   ↓
 AI: Reads user message → detects "merge" intent
 AI: Reads POLICY → sees "merge workflow (Step 10)"
@@ -222,7 +222,7 @@ AI: "✅ Epic vX.Y.Z merged to main. Next epic: [suggest]"
 
 ### **Solution (new way):**
 - 80 lines of bash (just wrapper)
-- Logic in POLICY.md (human-readable, AI executes)
+- Logic in policies (global/local) (human-readable, AI executes)
 - Portable (POLICY works with ANY LLM tool)
 
 ### **Benefits:**
@@ -240,10 +240,10 @@ AI: "✅ Epic vX.Y.Z merged to main. Next epic: [suggest]"
 ```
 backstage/
 ├── global/
-│   ├── POLICY.md           ← Universal workflow rules
-│   └── HEALTH.md           ← Universal health checks
-├── POLICY.md               ← Project-specific overrides (optional)
-├── HEALTH.md               ← Project-specific checks (optional)
+│   ├── policies (global/local)           ← Universal workflow rules
+│   └── checks (global/local)           ← Universal health checks
+├── policies (global/local)               ← Project-specific overrides (optional)
+├── checks (global/local)               ← Project-specific checks (optional)
 ├── ROADMAP.md              ← What we wanna do (AI reads for context)
 └── CHANGELOG.md            ← What we did (AI updates on merge)
 ```
@@ -272,8 +272,8 @@ backstage.prompt.md         ← Root (same name as skill, universal)
 # Pseudo-code (what AI does mentally)
 
 user_message = read_user_message()
-policy = read_file("backstage/global/POLICY.md")
-health = read_file("backstage/global/HEALTH.md")
+policy = read_file("backstage/global/policies (global/local)")
+health = read_file("backstage/global/checks (global/local)")
 
 if "merge" in user_message.lower():
     workflow = "merge"
@@ -296,18 +296,18 @@ report_results()
 
 **Two centers of power:**
 
-1. **global/POLICY.md** - Universal rules (all projects)
-2. **POLICY.md** - Project-specific overrides (this project only)
+1. **global/policies (global/local)** - Universal rules (all projects)
+2. **policies (global/local)** - Project-specific overrides (this project only)
 
 **AI reads BOTH, project wins on conflicts.**
 
 **Example:**
 
 ```markdown
-# global/POLICY.md
+# global/policies (global/local)
 Commit message format: "type: description"
 
-# project/POLICY.md (backstage)
+# project/policies (global/local) (backstage)
 Commit message format: "type: description [vX.Y.Z]" (include version)
 ```
 
@@ -322,7 +322,7 @@ Commit message format: "type: description [vX.Y.Z]" (include version)
 | Aspect | v0.2.0 (old) | v0.3.0+ (new) |
 |--------|--------------|---------------|
 | Skill size | 500+ lines bash | 80 lines bash |
-| Logic location | Hardcoded in skill | POLICY.md (human-readable) |
+| Logic location | Hardcoded in skill | policies (global/local) (human-readable) |
 | Prompts | 3 separate (start, close, update) | 1 prompt (backstage.prompt.md) |
 | Portability | OpenClaw only | Works with any LLM tool |
 | Maintenance | Change code = retest everything | Change POLICY = AI adapts |

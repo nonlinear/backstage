@@ -62,7 +62,7 @@ Nimble institutions reject growth trap by prioritizing **sustainability, adaptab
 
 | Principle | Backstage Implementation | Status |
 |-----------|-------------------------|--------|
-| **Protocol-Driven Collaboration** | Shared POLICY.md, HEALTH.md, ROADMAP.md across projects | ✅ DONE |
+| **Protocol-Driven Collaboration** | Shared policies (global/local), checks (global/local), ROADMAP.md across projects | ✅ DONE |
 | **Sovereignty Through Specialization** | Each project adapts protocol to domain (librarian, personal, apps) | ✅ DONE |
 | **Dynamic Orbits** | Dual-track development (librarian ↔️ skills), cross-pollination | ✅ DONE |
 | **Automated Middle Management** | Git trailers + LLM coordination (planned) | 🏗️ IN PROGRESS |
@@ -110,7 +110,7 @@ Nimble institutions reject growth trap by prioritizing **sustainability, adaptab
   - Test on 2026-Q1
   
 - [ ] **POLICY auto-sync detection**
-  - Detect global POLICY.md changes
+  - Detect global policies (global/local) changes
   - Flag drift across projects
   - Propose updates (human review required)
   

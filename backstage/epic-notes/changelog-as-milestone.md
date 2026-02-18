@@ -117,7 +117,7 @@ graph TD
 
 ### Phase 1: Commit Convention
 
-**Backstage POLICY.md addition:**
+**Backstage policies (global/local) addition:**
 
 ```markdown
 ## Changelog Commits
@@ -238,13 +238,13 @@ git log --grep="project:librarian" --grep="milestone:2026-Q1" \
 
 ## Tasks
 
-- [ ] **Define commit trailer convention** (POLICY.md)
+- [ ] **Define commit trailer convention** (policies (global/local))
   - milestone:YYYY-QQ (required)
   - epic:vX.Y.Z (required)
   - project:PROJECT_NAME (required)
   - Optional: announcement, skills, moon
   
-- [ ] **Update backstage POLICY.md** with convention
+- [ ] **Update backstage policies (global/local)** with convention
 
 - [ ] **Create quarterly-report.sh script**
   - Parse git log across all repos

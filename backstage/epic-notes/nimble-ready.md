@@ -45,7 +45,7 @@ Nimble institutions reject the growth trap by prioritizing sustainability, adapt
 
 | Principle | Backstage Implementation |
 |-----------|-------------------------|
-| **Protocol-Driven Collaboration** | Shared protocol (POLICY.md, HEALTH.md, ROADMAP.md) across projects |
+| **Protocol-Driven Collaboration** | Shared protocol (policies (global/local), checks (global/local), ROADMAP.md) across projects |
 | **Sovereignty Through Specialization** | Each project adapts protocol to its domain (librarian, personal, apps, skills) |
 | **Dynamic Orbits** | Projects evolve independently, cross-pollinate via dual-track development |
 | **Automated Middle Management** | Git commits + LLM coordination replace manual sync overhead |
@@ -59,7 +59,7 @@ Nimble institutions reject the growth trap by prioritizing sustainability, adapt
 **Nimble-ready orgs:** Share protocol, automate handshakes → stay small, collaborate dynamically
 
 **Backstage enables:**
-- **Handshake protocol:** POLICY.md defines "how we work," projects subscribe or fork
+- **Handshake protocol:** policies (global/local) defines "how we work," projects subscribe or fork
 - **Reference IDs:** Epic versions (v0.15.0), project names (librarian, skills) enable cross-project coordination
 - **Learning agents:** Each project maintains VISION.md (ethics), ROADMAP.md (priorities), CHANGELOG.md (history)
 - **Automated sync:** Git trailers, LLM-assisted queries, cross-repo aggregation (planned)
@@ -117,7 +117,7 @@ Nimble institutions reject the growth trap by prioritizing sustainability, adapt
 
 1. **Quarterly reports script** – Aggregate CHANGELOG.md across projects
 2. **Cross-project epic links** – Standardize references between projects (e.g., `librarian v0.15.0 ↔️ skills v1.1.0`)
-3. **LLM-assisted POLICY sync** – Detect when global POLICY.md changes, propose updates to projects
+3. **LLM-assisted POLICY sync** – Detect when global policies (global/local) changes, propose updates to projects
 
 ### Long-term Vision
 

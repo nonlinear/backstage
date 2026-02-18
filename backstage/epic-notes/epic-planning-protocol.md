@@ -20,7 +20,7 @@ We need a clear protocol for:
 
 ## Solution
 
-Define **Epic Planning Protocol** in global POLICY.md:
+Define **Epic Planning Protocol** in global policies (global/local):
 
 ### Phase 1: Epic Definition (always required)
 
@@ -82,14 +82,14 @@ Define **Epic Planning Protocol** in global POLICY.md:
 
 ## Tasks
 
-- [ ] **Add Epic Planning Protocol to global/POLICY.md**
+- [ ] **Add Epic Planning Protocol to global/policies (global/local)**
   - Phase 1: Definition checklist
   - Phase 2: Execution decision criteria
   - Phase 3: Architecture exercise triggers
   - Phase 4: Epic splitting guidelines
 
 - [ ] **Update AGENTS.md to defer to backstage**
-  - "If repo uses backstage → code needs epic (see backstage/POLICY.md)"
+  - "If repo uses backstage → code needs epic (see backstage/policies (global/local))"
   - Remove epic protocol details (now in global POLICY)
 
 - [ ] **Test protocol on next 3 code changes**
