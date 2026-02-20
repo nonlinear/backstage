@@ -54,6 +54,33 @@ graph LR
 
 ---
 
+## v1.0.2
+
+### Writing Custom Checks
+
+**Type:** Patch
+
+**Problem:**
+
+Users need to write project-specific checks (local) or contribute new global checks to backstage protocol.
+
+**Tasks:**
+
+- [ ] Document check anatomy (frontmatter: DESCRIPTION, TYPE, SCOPE)
+- [ ] Document deterministic vs interpretive checks
+- [ ] Document naming conventions (`-syntax`, `-list`, no `-sync`)
+- [ ] Document local vs global (local wins on conflict)
+- [ ] Provide templates (deterministic.sh.template, interpretive.md.template)
+- [ ] Document exit codes (0 = pass, non-zero = fail)
+- [ ] Document how checks.sh discovers and runs checks
+- [ ] Examples: simple validation, complex multi-step, interpretive AI check
+
+**Success:**
+
+Users can write custom checks following protocol conventions. Contributions to global checks follow standard format.
+
+---
+
 ## v1.0.1
 
 ### Merge Policies with Checks

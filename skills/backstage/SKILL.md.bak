@@ -107,9 +107,9 @@ flowchart TD
 
 **Two enforcement domains:**
 
-1. **Checks (Interpretive)**
-   - `checks/global/*.md` = Universal workflow rules
-   - `checks/local/*.md` = Project-specific overrides
+1. **Policies (Interpretive)**
+   - `policies/global/*.md` = Universal workflow rules
+   - `policies/local/*.md` = Project-specific overrides
    - **Enforced by:** AI (reads markdown, interprets context, acts)
    - **Always pass:** AI reads, understands, will act accordingly
 
@@ -127,10 +127,10 @@ flowchart TD
 **Report format:**
 
 ```
-📋 Interpretive checks:
-  ✅ checks/global/branch-workflow.md (read)
-  ✅ checks/global/commit-style.md (read)
-  ✅ checks/local/dogfooding.md (read)
+📋 Policies (interpretive):
+  ✅ policies/global/branch-workflow.md (read)
+  ✅ policies/global/commit-style.md (read)
+  ✅ policies/local/dogfooding.md (read)
 
 🔍 Checks (deterministic):
   ✅ checks/global/navigation-block-readme.sh
@@ -154,13 +154,13 @@ flowchart TD
    # Output: version|status_emoji|name
    ```
 
-2. **Read checks/ diagram rules** (interpretive - AI):
-   - `checks/global/navigation-block.md` defines default format (linear graph, all epics, sequential)
-   - `checks/local/*.md` can override (gantt, flowchart, or `diagram: none`)
+2. **Read policies/ diagram rules** (interpretive - AI):
+   - `policies/global/navigation-block.md` defines default format (linear graph, all epics, sequential)
+   - `policies/local/*.md` can override (gantt, flowchart, or `diagram: none`)
    - Local wins on conflict
 
 3. **Generate mermaid** (interpretive - AI):
-   - Apply checks/ rules to parsed data
+   - Apply policies/ rules to parsed data
    - Create mermaid syntax matching specification
    - Example (default):
      ```mermaid
@@ -175,15 +175,15 @@ flowchart TD
 
 **AI Prompt (when running backstage-start/end):**
 
-> Read checks/global/navigation-block.md and checks/local/*.md for diagram rules.
+> Read policies/global/navigation-block.md and policies/local/*.md for diagram rules.
 > Run `parse-roadmap.sh` to extract epics.
-> Generate mermaid diagram following checks/ rules (prefer local over global).
+> Generate mermaid diagram following policies/ rules (prefer local over global).
 > Insert diagram after navigation block (`> 🤖`) in all backstage files.
-> If local checks say `diagram: none`, skip generation.
+> If local policies say `diagram: none`, skip generation.
 
 **Tools:**
 - `parse-roadmap.sh` - Extract version|status|name from ROADMAP.md
-- `checks/` - Diagram format rules (type, include/exclude logic, status mapping)
+- `policies/` - Diagram format rules (type, include/exclude logic, status mapping)
 
 ---
 
@@ -191,13 +191,13 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-    GLOBAL_POL[checks/global/*.md<br/>Universal rules]
-    LOCAL_POL[checks/local/*.md<br/>Project-specific overrides]
+    GLOBAL_POL[policies/global/*.md<br/>Universal rules]
+    LOCAL_POL[policies/local/*.md<br/>Project-specific overrides]
     
     GLOBAL_CHK[checks/global/*.sh<br/>Universal tests]
     LOCAL_CHK[checks/local/*.sh<br/>Project-specific tests]
     
-    AI[AI reads checks/]
+    AI[AI reads policies/]
     BASH[Bash executes checks/]
     CONFLICT{Conflict?}
     
@@ -216,10 +216,10 @@ flowchart TD
 ```
 
 **This skill enforces polycentric governance:**
-- Reads ALL `checks/**/*.md` files (global + local)
+- Reads ALL `policies/**/*.md` files (global + local)
 - Executes ALL `checks/**/*.sh` files (global + local)
-- Merges checks when compatible
-- Prefers local checks on conflict
+- Merges policies when compatible
+- Prefers local policies on conflict
 - Reports deterministic check results (pass/fail)
 
 **Triggered by:** "good morning", "good night", "backstage start/end"
@@ -234,10 +234,10 @@ flowchart TD
     MODE{"Session mode?"}
     
     %% Common enforcement module
-    READ_POL["Read checks/<br/>global + local<br/>[AI interprets MD]"]
+    READ_POL["Read policies/<br/>global + local<br/>[AI interprets MD]"]
     EXEC_CHK["Execute checks/<br/>global + local<br/>[Bash runs SH]"]
     
-    REPORT["Report 6️⃣<br/>📋 Interpretive (✅)<br/>🔍 Checks (✅/❌)"]
+    REPORT["Report 6️⃣<br/>📋 Policies (✅)<br/>🔍 Checks (✅/❌)"]
     CHECKS_GATE{"All checks<br/>passed?"}
     
     %% Start Branch
@@ -290,28 +290,28 @@ flowchart TD
 ```
 
 **Domain labels:**
-- **[MD]** - Markdown file (checks/*.md, ROADMAP.md) = Human/AI prompts
+- **[MD]** - Markdown file (policies/*.md, ROADMAP.md) = Human/AI prompts
 - **[SH]** - Shell script (checks/*.sh, backstage-start.sh) = Machine executables
 - **[AI reads MD]** - AI parses markdown, understands rules/prompts
 - **[AI writes MD]** - AI generates markdown content
 - **[SH writes MD]** - Script modifies markdown files (checkboxes, navigation blocks)
 - **[Bash runs SH]** - Bash executes shell scripts (deterministic validation)
-- **[AI interprets MD]** - AI reads checks/, acts contextually
+- **[AI interprets MD]** - AI reads policies/, acts contextually
 
 **Critical separation:**
-- **checks/ = prompts** - AI reads, interprets, acts
+- **policies/ = prompts** - AI reads, interprets, acts
 - **checks/ = executors** - Bash runs commands, returns exit codes
-- **AI intermediates** - Reads checks/, executes checks/, integrates report
+- **AI intermediates** - Reads policies/, executes checks/, integrates report
 
 **Notes:**
 
 **1️⃣ Trigger:** "backstage start", "vamos trabalhar no X", "whatsup" (start mode) OR "backstage end", "boa noite", "wrap up" (end mode)
 - **Code:** `backstage-start.sh` OR `backstage-end.sh`
 
-**2️⃣ Read README 🤖 block:** Find navigation block between `> 🤖` markers. Extract all status file paths (ROADMAP, CHANGELOG, checks/, checks/). This is ONLY source of truth for file locations.
+**2️⃣ Read README 🤖 block:** Find navigation block between `> 🤖` markers. Extract all status file paths (ROADMAP, CHANGELOG, policies/, checks/). This is ONLY source of truth for file locations.
 - **Code:** `backstage-start.sh::read_navigation_block()`
 
-**3️⃣ Locate status files:** Use paths from 🤖 block. If missing, STOP and ask user where to create them. Check BOTH global (`backstage/checks/global/`, `backstage/checks/global/`) and local (`backstage/checks/local/`, `backstage/checks/local/`) for polycentric governance.
+**3️⃣ Locate status files:** Use paths from 🤖 block. If missing, STOP and ask user where to create them. Check BOTH global (`backstage/policies/global/`, `backstage/checks/global/`) and local (`backstage/policies/local/`, `backstage/checks/local/`) for polycentric governance.
 - **Code:** `backstage-start.sh::locate_status_files()`
 
 **4️⃣ Check git branch:** Run `git branch --show-current`. Determine work context.
@@ -331,10 +331,10 @@ Categorize: patch/minor/major. Compare with ROADMAP. Match reality to plans.
 
 **Report format:**
 ```
-📋 Interpretive checks:
-  ✅ checks/global/branch-workflow.md (read)
-  ✅ checks/global/commit-style.md (read)
-  ✅ checks/local/dogfooding.md (read)
+📋 Policies (interpretive):
+  ✅ policies/global/branch-workflow.md (read)
+  ✅ policies/global/commit-style.md (read)
+  ✅ policies/local/dogfooding.md (read)
 
 🔍 Checks (deterministic):
   ✅ checks/global/navigation-block-readme.sh
@@ -397,7 +397,7 @@ Categorize: patch/minor/major. Compare with ROADMAP. Match reality to plans.
 ## Key Principles
 
 1. **README's 🤖 block = Single source of truth** for file locations
-2. **Status files = AI prompts** (checks/ = tests, checks/ = rules, ROADMAP = backlog, CHANGELOG = history)
+2. **Status files = AI prompts** (checks/ = tests, policies/ = rules, ROADMAP = backlog, CHANGELOG = history)
 3. **Polycentric governance** (global + local rules, local wins on conflict)
 4. **Checks must pass** before commit (non-negotiable for start mode, soft fail for end mode)
 5. **CHANGELOG is append-only** (never edit old entries, add NEW entry for corrections)
@@ -439,7 +439,7 @@ Categorize: patch/minor/major. Compare with ROADMAP. Match reality to plans.
 
 **Level 2: Project-Specific** (e.g., Librarian MCP)
 - Generic tool others can use
-- Has status files (ROADMAP, CHANGELOG, checks/, checks/)
+- Has status files (ROADMAP, CHANGELOG, checks/, policies/)
 - Example flagship project for Level 3
 
 **Level 3: Meta-Workflow** (this skill)
@@ -464,7 +464,7 @@ Categorize: patch/minor/major. Compare with ROADMAP. Match reality to plans.
 
 ## TODO / Future Refinements
 
-- [ ] **Update .sh scripts** to read checks/ and checks/ folders
+- [ ] **Update .sh scripts** to read policies/ and checks/ folders
 - [ ] **Add emoji notes** (like design-discrepancy 1️⃣-8️⃣ format)
 - [ ] **Simplify diagram** (consolidated enforcement, removed "separate" step)
 - [ ] **Add code execution points** (where scripts run, if any)
@@ -477,6 +477,6 @@ Categorize: patch/minor/major. Compare with ROADMAP. Match reality to plans.
 ---
 
 **Created:** 2026-02-12
-**Updated:** 2026-02-18 (v1.0.0 - modular checks/checks)
+**Updated:** 2026-02-18 (v1.0.0 - modular policies/checks)
 **Status:** Documentation updated, scripts pending
 **Location:** `~/Documents/backstage/skills/backstage/SKILL.md`
