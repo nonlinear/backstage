@@ -90,68 +90,73 @@ echo ""
 echo "  📊 Checks executed: $CHECKS_RUN"
 
 # ============================================================================
-# STEP 2: Read ALL policies (interpretive - AI domain)
+# STEP 2: Read interpretive checks (.md files in checks/)
 # ============================================================================
 
 echo ""
-echo "📋 Reading policies/ (interpretive - AI enforces)..."
+echo "📋 Reading interpretive checks/ (.md files - AI enforces)..."
 echo ""
 
-GLOBAL_POLICIES_DIR="$HOME/Documents/backstage/backstage/policies/global"
-LOCAL_POLICIES_DIR="backstage/policies/local"
+INTERPRETIVE_READ=0
 
-POLICIES_READ=0
-
-# Collect local policy basenames (for override detection)
-LOCAL_POLICIES=""
-if [ -d "$LOCAL_POLICIES_DIR" ]; then
-    for policy in "$LOCAL_POLICIES_DIR"/*.md; do
-        if [ -f "$policy" ]; then
-            basename_policy=$(basename "$policy")
-            LOCAL_POLICIES="$LOCAL_POLICIES $basename_policy "
+# Collect local interpretive basenames (for override detection)
+LOCAL_INTERPRETIVE=""
+if [ -d "$LOCAL_CHECKS_DIR" ]; then
+    for check in "$LOCAL_CHECKS_DIR"/*.md; do
+        if [ -f "$check" ]; then
+            basename_check=$(basename "$check")
+            LOCAL_INTERPRETIVE="$LOCAL_INTERPRETIVE $basename_check "
         fi
     done
 fi
 
-# Read global policies (skip if local has same name)
-if [ -d "$GLOBAL_POLICIES_DIR" ]; then
-    echo "  📋 Global policies:"
-    for policy in "$GLOBAL_POLICIES_DIR"/*.md; do
-        if [ -f "$policy" ]; then
-            basename_policy=$(basename "$policy")
+# Read global interpretive checks (skip if local has same name)
+if [ -d "$GLOBAL_CHECKS_DIR" ]; then
+    echo "  📋 Global interpretive:"
+    for check in "$GLOBAL_CHECKS_DIR"/*.md; do
+        if [ -f "$check" ]; then
+            basename_check=$(basename "$check")
             
-            # Skip if local overrides (check if basename is in LOCAL_POLICIES string)
-            if echo "$LOCAL_POLICIES" | grep -q " $basename_policy "; then
-                echo "    ⏭️  $basename_policy (local override)"
+            # Skip README.md
+            if [ "$basename_check" = "README.md" ]; then
                 continue
             fi
             
-            echo "    ✅ $basename_policy (read)"
-            POLICIES_READ=$((POLICIES_READ + 1))
+            # Skip if local overrides
+            if echo "$LOCAL_INTERPRETIVE" | grep -q " $basename_check "; then
+                echo "    ⏭️  $basename_check (local override)"
+                continue
+            fi
+            
+            echo "    ✅ $basename_check (read)"
+            INTERPRETIVE_READ=$((INTERPRETIVE_READ + 1))
         fi
     done
-else
-    echo "  ⚠️  No global policies found ($GLOBAL_POLICIES_DIR)"
 fi
 
 echo ""
 
-# Read local policies (always read, overrides global if same name)
-if [ -d "$LOCAL_POLICIES_DIR" ]; then
-    echo "  📋 Local policies:"
-    for policy in "$LOCAL_POLICIES_DIR"/*.md; do
-        if [ -f "$policy" ]; then
-            basename_policy=$(basename "$policy")
-            echo "    ✅ $basename_policy (read)"
-            POLICIES_READ=$((POLICIES_READ + 1))
+# Read local interpretive checks (always read, overrides global if same name)
+if [ -d "$LOCAL_CHECKS_DIR" ]; then
+    echo "  📋 Local interpretive:"
+    HAS_LOCAL_INTERPRETIVE=false
+    for check in "$LOCAL_CHECKS_DIR"/*.md; do
+        if [ -f "$check" ] && [ "$(basename "$check")" != "README.md" ]; then
+            basename_check=$(basename "$check")
+            echo "    ✅ $basename_check (read)"
+            INTERPRETIVE_READ=$((INTERPRETIVE_READ + 1))
+            HAS_LOCAL_INTERPRETIVE=true
         fi
     done
+    if [ "$HAS_LOCAL_INTERPRETIVE" = false ]; then
+        echo "  ℹ️  No local interpretive checks found"
+    fi
 else
-    echo "  ℹ️  No local policies found ($LOCAL_POLICIES_DIR)"
+    echo "  ℹ️  No local interpretive checks found"
 fi
 
 echo ""
-echo "  📊 Policies read: $POLICIES_READ"
+echo "  📊 Interpretive checks read: $INTERPRETIVE_READ"
 
 # ============================================================================
 # STEP 3: Integrated report
@@ -169,8 +174,8 @@ else
 fi
 
 echo ""
-echo "📋 Policies (interpretive):"
-echo "  ✅ All policies read ($POLICIES_READ total)"
+echo "📋 Interpretive checks:"
+echo "  ✅ All interpretive checks read ($INTERPRETIVE_READ total)"
 echo "  🤖 AI will enforce contextual rules"
 
 echo ""
