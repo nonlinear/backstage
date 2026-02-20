@@ -35,12 +35,12 @@
 
 ```mermaid
 graph LR
-    A[📋 v1.0.0 Modular Policies & Checks]
-    B[📋 v0.3.9 Reordering rollout]
+    A[📋 v1.0.1 Merge Policies with Checks]
+    B[📋 v1.0.0 Modular Policies & Checks]
     A --> B
-    C[📋 v0.4.0 Roadmap Skill]
+    C[📋 v0.3.9 Reordering rollout]
     B --> C
-    D["📋 v0.5.0 Pattern Research (Backstage vs Open Source Standards)"]
+    D[📋 v0.4.0 Roadmap Skill]
     C --> D
 ```
 
@@ -51,6 +51,36 @@ graph LR
 
 
 
+
+---
+
+## v1.0.1
+
+### Merge Policies with Checks
+
+**Type:** Patch
+
+**Description:** Consolidate policies/ and checks/ into unified enforcement system
+
+**Problem:**
+- Current: policies/*.md (interpretive) + checks/*.sh (deterministic) separated
+
+**Tasks:**
+- [ ] can we merge? what do we use?
+- [ ] Frontmatter for each
+- [ ] change index (block?)
+- [ ] Naming
+- [ ] Design merged structure (checks/global/, checks/local/)
+- [ ] Migrate existing policies → checks/*.md
+- [ ] Update backstage-start.sh to read .md + .sh together
+- [ ] o report do bomdia tb tem que dizer o branch que estamos
+- [ ] boa noite, precisa?
+- [ ] Test
+
+**Success:**
+- Single source of truth (checks/ directory)
+- Each rule has docs (.md) + validation (.sh)
+- No confusion where to add new rules
 
 ---
 
