@@ -1,4 +1,7 @@
 #!/bin/bash
+# DESCRIPTION: Navigation links work. Prevents broken reference drift.
+# TYPE: deterministic
+# SCOPE: global
 # Link Integrity Check - Navigation links must point to existing files/folders
 
 test -f backstage/CHANGELOG.md && \
