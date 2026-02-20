@@ -166,9 +166,28 @@ echo ""
 echo "📊 Integrated Enforcement Report:"
 echo ""
 
-# Show current branch
+# Show current branch + epic info
 CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo "unknown")
-echo "🌿 Branch: $CURRENT_BRANCH"
+
+if [[ "$CURRENT_BRANCH" == "main" ]]; then
+    echo "🌿 Branch: main (read-only)"
+elif [[ "$CURRENT_BRANCH" =~ ^v([0-9]+\.[0-9]+\.[0-9]+) ]]; then
+    VERSION="${BASH_REMATCH[1]}"
+    # Extract epic title from ROADMAP
+    if [[ -f backstage/ROADMAP.md ]]; then
+        EPIC_TITLE=$(awk "/^## v$VERSION\$/,/^###/" backstage/ROADMAP.md | grep "^###" | head -1 | sed 's/^### //')
+        if [[ -n "$EPIC_TITLE" ]]; then
+            echo "🌿 Epic: v$VERSION - $EPIC_TITLE"
+        else
+            echo "🌿 Branch: $CURRENT_BRANCH"
+        fi
+    else
+        echo "🌿 Branch: $CURRENT_BRANCH"
+    fi
+else
+    echo "🌿 Branch: $CURRENT_BRANCH"
+fi
+
 echo ""
 
 echo "🔍 Checks (deterministic):"
