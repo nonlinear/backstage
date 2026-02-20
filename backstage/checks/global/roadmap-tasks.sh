@@ -68,6 +68,6 @@ else
     echo "📋 Epic v$VERSION progress: $DONE_TASKS/$TOTAL_TASKS tasks done ($TODO_TASKS remaining)"
     echo ""
     echo "⚠️  Ambiguous/incomplete tasks:"
-    echo "$AMBIGUOUS" | sed 's/^/   /'
+    echo "$AMBIGUOUS" | nl -w2 -s'. ' | sed 's/^/   /'
     exit 0
 fi
