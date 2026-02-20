@@ -1,11 +1,17 @@
 # Backstage - Roadmap
 
+
+
+
 > 🤖
 > This project follows [backstage protocol](https://github.com/nonlinear/backstage) v1.0.1
 >
-> - [README](../README.md) 👏 [ROADMAP](ROADMAP.md) 👏 [CHANGELOG](CHANGELOG.md) 👏 checks: [local](checks/local/) <sup>5</sup>, [global](checks/global/) <sup>14</sup>
+> - [README](../README.md) 👏 [ROADMAP](ROADMAP.md) 👏 [CHANGELOG](CHANGELOG.md) 👏 checks: [local](checks/local/) <sup>5</sup>, [global](checks/global/) <sup>15</sup>
 >
 > 🤖
+
+
+
 
 ```mermaid
 graph LR
@@ -65,7 +71,7 @@ Users can write custom checks following protocol conventions. Contributions to g
 - [x] change index (block?), remove policy (README updated, policies removed from nav)
 - [x] Design merged structure (checks/global/, checks/local/) (structure exists)
 - [ ] Migrate existing policies → checks/*.md (partially done, policies/ folder still exists)
-- [ ] Update backstage-start.sh to read .md + .sh together (checks.sh not yet updated)
+- [x] Update backstage-start.sh to read .md + .sh together (checks.sh reads .md from checks/)
 - [ ] o report do bom dia tb tem que dizer o branch que estamos (not implemented)
 - [x] backstage-start becomes backstage (renamed in commit 7d8e3a1)
 - [x] delete backstage-close (backstage-end.sh deleted in commit 7d8e3a1)

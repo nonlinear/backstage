@@ -166,6 +166,11 @@ echo ""
 echo "📊 Integrated Enforcement Report:"
 echo ""
 
+# Show current branch
+CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo "unknown")
+echo "🌿 Branch: $CURRENT_BRANCH"
+echo ""
+
 echo "🔍 Checks (deterministic):"
 if [ "$CHECKS_PASS" = true ]; then
     echo "  ✅ All checks passed ($CHECKS_RUN executed)"
