@@ -33,22 +33,22 @@ Running skill regularly enforces anti-drift, with deterministic and interpretati
 ```mermaid
 flowchart TD
     READ_CHK["Read checks/<br/>global + local<br/>[Deterministic .sh + Interpretive .md]"]
-
+    
     CONFLICT{Conflict?}
     MERGE[Merge compatible rules]
     LOCAL[Local wins]
-
+    
     AI["AI interprets .md checks<br/>[Contextual enforcement]"]
     SH["Bash executes .sh checks<br/>[Deterministic validation]"]
-
+    
     AI_ACT[✅ Enforce or discuss]
     AI_AMBIG[⚠️ Ask user]
-
+    
     SH_OK[✅ All checks pass]
     SH_FAIL[❌ Checks failed]
-
+    
     REPORT["Report:<br/>📋 Interpretive (always ✅)<br/>🔍 Deterministic (✅/❌)"]
-
+    
     READ_CHK --> CONFLICT
     CONFLICT -->|No| MERGE
     CONFLICT -->|Yes| LOCAL
@@ -56,17 +56,1086 @@ flowchart TD
     MERGE --> SH
     LOCAL --> AI
     LOCAL --> SH
-
+    
     AI -->|Clear| AI_ACT
     AI -->|Ambiguous| AI_AMBIG
-
+    
     SH -->|Pass| SH_OK
     SH -->|Fail| SH_FAIL
-
+    
     AI_ACT --> REPORT
     AI_AMBIG --> REPORT
     SH_OK --> REPORT
     SH_FAIL --> REPORT
+```
+```mermaid
+flowchart TD
+    GLOBAL_POL[checks/global/*.md<br/>Universal rules]
+    LOCAL_POL[checks/local/*.md<br/>Project-specific overrides]
+    
+    GLOBAL_CHK[checks/global/*.sh<br/>Universal tests]
+    LOCAL_CHK[checks/local/*.sh<br/>Project-specific tests]
+    
+    AI[AI reads checks/]
+    BASH[Bash executes checks/]
+    CONFLICT{Conflict?}
+    
+    GLOBAL_POL --> AI
+    LOCAL_POL --> AI
+    GLOBAL_CHK --> BASH
+    LOCAL_CHK --> BASH
+    
+    AI --> CONFLICT
+    CONFLICT -->|Yes| LOCAL_POL
+    CONFLICT -->|No| MERGE[Merge rules]
+    
+    MERGE --> ACTION[Execute workflow]
+    LOCAL_POL --> ACTION
+    BASH --> ACTION
+```
+```mermaid
+flowchart TD
+    START["Trigger 1️⃣<br/>[SH]"]
+    MODE{"Session mode?"}
+    
+    %% Common enforcement module
+    READ_POL["Read checks/<br/>global + local<br/>[AI interprets MD]"]
+    EXEC_CHK["Execute checks/<br/>global + local<br/>[Bash runs SH]"]
+    
+    REPORT["Report 6️⃣<br/>📋 Interpretive (✅)<br/>🔍 Checks (✅/❌)"]
+    CHECKS_GATE{"All checks<br/>passed?"}
+    
+    %% Start Branch
+    START_BRANCH["Read README 🤖 block 2️⃣<br/>[MD → AI]"]
+    START_FILES["Locate status files 3️⃣<br/>[SH]"]
+    START_GIT["Check git branch 4️⃣<br/>[SH]"]
+    START_WORK["Analyze changes 5️⃣<br/>[SH]"]
+    START_FIX["🛑 STOP: Fix issues<br/>[AI + SH]"]
+    START_UPDATE["Update docs 7️⃣<br/>[SH writes MD]"]
+    START_REPORT["Developer context 8️⃣<br/>[AI reads MD]"]
+    START_PUSH["Push / Groom 9️⃣<br/>[SH]"]
+    
+    %% End Branch
+    END_FIXES["Add fixes to roadmap<br/>[AI writes MD]"]
+    END_PUSH["Commit + push<br/>[SH]"]
+    END_VICTORY["Victory lap 🏆<br/>[AI reads MD]"]
+    END_BODY["Body check ⏸️<br/>[AI prompt]"]
+    END_CLOSE["Close VS Code 🌙<br/>[SH]"]
+    END_SILENT["[STAY SILENT]"]
+    
+    %% Flow
+    START --> MODE
+    
+    MODE -->|Start| START_BRANCH
+    START_BRANCH --> START_FILES
+    START_FILES --> START_GIT
+    START_GIT --> START_WORK
+    START_WORK --> READ_POL
+    START_WORK --> EXEC_CHK
+    
+    READ_POL --> REPORT
+    EXEC_CHK --> REPORT
+    REPORT --> CHECKS_GATE
+    
+    CHECKS_GATE -->|No, start mode| START_FIX
+    START_FIX --> READ_POL
+    CHECKS_GATE -->|Yes| START_UPDATE
+    START_UPDATE --> START_REPORT
+    START_REPORT --> START_PUSH
+    
+    MODE -->|End| READ_POL
+    MODE -->|End| EXEC_CHK
+    CHECKS_GATE -->|No, end mode| END_FIXES
+    CHECKS_GATE -->|Yes| END_PUSH
+    END_FIXES --> END_VICTORY
+    END_PUSH --> END_VICTORY
+    END_VICTORY --> END_BODY
+    END_BODY --> END_CLOSE
+    END_CLOSE --> END_SILENT
+```
+```mermaid
+flowchart TD
+    READ_CHK["Read checks/<br/>global + local<br/>[Deterministic .sh + Interpretive .md]"]
+    
+    CONFLICT{Conflict?}
+    MERGE[Merge compatible rules]
+    LOCAL[Local wins]
+    
+    AI["AI interprets .md checks<br/>[Contextual enforcement]"]
+    SH["Bash executes .sh checks<br/>[Deterministic validation]"]
+    
+    AI_ACT[✅ Enforce or discuss]
+    AI_AMBIG[⚠️ Ask user]
+    
+    SH_OK[✅ All checks pass]
+    SH_FAIL[❌ Checks failed]
+    
+    REPORT["Report:<br/>📋 Interpretive (always ✅)<br/>🔍 Deterministic (✅/❌)"]
+    
+    READ_CHK --> CONFLICT
+    CONFLICT -->|No| MERGE
+    CONFLICT -->|Yes| LOCAL
+    MERGE --> AI
+    MERGE --> SH
+    LOCAL --> AI
+    LOCAL --> SH
+    
+    AI -->|Clear| AI_ACT
+    AI -->|Ambiguous| AI_AMBIG
+    
+    SH -->|Pass| SH_OK
+    SH -->|Fail| SH_FAIL
+    
+    AI_ACT --> REPORT
+    AI_AMBIG --> REPORT
+    SH_OK --> REPORT
+    SH_FAIL --> REPORT
+```
+```mermaid
+flowchart TD
+    GLOBAL_POL[checks/global/*.md<br/>Universal rules]
+    LOCAL_POL[checks/local/*.md<br/>Project-specific overrides]
+    
+    GLOBAL_CHK[checks/global/*.sh<br/>Universal tests]
+    LOCAL_CHK[checks/local/*.sh<br/>Project-specific tests]
+    
+    AI[AI reads checks/]
+    BASH[Bash executes checks/]
+    CONFLICT{Conflict?}
+    
+    GLOBAL_POL --> AI
+    LOCAL_POL --> AI
+    GLOBAL_CHK --> BASH
+    LOCAL_CHK --> BASH
+    
+    AI --> CONFLICT
+    CONFLICT -->|Yes| LOCAL_POL
+    CONFLICT -->|No| MERGE[Merge rules]
+    
+    MERGE --> ACTION[Execute workflow]
+    LOCAL_POL --> ACTION
+    BASH --> ACTION
+```
+```mermaid
+flowchart TD
+    START["Trigger 1️⃣<br/>[SH]"]
+    MODE{"Session mode?"}
+    
+    %% Common enforcement module
+    READ_POL["Read checks/<br/>global + local<br/>[AI interprets MD]"]
+    EXEC_CHK["Execute checks/<br/>global + local<br/>[Bash runs SH]"]
+    
+    REPORT["Report 6️⃣<br/>📋 Interpretive (✅)<br/>🔍 Checks (✅/❌)"]
+    CHECKS_GATE{"All checks<br/>passed?"}
+    
+    %% Start Branch
+    START_BRANCH["Read README 🤖 block 2️⃣<br/>[MD → AI]"]
+    START_FILES["Locate status files 3️⃣<br/>[SH]"]
+    START_GIT["Check git branch 4️⃣<br/>[SH]"]
+    START_WORK["Analyze changes 5️⃣<br/>[SH]"]
+    START_FIX["🛑 STOP: Fix issues<br/>[AI + SH]"]
+    START_UPDATE["Update docs 7️⃣<br/>[SH writes MD]"]
+    START_REPORT["Developer context 8️⃣<br/>[AI reads MD]"]
+    START_PUSH["Push / Groom 9️⃣<br/>[SH]"]
+    
+    %% End Branch
+    END_FIXES["Add fixes to roadmap<br/>[AI writes MD]"]
+    END_PUSH["Commit + push<br/>[SH]"]
+    END_VICTORY["Victory lap 🏆<br/>[AI reads MD]"]
+    END_BODY["Body check ⏸️<br/>[AI prompt]"]
+    END_CLOSE["Close VS Code 🌙<br/>[SH]"]
+    END_SILENT["[STAY SILENT]"]
+    
+    %% Flow
+    START --> MODE
+    
+    MODE -->|Start| START_BRANCH
+    START_BRANCH --> START_FILES
+    START_FILES --> START_GIT
+    START_GIT --> START_WORK
+    START_WORK --> READ_POL
+    START_WORK --> EXEC_CHK
+    
+    READ_POL --> REPORT
+    EXEC_CHK --> REPORT
+    REPORT --> CHECKS_GATE
+    
+    CHECKS_GATE -->|No, start mode| START_FIX
+    START_FIX --> READ_POL
+    CHECKS_GATE -->|Yes| START_UPDATE
+    START_UPDATE --> START_REPORT
+    START_REPORT --> START_PUSH
+    
+    MODE -->|End| READ_POL
+    MODE -->|End| EXEC_CHK
+    CHECKS_GATE -->|No, end mode| END_FIXES
+    CHECKS_GATE -->|Yes| END_PUSH
+    END_FIXES --> END_VICTORY
+    END_PUSH --> END_VICTORY
+    END_VICTORY --> END_BODY
+    END_BODY --> END_CLOSE
+    END_CLOSE --> END_SILENT
+```
+```mermaid
+flowchart TD
+    READ_CHK["Read checks/<br/>global + local<br/>[Deterministic .sh + Interpretive .md]"]
+    
+    CONFLICT{Conflict?}
+    MERGE[Merge compatible rules]
+    LOCAL[Local wins]
+    
+    AI["AI interprets .md checks<br/>[Contextual enforcement]"]
+    SH["Bash executes .sh checks<br/>[Deterministic validation]"]
+    
+    AI_ACT[✅ Enforce or discuss]
+    AI_AMBIG[⚠️ Ask user]
+    
+    SH_OK[✅ All checks pass]
+    SH_FAIL[❌ Checks failed]
+    
+    REPORT["Report:<br/>📋 Interpretive (always ✅)<br/>🔍 Deterministic (✅/❌)"]
+    
+    READ_CHK --> CONFLICT
+    CONFLICT -->|No| MERGE
+    CONFLICT -->|Yes| LOCAL
+    MERGE --> AI
+    MERGE --> SH
+    LOCAL --> AI
+    LOCAL --> SH
+    
+    AI -->|Clear| AI_ACT
+    AI -->|Ambiguous| AI_AMBIG
+    
+    SH -->|Pass| SH_OK
+    SH -->|Fail| SH_FAIL
+    
+    AI_ACT --> REPORT
+    AI_AMBIG --> REPORT
+    SH_OK --> REPORT
+    SH_FAIL --> REPORT
+```
+```mermaid
+flowchart TD
+    GLOBAL_POL[checks/global/*.md<br/>Universal rules]
+    LOCAL_POL[checks/local/*.md<br/>Project-specific overrides]
+    
+    GLOBAL_CHK[checks/global/*.sh<br/>Universal tests]
+    LOCAL_CHK[checks/local/*.sh<br/>Project-specific tests]
+    
+    AI[AI reads checks/]
+    BASH[Bash executes checks/]
+    CONFLICT{Conflict?}
+    
+    GLOBAL_POL --> AI
+    LOCAL_POL --> AI
+    GLOBAL_CHK --> BASH
+    LOCAL_CHK --> BASH
+    
+    AI --> CONFLICT
+    CONFLICT -->|Yes| LOCAL_POL
+    CONFLICT -->|No| MERGE[Merge rules]
+    
+    MERGE --> ACTION[Execute workflow]
+    LOCAL_POL --> ACTION
+    BASH --> ACTION
+```
+```mermaid
+flowchart TD
+    START["Trigger 1️⃣<br/>[SH]"]
+    MODE{"Session mode?"}
+    
+    %% Common enforcement module
+    READ_POL["Read checks/<br/>global + local<br/>[AI interprets MD]"]
+    EXEC_CHK["Execute checks/<br/>global + local<br/>[Bash runs SH]"]
+    
+    REPORT["Report 6️⃣<br/>📋 Interpretive (✅)<br/>🔍 Checks (✅/❌)"]
+    CHECKS_GATE{"All checks<br/>passed?"}
+    
+    %% Start Branch
+    START_BRANCH["Read README 🤖 block 2️⃣<br/>[MD → AI]"]
+    START_FILES["Locate status files 3️⃣<br/>[SH]"]
+    START_GIT["Check git branch 4️⃣<br/>[SH]"]
+    START_WORK["Analyze changes 5️⃣<br/>[SH]"]
+    START_FIX["🛑 STOP: Fix issues<br/>[AI + SH]"]
+    START_UPDATE["Update docs 7️⃣<br/>[SH writes MD]"]
+    START_REPORT["Developer context 8️⃣<br/>[AI reads MD]"]
+    START_PUSH["Push / Groom 9️⃣<br/>[SH]"]
+    
+    %% End Branch
+    END_FIXES["Add fixes to roadmap<br/>[AI writes MD]"]
+    END_PUSH["Commit + push<br/>[SH]"]
+    END_VICTORY["Victory lap 🏆<br/>[AI reads MD]"]
+    END_BODY["Body check ⏸️<br/>[AI prompt]"]
+    END_CLOSE["Close VS Code 🌙<br/>[SH]"]
+    END_SILENT["[STAY SILENT]"]
+    
+    %% Flow
+    START --> MODE
+    
+    MODE -->|Start| START_BRANCH
+    START_BRANCH --> START_FILES
+    START_FILES --> START_GIT
+    START_GIT --> START_WORK
+    START_WORK --> READ_POL
+    START_WORK --> EXEC_CHK
+    
+    READ_POL --> REPORT
+    EXEC_CHK --> REPORT
+    REPORT --> CHECKS_GATE
+    
+    CHECKS_GATE -->|No, start mode| START_FIX
+    START_FIX --> READ_POL
+    CHECKS_GATE -->|Yes| START_UPDATE
+    START_UPDATE --> START_REPORT
+    START_REPORT --> START_PUSH
+    
+    MODE -->|End| READ_POL
+    MODE -->|End| EXEC_CHK
+    CHECKS_GATE -->|No, end mode| END_FIXES
+    CHECKS_GATE -->|Yes| END_PUSH
+    END_FIXES --> END_VICTORY
+    END_PUSH --> END_VICTORY
+    END_VICTORY --> END_BODY
+    END_BODY --> END_CLOSE
+    END_CLOSE --> END_SILENT
+```
+```mermaid
+flowchart TD
+    READ_CHK["Read checks/<br/>global + local<br/>[Deterministic .sh + Interpretive .md]"]
+    
+    CONFLICT{Conflict?}
+    MERGE[Merge compatible rules]
+    LOCAL[Local wins]
+    
+    AI["AI interprets .md checks<br/>[Contextual enforcement]"]
+    SH["Bash executes .sh checks<br/>[Deterministic validation]"]
+    
+    AI_ACT[✅ Enforce or discuss]
+    AI_AMBIG[⚠️ Ask user]
+    
+    SH_OK[✅ All checks pass]
+    SH_FAIL[❌ Checks failed]
+    
+    REPORT["Report:<br/>📋 Interpretive (always ✅)<br/>🔍 Deterministic (✅/❌)"]
+    
+    READ_CHK --> CONFLICT
+    CONFLICT -->|No| MERGE
+    CONFLICT -->|Yes| LOCAL
+    MERGE --> AI
+    MERGE --> SH
+    LOCAL --> AI
+    LOCAL --> SH
+    
+    AI -->|Clear| AI_ACT
+    AI -->|Ambiguous| AI_AMBIG
+    
+    SH -->|Pass| SH_OK
+    SH -->|Fail| SH_FAIL
+    
+    AI_ACT --> REPORT
+    AI_AMBIG --> REPORT
+    SH_OK --> REPORT
+    SH_FAIL --> REPORT
+```
+```mermaid
+flowchart TD
+    GLOBAL_POL[checks/global/*.md<br/>Universal rules]
+    LOCAL_POL[checks/local/*.md<br/>Project-specific overrides]
+    
+    GLOBAL_CHK[checks/global/*.sh<br/>Universal tests]
+    LOCAL_CHK[checks/local/*.sh<br/>Project-specific tests]
+    
+    AI[AI reads checks/]
+    BASH[Bash executes checks/]
+    CONFLICT{Conflict?}
+    
+    GLOBAL_POL --> AI
+    LOCAL_POL --> AI
+    GLOBAL_CHK --> BASH
+    LOCAL_CHK --> BASH
+    
+    AI --> CONFLICT
+    CONFLICT -->|Yes| LOCAL_POL
+    CONFLICT -->|No| MERGE[Merge rules]
+    
+    MERGE --> ACTION[Execute workflow]
+    LOCAL_POL --> ACTION
+    BASH --> ACTION
+```
+```mermaid
+flowchart TD
+    START["Trigger 1️⃣<br/>[SH]"]
+    MODE{"Session mode?"}
+    
+    %% Common enforcement module
+    READ_POL["Read checks/<br/>global + local<br/>[AI interprets MD]"]
+    EXEC_CHK["Execute checks/<br/>global + local<br/>[Bash runs SH]"]
+    
+    REPORT["Report 6️⃣<br/>📋 Interpretive (✅)<br/>🔍 Checks (✅/❌)"]
+    CHECKS_GATE{"All checks<br/>passed?"}
+    
+    %% Start Branch
+    START_BRANCH["Read README 🤖 block 2️⃣<br/>[MD → AI]"]
+    START_FILES["Locate status files 3️⃣<br/>[SH]"]
+    START_GIT["Check git branch 4️⃣<br/>[SH]"]
+    START_WORK["Analyze changes 5️⃣<br/>[SH]"]
+    START_FIX["🛑 STOP: Fix issues<br/>[AI + SH]"]
+    START_UPDATE["Update docs 7️⃣<br/>[SH writes MD]"]
+    START_REPORT["Developer context 8️⃣<br/>[AI reads MD]"]
+    START_PUSH["Push / Groom 9️⃣<br/>[SH]"]
+    
+    %% End Branch
+    END_FIXES["Add fixes to roadmap<br/>[AI writes MD]"]
+    END_PUSH["Commit + push<br/>[SH]"]
+    END_VICTORY["Victory lap 🏆<br/>[AI reads MD]"]
+    END_BODY["Body check ⏸️<br/>[AI prompt]"]
+    END_CLOSE["Close VS Code 🌙<br/>[SH]"]
+    END_SILENT["[STAY SILENT]"]
+    
+    %% Flow
+    START --> MODE
+    
+    MODE -->|Start| START_BRANCH
+    START_BRANCH --> START_FILES
+    START_FILES --> START_GIT
+    START_GIT --> START_WORK
+    START_WORK --> READ_POL
+    START_WORK --> EXEC_CHK
+    
+    READ_POL --> REPORT
+    EXEC_CHK --> REPORT
+    REPORT --> CHECKS_GATE
+    
+    CHECKS_GATE -->|No, start mode| START_FIX
+    START_FIX --> READ_POL
+    CHECKS_GATE -->|Yes| START_UPDATE
+    START_UPDATE --> START_REPORT
+    START_REPORT --> START_PUSH
+    
+    MODE -->|End| READ_POL
+    MODE -->|End| EXEC_CHK
+    CHECKS_GATE -->|No, end mode| END_FIXES
+    CHECKS_GATE -->|Yes| END_PUSH
+    END_FIXES --> END_VICTORY
+    END_PUSH --> END_VICTORY
+    END_VICTORY --> END_BODY
+    END_BODY --> END_CLOSE
+    END_CLOSE --> END_SILENT
+```
+```mermaid
+flowchart TD
+    READ_CHK["Read checks/<br/>global + local<br/>[Deterministic .sh + Interpretive .md]"]
+    
+    CONFLICT{Conflict?}
+    MERGE[Merge compatible rules]
+    LOCAL[Local wins]
+    
+    AI["AI interprets .md checks<br/>[Contextual enforcement]"]
+    SH["Bash executes .sh checks<br/>[Deterministic validation]"]
+    
+    AI_ACT[✅ Enforce or discuss]
+    AI_AMBIG[⚠️ Ask user]
+    
+    SH_OK[✅ All checks pass]
+    SH_FAIL[❌ Checks failed]
+    
+    REPORT["Report:<br/>📋 Interpretive (always ✅)<br/>🔍 Deterministic (✅/❌)"]
+    
+    READ_CHK --> CONFLICT
+    CONFLICT -->|No| MERGE
+    CONFLICT -->|Yes| LOCAL
+    MERGE --> AI
+    MERGE --> SH
+    LOCAL --> AI
+    LOCAL --> SH
+    
+    AI -->|Clear| AI_ACT
+    AI -->|Ambiguous| AI_AMBIG
+    
+    SH -->|Pass| SH_OK
+    SH -->|Fail| SH_FAIL
+    
+    AI_ACT --> REPORT
+    AI_AMBIG --> REPORT
+    SH_OK --> REPORT
+    SH_FAIL --> REPORT
+```
+```mermaid
+flowchart TD
+    GLOBAL_POL[checks/global/*.md<br/>Universal rules]
+    LOCAL_POL[checks/local/*.md<br/>Project-specific overrides]
+    
+    GLOBAL_CHK[checks/global/*.sh<br/>Universal tests]
+    LOCAL_CHK[checks/local/*.sh<br/>Project-specific tests]
+    
+    AI[AI reads checks/]
+    BASH[Bash executes checks/]
+    CONFLICT{Conflict?}
+    
+    GLOBAL_POL --> AI
+    LOCAL_POL --> AI
+    GLOBAL_CHK --> BASH
+    LOCAL_CHK --> BASH
+    
+    AI --> CONFLICT
+    CONFLICT -->|Yes| LOCAL_POL
+    CONFLICT -->|No| MERGE[Merge rules]
+    
+    MERGE --> ACTION[Execute workflow]
+    LOCAL_POL --> ACTION
+    BASH --> ACTION
+```
+```mermaid
+flowchart TD
+    START["Trigger 1️⃣<br/>[SH]"]
+    MODE{"Session mode?"}
+    
+    %% Common enforcement module
+    READ_POL["Read checks/<br/>global + local<br/>[AI interprets MD]"]
+    EXEC_CHK["Execute checks/<br/>global + local<br/>[Bash runs SH]"]
+    
+    REPORT["Report 6️⃣<br/>📋 Interpretive (✅)<br/>🔍 Checks (✅/❌)"]
+    CHECKS_GATE{"All checks<br/>passed?"}
+    
+    %% Start Branch
+    START_BRANCH["Read README 🤖 block 2️⃣<br/>[MD → AI]"]
+    START_FILES["Locate status files 3️⃣<br/>[SH]"]
+    START_GIT["Check git branch 4️⃣<br/>[SH]"]
+    START_WORK["Analyze changes 5️⃣<br/>[SH]"]
+    START_FIX["🛑 STOP: Fix issues<br/>[AI + SH]"]
+    START_UPDATE["Update docs 7️⃣<br/>[SH writes MD]"]
+    START_REPORT["Developer context 8️⃣<br/>[AI reads MD]"]
+    START_PUSH["Push / Groom 9️⃣<br/>[SH]"]
+    
+    %% End Branch
+    END_FIXES["Add fixes to roadmap<br/>[AI writes MD]"]
+    END_PUSH["Commit + push<br/>[SH]"]
+    END_VICTORY["Victory lap 🏆<br/>[AI reads MD]"]
+    END_BODY["Body check ⏸️<br/>[AI prompt]"]
+    END_CLOSE["Close VS Code 🌙<br/>[SH]"]
+    END_SILENT["[STAY SILENT]"]
+    
+    %% Flow
+    START --> MODE
+    
+    MODE -->|Start| START_BRANCH
+    START_BRANCH --> START_FILES
+    START_FILES --> START_GIT
+    START_GIT --> START_WORK
+    START_WORK --> READ_POL
+    START_WORK --> EXEC_CHK
+    
+    READ_POL --> REPORT
+    EXEC_CHK --> REPORT
+    REPORT --> CHECKS_GATE
+    
+    CHECKS_GATE -->|No, start mode| START_FIX
+    START_FIX --> READ_POL
+    CHECKS_GATE -->|Yes| START_UPDATE
+    START_UPDATE --> START_REPORT
+    START_REPORT --> START_PUSH
+    
+    MODE -->|End| READ_POL
+    MODE -->|End| EXEC_CHK
+    CHECKS_GATE -->|No, end mode| END_FIXES
+    CHECKS_GATE -->|Yes| END_PUSH
+    END_FIXES --> END_VICTORY
+    END_PUSH --> END_VICTORY
+    END_VICTORY --> END_BODY
+    END_BODY --> END_CLOSE
+    END_CLOSE --> END_SILENT
+```
+```mermaid
+flowchart TD
+    READ_CHK["Read checks/<br/>global + local<br/>[Deterministic .sh + Interpretive .md]"]
+    
+    CONFLICT{Conflict?}
+    MERGE[Merge compatible rules]
+    LOCAL[Local wins]
+    
+    AI["AI interprets .md checks<br/>[Contextual enforcement]"]
+    SH["Bash executes .sh checks<br/>[Deterministic validation]"]
+    
+    AI_ACT[✅ Enforce or discuss]
+    AI_AMBIG[⚠️ Ask user]
+    
+    SH_OK[✅ All checks pass]
+    SH_FAIL[❌ Checks failed]
+    
+    REPORT["Report:<br/>📋 Interpretive (always ✅)<br/>🔍 Deterministic (✅/❌)"]
+    
+    READ_CHK --> CONFLICT
+    CONFLICT -->|No| MERGE
+    CONFLICT -->|Yes| LOCAL
+    MERGE --> AI
+    MERGE --> SH
+    LOCAL --> AI
+    LOCAL --> SH
+    
+    AI -->|Clear| AI_ACT
+    AI -->|Ambiguous| AI_AMBIG
+    
+    SH -->|Pass| SH_OK
+    SH -->|Fail| SH_FAIL
+    
+    AI_ACT --> REPORT
+    AI_AMBIG --> REPORT
+    SH_OK --> REPORT
+    SH_FAIL --> REPORT
+```
+```mermaid
+flowchart TD
+    GLOBAL_POL[checks/global/*.md<br/>Universal rules]
+    LOCAL_POL[checks/local/*.md<br/>Project-specific overrides]
+    
+    GLOBAL_CHK[checks/global/*.sh<br/>Universal tests]
+    LOCAL_CHK[checks/local/*.sh<br/>Project-specific tests]
+    
+    AI[AI reads checks/]
+    BASH[Bash executes checks/]
+    CONFLICT{Conflict?}
+    
+    GLOBAL_POL --> AI
+    LOCAL_POL --> AI
+    GLOBAL_CHK --> BASH
+    LOCAL_CHK --> BASH
+    
+    AI --> CONFLICT
+    CONFLICT -->|Yes| LOCAL_POL
+    CONFLICT -->|No| MERGE[Merge rules]
+    
+    MERGE --> ACTION[Execute workflow]
+    LOCAL_POL --> ACTION
+    BASH --> ACTION
+```
+```mermaid
+flowchart TD
+    START["Trigger 1️⃣<br/>[SH]"]
+    MODE{"Session mode?"}
+    
+    %% Common enforcement module
+    READ_POL["Read checks/<br/>global + local<br/>[AI interprets MD]"]
+    EXEC_CHK["Execute checks/<br/>global + local<br/>[Bash runs SH]"]
+    
+    REPORT["Report 6️⃣<br/>📋 Interpretive (✅)<br/>🔍 Checks (✅/❌)"]
+    CHECKS_GATE{"All checks<br/>passed?"}
+    
+    %% Start Branch
+    START_BRANCH["Read README 🤖 block 2️⃣<br/>[MD → AI]"]
+    START_FILES["Locate status files 3️⃣<br/>[SH]"]
+    START_GIT["Check git branch 4️⃣<br/>[SH]"]
+    START_WORK["Analyze changes 5️⃣<br/>[SH]"]
+    START_FIX["🛑 STOP: Fix issues<br/>[AI + SH]"]
+    START_UPDATE["Update docs 7️⃣<br/>[SH writes MD]"]
+    START_REPORT["Developer context 8️⃣<br/>[AI reads MD]"]
+    START_PUSH["Push / Groom 9️⃣<br/>[SH]"]
+    
+    %% End Branch
+    END_FIXES["Add fixes to roadmap<br/>[AI writes MD]"]
+    END_PUSH["Commit + push<br/>[SH]"]
+    END_VICTORY["Victory lap 🏆<br/>[AI reads MD]"]
+    END_BODY["Body check ⏸️<br/>[AI prompt]"]
+    END_CLOSE["Close VS Code 🌙<br/>[SH]"]
+    END_SILENT["[STAY SILENT]"]
+    
+    %% Flow
+    START --> MODE
+    
+    MODE -->|Start| START_BRANCH
+    START_BRANCH --> START_FILES
+    START_FILES --> START_GIT
+    START_GIT --> START_WORK
+    START_WORK --> READ_POL
+    START_WORK --> EXEC_CHK
+    
+    READ_POL --> REPORT
+    EXEC_CHK --> REPORT
+    REPORT --> CHECKS_GATE
+    
+    CHECKS_GATE -->|No, start mode| START_FIX
+    START_FIX --> READ_POL
+    CHECKS_GATE -->|Yes| START_UPDATE
+    START_UPDATE --> START_REPORT
+    START_REPORT --> START_PUSH
+    
+    MODE -->|End| READ_POL
+    MODE -->|End| EXEC_CHK
+    CHECKS_GATE -->|No, end mode| END_FIXES
+    CHECKS_GATE -->|Yes| END_PUSH
+    END_FIXES --> END_VICTORY
+    END_PUSH --> END_VICTORY
+    END_VICTORY --> END_BODY
+    END_BODY --> END_CLOSE
+    END_CLOSE --> END_SILENT
+```
+```mermaid
+flowchart TD
+    READ_CHK["Read checks/<br/>global + local<br/>[Deterministic .sh + Interpretive .md]"]
+    
+    CONFLICT{Conflict?}
+    MERGE[Merge compatible rules]
+    LOCAL[Local wins]
+    
+    AI["AI interprets .md checks<br/>[Contextual enforcement]"]
+    SH["Bash executes .sh checks<br/>[Deterministic validation]"]
+    
+    AI_ACT[✅ Enforce or discuss]
+    AI_AMBIG[⚠️ Ask user]
+    
+    SH_OK[✅ All checks pass]
+    SH_FAIL[❌ Checks failed]
+    
+    REPORT["Report:<br/>📋 Interpretive (always ✅)<br/>🔍 Deterministic (✅/❌)"]
+    
+    READ_CHK --> CONFLICT
+    CONFLICT -->|No| MERGE
+    CONFLICT -->|Yes| LOCAL
+    MERGE --> AI
+    MERGE --> SH
+    LOCAL --> AI
+    LOCAL --> SH
+    
+    AI -->|Clear| AI_ACT
+    AI -->|Ambiguous| AI_AMBIG
+    
+    SH -->|Pass| SH_OK
+    SH -->|Fail| SH_FAIL
+    
+    AI_ACT --> REPORT
+    AI_AMBIG --> REPORT
+    SH_OK --> REPORT
+    SH_FAIL --> REPORT
+```
+```mermaid
+flowchart TD
+    GLOBAL_POL[checks/global/*.md<br/>Universal rules]
+    LOCAL_POL[checks/local/*.md<br/>Project-specific overrides]
+    
+    GLOBAL_CHK[checks/global/*.sh<br/>Universal tests]
+    LOCAL_CHK[checks/local/*.sh<br/>Project-specific tests]
+    
+    AI[AI reads checks/]
+    BASH[Bash executes checks/]
+    CONFLICT{Conflict?}
+    
+    GLOBAL_POL --> AI
+    LOCAL_POL --> AI
+    GLOBAL_CHK --> BASH
+    LOCAL_CHK --> BASH
+    
+    AI --> CONFLICT
+    CONFLICT -->|Yes| LOCAL_POL
+    CONFLICT -->|No| MERGE[Merge rules]
+    
+    MERGE --> ACTION[Execute workflow]
+    LOCAL_POL --> ACTION
+    BASH --> ACTION
+```
+```mermaid
+flowchart TD
+    START["Trigger 1️⃣<br/>[SH]"]
+    MODE{"Session mode?"}
+    
+    %% Common enforcement module
+    READ_POL["Read checks/<br/>global + local<br/>[AI interprets MD]"]
+    EXEC_CHK["Execute checks/<br/>global + local<br/>[Bash runs SH]"]
+    
+    REPORT["Report 6️⃣<br/>📋 Interpretive (✅)<br/>🔍 Checks (✅/❌)"]
+    CHECKS_GATE{"All checks<br/>passed?"}
+    
+    %% Start Branch
+    START_BRANCH["Read README 🤖 block 2️⃣<br/>[MD → AI]"]
+    START_FILES["Locate status files 3️⃣<br/>[SH]"]
+    START_GIT["Check git branch 4️⃣<br/>[SH]"]
+    START_WORK["Analyze changes 5️⃣<br/>[SH]"]
+    START_FIX["🛑 STOP: Fix issues<br/>[AI + SH]"]
+    START_UPDATE["Update docs 7️⃣<br/>[SH writes MD]"]
+    START_REPORT["Developer context 8️⃣<br/>[AI reads MD]"]
+    START_PUSH["Push / Groom 9️⃣<br/>[SH]"]
+    
+    %% End Branch
+    END_FIXES["Add fixes to roadmap<br/>[AI writes MD]"]
+    END_PUSH["Commit + push<br/>[SH]"]
+    END_VICTORY["Victory lap 🏆<br/>[AI reads MD]"]
+    END_BODY["Body check ⏸️<br/>[AI prompt]"]
+    END_CLOSE["Close VS Code 🌙<br/>[SH]"]
+    END_SILENT["[STAY SILENT]"]
+    
+    %% Flow
+    START --> MODE
+    
+    MODE -->|Start| START_BRANCH
+    START_BRANCH --> START_FILES
+    START_FILES --> START_GIT
+    START_GIT --> START_WORK
+    START_WORK --> READ_POL
+    START_WORK --> EXEC_CHK
+    
+    READ_POL --> REPORT
+    EXEC_CHK --> REPORT
+    REPORT --> CHECKS_GATE
+    
+    CHECKS_GATE -->|No, start mode| START_FIX
+    START_FIX --> READ_POL
+    CHECKS_GATE -->|Yes| START_UPDATE
+    START_UPDATE --> START_REPORT
+    START_REPORT --> START_PUSH
+    
+    MODE -->|End| READ_POL
+    MODE -->|End| EXEC_CHK
+    CHECKS_GATE -->|No, end mode| END_FIXES
+    CHECKS_GATE -->|Yes| END_PUSH
+    END_FIXES --> END_VICTORY
+    END_PUSH --> END_VICTORY
+    END_VICTORY --> END_BODY
+    END_BODY --> END_CLOSE
+    END_CLOSE --> END_SILENT
+```
+```mermaid
+flowchart TD
+    READ_CHK["Read checks/<br/>global + local<br/>[Deterministic .sh + Interpretive .md]"]
+    
+    CONFLICT{Conflict?}
+    MERGE[Merge compatible rules]
+    LOCAL[Local wins]
+    
+    AI["AI interprets .md checks<br/>[Contextual enforcement]"]
+    SH["Bash executes .sh checks<br/>[Deterministic validation]"]
+    
+    AI_ACT[✅ Enforce or discuss]
+    AI_AMBIG[⚠️ Ask user]
+    
+    SH_OK[✅ All checks pass]
+    SH_FAIL[❌ Checks failed]
+    
+    REPORT["Report:<br/>📋 Interpretive (always ✅)<br/>🔍 Deterministic (✅/❌)"]
+    
+    READ_CHK --> CONFLICT
+    CONFLICT -->|No| MERGE
+    CONFLICT -->|Yes| LOCAL
+    MERGE --> AI
+    MERGE --> SH
+    LOCAL --> AI
+    LOCAL --> SH
+    
+    AI -->|Clear| AI_ACT
+    AI -->|Ambiguous| AI_AMBIG
+    
+    SH -->|Pass| SH_OK
+    SH -->|Fail| SH_FAIL
+    
+    AI_ACT --> REPORT
+    AI_AMBIG --> REPORT
+    SH_OK --> REPORT
+    SH_FAIL --> REPORT
+```
+```mermaid
+flowchart TD
+    GLOBAL_POL[checks/global/*.md<br/>Universal rules]
+    LOCAL_POL[checks/local/*.md<br/>Project-specific overrides]
+    
+    GLOBAL_CHK[checks/global/*.sh<br/>Universal tests]
+    LOCAL_CHK[checks/local/*.sh<br/>Project-specific tests]
+    
+    AI[AI reads checks/]
+    BASH[Bash executes checks/]
+    CONFLICT{Conflict?}
+    
+    GLOBAL_POL --> AI
+    LOCAL_POL --> AI
+    GLOBAL_CHK --> BASH
+    LOCAL_CHK --> BASH
+    
+    AI --> CONFLICT
+    CONFLICT -->|Yes| LOCAL_POL
+    CONFLICT -->|No| MERGE[Merge rules]
+    
+    MERGE --> ACTION[Execute workflow]
+    LOCAL_POL --> ACTION
+    BASH --> ACTION
+```
+```mermaid
+flowchart TD
+    START["Trigger 1️⃣<br/>[SH]"]
+    MODE{"Session mode?"}
+    
+    %% Common enforcement module
+    READ_POL["Read checks/<br/>global + local<br/>[AI interprets MD]"]
+    EXEC_CHK["Execute checks/<br/>global + local<br/>[Bash runs SH]"]
+    
+    REPORT["Report 6️⃣<br/>📋 Interpretive (✅)<br/>🔍 Checks (✅/❌)"]
+    CHECKS_GATE{"All checks<br/>passed?"}
+    
+    %% Start Branch
+    START_BRANCH["Read README 🤖 block 2️⃣<br/>[MD → AI]"]
+    START_FILES["Locate status files 3️⃣<br/>[SH]"]
+    START_GIT["Check git branch 4️⃣<br/>[SH]"]
+    START_WORK["Analyze changes 5️⃣<br/>[SH]"]
+    START_FIX["🛑 STOP: Fix issues<br/>[AI + SH]"]
+    START_UPDATE["Update docs 7️⃣<br/>[SH writes MD]"]
+    START_REPORT["Developer context 8️⃣<br/>[AI reads MD]"]
+    START_PUSH["Push / Groom 9️⃣<br/>[SH]"]
+    
+    %% End Branch
+    END_FIXES["Add fixes to roadmap<br/>[AI writes MD]"]
+    END_PUSH["Commit + push<br/>[SH]"]
+    END_VICTORY["Victory lap 🏆<br/>[AI reads MD]"]
+    END_BODY["Body check ⏸️<br/>[AI prompt]"]
+    END_CLOSE["Close VS Code 🌙<br/>[SH]"]
+    END_SILENT["[STAY SILENT]"]
+    
+    %% Flow
+    START --> MODE
+    
+    MODE -->|Start| START_BRANCH
+    START_BRANCH --> START_FILES
+    START_FILES --> START_GIT
+    START_GIT --> START_WORK
+    START_WORK --> READ_POL
+    START_WORK --> EXEC_CHK
+    
+    READ_POL --> REPORT
+    EXEC_CHK --> REPORT
+    REPORT --> CHECKS_GATE
+    
+    CHECKS_GATE -->|No, start mode| START_FIX
+    START_FIX --> READ_POL
+    CHECKS_GATE -->|Yes| START_UPDATE
+    START_UPDATE --> START_REPORT
+    START_REPORT --> START_PUSH
+    
+    MODE -->|End| READ_POL
+    MODE -->|End| EXEC_CHK
+    CHECKS_GATE -->|No, end mode| END_FIXES
+    CHECKS_GATE -->|Yes| END_PUSH
+    END_FIXES --> END_VICTORY
+    END_PUSH --> END_VICTORY
+    END_VICTORY --> END_BODY
+    END_BODY --> END_CLOSE
+    END_CLOSE --> END_SILENT
+```
+```mermaid
+flowchart TD
+    READ_CHK["Read checks/<br/>global + local<br/>[Deterministic .sh + Interpretive .md]"]
+    
+    CONFLICT{Conflict?}
+    MERGE[Merge compatible rules]
+    LOCAL[Local wins]
+    
+    AI["AI interprets .md checks<br/>[Contextual enforcement]"]
+    SH["Bash executes .sh checks<br/>[Deterministic validation]"]
+    
+    AI_ACT[✅ Enforce or discuss]
+    AI_AMBIG[⚠️ Ask user]
+    
+    SH_OK[✅ All checks pass]
+    SH_FAIL[❌ Checks failed]
+    
+    REPORT["Report:<br/>📋 Interpretive (always ✅)<br/>🔍 Deterministic (✅/❌)"]
+    
+    READ_CHK --> CONFLICT
+    CONFLICT -->|No| MERGE
+    CONFLICT -->|Yes| LOCAL
+    MERGE --> AI
+    MERGE --> SH
+    LOCAL --> AI
+    LOCAL --> SH
+    
+    AI -->|Clear| AI_ACT
+    AI -->|Ambiguous| AI_AMBIG
+    
+    SH -->|Pass| SH_OK
+    SH -->|Fail| SH_FAIL
+    
+    AI_ACT --> REPORT
+    AI_AMBIG --> REPORT
+    SH_OK --> REPORT
+    SH_FAIL --> REPORT
+```
+```mermaid
+flowchart TD
+    GLOBAL_POL[checks/global/*.md<br/>Universal rules]
+    LOCAL_POL[checks/local/*.md<br/>Project-specific overrides]
+    
+    GLOBAL_CHK[checks/global/*.sh<br/>Universal tests]
+    LOCAL_CHK[checks/local/*.sh<br/>Project-specific tests]
+    
+    AI[AI reads checks/]
+    BASH[Bash executes checks/]
+    CONFLICT{Conflict?}
+    
+    GLOBAL_POL --> AI
+    LOCAL_POL --> AI
+    GLOBAL_CHK --> BASH
+    LOCAL_CHK --> BASH
+    
+    AI --> CONFLICT
+    CONFLICT -->|Yes| LOCAL_POL
+    CONFLICT -->|No| MERGE[Merge rules]
+    
+    MERGE --> ACTION[Execute workflow]
+    LOCAL_POL --> ACTION
+    BASH --> ACTION
+```
+```mermaid
+flowchart TD
+    START["Trigger 1️⃣<br/>[SH]"]
+    MODE{"Session mode?"}
+    
+    %% Common enforcement module
+    READ_POL["Read checks/<br/>global + local<br/>[AI interprets MD]"]
+    EXEC_CHK["Execute checks/<br/>global + local<br/>[Bash runs SH]"]
+    
+    REPORT["Report 6️⃣<br/>📋 Interpretive (✅)<br/>🔍 Checks (✅/❌)"]
+    CHECKS_GATE{"All checks<br/>passed?"}
+    
+    %% Start Branch
+    START_BRANCH["Read README 🤖 block 2️⃣<br/>[MD → AI]"]
+    START_FILES["Locate status files 3️⃣<br/>[SH]"]
+    START_GIT["Check git branch 4️⃣<br/>[SH]"]
+    START_WORK["Analyze changes 5️⃣<br/>[SH]"]
+    START_FIX["🛑 STOP: Fix issues<br/>[AI + SH]"]
+    START_UPDATE["Update docs 7️⃣<br/>[SH writes MD]"]
+    START_REPORT["Developer context 8️⃣<br/>[AI reads MD]"]
+    START_PUSH["Push / Groom 9️⃣<br/>[SH]"]
+    
+    %% End Branch
+    END_FIXES["Add fixes to roadmap<br/>[AI writes MD]"]
+    END_PUSH["Commit + push<br/>[SH]"]
+    END_VICTORY["Victory lap 🏆<br/>[AI reads MD]"]
+    END_BODY["Body check ⏸️<br/>[AI prompt]"]
+    END_CLOSE["Close VS Code 🌙<br/>[SH]"]
+    END_SILENT["[STAY SILENT]"]
+    
+    %% Flow
+    START --> MODE
+    
+    MODE -->|Start| START_BRANCH
+    START_BRANCH --> START_FILES
+    START_FILES --> START_GIT
+    START_GIT --> START_WORK
+    START_WORK --> READ_POL
+    START_WORK --> EXEC_CHK
+    
+    READ_POL --> REPORT
+    EXEC_CHK --> REPORT
+    REPORT --> CHECKS_GATE
+    
+    CHECKS_GATE -->|No, start mode| START_FIX
+    START_FIX --> READ_POL
+    CHECKS_GATE -->|Yes| START_UPDATE
+    START_UPDATE --> START_REPORT
+    START_REPORT --> START_PUSH
+    
+    MODE -->|End| READ_POL
+    MODE -->|End| EXEC_CHK
+    CHECKS_GATE -->|No, end mode| END_FIXES
+    CHECKS_GATE -->|Yes| END_PUSH
+    END_FIXES --> END_VICTORY
+    END_PUSH --> END_VICTORY
+    END_VICTORY --> END_BODY
+    END_BODY --> END_CLOSE
+    END_CLOSE --> END_SILENT
 ```
 
 ## Philosophy: Polycentric Governance
@@ -78,10 +1147,14 @@ Backstage follows a **polycentric structure**—not hierarchical "levels" but **
 
 ---
 
+
+
 > 🤖
 >
-> This project follows [backstage protocol](https://github.com/nonlinear/backstage) v1.0.1
+> This project follows [backstage protocol](https://github.com/nonlinear/backstage) v1.0.0
 >
-> [README](README.md) 👏 [ROADMAP](backstage/ROADMAP.md) 👏 [CHANGELOG](backstage/CHANGELOG.md) 👏 checks: [local](backstage/checks/local/) <sup>10</sup>, [global](backstage/checks/global/) <sup>26</sup>
+> [README](README.md) 👏 [ROADMAP](backstage/ROADMAP.md) 👏 [CHANGELOG](backstage/CHANGELOG.md) 👏 checks: [local](backstage/checks/local/) <sup>11</sup>, [global](backstage/checks/global/) <sup>28</sup>
 >
 > 🤖
+
+
