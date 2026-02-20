@@ -18,6 +18,7 @@
 
 
 
+
 > 🤖
 > This project follows [backstage protocol](https://github.com/nonlinear/backstage) v1.0.1
 >
@@ -31,6 +32,42 @@
 
 
 
+
+
+## v1.0.1 - 2026-02-20
+
+### Merge Policies with Checks
+
+**Type:** Patch
+
+**Description:** Consolidate policies/ and checks/ into unified enforcement system
+
+**Problem:**
+
+- Current: policies/_.md (interpretive) + checks/_.sh (deterministic) separated
+
+**Tasks:**
+
+- can we merge? what do we use? (decided: merge into checks/)
+- Frontmatter for each (all checks have DESCRIPTION, TYPE, SCOPE)
+- change index (block?), remove policy (README updated, policies removed from nav)
+- Design merged structure (checks/global/, checks/local/) (structure exists)
+- Migrate existing policies → checks/\*.md (partially done, policies/ folder still exists)
+- Update backstage-start.sh to read .md + .sh together (checks.sh reads .md from checks/)
+- o report do bom dia tb tem que dizer o branch que estamos (not implemented)
+- backstage-start becomes backstage (renamed in commit 7d8e3a1)
+- delete backstage-close (backstage-end.sh deleted in commit 7d8e3a1)
+- Created epic-branch.sh (forces work in epic branches, keeps main clean)
+- Created roadmap-tasks check (syncs tasks with actual work done)
+- Created merge-to-main.md (merge workflow protocol)
+- Created doc-parity.md (detects doc-reality drift)
+- Standardized check naming (removed -sync suffix, patterns: -syntax/-list/none)
+- Consolidated redundant checks (navigation-block-\* → navigation-syntax, etc.)
+- Fixed bugs (navigation-syntax typo, roadmap-tasks regex)
+
+- Single source of truth (checks/ directory)
+- Each rule has docs (.md) + validation (.sh)
+- No confusion where to add new rules
 
 ## v1.0.0 - 2026-02-18
 
