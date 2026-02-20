@@ -23,18 +23,45 @@
 
 ```mermaid
 graph LR
-    A[📋 v1.0.1 Merge Policies with Checks]
-    B[📋 v1.0.0 Modular Policies & Checks]
+    A[📋 v1.0.2 Auto-create Navigation]
+    B[📋 v1.0.3 Writing Custom Checks]
     A --> B
-    C[📋 v0.3.9 Reordering rollout]
+    C[📋 v1.0.1 Merge Policies with Checks]
     B --> C
-    D[📋 v0.4.0 Roadmap Skill]
+    D[📋 v1.0.0 Modular Policies & Checks]
     C --> D
+    E[📋 v0.3.9 Reordering rollout]
+    D --> E
+    F[📋 v0.4.0 Roadmap Skill]
+    E --> F
 ```
 
 ---
 
 ## v1.0.2
+
+### Auto-create Navigation Blocks
+
+**Type:** Patch
+
+**Problem:**
+
+`navigation-syntax.sh` only EDITS existing blocks. New projects fail when README/ROADMAP/CHANGELOG are missing blocks.
+
+**Tasks:**
+
+- [ ] Modify navigation-syntax.sh: create block template if README missing block
+- [ ] Modify navigation-syntax.sh: create block template in ROADMAP/CHANGELOG if missing
+- [ ] Test on project without navigation blocks
+- [ ] Document symlink pattern (checks/global/ → backstage/backstage/checks/global)
+
+**Success:**
+
+New projects auto-generate navigation blocks on first `backstage start`. No manual hardcoding needed.
+
+---
+
+## v1.0.3
 
 ### Writing Custom Checks
 
