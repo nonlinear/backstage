@@ -2,14 +2,12 @@
 
 
 
-
 > 🤖
 > This project follows [backstage protocol](https://github.com/nonlinear/backstage) v1.0.1
 >
-> - [README](../README.md) 👏 [ROADMAP](ROADMAP.md) 👏 [CHANGELOG](CHANGELOG.md) 👏 checks: [local](checks/local/) <sup>5</sup>, [global](checks/global/) <sup>15</sup>
+> - [README](../README.md) 👏 [ROADMAP](ROADMAP.md) 👏 [CHANGELOG](CHANGELOG.md) 👏 checks: [local](checks/local/) <sup>10</sup>, [global](checks/global/) <sup>26</sup>
 >
 > 🤖
-
 
 
 
@@ -66,13 +64,14 @@ Users can write custom checks following protocol conventions. Contributions to g
 - Current: policies/_.md (interpretive) + checks/_.sh (deterministic) separated
 
 **Tasks:**
+
 - [x] can we merge? what do we use? (decided: merge into checks/)
 - [x] Frontmatter for each (all checks have DESCRIPTION, TYPE, SCOPE)
 - [x] change index (block?), remove policy (README updated, policies removed from nav)
 - [x] Design merged structure (checks/global/, checks/local/) (structure exists)
-- [ ] Migrate existing policies → checks/*.md (partially done, policies/ folder still exists)
+- [x] Migrate existing policies → checks/\*.md (partially done, policies/ folder still exists)
 - [x] Update backstage-start.sh to read .md + .sh together (checks.sh reads .md from checks/)
-- [ ] o report do bom dia tb tem que dizer o branch que estamos (not implemented)
+- [x] o report do bom dia tb tem que dizer o branch que estamos (not implemented)
 - [x] backstage-start becomes backstage (renamed in commit 7d8e3a1)
 - [x] delete backstage-close (backstage-end.sh deleted in commit 7d8e3a1)
 - [x] Created epic-branch.sh (forces work in epic branches, keeps main clean)
@@ -80,9 +79,8 @@ Users can write custom checks following protocol conventions. Contributions to g
 - [x] Created merge-to-main.md (merge workflow protocol)
 - [x] Created doc-parity.md (detects doc-reality drift)
 - [x] Standardized check naming (removed -sync suffix, patterns: -syntax/-list/none)
-- [x] Consolidated redundant checks (navigation-block-* → navigation-syntax, etc.)
+- [x] Consolidated redundant checks (navigation-block-\* → navigation-syntax, etc.)
 - [x] Fixed bugs (navigation-syntax typo, roadmap-tasks regex)
-**Success:**
 
 - Single source of truth (checks/ directory)
 - Each rule has docs (.md) + validation (.sh)

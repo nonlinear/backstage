@@ -13,12 +13,22 @@
 
 
 
+
+
+
+
+
 > 🤖
-> This project follows [backstage protocol](https://github.com/nonlinear/backstage) v1.0.0
+> This project follows [backstage protocol](https://github.com/nonlinear/backstage) v1.0.1
 >
-> - [README](../README.md) 👏 [ROADMAP](ROADMAP.md) 👏  [CHANGELOG](CHANGELOG.md) 👏 policies: [local](policies/local/) <sup>5</sup>, [global](policies/global/) <sup>11</sup> 👏 checks: [local](checks/local/) <sup>4</sup>, [global](checks/global/) <sup>11</sup>
+> - [README](../README.md) 👏 [ROADMAP](ROADMAP.md) 👏 [CHANGELOG](CHANGELOG.md) 👏 checks: [local](checks/local/) <sup>10</sup>, [global](checks/global/) <sup>26</sup>
 >
 > 🤖
+
+
+
+
+
 
 
 
