@@ -77,7 +77,7 @@ Users can write custom checks following protocol conventions. Contributions to g
 
 ---
 
-## v0.4.0
+## v0.4.0 | [notes](epic-notes/v0.4.0-skill-security-fixes.md)
 
 ### Roadmap Skill
 
@@ -252,7 +252,7 @@ Implement `add_epic_types()` in backstage-start.sh:
 
 ---
 
-## v0.9.0
+## v0.9.0 | [notes](epic-notes/v0.9.0-pattern-research.md)
 
 ### "Back to Main" rites
 
