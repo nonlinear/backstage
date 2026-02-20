@@ -1,12 +1,14 @@
 # Backstage
 
-A protocol for AI-assisted development that allows you to be in your zone while AI ensures best practices:
+An anti-drift protocol for AI-assisted development, letting you to be in your zone while AI enforces:
 
-- [sandboxing ideas on epics, sandboxing experimentations on branches](backstage/checks/global/epic-branch.sh) (no more messy fixes going all places at once)
-- enforcing policies for documentation
-- checks for stability
+- sandboxing ideas on epics, sandboxing experimentations on branches [check](backstage/checks/global/epic-branch.sh) (no more messy fixes going all places at once)
+- commit before edit [check](backstage/checks/global/git.sh) (an undo for when AI explodes in your face)
+- enforcing parity between docs and system [check](backstage/checks/global/doc-parity.md)
+- completion of tasks [check](backstage/checks/global/roadmap-tasks.sh)
 - automatic documentation of epic notes
-- [automatic documentation for these pesky knowledge gaps](backstage/checks/global/gaps-list.sh) (no more your AI running in circles on same failed experiments)
+- automatic documentation for these pesky knowledge gaps [check](backstage/checks/global/gaps-list.sh) (no more your AI running in circles on same failed experiments)
+- [and others](backstage/checks/global/gaps-list.sh) (or write your own)
 
 > Main is protected with only stable, vetted code + documentation. Branches allow free experimentation to dig in. Get your hyperfocus AND stability.
 
@@ -27,19 +29,46 @@ A protocol for AI-assisted development that allows you to be in your zone while 
 
 ## Usage
 
-Running skill regularly acts as anti-drift, by enforcing deterministic and interpretative checks, both local and global (local wins if conflict), like:
+Running skill regularly enforces anti-drift, with deterministic and interpretative checks, both local and global (local wins if conflict).
 
-- [Forces work in epic branches, keeping main clean](backstage/checks/global/epic-branch.sh)
-- [Commit before edit](backstage/checks/global/git.sh)
-- [Completed work marked in ROADMAP](backstage/checks/global/roadmap-tasks.sh)
-- [Semantic versioning](backstage/checks/global/semver-syntax.sh)
-- [Documentation matches system reality](backstage/checks/global/doc-parity.md)
-- [Merge to main when epic complete](backstage/checks/global/merge-to-main.md)
-- (or write your own)
+```mermaid
+flowchart TD
+    READ_CHK["Read checks/<br/>global + local<br/>[Deterministic .sh + Interpretive .md]"]
 
-View [skill diagram](skills/backstage/SKILL.md#workflow-diagram) of what it does every time it runs
+    CONFLICT{Conflict?}
+    MERGE[Merge compatible rules]
+    LOCAL[Local wins]
 
-📖 [How to write your own checks](backstage/ROADMAP.md) (see epic v1.0.2: Writing Custom Checks)
+    AI["AI interprets .md checks<br/>[Contextual enforcement]"]
+    SH["Bash executes .sh checks<br/>[Deterministic validation]"]
+
+    AI_ACT[✅ Enforce or discuss]
+    AI_AMBIG[⚠️ Ask user]
+
+    SH_OK[✅ All checks pass]
+    SH_FAIL[❌ Checks failed]
+
+    REPORT["Report:<br/>📋 Interpretive (always ✅)<br/>🔍 Deterministic (✅/❌)"]
+
+    READ_CHK --> CONFLICT
+    CONFLICT -->|No| MERGE
+    CONFLICT -->|Yes| LOCAL
+    MERGE --> AI
+    MERGE --> SH
+    LOCAL --> AI
+    LOCAL --> SH
+
+    AI -->|Clear| AI_ACT
+    AI -->|Ambiguous| AI_AMBIG
+
+    SH -->|Pass| SH_OK
+    SH -->|Fail| SH_FAIL
+
+    AI_ACT --> REPORT
+    AI_AMBIG --> REPORT
+    SH_OK --> REPORT
+    SH_FAIL --> REPORT
+```
 
 ## Philosophy: Polycentric Governance
 
@@ -50,14 +79,6 @@ Backstage follows a **polycentric structure**—not hierarchical "levels" but **
 
 ---
 
-
-
-
-
-
-
-
-
 > 🤖
 >
 > This project follows [backstage protocol](https://github.com/nonlinear/backstage) v1.0.1
@@ -65,22 +86,3 @@ Backstage follows a **polycentric structure**—not hierarchical "levels" but **
 > [README](README.md) 👏 [ROADMAP](backstage/ROADMAP.md) 👏 [CHANGELOG](backstage/CHANGELOG.md) 👏 checks: [local](backstage/checks/local/) <sup>10</sup>, [global](backstage/checks/global/) <sup>26</sup>
 >
 > 🤖
-
-
-
-
-
-
-
-
-
-```mermaid
-graph LR
-    A[📋 v0.3.8 Major reordering]
-    B[📋 v0.3.9 Reordering rollout]
-    A --> B
-    C[📋 v0.4.0 Roadmap Skill]
-    B --> C
-    D["📋 v0.5.0 Pattern Research (Backstage vs Open Source Standards)"]
-    C --> D
-```
