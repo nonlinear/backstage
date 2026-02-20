@@ -1,6 +1,6 @@
 # Backstage
 
-A protocol for AI-assisted development that allows you to be in your zone while AI ensures best practices:
+An anti-drift protocol for AI-assisted development, allowing you to be in your zone while AI ensures best practices:
 
 - sandboxing ideas on epics, sandboxing experimentations on branches (no more messy fixes going all places at once)
 - enforcing policies for documentation
@@ -39,8 +39,6 @@ Running skill regularly acts as anti-drift, by enforcing deterministic and inter
 
 View [skill diagram](skills/backstage/SKILL.md#workflow-diagram) of what it does every time it runs
 
-📖 [How to write your own checks](backstage/ROADMAP.md) (see epic v1.0.2: Writing Custom Checks)
-
 ## Philosophy: Polycentric Governance
 
 Backstage follows a **polycentric structure**—not hierarchical "levels" but **overlapping jurisdictions** where global and project concerns coexist with two centers of authority: global (universal) and project (local, free to extend or deviate)
@@ -50,13 +48,23 @@ Backstage follows a **polycentric structure**—not hierarchical "levels" but **
 
 ---
 
+
+
+
+
+
 > 🤖
 >
-> This project follows [backstage protocol](https://github.com/nonlinear/backstage) v1.0.0
+> This project follows [backstage protocol](https://github.com/nonlinear/backstage) v1.0.1
 >
-> [README](README.md) 👏 [ROADMAP](backstage/ROADMAP.md) 👏 [CHANGELOG](backstage/CHANGELOG.md) 👏 policies: [local](backstage/policies/local/) <sup>5</sup>, [global](backstage/policies/global/) <sup>11</sup> 👏 checks: [local](backstage/checks/local/) <sup>4</sup>, [global](backstage/checks/global/) <sup>11</sup>
+> [README](README.md) 👏 [ROADMAP](backstage/ROADMAP.md) 👏 [CHANGELOG](backstage/CHANGELOG.md) 👏 checks: [local](backstage/checks/local/) <sup>5</sup>, [global](backstage/checks/global/) <sup>15</sup>
 >
 > 🤖
+
+
+
+
+
 
 ```mermaid
 graph LR

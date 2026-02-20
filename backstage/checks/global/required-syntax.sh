@@ -8,10 +8,8 @@
 test -f README.md && \
 test -f backstage/ROADMAP.md && \
 test -f backstage/CHANGELOG.md && \
-test -d backstage/policies && \
 test -d backstage/checks && \
 test -d backstage/global && \
 # Global folders
-test -d backstage/policies/global && \
 test -d backstage/checks/global && \
 echo '✅ Required structure exists' || echo '❌ Missing files/folders'
