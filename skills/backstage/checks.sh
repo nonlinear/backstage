@@ -24,6 +24,7 @@ LOCAL_CHECKS_DIR="backstage/checks/local"
 
 CHECKS_PASS=true
 CHECKS_RUN=0
+ROADMAP_STATUS="" # Capture roadmap-tasks output
 
 # Collect local check basenames (for override detection)
 LOCAL_CHECKS=""
@@ -50,8 +51,13 @@ if [ -d "$GLOBAL_CHECKS_DIR" ]; then
             fi
             
             # Run check
-            if bash "$check" >/dev/null 2>&1; then
+            CHECK_OUTPUT=$(bash "$check" 2>&1)
+            if [ $? -eq 0 ]; then
                 echo "    ✅ $basename_check"
+                # Capture roadmap-tasks output if all tasks done
+                if [ "$basename_check" = "roadmap-tasks.sh" ] && echo "$CHECK_OUTPUT" | grep -q "🚦 Ready for merge-to-main"; then
+                    ROADMAP_STATUS="$CHECK_OUTPUT"
+                fi
             else
                 echo "    ❌ $basename_check (failed)"
                 CHECKS_PASS=false
@@ -201,6 +207,12 @@ echo ""
 echo "📋 Interpretive checks:"
 echo "  ✅ All interpretive checks read ($INTERPRETIVE_READ total)"
 echo "  🤖 AI will enforce contextual rules"
+
+# Show roadmap status if epic complete
+if [ -n "$ROADMAP_STATUS" ]; then
+    echo ""
+    echo "$ROADMAP_STATUS"
+fi
 
 echo ""
 
