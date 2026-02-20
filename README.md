@@ -6,7 +6,7 @@ An anti-drift protocol for AI-assisted development, letting you to be in your zo
 - commit before edit [check](backstage/checks/global/git.sh) (an undo for when AI explodes in your face)
 - enforcing parity between docs and system [check](backstage/checks/global/doc-parity.md)
 - completion of tasks [check](backstage/checks/global/roadmap-tasks.sh)
-- automatic documentation of epic notes
+- automatic documentation of epic notes [check](backstage/checks/global/epic-notes.sh)
 - automatic documentation for these pesky knowledge gaps [check](backstage/checks/global/gaps-list.sh) (no more your AI running in circles on same failed experiments)
 - [and others](backstage/checks/global/gaps-list.sh) (or write your own)
 
