@@ -56,6 +56,8 @@ Backstage follows a **polycentric structure**—not hierarchical "levels" but **
 
 
 
+
+
 > 🤖
 >
 > This project follows [backstage protocol](https://github.com/nonlinear/backstage) v1.0.1
@@ -63,6 +65,8 @@ Backstage follows a **polycentric structure**—not hierarchical "levels" but **
 > [README](README.md) 👏 [ROADMAP](backstage/ROADMAP.md) 👏 [CHANGELOG](backstage/CHANGELOG.md) 👏 checks: [local](backstage/checks/local/) <sup>10</sup>, [global](backstage/checks/global/) <sup>26</sup>
 >
 > 🤖
+
+
 
 
 
