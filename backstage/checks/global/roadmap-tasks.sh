@@ -56,6 +56,9 @@ if [[ $TOTAL_TASKS -eq 0 ]]; then
     exit 0
 fi
 
+# Extract ambiguous tasks (those still marked [ ])
+AMBIGUOUS=$(echo "$EPIC_SECTION" | grep "^- \[ \]")
+
 # Report status
 if [[ $TODO_TASKS -eq 0 ]]; then
     echo "✅ All tasks complete in epic v$VERSION ($DONE_TASKS/$TOTAL_TASKS)"
@@ -63,5 +66,8 @@ if [[ $TODO_TASKS -eq 0 ]]; then
     exit 0
 else
     echo "📋 Epic v$VERSION progress: $DONE_TASKS/$TOTAL_TASKS tasks done ($TODO_TASKS remaining)"
+    echo ""
+    echo "⚠️  Ambiguous/incomplete tasks:"
+    echo "$AMBIGUOUS" | sed 's/^/   /'
     exit 0
 fi
