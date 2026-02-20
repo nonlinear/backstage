@@ -1,4 +1,7 @@
 #!/bin/bash
+# DESCRIPTION: Epics follow standard format. Prevents roadmap structure drift.
+# TYPE: deterministic
+# SCOPE: global
 # Epic Format Validation - Verify ROADMAP epics follow required structure
 
 # Check if ROADMAP exists

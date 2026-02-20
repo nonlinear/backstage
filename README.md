@@ -20,12 +20,26 @@ A protocol for AI-assisted development that allows you to be in your zone while 
    1. Install [backstage prompt](https://github.com/nonlinear/backstage/blob/main/backstage.prompt.md)
    2. Run `/backstage` in your project
 2. **Via OpenClaw Skill**
-   1. Install skill: `clawdhub install backstage` 
-   2. Say `backstage <project-path>` to start the workflow
-
-Prompt/skill auto-installs backstage if needed, then [starts workflow](epic-notes/v0.3.0-openclaw-skill-prompt.md#workflow)
+   1. Install skill: `clawdhub install backstage`
+   2. Say `good morning, <project-path>` to start the workflow
 
 ---
+
+## Usage
+
+Running skill regularly acts as anti-drift, by enforcing deterministic and interpretative checks, both local and global (local wins if conflict), like:
+
+- [Forces work in epic branches, keeping main clean](backstage/checks/global/epic-branch.sh)
+- [Commit before edit](backstage/checks/global/git.sh)
+- [Completed work marked in ROADMAP](backstage/checks/global/roadmap-tasks.sh)
+- [Semantic versioning](backstage/checks/global/semver-syntax.sh)
+- [Documentation matches system reality](backstage/checks/global/doc-parity.md)
+- [Merge to main when epic complete](backstage/checks/global/merge-to-main.md)
+- (or write your own)
+
+View [skill diagram](skills/backstage/SKILL.md#workflow-diagram) of what it does every time it runs
+
+📖 [How to write your own checks](backstage/ROADMAP.md) (see epic v1.0.2: Writing Custom Checks)
 
 ## Philosophy: Polycentric Governance
 
@@ -36,39 +50,13 @@ Backstage follows a **polycentric structure**—not hierarchical "levels" but **
 
 ---
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 > 🤖
 >
 > This project follows [backstage protocol](https://github.com/nonlinear/backstage) v1.0.0
 >
-> [README](README.md) 👏 [ROADMAP](backstage/ROADMAP.md) 👏  [CHANGELOG](backstage/CHANGELOG.md) 👏 policies: [local](backstage/policies/local/) <sup>5</sup>, [global](backstage/policies/global/) <sup>11</sup> 👏 checks: [local](backstage/checks/local/) <sup>4</sup>, [global](backstage/checks/global/) <sup>11</sup>
+> [README](README.md) 👏 [ROADMAP](backstage/ROADMAP.md) 👏 [CHANGELOG](backstage/CHANGELOG.md) 👏 policies: [local](backstage/policies/local/) <sup>5</sup>, [global](backstage/policies/global/) <sup>11</sup> 👏 checks: [local](backstage/checks/local/) <sup>4</sup>, [global](backstage/checks/global/) <sup>11</sup>
 >
 > 🤖
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 ```mermaid
 graph LR
@@ -80,22 +68,3 @@ graph LR
     D["📋 v0.5.0 Pattern Research (Backstage vs Open Source Standards)"]
     C --> D
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
