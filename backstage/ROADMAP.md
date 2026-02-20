@@ -646,3 +646,32 @@ Implement `add_epic_types()` in backstage-start.sh:
 - Automated cleanup (configurable)
 - Multi-user PR support (opt-in)
 - No branch pollution after 10+ epics
+
+## v1.1.0
+
+### OpenClaw Integration
+
+**Type:** Minor
+
+**Problem:**
+
+OpenClaw AI needs to work seamlessly with backstage protocol. Current gaps:
+
+- AGENTS.md rules (commit before edit, README protection) not enforced by backstage checks
+- Backstage skill runs checks but doesn't teach AI the rules
+- AI violates protocol (edits without commit, touches README without permission)
+- No clear integration path: how does OpenClaw read/enforce backstage policies?
+
+**Tasks:**
+
+- [ ] Design integration architecture (how OpenClaw learns backstage rules)
+- [ ] Decide: checks teach AI, or AGENTS.md references checks?
+- [ ] Add interpretive checks for AI behavior (commit-before-edit.md, readme-protection.md)
+- [ ] Update SKILL.md with AI integration guidance
+- [ ] Test: AI follows backstage protocol without manual reminders
+- [ ] Document: How to configure OpenClaw for backstage projects
+
+**Success:**
+
+OpenClaw AI automatically follows backstage protocol. No manual enforcement needed. AI reads checks, internalizes rules, acts accordingly.
+
