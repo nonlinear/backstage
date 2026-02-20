@@ -2,11 +2,11 @@
 
 A protocol for AI-assisted development that allows you to be in your zone while AI ensures best practices:
 
-- sandboxing ideas on epics, sandboxing experimentations on branches (no more messy fixes going all places at once)
+- [sandboxing ideas on epics, sandboxing experimentations on branches](backstage/checks/global/epic-branch.sh) (no more messy fixes going all places at once)
 - enforcing policies for documentation
 - checks for stability
 - automatic documentation of epic notes
-- automatic documentation for these pesky knowledge gaps (no more your AI running in circles on same failed experiments)
+- [automatic documentation for these pesky knowledge gaps](backstage/checks/global/gaps-list.sh) (no more your AI running in circles on same failed experiments)
 
 > Main is protected with only stable, vetted code + documentation. Branches allow free experimentation to dig in. Get your hyperfocus AND stability.
 
