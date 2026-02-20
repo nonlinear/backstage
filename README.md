@@ -3,7 +3,6 @@
 An anti-drift protocol for AI-assisted development, so you're in the zone while AI enforces:
 
 - sandboxing ideas on epics, and epics on branches [check](backstage/checks/global/epic-branch.sh) (no more messy fixes going all places at once)
-- commit before edit [check](backstage/checks/global/git.sh) (an undo for when AI explodes in your face)
 - enforcing parity between docs and system [check](backstage/checks/global/doc-parity.md)
 - completion of tasks [check](backstage/checks/global/roadmap-tasks.sh)
 - automatic documentation of epic notes [check](backstage/checks/global/epic-notes-link.sh)
