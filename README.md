@@ -2,11 +2,11 @@
 
 An anti-drift protocol for AI-assisted development, so you're in the zone while AI enforces:
 
-- sandboxing ideas on epics, and epics on branches [check](backstage/checks/global/epic-branch.sh) (no more messy fixes going all places at once)
-- enforcing parity between docs and system [check](backstage/checks/global/doc-parity.md)
-- completion of tasks [check](backstage/checks/global/roadmap-tasks.sh)
-- automatic documentation of epic notes [check](backstage/checks/global/epic-notes-link.sh)
-- automatic documentation for these pesky knowledge gaps [check](backstage/checks/global/gaps-list.sh) (no more your AI running in circles on same failed experiments)
+- [sandboxing ideas on epics, and epics on branches](backstage/checks/global/epic-branch.sh) (no more messy fixes going all places at once)
+- [enforcing parity between docs and system](backstage/checks/global/doc-parity.md)
+- [completion of tasks](backstage/checks/global/roadmap-tasks.sh)
+- [automatic documentation of epic notes](backstage/checks/global/epic-notes-link.sh)
+- [automatic documentation for these pesky knowledge gaps](backstage/checks/global/gaps-list.sh) (no more your AI running in circles on same failed experiments)
 - [and others](backstage/checks/global/gaps-list.sh) (or write your own)
 
 > Main is protected with only stable, vetted code + documentation. Branches allow free experimentation to dig in. Get your hyperfocus AND stability.
