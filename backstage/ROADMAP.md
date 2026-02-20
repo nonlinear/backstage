@@ -145,6 +145,7 @@ Users can write custom checks following protocol conventions. Contributions to g
 
 - [ ] Discuss: Is eval execution core to backstage or removable?
 - [ ] Decide: Configurable $HOME paths vs hardcoded (env var?)
+- [ ] **Auto-detect backstage protocol path** (avoid hardcoded $HOME/Documents/backstage)
 - [ ] Document: Add explicit warnings about HEALTH.md code execution
 - [ ] Metadata: Declare required paths/permissions in skill manifest
 - [ ] Consider: Sandbox eval (restricted bash, whitelist commands?)
