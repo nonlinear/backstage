@@ -1,25 +1,16 @@
-# Local Health Checks - README
+# Backstage Project Policy - README
 
-**Backstage-specific project checks** (not universal framework checks).
+**This folder contains backstage-specific rules** (not universal framework rules).
 
-**Context:** Backstage is meta - both framework (global/) AND project using that framework (root files).
+**Project-specific policies:**
 
-**Checks (alphabetical order):**
+- `dogfooding.md` - How backstage uses backstage (dual-layer structure)
+- `global-vs-project.md` - Understanding the distinction (critical!)
+- `templates.md` - Template maintenance rules
+- `version-tracking.md` - Framework version sync with CHANGELOG
+- `skill-workflow.md` - OpenClaw skill development flow
 
-- `dual-layer-global.sh` - Global framework files exist
-- `dual-layer-project.sh` - Project status files exist at root
-- `pre-merge-tasks.sh` - All tasks complete in ROADMAP before merge
-
-**Run all checks:**
-
-```bash
-# From project root
-for check in backstage/checks/local/*.sh; do
-  bash "$check"
-done
-```
-
-**Universal checks:** See `../global/README.md`
+**Universal rules:** See `../global/POLICY.md`
 
 **Last updated:** 2026-02-18  
-**Version:** 2.0 (Exploded from monolithic HEALTH.md)
+**Version:** 2.0 (Exploded from monolithic POLICY.md)
