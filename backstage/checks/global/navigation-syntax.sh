@@ -38,7 +38,7 @@ elif [[ "$BRANCH" =~ ^v([0-9]+\.[0-9]+\.[0-9]+) ]]; then
 else
     VERSION=$(cat backstage/VERSION 2>/dev/null || echo "0.3.4")
 fi
-r
+
 # Count ALL files in checks/ folders (.sh AND .md, exclude README.md)
 CHECKS_LOCAL=$(find backstage/checks/local \( -name "*.sh" -o -name "*.md" \) ! -name "README.md" 2>/dev/null | wc -l | tr -d ' ')
 CHECKS_GLOBAL=$(find backstage/checks/global \( -name "*.sh" -o -name "*.md" \) ! -name "README.md" 2>/dev/null | wc -l | tr -d ' ')
