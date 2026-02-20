@@ -1,6 +1,6 @@
 ---
 name: backstage
-description: "Manage backstage workflow in projects (ROADMAP, checks/, CHANGELOG). Triggers: 'backstage start', 'vamos trabalhar no X', 'backstage health'. Installs protocol if missing, updates global rules, runs health checks, shows active epics. Use for: epic planning, project setup, quality enforcement, context switching."
+description: "Manage backstage workflow in projects (ROADMAP, checks/, CHANGELOG). Triggers: 'backstage start', 'vamos trabalhar no X', 'backstage health'. Updates global rules, runs health checks, shows active epics. Use for: epic planning, project setup, quality enforcement, context switching."
 type: public
 version: 1.0.0
 status: production
