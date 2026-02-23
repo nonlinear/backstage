@@ -21,7 +21,7 @@ An anti-drift protocol for AI-assisted development, so you're in the zone while 
    1. Install [backstage prompt](https://github.com/nonlinear/backstage/blob/main/backstage.prompt.md)
    2. Run `/backstage` in your project
 2. **Via OpenClaw Skill**
-   1. Install skill: `clawdhub install backstage`
+   1. Install skill: `openclaw skill install nonlinear/backstage`
    2. Say `good morning, <project-path>` to start the workflow
 
 ---
