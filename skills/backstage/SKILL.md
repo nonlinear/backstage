@@ -222,7 +222,7 @@ flowchart TD
 - Prefers local checks on conflict
 - Reports deterministic check results (pass/fail)
 
-**Triggered by:** "good morning", "good night", "backstage start/end"
+**Triggered by:** "good morning", "good night", "backstage start/end", "update backstage"
 
 ---
 
@@ -258,6 +258,20 @@ flowchart TD
     END_CLOSE["Close VS Code 🌙<br/>[SH]"]
     END_SILENT["[STAY SILENT]"]
     
+    %% Update Backstage Branch
+    UPDATE_DETECT["Find backstage/ folder<br/>[SH]"]
+    UPDATE_CHECK_SYM{"Symlinked?"}
+    UPDATE_SKIP["✅ Already auto-updates<br/>[Report]"]
+    UPDATE_FETCH["Fetch upstream<br/>[SH: git clone]"]
+    UPDATE_DIFF["Compare local vs upstream<br/>[SH: diff]"]
+    UPDATE_UPTODATE{"Changes<br/>found?"}
+    UPDATE_UPTODATE_SKIP["✅ Already up to date<br/>[Report]"]
+    UPDATE_CHANGELOG["Generate mini changelog<br/>[AI reads diffs]"]
+    UPDATE_PROMPT{"User<br/>approves?"}
+    UPDATE_ABORT["Aborted<br/>[Report]"]
+    UPDATE_APPLY["rsync upstream → local<br/>[SH]"]
+    UPDATE_REPORT["🎉 Updated!<br/>[Report changes]"]
+    
     %% Flow
     START --> MODE
     
@@ -287,6 +301,19 @@ flowchart TD
     END_VICTORY --> END_BODY
     END_BODY --> END_CLOSE
     END_CLOSE --> END_SILENT
+    
+    MODE -->|Update| UPDATE_DETECT
+    UPDATE_DETECT --> UPDATE_CHECK_SYM
+    UPDATE_CHECK_SYM -->|Yes| UPDATE_SKIP
+    UPDATE_CHECK_SYM -->|No| UPDATE_FETCH
+    UPDATE_FETCH --> UPDATE_DIFF
+    UPDATE_DIFF --> UPDATE_UPTODATE
+    UPDATE_UPTODATE -->|No| UPDATE_UPTODATE_SKIP
+    UPDATE_UPTODATE -->|Yes| UPDATE_CHANGELOG
+    UPDATE_CHANGELOG --> UPDATE_PROMPT
+    UPDATE_PROMPT -->|No| UPDATE_ABORT
+    UPDATE_PROMPT -->|Yes| UPDATE_APPLY
+    UPDATE_APPLY --> UPDATE_REPORT
 ```
 
 **Domain labels:**
