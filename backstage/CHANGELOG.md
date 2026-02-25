@@ -53,6 +53,7 @@
 - Documented project definition guidelines (epic-notes/definition-of-project.md)
 - Created global check: skill-publish-warning.sh (detects unpublished changes before merge, prompts ClawHub + Finder)
 - Added ClawHub link to README frontmatter (auto-detected by check)
+- **Added "bom dia PROJECT" / "good morning PROJECT" trigger** to backstage skill (loads project context + health checks)
 - Tested patch workflow (this epic)
 
 **Success criteria met:**
@@ -60,6 +61,7 @@
 - Project scope ambiguity addressed (what belongs where)
 - Skills can't accidentally merge unpublished changes to main (check warns)
 - ClawHub link auto-opens for republishing
+- **"bom dia PROJECT" trigger enables morning context loading** (functional change)
 
 ---
 
