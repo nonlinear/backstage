@@ -1,8 +1,8 @@
 ---
 name: backstage
-description: "Anti-drift protocol script. Ensures parity between docs and system, among others"
+description: "Anti-drift protocol script. Ensures parity between docs and system. Triggers: 'bom dia PROJECT' / 'good morning PROJECT' (load project context with health checks)"
 type: public
-version: 1.0.0
+version: 1.0.2
 status: production
 author: nonlinear
 license: MIT
@@ -377,6 +377,12 @@ Categorize: patch/minor/major. Compare with ROADMAP. Match reality to plans.
 ## When to Use
 
 **Trigger patterns:**
+
+**"Bom dia" / "Good morning" + PROJECT:**
+- `bom dia personal` / `good morning personal`
+- `bom dia librarian` / `good morning librarian`
+- **Action:** Load project context + run health checks
+- **Output:** Current epic, roadmap status, branch info, gaps
 
 **Start mode:**
 - "backstage start"
