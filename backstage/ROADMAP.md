@@ -23,18 +23,47 @@
 
 ```mermaid
 graph LR
-    A[📋 v1.0.2 Auto-create Navigation]
-    B[📋 v1.0.3 Writing Custom Checks]
+    A[📋 v1.0.4 Patch Dance + Project Definition]
+    B[📋 v1.0.2 Auto-create Navigation]
     A --> B
-    C[📋 v1.0.1 Merge Policies with Checks]
+    C[📋 v1.0.3 Writing Custom Checks]
     B --> C
-    D[📋 v1.0.0 Modular Policies & Checks]
+    D[📋 v1.0.1 Merge Policies with Checks]
     C --> D
-    E[📋 v0.3.9 Reordering rollout]
+    E[📋 v1.0.0 Modular Policies & Checks]
     D --> E
-    F[📋 v0.4.0 Roadmap Skill]
+    F[📋 v0.3.9 Reordering rollout]
     E --> F
+    G[📋 v0.4.0 Roadmap Skill]
+    F --> G
 ```
+
+---
+
+## v1.0.4
+
+### Patch Dance + Project Definition
+
+**Type:** Patch
+
+**Problem:**
+
+1. **Publishing unclear:** No documented workflow for patches (ClawHub republish, version bumps, rewind/merge)
+2. **Project scope ambiguous:** Unclear what belongs in backstage vs skills vs personal projects
+3. **Skill publishing safety:** Need check to warn before merging unpublished skill changes to main
+
+**Tasks:**
+
+- [x] Document patch dance protocol (epic-notes/patch-dance-protocol.md)
+- [x] Document project definition guidelines (epic-notes/definition-of-project.md)
+- [ ] Create global check: skill-publish-warning.sh (detect unpublished changes, prompt ClawHub + Finder)
+- [ ] Add ClawHub link to skill frontmatter (for auto-open)
+- [ ] Test patch workflow (this epic)
+- [ ] Update CHANGELOG with v1.0.4 entry
+
+**Success:**
+
+Publishing patches is documented + automated. Project scope is clear. Skills can't accidentally merge unpublished changes to main.
 
 ---
 
