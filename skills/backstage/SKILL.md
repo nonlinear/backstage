@@ -23,6 +23,32 @@ dependencies:
 
 ---
 
+## ⚠️ Security Notice
+
+**This is an admin tool with elevated privileges:**
+
+- **Executes checks from global path** (`$HOME/Documents/backstage/backstage/checks/global/`)
+- **Pulls remote code** from GitHub (https://github.com/nonlinear/backstage)
+- **Modifies project files** (README, ROADMAP, CHANGELOG with mermaid diagrams)
+- **Rsyncs updates** when using `update backstage` trigger
+
+**Intended for:**
+- Personal use (you control the upstream repo)
+- Trusted teams (shared backstage protocol repo)
+
+**Not recommended for:**
+- Untrusted third-party projects
+- Public/open-source projects with unknown contributors
+
+**Mitigations in place:**
+- User confirmation before applying updates
+- Git history (all changes committed, revertable)
+- Symlink detection (admin mode auto-updates)
+
+**Use at your own risk.** Review `update-backstage.sh` and `checks.sh` before running.
+
+---
+
 ## 🔴 Why This Skill Exists (Anti-Drift)
 
 **Backstage-skill = ANTI-DRIFT:**
