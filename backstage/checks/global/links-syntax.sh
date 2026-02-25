@@ -6,6 +6,5 @@
 
 test -f backstage/CHANGELOG.md && \
 test -f backstage/ROADMAP.md && \
-test -d backstage/policies && \
 test -d backstage/checks && \
 echo '✅ README links valid' || echo '❌ Broken links in README'

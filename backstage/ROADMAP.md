@@ -7,12 +7,16 @@
 
 
 
+
+
 > 🤖
 > This project follows [backstage protocol](https://github.com/nonlinear/backstage) v1.0.0
 >
-> - [README](../README.md) 👏 [ROADMAP](ROADMAP.md) 👏 [CHANGELOG](CHANGELOG.md) 👏 checks: [local](checks/local/) <sup>11</sup>, [global](checks/global/) <sup>28</sup>
+> - [README](../README.md) 👏 [ROADMAP](ROADMAP.md) 👏 [CHANGELOG](CHANGELOG.md) 👏 checks: [local](checks/local/) <sup>11</sup>, [global](checks/global/) <sup>33</sup>
 >
 > 🤖
+
+
 
 
 
@@ -708,7 +712,7 @@ Implement `add_epic_types()` in backstage-start.sh:
 - Multi-user PR support (opt-in)
 - No branch pollution after 10+ epics
 
-## v1.1.0
+## v1.1.0 | [notes](epic-notes/v1.1.0-contract-diagram-adoption.md)
 
 ### OpenClaw Integration
 
