@@ -384,6 +384,14 @@ Categorize: patch/minor/major. Compare with ROADMAP. Match reality to plans.
 - **Action:** Load project context + run health checks
 - **Output:** Current epic, roadmap status, branch info, gaps
 
+**"Update backstage":**
+- **Action:** Compare local `*/backstage/checks/global/` against official repo
+- **Detect changes:** What's NEW or CHANGED in upstream
+- **Show delta:** Mini changelog (1 paragraph: what you GAIN if updated)
+- **Confirm:** User approves update
+- **Execute:** Pull latest `checks/global/` files from upstream
+- **Output:** Updated files list, what changed
+
 **Start mode:**
 - "backstage start"
 - "whatsup"
@@ -397,6 +405,110 @@ Categorize: patch/minor/major. Compare with ROADMAP. Match reality to plans.
 - "wrap up"
 - "pause work"
 - End of work session, when tired, or context-switch
+
+---
+
+## "Update Backstage" Workflow
+
+**Trigger:** `update backstage` (from any project using backstage protocol)
+
+**Purpose:** Sync local `checks/global/` with latest from upstream repo, show what's new.
+
+### How It Works
+
+1. **Detect project backstage folder:**
+   ```bash
+   # Search up from CWD for backstage/ folder
+   find . -type d -name "backstage" | grep -E "backstage$"
+   # Or read README 🤖 block for backstage location
+   ```
+
+2. **Confirm upstream source:**
+   ```bash
+   # Check if checks/global/ is symlink (admin mode)
+   if [ -L "backstage/checks/global" ]; then
+     echo "✅ Symlinked to upstream (auto-updates)"
+     exit 0
+   fi
+   
+   # Otherwise, assume official repo
+   UPSTREAM="https://github.com/nonlinear/backstage"
+   echo "Upstream: $UPSTREAM"
+   echo "Confirm this is correct? (y/n)"
+   ```
+
+3. **Fetch latest from upstream:**
+   ```bash
+   # Clone or pull latest
+   TMP_DIR=$(mktemp -d)
+   git clone --depth 1 "$UPSTREAM" "$TMP_DIR/backstage"
+   ```
+
+4. **Compare local vs upstream:**
+   ```bash
+   # Diff local checks/global/ vs upstream
+   diff -qr backstage/checks/global/ "$TMP_DIR/backstage/backstage/checks/global/"
+   ```
+
+5. **Generate mini changelog:**
+   ```
+   📦 Backstage Updates Available:
+   
+   NEW files (3):
+   - skill-publish-warning.sh (warns before merging unpublished skills)
+   - rebase-cadence.md (suggests rebase if branch >7 days old)
+   - epic-notes-orphan-detection.md (detects orphan epic notes)
+   
+   CHANGED files (2):
+   - merge-to-main.md (added Step 0: skill publish check)
+   - epic-branch.sh (improved detection logic)
+   
+   WHAT YOU GAIN:
+   Better skill publishing workflow, orphan detection, rebase reminders.
+   ```
+
+6. **Prompt user:**
+   ```
+   Apply these updates? (y/n)
+   ```
+
+7. **Update if confirmed:**
+   ```bash
+   # Copy upstream checks/global/ to local
+   rsync -av --delete "$TMP_DIR/backstage/backstage/checks/global/" backstage/checks/global/
+   
+   # Cleanup
+   rm -rf "$TMP_DIR"
+   
+   echo "✅ Updated checks/global/ from upstream"
+   ```
+
+8. **Report:**
+   ```
+   🎉 Backstage updated!
+   
+   Files changed: 5
+   - Added: skill-publish-warning.sh, rebase-cadence.md, epic-notes-orphan-detection.md
+   - Modified: merge-to-main.md, epic-branch.sh
+   
+   Next: Run 'backstage start' to test new checks.
+   ```
+
+### Edge Cases
+
+**Symlinked (admin mode):**
+- If `checks/global/` is symlink → already auto-updates
+- Just report: "✅ Already symlinked to upstream (no action needed)"
+
+**No changes:**
+- If local == upstream → report: "✅ Already up to date"
+
+**Conflicts:**
+- If user modified global checks locally → warn, ask to resolve
+- Suggest: copy to `checks/local/` (overrides) before updating
+
+**No internet:**
+- If git clone fails → report: "❌ Can't reach upstream (offline?)"
 
 ---
 
