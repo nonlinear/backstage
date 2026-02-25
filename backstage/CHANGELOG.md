@@ -26,7 +26,7 @@
 > 🤖
 > This project follows [backstage protocol](https://github.com/nonlinear/backstage) v1.0.0
 >
-> - [README](../README.md) 👏 [ROADMAP](ROADMAP.md) 👏 [CHANGELOG](CHANGELOG.md) 👏 checks: [local](checks/local/) <sup>11</sup>, [global](checks/global/) <sup>28</sup>
+> - [README](../README.md) 👏 [ROADMAP](ROADMAP.md) 👏 [CHANGELOG](CHANGELOG.md) 👏 checks: [local](checks/local/) <sup>11</sup>, [global](checks/global/) <sup>29</sup>
 >
 > 🤖
 
@@ -41,6 +41,27 @@
 
 
 
+
+## v1.0.4 - 2026-02-25
+
+### Patch Dance + Project Definition + Skill Publish Warning
+
+**Type:** Patch
+
+**Completed:**
+- Documented patch dance protocol (epic-notes/patch-dance-protocol.md)
+- Documented project definition guidelines (epic-notes/definition-of-project.md)
+- Created global check: skill-publish-warning.sh (detects unpublished changes before merge, prompts ClawHub + Finder)
+- Added ClawHub link to README frontmatter (auto-detected by check)
+- Tested patch workflow (this epic)
+
+**Success criteria met:**
+- Publishing patches is now documented + semi-automated
+- Project scope ambiguity addressed (what belongs where)
+- Skills can't accidentally merge unpublished changes to main (check warns)
+- ClawHub link auto-opens for republishing
+
+---
 
 ## v1.0.1 - 2026-02-20
 

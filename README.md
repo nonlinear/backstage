@@ -1,5 +1,8 @@
 # Backstage
 
+**Status:** Published Skill  
+**ClawHub:** https://clawhub.com/nonlinear/backstage
+
 An anti-drift protocol for AI-assisted development, so you're in the zone while AI enforces:
 
 - [sandboxing ideas on epics, and epics on branches](backstage/checks/global/epic-branch.sh) (no more messy fixes going all places at once)
@@ -21,7 +24,7 @@ An anti-drift protocol for AI-assisted development, so you're in the zone while 
    1. Install [backstage prompt](https://github.com/nonlinear/backstage/blob/main/backstage.prompt.md)
    2. Run `/backstage` in your project
 2. **Via OpenClaw Skill**
-   1. Install skill: `clawdhub install backstage`
+   1. Install skill: `openclaw skill install nonlinear/backstage`
    2. Say `good morning, <project-path>` to start the workflow
 
 ---

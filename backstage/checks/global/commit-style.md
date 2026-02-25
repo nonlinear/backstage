@@ -163,3 +163,49 @@ git push origin main
 | **Branch**    | Before merge to main      | ✅ **MANDATORY**          |
 
 **Key principle:** Main is sacred. Branches are sandboxes.
+
+## Backup Strategy: Commit Before Edit > .bak Files
+
+**Rule:** Git commits = better backups than .bak files.
+
+**Why:**
+- ✅ Timestamp (when changed)
+- ✅ Context (why changed - commit message)
+- ✅ Precise diff (what changed)
+- ✅ Precise rollback (git revert to exact point)
+
+**vs .bak files:**
+- ❌ No timestamp clarity
+- ❌ No context (why was this created?)
+- ❌ Hard to find (scattered in repo)
+- ❌ Clutter (noise in git status)
+
+**Workflow:**
+
+```bash
+# BEFORE editing important file:
+git add file.py
+git commit -m "Before editing X: reason for change"
+
+# Make changes
+vim file.py
+
+# After editing:
+git add file.py
+git commit -m "Changed X to Y: what was done"
+```
+
+**Recovery:**
+
+```bash
+# See what changed:
+git log --oneline file.py
+git diff HEAD~1 file.py
+
+# Rollback if needed:
+git revert HEAD
+# or
+git checkout HEAD~1 file.py
+```
+
+**Rule:** If you have git → commit before edit. No .bak files needed.

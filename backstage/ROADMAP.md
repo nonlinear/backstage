@@ -23,18 +23,74 @@
 
 ```mermaid
 graph LR
-    A[📋 v1.0.1 Merge Policies with Checks]
-    B[📋 v1.0.0 Modular Policies & Checks]
+    A[📋 v1.0.4 Patch Dance + Project Definition]
+    B[📋 v1.0.2 Auto-create Navigation]
     A --> B
-    C[📋 v0.3.9 Reordering rollout]
+    C[📋 v1.0.3 Writing Custom Checks]
     B --> C
-    D[📋 v0.4.0 Roadmap Skill]
+    D[📋 v1.0.1 Merge Policies with Checks]
     C --> D
+    E[📋 v1.0.0 Modular Policies & Checks]
+    D --> E
+    F[📋 v0.3.9 Reordering rollout]
+    E --> F
+    G[📋 v0.4.0 Roadmap Skill]
+    F --> G
 ```
 
 ---
 
+## v1.0.4
+
+### Patch Dance + Project Definition
+
+**Type:** Patch
+
+**Problem:**
+
+1. **Publishing unclear:** No documented workflow for patches (ClawHub republish, version bumps, rewind/merge)
+2. **Project scope ambiguous:** Unclear what belongs in backstage vs skills vs personal projects
+3. **Skill publishing safety:** Need check to warn before merging unpublished skill changes to main
+
+**Tasks:**
+
+- [x] Document patch dance protocol (epic-notes/patch-dance-protocol.md)
+- [x] Document project definition guidelines (epic-notes/definition-of-project.md)
+- [x] Create global check: skill-publish-warning.sh (detect unpublished changes, prompt ClawHub + Finder)
+- [x] Add ClawHub link to skill frontmatter (for auto-open)
+- [x] Test patch workflow (this epic)
+- [x] Update CHANGELOG with v1.0.4 entry
+
+**Success:**
+
+Publishing patches is documented + automated. Project scope is clear. Skills can't accidentally merge unpublished changes to main.
+
+---
+
 ## v1.0.2
+
+### Auto-create Navigation Blocks
+
+**Type:** Patch
+
+**Problem:**
+
+`navigation-syntax.sh` only EDITS existing blocks. New projects fail when README/ROADMAP/CHANGELOG are missing blocks.
+
+**Tasks:**
+
+- [ ] Modify navigation-syntax.sh: create block template if README missing block
+- [ ] Modify navigation-syntax.sh: create block template in ROADMAP/CHANGELOG if missing
+- [ ] Test on project without navigation blocks
+- [ ] Document symlink pattern (checks/global/ → backstage/backstage/checks/global)
+
+**Success:**
+
+New projects auto-generate navigation blocks on first `backstage start`. No manual hardcoding needed.
+
+---
+
+## v1.0.3
 
 ### Writing Custom Checks
 

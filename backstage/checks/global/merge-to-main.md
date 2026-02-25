@@ -36,7 +36,36 @@
 
 ## Workflow Steps
 
-### Step 0: Rebase Main (Keep Branch Current)
+### Step 0: Check Skill Publish Status (If Applicable)
+
+**If project is a published skill, warn before merge:**
+
+```bash
+# Automatically run by checks system
+./backstage/checks/global/skill-publish-warning.sh
+```
+
+**What happens:**
+- Detects if README mentions "published skill"
+- If on epic/patch branch with changes
+- Prompts: publish to ClawHub first
+- Opens ClawHub link (if in README)
+- Opens Finder to skill folder
+
+**User should:**
+1. Test skill changes
+2. Publish to ClawHub (republish)
+3. Verify external users can install
+4. THEN return and continue merge
+
+**Skip if:**
+- Not a skill project
+- Already published
+- No changes to skill code
+
+---
+
+### Step 1: Rebase Main (Keep Branch Current)
 
 **Before merging, sync with latest main:**
 
