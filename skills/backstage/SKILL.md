@@ -399,6 +399,17 @@ Categorize: patch/minor/major. Compare with ROADMAP. Match reality to plans.
 
 **[STAY SILENT]:** No reply after closing VS Code (prevents unsaved prompt).
 
+**🔄 Update Backstage:** "update backstage" trigger
+- **Find backstage folder:** Search CWD for `*/backstage/` directory
+- **Check if symlinked:** If `checks/global/` is symlink → already auto-updates (skip)
+- **Fetch upstream:** Clone https://github.com/nonlinear/backstage (temp dir)
+- **Compare:** Diff local `checks/global/` vs upstream
+- **Generate changelog:** Show NEW, CHANGED, REMOVED files (with descriptions)
+- **Prompt user:** "Apply updates? (y/n)"
+- **Apply if yes:** `rsync --delete upstream → local`
+- **Report:** What changed, how many files
+- **Code:** `update-backstage.sh`
+
 ---
 
 ## When to Use
