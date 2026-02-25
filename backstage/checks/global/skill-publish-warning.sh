@@ -9,8 +9,8 @@
 set -e
 
 # Parse README for skill status
-SKILL_PUBLISHED=$(grep -E "status.*published|published.*skill" README.md 2>/dev/null || echo "")
-SKILL_LINK=$(grep -E "clawhub.*install|ClawHub.*link" README.md 2>/dev/null | grep -oE 'https?://[^ ]+' | head -1)
+SKILL_PUBLISHED=$(grep -iE "\*\*Status:\*\*.*[Pp]ublished|status:.*published|published.*skill" README.md 2>/dev/null || echo "")
+SKILL_LINK=$(grep -iE "clawhub|ClawHub" README.md 2>/dev/null | grep -oE 'https?://[^ ]+' | head -1)
 
 # If not a published skill, pass immediately
 if [ -z "$SKILL_PUBLISHED" ]; then
@@ -54,22 +54,32 @@ if [ -n "$SKILL_LINK" ]; then
   echo "📦 ClawHub link detected:"
   echo "   $SKILL_LINK"
   echo ""
-  read -p "Open ClawHub link now? (y/n) " -n 1 -r
-  echo ""
-  if [[ $REPLY =~ ^[Yy]$ ]]; then
-    open "$SKILL_LINK" 2>/dev/null || xdg-open "$SKILL_LINK" 2>/dev/null || echo "Could not open link (try manually)"
+  if [ -t 0 ]; then
+    # Interactive terminal, prompt user
+    read -p "Open ClawHub link now? (y/n) " -n 1 -r
+    echo ""
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+      open "$SKILL_LINK" 2>/dev/null || xdg-open "$SKILL_LINK" 2>/dev/null || echo "Could not open link (try manually)"
+    fi
+  else
+    # Non-interactive, just show link
+    echo "(Open manually or run interactively)"
   fi
 else
   echo "📦 No ClawHub link found in README. Add it to frontmatter:"
-  echo "   clawhub_link: https://clawhub.com/skill/your-skill"
+  echo "   **ClawHub:** https://clawhub.com/your-skill"
 fi
 
 # Auto-open Finder to skill folder
 echo ""
-read -p "Open skill folder in Finder? (y/n) " -n 1 -r
-echo ""
-if [[ $REPLY =~ ^[Yy]$ ]]; then
-  open . 2>/dev/null || xdg-open . 2>/dev/null || echo "Could not open Finder (macOS/Linux only)"
+if [ -t 0 ]; then
+  read -p "Open skill folder in Finder? (y/n) " -n 1 -r
+  echo ""
+  if [[ $REPLY =~ ^[Yy]$ ]]; then
+    open . 2>/dev/null || xdg-open . 2>/dev/null || echo "Could not open Finder (macOS/Linux only)"
+  fi
+else
+  echo "(Run interactively to open Finder)"
 fi
 
 echo ""
