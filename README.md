@@ -1,5 +1,8 @@
 # Backstage
 
+**Status:** Published Skill  
+**ClawHub:** https://clawhub.com/nonlinear/backstage
+
 An anti-drift protocol for AI-assisted development, so you're in the zone while AI enforces:
 
 - [sandboxing ideas on epics, and epics on branches](backstage/checks/global/epic-branch.sh) (no more messy fixes going all places at once)

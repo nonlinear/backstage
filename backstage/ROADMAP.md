@@ -56,7 +56,7 @@ graph LR
 
 - [x] Document patch dance protocol (epic-notes/patch-dance-protocol.md)
 - [x] Document project definition guidelines (epic-notes/definition-of-project.md)
-- [ ] Create global check: skill-publish-warning.sh (detect unpublished changes, prompt ClawHub + Finder)
+- [x] Create global check: skill-publish-warning.sh (detect unpublished changes, prompt ClawHub + Finder)
 - [ ] Add ClawHub link to skill frontmatter (for auto-open)
 - [ ] Test patch workflow (this epic)
 - [ ] Update CHANGELOG with v1.0.4 entry
