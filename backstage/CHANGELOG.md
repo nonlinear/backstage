@@ -42,6 +42,33 @@
 
 
 
+## v1.0.5 - 2026-02-25
+
+### Update Backstage + Security Notice + Minimalism Checks
+
+**Type:** Patch
+
+**Completed:**
+- Added "update backstage" trigger (sync checks/global/ with upstream)
+- Created update-backstage.sh script (git clone, diff, mini changelog, user approval, rsync)
+- Added security notice to SKILL.md (⚠️ admin tool warning)
+- Added workflow notes for update trigger
+- Added update branch to workflow diagram
+- Created contract-diagram-discipline.md check (if contract exists, update it first)
+- Created published-skill-minimalism.md check (minimal language, files, structure)
+- Removed contract.html (unused visualizer)
+- Created v1.1.0 epic (contract diagram adoption - future work)
+- Documented update flow in epic-notes/update-backstage-flow-diagram.md
+
+**Success criteria met:**
+- Update backstage trigger works (detects symlinks, compares upstream, prompts user)
+- Security notice visible (ClawHub feedback addressed)
+- Checks enforce discipline (contract-first, minimalism before publishing)
+- Cleanup complete (no unused files in skill)
+- Workflow fully documented (triggers, diagrams, edge cases)
+
+---
+
 ## v1.0.4 - 2026-02-25
 
 ### Patch Dance + Project Definition + Skill Publish Warning
@@ -53,6 +80,7 @@
 - Documented project definition guidelines (epic-notes/definition-of-project.md)
 - Created global check: skill-publish-warning.sh (detects unpublished changes before merge, prompts ClawHub + Finder)
 - Added ClawHub link to README frontmatter (auto-detected by check)
+- **Added "bom dia PROJECT" / "good morning PROJECT" trigger** to backstage skill (loads project context + health checks)
 - Tested patch workflow (this epic)
 
 **Success criteria met:**
@@ -60,6 +88,7 @@
 - Project scope ambiguity addressed (what belongs where)
 - Skills can't accidentally merge unpublished changes to main (check warns)
 - ClawHub link auto-opens for republishing
+- **"bom dia PROJECT" trigger enables morning context loading** (functional change)
 
 ---
 
