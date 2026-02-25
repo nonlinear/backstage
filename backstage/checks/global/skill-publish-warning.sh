@@ -10,7 +10,6 @@ set -e
 
 # Parse README for skill status
 SKILL_PUBLISHED=$(grep -iE "\*\*Status:\*\*.*[Pp]ublished|status:.*published|published.*skill" README.md 2>/dev/null || echo "")
-SKILL_LINK=$(grep -iE "clawhub|ClawHub" README.md 2>/dev/null | grep -oE 'https?://[^ ]+' | head -1)
 
 # If not a published skill, pass immediately
 if [ -z "$SKILL_PUBLISHED" ]; then
@@ -41,44 +40,32 @@ echo ""
 echo "Branch: $CURRENT_BRANCH"
 echo "Commits ahead of main: $COMMITS_AHEAD"
 echo ""
-
-# Prompt user
 echo "Before merging to main, you should:"
 echo "  1. Test the skill changes"
 echo "  2. Publish to ClawHub (republish)"
 echo "  3. Verify external users can install/update"
 echo ""
 
-# Auto-open ClawHub link if found
-if [ -n "$SKILL_LINK" ]; then
-  echo "📦 ClawHub link detected:"
-  echo "   $SKILL_LINK"
-  echo ""
-  if [ -t 0 ]; then
-    # Interactive terminal, prompt user
-    read -p "Open ClawHub link now? (y/n) " -n 1 -r
-    echo ""
-    if [[ $REPLY =~ ^[Yy]$ ]]; then
-      open "$SKILL_LINK" 2>/dev/null || xdg-open "$SKILL_LINK" 2>/dev/null || echo "Could not open link (try manually)"
-    fi
-  else
-    # Non-interactive, just show link
-    echo "(Open manually or run interactively)"
-  fi
-else
-  echo "📦 No ClawHub link found in README. Add it to frontmatter:"
-  echo "   **ClawHub:** https://clawhub.com/your-skill"
-fi
+# Auto-open ClawHub dashboard (always same link)
+CLAWHUB_DASHBOARD="https://clawhub.ai/dashboard"
 
-# Auto-open Finder to skill folder
-echo ""
 if [ -t 0 ]; then
-  read -p "Open skill folder in Finder? (y/n) " -n 1 -r
+  # Interactive terminal, prompt user
+  read -p "Open ClawHub dashboard to republish? (y/n) " -n 1 -r
   echo ""
   if [[ $REPLY =~ ^[Yy]$ ]]; then
-    open . 2>/dev/null || xdg-open . 2>/dev/null || echo "Could not open Finder (macOS/Linux only)"
+    open "$CLAWHUB_DASHBOARD" 2>/dev/null || xdg-open "$CLAWHUB_DASHBOARD" 2>/dev/null || echo "Could not open link (try manually: $CLAWHUB_DASHBOARD)"
+    
+    # Also open Finder
+    read -p "Open skill folder in Finder? (y/n) " -n 1 -r
+    echo ""
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+      open . 2>/dev/null || xdg-open . 2>/dev/null || echo "Could not open Finder (macOS/Linux only)"
+    fi
   fi
 else
+  # Non-interactive, just show link
+  echo "📦 Open ClawHub dashboard to republish: $CLAWHUB_DASHBOARD"
   echo "(Run interactively to open Finder)"
 fi
 
