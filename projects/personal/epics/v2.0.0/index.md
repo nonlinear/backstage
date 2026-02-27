@@ -913,3 +913,43 @@ tasks:
 - **AI-friendly:** Can LLM help build/modify?
 
 **Recommendation:** Start with **Option 1 (Next.js + Tailwind + shadcn/ui)** for speed, then evaluate portability needs.
+
+---
+
+## Epic Note: Philosophy
+
+**Backstage legível para:**
+- **Humanos** - Folder-friendly, markdown, visual hierarchy
+- **AIs** - YAML structure, semantic versioning, predictable paths
+- **GUIs** - Structured data, relationships, status tracking
+
+**Checks enforce policy:**
+- Folder changes detected automatically
+- Sync with others (templates, shared checks)
+- Policy-as-code (declarative, versionable)
+
+**If folders change, checks detect and adapt.**
+
+---
+
+## Epic Note: DRY Principle
+
+**Redundância = mismatch, confusão, bugs.**
+
+**Problema exemplo:**
+- Folder name: `v2.0.0/`
+- YAML field: `version: v2.0.0`
+
+**Se folder = v2.0.0, por que repetir no YAML?**
+
+**Consequências:**
+- Folder diz uma coisa, YAML diz outra
+- Rename folder → esquece atualizar YAML → inconsistência
+- Checks precisam validar dois lugares
+- Mais código, mais bugs
+
+**Solução:**
+- **Folder name = source of truth** (version inferida do path)
+- YAML só tem o que NÃO está no folder (name, status, tier, tasks)
+
+**Future refactor:** Remove `version` field do epic.yaml completamente.

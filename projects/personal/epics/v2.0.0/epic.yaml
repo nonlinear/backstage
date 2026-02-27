@@ -7,6 +7,12 @@ tasks:
   - [x] Create modes.md
   - [x] Create check-anatomy.md
   - [x] Migrate personal to studio
+  - [x] Restructure (projects/, v prefix, index.md)
+  - [ ] Checks logic (do we need id? Can we go on without it?)
+  - [ ] Migrate global and local checks
+  - [ ] Projects.yaml
+  - [ ] Projects check
+  - [ ] Epics check
   - [ ] Decide on UI framework
   - [ ] Migrate other projects
 ---
