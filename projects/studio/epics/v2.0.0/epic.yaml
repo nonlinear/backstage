@@ -1,0 +1,12 @@
+---
+version: v2.0.0
+name: backstage-as-checkpoints
+status: roadmap
+tier: 0
+tasks:
+  - [x] Create modes.md
+  - [x] Create check-anatomy.md
+  - [x] Migrate personal to studio
+  - [ ] Decide on UI framework
+  - [ ] Migrate other projects
+---
