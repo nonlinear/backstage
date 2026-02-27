@@ -1,0 +1,15 @@
+---
+checks:
+  - README.md
+  - dogfooding.md
+  - dual-layer-global.sh
+  - dual-layer-project.sh
+  - global-vs-project.md
+  - mermaid-sync.sh
+  - pre-merge-tasks.sh
+  - skill-workflow.md
+  - templates.md
+  - version-from-branch.sh
+  - version-sync.sh
+  - version-tracking.md
+---
