@@ -1,8 +1,10 @@
 ---
-version: v2.0.0
 name: backstage-as-checkpoints
 status: roadmap
 tier: 0
+created: 2026-02-27
+started: 2026-02-27
+completed: null
 tasks:
   - [x] Create modes.md
   - [x] Create check-anatomy.md
