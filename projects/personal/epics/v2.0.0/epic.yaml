@@ -10,6 +10,8 @@ tasks:
   - [x] Create check-anatomy.md
   - [x] Migrate personal to studio
   - [x] Restructure (projects/, v prefix, index.md)
+  - [x] Refactor backstage skill (parse-epics.sh, checks-composite.sh, backstage.sh)
+  - [ ] Fix defasado checks (4 failed: detect-obsolete-references.sh, backstage-structure.sh, context-files.sh, + 1 unknown)
   - [ ] Checks logic (do we need id? Can we go on without it?)
   - [ ] Migrate global and local checks
   - [ ] Projects.yaml
