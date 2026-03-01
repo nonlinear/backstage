@@ -34,11 +34,3 @@ Run MCP servers (Reddit, GitHub, etc.) in persistent Docker containers instead o
 - Testing (30min): Fetch real Reddit data, verify latency improvement
 
 **Can be done incrementally** (start with Reddit MCP, add more later).
-
-## Success Criteria
-
-- [ ] Reddit MCP running in Docker container
-- [ ] OpenClaw configured to use it (HTTP or stdio)
-- [ ] <1s response time for Reddit API calls
-- [ ] Can fetch community opinions for UI frameworks
-- [ ] Documented in connections/reddit-mcp.md
