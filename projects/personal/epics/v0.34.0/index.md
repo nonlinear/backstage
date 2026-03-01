@@ -88,3 +88,27 @@ agents:
 - Platform options: Zulip (self-hosted), Mastodon (federated)
 
 **Status:** Future idea (not implemented yet)
+
+**MCP topic scoping (refined):**
+- Not just `librarian` (all books), but `librarian:topic` (focused)
+- Example:
+  ```yaml
+  wiley:
+    default:
+      - jira
+      - librarian:design-systems
+      - librarian:ux-patterns
+  
+  defense:
+    default:
+      - github
+      - librarian:chaos-magick
+      - librarian:cybernetics
+  ```
+- Benefits:
+  - Focused context (agent sees only relevant books)
+  - Faster search (fewer embeddings)
+  - Better precision (scoped results)
+  - Semantic routing ("wiley needs design → query design-systems")
+
+**Status:** Idea phase (depends on Librarian MCP v0.16.0)
