@@ -75,3 +75,16 @@ agents:
 ```
 
 **Status:** Idea phase (not implemented yet)
+
+**Multi-agent chat identities:**
+- Each agent = separate user in Zulip/Mastodon
+- Examples: @defense, @secretaria, @wiley, @uxr
+- Squads = groups of agents (DevSquad = defense + uxr + qa)
+- Benefits:
+  - Visible work (who did what)
+  - @mentions (Nicholas calls specific agent)
+  - Squad coordination (agents collaborate in channels)
+  - Social presence (agents as workspace citizens)
+- Platform options: Zulip (self-hosted), Mastodon (federated)
+
+**Status:** Future idea (not implemented yet)
