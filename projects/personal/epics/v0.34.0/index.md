@@ -34,3 +34,24 @@ Run MCP servers (Reddit, GitHub, etc.) in persistent Docker containers instead o
 - Testing (30min): Fetch real Reddit data, verify latency improvement
 
 **Can be done incrementally** (start with Reddit MCP, add more later).
+
+## Future Ideas
+
+**Context-aware MCP routing:**
+- Agent → MCP mapping (defense → github/figma, secretaria → calendar/email)
+- Project → MCP mapping (librarian → books/research, wiley → jira/figma)
+- Auto-routing: "procura X" → checks active project → uses project MCPs
+- Override-able: explicit "procura no Reddit" still works
+- Zero cognitive load (context determines source)
+
+**Schema example:**
+```yaml
+agents:
+  defense: [github, figma, reddit]
+  secretaria: [calendar, email, jira]
+projects:
+  librarian: [books, research, pdf-extraction]
+  wiley: [jira, figma, confluence]
+```
+
+**Status:** Idea phase (not implemented yet)
