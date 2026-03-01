@@ -55,3 +55,23 @@ projects:
 ```
 
 **Status:** Idea phase (not implemented yet)
+
+**MCP routing (default-only approach):**
+- Each agent has `default` MCPs (preferred sources)
+- Example: `wiley: [jira]`, `defense: [github]`, `secretaria: [calendar, jira]`
+- Any agent can use any MCP if needed (not blocked)
+- Default = suggest first, not enforce
+- Flexible > rigid (context changes, MCPs evolve)
+
+**Schema:**
+```yaml
+agents:
+  defense:
+    default: [github, figma]
+  secretaria:
+    default: [calendar, jira]
+  wiley:
+    default: [jira]
+```
+
+**Status:** Idea phase (not implemented yet)
