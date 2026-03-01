@@ -112,3 +112,26 @@ agents:
   - Semantic routing ("wiley needs design → query design-systems")
 
 **Status:** Idea phase (depends on Librarian MCP v0.16.0)
+
+**Expert system architecture (topic-bounded agents):**
+- Agent decisions = ONLY from required topics (bounded knowledge domain)
+- Classic expert system: Knowledge Base (facts) + Inference Engine (rules)
+- Our version: Topic-scoped Librarian (facts) + Agent (inference)
+- Example:
+  ```yaml
+  wiley-agent:
+    expert_domains:
+      - librarian:design-systems
+      - librarian:ux-patterns
+      - librarian:accessibility
+    enforcement: strict  # Can't query outside
+    fallback: "Outside my expertise, consult @defense"
+  ```
+- Benefits:
+  - Verifiable decisions (every answer traceable to source)
+  - Domain expertise (focused > generic)
+  - No context pollution (wiley doesn't cite anarchism)
+  - Bounded rationality (knows limits, refers when needed)
+- Implementation: Librarian MCP enforces topic whitelist per agent
+
+**Status:** Idea phase (requires Librarian MCP v0.16.0 + agent configs)
