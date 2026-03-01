@@ -1,10 +1,14 @@
+# Epic Notes
+
+> Version, name, status → see `epic.yaml`
+
+---
+
 # v0.4.0 - Skill Security Fixes
 
 **Epic created:** 2026-02-14  
 **Source:** ClawHub OpenClaw Security Scan Report  
-**Status:** Planning
 
----
 
 ## ClawHub Security Scan Report (2026-02-14)
 
@@ -13,7 +17,6 @@
 **VirusTotal:** Pending  
 **OpenClaw Scan:** Failed (3 major issues)
 
----
 
 ## Security Issues Identified
 
@@ -33,7 +36,6 @@
 **Scan Quote:**
 > "checks.sh reads global POLICY/HEALTH from a hard-coded path under $HOME — that access is not declared in the skill metadata and is outside the project scope the description implies."
 
----
 
 ### 2. Arbitrary Code Execution via eval
 
@@ -51,7 +53,6 @@
 **Scan Quote:**
 > "checks.sh extracts code blocks from PROJECT/GLOBAL checks (global/local) and executes them using eval. Executing arbitrary code from README/HEALTH/POLICY files is powerful and can run any shell command; while this is part of the declared 'executable rules' model, it significantly increases risk and is not explicitly warned in metadata or SKILL.md as a dangerous capability."
 
----
 
 ### 3. File Modification + Git Operations (Undeclared)
 
@@ -69,7 +70,6 @@
 **Scan Quote:**
 > "The runtime instructions/scripts modify repository files (inserting navigation blocks, replacing mermaid diagrams), create and remove temp files in /tmp, and perform git commits/pushes (backstage-end.sh prompts user to commit/push)."
 
----
 
 ## Scan Recommendations
 
@@ -86,7 +86,6 @@
 > 
 > If the author can justify the HOME path, remove hard-coded globals, and remove/limit eval-driven execution (or document explicit warnings), my assessment would move toward benign."
 
----
 
 ## Tasks to Discuss
 
@@ -108,7 +107,6 @@
 - [ ] **Should skill prompt before modifying files?** (auto-update vs explicit approval)
 - [ ] **Git operations: always prompt, or auto-commit allowed?**
 
----
 
 ## Design Philosophy Discussion
 
@@ -124,7 +122,6 @@
 
 **Question:** Is this the right tradeoff, or too dangerous for public skill?
 
----
 
 ## Potential Solutions (Brainstorm)
 
@@ -162,7 +159,6 @@
 - **Pro:** Balances flexibility + safety
 - **Con:** Asymmetric model (may confuse users)
 
----
 
 ## Next Steps
 
@@ -173,15 +169,12 @@
 5. **Re-publish** - Get "benign" or "safe" scan result
 6. **Document decision** - Why we chose this approach (for future reference)
 
----
 
 **This epic = security hardening + design validation. Not just "fix bugs" — fundamental questions about skill safety model.**
 
----
 
 ## ClawHub Security Review - v1.0.1 Publication Attempt (2026-02-20)
 
-**Status:** REJECTED - "Suspicious" (high confidence)
 
 **Issues flagged:**
 
@@ -209,7 +202,6 @@
 - **Behavior:** Encourages running local HTTP server + WebSocket hot reload
 - **Scope creep:** Beyond "project workflow checks"
 
----
 
 ## Response Plan
 
@@ -227,7 +219,6 @@
 - [ ] **Sandboxing** - run checks in restricted environment
 - [ ] **Install spec** - proper fetch/install mechanism if "install" claim stays
 
----
 
 ## Philosophy Question
 
@@ -245,4 +236,3 @@
 - Autonomous execution needs safeguards
 
 **Decision:** Global checks are valid BUT need better communication + safety rails.
-

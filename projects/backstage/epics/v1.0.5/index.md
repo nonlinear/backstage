@@ -1,10 +1,13 @@
-# v1.0.5 - Update Backstage + Security Notice + Minimalism Checks
+# Epic Notes
 
-**Status:** ✅ Complete  
-**Created:** 2026-02-25  
-**Type:** Patch
+> Version, name, status → see `epic.yaml`
 
 ---
+
+# v1.0.5 - Update Backstage + Security Notice + Minimalism Checks
+
+**Type:** Patch
+
 
 ## Changes
 
@@ -31,7 +34,6 @@
 - **v1.1.0** - Contract diagram adoption (future work)
 - **update-backstage-flow-diagram.md** - Visual spec for update trigger
 
----
 
 ## Success Criteria
 
@@ -41,7 +43,6 @@
 - ✅ Cleanup complete (no unused files)
 - ✅ Workflow documented (triggers, diagrams, notes)
 
----
 
 ## Git Log
 
@@ -57,7 +58,6 @@ c7ce502 Add update-backstage.sh script
 9c480d6 Add 'update backstage' subtrigger to SKILL.md
 ```
 
----
 
 ## ClawHub Feedback Addressed
 
@@ -69,6 +69,5 @@ c7ce502 Add update-backstage.sh script
 - Mitigations listed (user confirmation, git history, symlink detection)
 - Use at your own risk + review scripts before running
 
----
 
 **Ready to publish:** Yes (after merge to main + tag)

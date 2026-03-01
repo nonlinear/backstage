@@ -1,10 +1,12 @@
-# v1.1.0 - Contract Diagram Adoption
+# Epic Notes
 
-**Status:** 📋 Planned  
-**Created:** 2026-02-25  
-**Priority:** High (trust maintenance)
+> Version, name, status → see `epic.yaml`
 
 ---
+
+# v1.1.0 - Contract Diagram Adoption
+
+
 
 ## Problem
 
@@ -19,7 +21,6 @@
 - No frozen spec to refer back to
 - User: "You agreed to X, why did you do Y?" → broken trust
 
----
 
 ## Goal
 
@@ -29,7 +30,6 @@
 3. Document "update backstage" flow in contract
 4. Establish contract-first discipline
 
----
 
 ## Tasks
 
@@ -54,7 +54,6 @@
     - Edge cases: symlinked, no changes, offline
   - Validate with user before finalizing
 
----
 
 ## Success Criteria
 
@@ -64,7 +63,6 @@
 - ✅ Future changes start with contract update (not SKILL.md)
 - ✅ Trust maintained (no surprise changes)
 
----
 
 ## References
 

@@ -1,3 +1,9 @@
+# Epic Notes
+
+> Version, name, status → see `epic.yaml`
+
+---
+
 # Backstage Skill/prompt Flow
 
 ```mermaid
@@ -61,7 +67,6 @@ flowchart TD
     click READ_HEALTH "https://github.com/nonlinear/backstage/blob/main/global/checks (global/local)" "global/checks (global/local)"
 ```
 
----
 
 **1️⃣ Install Backstage**
 - **Source:** `https://github.com/nonlinear/backstage` branch `main`

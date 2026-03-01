@@ -1,10 +1,12 @@
-# v0.28.0 - Docker Backup Strategy
+# Epic Notes
 
-**Status:** 📋 TODO  
-**Priority:** HIGH (prevent data loss like Kavita incident)  
-**Created:** 2026-02-25
+> Version, name, status → see `epic.yaml`
 
 ---
+
+# v0.28.0 - Docker Backup Strategy
+
+
 
 ## Goal
 
@@ -12,7 +14,6 @@
 
 **Prevents repeat of Kavita incident (container deleted = data lost).**
 
----
 
 ## Scope
 
@@ -47,7 +48,6 @@
 - Application-level exports (future epic)
 - Real-time replication (overkill for personal use)
 
----
 
 ## Success Criteria
 
@@ -59,7 +59,6 @@
 - [ ] Documentation updated (docker.md recovery procedures)
 - [ ] 30-day rotation verified (old backups deleted automatically)
 
----
 
 ## Tasks
 
@@ -134,7 +133,6 @@
    - Where backups stored (`~/Backups/`)
    - Retention policy (30 days)
 
----
 
 ## Dependencies
 
@@ -142,7 +140,6 @@
 - Existing: Telegram env vars (`$TELEGRAM_BOT_TOKEN`, `$TELEGRAM_CHAT_ID`)
 - New: `~/Backups/` directory (auto-created by script)
 
----
 
 ## Lessons from Kavita Incident
 
@@ -159,7 +156,6 @@
 4. ✅ Alerts on failure (know immediately if backup breaks)
 5. ✅ Git-friendly format (SQL dumps = text = trackable)
 
----
 
 ## Timeline
 
@@ -171,7 +167,6 @@
 4. Documentation: 30min
 5. Verification (wait for next 3am run): next day
 
----
 
 ## Notes
 
@@ -181,13 +176,11 @@
 - **PostgreSQL caveat:** Container must be running for pg_dump (health-check ensures this)
 - **SQLite caveat:** `.backup` requires absolute path inside container (check paths first)
 
----
 
 ## Related Epics
 
 - v0.26.0 Travel Mode (depends on backup strategy being solid)
 - v0.3.0 PM Tool Evaluation (OpenProject needs backup before production use)
 
----
 
 **End epic definition.**

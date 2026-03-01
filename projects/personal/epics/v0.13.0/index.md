@@ -1,8 +1,13 @@
+# Epic Notes
+
+> Version, name, status → see `epic.yaml`
+
+---
+
 # v0.13.0 - Security & Secrets Management 🔒
 
 **Epic Note - Full Implementation Details**
 
----
 
 ## Security Layers
 
@@ -34,7 +39,6 @@
 - [ ] Test: ensure OpenClaw still boots after rename
 - [ ] Document: "Where is my data actually stored?"
 
----
 
 ### Layer 2: Access Control (Biometric Authentication)
 **Maximum device security on `.openclaw` folder (or renamed equivalent)**
@@ -71,7 +75,6 @@
 - Screen lock → immediate auto-lock
 - Sleep → immediate auto-lock
 
----
 
 ### Layer 3: Intrusion Detection (Stealth Surveillance)
 **If unauthorized access detected → silent alert with evidence**
@@ -132,7 +135,6 @@ rm /tmp/.sys_*.jpg
 - If Telegram blocked → fallback to iMessage
 - If both blocked → write encrypted log to NAS (retrieve later)
 
----
 
 ## Attack Vectors Prevented
 
@@ -150,7 +152,6 @@ rm /tmp/.sys_*.jpg
 - ✅ Stealth surveillance → Intruders photographed + reported
 - ✅ Auto-lock on idle → No window of opportunity
 
----
 
 ## Implementation Options
 
@@ -181,7 +182,6 @@ rm /tmp/.sys_*.jpg
 - Each layer catches what previous layer missed
 - Stealth surveillance = evidence if breach happens
 
----
 
 ## Tasks (Full Hardening Path)
 
@@ -217,7 +217,6 @@ rm /tmp/.sys_*.jpg
 - [ ] Implement offline queue (send when network returns)
 - [ ] Document: "Disable surveillance when lending device"
 
----
 
 ## Files to Protect
 
@@ -232,7 +231,6 @@ rm /tmp/.sys_*.jpg
 └── workspace/ (on encrypted DMG)
 ```
 
----
 
 ## Integration with v0.12.0
 
@@ -241,18 +239,13 @@ rm /tmp/.sys_*.jpg
 - Never logged or committed
 - Protected by 3 layers of security
 
----
 
 **Rationale:** Defense in depth - multiple layers ensure no single point of failure. If one layer is bypassed, others still protect. Stealth surveillance provides evidence if all layers fail.
 
----
 
-**Created:** 2026-02-03  
 **Updated:** 2026-02-10 (Matt Ganzak security tips added)  
-**Status:** Planning phase  
 **Owner:** Nicholas (with Claw implementation support)
 
----
 
 ## 🔐 Additional Security Recommendations (Matt Ganzak)
 
@@ -293,7 +286,6 @@ rm /tmp/.sys_*.jpg
 }
 ```
 
----
 
 #### **5️⃣ SSH Keys + Fail2ban (NAS)**
 
@@ -322,7 +314,6 @@ rm /tmp/.sys_*.jpg
 - [ ] Test: trigger false login attempts, verify ban
 - [ ] Document in `connections/nas-security.md`
 
----
 
 #### **6️⃣ Firewall with UFW (NAS)**
 
@@ -373,7 +364,6 @@ networks:
     driver: bridge  # Only specific services
 ```
 
----
 
 #### **8️⃣ Ask Bot to Audit Security (Self-Monitoring)**
 
@@ -411,7 +401,6 @@ log show --predicate 'eventMessage contains "failed"' --last 24h
 └── report-security.sh (generate daily report)
 ```
 
----
 
 #### **9️⃣ Real-Time Alerts (24/7 Monitoring)**
 
@@ -477,7 +466,6 @@ done
 - [ ] Monitor additional services (NAS Docker containers)
 - [ ] Document in `connections/openclaw-monitoring.md`
 
----
 
 ### 📋 Priority Order (Matt Ganzak Tips)
 
@@ -497,7 +485,6 @@ done
 7. ✅ Move to dedicated server (epic-server-migration.md)
 8. ✅ Harden server (all best practices)
 
----
 
 ## Security Audit Documentation
 
@@ -509,5 +496,3 @@ done
 - 🔴 **High risk:** 1/10 points (default port 18789)
 
 **Next review:** 2026-03-10 (monthly security audit)
-
----

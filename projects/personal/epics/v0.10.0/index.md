@@ -1,10 +1,14 @@
+# Epic Notes
+
+> Version, name, status → see `epic.yaml`
+
+---
+
 # v0.10.0 - Pi-hole (Network-Wide Ad Blocking)
 
-**Status:** ✅ COMPLETE (2026-02-10)
 
 **Goal:** Ad blocking, DNS control, network-wide privacy
 
----
 
 ## ✅ Tasks Completed
 
@@ -19,7 +23,6 @@
 - [x] Secondary DNS: 1.1.1.1 (Cloudflare fallback)
 - [x] All devices on network = auto-blocked ads
 
----
 
 ## 📊 Results
 
@@ -50,7 +53,6 @@
 - Smart TV
 - All future devices (automatic)
 
----
 
 ## 🎯 Advanced Features (Documented)
 
@@ -74,7 +76,6 @@ Created 3 new connection docs:
    - Testing guide (iPhone 4G)
    - Battery/latency trade-offs
 
----
 
 ## 🔮 Future Enhancements (Optional)
 
@@ -87,7 +88,6 @@ Created 3 new connection docs:
 - [ ] Conditional Forwarding (device names)
 - [ ] DHCP server (replace router DHCP - advanced)
 
----
 
 ## 📝 Lessons Learned
 
@@ -106,7 +106,6 @@ Created 3 new connection docs:
 - Wants practical features (regex, IoT, Tailscale)
 - Understands limitations (Instagram feed ads = same origin)
 
----
 
 ## 🔗 References
 
@@ -114,7 +113,6 @@ Created 3 new connection docs:
 - Documentation: `~/.openclaw/workspace/connections/pi-hole-*.md`
 - Memory: `~/.openclaw/workspace/memory/2026-02-10.md`
 
----
 
 **Epic Duration:** ~5 hours (planning + install + router config + regex + IoT + Tailscale + docs)
 

@@ -1,3 +1,9 @@
+# Epic Notes
+
+> Version, name, status → see `epic.yaml`
+
+---
+
 # v1.8.0 - Rebranding Menu
 
 ## Context Snapshot
@@ -6,7 +12,6 @@
 - **Date:** 2026-02-14
 - **Assumptions:** Skills README gets custom menu, follows GitHub markdown rendering rules
 
----
 
 ## Research Summary (2026-02-14)
 
@@ -35,7 +40,6 @@
 - **Test in GitHub preview** (sanitizer strips blocked elements silently)
 - **Keep SVG simple** (complex animations may lag on mobile)
 
----
 
 ## Design Concepts
 
@@ -69,7 +73,6 @@
 </svg>
 ```
 
----
 
 ### Option 2: Hero Banner
 **Layout:** Full-width banner with branding + navigation
@@ -114,7 +117,6 @@
 </svg>
 ```
 
----
 
 ### Option 3: Card Grid
 **Layout:** Skill cards in grid
@@ -151,7 +153,6 @@
 </svg>
 ```
 
----
 
 ## SMIL Animation Examples
 
@@ -197,7 +198,6 @@
 </text>
 ```
 
----
 
 ## Data URI Images (Inline Base64)
 
@@ -223,7 +223,6 @@ base64 icon.png > icon.txt
 
 **Why:** GitHub blocks external URLs (`http://...`), must inline all resources.
 
----
 
 ## Testing Process
 
@@ -246,7 +245,6 @@ base64 icon.png > icon.txt
 - Check GitHub's allowed list (no `<script>`, no external URLs)
 - Rewrite using SMIL instead of CSS/JavaScript
 
----
 
 ## Implementation Plan
 
@@ -278,7 +276,6 @@ base64 icon.png > icon.txt
 - [ ] Add to backstage POLICY (menu design guidelines)
 - [ ] Create template (reusable for other projects)
 
----
 
 ## SVG Best Practices (GitHub)
 
@@ -301,7 +298,6 @@ base64 icon.png > icon.txt
 - GitHub preview (push to repo, view README)
 - Mobile (animations smooth? readable?)
 
----
 
 ## Open Questions
 
@@ -322,7 +318,6 @@ base64 icon.png > icon.txt
    - Section anchors = navigate within README
    - External URLs = link to skill docs, GitHub repos
 
----
 
 ## Success Criteria
 
@@ -333,13 +328,10 @@ base64 icon.png > icon.txt
 - ✅ Documented best practices (for future updates)
 - ✅ Template created (reusable for other projects)
 
----
 
 ## Related Epics
 - v0.1.0 - Skill Reordering (formatting protocol)
 - v2.1.0 - use-for (companion skill protocol)
 
----
 
-**Status:** 🔍 RESEARCH PHASE
 **Next:** Choose layout (menu bar, hero banner, or card grid), sketch design

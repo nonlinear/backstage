@@ -1,16 +1,17 @@
-# v0.18.0 - Skill Validation & AI Testing
+# Epic Notes
 
-**Status:** 📋 Planned  
-**Created:** 2026-02-20  
-**Priority:** HIGH (validation of v0.15.0 work)
+> Version, name, status → see `epic.yaml`
 
 ---
+
+# v0.18.0 - Skill Validation & AI Testing
+
+
 
 ## Goal
 
 End-to-end conversational testing of librarian skill protocol. Validate all 🟠 ORANGE nodes from v0.15.0 architecture.
 
----
 
 ## Context
 
@@ -30,7 +31,6 @@ End-to-end conversational testing of librarian skill protocol. Validate all 🟠
 
 **Need:** Real AI session to test conversational flow.
 
----
 
 ## Tasks
 
@@ -48,7 +48,6 @@ End-to-end conversational testing of librarian skill protocol. Validate all 🟠
 
 **Success:** >90% trigger accuracy
 
----
 
 ### Phase 2: Scope Inference Testing
 
@@ -63,7 +62,6 @@ End-to-end conversational testing of librarian skill protocol. Validate all 🟠
 
 **Success:** >85% confidence on clear queries, <75% on ambiguous
 
----
 
 ### Phase 3: Hard Stop Testing
 
@@ -85,7 +83,6 @@ End-to-end conversational testing of librarian skill protocol. Validate all 🟠
 
 **Success:** All hard stops honest, actionable, helpful
 
----
 
 ### Phase 4: Format & Response Testing
 
@@ -100,7 +97,6 @@ End-to-end conversational testing of librarian skill protocol. Validate all 🟠
 
 **Success:** User-facing output helpful, readable, cites sources correctly
 
----
 
 ### Phase 5: Edge Cases
 
@@ -111,7 +107,6 @@ End-to-end conversational testing of librarian skill protocol. Validate all 🟠
 - [ ] Rapid-fire queries (caching? rate limits?)
 - [ ] Mixed language (Portuguese + English in same query)
 
----
 
 ### Phase 6: Regression Suite
 
@@ -121,7 +116,6 @@ End-to-end conversational testing of librarian skill protocol. Validate all 🟠
 - [ ] Document how to run regression suite
 - [ ] Automate where possible (wrapper tests OK, AI tests manual)
 
----
 
 ## Success Criteria
 
@@ -140,7 +134,6 @@ End-to-end conversational testing of librarian skill protocol. Validate all 🟠
 - Regression suite created
 - SKILL.md examples verified
 
----
 
 ## Blocked By
 
@@ -154,7 +147,6 @@ End-to-end conversational testing of librarian skill protocol. Validate all 🟠
 
 **Timeline:** Cannot start until v0.15.0 Phases 2-3 complete
 
----
 
 ## Notes
 
@@ -172,6 +164,5 @@ End-to-end conversational testing of librarian skill protocol. Validate all 🟠
 - Trigger patterns must match AGENTS.md skill triggers table
 - Update AGENTS.md after validation (accurate patterns)
 
----
 
 *Epic created: 2026-02-20 22:57 EST*

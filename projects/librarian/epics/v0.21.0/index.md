@@ -1,3 +1,9 @@
+# Epic Notes
+
+> Version, name, status → see `epic.yaml`
+
+---
+
 # v0.21.0 - Reader App Comparison
 
 **Context:** Kavita ❌ no deep linking. Need alternative.
@@ -17,7 +23,6 @@
 **Booklore disqualified:** Requires MariaDB (not folder-only, crashed without DB)  
 **Test:** Komga vs Kavita comparison (search quality, URL params, UX)
 
----
 
 | Feature | [**Kavita**](https://github.com/Kareadita/Kavita) | [**Komga**](https://komga.org) | [**Calibre-web**](https://github.com/janeczku/calibre-web) | [**Booklore**](https://github.com/booklore-app/booklore) |
 |---------|-----------|-----------|-----------------|--------------|

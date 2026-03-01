@@ -1,9 +1,12 @@
-# v0.14.0 - Self-Promotion & Digital Identity
+# Epic Notes
 
-**Status:** 🆕 PLANNED (2026-02-09, expanded from ROADMAP)  
-**Priority:** MED (income + visibility)
+> Version, name, status → see `epic.yaml`
 
 ---
+
+# v0.14.0 - Self-Promotion & Digital Identity
+
+
 
 ## 🎯 Problem
 
@@ -13,7 +16,6 @@
 - No income streams
 - Blog exists but not promoted
 
----
 
 ## 🎯 Goal
 
@@ -24,7 +26,6 @@
 4. Income strategy (3 viable paths)
 5. Community engagement (testers, feedback, growth)
 
----
 
 ## 📋 Components
 
@@ -37,7 +38,6 @@
 
 **Deliverable:** `IDENTITY.md` (public version of USER.md)
 
----
 
 ### 2. Content Calendar
 **Platforms:**
@@ -57,7 +57,6 @@
 - Biweekly: Blog post (deep dive, tutorial)
 - Monthly: Community check-in (beta testers, feedback)
 
----
 
 ### 3. Blog Redesign (nonlinear.nyc)
 **Current state:** Basic Jekyll site, not updated
@@ -73,7 +72,6 @@
 - Keep Jekyll? OR migrate to Astro/Hugo?
 - Photo pipeline (epic exists: photo-pipeline-nonlinear.md)
 
----
 
 ### 4. Income Streams (3 Paths)
 
@@ -88,7 +86,6 @@
 **Effort:** LOW (set up once, passive)  
 **Revenue:** LOW-MED ($50-500/mo realistically)
 
----
 
 #### Path 2: Consulting/Freelance
 **Services:**
@@ -101,7 +98,6 @@
 **Effort:** HIGH (client work, time-intensive)  
 **Revenue:** MED-HIGH ($100-200/hr, project-based)
 
----
 
 #### Path 3: Products/SaaS
 **Ideas:**
@@ -115,7 +111,6 @@
 **Effort:** VERY HIGH (build, maintain, support)  
 **Revenue:** HIGH (scalable, recurring)
 
----
 
 ### 5. Community Engagement (2026-02-09 addition)
 
@@ -140,7 +135,6 @@
 - Feedback = better product (user-driven)
 - Engagement = visibility (word-of-mouth growth)
 
----
 
 ### 6. Donations & Sustainability (2026-02-09 addition)
 
@@ -162,7 +156,6 @@
 - "Help me build tools for self-sufficient creatives"
 - "Fund my familiar-servitor experiments"
 
----
 
 ## 📊 Success Metrics
 
@@ -181,7 +174,6 @@
 - [ ] 10+ monthly donors
 - [ ] 1 income stream active ($100+/mo)
 
----
 
 ## 🚀 Next Steps
 
@@ -190,7 +182,6 @@
 3. **Next week:** Content calendar (what to share, where, when)
 4. **Next month:** Launch blog v2.0 + Mastodon presence
 
----
 
 ## 🔗 Related Epics
 
@@ -198,6 +189,5 @@
 - **v0.20.0 OpenClaw Mobile** (product for income Path 3)
 - **Fae Talk** (storytelling, audience building)
 
----
 
 **Why this matters:** Visibility = opportunities. Income = autonomy. Community = accountability. 🏴

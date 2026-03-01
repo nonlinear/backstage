@@ -1,14 +1,18 @@
+# Epic Notes
+
+> Version, name, status → see `epic.yaml`
+
+---
+
 # v0.11.5 / v0.15.0 - Moon Rituals & Daily Skills 🌅🌙
 
 **Epic Note - Full Implementation Details**
 
----
 
 ## Overview
 
 Merge of Daily Rituals (v0.11.5) + Moon Cycles (v0.15.0) into unified lunar-aligned ritual system.
 
----
 
 ## 🌙 SPLIFF Lunar Calendar (Ritual Timing Framework)
 
@@ -38,7 +42,6 @@ Combining Chaos Magick's SPLIFF method with lunar timing for ADHD-friendly ritua
 
 Garden analogy: You tend a plant (intention), then go watch TV. When you look at the garden again, **don't notice** the plant you tended. The result comes when the intent becomes latent—completely forgotten.
 
----
 
 ## 🌙 Moon Phase Energy Map
 
@@ -53,7 +56,6 @@ Garden analogy: You tend a plant (intention), then go watch TV. When you look at
 - 🌗 **Last quarter** → Deep release, letting go, reflection
 - 🌑 **Waning crescent** → Rest, darkness, preparation for new cycle
 
----
 
 ## 🔶 Double Diamond Integration
 
@@ -70,7 +72,6 @@ Map Double Diamond design process to lunar phases:
 - Waning = energy releases → natural completion/rest phase
 - New moon = darkness → preparation for next cycle
 
----
 
 ## 🛠️ Skills to Create
 
@@ -88,7 +89,6 @@ Map Double Diamond design process to lunar phases:
 - **vision-recall** - Show visions from specific phase or cycle
 - **ritual-prompt** - Phase-appropriate ritual suggestion
 
----
 
 ## 🔗 Integration Points
 
@@ -108,7 +108,6 @@ Map Double Diamond design process to lunar phases:
 - Align task advice with lunar energy
 - Example: "Waning gibbous says release, but system demands output. Let the moon wait."
 
----
 
 ## 📊 Vision Tracking System
 
@@ -136,7 +135,6 @@ Map Double Diamond design process to lunar phases:
 - Do dreams at full moon manifest differently?
 - Patterns across cycles (e.g., always creative ideas at waxing crescent)
 
----
 
 ## 🎙️ Voice Integration (HA Voice)
 
@@ -149,7 +147,6 @@ Map Double Diamond design process to lunar phases:
 **Daily summary includes moon phase:**
 - "Good morning. Today is Tuesday, February 3rd. Waning gibbous moon—release what you collected at full. You have one overdue task..."
 
----
 
 ## 📚 Research & Book Sources
 
@@ -163,7 +160,6 @@ Map Double Diamond design process to lunar phases:
 - *The Chaos Apple* by Thumper Forge (aspirin moon water ritual)
 - `~/Documents/notes/magick/moon.md` (personal notes)
 
----
 
 ## 🧪 Experiments & Observations
 
@@ -178,7 +174,6 @@ Map Double Diamond design process to lunar phases:
 - Not all rituals will resonate—find the ones that do
 - ADHD-friendly = low activation energy, batching, alarms
 
----
 
 ## 🔧 Implementation Tasks
 
@@ -210,7 +205,6 @@ Map Double Diamond design process to lunar phases:
 - [ ] Adjust rituals based on what works
 - [ ] Document learnings in epic note
 
----
 
 ## 🏴 Chaos Magick + ADHD = Natural Match
 
@@ -222,14 +216,10 @@ Map Double Diamond design process to lunar phases:
 
 **You don't close circles** → you **open infinite portals**. The waning moon closes them (nature does the work). 🌀
 
----
 
-**Created:** 2026-02-03  
-**Status:** Planning phase  
 **Merged from:** v0.11.5 (Daily Rituals) + v0.15.0 (Moon Cycles)  
 **Reference:** `~/Documents/notes/magick/moon.md`
 
----
 
 ## HEARTBEAT Integration (2026-02-09)
 
@@ -259,4 +249,3 @@ osascript -e 'tell application "Agenda" to activate' -e 'delay 0.5' -e 'tell app
 - Build bom-dia/boa-noite skills (use these data sources)
 - Add moon phase context to morning briefing
 - SPLIFF stage prompts in rituals
-

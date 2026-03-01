@@ -1,10 +1,13 @@
-# v0.6.0 - Fitness Tracker (Gymera + Airtable + Voice)
+# Epic Notes
 
-**Status:** Planning  
-**Priority:** HIGH (daily use case, health)  
-**Effort:** 3-4 days (Airtable integration + voice UI)
+> Version, name, status → see `epic.yaml`
 
 ---
+
+# v0.6.0 - Fitness Tracker (Gymera + Airtable + Voice)
+
+**Effort:** 3-4 days (Airtable integration + voice UI)
+
 
 ## Problem
 
@@ -23,7 +26,6 @@
 - ⚠️ Smart suggestions (areas not trained, balance)
 - ✨ Voice-first (HA Voice integration = hands-free while exercising!)
 
----
 
 ## Solution
 
@@ -57,7 +59,6 @@ Columns:
 - Muscle Group (rollup): From Exercise
 ```
 
----
 
 ## User Flow (Voice-First, HA Voice)
 
@@ -83,7 +84,6 @@ Ready to start?"
 
 **You:** "Yes"
 
----
 
 ### **Scenario 2: Guided Exercise (Hands-Free!)**
 
@@ -119,7 +119,6 @@ Let me know when you're ready."
 
 **HA Voice:** 🔊 "Leg Press complete! 3 sets of 12 reps logged. Next: Squats. Configure Gymera to position 1..."
 
----
 
 ### **Scenario 3: Mid-Workout Adjustments**
 
@@ -133,7 +132,6 @@ Let me know when you're ready."
 
 **HA Voice:** 🔊 "Skipping squats. Moving to Leg Extension. Configure Gymera to position 5..."
 
----
 
 ### **Scenario 4: Post-Workout Summary**
 
@@ -150,7 +148,6 @@ Let me know when you're ready."
 
 Workout logged. Great job!"
 
----
 
 ### **Scenario 5: Add New Exercise (Voice)**
 
@@ -180,7 +177,6 @@ Workout logged. Great job!"
 
 **HA Voice:** 🔊 "Saved! You can add details later."
 
----
 
 ### **Scenario 6: Progress Check**
 
@@ -200,7 +196,6 @@ Total: 155 minutes. You haven't trained back or chest this week. Want to schedul
 
 **HA Voice:** 🔊 "Great! I'll suggest a chest and back workout tomorrow. Reminder set for 9 AM."
 
----
 
 ### **Scenario 7: Visual Progress (Web/iMessage)**
 
@@ -238,7 +233,6 @@ pie
     "Chest" : 5
 ```
 
----
 
 ## Tasks
 
@@ -253,7 +247,6 @@ pie
 
 **Deliverable:** Airtable base with 10+ exercises, trackable via API.
 
----
 
 ### Phase 2: Airtable Skill (Day 1-2, 3-4 hours)
 
@@ -276,7 +269,6 @@ pie
 
 **Deliverable:** OpenClaw can CRUD fitness data in Airtable.
 
----
 
 ### Phase 3: Workout Voice Flow (Day 2-3, 4-5 hours)
 
@@ -318,7 +310,6 @@ OpenClaw:
 
 **Deliverable:** Full voice-guided workout loop.
 
----
 
 ### Phase 4: Progress & Insights (Day 3-4, 3-4 hours)
 
@@ -339,7 +330,6 @@ OpenClaw:
 
 **Deliverable:** Voice queries + visual progress reports.
 
----
 
 ### Phase 5: HA Voice Integration (Day 4, 2 hours)
 
@@ -353,7 +343,6 @@ OpenClaw:
 
 **Deliverable:** Fully hands-free workout sessions.
 
----
 
 ## Airtable Schema (Detailed)
 
@@ -372,7 +361,6 @@ OpenClaw:
 | Tags | Multiple Select | Compound, Isolation, Cardio | Advanced filtering |
 | Created | Created Time | Auto | Audit |
 
----
 
 ### **Workout Tracker Table**
 
@@ -390,7 +378,6 @@ OpenClaw:
 | Completed | Checkbox | ✓ | Status |
 | Created | Created Time | Auto | Audit |
 
----
 
 ## Voice UI Design (Hands-Free Considerations)
 
@@ -412,7 +399,6 @@ OpenClaw:
 - "Last set, push through!"
 - "Awesome work! Workout logged."
 
----
 
 ## Smart Features (Future)
 
@@ -434,7 +420,6 @@ OpenClaw:
 - "How did that feel?" → Log subjective difficulty
 - "Any pain?" → Flag for review
 
----
 
 ## Success Criteria
 
@@ -447,7 +432,6 @@ OpenClaw:
 - ✅ Mermaid graphs visualize trends
 - ✅ Hands-free (no phone touching during workout)
 
----
 
 ## Dependencies
 
@@ -456,7 +440,6 @@ OpenClaw:
 - Gymera machine (you have!)
 - HA Voice device placed in gym area
 
----
 
 ## Blockers
 
@@ -468,7 +451,6 @@ OpenClaw:
 4. **Gym location?** (where to place HA Voice device?)
 5. **Start simple or full featured?** (MVP = guide 1 exercise, or full workout flow?)
 
----
 
 ## Why This Epic Is PERFECT
 
@@ -487,7 +469,6 @@ OpenClaw:
 - ✅ Real-time feedback (not just smart home control)
 - ✅ Daily use case (builds HA Voice habit)
 
----
 
 *This is a GREAT epic. Let's build it!* 💪
 

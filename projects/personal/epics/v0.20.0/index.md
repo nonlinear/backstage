@@ -1,3 +1,9 @@
+# Epic Notes
+
+> Version, name, status → see `epic.yaml`
+
+---
+
 # v0.20.0 - Open Source Maps
 
 ## Context Snapshot
@@ -6,7 +12,6 @@
 - **Date:** 2026-02-15
 - **Assumptions:** OpenStreetMap ecosystem, navigation + photo location needed, offline support critical
 
----
 
 ## Research Summary (2026-02-15)
 
@@ -19,7 +24,6 @@
 
 **Challenge:** No single OSM solution does everything (ecosystem fragmented)
 
----
 
 ## Options Analysis
 
@@ -47,7 +51,6 @@
 
 **Recommendation:** **Best for navigation** (replace Google Maps day-to-day)
 
----
 
 ### Option 2: Nextcloud Maps (BEST for Photo Integration)
 
@@ -77,7 +80,6 @@
 
 **Recommendation:** Only if already running Nextcloud
 
----
 
 ### Option 3: OwnTracks + Home Assistant (Location Tracking Only)
 
@@ -104,7 +106,6 @@
 
 **Recommendation:** Complement to Organic Maps (tracking + automation)
 
----
 
 ### Option 4: MapLibre + OSRM (DIY Stack, Full Control)
 
@@ -141,7 +142,6 @@
 
 **Recommendation:** Only if you want full DIY control (overkill for most)
 
----
 
 ## Comparison Table
 
@@ -157,7 +157,6 @@
 **Winner (Navigation):** **Organic Maps** (best offline, easy setup)  
 **Winner (Photo Integration):** **Nextcloud Maps** (if running Nextcloud) OR **MapLibre DIY** (full control)
 
----
 
 ## Recommendation
 
@@ -175,7 +174,6 @@
 2. Download offline maps (Settings → Download maps → Select region)
 3. Use for navigation (search, directions, POI)
 
----
 
 ### For Photo Location Overlay:
 **Nextcloud Maps** (if running Nextcloud) OR **DIY MapLibre** (if want full control)
@@ -195,7 +193,6 @@
 2. Run OSRM (routing backend)
 3. Build web UI (MapLibre + Immich photo layer)
 
----
 
 ### For Location Tracking (HA Integration):
 **OwnTracks** (self-hosted location tracking)
@@ -209,7 +206,6 @@
 2. Configure MQTT server (Mosquitto)
 3. Add to Home Assistant (Configuration → Integrations → OwnTracks)
 
----
 
 ## Trade-Offs
 
@@ -223,7 +219,6 @@
 - **Nextcloud Maps** OR **MapLibre** for photo location
 - **OwnTracks** for location tracking (optional, HA integration)
 
----
 
 ## Implementation Plan
 
@@ -254,7 +249,6 @@
 - [ ] Add to Home Assistant
 - [ ] Test location tracking (arrive home automation)
 
----
 
 ## Open Questions
 
@@ -275,7 +269,6 @@
    - Organic Maps: Auto-updates (app downloads new data)
    - Self-hosted: Manual (re-import OSM data monthly/quarterly)
 
----
 
 ## Success Criteria
 
@@ -285,13 +278,10 @@
 - ✅ Google Maps replaced for daily use (Organic Maps primary navigation)
 - ✅ Optional: OwnTracks + HA integration (location tracking automations)
 
----
 
 ## Related Epics
 - v0.5.0 - Home Augmented Calendar (location-based automations)
 - v0.19.0 - HA Fixes (location triggers, presence detection)
 
----
 
-**Status:** 🔍 RESEARCH PHASE
 **Next:** Download Organic Maps, test navigation, decide on photo integration (Nextcloud vs MapLibre)

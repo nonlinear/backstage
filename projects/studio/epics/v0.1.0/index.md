@@ -1,10 +1,14 @@
+# Epic Notes
+
+> Version, name, status → see `epic.yaml`
+
+---
+
 # v0.1.0 - Server Migration
 
 **Goal:** Migrate OpenClaw from MacBook M3 → always-on server
 
-**Status:** 🏗️ PLANNING
 
----
 
 ## Overview
 
@@ -15,7 +19,6 @@
 
 
 
----
 
 ## Success Criteria
 
@@ -26,7 +29,6 @@
 - [ ] MacBook can connect remotely (Jump Desktop + Tailscale)
 - [ ] Migration documented in memory files
 
----
 
 ## Notes
 
@@ -36,6 +38,5 @@
 
 **Reference:** See IDENTITY.md for familiar-servitor philosophy.
 
----
 
 *Created: 2026-02-19*

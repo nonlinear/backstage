@@ -1,10 +1,13 @@
-# v0.14.0 - OpenClaw Walkie-Talkie
+# Epic Notes
 
-**Created:** 2026-02-15  
-**Status:** Planning  
-**Epic type:** New iOS app (potential revenue stream)
+> Version, name, status → see `epic.yaml`
 
 ---
+
+# v0.14.0 - OpenClaw Walkie-Talkie
+
+**Epic type:** New iOS app (potential revenue stream)
+
 
 ## Context Snapshot
 
@@ -21,13 +24,11 @@ Current OpenClaw = desktop/web-centric, typing required. Mobile voice = faster, 
 - Push-to-talk OR always-listening modes supported
 - Monetization TBD (one-time purchase? subscription? freemium?)
 
----
 
 ## Goal
 
 Build iOS voice-first app for OpenClaw. Talk to your AI like a walkie-talkie. Ship v1.0 with core functionality, iterate based on usage.
 
----
 
 ## Questions for Nicholas (Disambiguation Protocol)
 
@@ -99,7 +100,6 @@ Any existing apps you want to model this after?
 - [ ] Hire iOS dev?
 - [ ] Contract out full build?
 
----
 
 ## Proposed Architecture (Pending Answers)
 
@@ -138,7 +138,6 @@ graph TD
     H -->|Tap to stop| I[Send + process]
 ```
 
----
 
 ## Tasks (Blocked Until Disambiguation)
 
@@ -185,7 +184,6 @@ graph TD
 - [ ] Prioritize feature requests
 - [ ] Ship v1.1, v1.2, etc.
 
----
 
 ## Risks & Caveats
 
@@ -208,7 +206,6 @@ graph TD
 - Privacy policy = required for voice recording (even if local-only)
 - Terms of service = required for gateway connection
 
----
 
 ## Success Metrics (TBD)
 
@@ -219,7 +216,6 @@ graph TD
 - [ ] X average session length
 - [ ] X revenue (if paid/subscription)
 
----
 
 ## Related Epics
 
@@ -227,7 +223,6 @@ graph TD
 - **personal v0.18.0** - Open Source Notes (SiYuan mobile UX research transferable)
 - **apps v0.3.0** - Webchat Redesign (design patterns transferable)
 
----
 
 ## Notes
 
@@ -238,7 +233,3 @@ graph TD
 **Disambiguation strategy:** 10 questions above = minimum info needed to design/build unsupervised.
 
 **Next step:** Nicholas answers questions → I create detailed spec + wireframes + mermaid diagrams → handoff to dev (Nicholas or contractor).
-
----
-
-**Status:** ⏸️ PAUSED (awaiting disambiguation answers)

@@ -1,3 +1,9 @@
+# Epic Notes
+
+> Version, name, status → see `epic.yaml`
+
+---
+
 # v0.1.0 Discovery - Epic Notes
 
 ## Meet with Nicholas
@@ -76,7 +82,6 @@ Need browser and the card to see creation, can see if someone is watching
 
 - make music
 
----
 
 - Who are you?
 - Get contact list, prove you are you

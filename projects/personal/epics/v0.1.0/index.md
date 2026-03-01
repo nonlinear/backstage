@@ -1,10 +1,13 @@
-# v0.1.0 - Visual Communication (Graphs & Images)
+# Epic Notes
 
-**Status:** In progress  
-**Started:** 2026-01-30  
-**Target:** Week of Feb 3
+> Version, name, status → see `epic.yaml`
 
 ---
+
+# v0.1.0 - Visual Communication (Graphs & Images)
+
+**Target:** Week of Feb 3
+
 
 ## Problem
 
@@ -18,7 +21,6 @@ Current state:
 - ❌ `read` tool images don't render in web chat
 - ❌ iMessage attachments fail (BlueBubbles Private API disabled)
 
----
 
 ## Solution
 
@@ -30,7 +32,6 @@ Current state:
   - **Disposable:** Graphs are ephemeral visualizations
   - **Persistent:** Save .md source only when requested
 
----
 
 ## Architecture
 
@@ -55,7 +56,6 @@ Current state:
 3. User sees images inline
 ```
 
----
 
 ## Tasks
 
@@ -70,7 +70,6 @@ Current state:
 - [ ] Global graph styles (`graph-styles.css`)
 - [ ] Auto-cleanup temp files
 
----
 
 ## Blockers
 
@@ -80,7 +79,6 @@ Current state:
 **Risk:** Security implications  
 **Alternative:** Use Google Messages Bridge or other service
 
----
 
 ## Technical Notes
 
@@ -101,7 +99,6 @@ Current state:
 - **Disposable by default** - only persist when asked
 - **read tool** works for images but doesn't auto-send
 
----
 
 ## Future Enhancements
 
@@ -121,7 +118,6 @@ Current state:
    - Auto-delete temp HTML after view
    - Periodic MEDIA: path cleanup (>7 days old)
 
----
 
 ## Success Criteria
 
@@ -131,7 +127,6 @@ Current state:
 - ⏳ User can request "save this graph" → gets .md
 - ⏳ Global styles applied consistently
 
----
 
 ## Session Log
 
@@ -146,11 +141,9 @@ Current state:
 
 **Key insight:** Same pattern works for graphs AND images - render local, show where possible.
 
----
 
 *Epic active - updates ongoing*
 
----
 
 ## Agenda Dashboard Fixes (2026-02-09)
 
@@ -195,4 +188,3 @@ osascript -e 'tell application "Agenda" to activate' \
 - [ ] Add notes count to GEAR tab
 - [ ] Add backstage count to GEAR tab
 - [ ] Test all dashboard sections load correctly
-

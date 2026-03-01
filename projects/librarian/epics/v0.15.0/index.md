@@ -1,10 +1,14 @@
+# Epic Notes
+
+> Version, name, status → see `epic.yaml`
+
+---
+
 # Librarian SKILL.md Translation
 
 **Epic:** v0.15.0-skill-enforcement  
-**Created:** 2026-02-08  
 **Goal:** Translate EXISTING librarian/SKILL.md to official skill format
 
----
 
 ## Current Problems
 
@@ -19,7 +23,6 @@
 - ✅ Dense but scannable
 - ✅ Enforcement lives in librarian.sh (not text)
 
----
 
 ## Translation Plan
 
@@ -41,12 +44,10 @@
 - Syntax validation
 - Output formatting
 
----
 
 ## Proposed New SKILL.md
 
 ```markdown
----
 name: librarian
 description: Search Nicholas's book library (EPUBs/PDFs) via semantic search. Use when user asks to research books, find quotes, or search library by topic.
 homepage: ~/Documents/librarian/README.md
@@ -56,7 +57,6 @@ metadata:
     os: ["darwin"]
     requires:
       bins: ["python3", "jq"]
----
 
 # Librarian
 
@@ -65,7 +65,6 @@ Semantic search across Nicholas's book library (EPUBs, PDFs).
 **Location:** `~/Documents/librarian/`  
 **MacBook only** (not on NAS)
 
----
 
 ## When to use
 
@@ -75,7 +74,6 @@ Use this skill when the user asks:
 - "what do my books say about [topic]?"
 - "find quotes about [subject]"
 
----
 
 ## Quick start
 
@@ -90,7 +88,6 @@ cd ~/Documents/librarian && \
 python3 engine/scripts/research.py "query text" --topics topic1,topic2
 ```
 
----
 
 ## Available topics
 
@@ -108,7 +105,6 @@ ls -1 ~/Documents/librarian/books/
 
 **Note:** Folder names = topic IDs (use exact names: lowercase, hyphens)
 
----
 
 ## Wrapper (librarian.sh)
 
@@ -134,7 +130,6 @@ Achei **2 resultado(s)**.
 
 > A servitor is a semi-autonomous entity created for a specific purpose...
 
----
 
 2️⃣ **Programming Servitors**
 **Fonte:** *The Chaos Protocols*
@@ -147,7 +142,6 @@ Achei **2 resultado(s)**.
 ❌ Não achei resultados sobre "servitors" no topic "chaos-magick".
 ```
 
----
 
 ## Direct usage (research.py)
 
@@ -180,7 +174,6 @@ python3 engine/scripts/research.py "QUERY" --topics topic1,topic2
 
 **Empty results:** `{"results": []}`
 
----
 
 ## Indexing
 
@@ -193,7 +186,6 @@ python3 engine/scripts/index_library.py --smart
 **`--smart`:** Only indexes new/modified files (fast)  
 **`--force`:** Full rebuild (slow)
 
----
 
 ## Kavita integration
 
@@ -208,7 +200,6 @@ python3 engine/scripts/index_library.py --smart
 **When presenting results:** Include link if available:
 > **📖 Read in Kavita:** [Open book](http://192.168.1.152:5000/library/1/series/42)
 
----
 
 ## Troubleshooting
 
@@ -226,7 +217,6 @@ python3 engine/scripts/index_library.py --smart
 **Missing index for topic**
 - Run reindex: `python3 engine/scripts/index_library.py --smart`
 
----
 
 ## Notes
 
@@ -236,10 +226,8 @@ python3 engine/scripts/index_library.py --smart
 - Use wrapper for enforcement (empty → "não achei")
 - Direct research.py for advanced control (JSON output)
 
----
 ```
 
----
 
 ## What Changed
 
@@ -265,7 +253,6 @@ python3 engine/scripts/index_library.py --smart
 - ✅ Troubleshooting
 - ✅ Kavita integration
 
----
 
 ## Size Comparison
 
@@ -274,7 +261,6 @@ python3 engine/scripts/index_library.py --smart
 
 **Reduction:** 56% smaller, 100% more useful
 
----
 
 ## Questions for Nicholas
 
@@ -286,7 +272,6 @@ Before I replace SKILL.md:
 4. **Metadata:** Add python deps to frontmatter now or later?
 5. **Tone:** Too casual? Too technical? Just right?
 
----
 
 ## Next Steps (After Approval)
 
@@ -296,6 +281,5 @@ Before I replace SKILL.md:
 4. Commit both (SKILL.md + librarian.sh)
 5. Archive old SKILL.md (git history)
 
----
 
 **Ready to discuss.**

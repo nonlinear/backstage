@@ -1,10 +1,14 @@
+# Epic Notes
+
+> Version, name, status → see `epic.yaml`
+
+---
+
 # v0.21.0 - Business Model for Commons
 
 **Epic:** [v0.21.0 Business Model for Commons](../ROADMAP.md#v0210)
 
-**Status:** 🚧 PROPOSED (2026-02-21)
 
----
 
 ## Philosophy
 
@@ -27,7 +31,6 @@
 - **Self-hosted infrastructure** - Mac Studio, NAS, anarchist stack
 - **Ethical alignment** - Anti-surveillance, pro-autonomy, anti-commercialization
 
----
 
 ## Agent Hierarchy
 
@@ -59,7 +62,6 @@
 - **When migrating to Open Project:** Can assign QUEM (who) + blockers per task
 - **Even without agents implemented:** Structure supports future automation
 
----
 
 ## Canonical Books (To Index in Librarian)
 
@@ -77,7 +79,6 @@
 - The Design Studio Method
 - Strategic Design Thinking
 
----
 
 ## Intake Questions (Foundational Strategy)
 
@@ -101,7 +102,6 @@
 2. How do agents communicate? (drafts → questions → approval)
 3. Temporal for orchestration? (workflow engine, retries, state management)
 
----
 
 ## Next Steps
 
@@ -111,7 +111,5 @@
 4. **Map agent hierarchy** (which roles, which order, how they spawn)
 5. **HR bot prototype** (skill gap detection, book suggestions)
 
----
 
-**Created:** 2026-02-21  
 **Updated:** 2026-02-21

@@ -1,9 +1,12 @@
-# v0.31.0 - Checkpoint System Research
+# Epic Notes
 
-**Status:** 💡 PROPOSED (2026-02-26)  
-**Priority:** MEDIUM (Foundation for governance scale)
+> Version, name, status → see `epic.yaml`
 
 ---
+
+# v0.31.0 - Checkpoint System Research
+
+
 
 ## Goal
 
@@ -15,7 +18,6 @@ Research architectural patterns for **Backstage 2.0 checkpoint system** before i
 - Event-driven (triggers → checks → logs)
 - Scales to 15 agents + multiple projects
 
----
 
 ## Why Research First
 
@@ -35,7 +37,6 @@ Research architectural patterns for **Backstage 2.0 checkpoint system** before i
 
 **Solution:** Study existing systems first (OPA, Temporal, TLA+)
 
----
 
 ## Research Tracks
 
@@ -57,7 +58,6 @@ Research architectural patterns for **Backstage 2.0 checkpoint system** before i
 
 **Output:** `~/Documents/personal/ideas/checkpoint-research-opa.md`
 
----
 
 ### 2. Temporal.io
 
@@ -77,7 +77,6 @@ Research architectural patterns for **Backstage 2.0 checkpoint system** before i
 
 **Output:** `~/Documents/personal/ideas/checkpoint-research-temporal.md`
 
----
 
 ### 3. Formal Methods (TLA+)
 
@@ -97,7 +96,6 @@ Research architectural patterns for **Backstage 2.0 checkpoint system** before i
 
 **Output:** `~/Documents/personal/ideas/checkpoint-research-formal.md`
 
----
 
 ## Tasks
 
@@ -109,7 +107,6 @@ Research architectural patterns for **Backstage 2.0 checkpoint system** before i
 - [ ] Design Minimal Viable Checkpoint (MVC) architecture
 - [ ] Propose epic v0.32.0: MVC implementation
 
----
 
 ## Success Criteria
 
@@ -127,7 +124,6 @@ Research architectural patterns for **Backstage 2.0 checkpoint system** before i
 - Epic v0.32.0 scoped (Minimal Viable Checkpoint)
 - Clear next steps (build registry first, then triggers, then execution)
 
----
 
 ## Notes
 
@@ -140,7 +136,6 @@ Research architectural patterns for **Backstage 2.0 checkpoint system** before i
 
 **Next:** When ready, run librarian research on all 3 tracks, consolidate findings, design MVC.
 
----
 
 ## Related Epics
 
@@ -148,7 +143,6 @@ Research architectural patterns for **Backstage 2.0 checkpoint system** before i
 - **v0.25.0:** Local LLM Infrastructure (agents need governance)
 - **v0.3.0:** PM Tool Evaluation (roadmap management, migration context)
 
----
 
 ## References
 
@@ -163,11 +157,8 @@ Research architectural patterns for **Backstage 2.0 checkpoint system** before i
 - `checkpoint-research-formal.md`
 # Modes - Execution Context Framework
 
-**Created:** 2026-02-27
-**Status:** Design phase
 **Purpose:** Define execution modes for agent workflows and task processing
 
----
 
 ## What Are Modes?
 
@@ -179,7 +170,6 @@ Research architectural patterns for **Backstage 2.0 checkpoint system** before i
 
 **Philosophy:** Modes = runtime metadata that tells agents HOW to execute, not WHAT to execute.
 
----
 
 ## Mode Dimensions
 
@@ -204,7 +194,6 @@ Research architectural patterns for **Backstage 2.0 checkpoint system** before i
 - Human-in-loop for major decisions
 - Model: Claude Sonnet 4.5 (cloud, GitHub Copilot subscription)
 
----
 
 ### 2. Interface Mode
 
@@ -220,7 +209,6 @@ Research architectural patterns for **Backstage 2.0 checkpoint system** before i
 - Browser automation, localhost servers
 - Examples: Mac Studio workstation, development work
 
----
 
 ### 3. Execution Environment
 
@@ -242,7 +230,6 @@ Research architectural patterns for **Backstage 2.0 checkpoint system** before i
 - Cron jobs, background tasks
 - Examples: Night shift reminders, billable-hours automation
 
----
 
 ## Mode Combinations (Real-World Examples)
 
@@ -253,7 +240,6 @@ Research architectural patterns for **Backstage 2.0 checkpoint system** before i
 - **Interface:** CLI only (no browser, no UI)
 - **Environment:** Mac Studio local
 
----
 
 ### Secretaria (Supervised + Desktop + Local)
 - **Context:** 9-5 M-F, Nicholas at desk
@@ -263,7 +249,6 @@ Research architectural patterns for **Backstage 2.0 checkpoint system** before i
 - **Environment:** Mac Studio local
 - **Model:** Qwen 7B (fast latency > high reasoning)
 
----
 
 ### Development (Unsupervised + Desktop + Local)
 - **Context:** Epic implementation, testing phases
@@ -273,7 +258,6 @@ Research architectural patterns for **Backstage 2.0 checkpoint system** before i
 - **Environment:** Mac Studio local
 - **Model:** Qwen 32B (high reasoning for decisions)
 
----
 
 ### iPad Workflow (Supervised + Device + Remote)
 - **Context:** Nicholas traveling, iPad + keyboard
@@ -283,7 +267,6 @@ Research architectural patterns for **Backstage 2.0 checkpoint system** before i
 - **Environment:** Remote (Tailscale HTTPS only)
 - **Constraint:** No PWAs with HTTP (iOS restriction)
 
----
 
 ## Mode Selection Rules
 
@@ -312,7 +295,6 @@ Research architectural patterns for **Backstage 2.0 checkpoint system** before i
 - iPad/iPhone access
 - Tailscale-exposed services only
 
----
 
 ## Mode Configuration (Future)
 
@@ -340,7 +322,6 @@ required_mode:
   environment: local       # API tokens on Mac
 ```
 
----
 
 ## Key Insights
 
@@ -356,7 +337,6 @@ required_mode:
 - Tailscale = remote access without cloud dependency
 - Mode-aware agents = right tool for right context
 
----
 
 ## Related Concepts
 
@@ -365,16 +345,12 @@ required_mode:
 - **Local LLM Strategy** (v0.25.0): MLX-first, supervised vs unsupervised models
 - **Tailscale Access** (iPad setup): Remote mode constraints (HTTPS, no localhost)
 
----
 
 **Source:** talk1.md, talk2.md, memory/2026-02-27.md, AGENTS.md
 # Check Anatomy - Modular Quality Control
 
-**Created:** 2026-02-27
-**Status:** Design phase
 **Purpose:** Define structure and execution model for reusable quality checks
 
----
 
 ## What Is a Check?
 
@@ -387,7 +363,6 @@ required_mode:
 - **Versionable** (git-tracked, semantic versioning)
 - **Domain-aware** (web, design, infra, legal, etc.)
 
----
 
 ## Check File Structure
 
@@ -402,12 +377,10 @@ spacing-consistency/
 └── README.md            # Human docs
 ```
 
----
 
 ## check.yaml Format
 
 ```yaml
----
 name: spacing-consistency
 domain: design
 version: 1.0.0
@@ -427,10 +400,8 @@ success_metrics:
   - spacing.divisible_by_8 == true
   - orphan_values.count == 0
   - vertical_rhythm.consistent == true
----
 ```
 
----
 
 ## Execution Model
 
@@ -464,7 +435,6 @@ success_metrics:
 - `1` = Check failed
 - `2` = Execution error (invalid input, API timeout, etc.)
 
----
 
 ## Check Types
 
@@ -485,7 +455,6 @@ success_metrics:
 - Locked dependency versions
 - Hash of input in report
 
----
 
 ### 2. Probabilistic Checks (LLM-Assisted)
 
@@ -503,18 +472,15 @@ success_metrics:
 - Model version locked in check.yaml
 - Prompt versioned in git
 
----
 
 ### 3. Composite Checks
 
 **Check that runs multiple sub-checks.**
 
 ```yaml
----
 name: full-design-qa
 domain: design
 composite: true
----
 
 sub_checks:
   - spacing-consistency >= 0.95
@@ -525,7 +491,6 @@ success_criteria:
   - ALL sub_checks pass
 ```
 
----
 
 ## Domain Organization
 
@@ -558,14 +523,12 @@ success_criteria:
     └── probabilistic.template
 ```
 
----
 
 ## Integration with OpenProject
 
 **Task YAML (in description):**
 
 ```yaml
----
 domain: design
 checks:
   - spacing-consistency
@@ -574,7 +537,6 @@ checks:
 success_criteria:
   - spacing-consistency.score >= 0.95
   - color-palette.violations == 0
----
 ```
 
 **Agent workflow:**
@@ -584,7 +546,6 @@ success_criteria:
 4. Executes checks sequentially (or parallel if independent)
 5. Updates task status (Pass/Fail + report)
 
----
 
 ## Check Execution Modes
 
@@ -604,7 +565,6 @@ curl -X POST http://localhost:8000/checks/spacing-consistency \
   -d @input.json
 ```
 
----
 
 ## Check Library as Product
 
@@ -621,7 +581,6 @@ curl -X POST http://localhost:8000/checks/spacing-consistency \
 **Example:**
 > "We use check X for design consistency. You can adopt it too."
 
----
 
 ## Check Lifecycle
 
@@ -649,7 +608,6 @@ curl -X POST http://localhost:8000/checks/spacing-consistency \
 - Backward compatibility via schema versions
 - Deprecation path for old checks
 
----
 
 ## Librarian Integration
 
@@ -661,12 +619,10 @@ curl -X POST http://localhost:8000/checks/spacing-consistency \
 - Generate check: `ritual-completion.check`
 
 ```yaml
----
 name: ritual-completion
 domain: librarian/chaos-magick
 topic: ritual design
 deterministic: false  # LLM-assisted validation
----
 
 success_metrics:
   - intent.declared == true
@@ -677,27 +633,23 @@ success_metrics:
 
 **Safeguard:** Librarian generates **draft check**, human approves before becoming executable.
 
----
 
 ## Mode-Aware Checks
 
 **Some checks require specific modes:**
 
 ```yaml
----
 name: figma-browser-qa
 domain: design
 required_mode:
   interface: desktop   # Browser automation
   environment: local   # API tokens
----
 ```
 
 **Agent respects mode constraints:**
 - Desktop-only checks skip on device mode
 - Remote checks skip when localhost required
 
----
 
 ## Key Principles
 
@@ -723,7 +675,6 @@ required_mode:
 - Clear pass/fail (no ambiguity)
 - Reports actionable (fix path obvious)
 
----
 
 ## Related Concepts
 
@@ -732,11 +683,9 @@ required_mode:
 - **OpenProject Integration**: Task → Check mapping
 - **Check Library** (talk1.md, talk2.md): Full infrastructure vision
 
----
 
 **Source:** talk1.md, talk2.md, v0.31.0 checkpoint research
 
----
 
 ## Epic Tasks (YAML)
 
@@ -772,7 +721,6 @@ tasks:
       - Links to tasks, checks, domains
 ```
 
----
 
 ## Task: Decide on UI Framework
 
@@ -809,7 +757,6 @@ tasks:
 - https://nextjs.org/showcase (Next.js apps)
 - https://github.com/shadcn-ui/taxonomy (full stack example)
 
----
 
 ### Option 2: Astro + Tailwind + Shoelace
 **Stack:**
@@ -833,7 +780,6 @@ tasks:
 - https://shoelace.style/ (Web Components)
 - https://github.com/withastro/astro (official repo)
 
----
 
 ### Option 3: SvelteKit + Tailwind + DaisyUI
 **Stack:**
@@ -857,7 +803,6 @@ tasks:
 - https://kit.svelte.dev/ (SvelteKit docs)
 - https://github.com/sveltejs/kit (official repo)
 
----
 
 ### Option 4: Eleventy + Tailwind + Alpine.js
 **Stack:**
@@ -881,7 +826,6 @@ tasks:
 - https://alpinejs.dev/examples (Alpine examples)
 - https://github.com/11ty/eleventy-base-blog (starter)
 
----
 
 ### Option 5: Plain HTML + Tailwind (Zero framework)
 **Stack:**
@@ -904,7 +848,6 @@ tasks:
 - https://tailwindcss.com/docs/installation/play-cdn (CDN setup)
 - https://github.com/tailwindlabs/tailwindcss (official repo)
 
----
 
 **Decision criteria:**
 - **Speed:** How fast to prototype?
@@ -914,7 +857,6 @@ tasks:
 
 **Recommendation:** Start with **Option 1 (Next.js + Tailwind + shadcn/ui)** for speed, then evaluate portability needs.
 
----
 
 ## Epic Note: Philosophy
 
@@ -930,7 +872,6 @@ tasks:
 
 **If folders change, checks detect and adapt.**
 
----
 
 ## Epic Note: DRY Principle
 

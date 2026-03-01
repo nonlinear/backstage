@@ -1,3 +1,9 @@
+# Epic Notes
+
+> Version, name, status → see `epic.yaml`
+
+---
+
 # v0.13.0 - Autocomplete (Keyboard App Research)
 
 ## Context Snapshot
@@ -6,7 +12,6 @@
 - **Date:** 2026-02-14
 - **Assumptions:** Building text tools (autocomplete, foyer pre-send review), need privacy-first approach
 
----
 
 ## Research Summary (2026-02-14)
 
@@ -32,7 +37,6 @@
 - Secure fields (passwords, credit cards) = ALWAYS isolated (no third-party access)
 - User must explicitly grant permissions
 
----
 
 ### Android IME (Input Method Editor)
 
@@ -54,7 +58,6 @@
 - Permissions required for network, clipboard, accessibility
 - Secure fields always isolated
 
----
 
 ## Delta Analysis: iOS vs Android
 
@@ -74,7 +77,6 @@
 
 **Key takeaway:** Android IME = more capabilities, iOS = more restrictions (privacy-focused)
 
----
 
 ## Cross-Platform Keyboard Apps
 
@@ -91,7 +93,6 @@
 - [ ] Identify capabilities delta (what works on Android but not iOS, vice versa)
 - [ ] Privacy policies (do they transmit data? how?)
 
----
 
 ## Foyer Pre-Send Review
 
@@ -116,7 +117,6 @@
 
 **Recommendation:** Share extension (Option 1) = best balance (privacy + user control + cross-platform)
 
----
 
 ## iOS Text Replacements Integration
 
@@ -134,7 +134,6 @@
 - Users must manually duplicate entries (iOS replacements + app replacements)
 - OR: Build migration tool (import iOS replacements once, maintain separately)
 
----
 
 ## Network Access Patterns
 
@@ -154,7 +153,6 @@
 - Encrypt all data in transit
 - Document what data is transmitted (transparency)
 
----
 
 ## Clipboard Access
 
@@ -172,7 +170,6 @@
 - Clipboard monitor (Option 2 for Foyer) = easier on Android, harder on iOS
 - Share extension (Option 1) = works on both without clipboard permissions
 
----
 
 ## Voice/Gesture Input
 
@@ -188,7 +185,6 @@
 - Voice autocomplete = easier on Android
 - iOS = must use system dictation (cannot customize)
 
----
 
 ## Next Steps
 
@@ -210,7 +206,6 @@
 - [ ] Create autocomplete DB schema (local storage)
 - [ ] Import iOS Text Replacements (one-time migration tool)
 
----
 
 ## Open Questions
 
@@ -231,13 +226,10 @@
    - Example: Swipe to select suggestion, draw to trigger macro
    - Platform: Android only
 
----
 
 ## Related Epics
 - v0.11.0 - Memory Architecture (data persistence, sync)
 - v0.3.0 - Design Strategy (user research, UX decisions)
 
----
 
-**Status:** 🔍 RESEARCH PHASE
 **Next:** Delta analysis (test cross-platform keyboards), decide Foyer implementation

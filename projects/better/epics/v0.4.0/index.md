@@ -1,3 +1,9 @@
+# Epic Notes
+
+> Version, name, status → see `epic.yaml`
+
+---
+
 # v0.4.0 - Offline Browser Storage (Kavita/Komga)
 
 ## Context Snapshot
@@ -6,7 +12,6 @@
 - **Date:** 2026-02-15
 - **Assumptions:** Kavita/Komga running on NAS, web-based readers, no native offline support
 
----
 
 ## Research Summary (2026-02-15)
 
@@ -21,7 +26,6 @@
 - Reduce mobile data usage (cache once, read many times)
 - Faster reading (no network latency)
 
----
 
 ## Approaches
 
@@ -90,7 +94,6 @@ if ('serviceWorker' in navigator) {
 
 **Recommendation:** **Best approach** (standard PWA pattern)
 
----
 
 ### Option 2: Browser Extension (More Invasive)
 
@@ -133,7 +136,6 @@ chrome.webRequest.onBeforeRequest.addListener(
 
 **Recommendation:** Only if Service Worker insufficient
 
----
 
 ### Option 3: Kavita/Komga Native Features (Check First)
 
@@ -157,7 +159,6 @@ chrome.webRequest.onBeforeRequest.addListener(
 
 **If native support exists:** Use that instead of custom SW/extension
 
----
 
 ## Comparison Table
 
@@ -171,7 +172,6 @@ chrome.webRequest.onBeforeRequest.addListener(
 
 **Winner:** **Native features** (if available) OR **Service Worker** (if no native support)
 
----
 
 ## Technical Details
 
@@ -230,7 +230,6 @@ self.addEventListener('activate', (event) => {
 });
 ```
 
----
 
 ### Injection Methods
 
@@ -243,7 +242,6 @@ navigator.serviceWorker.register('/service-worker.js');
 **Pros:** Quick test  
 **Cons:** Must re-inject on new domains
 
----
 
 #### Method B: Bookmarklet (One-Click)
 ```javascript
@@ -255,7 +253,6 @@ javascript:(function(){navigator.serviceWorker.register('/service-worker.js').th
 **Pros:** One-click activation  
 **Cons:** Still requires SW file hosted
 
----
 
 #### Method C: Browser Extension (Automatic)
 ```javascript
@@ -268,7 +265,6 @@ if (window.location.hostname === 'NAS_HOST') {
 **Pros:** Automatic (no manual injection)  
 **Cons:** Requires extension installation
 
----
 
 ## DRM/Copy Protection Concerns
 
@@ -285,7 +281,6 @@ if (window.location.hostname === 'NAS_HOST') {
 
 **Assumption:** Self-hosted = no DRM, caching is fine
 
----
 
 ## Implementation Plan
 
@@ -313,7 +308,6 @@ if (window.location.hostname === 'NAS_HOST') {
 - [ ] Test on mobile (iOS Safari, Android Chrome)
 - [ ] Measure storage usage (how many books cached?)
 
----
 
 ## Open Questions
 
@@ -337,7 +331,6 @@ if (window.location.hostname === 'NAS_HOST') {
 5. **Mobile support:** iOS Safari vs Android Chrome?
    - Both support Service Worker (test compatibility)
 
----
 
 ## Success Criteria
 
@@ -348,13 +341,10 @@ if (window.location.hostname === 'NAS_HOST') {
 - ✅ Mobile tested (iOS Safari + Android Chrome)
 - ✅ Cache management UI (view cached books, clear cache)
 
----
 
 ## Related Epics
 - apps v0.1.0 - Agenda Fixes (PWA offline mode pattern)
 - apps v0.3.0 - Webchat Redesign (PWA architecture)
 
----
 
-**Status:** 🔍 RESEARCH PHASE
 **Next:** Check Kavita/Komga docs for native offline support, test Service Worker PoC

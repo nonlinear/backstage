@@ -1,9 +1,12 @@
-# v0.30.0 - Execution Decision Protocol
+# Epic Notes
 
-**Status:** 💡 PROPOSED (2026-02-26)  
-**Priority:** HIGH (Reduces decision overhead)
+> Version, name, status → see `epic.yaml`
 
 ---
+
+# v0.30.0 - Execution Decision Protocol
+
+
 
 ## 🎯 Problem
 
@@ -17,7 +20,6 @@
 
 **Result:** Nicholas spends cognitive energy on "should I do this now?" instead of actual work.
 
----
 
 ## 🧠 Decision Tree
 
@@ -35,7 +37,6 @@
 - Approved → Level 2 (time-based routing)
 - Needs Discussion → Create epic (document options, propose solutions)
 
----
 
 ### Level 2: Time-Based Routing (Approved Tasks Only)
 
@@ -53,7 +54,6 @@
 
 **Action:** Execute without confirmation, report after.
 
----
 
 #### B) >5min → Night Shift Queue
 
@@ -70,7 +70,6 @@
 
 **Action:** Add to night queue, execute 2AM-6AM, report in morning.
 
----
 
 ### Level 3: Epic Creation (Needs Discussion)
 
@@ -85,7 +84,6 @@
 - Propose recommendation
 - Wait for Nicholas approval
 
----
 
 ## 🌙 Night Shift Protocol
 
@@ -122,7 +120,6 @@ night-queue add "process PDFs" "python ocr.py --batch 500" --timeout 3600
 night-queue list
 ```
 
----
 
 ## 📋 Contract Diagram
 
@@ -149,7 +146,6 @@ graph TD
 
 **Living document:** Updated as protocols evolve
 
----
 
 ## 🏢 Scope: Global vs Squad/Agent
 
@@ -163,7 +159,6 @@ graph TD
 **Cons:**
 - May not fit all contexts (UX research ≠ code deployment)
 
----
 
 ### Option 2: Per-Squad Protocol
 
@@ -175,7 +170,6 @@ graph TD
 - More complexity (which protocol applies?)
 - Maintenance overhead (update N protocols)
 
----
 
 ### Option 3: Hybrid (Global + Squad Overrides)
 
@@ -188,7 +182,6 @@ graph TD
 
 **Recommendation:** Start global, add squad overrides as needed
 
----
 
 ## ⏱️ Time Budgets
 
@@ -210,7 +203,6 @@ graph TD
 
 **Question for Nicholas:** Hard budget or flexible average?
 
----
 
 ## 🛠️ Implementation
 
@@ -237,7 +229,6 @@ graph TD
 - [ ] Weekly summary (time spent per category)
 - [ ] Dashboard (visualize budgets vs actual)
 
----
 
 ## 🎯 Success Criteria
 
@@ -247,7 +238,6 @@ graph TD
 - ✅ Contract diagram clear (visual agreement of work scope)
 - ✅ Nicholas spends less time on "should we do this?" decisions
 
----
 
 ## 🔗 Related Epics
 
@@ -255,7 +245,6 @@ graph TD
 - **v0.21.0 Business Model** - Time budgets for studio work
 - **v0.2.0 Company Skeleton** - Agent orchestration (which agent decides what)
 
----
 
 ## 📝 Open Questions
 
@@ -265,6 +254,5 @@ graph TD
 4. **Approval gates:** Always ask for >5min tasks, or auto-queue trusted ones?
 5. **Contract diagram:** Where to store? (epic note, AGENTS.md, separate file?)
 
----
 
 **Next:** Discuss with Nicholas → finalize protocol → implement Phase 1 (decision tree)

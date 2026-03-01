@@ -1,10 +1,12 @@
-# v1.14.0 - Automate ClawHub Publication
+# Epic Notes
 
-**Status:** 📋 Planned  
-**Created:** 2026-02-25 (expanded from ROADMAP stub)  
-**Priority:** Medium
+> Version, name, status → see `epic.yaml`
 
 ---
+
+# v1.14.0 - Automate ClawHub Publication
+
+
 
 ## Problem
 
@@ -23,7 +25,6 @@
 - Can't integrate with git hooks or CI pipelines
 - Dual-repo strategy unclear (commit locally vs push to GitHub)
 
----
 
 ## Goal
 
@@ -36,7 +37,6 @@
 4. **Batch operations:** `openclaw skill publish-all` (publish all changed skills)
 5. **Dual-repo clarity:** Commit locally (all skills) ≠ push to GitHub (published only)
 
----
 
 ## Tasks (from ROADMAP + expansion)
 
@@ -88,7 +88,6 @@
   - Auto-generate table: skill name, version, install command, ClawHub link
   - Keep README fresh (no manual updates when publishing)
 
----
 
 ## Research Questions
 
@@ -100,7 +99,6 @@
 - [ ] Rate limits? (how many publishes per hour?)
 - [ ] Dual-repo: Which strategy scales best? (pre-push hook, dual-branch, separate repo?)
 
----
 
 ## API Design (Hypothetical)
 
@@ -132,7 +130,6 @@ openclaw skill publish-all
 # Detect changed skills since last publish, batch publish
 ```
 
----
 
 ## Dual-Repo Strategies (Research)
 
@@ -165,7 +162,6 @@ openclaw skill publish-all
 
 **Recommendation:** TBD after research
 
----
 
 ## Success Criteria
 
@@ -177,7 +173,6 @@ openclaw skill publish-all
 - ✅ Error handling (auth failures, build errors, network issues)
 - ✅ Documentation (how to use CLI, how to opt in to workflows)
 
----
 
 ## References
 

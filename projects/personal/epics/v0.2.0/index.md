@@ -1,10 +1,14 @@
+# Epic Notes
+
+> Version, name, status → see `epic.yaml`
+
+---
+
 # v0.2.0 - Company Skeleton (Open Project + Agent Orchestration)
 
 **Epic:** [v0.2.0 Company Skeleton](../ROADMAP.md#v020)
 
-**Status:** 🚧 PROPOSED (2026-02-21)
 
----
 
 ## Tier System Architecture
 
@@ -113,7 +117,6 @@ TIERS
 - Tier 2: Monthly check-ins (bug fixes, stability)
 - Tier 3: Quarterly review (keep or archive?)
 
----
 
 ## Agent Orchestration + Tiers
 
@@ -127,7 +130,6 @@ TIERS
 - Tier 2: Manual deployment, basic testing
 - Tier 3: No deployment automation (prototype code, manual publish)
 
----
 
 ## Next Steps
 
@@ -137,7 +139,5 @@ TIERS
 4. **Agent tier awareness** (how agents prioritize work based on tier)
 5. **Quarterly tier review ritual** (when to promote/demote products)
 
----
 
-**Created:** 2026-02-21  
 **Updated:** 2026-02-21

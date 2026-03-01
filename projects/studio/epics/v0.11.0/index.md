@@ -1,3 +1,9 @@
+# Epic Notes
+
+> Version, name, status → see `epic.yaml`
+
+---
+
 # v0.11.0 - Memory Architecture Refinement
 
 ## Context Snapshot
@@ -6,7 +12,6 @@
 - **Date:** 2026-02-14
 - **Assumptions:** AI sessions are stateless, Nicholas prefers structured tables, git history = versioning
 
----
 
 ## Core Insight (from external AI analysis)
 
@@ -18,7 +23,6 @@
 
 **Most people collapse (2) and (3). That's where pollution begins.**
 
----
 
 ## Proposed Architecture: Dual-Artifact Model
 
@@ -31,7 +35,6 @@
 
 **This is your "staging area". Chaos is allowed here.**
 
----
 
 ### Layer 2 — Decision Artifact (Immutable Concept File)
 - **Purpose:** Durable reference for both AI + Nicholas
@@ -42,7 +45,6 @@
 
 **This is not a transcript. This is a cleaned synthesis.**
 
----
 
 ## File Lifecycle Protocol
 
@@ -55,7 +57,6 @@ Default to inline conversation **unless:**
 
 **If none of those: stay inline.**
 
----
 
 ### Phase 1 — Promote to Working File (Optional)
 Create `epic-notes/__working/analysis.md` **ONLY if:**
@@ -72,7 +73,6 @@ Delete-after: synthesis
 
 **This prevents accidental permanence.**
 
----
 
 ### Phase 2 — Synthesis Gate (The Commit Trigger)
 Before creating permanent file, ask:
@@ -84,7 +84,6 @@ Before creating permanent file, ask:
 
 **If 3 of 4 = yes → synthesize.**
 
----
 
 ### Phase 3 — Create Decision Artifact
 Create: `epic-notes/vX.Y.Z/analysis-name.md`
@@ -102,7 +101,6 @@ Create: `epic-notes/vX.Y.Z/analysis-name.md`
 
 **This is not iteration history. This is judgment crystallized.**
 
----
 
 ### Phase 4 — Cleanup
 **Delete:**
@@ -113,7 +111,6 @@ Create: `epic-notes/vX.Y.Z/analysis-name.md`
 - Conversation log (in session history)
 - Final artifact (epic-notes/)
 
----
 
 ## Memory vs File Separation
 
@@ -133,7 +130,6 @@ See: ~/Documents/nonlinear/backstage/epic-notes/mac-studio-comparison-table.md
 
 **Memory is an index. Not storage.**
 
----
 
 ### File (Human-Oriented)
 **File contains:**
@@ -145,7 +141,6 @@ See: ~/Documents/nonlinear/backstage/epic-notes/mac-studio-comparison-table.md
 
 **The file serves Nicholas. Memory serves future-AI.**
 
----
 
 ## Granularity Rule: When to Create Separate File
 
@@ -162,7 +157,6 @@ See: ~/Documents/nonlinear/backstage/epic-notes/mac-studio-comparison-table.md
 - It's pure exploration
 - It won't matter in 30 days
 
----
 
 ## Search Strategy (Hybrid, Ordered)
 
@@ -179,7 +173,6 @@ Open artifact for:
 
 **Never search working files. Working files should never survive synthesis.**
 
----
 
 ## Implementation Tasks
 
@@ -194,7 +187,6 @@ Open artifact for:
 - [ ] Add auto-cleanup `__working/` to backstage-start (after epic merge)
 - [ ] Apply Context Snapshot headers to existing decision files
 
----
 
 ## Key Principles
 
@@ -205,7 +197,6 @@ Open artifact for:
 Working = disposable.
 Artifact = sacred.
 
----
 
 ### 2. Never Update Decision Artifact Silently
 If revision needed:
@@ -214,7 +205,6 @@ If revision needed:
 
 **This prevents invisible drift.**
 
----
 
 ### 3. Exploration is Disposable, Decisions are Sacred
 **Don't mix them.**
@@ -223,7 +213,6 @@ Scratch pad = whiteboard (gets erased)
 Decision artifact = architectural spec (goes in binder)
 Memory = index card in cabinet (tells you where spec lives)
 
----
 
 ## What We Already Do Right
 
@@ -241,7 +230,6 @@ Memory = index card in cabinet (tells you where spec lives)
 - Commits = revisions
 - No need for v2 files (can revert via git)
 
----
 
 ## What We Need to Add
 
@@ -259,7 +247,6 @@ epic-notes/
     └── analysis.md
 ```
 
----
 
 ### 2. MEMORY.md as Index (Not Storage)
 **Current problem:** MEMORY.md duplicates content from epic-notes, CHANGELOG, etc.
@@ -271,7 +258,6 @@ One-line summary.
 See: path/to/file.md
 ```
 
----
 
 ### 3. File Granularity Checklist
 Add to POLICY.md:
@@ -289,7 +275,6 @@ If ≥3 yes → file.
 Else → inline.
 ```
 
----
 
 ### 4. Synthesis Gate Protocol
 **When to move ROADMAP → CHANGELOG:**
@@ -302,7 +287,6 @@ Ask:
 
 **If 3 of 4 = yes → ready to merge.**
 
----
 
 ## Success Criteria
 
@@ -312,7 +296,6 @@ Ask:
 ✅ **Stateless AI** can reconstruct context from headers alone
 ✅ **No pollution:** Working files deleted, decision artifacts preserved
 
----
 
 ## Open Questions
 
@@ -320,7 +303,6 @@ Ask:
 2. **Auto-cleanup `__working/` during backstage-start?** (safe? or risky?)
 3. **Apply headers retroactively to existing files?** (one-time migration task?)
 
----
 
 ## References
 
@@ -328,7 +310,5 @@ Ask:
 - Hebbian memory architecture (AGENTS.md) - "Links matter more than content"
 - Global POLICY.md - Context Snapshot template (added 2026-02-14)
 
----
 
-**Status:** 🏗️ PLANNING (epic created, not started)
 **Next step:** Review with Nicholas, approve tasks, create branch when ready

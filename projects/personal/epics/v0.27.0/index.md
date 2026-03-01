@@ -1,10 +1,12 @@
-# v0.27.0 - Web Search Infrastructure
+# Epic Notes
 
-**Status:** 📋 Active  
-**Created:** 2026-02-25  
-**Priority:** High
+> Version, name, status → see `epic.yaml`
 
 ---
+
+# v0.27.0 - Web Search Infrastructure
+
+
 
 ## Problem
 
@@ -17,7 +19,6 @@
 **Brave Search API = paid** (not acceptable)
 **SearXNG via SSH (NAS) = timeout issues**
 
----
 
 ## Solution
 
@@ -36,7 +37,6 @@
 - Maximum agency (self-hosted)
 - Anarchist-aligned (unplug from bro-oligarch internet)
 
----
 
 ## Implementation Plan
 
@@ -74,7 +74,6 @@ NEVER: Answer from "general knowledge" when web can verify.
 - Verify claims with sources
 - Include URLs in responses
 
----
 
 ### Phase 2: FUTURE (Improvements)
 
@@ -105,14 +104,15 @@ NEVER: Answer from "general knowledge" when web can verify.
 - Ranked results (relevance + source type)
 - Visual report
 
----
 
 ## Tasks
 
 ### NOW
 - [ ] Create `web-search.sh` wrapper
   - [ ] Localhost:8889 endpoint
-  - [ ] Format: `[engine] title\nurl\n---`
+  - [ ] Format: `[engine] title
+url
+---`
   - [ ] Error handling (fallback to web_fetch)
   - [ ] Limit results (default 5)
 
@@ -132,7 +132,6 @@ NEVER: Answer from "general knowledge" when web can verify.
 - [ ] Logs/analytics system
 - [ ] Master Search epic planning
 
----
 
 ## Success Criteria
 
@@ -143,7 +142,6 @@ NEVER: Answer from "general knowledge" when web can verify.
 - ✅ No vendor lock-in (self-hosted)
 - ✅ No quotas (unlimited queries)
 
----
 
 ## Notes
 

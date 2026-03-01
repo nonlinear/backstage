@@ -1,9 +1,12 @@
-# v0.32.0 - Simplify Skills System
+# Epic Notes
 
-**Status:** 💡 PROPOSED (2026-02-26)  
-**Priority:** HIGH (Reduce infrastructure overhead)
+> Version, name, status → see `epic.yaml`
 
 ---
+
+# v0.32.0 - Simplify Skills System
+
+
 
 ## Problem
 
@@ -21,7 +24,6 @@
 
 **Goal:** Single location, properly committed, no symlinks.
 
----
 
 ## Solution
 
@@ -41,7 +43,6 @@
 - ✅ Git backup (already committed daily)
 - ✅ Simpler skill discovery (OpenClaw scans one dir)
 
----
 
 ## Tasks
 
@@ -66,7 +67,6 @@
 - [ ] Update any skill READMEs (paths)
 - [ ] Document new workflow (create skill directly in workspace)
 
----
 
 ## Migration Plan
 
@@ -108,7 +108,6 @@ git commit -m "Simplified skills: moved from ~/Documents/skills, removed symlink
 rm -rf ~/Documents/skills/
 ```
 
----
 
 ## Success Criteria
 
@@ -118,7 +117,6 @@ rm -rf ~/Documents/skills/
 ✅ No infrastructure overhead (one location, simple)  
 ✅ Documentation updated (AGENTS.md, TOOLS.md, connections/)  
 
----
 
 ## Notes
 
@@ -137,7 +135,6 @@ rm -rf ~/Documents/skills/
 
 **Savings:** 3 steps → 1 step. No sync complexity.
 
----
 
 ### Skill Discovery
 
@@ -148,7 +145,6 @@ rm -rf ~/Documents/skills/
 
 **No difference after migration** (same scan pattern, just no symlinks).
 
----
 
 ### Git Backup
 
@@ -161,7 +157,6 @@ rm -rf ~/Documents/skills/
 - Git submodule (if specific skill needs own repo)
 - But default = all in workspace (simpler)
 
----
 
 ## Related
 
@@ -169,7 +164,6 @@ rm -rf ~/Documents/skills/
 - **TOOLS.md:** Skills section (update location)
 - **backstage skill:** Context-switch protocol (may reference skill paths)
 
----
 
 ## Future
 

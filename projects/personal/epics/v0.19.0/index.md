@@ -1,3 +1,9 @@
+# Epic Notes
+
+> Version, name, status → see `epic.yaml`
+
+---
+
 # v0.19.0
 
 ### HA Fixes
@@ -27,5 +33,3 @@
 - Guest mode scene working (cameras off, bedroom unlocked, thermostat set)
 - Calendar integration (events visible in HA, automations triggered)
 - Curtain sync automation defined and tested
-
----

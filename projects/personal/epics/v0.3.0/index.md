@@ -1,3 +1,9 @@
+# Epic Notes
+
+> Version, name, status → see `epic.yaml`
+
+---
+
 # v0.3.0
 
 ### PM Tool Evaluation 🔬
@@ -42,5 +48,3 @@
 **Next:** Install Focalboard (Docker). Se API for boa + customizável, pode ganhar (modern UI + MIT license).
 
 **Details:** [v0.3.0-pm-tool-evaluation.md](epic-notes/v0.3.0-pm-tool-evaluation.md)
-
----

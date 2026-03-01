@@ -1,3 +1,9 @@
+# Epic Notes
+
+> Version, name, status → see `epic.yaml`
+
+---
+
 # v0.18.0
 
 ### Open Source Notes
@@ -25,5 +31,3 @@
 - Siri can create notes/reminders
 - Tags work (organize notes)
 - Privacy-first (E2E encryption or self-hosted = no third-party access)
-
----

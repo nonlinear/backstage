@@ -1,10 +1,15 @@
+# Epic Notes
+
+> Version, name, status → see `epic.yaml`
+
+---
+
 # v0.17.0 - Indexing Bug: Subfolders Not Discovered
 
 **Epic:** Multi-Scope Queries (v0.17.0)  
 **Date discovered:** 2026-02-10  
 **Reporter:** Nicholas + Claw
 
----
 
 ## 🚨 Bug Description
 
@@ -22,7 +27,6 @@
 
 **Impact:** **Metade da biblioteca ou mais** não tá acessível via research!
 
----
 
 ## 🔍 Root Cause
 
@@ -50,7 +54,6 @@ has_books = any(
 - `registry['topics']` só tem pastas com livros diretamente
 - `--all` indexa tudo no registry → subfolders ficam de fora
 
----
 
 ## 📐 Architecture Rule (Nicholas)
 
@@ -65,7 +68,6 @@ has_books = any(
 
 **Current structure already follows this!** Bug is in discovery logic not respecting it.
 
----
 
 ## ✅ Solution
 
@@ -94,7 +96,6 @@ def scan_directory(base_path, relative_path=""):
 
 **Key change:** Don't skip recursion when `has_books = True`. Check each folder independently.
 
----
 
 ## 🧪 Test Cases
 
@@ -127,7 +128,6 @@ def scan_directory(base_path, relative_path=""):
    ```
    **Expected:** ~70+ topics (currently ~20)
 
----
 
 ## 📊 Validation
 
@@ -152,7 +152,6 @@ python3 research-tracked.sh "Philosophy and Simulation DeLanda"
 # Should find: theory/system/Philosophy and Simulation.epub
 ```
 
----
 
 ## 🚧 Implementation Notes
 
@@ -174,14 +173,11 @@ python3 research-tracked.sh "Philosophy and Simulation DeLanda"
 - Test multi-topic search (v0.17.0 epic goal)
 - Update topic count in docs
 
----
 
 ## 🔗 Related
 
 **Epic:** v0.17.0 - Multi-Scope Queries  
 **Blocked by:** This bug (can't test multi-topic if half the topics don't exist)  
-**Priority:** HIGH (blocks v0.17.0 + breaks current research for ~50% of library)
 
----
 
 **Next:** Fix → test → validate → merge → celebrate 🏴

@@ -1,10 +1,13 @@
-# v0.33.0 - OpenProject Migration & MD Mirror
+# Epic Notes
 
-**Created:** 2026-02-26  
-**Status:** New  
-**OpenProject:** http://localhost:8086/work_packages/302
+> Version, name, status → see `epic.yaml`
 
 ---
+
+# v0.33.0 - OpenProject Migration & MD Mirror
+
+**OpenProject:** http://localhost:8086/work_packages/302
+
 
 ## 🎯 Goal
 
@@ -14,7 +17,6 @@ Establish robust structure for project/epic tracking with:
 - Seamless cross-referencing
 - Multi-device viewing (localhost reader or sync)
 
----
 
 ## 📋 Architecture
 
@@ -43,7 +45,6 @@ Establish robust structure for project/epic tracking with:
 - ✅ `checks/` (validation, anti-drift, CI/CD)
 - ✅ `README.md` (project overview, public-facing)
 
----
 
 ## 🔗 Cross-Referencing
 
@@ -66,11 +67,8 @@ Description:
 ```markdown
 # vX.Y.Z - Epic Name
 
-**Created:** YYYY-MM-DD
-**Status:** [New/In Progress/Closed]
 **OpenProject:** http://localhost:8086/work_packages/ID
 
----
 
 ## Context
 [Deep background, why this epic exists]
@@ -88,7 +86,6 @@ Description:
 [Links, references, prior art]
 ```
 
----
 
 ## 🔍 Anti-Drift Checks
 
@@ -133,7 +130,6 @@ Description:
    # Exit 1 if closed epic has active branch
    ```
 
----
 
 ## 📱 Multi-Device Viewing
 
@@ -165,7 +161,6 @@ python3 -m http.server 8765
 - ❌ Needs Mac Studio running (always-on)
 - ❌ No offline access on mobile
 
----
 
 ### Option B: Sync Mechanism
 
@@ -187,7 +182,6 @@ git push origin main
 - ❌ Manual sync (pull to see updates)
 - ❌ iPad can't edit (read-only)
 
----
 
 ### Option C: Hybrid (Recommended)
 
@@ -196,7 +190,6 @@ git push origin main
 - **Fallback:** Git clone on iPad (offline)
 - **Auto-generate:** INDEX.html on every epic change (cron/hook)
 
----
 
 ## 🎨 Diagram Embedding
 
@@ -225,7 +218,6 @@ git push origin main
 - Updates HTML files
 - Re-uploads to OpenProject
 
----
 
 ## 🚀 Implementation Tasks
 
@@ -252,7 +244,6 @@ git push origin main
 - [ ] Bulk grooming tools
 - [ ] OpenProject → custom solution (if needed)
 
----
 
 ## 📚 References
 
@@ -261,7 +252,6 @@ git push origin main
 - Connections doc: `~/Documents/personal/connections/openproject.md`
 - Migration scripts: `/tmp/migrate-*.py`
 
----
 
 ## 🏴 Philosophy
 

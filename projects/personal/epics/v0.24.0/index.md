@@ -1,10 +1,14 @@
+# Epic Notes
+
+> Version, name, status → see `epic.yaml`
+
+---
+
 # v0.24.0 - Mastodon Migration + Studio Accounts
 
 **Epic:** Reduce hosting costs + create nonlinear.studio multi-account server
 
-**Created:** 2026-02-24
 
----
 
 ## Problem
 
@@ -18,7 +22,6 @@
 2. **Studio server** (nonlinear.studio with multiple accounts)
 3. **Domain-based posting** (each account posts different content)
 
----
 
 ## Solution: Two Tracks
 
@@ -74,7 +77,6 @@
 - Cost: $10-20/month
 - Savings: $15-25/month
 
----
 
 ### Track 2: Nonlinear Studio Server
 
@@ -96,7 +98,6 @@
 - **Took it to heart** (internalized, practiced, validated)
 - Each account = different voice/domain
 
----
 
 ## Posting Rules (Per Account)
 
@@ -113,7 +114,6 @@
 
 **Tone:** Technical, concise, curious
 
----
 
 ### @wiley@nonlinear.studio (Work/Professional)
 **Topics:**
@@ -128,7 +128,6 @@
 
 **Tone:** Professional, polished, strategic
 
----
 
 ### @librarian@nonlinear.studio (Books, Research, Magick)
 **Topics:**
@@ -144,7 +143,6 @@
 
 **Tone:** Esoteric, reflective, research-driven
 
----
 
 ### @fitness@nonlinear.studio (Movement, Body)
 **Topics:**
@@ -159,7 +157,6 @@
 
 **Tone:** Body-positive, data-driven, practical
 
----
 
 ### @main@nonlinear.studio (Personal, Life, Philosophy)
 **Topics:**
@@ -175,7 +172,6 @@
 
 **Tone:** Personal, philosophical, warm
 
----
 
 ## Technical Implementation
 
@@ -216,7 +212,6 @@ services:
 - Create 5 accounts: kin, wiley, librarian, fitness, main
 - Each has own API token (for auto-posting)
 
----
 
 ### Auto-Posting Integration
 
@@ -242,7 +237,6 @@ curl -X POST https://nonlinear.studio/api/v1/statuses \
 - Cronjobs can auto-post summaries
 - Reminders can trigger posts (e.g., "Post this to @librarian")
 
----
 
 ## Migration Path (From mastohost)
 
@@ -263,7 +257,6 @@ curl -X POST https://nonlinear.studio/api/v1/statuses \
 
 **Gotcha:** Federation can break during migration. Plan for 24-48h downtime.
 
----
 
 ## Cost Analysis
 
@@ -289,7 +282,6 @@ curl -X POST https://nonlinear.studio/api/v1/statuses \
 
 **Recommendation:** Start with VPS (Option B) for reliability, migrate to NAS later if comfortable.
 
----
 
 ## Success Criteria
 
@@ -308,7 +300,6 @@ curl -X POST https://nonlinear.studio/api/v1/statuses \
 - ✅ Updates documented (upgrade path)
 - ✅ Monitoring set up (uptime, errors)
 
----
 
 ## Open Questions
 
@@ -318,7 +309,6 @@ curl -X POST https://nonlinear.studio/api/v1/statuses \
 4. **Time commitment:** Is 2h/month maintenance realistic?
 5. **Backup strategy:** Where to store backups? (NAS local + cloud?)
 
----
 
 ## Next Steps
 
@@ -329,7 +319,3 @@ curl -X POST https://nonlinear.studio/api/v1/statuses \
 5. Design posting workflow (who posts what, when)
 6. Document migration path (export, import, DNS, federation)
 7. Decision: Commit to migration or stay with mastohost (with data)
-
----
-
-**Status:** Epic defined, research phase. No action until break-even calculated. 🏴

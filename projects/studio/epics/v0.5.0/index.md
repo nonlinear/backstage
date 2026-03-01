@@ -1,10 +1,13 @@
-# v0.5.0 - Self-Promotion (Personal Branding Strategy)
+# Epic Notes
 
-**Status:** Just created  
-**Priority:** User interest  
-**Effort:** Research + strategy (1-2 days)
+> Version, name, status → see `epic.yaml`
 
 ---
+
+# v0.5.0 - Self-Promotion (Personal Branding Strategy)
+
+**Effort:** Research + strategy (1-2 days)
+
 
 ## Problem
 
@@ -20,7 +23,6 @@ Current state:
 - ❌ No clear audience targeting
 - ❌ Inconsistent messaging across platforms
 
----
 
 ## Solution
 
@@ -44,7 +46,6 @@ Current state:
    - Metrics/goals
    - Quick wins vs long-term
 
----
 
 ## Use Case
 
@@ -81,7 +82,6 @@ Me: *elaborates strategy*
      4. Creative coding"
 ```
 
----
 
 ## Tasks
 
@@ -111,7 +111,6 @@ Me: *elaborates strategy*
 - [ ] Content calendar template
 - [ ] Metrics to track
 
----
 
 ## Research Prompt Integration
 
@@ -133,7 +132,6 @@ Goals:
 4. Content opportunities
 ```
 
----
 
 ## Deliverables
 
@@ -160,7 +158,6 @@ Goals:
    - Content types
    - Cross-promotion plan
 
----
 
 ## Success Criteria
 
@@ -170,7 +167,6 @@ Goals:
 - ⏳ 10 quick wins identified & prioritized
 - ⏳ Content calendar template ready
 
----
 
 ## Resources to Analyze
 
@@ -185,7 +181,6 @@ Goals:
 - Successful personal brands in tech
 - Content creators in knowledge management space
 
----
 
 ## Blockers
 
@@ -193,6 +188,5 @@ None! Can start immediately.
 
 **Next step:** User confirms scope, then run research prompt.
 
----
 
 *Epic created - ready to start when user chooses*

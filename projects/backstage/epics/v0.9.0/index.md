@@ -1,3 +1,9 @@
+# Epic Notes
+
+> Version, name, status → see `epic.yaml`
+
+---
+
 # v0.9.0 - Backstage Protocol Pattern Research
 
 ## Context
@@ -6,7 +12,6 @@
 - **Date:** 2026-02-17
 - **Question:** Should we adopt existing protocols or continue with backstage custom approach?
 
----
 
 ## Research Goal
 
@@ -16,7 +21,6 @@
 3. Adoption effort (if switching)
 4. Recommendation (keep, hybrid, or replace)
 
----
 
 ## Protocol Comparison
 
@@ -31,7 +35,6 @@
 | **GitHub Projects** | Issues + Milestones + Project boards | ✅ Kanban/Timeline | ❌ No health | ❌ GitHub UI | ✅ Native integration | ⭐⭐⭐⭐ GitHub users |
 | **Linear** | Issues + Roadmap + Cycles | ✅ Timeline view | ⚠️ Implicit (velocity) | ❌ Linear app | ✅ Linear platform | ⭐⭐⭐ Startups |
 
----
 
 ## Feature Deep Dive
 
@@ -56,7 +59,6 @@
    - Similar to CONTRIBUTING.md (open source projects)
    - Value: Codify conventions
 
----
 
 ### What Backstage LACKS that others HAVE:
 
@@ -76,7 +78,6 @@
    - Backstage: Manual updates
    - Impact: Duplicate work (commit message + ROADMAP update)
 
----
 
 ## Hybrid Approaches
 
@@ -102,7 +103,6 @@
 - Learning Conventional Commits
 - Setting up changelog generator
 
----
 
 ### Option 2: Simplify Backstage (Reduce Files)
 
@@ -122,7 +122,6 @@
 **Cost:**
 - ❌ Lose separation (HEALTH mixed with ROADMAP)
 
----
 
 ### Option 3: Abandon Backstage, Use GitHub/Linear
 
@@ -140,7 +139,6 @@
 - ❌ No mermaid dependency graphs
 - ❌ Vendor lock-in
 
----
 
 ## Recommendation (Draft)
 
@@ -177,7 +175,6 @@
 - ✅ Still markdown-first
 - ✅ Can share CHANGELOG with others (standard format)
 
----
 
 ### Long-term: Evaluate Backstage v1.0
 
@@ -193,7 +190,6 @@
 - Migrate to GitHub Projects or Linear
 - Archive backstage as experiment
 
----
 
 ## Next Steps
 
@@ -202,7 +198,6 @@
 - [ ] Measure: Does checks (global/local) prevent issues? (track violations)
 - [ ] Decide: Keep, hybrid, or abandon backstage?
 
----
 
 ## References
 
@@ -216,8 +211,3 @@
 **Tools:**
 - git-cliff (changelog generator): https://git-cliff.org
 - standard-version (changelog + release automation): https://github.com/conventional-changelog/standard-version
-
----
-
-**Created:** 2026-02-17  
-**Status:** 📋 Draft (needs discussion)

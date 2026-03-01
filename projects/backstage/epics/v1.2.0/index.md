@@ -1,8 +1,13 @@
+# Epic Notes
+
+> Version, name, status → see `epic.yaml`
+
+---
+
 # Epic v1.2.0 - Contract Diagram Updates
 
 **Enhancements and future features for contract diagram skill.**
 
----
 
 ## Features
 
@@ -22,7 +27,6 @@
 
 **Why:** User control when automatic update fails.
 
----
 
 ## Future Considerations
 
@@ -30,8 +34,3 @@
 - Multiple diagrams per page with navigation
 - Export rendered diagrams (SVG/PNG)
 - Absolute path support (beyond engine directory)
-
----
-
-**Created:** 2026-02-22  
-**Status:** Backlog (pending v1.1.0 completion)

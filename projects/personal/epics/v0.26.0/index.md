@@ -1,8 +1,13 @@
+# Epic Notes
+
+> Version, name, status → see `epic.yaml`
+
+---
+
 # v0.26.0
 
 ### Travel Mode 🧳
 
-**Status:** 💡 PROPOSED (2026-02-25)
 
 **Goal:** Pre-travel checklist + health checks to prevent vacation disasters
 
@@ -34,5 +39,3 @@
 - Nicholas confident = won't be stranded
 
 **Details:** [v0.X.0-travel-mode.md](epic-notes/v0.X.0-travel-mode.md)
-
----

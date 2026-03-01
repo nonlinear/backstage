@@ -1,3 +1,9 @@
+# Epic Notes
+
+> Version, name, status → see `epic.yaml`
+
+---
+
 # v0.2.0 - Better Apps Architecture
 
 ## Context Snapshot
@@ -6,7 +12,6 @@
 - **Date:** 2026-02-17
 - **Assumptions:** Better = all-or-nothing per app, each skill is standalone (no shared dependencies)
 
----
 
 ## Research Summary (2026-02-17)
 
@@ -21,7 +26,6 @@
 - Each skill = standalone (can be installed independently)
 - Toggle on/off per app (reversible)
 
----
 
 ## Architecture Decisions
 
@@ -46,7 +50,6 @@ skills/better-openclaw/  ❌ (flat, loses grouping)
 - Skill name = `better-{app}` (published as npm package)
 - Folder = organization, name = identity
 
----
 
 ### 2. Standalone Skills (No Shared Code)
 
@@ -73,7 +76,6 @@ better/openclaw/
 
 **Shared code = reference only** (copy/paste, not import)
 
----
 
 ### 3. Per-App Toggle (Not Master Toggle)
 
@@ -95,7 +97,6 @@ better/komga/toggle.sh      ← Komga-specific
 - **Manual** (Service Worker = console code)
 - **Hybrid** (Browser extension = load/unload)
 
----
 
 ### 4. Better = All-or-Nothing Per App
 
@@ -113,14 +114,12 @@ better/komga/toggle.sh      ← Komga-specific
 - Not modular (all features together)
 - Can change later if needed
 
----
 
 ## Frontmatter Schema
 
 **All better skills use `type: better` + nested `better:` block:**
 
 ```yaml
----
 name: better-{app}
 type: better
 version: X.Y.Z
@@ -133,7 +132,6 @@ better:
   platform: web | ios | android | desktop  # optional, default: web
   browser: chrome | firefox | safari | edge | all  # optional, if web
   reference: technique-doc.md  # link to canonical technique (future)
----
 ```
 
 **Why nested:**
@@ -141,7 +139,6 @@ better:
 - Clean separation (better-specific metadata)
 - Future-proof (can add more fields without polluting top-level)
 
----
 
 ## Skills Created
 
@@ -166,9 +163,7 @@ better:
 - `off.sh` - Stop injection
 - `toggle.sh` - Toggle on/off
 
-**Status:** ✅ Working (tested, CSS applied)
 
----
 
 ### better-kavita
 
@@ -191,11 +186,9 @@ better:
 - `off.sh` - Show unregistration code
 - `toggle.sh` - Instructions
 
-**Status:** 🚧 Experimental (needs manual testing)
 
 **Epic:** See [v0.4.0-offline-browser-storage.md](v0.4.0-offline-browser-storage.md)
 
----
 
 ### better-komga
 
@@ -209,11 +202,9 @@ better:
 - `service-worker.js` - Komga-specific cache strategy
 - `on.sh`, `off.sh`, `toggle.sh`
 
-**Status:** 🚧 Experimental (needs manual testing)
 
 **Epic:** See [v0.4.0-offline-browser-storage.md](v0.4.0-offline-browser-storage.md)
 
----
 
 ## Key Learnings
 
@@ -227,7 +218,6 @@ better:
 - Making apps work the way WE want
 - "Better" = honest about intent
 
----
 
 ### 2. Folder vs Name Convention
 
@@ -239,7 +229,6 @@ better:
 - Name = identity (published as npm package)
 - Best of both (grouping + independence)
 
----
 
 ### 3. CSS Injection Limitations (Tailscale)
 
@@ -260,7 +249,6 @@ better:
 - Browser extension (synced across devices)
 - Bookmarklet (device-independent)
 
----
 
 ### 4. Toggle Types Matter
 
@@ -274,7 +262,6 @@ better:
 
 **Can't have one master toggle** (each app = custom logic)
 
----
 
 ## Future Possibilities
 
@@ -292,7 +279,6 @@ better/openclaw/accessibility/ ← High contrast, larger fonts
 
 **Decision:** Start simple, add complexity when needed
 
----
 
 ### Technique Reference Docs
 
@@ -313,9 +299,7 @@ better/docs/
 2. All skills using that technique benefit
 3. Users know which skills are compatible
 
-**Status:** Not implemented yet (reference field exists in schema)
 
----
 
 ## Implementation Timeline
 
@@ -335,7 +319,6 @@ better/docs/
 
 **Total time:** ~1 hour (rapid prototyping + architecture refinement)
 
----
 
 ## Success Criteria
 
@@ -354,8 +337,5 @@ better/docs/
 - [ ] Document technique references (css-injection.md, etc.)
 - [ ] Publish to npm/clawhub (optional)
 
----
 
-**Created:** 2026-02-17  
-**Status:** ✅ Complete  
 **Branch:** Merged to main via epic/better-apps

@@ -1,9 +1,12 @@
-# v0.25.0 - Local LLM Infrastructure
+# Epic Notes
 
-**Status:** 🚧 IN PROGRESS (2026-02-26)  
-**Priority:** HIGH (Token optimization + night jobs)
+> Version, name, status → see `epic.yaml`
 
 ---
+
+# v0.25.0 - Local LLM Infrastructure
+
+
 
 ## 🔍 Engine Comparison
 
@@ -18,7 +21,6 @@
 
 **Winner:** **llama.cpp** (ecosystem + server) or **MLX** (Apple-backed + Python)
 
----
 
 ### Tier 2: 70-95% Metal
 
@@ -30,7 +32,6 @@
 | **ssd-llm** | 70% | Cargo | Manual | Rust | Low RAM |
 | **vLLM** | 0% | Docker | Manual | OpenAI | NVIDIA only |
 
----
 
 ## 📊 Cloud vs Local
 
@@ -55,7 +56,6 @@ Reasoning
 
 **Sweet Spot: Qwen 32B** = 85% Claude quality, 4x faster, FREE, private
 
----
 
 ## 📦 Model Selection
 
@@ -67,7 +67,6 @@ Reasoning
 | **nomic-embed-text-v1.5** | ~274MB | Fast | ALL agents (Librarian) |
 | **Qwen-Coder 7B Q4_K_M** | ~4GB | 30-40 tok/s | Secretaria (clerical) |
 
----
 
 ### Phase 2: SCALE (~80GB)
 
@@ -76,7 +75,6 @@ Reasoning
 | **Qwen 72B Instruct Q4_K_M** | ~40GB | 10-15 tok/s | Text agents (unassisted) |
 | **Qwen2-VL 72B Q4_K_M** | ~40GB | Slow | Vision agents (Design, Marketing) |
 
----
 
 ### Phase 3: FALLBACK (~40GB)
 
@@ -84,7 +82,6 @@ Reasoning
 |-------|------|-------|-----|
 | **Llama 3.3 70B Q4_K_M** | ~40GB | 10-15 tok/s | Only if Qwen 72B insufficient |
 
----
 
 ## 🤖 Workflow Matrix
 
@@ -98,7 +95,6 @@ Reasoning
 | **SECRETARIA** | Qwen-Coder 7B | 30-40 tok/s | ⭐⭐⭐⭐ | File ops, queries (assisted, low stakes) |
 | **STRATEGIC** | Claude Sonnet | 2-5 sec | ⭐⭐⭐⭐⭐ | Epic planning, complex decisions (cloud) |
 
----
 
 ## 🔄 Hybrid Strategy
 
@@ -123,7 +119,6 @@ Reasoning
 /model http://localhost:8082/v1          # Night jobs (72B)
 ```
 
----
 
 ## 🎯 Anti-Drift Protocol Impact
 
@@ -135,7 +130,6 @@ Reasoning
 
 **Result:** Less wasted inference, faster defense, lower metabolic cost
 
----
 
 ## 🎯 M4 Max 64GB = Perfect Fit
 
@@ -153,7 +147,6 @@ Reasoning
 - Parallel: Embedding + LLM (no bottleneck)
 - **Feels like expert conversation, not computer waiting**
 
----
 
 ## 📂 Storage Location
 
@@ -170,7 +163,6 @@ Reasoning
 └── llama.cpp/  # if using llama.cpp engine
 ```
 
----
 
 ## 🚀 Progress (2026-02-26)
 
@@ -203,7 +195,6 @@ Reasoning
 - Setup llama-server (múltiplas portas: 8080 = 32B, 8081 = 7B, 8082 = 72B)
 - Test OpenClaw integration
 
----
 
 ## 🔗 Related Epics
 
@@ -211,11 +202,9 @@ Reasoning
 - **v0.9.0 Cellular Router** - mobile connectivity
 - **Audio Interface** - voice → local processing
 
----
 
 **Goal:** Hybrid local+cloud = speed + privacy + cost savings + quality when needed. 🏴
 
----
 
 ## 📊 MLX vs GGUF Strategy Insights (2026-02-26)
 
@@ -316,11 +305,9 @@ Download complete → Benchmark speed → Decide:
 - Signal feedback = GGUF baseline, MLX may surprise us
 - Night shift = slow acceptable IF completes before 6AM
 
----
 
 **Decision deferred:** Wait for benchmarks. Don't assume 122B unusable without testing MLX optimization first. 🏴
 
----
 
 ## 🤝 Company Promise: Infrastructure Investment Ethics
 
@@ -391,11 +378,9 @@ Mac Studio M4 Max 64GB = $$$ investido
 - Running always-on server (pmset sleep 0)
 - Future hardware upgrades (when justified)
 
----
 
 **Grooming note:** Expand this into standalone epic after OpenProject migration (Infrastructure Investment Philosophy). For now, anchored in v0.25.0 as context for LLM platform choices. 🏴
 
----
 
 ## 🎬 Future Vision: Autonomous Content Creation
 
@@ -473,11 +458,9 @@ Approval Process:
 - Font/music licensing (Creative Commons)
 - Template system (reusable storyboards)
 
----
 
 **Timeline:** Post OpenProject migration, structure in place, then explore content automation infrastructure. 🎬🏴
 
----
 
 ## 📱 Marketing Deliverables: Lottie + Audio Pipeline
 
@@ -595,11 +578,9 @@ Approval Process:
 
 **Post OpenProject migration:** Integrate marketing deliverables as project type with approval workflows.
 
----
 
 **Marketing = ethical content creation.** Local infrastructure, no surveillance, community-focused. 🏴🎬
 
----
 
 ## 👁️ Vision Model Integration: Storyboard → Animation
 
@@ -751,6 +732,5 @@ Nicholas creates:
 
 **Post OpenProject migration:** Storyboard approval workflow as project stage.
 
----
 
 **Vision model = Nicholas keeps visual thinking, AI handles execution.** Draw → sleep → review. 🎬👁️🏴

@@ -1,3 +1,9 @@
+# Epic Notes
+
+> Version, name, status → see `epic.yaml`
+
+---
+
 # v0.17.0
 
 ### Location on Screenshots
@@ -23,5 +29,3 @@
 - Location accurate enough (doesn't need EXACT, just helpful)
 - Low battery impact (not continuous monitoring)
 - Easy to disable when needed (privacy mode)
-
----

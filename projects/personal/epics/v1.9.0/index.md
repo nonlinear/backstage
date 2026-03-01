@@ -1,3 +1,9 @@
+# Epic Notes
+
+> Version, name, status → see `epic.yaml`
+
+---
+
 # v1.9.0 - proton-mail-finder
 
 ## Context Snapshot
@@ -6,7 +12,6 @@
 - **Date:** 2026-02-15
 - **Assumptions:** Proton Mail web UI, no official API, URL patterns stable
 
----
 
 ## Research Summary (2026-02-15)
 
@@ -28,7 +33,6 @@
 
 **Source:** https://proton.me/support/search
 
----
 
 ## URL Search Patterns
 
@@ -42,7 +46,6 @@ https://mail.proton.me/u/0/all-mail#from=sender@email.com
 - Folder: `all-mail`, `inbox`, `drafts`, `sent`, `archive`
 - Parameters: `#from=`, `#to=`, `#subject=`, etc.
 
----
 
 ### From Sender
 ```
@@ -51,7 +54,6 @@ https://mail.proton.me/u/0/all-mail#from=sender@email.com
 
 **Use case:** All emails from specific sender
 
----
 
 ### To Recipient
 ```
@@ -60,7 +62,6 @@ https://mail.proton.me/u/0/all-mail#to=recipient@email.com
 
 **Use case:** All emails sent to specific recipient
 
----
 
 ### Subject Contains
 ```
@@ -69,7 +70,6 @@ https://mail.proton.me/u/0/all-mail#subject=invoice
 
 **Use case:** All emails with "invoice" in subject
 
----
 
 ### Folder Filter
 ```
@@ -87,16 +87,13 @@ https://mail.proton.me/u/0/drafts
 - `trash` - Trash
 - `all-mail` - All Mail (default)
 
----
 
 ### Date Range (Research Needed)
 ```
 https://mail.proton.me/u/0/all-mail#from=sender&start=2024-01-01&end=2024-12-31
 ```
 
-**Status:** Need to test (date parameter format unclear)
 
----
 
 ### Advanced Syntax (Combine Filters)
 ```
@@ -105,16 +102,13 @@ https://mail.proton.me/u/0/all-mail#from=sender@email.com&subject=invoice
 
 **Combine:** Use `&` to chain multiple filters
 
----
 
 ### Wildcards (Research Needed)
 ```
 https://mail.proton.me/u/0/all-mail#from=*@example.com
 ```
 
-**Status:** Need to test (wildcard support in URLs unclear)
 
----
 
 ## Skill Implementation
 
@@ -143,7 +137,6 @@ proton-mail-search --query "hello | world"
 Opening: https://mail.proton.me/u/0/inbox#from=sender@email.com&subject=invoice
 ```
 
----
 
 ### URL Builder Function
 
@@ -194,7 +187,6 @@ build_proton_url() {
 open "$(build_proton_url "$@")"
 ```
 
----
 
 ## Proton Pass Research
 
@@ -219,7 +211,6 @@ open "$(build_proton_url "$@")"
 - [ ] Search GitHub for Proton Pass CLI (community tools?)
 - [ ] Document findings in epic-notes
 
----
 
 ## Examples
 
@@ -255,7 +246,6 @@ proton-mail-search --query "subject:newsletter !from:spam@example.com"
 proton-mail-search --query '"urgent request"'
 ```
 
----
 
 ## Testing Checklist
 
@@ -267,7 +257,6 @@ proton-mail-search --query '"urgent request"'
 - [ ] Verify links open in Proton Mail web UI
 - [ ] Test on different browsers (Chrome, Firefox, Safari)
 
----
 
 ## Open Questions
 
@@ -290,7 +279,6 @@ proton-mail-search --query '"urgent request"'
    - Requires "Search message content" enabled
    - May only work via UI search bar (encrypted local index)
 
----
 
 ## Success Criteria
 
@@ -301,13 +289,10 @@ proton-mail-search --query '"urgent request"'
 - ✅ Examples documented (common use cases)
 - ✅ Testing complete (verified on all browsers)
 
----
 
 ## Related Skills
 - find-books - Piracy search (similar URL builder pattern)
 - system-detective - System diagnostics (Chrome Relay integration)
 
----
 
-**Status:** 🔍 RESEARCH PHASE
 **Next:** Test URL patterns in Proton Mail web UI, research Proton Pass web UI/CLI

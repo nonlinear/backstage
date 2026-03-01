@@ -1,9 +1,12 @@
-# v0.19.0 - Multi-Format Support
+# Epic Notes
 
-**Status:** 💡 PROPOSED  
-**Created:** 2026-02-10
+> Version, name, status → see `epic.yaml`
 
 ---
+
+# v0.19.0 - Multi-Format Support
+
+
 
 ## Problem
 
@@ -17,7 +20,6 @@
 
 **Pain:** Can't query across all knowledge sources. Research misses relevant info in non-EPUB formats.
 
----
 
 ## Vision
 
@@ -26,7 +28,6 @@
 - Ask "ROI calculation methods" → finds spreadsheet formulas + PowerPoint slides + EPUB passages
 - Single search → all your knowledge, regardless of format
 
----
 
 ## Proposed Formats
 
@@ -57,7 +58,6 @@
    - Index: Content + header hierarchy
    - Use case: Personal notes, documentation, wikis
 
----
 
 ## Architecture
 
@@ -99,7 +99,6 @@ def get_extractor(file_path):
 }
 ```
 
----
 
 ## Tasks
 
@@ -180,7 +179,6 @@ def get_extractor(file_path):
 - [ ] Document extraction limitations (e.g., no images, no macros)
 - [ ] Update SKILL.md with multi-format usage
 
----
 
 ## Success Criteria
 
@@ -193,7 +191,6 @@ def get_extractor(file_path):
 - ✅ Citations include format-specific metadata
 - ✅ Backward compatible (existing EPUB indexes work)
 
----
 
 ## Open Questions
 
@@ -220,7 +217,6 @@ def get_extractor(file_path):
    - Add OCR support (tesseract)?
    - Or require text-based PDFs only?
 
----
 
 ## Dependencies
 
@@ -235,7 +231,6 @@ def get_extractor(file_path):
 - ✅ v0.15.0 (Skill as Protocol) - refactoring done
 - ✅ v0.16.0 (Unified Indexing) - single pipeline ready
 
----
 
 ## Related Epics
 
@@ -243,7 +238,6 @@ def get_extractor(file_path):
 - v1.2.1: Research Enhancement (better context for all formats)
 - v1.4.0: Reader Integration (may need format-specific readers)
 
----
 
 ## Notes
 

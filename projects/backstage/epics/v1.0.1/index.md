@@ -1,16 +1,18 @@
-# v1.0.1 - Merge Policies with Checks
+# Epic Notes
 
-**Status:** 🔄 Active  
-**Started:** 2026-02-20  
-**Type:** Patch
+> Version, name, status → see `epic.yaml`
 
 ---
+
+# v1.0.1 - Merge Policies with Checks
+
+**Type:** Patch
+
 
 ## Goal
 
 Consolidate `policies/` and `checks/` into unified `checks/` directory with side-by-side `.md` (explanation) + `.sh` (validation).
 
----
 
 ## Decision Log
 
@@ -35,7 +37,6 @@ Consolidate `policies/` and `checks/` into unified `checks/` directory with side
 - "Health check" is accepted concept (not just binary)
 - Less migration overhead
 
----
 
 ### 2026-02-20 11:41 - Structure Design
 
@@ -58,7 +59,6 @@ checks/
 
 **Read order:** `.sh` first (execute validation), `.md` after (read context)
 
----
 
 ### 2026-02-20 11:44 - Deprecate backstage-end
 
@@ -74,7 +74,6 @@ checks/
 - ✅ Rename `backstage-start.sh` → `backstage.sh` (simpler name)
 - Update SKILL.md (remove -end references, diagrams)
 
----
 
 ### 2026-02-20 11:47 - Backstage.sh Role: Minimal Orchestrator
 
@@ -102,7 +101,6 @@ checks/
 - Backstage.sh should NOT orchestrate phases/steps
 - Intelligence distributed = easier to test, extend, override
 
----
 
 ### 2026-02-20 11:48 - Check Execution Order
 
@@ -150,7 +148,6 @@ navigation-blocks.sh  ← handles update + validation internally
 - Internal order (within check) is explicit and testable
 - Simpler mental model: "one check, one concern"
 
----
 
 ### 2026-02-20 11:49 - Navigation Checks Consolidation
 
@@ -181,7 +178,6 @@ navigation-blocks.sh  ← handles update + validation internally
 - No external orchestration needed
 - Easier to test as unit
 
----
 
 ## Architecture Principles Established
 
@@ -209,7 +205,6 @@ navigation-blocks.sh  ← handles update + validation internally
 - Report results
 - NO orchestration, NO phases
 
----
 
 ## Checks Consolidation & Naming (2026-02-20 11:56-11:59)
 
@@ -256,7 +251,6 @@ navigation-blocks.sh  ← handles update + validation internally
 
 **Final count:** 7 checks, zero redundancy, clear patterns
 
----
 
 ## Dependency Management Decision (2026-02-20 12:02-12:06)
 
@@ -295,7 +289,6 @@ navigation-blocks.sh  ← handles update + validation internally
 
 **Result:** 4 checks, zero inter-check dependencies
 
----
 
 ## Future Epic: Frontmatter for Checks
 
@@ -432,7 +425,6 @@ fi
 
 **When to revisit:** When merge workflow becomes deterministic enough to automate fully.
 
----
 
 ## Next Steps
 

@@ -1,10 +1,14 @@
+# Epic Notes
+
+> Version, name, status → see `epic.yaml`
+
+---
+
 # v0.22.0 - Feedback Loops
 
 **Epic:** [v0.22.0 Feedback Loops](../ROADMAP.md#v0220)
 
-**Status:** 🚧 PROPOSED (2026-02-21)
 
----
 
 ## Philosophy
 
@@ -19,7 +23,6 @@
 - **Self-hosted analytics** - Privacy-first, no surveillance capitalism
 - **Nicholas as stakeholder** - Departments (agents) demo work, Nicholas gives feedback, refines autonomous checks over time
 
----
 
 ## Internal Feedback Loop (Nicholas ← Agents)
 
@@ -44,7 +47,6 @@
 - **Suggests process improvements** - New checks, better agent communication, refined workflows
 - **Reduces Nicholas's cognitive load** - Over time, agents need less direction
 
----
 
 ## Analytics Tooling
 
@@ -62,7 +64,6 @@
 - **NAS or Mac Studio** - Self-hosted, full data ownership
 - **Tailscale accessible** - Remote monitoring via MagicDNS
 
----
 
 ## User Testing Workflows
 
@@ -81,7 +82,6 @@
 - **Test scenarios** - Task-based testing, edge case exploration
 - **Consent forms** - Privacy-first, transparent data usage
 
----
 
 ## Social Media Monitoring
 
@@ -95,7 +95,6 @@
 - **Automated:** Webhooks, RSS feeds, API integrations
 - **Manual:** Weekly review sessions, community check-ins
 
----
 
 ## Growth Strategist vs UX Research
 
@@ -112,7 +111,6 @@
 - **May merge roles** - One person/agent handles both (growth + UX)
 - **Or collaborate closely** - Weekly sync, shared dashboards
 
----
 
 ## Feedback → Roadmap Integration
 
@@ -131,7 +129,6 @@
 - **Monthly retrospectives** - Bigger patterns, strategic shifts
 - **Quarterly recaps** - Major direction changes, epic planning
 
----
 
 ## Next Steps
 
@@ -142,7 +139,5 @@
 5. **Social media monitoring** (webhooks, RSS, weekly manual review)
 6. **Feedback → roadmap process** (how insights become tasks)
 
----
 
-**Created:** 2026-02-21  
 **Updated:** 2026-02-21

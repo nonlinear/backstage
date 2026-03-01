@@ -1,10 +1,13 @@
-# Epic v0.20.0: Usage Analytics
+# Epic Notes
 
-**Status:** 🟡 Ready (Not Started)
-**Branch:** v0.20.0 (not created yet)
-**Created:** 2026-02-11
+> Version, name, status → see `epic.yaml`
 
 ---
+
+# Epic v0.20.0: Usage Analytics
+
+**Branch:** v0.20.0 (not created yet)
+
 
 ## Goal
 
@@ -13,7 +16,6 @@ Build analytics on top of `usage.jsonl` to rank topics, detect patterns, and ide
 **User story:**
 > "I want to know which topics I use most, which queries succeed/fail, and see patterns in my research behavior."
 
----
 
 ## Context
 
@@ -37,7 +39,6 @@ Build analytics on top of `usage.jsonl` to rank topics, detect patterns, and ide
 4. **Query patterns:** Common phrases, multi-word vs single-word searches
 5. **Session correlation:** Which topics appear together in same timeframe?
 
----
 
 ## Tasks
 
@@ -128,7 +129,6 @@ Build analytics on top of `usage.jsonl` to rank topics, detect patterns, and ide
 
 **Why future:** Need stable ranking first. Quick scan = optimization on top.
 
----
 
 ## Implementation Notes
 
@@ -149,7 +149,6 @@ Build analytics on top of `usage.jsonl` to rank topics, detect patterns, and ide
 - Analytics = read entire file (acceptable for <10k queries)
 - Future: If file grows large, add sampling or pagination
 
----
 
 ## Success Criteria
 
@@ -168,7 +167,6 @@ Build analytics on top of `usage.jsonl` to rank topics, detect patterns, and ide
 - Time-based trends (usage over weeks/months)
 - Predictive analytics (which queries likely to succeed?)
 
----
 
 ## Questions to Resolve
 
@@ -190,7 +188,6 @@ Build analytics on top of `usage.jsonl` to rank topics, detect patterns, and ide
 - Useful for detecting slow topics (large indexes? complex queries?)
 - **Decision:** DEFER to future epic (needs code changes in research.py)
 
----
 
 ## Related Epics
 
@@ -198,7 +195,6 @@ Build analytics on top of `usage.jsonl` to rank topics, detect patterns, and ide
 - **v1.2.0 User Testing:** Analytics show what real users search for
 - **v1.3.0 Better Feedback:** Failed queries + analytics = identify gaps in library
 
----
 
 ## Notes
 
@@ -215,7 +211,6 @@ Build analytics on top of `usage.jsonl` to rank topics, detect patterns, and ide
 
 **Nicholas's insight:** "será que dá?" = YES, it's already structured for this! 🏴
 
----
 
 ## Next Steps
 
@@ -225,8 +220,3 @@ Build analytics on top of `usage.jsonl` to rank topics, detect patterns, and ide
 4. Test with real usage.jsonl data
 5. Document in SKILL.md
 6. Merge when stable
-
----
-
-**Created:** 2026-02-11 by Claw
-**Status:** Ready for Nicholas approval

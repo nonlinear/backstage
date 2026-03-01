@@ -1,10 +1,14 @@
+# Epic Notes
+
+> Version, name, status → see `epic.yaml`
+
+---
+
 # v1.13.0 - Reminders + Summarize Integration
 
 **Epic:** URL-based reminder research with contextual summarization
 
-**Created:** 2026-02-24
 
----
 
 ## Problem
 
@@ -19,7 +23,6 @@
 - "Does this solution work for project X?"
 - "How does this compare to book Y?"
 
----
 
 ## Solution
 
@@ -38,7 +41,6 @@ RELEVANCE: Matches epic v1.12.0 (Roadmap Skill) - drag-and-drop reordering.
 ACTION: Review for implementation ideas?
 ```
 
----
 
 ### Mode 2: URL + notes (directed research)
 **Notes explain WHY:**
@@ -62,7 +64,6 @@ ANSWER: Hine's method safer - includes dismissal protocol.
 RECOMMENDATION: Use Hine's approach, video good for visuals only.
 ```
 
----
 
 ## Content Types
 
@@ -83,7 +84,6 @@ RECOMMENDATION: Use Hine's approach, video good for visuals only.
 4. Cross-reference (librarian, ROADMAP, epic notes)
 5. Update reminder notes with 💎 + answer
 
----
 
 ## Integration Points
 
@@ -102,7 +102,6 @@ RECOMMENDATION: Use Hine's approach, video good for visuals only.
 - Daily 3AM: batch process URL reminders
 - OR: On-demand via heartbeat (2x/day)
 
----
 
 ## Workflow Examples
 
@@ -129,7 +128,6 @@ RELEVANCE: Matches epic v1.12.0 (Roadmap Skill) - interactive epic reordering.
 ACTION: Review for implementation? [y/n]
 ```
 
----
 
 ### Example 2: URL + directed question
 
@@ -171,7 +169,6 @@ ANSWER: Hine's method safer - includes dismissal protocol.
 RECOMMENDATION: Use Hine's approach. Video good for visuals, but incomplete safety-wise.
 ```
 
----
 
 ### Example 3: Instagram Reel
 
@@ -213,7 +210,6 @@ ANSWER: Not better, just different scale. Our approach fits current needs.
 ACTION: Bookmark pattern for when we scale to multi-user.
 ```
 
----
 
 ## Technical Implementation
 
@@ -275,7 +271,6 @@ echo "💎 SUMMARY: $summary"
 [ -n "$epic_match" ] && echo "RELEVANCE: $epic_match"
 ```
 
----
 
 ## Cronjob Integration
 
@@ -291,7 +286,6 @@ echo "💎 SUMMARY: $summary"
 - Run reminder processing (includes URL detection)
 ```
 
----
 
 ## Success Criteria
 
@@ -316,7 +310,6 @@ echo "💎 SUMMARY: $summary"
 - ✅ Cronjob runs reliably
 - ✅ 💎 output format consistent
 
----
 
 ## Open Questions
 
@@ -325,7 +318,6 @@ echo "💎 SUMMARY: $summary"
 3. **Privacy:** Transcripts of private reels? Delete after processing?
 4. **Accuracy:** Whisper transcription quality on reels (background music, accents)?
 
----
 
 ## Next Steps
 
@@ -336,7 +328,3 @@ echo "💎 SUMMARY: $summary"
 5. Test Mode 2 (URL + directed question, librarian integration)
 6. Document URL reminder format (best practices)
 7. Add cronjob (3AM daily or heartbeat 2x/day)
-
----
-
-**Status:** Epic defined, ready for implementation. 🏴
