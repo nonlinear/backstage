@@ -1,0 +1,14 @@
+---
+name: checkpoints
+status: roadmap
+tier: 0
+created: 2026-03-01
+started: null
+completed: null
+tasks:
+  - Design checkpoint enforcement architecture
+  - Implement watchers (trigger checkpoints)
+  - Design git commit structure (scannable → YAML)
+  - Implement composable YAML generation
+  - Document checkpoint protocol
+---

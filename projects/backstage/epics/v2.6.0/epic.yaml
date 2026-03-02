@@ -1,0 +1,14 @@
+---
+name: policy-feedback-loop
+status: roadmap
+tier: 0
+created: 2026-03-01
+started: null
+completed: null
+tasks:
+  - Design master check architecture
+  - Formalize policy creation process (human + business analyst agent)
+  - Implement policy retroalimentação
+  - Document policy lifecycle
+  - Validate feedback loop effectiveness
+---
