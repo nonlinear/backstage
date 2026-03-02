@@ -1,0 +1,14 @@
+---
+name: agents-checks-gui
+status: roadmap
+tier: 0
+created: 2026-03-01
+started: null
+completed: null
+tasks:
+  - Design agent status visualization
+  - Design check results dashboard
+  - Implement agent activity logs
+  - Implement check history view
+  - Document GUI patterns
+---

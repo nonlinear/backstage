@@ -1,0 +1,14 @@
+---
+name: project-tiers
+status: planning
+tier: 0
+created: 2026-03-01
+started: null
+completed: null
+tasks:
+  - Define tier system
+  - Design tier assignment logic
+  - Implement tier validation
+  - Document tier philosophy
+  - Migrate existing projects
+---

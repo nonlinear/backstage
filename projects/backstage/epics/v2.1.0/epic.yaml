@@ -1,0 +1,14 @@
+---
+name: backstage-gui
+status: roadmap
+tier: 0
+created: 2026-03-01
+started: null
+completed: null
+tasks:
+  - Design read-only GUI architecture
+  - Mermaid as wireframe contract (ensure unambiguous)
+  - Implement project/epic/task surfacing
+  - Conversational AI editing (respects checks)
+  - Document GUI design principles
+---

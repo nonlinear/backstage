@@ -1,0 +1,14 @@
+---
+name: agents-and-checks
+status: roadmap
+tier: 0
+created: 2026-03-01
+started: null
+completed: null
+tasks:
+  - Define agent domains (scope boundaries)
+  - Design check architecture (after agents exist)
+  - Implement agent runtime
+  - Implement check execution framework
+  - Document agent-check relationship
+---

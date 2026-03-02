@@ -1,0 +1,15 @@
+---
+name: flat-to-cascading
+status: planning
+tier: 0
+created: 2026-03-01
+started: null
+completed: null
+tasks:
+  - Design epic dependency system
+  - Design task dependency system
+  - Implement dependency validation
+  - Implement cascading task execution
+  - Document dependency syntax
+  - Migrate existing epics (add dependencies)
+---
