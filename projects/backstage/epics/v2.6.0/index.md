@@ -1,25 +1,9 @@
-# v2.6.0 - Retro as Checks
+# v2.6.0 - Checkpoints
 
 ## Goal
 
-Foundation for retrospective as executable checks.
-
-## Philosophy
-
-**Retro = meta epic**
-- Monta fundação pra refinamento contínuo
-- Policy criada (human + agent) → becomes check
-- Checks evoluem de acordo com learnings
-
-## Approach
-
-1. Formalize retro process (what worked, what didn't)
-2. Convert learnings → policy
-3. Policy → check (executable validation)
-4. Refine checks based on new retros
-
-**Meta nature:** This epic enables future epic refinement.
+Checkpoint enforcement with watchers and composable commit structure.
 
 ## Status
 
-Roadmap (depends on v2.4.0 checkpoint data).
+Planning (depends on v2.2.0).

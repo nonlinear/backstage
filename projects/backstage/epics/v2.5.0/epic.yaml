@@ -1,14 +1,12 @@
 ---
-name: checkpoints-gui
-status: roadmap
+name: project-tiers-gui
+status: planning
 tier: 0
 created: 2026-03-01
 started: null
 completed: null
 tasks:
-  - Design checkpoint compliance dashboard
-  - Implement checkpoint history view
-  - Visualize trigger conditions
-  - Show enforcement results
-  - Document checkpoint UI patterns
+  - Design tier visualization
+  - Implement tier filtering
+  - Show tier promotion workflow
 ---
