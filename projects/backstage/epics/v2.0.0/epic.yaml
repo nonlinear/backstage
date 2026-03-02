@@ -1,17 +1,17 @@
 ---
 name: backstage-2.0
-status: active
+status: review
 tier: 0
 created: 2026-02-20
 started: 2026-02-20
 completed: null
 tasks:
-  - Centralize checks in ~/Documents/backstage/checks/
-  - Migrate projects to ~/Documents/backstage/projects/
-  - Epic folders (yaml + index.md, not markdown files)
-  - Create checks.yaml manifests
-  - Refactor backstage skill for new structure
-  - Global + project checks composite execution
-  - Update SKILL.md diagram to match implementation
-  - Document architecture (syntax: project/epic types/task/notes)
+  - Centralize checks in ~/Documents/backstage/checks/ ✅
+  - Migrate projects to ~/Documents/backstage/projects/ ✅
+  - Epic folders (yaml + index.md, not markdown files) ✅
+  - Create checks.yaml manifests ✅
+  - Refactor backstage skill for new structure ✅
+  - Global + project checks composite execution ✅
+  - Update SKILL.md diagram to match implementation ✅
+  - Document architecture (syntax: project/epic types/task/notes) ✅
 ---
