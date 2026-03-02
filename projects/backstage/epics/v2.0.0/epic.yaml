@@ -1,10 +1,10 @@
 ---
 name: backstage-2.0
-status: review
+status: published
 tier: 0
 created: 2026-02-20
 started: 2026-02-20
-completed: null
+completed: 2026-03-01
 tasks:
   - Centralize checks in ~/Documents/backstage/checks/ ✅
   - Migrate projects to ~/Documents/backstage/projects/ ✅

@@ -3,7 +3,7 @@ name: backstage-gui
 status: roadmap
 tier: 0
 created: 2026-03-01
-started: null
+started: 2026-03-01
 completed: null
 tasks:
   - Design read-only GUI architecture
