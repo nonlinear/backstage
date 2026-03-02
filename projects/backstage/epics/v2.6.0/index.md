@@ -1,32 +1,24 @@
-# v2.6.0 - Policy Feedback Loop
+# v2.6.0 - Retro as Checks
 
 ## Goal
 
-Structured retroalimentação for policy refinement.
+Foundation for retrospective as executable checks.
 
 ## Philosophy
 
-**Not a new structure, but a master check:**
-- Formalizes policies (human + business analyst agent)
-- Retroalimentação = learning from execution
-- Policies evolve based on real-world use
+**Retro = meta epic**
+- Monta fundação pra refinamento contínuo
+- Policy criada (human + agent) → becomes check
+- Checks evoluem de acordo com learnings
 
-## Components
+## Approach
 
-**Master Check:**
-- Validates policy consistency
-- Detects conflicts
-- Suggests refinements
+1. Formalize retro process (what worked, what didn't)
+2. Convert learnings → policy
+3. Policy → check (executable validation)
+4. Refine checks based on new retros
 
-**Policy Creation:**
-- Human proposes intent
-- Business analyst agent formalizes
-- System validates feasibility
-
-**Feedback Loop:**
-- Execution results → policy adjustments
-- Continuous improvement
-- Audit trail of policy evolution
+**Meta nature:** This epic enables future epic refinement.
 
 ## Status
 
