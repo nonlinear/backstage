@@ -1,0 +1,15 @@
+---
+name: backstage-as-protocol
+status: planning
+tier: 0
+created: 2026-03-01
+started: null
+completed: null
+tasks:
+  - Define node discovery protocol
+  - Design handshake mechanism
+  - Read history through protocol
+  - Multi-company project coordination
+  - Show capabilities (what we can do together)
+  - Document protocol specification
+---
