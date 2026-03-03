@@ -92,10 +92,10 @@ export function EpicCard({
         {/* Tabs: Tasks and Notes */}
         <Tabs value={activeTab} onValueChange={onTabChange} className="w-full">
           <TabsList className="w-full">
-            <TabsTrigger value="tasks" className="flex-1">
+            <TabsTrigger value="tasks">
               Tasks<sup className="ml-1">{completedTasks} of {tasks.length}</sup>
             </TabsTrigger>
-            <TabsTrigger value="notes" className="flex-1">
+            <TabsTrigger value="notes">
               Notes<sup className="ml-1">{notesCount}</sup>
             </TabsTrigger>
           </TabsList>

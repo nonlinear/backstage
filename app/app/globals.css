@@ -178,3 +178,9 @@
 [role="tab"][data-state="inactive"] {
   background-color: transparent;
 }
+
+/* Standardized superscript spacing */
+sup {
+  margin-left: 0.5rem;
+  font-weight: normal;
+}
