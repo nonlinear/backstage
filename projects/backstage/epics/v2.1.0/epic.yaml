@@ -6,9 +6,14 @@ created: 2026-03-01
 started: 2026-03-01
 completed: null
 tasks:
-  - Design read-only GUI architecture
-  - Mermaid as wireframe contract (ensure unambiguous)
-  - Implement project/epic/task surfacing
-  - Conversational AI editing (respects checks)
-  - Document GUI design principles
+  - text: Design read-only GUI architecture
+    checked: true
+  - text: Mermaid as wireframe contract (ensure unambiguous)
+    checked: true
+  - text: Implement project/epic/task surfacing
+    checked: true
+  - text: Conversational AI editing (respects checks)
+    checked: false
+  - text: Document GUI design principles
+    checked: false
 ---

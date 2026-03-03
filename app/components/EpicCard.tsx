@@ -9,7 +9,6 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Checkbox } from "@/components/ui/checkbox"
 import {
   Select,
   SelectContent,
@@ -59,7 +58,7 @@ export function EpicCard({
   onTabChange
 }: EpicCardProps) {
   const formattedName = formatName(name)
-  const uncheckedTasks = tasks.filter(t => !t.checked).length
+  const completedTasks = tasks.filter(t => t.checked).length
   const [selectedNote, setSelectedNote] = useState(notesList[0] || "")
   
   // Expand to 400px when Notes tab is active
@@ -93,7 +92,7 @@ export function EpicCard({
         <Tabs value={activeTab} onValueChange={onTabChange} className="w-full">
           <TabsList className="w-full">
             <TabsTrigger value="tasks" className="flex-1">
-              Tasks<sup className="ml-1">{uncheckedTasks} of {tasks.length}</sup>
+              Tasks<sup className="ml-1">{completedTasks} of {tasks.length}</sup>
             </TabsTrigger>
             <TabsTrigger value="notes" className="flex-1">
               Notes<sup className="ml-1">{notesCount}</sup>
@@ -104,14 +103,12 @@ export function EpicCard({
             {tasks.length > 0 ? (
               tasks.map((task, idx) => (
                 <div key={idx} className="flex items-start gap-2">
-                  <Checkbox 
-                    checked={task.checked}
-                    onCheckedChange={(e) => e.preventDefault()}
-                    className="mt-1"
-                  />
-                  <label className="text-sm leading-tight cursor-pointer">
+                  <span className="font-mono text-sm">
+                    {task.checked ? '[x]' : '[ ]'}
+                  </span>
+                  <span className="text-sm leading-tight">
                     {task.text}
-                  </label>
+                  </span>
                 </div>
               ))
             ) : (
