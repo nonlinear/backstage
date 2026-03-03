@@ -75,7 +75,8 @@ export function EpicCard({
   const notesClass = isActiveEpic && activeTab === "notes" ? "notes" : ""
   
   return (
-    <Card id={version} className={`card ${cardWidth} ${notesClass} transition-all duration-300`}>
+    <div className={`card ${cardWidth} ${notesClass}`}>
+      <Card id={version} className="transition-all duration-300">
       <CardHeader>
         {/* Status badge top-right */}
         <div className="flex justify-end mb-1">
@@ -160,5 +161,6 @@ export function EpicCard({
         </Tabs>
       </CardContent>
     </Card>
+    </div>
   )
 }
