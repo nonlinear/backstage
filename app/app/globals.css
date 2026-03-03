@@ -199,11 +199,9 @@ sup {
 .card:not(.notes) {
   position: sticky !important;
   top: 1rem !important;
-  min-width: 300px;
-  flex-shrink: 0;
+  width: 100% !important;
 }
 
 .card.notes {
   max-width: 600px;
-  flex-shrink: 0;
 }
