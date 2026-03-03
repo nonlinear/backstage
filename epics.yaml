@@ -5,20 +5,35 @@ statuses:
   - value: "planning"
     label: "Planning"
     description: "Epic in design/wireframe phase, not started"
+    can_transition_to: ["active", "roadmap"]
     
   - value: "active"
     label: "Active"
     description: "Epic in active development"
+    can_transition_to: ["published", "planning"]
     
   - value: "published"
     label: "Published"
     description: "Epic completed and deployed"
+    can_transition_to: []
     
   - value: "roadmap"
     label: "Roadmap"
     description: "Epic planned for future, not yet started"
+    can_transition_to: ["planning"]
 
 rules:
   - "All epics MUST have status field in YAML frontmatter"
   - "Status values are case-sensitive (lowercase)"
   - "UI filters are auto-generated from this list"
+  - "Status transitions validated by epic-status-validator check"
+
+validation:
+  check_script: "~/Documents/backstage/checks/epic-status-validator.sh"
+  validates:
+    - "Status exists in epics.yaml statuses list"
+    - "YAML frontmatter present in epic.yaml or index.md"
+    - "Status transitions follow can_transition_to rules"
+  triggers:
+    - "Pre-commit hook (validate changed epics)"
+    - "Manual: backstage.sh <project> health"
