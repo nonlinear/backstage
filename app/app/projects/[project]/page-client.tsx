@@ -180,22 +180,20 @@ export function ProjectPageClient({
           
           {/* Epic cards */}
           {sortedEpics.map((epic) => (
-            <div key={epic.version} className="flex-shrink-0">
-              <div className="snap-start" />
-              <EpicCard
-                version={epic.version}
-                name={epic.name}
-                description={epic.description}
-                status={epic.status}
-                goal={epic.goal}
-                tasks={epic.tasks}
-                notesCount={epic.notesCount}
-                notesList={epic.notesList}
-                activeTab={activeEpicVersion === epic.version ? "notes" : "tasks"}
-                isActiveEpic={activeEpicVersion === epic.version}
-                onTabChange={(tab) => handleEpicTabChange(epic.version, tab)}
-              />
-            </div>
+            <EpicCard
+              key={epic.version}
+              version={epic.version}
+              name={epic.name}
+              description={epic.description}
+              status={epic.status}
+              goal={epic.goal}
+              tasks={epic.tasks}
+              notesCount={epic.notesCount}
+              notesList={epic.notesList}
+              activeTab={activeEpicVersion === epic.version ? "notes" : "tasks"}
+              isActiveEpic={activeEpicVersion === epic.version}
+              onTabChange={(tab) => handleEpicTabChange(epic.version, tab)}
+            />
           ))}
         </div>
       </div>
