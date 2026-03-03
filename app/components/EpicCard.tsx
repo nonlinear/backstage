@@ -22,6 +22,7 @@ import {
   TabsList,
   TabsTrigger,
 } from "@/components/ui/tabs"
+import { Checkbox } from "@/components/ui/checkbox"
 import type { Task } from "@/lib/epics"
 
 interface EpicCardProps {
@@ -103,12 +104,14 @@ export function EpicCard({
             {tasks.length > 0 ? (
               tasks.map((task, idx) => (
                 <div key={idx} className="flex items-start gap-2">
-                  <span className="font-mono text-sm">
-                    {task.checked ? '[x]' : '[ ]'}
-                  </span>
-                  <span className="text-sm leading-tight">
+                  <Checkbox 
+                    checked={task.checked}
+                    disabled
+                    className="mt-0.5"
+                  />
+                  <label className="text-sm leading-tight">
                     {task.text}
-                  </span>
+                  </label>
                 </div>
               ))
             ) : (
