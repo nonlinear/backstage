@@ -14,6 +14,11 @@ export default async function ProjectPage({
   const branch = getProjectBranch(project)
   const checks = getProjectChecks(project)
   
+  // Calculate epic counts by status
+  const activeCount = epics.filter(e => e.status === 'active').length
+  const backlogCount = epics.filter(e => e.status === 'backlog').length
+  const publishedCount = epics.filter(e => e.status === 'published').length
+  
   // Load project metadata
   const projectPath = path.join(process.env.HOME!, 'Documents/backstage/projects', project, 'index.yml')
   let projectType = 'undefined'
@@ -42,6 +47,9 @@ export default async function ProjectPage({
       projectBranch={branch}
       projectChecks={checks}
       projectEpicCount={epics.length}
+      activeCount={activeCount}
+      backlogCount={backlogCount}
+      publishedCount={publishedCount}
       epics={epics} 
     />
   )
