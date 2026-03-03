@@ -1,44 +1,51 @@
-# Epic Lifecycle States
-# Location: ~/Documents/backstage/epics.yaml
+---
+# Epic Status Lifecycle
+# Canonical order: active → backlog → published
 
 statuses:
-  - value: "backlog"
-    label: "Backlog"
-    description: "Only has default tasks, unchecked. Not started yet."
+  active:
+    order: 1
+    description: "Has unfinished tasks, has branch. Work in progress."
     conditions:
-      enter: "Epic created, default tasks from template"
-      exit: "First task checked OR branch created"
-    can_transition_to: ["active"]
+      - "Has tasks (beyond default template)"
+      - "Has git branch (not on main)"
+      - "Not all tasks checked"
+    can_transition_to:
+      - published
+      - backlog
     
-  - value: "active"
-    label: "Active"
-    description: "Has unfinished tasks, has branch"
+  backlog:
+    order: 2
+    description: "Only default tasks, unchecked. Not started yet. No branch."
     conditions:
-      enter: "Branch created OR first task checked"
-      exit: "All tasks checked"
-    can_transition_to: ["published", "backlog"]
+      - "Only has default unchecked tasks"
+      - "No custom tasks added"
+      - "On main branch (no epic branch)"
+    can_transition_to:
+      - active
     
-  - value: "published"
-    label: "Published"
-    description: "All tasks checked (auto-detected, no need to codify)"
+  published:
+    order: 3
+    description: "All tasks checked. Terminal state."
     conditions:
-      enter: "All tasks in epic checked"
-      exit: "Never (terminal state)"
+      - "All tasks checked (100% complete)"
+      - "Epic is done"
     can_transition_to: []
 
-rules:
-  - "All epics MUST have status field in YAML frontmatter"
-  - "Status values are case-sensitive (lowercase)"
-  - "UI filters are auto-generated from this list"
-  - "Status transitions validated by epic-status-validator check"
-  - "Published state auto-detected (all tasks checked = published)"
+# Transition rules
+transitions:
+  backlog_to_active:
+    trigger: "Add tasks or create branch"
+  
+  active_to_published:
+    trigger: "Check all tasks"
+    
+  active_to_backlog:
+    trigger: "Remove all custom tasks and return to main"
+    note: "Regression, avoid if possible"
 
-validation:
-  check_script: "~/Documents/backstage/checks/epic-status-validator.sh"
-  validates:
-    - "Status exists in epics.yaml statuses list"
-    - "YAML frontmatter present in epic.yaml or index.md"
-    - "Status transitions follow can_transition_to rules"
-  triggers:
-    - "Pre-commit hook (validate changed epics)"
-    - "Manual: backstage.sh <project> health"
+# Display order (everywhere)
+display_order:
+  - active
+  - backlog
+  - published

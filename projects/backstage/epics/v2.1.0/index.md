@@ -1,8 +1,7 @@
 ---
 name: "backstage-gui"
 version: "2.1.0"
-status: "planning"
-tier: "infrastructure"
+status: "active"
 contract_type: "wireframe"
 framework: "shadcn/ui"
 ---
