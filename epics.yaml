@@ -1,0 +1,24 @@
+# Epic Lifecycle States
+# Location: ~/Documents/backstage/epics.yaml
+
+statuses:
+  - value: "planning"
+    label: "Planning"
+    description: "Epic in design/wireframe phase, not started"
+    
+  - value: "active"
+    label: "Active"
+    description: "Epic in active development"
+    
+  - value: "published"
+    label: "Published"
+    description: "Epic completed and deployed"
+    
+  - value: "roadmap"
+    label: "Roadmap"
+    description: "Epic planned for future, not yet started"
+
+rules:
+  - "All epics MUST have status field in YAML frontmatter"
+  - "Status values are case-sensitive (lowercase)"
+  - "UI filters are auto-generated from this list"
