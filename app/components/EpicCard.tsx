@@ -69,8 +69,11 @@ export function EpicCard({
   // Expand to 500px when Notes tab is active
   const cardWidth = activeTab === "notes" ? "min-w-[500px] max-w-[500px]" : "min-w-[300px] max-w-[300px]"
   
+  // Sticky when NOT showing notes (so other cards follow scroll)
+  const stickyClass = activeTab === "tasks" ? "sticky top-4" : ""
+  
   return (
-    <Card id={version} className={`${cardWidth} flex-shrink-0 transition-all duration-300`}>
+    <Card id={version} className={`${cardWidth} ${stickyClass} flex-shrink-0 transition-all duration-300`}>
       <CardHeader>
         {/* Status badge top-right */}
         <div className="flex justify-end mb-1">
