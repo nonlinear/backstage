@@ -68,8 +68,8 @@ export function EpicCard({
   // Find selected note content
   const noteContent = notesList.find(n => n.slug === selectedNote)?.content || ""
   
-  // Expand to 600px when Notes tab is active
-  const cardWidth = activeTab === "notes" ? "w-full max-w-[600px]" : "w-full max-w-[300px]"
+  // Expand to 600px when Notes tab is active (otherwise natural width)
+  const cardWidth = activeTab === "notes" ? "max-w-[600px]" : ""
   
   // Add "notes" class when this epic has notes open
   const notesClass = isActiveEpic && activeTab === "notes" ? "notes" : ""
