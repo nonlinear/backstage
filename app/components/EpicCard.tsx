@@ -66,8 +66,8 @@ export function EpicCard({
   // Find selected note content
   const noteContent = notesList.find(n => n.slug === selectedNote)?.content || ""
   
-  // Expand to 500px when Notes tab is active
-  const cardWidth = activeTab === "notes" ? "min-w-[500px] max-w-[500px]" : "min-w-[300px] max-w-[300px]"
+  // Expand to 500px max when Notes tab is active
+  const cardWidth = activeTab === "notes" ? "w-full max-w-[500px]" : "w-full max-w-[300px]"
   
   // Sticky when NOT showing notes (so other cards follow scroll)
   const stickyClass = activeTab === "tasks" ? "sticky top-4" : ""
