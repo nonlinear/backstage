@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import { MarkdownRenderer } from "./MarkdownRenderer"
 import {
   Card,
   CardContent,
@@ -33,7 +34,7 @@ interface EpicCardProps {
   goal?: string
   tasks?: Task[]
   notesCount?: number
-  notesList?: { slug: string; title: string }[]
+  notesList?: { slug: string; title: string; content: string }[]
   activeTab: "tasks" | "notes"
   onTabChange: (tab: "tasks" | "notes") => void
 }
@@ -61,6 +62,9 @@ export function EpicCard({
   const formattedName = formatName(name)
   const completedTasks = tasks.filter(t => t.checked).length
   const [selectedNote, setSelectedNote] = useState(notesList[0]?.slug || "")
+  
+  // Find selected note content
+  const noteContent = notesList.find(n => n.slug === selectedNote)?.content || ""
   
   // Expand to 500px when Notes tab is active
   const cardWidth = activeTab === "notes" ? "min-w-[500px] max-w-[500px]" : "min-w-[300px] max-w-[300px]"
@@ -139,9 +143,9 @@ export function EpicCard({
                   </SelectContent>
                 </Select>
                 
-                {/* Note content preview placeholder */}
-                <div className="text-xs text-muted-foreground">
-                  <p className="font-mono italic">Preview: {selectedNote}</p>
+                {/* Markdown content (strip first line # TITLE) */}
+                <div className="mt-4">
+                  <MarkdownRenderer content={noteContent} stripFirstLine={true} />
                 </div>
               </>
             ) : (
