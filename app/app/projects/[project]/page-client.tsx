@@ -173,7 +173,7 @@ export function ProjectPageClient({
       <div className="flex-1 overflow-x-auto overflow-y-auto">
         <div className="flex items-start" style={{ gap: 'var(--spacing-unit)', padding: 'var(--spacing-unit)' }}>
           {/* Project card */}
-          <Card className="w-full max-w-[300px]">
+          <Card className="w-full max-w-[300px] transition-all duration-300">
             <h2 className="text-2xl font-semibold mb-2">{projectName}</h2>
             <p className="text-sm text-muted-foreground">{projectDescription}</p>
           </Card>
