@@ -194,3 +194,9 @@ sup {
   margin-left: 0.5rem;
   font-weight: normal;
 }
+
+/* All cards sticky at top-4, except card with notes open */
+.card:not(.notes) {
+  position: sticky;
+  top: 1rem;
+}

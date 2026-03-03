@@ -68,14 +68,14 @@ export function EpicCard({
   // Find selected note content
   const noteContent = notesList.find(n => n.slug === selectedNote)?.content || ""
   
-  // Expand to 500px max when Notes tab is active
-  const cardWidth = activeTab === "notes" ? "w-full max-w-[500px]" : "w-full max-w-[300px]"
+  // Expand to 500px when Notes tab is active
+  const cardWidth = activeTab === "notes" ? "max-w-[500px]" : "max-w-[300px]"
   
-  // Sticky when NOT the active epic (so other cards follow scroll)
-  const stickyClass = !isActiveEpic ? "sticky top-4" : ""
+  // Add "notes" class when this epic has notes open
+  const notesClass = isActiveEpic && activeTab === "notes" ? "notes" : ""
   
   return (
-    <Card id={version} className={`${cardWidth} ${stickyClass} transition-all duration-300`}>
+    <Card id={version} className={`card ${cardWidth} ${notesClass} transition-all duration-300`}>
       <CardHeader>
         {/* Status badge top-right */}
         <div className="flex justify-end mb-1">
