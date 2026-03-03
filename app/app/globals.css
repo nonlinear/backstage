@@ -195,8 +195,10 @@ sup {
   font-weight: normal;
 }
 
-/* All cards sticky */
+/* All cards sticky with width constraints */
 .card {
   position: sticky !important;
   top: 1rem !important;
+  width: 100%;
+  max-width: 300px;
 }
