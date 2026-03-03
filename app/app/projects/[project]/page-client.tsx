@@ -18,6 +18,7 @@ import {
 } from "@/components/ui/select"
 import { ProjectCard } from "@/components/ProjectCard"
 import { EpicCard } from "@/components/EpicCard"
+import { Card } from "@/components/ui/card"
 import type { Epic } from "@/lib/epics"
 
 const sections = [
