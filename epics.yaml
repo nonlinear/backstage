@@ -2,31 +2,36 @@
 # Location: ~/Documents/backstage/epics.yaml
 
 statuses:
-  - value: "planning"
-    label: "Planning"
-    description: "Epic in design/wireframe phase, not started"
-    can_transition_to: ["active", "roadmap"]
+  - value: "backlog"
+    label: "Backlog"
+    description: "Only has default tasks, unchecked. Not started yet."
+    conditions:
+      enter: "Epic created, default tasks from template"
+      exit: "First task checked OR branch created"
+    can_transition_to: ["active"]
     
   - value: "active"
     label: "Active"
-    description: "Epic in active development"
-    can_transition_to: ["published", "planning"]
+    description: "Has unfinished tasks, has branch"
+    conditions:
+      enter: "Branch created OR first task checked"
+      exit: "All tasks checked"
+    can_transition_to: ["published", "backlog"]
     
   - value: "published"
     label: "Published"
-    description: "Epic completed and deployed"
+    description: "All tasks checked (auto-detected, no need to codify)"
+    conditions:
+      enter: "All tasks in epic checked"
+      exit: "Never (terminal state)"
     can_transition_to: []
-    
-  - value: "roadmap"
-    label: "Roadmap"
-    description: "Epic planned for future, not yet started"
-    can_transition_to: ["planning"]
 
 rules:
   - "All epics MUST have status field in YAML frontmatter"
   - "Status values are case-sensitive (lowercase)"
   - "UI filters are auto-generated from this list"
   - "Status transitions validated by epic-status-validator check"
+  - "Published state auto-detected (all tasks checked = published)"
 
 validation:
   check_script: "~/Documents/backstage/checks/epic-status-validator.sh"

@@ -1,155 +1,95 @@
-# v2.1.0 - Backstage GUI
-
-**Status:** `planning` → Contract wireframe in progress
-
+---
+name: "backstage-gui"
+version: "2.1.0"
+status: "planning"
+tier: "infrastructure"
+contract_type: "wireframe"
+framework: "shadcn/ui"
 ---
 
-## Contract Wireframe
+## backstage-gui wireframe ![default](https://img.shields.io/badge/default-lightgray)
 
 **Goal:** Read-only GUI for backstage (projects → epics → tasks).
 
-**Components:** shadcn/ui (Next.js)
-
-**Terminology:** See Glossary below.
+**Framework:** shadcn/ui (Next.js)
 
 ---
 
-### Main Layout
+## Big Picture Layout
+
+**Page structure:** Horizontal scroll (not vertical)
 
 ```mermaid
-graph TD
-    App[App Container]
+%%{init: {'theme':'base','themeVariables':{"primaryColor":"#4A90E2","primaryTextColor":"#fff","primaryBorderColor":"#2E5C8A","lineColor":"#666","secondaryColor":"#50E3C2","tertiaryColor":"#FFD700","edgeLabelBackground":"#666"},'flowchart':{"nodeSpacing":50,"rankSpacing":50,"padding":15,"curve":"basis"}}}%%
+flowchart LR
+    Sidebar["Sidebar<br/>(fixed)"]
+    Card1["Project Card 1"]
+    Card2["Project Card 2"]
+    Card3["Project Card 3"]
+    Card4["Project Card 4"]
+    Card5["Project Card 5"]
+    More["... (scroll)"]
     
-    App --> Header[Header: Project Selector]
-    App --> Main[Main: Epic List]
-    App --> Sidebar[Sidebar: Filters & Status]
+    Sidebar -.- Card1 -.- Card2 -.- Card3 -.- Card4 -.- Card5 -.- More
     
-    Header --> ProjectDropdown[Select: All Projects<br/>Data: ~/backstage/projects/*/<br/>Component: shadcn Select<br/>On change: loadEpics selected]
-    
-    Main --> EpicTable[Table: Epics for Project<br/>Data: ~/backstage/projects/PROJECT/epics/*/epic.yaml<br/>Component: shadcn Table<br/>Columns: version, name, status, tier<br/>On row click: showEpicDetails epic]
-    
-    Sidebar --> StatusFilter[Checkbox Group: Status Filter<br/>Options: planning, active, review, published<br/>Component: shadcn Checkbox<br/>On change: filterEpics statuses]
-    
-    Sidebar --> TierFilter[Select: Tier Filter<br/>Options: 0, 1, 2, 3, all<br/>Component: shadcn Select<br/>On change: filterEpics tier]
-    
-    EpicTable --> EpicDetails[Dialog: Epic Details<br/>Data: epic.yaml + index.md<br/>Component: shadcn Dialog<br/>Shows: tasks, notes, dates]
-    
-    style App fill:#1e293b,stroke:#475569,color:#e2e8f0
-    style Header fill:#334155,stroke:#475569,color:#e2e8f0
-    style Main fill:#334155,stroke:#475569,color:#e2e8f0
     style Sidebar fill:#334155,stroke:#475569,color:#e2e8f0
+    style Card1 fill:#e5e7eb,stroke:#9ca3af,color:#1f2937
+    style Card2 fill:#e5e7eb,stroke:#9ca3af,color:#1f2937
+    style Card3 fill:#e5e7eb,stroke:#9ca3af,color:#1f2937
+    style Card4 fill:#e5e7eb,stroke:#9ca3af,color:#1f2937
+    style Card5 fill:#e5e7eb,stroke:#9ca3af,color:#1f2937
+    style More fill:#f3f4f6,stroke:#d1d5db,color:#6b7280
 ```
 
 ---
 
-## Glossary
+## Components
 
-### Data Sources (Single Source of Truth)
-
-**Projects:**
-- **Path:** `~/Documents/backstage/projects/*/`
-- **Format:** Directory listing (folder names)
-- **Example:** `backstage`, `librarian`, `personal`
-
-**Epics:**
-- **Path:** `~/Documents/backstage/projects/{PROJECT}/epics/*/epic.yaml`
-- **Format:** YAML frontmatter
-- **Schema:**
-  ```yaml
-  name: epic-slug
-  status: planning|blocked|paused|ready|active|review|published|backlog
-  tier: 0|1|2|3
-  created: YYYY-MM-DD
-  started: YYYY-MM-DD|null
-  completed: YYYY-MM-DD|null
-  tasks: [string array]
-  ```
-
-**Epic Notes:**
-- **Path:** `~/Documents/backstage/projects/{PROJECT}/epics/{VERSION}/index.md`
-- **Format:** Markdown
-- **Content:** Philosophy, context (NOT metadata)
-
-### Components (shadcn/ui)
-
-**Select:**
-- Dropdown component
-- Docs: https://ui.shadcn.com/docs/components/select
-- Use for: Project selector, tier filter
-
-**Table:**
-- Data table component
-- Docs: https://ui.shadcn.com/docs/components/table
-- Use for: Epic list (sortable, filterable)
-
-**Checkbox:**
-- Checkbox component
-- Docs: https://ui.shadcn.com/docs/components/checkbox
-- Use for: Multi-select filters (status)
-
-**Dialog:**
-- Modal dialog component
-- Docs: https://ui.shadcn.com/docs/components/dialog
-- Use for: Epic details view
-
-### Interactions (Event Handlers)
-
-**`loadEpics(projectName: string)`**
-- **Trigger:** Project dropdown selection changes
-- **Action:** 
-  1. Read `~/backstage/projects/{projectName}/epics/*/epic.yaml`
-  2. Parse YAML → array of epic objects
-  3. Update `EpicTable` state
-- **Return:** `Epic[]`
-
-**`filterEpics(filters: {status?: string[], tier?: number})`**
-- **Trigger:** Status checkboxes OR tier dropdown change
-- **Action:**
-  1. Filter current epic list by status/tier
-  2. Update `EpicTable` visible rows
-- **Return:** `Epic[]` (filtered)
-
-**`showEpicDetails(epic: Epic)`**
-- **Trigger:** Click epic table row
-- **Action:**
-  1. Read `epic.yaml` (already loaded)
-  2. Read `index.md` from same folder
-  3. Open Dialog with combined data
-- **Return:** `void`
-
-### State Management
-
-**Global state:**
-- `selectedProject: string | null`
-- `epics: Epic[]` (loaded from filesystem)
-- `filters: {status: string[], tier: number | null}`
-
-**Derived state:**
-- `filteredEpics: Epic[]` (epics + filters applied)
+| Component | Layout | Content |
+|-----------|--------|---------|
+| [Sidebar](https://ui.shadcn.com/docs/components/radix/sidebar) | Fixed left, always visible | (TBD) |
+| [Project Card](https://ui.shadcn.com/docs/components/radix/card) | Horizontal rectangle, light gray<br/>Max width: `$CARD_WIDTH` (400px)<br/>CSS scroll-snap (snaps to card start)<br/>Horizontal scroll (as many cards as projects exist) | Loops through all projects (see glossary)<br/>Order: Most recent first<br/>Data source: `~/Documents/backstage/projects/*/` |
 
 ---
 
-## Ambiguities to Remove
+## Variables
 
-**Questions for Nicholas:**
-
-1. **Initial load:** Which project selected by default? (last used? first alphabetical? none?)
-2. **Epic sorting:** Default sort column? (version? status? created date?)
-3. **Tier "all":** Show all tiers OR no tier filter? (semantics)
-4. **Dialog actions:** Read-only = true, but show "Edit in AI" button? (opens conversational flow?)
-5. **Empty states:** What to show when no project selected? No epics found?
+| Variable | Value | Notes |
+|----------|-------|-------|
+| `$CARD_WIDTH` | 400px | Project card max width (adjustable) |
 
 ---
 
-## Night Shift Ready?
+## Next: Define Card Structure
 
-**Current state:** **NO** (ambiguities exist).
-
-**After removing ambiguities:** **YES** (diagram + glossary + interactions = complete spec).
-
-**Next:** Answer questions above, iterate until zero ambiguity.
+**Pergunta:** O que tem **dentro** de cada Project Card? (project name? epic count? outros dados?)
 
 ---
 
-**Contract status:** 🟡 Draft (needs clarification)
+**Status:** 🔄 In progress - card scroll behavior defined
+
+---
+
+## Tasks - NOW (Immediate)
+
+### ✅ DONE
+- [x] Use template index.yml across ALL projects
+- [x] Created index.yml for all 13 projects (tier 1, basic descriptions)
+- [x] App: Project list loops through all projects (including template)
+
+### 🔲 TODO
+- [ ] Find better descriptions for each project (replace "X project" placeholders)
+- [ ] Sort project list by most recent (need "updated" or "created" field in index.yml)
+- [ ] Research: Does shadcn/ui have AUTOCOMPLETE component? (for project selection)
+
+---
+
+## Tasks - LATER (After v2.1.0)
+
+- [ ] Define Sidebar content/purpose
+- [ ] Define Project Card internal structure (what fields to display)
+- [ ] Add navigation (SELECT changes → route to /projects, /checks, /agents)
+- [ ] Dynamic routing (/projects/[project]/epics)
+- [ ] Epic listing page
+- [ ] Read-only epic viewer
 
