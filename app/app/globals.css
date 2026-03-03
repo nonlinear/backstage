@@ -195,12 +195,8 @@ sup {
   font-weight: normal;
 }
 
-/* All cards sticky at top-4, except card with notes open */
-.card:not(.notes) {
+/* All cards sticky */
+.card {
   position: sticky !important;
   top: 1rem !important;
-}
-
-.card.notes {
-  max-width: 600px;
 }
