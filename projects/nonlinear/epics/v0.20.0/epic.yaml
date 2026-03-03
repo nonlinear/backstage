@@ -1,7 +1,8 @@
 ---
-name: usage-analytics
+name: "usage-analytics"
 goal: "Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit sed quia consequuntur magni dolores."
 status: roadmap
+type: "undefined"
 created: null
 started: null
 completed: null

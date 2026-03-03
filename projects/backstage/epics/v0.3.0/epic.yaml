@@ -1,7 +1,8 @@
 ---
-name: openclaw-skill-prompt
+name: "openclaw-skill-prompt"
 goal: "Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit sed quia consequuntur magni dolores."
 status: backlog
+type: "undefined"
 created: null
 started: null
 completed: null

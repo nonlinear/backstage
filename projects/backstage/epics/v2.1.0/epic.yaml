@@ -2,6 +2,7 @@
 name: "Backstage GUI"
 goal: "Read-only interface for projects and epics"
 status: active
+type: "undefined"
 tasks:
   - text: Design read-only GUI architecture
     checked: true

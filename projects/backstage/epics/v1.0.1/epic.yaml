@@ -1,7 +1,8 @@
 ---
-name: merge-policies-checks
+name: "merge-policies-checks"
 goal: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
 status: backlog
+type: "undefined"
 created: null
 started: null
 completed: null

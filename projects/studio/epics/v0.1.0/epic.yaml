@@ -1,7 +1,8 @@
 ---
-name: server-migration
+name: "server-migration"
 goal: "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti."
 status: roadmap
+type: "undefined"
 created: null
 started: null
 completed: null
