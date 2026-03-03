@@ -123,7 +123,7 @@ export function EpicCard({
             )}
           </TabsContent>
           
-          <TabsContent value="notes" className="space-y-3 overflow-y-auto max-h-[60vh]">
+          <TabsContent value="notes" className="space-y-3">
             {notesList.length > 0 ? (
               <>
                 <Select value={selectedNote} onValueChange={setSelectedNote}>
