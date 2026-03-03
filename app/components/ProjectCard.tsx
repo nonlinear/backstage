@@ -32,7 +32,7 @@ export function ProjectCard({
   publishedCount
 }: ProjectCardProps) {
   return (
-    <Card className="card max-w-[300px]">
+    <Card className="card w-full max-w-[300px]">
       <CardHeader>
         <h1 className="text-2xl font-bold mb-2">
           {name}

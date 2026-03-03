@@ -197,6 +197,6 @@ sup {
 
 /* All cards sticky at top-4, except card with notes open */
 .card:not(.notes) {
-  position: sticky;
-  top: 1rem;
+  position: sticky !important;
+  top: 1rem !important;
 }
