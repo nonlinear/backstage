@@ -70,7 +70,7 @@ export function EpicCard({
   const cardWidth = activeTab === "notes" ? "min-w-[500px] max-w-[500px]" : "min-w-[300px] max-w-[300px]"
   
   return (
-    <Card className={`${cardWidth} flex-shrink-0 transition-all duration-300`}>
+    <Card id={version} className={`${cardWidth} flex-shrink-0 transition-all duration-300`}>
       <CardHeader>
         {/* Status badge top-right */}
         <div className="flex justify-end mb-1">
@@ -123,7 +123,7 @@ export function EpicCard({
             )}
           </TabsContent>
           
-          <TabsContent value="notes" className="space-y-3">
+          <TabsContent value="notes" className="space-y-3 overflow-y-auto max-h-[60vh]">
             {notesList.length > 0 ? (
               <>
                 <Select value={selectedNote} onValueChange={setSelectedNote}>

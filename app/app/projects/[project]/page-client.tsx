@@ -95,6 +95,14 @@ export function ProjectPageClient({
   
   const handleEpicTabChange = (version: string, tab: "tasks" | "notes") => {
     setActiveEpicVersion(tab === "notes" ? version : null)
+    
+    // Update URL hash when Notes tab opened
+    if (tab === "notes") {
+      window.location.hash = version
+    } else {
+      // Clear hash when returning to Tasks
+      window.history.replaceState(null, '', window.location.pathname)
+    }
   }
   
   const currentProject = projects.find(p => p.value === projectSlug)
