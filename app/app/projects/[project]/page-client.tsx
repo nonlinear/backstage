@@ -169,8 +169,8 @@ export function ProjectPageClient({
       </div>
       
       {/* Horizontal card scroll */}
-      <div className="flex-1 overflow-x-auto overflow-y-hidden">
-        <div className="flex h-full items-start" style={{ gap: 'var(--spacing-unit)', padding: 'var(--spacing-unit)' }}>
+      <div className="flex-1 overflow-x-auto">
+        <div className="flex items-start" style={{ gap: 'var(--spacing-unit)', padding: 'var(--spacing-unit)' }}>
           {/* Project card */}
           <ProjectCard 
             name={projectName}
