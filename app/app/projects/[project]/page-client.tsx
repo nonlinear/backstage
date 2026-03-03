@@ -172,9 +172,10 @@ export function ProjectPageClient({
       {/* Horizontal card scroll */}
       <div className="flex-1 overflow-x-auto overflow-y-auto">
         <div className="flex items-start" style={{ gap: 'var(--spacing-unit)', padding: 'var(--spacing-unit)' }}>
-          {/* Blank card placeholder */}
+          {/* Project card */}
           <Card className="w-full max-w-[300px]">
-            lorem ipsum
+            <h2 className="text-2xl font-semibold mb-2">{projectName}</h2>
+            <p className="text-sm text-muted-foreground">{projectDescription}</p>
           </Card>
           
           {/* Epic cards */}
