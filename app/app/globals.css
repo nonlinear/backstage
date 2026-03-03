@@ -98,32 +98,34 @@
   --accent: oklch(0.269 0 0);
   --accent-foreground: oklch(0.985 0 0);
   --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
+  --border: oklch(0.269 0 0);
+  --input: oklch(0.269 0 0);
+  --ring: oklch(0.328 0 0);
+  --chart-1: oklch(0.761 0.161 43.683);
+  --chart-2: oklch(0.735 0.089 196.503);
+  --chart-3: oklch(0.628 0.103 231.628);
+  --chart-4: oklch(0.847 0.098 86.349);
+  --chart-5: oklch(0.831 0.107 71.704);
   --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.922 0 0);
+  --sidebar-primary: oklch(0.922 0 0);
+  --sidebar-primary-foreground: oklch(0.205 0 0);
   --sidebar-accent: oklch(0.269 0 0);
   --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+  --sidebar-border: oklch(0.269 0 0);
+  --sidebar-ring: oklch(0.328 0 0);
 }
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
   }
 }
+
 :root {
   --spacing-unit: 1rem;
 }
@@ -159,6 +161,8 @@
 [role="tablist"] {
   padding: 0.25rem;
   gap: 0.25rem;
+  display: inline-flex;
+  width: auto;
 }
 
 [role="tab"] {
@@ -171,7 +175,6 @@
 [role="tab"][data-state="active"] {
   background-color: black;
   color: white;
-  font-weight: bold;
   box-shadow: none;
 }
 
