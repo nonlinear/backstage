@@ -70,7 +70,7 @@ export function EpicCard({
   
   return (
     <div className="card">
-      <Card id={version} className="transition-all duration-300">
+      <Card id={version} className="w-full max-w-[300px] transition-all duration-300">
       <CardHeader>
         {/* Status badge top-right */}
         <div className="flex justify-end mb-1">

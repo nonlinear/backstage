@@ -33,7 +33,7 @@ export function ProjectCard({
 }: ProjectCardProps) {
   return (
     <div className="card">
-      <Card>
+      <Card className="w-full max-w-[300px]">
       <CardHeader>
         <h1 className="text-2xl font-bold mb-2">
           {name}
