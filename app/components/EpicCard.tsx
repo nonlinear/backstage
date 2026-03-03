@@ -75,7 +75,7 @@ export function EpicCard({
   const stickyClass = !isActiveEpic ? "sticky top-4" : ""
   
   return (
-    <Card id={version} className={`${cardWidth} ${stickyClass} flex-shrink-0 transition-all duration-300`}>
+    <Card id={version} className={`${cardWidth} ${stickyClass} transition-all duration-300`}>
       <CardHeader>
         {/* Status badge top-right */}
         <div className="flex justify-end mb-1">
