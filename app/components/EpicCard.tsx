@@ -36,6 +36,7 @@ interface EpicCardProps {
   notesCount?: number
   notesList?: { slug: string; title: string; content: string }[]
   activeTab: "tasks" | "notes"
+  isActiveEpic: boolean
   onTabChange: (tab: "tasks" | "notes") => void
 }
 
@@ -57,6 +58,7 @@ export function EpicCard({
   notesCount = 0,
   notesList = [],
   activeTab,
+  isActiveEpic,
   onTabChange
 }: EpicCardProps) {
   const formattedName = formatName(name)
@@ -69,8 +71,8 @@ export function EpicCard({
   // Expand to 500px max when Notes tab is active
   const cardWidth = activeTab === "notes" ? "w-full max-w-[500px]" : "w-full max-w-[300px]"
   
-  // Sticky when NOT showing notes (so other cards follow scroll)
-  const stickyClass = activeTab === "tasks" ? "sticky top-4" : ""
+  // Sticky when NOT the active epic (so other cards follow scroll)
+  const stickyClass = !isActiveEpic ? "sticky top-4" : ""
   
   return (
     <Card id={version} className={`${cardWidth} ${stickyClass} flex-shrink-0 transition-all duration-300`}>

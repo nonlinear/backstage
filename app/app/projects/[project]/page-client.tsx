@@ -199,6 +199,7 @@ export function ProjectPageClient({
                 notesCount={epic.notesCount}
                 notesList={epic.notesList}
                 activeTab={activeEpicVersion === epic.version ? "notes" : "tasks"}
+                isActiveEpic={activeEpicVersion === epic.version}
                 onTabChange={(tab) => handleEpicTabChange(epic.version, tab)}
               />
             </div>
