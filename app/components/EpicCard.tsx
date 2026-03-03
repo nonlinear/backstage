@@ -68,11 +68,8 @@ export function EpicCard({
   // Find selected note content
   const noteContent = notesList.find(n => n.slug === selectedNote)?.content || ""
   
-  // Notes: max-w-600px
-  const cardWidth = activeTab === "notes" ? "max-w-[600px]" : ""
-  
   return (
-    <div className={`card ${cardWidth}`}>
+    <div className="card">
       <Card id={version} className="transition-all duration-300">
       <CardHeader>
         {/* Status badge top-right */}
