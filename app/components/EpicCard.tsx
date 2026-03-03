@@ -33,7 +33,7 @@ interface EpicCardProps {
   goal?: string
   tasks?: Task[]
   notesCount?: number
-  notesList?: string[]
+  notesList?: { slug: string; title: string }[]
   activeTab: "tasks" | "notes"
   onTabChange: (tab: "tasks" | "notes") => void
 }
@@ -60,9 +60,9 @@ export function EpicCard({
 }: EpicCardProps) {
   const formattedName = formatName(name)
   const completedTasks = tasks.filter(t => t.checked).length
-  const [selectedNote, setSelectedNote] = useState(notesList[0] || "")
+  const [selectedNote, setSelectedNote] = useState(notesList[0]?.slug || "")
   
-  // Expand to 400px when Notes tab is active
+  // Expand to 500px when Notes tab is active
   const cardWidth = activeTab === "notes" ? "min-w-[500px] max-w-[500px]" : "min-w-[300px] max-w-[300px]"
   
   return (
@@ -90,7 +90,7 @@ export function EpicCard({
       
       <CardContent>
         {/* Tabs: Tasks and Notes */}
-        <Tabs value={activeTab} onValueChange={onTabChange} className="w-full">
+        <Tabs value={activeTab} onValueChange={(v) => onTabChange(v as "tasks" | "notes")} className="w-full">
           <TabsList className="w-full">
             <TabsTrigger value="tasks">
               Tasks<sup className="ml-1">{completedTasks} of {tasks.length}</sup>
@@ -126,14 +126,14 @@ export function EpicCard({
                   <SelectTrigger className="w-full justify-start border-0 shadow-none p-0 focus:ring-0 hover:bg-transparent">
                     <SelectValue>
                       <span className="font-bold text-foreground">
-                        {selectedNote}
+                        {notesList.find(n => n.slug === selectedNote)?.title || selectedNote}
                       </span>
                     </SelectValue>
                   </SelectTrigger>
                   <SelectContent>
                     {notesList.map((note) => (
-                      <SelectItem key={note} value={note}>
-                        {note}
+                      <SelectItem key={note.slug} value={note.slug}>
+                        {note.title}
                       </SelectItem>
                     ))}
                   </SelectContent>
