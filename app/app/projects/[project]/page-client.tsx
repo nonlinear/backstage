@@ -171,21 +171,12 @@ export function ProjectPageClient({
       {/* Horizontal card scroll */}
       <div className="flex-1 overflow-x-auto overflow-y-auto">
         <div className="flex items-start" style={{ gap: 'var(--spacing-unit)', padding: 'var(--spacing-unit)' }}>
-          {/* Project card */}
-          <ProjectCard 
-            name={projectName}
-            description={projectDescription}
-            tier={projectTier}
-            type={projectType}
-            branch={projectBranch}
-            checks={projectChecks}
-            epicCount={projectEpicCount}
-            activeCount={activeCount}
-            backlogCount={backlogCount}
-            publishedCount={publishedCount}
-          />
+          {/* Blank card placeholder */}
+          <div className="w-full max-w-[300px]">
+            {/* Blank */}
+          </div>
           
-          {/* Scroll snap points before epic cards */}
+          {/* Epic cards */}
           {sortedEpics.map((epic) => (
             <div key={epic.version} className="flex-shrink-0">
               <div className="snap-start" />
