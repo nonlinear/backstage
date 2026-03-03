@@ -69,7 +69,6 @@ export function EpicCard({
   const noteContent = notesList.find(n => n.slug === selectedNote)?.content || ""
   
   return (
-    <div className="card">
       <Card id={version} className="w-full max-w-[300px] transition-all duration-300">
       <CardHeader>
         {/* Status badge top-right */}
@@ -155,6 +154,5 @@ export function EpicCard({
         </Tabs>
       </CardContent>
     </Card>
-    </div>
   )
 }

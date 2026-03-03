@@ -32,7 +32,6 @@ export function ProjectCard({
   publishedCount
 }: ProjectCardProps) {
   return (
-    <div className="card">
       <Card className="w-full max-w-[300px]">
       <CardHeader>
         <h1 className="text-2xl font-bold mb-2">
@@ -70,6 +69,5 @@ export function ProjectCard({
         )}
       </CardContent>
     </Card>
-    </div>
   )
 }

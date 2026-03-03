@@ -196,7 +196,7 @@ sup {
 }
 
 /* All cards sticky with max-width constraint */
-.card {
+[data-slot="card"] {
   position: sticky !important;
   top: 1rem !important;
   max-width: 300px !important;
