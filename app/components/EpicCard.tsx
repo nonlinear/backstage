@@ -63,7 +63,7 @@ export function EpicCard({
   const [selectedNote, setSelectedNote] = useState(notesList[0] || "")
   
   // Expand to 400px when Notes tab is active
-  const cardWidth = activeTab === "notes" ? "min-w-[400px] max-w-[400px]" : "min-w-[300px] max-w-[300px]"
+  const cardWidth = activeTab === "notes" ? "min-w-[500px] max-w-[500px]" : "min-w-[300px] max-w-[300px]"
   
   return (
     <Card className={`${cardWidth} flex-shrink-0 transition-all duration-300`}>

@@ -1,10 +1,7 @@
 ---
-name: backstage-gui
-goal: "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti."
+name: "Backstage GUI"
+goal: "Read-only interface for projects and epics"
 status: active
-created: 2026-03-01
-started: 2026-03-01
-completed: null
 tasks:
   - text: Design read-only GUI architecture
     checked: true
@@ -14,6 +11,8 @@ tasks:
     checked: true
   - text: Conversational AI editing (respects checks)
     checked: false
+  - text: Glossary
+    checked: true
   - text: Document GUI design principles
     checked: false
 ---

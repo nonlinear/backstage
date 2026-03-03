@@ -170,6 +170,8 @@
   width: auto !important;
   padding-left: 1rem;
   padding-right: 1rem;
+  padding-top: calc(0.5rem + 4px);
+  padding-bottom: 0.5rem;
 }
 
 [role="tab"][data-state="active"] {
@@ -182,7 +184,12 @@
   background-color: transparent;
 }
 
-/* Standardized superscript spacing */
+/* Tab sup closer to text */
+[role="tab"] sup {
+  margin-left: 0.25rem;
+}
+
+/* Standardized superscript spacing (global) */
 sup {
   margin-left: 0.5rem;
   font-weight: normal;
