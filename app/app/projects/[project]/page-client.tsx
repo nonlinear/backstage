@@ -173,7 +173,7 @@ export function ProjectPageClient({
         <div className="flex items-start" style={{ gap: 'var(--spacing-unit)', padding: 'var(--spacing-unit)' }}>
           {/* Blank card placeholder */}
           <div className="w-full max-w-[300px]">
-            {/* Blank */}
+            lorem ipsum
           </div>
           
           {/* Epic cards */}
