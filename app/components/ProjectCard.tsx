@@ -1,6 +1,6 @@
 "use client"
 
-import { Card, CardHeader } from "@/components/ui/card"
+import { Card, CardHeader, CardContent } from "@/components/ui/card"
 
 interface ProjectCardProps {
   projectName: string
@@ -14,6 +14,10 @@ export function ProjectCard({ projectName, projectDescription }: ProjectCardProp
         <h2 className="text-2xl font-semibold mb-2">{projectName}</h2>
         <p className="text-sm text-muted-foreground">{projectDescription}</p>
       </CardHeader>
+      
+      <CardContent>
+        {/* Content placeholder */}
+      </CardContent>
     </Card>
   )
 }
