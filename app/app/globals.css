@@ -154,3 +154,27 @@
   position: relative;
   z-index: 1;
 }
+
+/* Tabs styling customization */
+[role="tablist"] {
+  padding: 0.25rem;
+  gap: 0.25rem;
+}
+
+[role="tab"] {
+  border-radius: 20px;
+  width: auto !important;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+[role="tab"][data-state="active"] {
+  background-color: black;
+  color: white;
+  font-weight: bold;
+  box-shadow: none;
+}
+
+[role="tab"][data-state="inactive"] {
+  background-color: transparent;
+}
