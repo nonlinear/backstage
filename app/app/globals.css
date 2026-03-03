@@ -199,4 +199,6 @@ sup {
 .card:not(.notes) {
   position: sticky !important;
   top: 1rem !important;
+  max-height: 300px !important;
+  overflow-y: auto;
 }
