@@ -172,9 +172,9 @@ export function ProjectPageClient({
       <div className="flex-1 overflow-x-auto overflow-y-auto">
         <div className="flex items-start" style={{ gap: 'var(--spacing-unit)', padding: 'var(--spacing-unit)' }}>
           {/* Blank card placeholder */}
-          <div className="w-full max-w-[300px]">
+          <Card className="w-full max-w-[300px]">
             lorem ipsum
-          </div>
+          </Card>
           
           {/* Epic cards */}
           {sortedEpics.map((epic) => (
