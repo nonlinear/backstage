@@ -2,3 +2,10 @@ name: "Skills"
 tier: 1
 type: undefined
 description: "Skills project"
+checks:
+  - better-schema.md
+  - openclaw-skills-location.sh
+  - readme-tables.md
+  - skill-diagrams.sh
+  - skill-symlinks.md
+  - skill-symlinks.sh

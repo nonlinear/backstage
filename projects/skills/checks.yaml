@@ -1,9 +1,0 @@
----
-checks:
-  - better-schema.md
-  - openclaw-skills-location.sh
-  - readme-tables.md
-  - skill-diagrams.sh
-  - skill-symlinks.md
-  - skill-symlinks.sh
----

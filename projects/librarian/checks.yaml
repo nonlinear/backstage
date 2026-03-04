@@ -1,7 +1,0 @@
----
-checks:
-  - arch-workflow.md
-  - byob-setup.md
-  - gitignore-local.sh
-  - versioning.md
----

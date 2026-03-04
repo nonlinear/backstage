@@ -2,3 +2,16 @@ name: "Personal"
 tier: 1
 type: undefined
 description: "Personal project"
+checks:
+  - active-epics.sh
+  - backstage-structure.sh
+  - broken-links.sh
+  - context-files.sh
+  - design-dev-workflow.md
+  - epic-branch.sh
+  - location-aware.md
+  - memory-files.sh
+  - no-epic-branches.md
+  - parallel-epics.md
+  - parity-freshness.sh
+  - sync-automation.md

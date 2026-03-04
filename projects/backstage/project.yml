@@ -2,3 +2,16 @@ name: "Backstage"
 tier: 1
 type: undefined
 description: "Backstage project lorem ipsum dolor sit amet"
+checks:
+  - README.md
+  - dogfooding.md
+  - dual-layer-global.sh
+  - dual-layer-project.sh
+  - global-vs-project.md
+  - mermaid-sync.sh
+  - pre-merge-tasks.sh
+  - skill-workflow.md
+  - templates.md
+  - version-from-branch.sh
+  - version-sync.sh
+  - version-tracking.md
