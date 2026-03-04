@@ -76,8 +76,9 @@ export function EpicCard({
   const noteContent = notesList.find(n => n.slug === selectedNote)?.content || ""
   
   return (
+    <>
+      <div id={version} className="scroll-mt-4" />
       <Card 
-        id={version} 
         className={`relative flex-shrink-0 transition-all duration-300 ${isActiveEpic ? 'w-[500px]' : 'w-[300px]'} h-full overflow-y-auto`}
       >
       {/* Status badge top-left (absolute) */}
@@ -161,5 +162,6 @@ export function EpicCard({
         </Tabs>
       </CardContent>
     </Card>
+    </>
   )
 }
