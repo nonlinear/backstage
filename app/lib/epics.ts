@@ -133,33 +133,7 @@ export function getProjectEpics(projectSlug: string): Epic[] {
     const notesCount = countNotes(epicPath)
     const notesList = getNoteTitles(epicPath)
     
-    // Try index.md frontmatter first
-    const indexMdPath = path.join(epicPath, 'index.md')
-    if (fs.existsSync(indexMdPath)) {
-      try {
-        const content = fs.readFileSync(indexMdPath, 'utf-8')
-        const frontmatterMatch = content.match(/^---\n([\s\S]*?)\n---/)
-        
-        if (frontmatterMatch) {
-          const frontmatter = yaml.load(frontmatterMatch[1]) as any
-          epics.push({
-            version: epicDir, // Always use folder name
-            name: frontmatter.name || epicDir,
-            description: frontmatter.description || '',
-            status: frontmatter.status || 'backlog',
-            goal: frontmatter.goal || '',
-            tasks,
-            notesCount,
-            notesList,
-          })
-          continue
-        }
-      } catch (err) {
-        // Silent fail, try epic.yaml
-      }
-    }
-    
-    // Fallback to epic.yaml
+    // Always use epic.yaml (ignore index.md frontmatter)
     const epicYamlPath = path.join(epicPath, 'epic.yaml')
     if (fs.existsSync(epicYamlPath)) {
       try {
@@ -174,7 +148,7 @@ export function getProjectEpics(projectSlug: string): Epic[] {
           goal: epicData.goal || '',
           tasks,
           notesCount,
-            notesList,
+          notesList,
         })
       } catch (err) {
         console.error(`Error reading ${epicYamlPath}:`, err)
