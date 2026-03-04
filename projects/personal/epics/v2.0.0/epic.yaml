@@ -7,17 +7,30 @@ created: 2026-02-27
 started: 2026-02-27
 completed: null
 tasks:
-  - [x] Create modes.md
-  - [x] Create check-anatomy.md
-  - [x] Migrate personal to studio
-  - [x] Restructure (projects/, v prefix, index.md)
-  - [x] Refactor backstage skill (parse-epics.sh, checks-composite.sh, backstage.sh)
-  - [ ] Fix defasado checks (4 failed: detect-obsolete-references.sh, backstage-structure.sh, context-files.sh, + 1 unknown)
-  - [ ] Checks logic (do we need id? Can we go on without it?)
-  - [ ] Migrate global and local checks
-  - [ ] Projects.yaml
-  - [ ] Projects check
-  - [ ] Epics check
-  - [ ] Decide on UI framework
-  - [ ] Migrate other projects
----
+  - text: "Create modes.md"
+    checked: true
+  - text: "Create check-anatomy.md"
+    checked: true
+  - text: "Migrate personal to studio"
+    checked: true
+  - text: "Restructure (projects/, v prefix, index.md)"
+    checked: true
+  - text: "Refactor backstage skill (parse-epics.sh, checks-composite.sh, backstage.sh)"
+    checked: true
+  - text: "Fix defasado checks (4 failed: detect-obsolete-references.sh, backstage-structure.sh, context-files.sh, + 1 unknown)"
+    checked: false
+  - text: "Checks logic (do we need id? Can we go on without it?)"
+    checked: false
+  - text: "Migrate global and local checks"
+    checked: false
+  - text: "Projects.yaml"
+    checked: false
+  - text: "Projects check"
+    checked: false
+  - text: "Epics check"
+    checked: false
+  - text: "Decide on UI framework"
+    checked: false
+  - text: "Migrate other projects"
+    checked: false---
+

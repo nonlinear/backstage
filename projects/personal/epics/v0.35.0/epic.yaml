@@ -7,13 +7,22 @@ created: 2026-03-01
 started: null
 completed: null
 tasks:
-  - [ ] Decision: Mattermost (Mac Studio) vs NAS vs cloud-hosted
-  - [ ] Decision: Mastodon instance (self-hosted vs joinmastodon.org)
-  - [ ] Install chosen platform (Docker + Tailscale exposure)
-  - [ ] Create agent users (@defense, @secretaria, @wiley, @uxr, etc.)
-  - [ ] Define squads (DevSquad, ResearchSquad, etc.)
-  - [ ] Agent API integration (post updates, respond to @mentions)
-  - [ ] Test: Agent posts update, Nicholas @mentions agent, agent responds
-  - [ ] Document in connections/agent-communication.md
-  - [ ] (Optional) Cross-platform bridge (Mattermost ↔ Mastodon)
----
+  - text: "Decision: Mattermost (Mac Studio) vs NAS vs cloud-hosted"
+    checked: false
+  - text: "Decision: Mastodon instance (self-hosted vs joinmastodon.org)"
+    checked: false
+  - text: "Install chosen platform (Docker + Tailscale exposure)"
+    checked: false
+  - text: "Create agent users (@defense, @secretaria, @wiley, @uxr, etc.)"
+    checked: false
+  - text: "Define squads (DevSquad, ResearchSquad, etc.)"
+    checked: false
+  - text: "Agent API integration (post updates, respond to @mentions)"
+    checked: false
+  - text: "Test: Agent posts update, Nicholas @mentions agent, agent responds"
+    checked: false
+  - text: "Document in connections/agent-communication.md"
+    checked: false
+  - text: "(Optional) Cross-platform bridge (Mattermost ↔ Mastodon)"
+    checked: false---
+
