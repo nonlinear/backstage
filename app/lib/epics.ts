@@ -65,7 +65,6 @@ function countNotes(epicPath: string): number {
     const files = fs.readdirSync(epicPath)
     return files.filter(f => 
       f.endsWith('.md') && 
-      f !== 'index.md' && 
       f !== 'epic.yaml'
     ).length
   } catch {
