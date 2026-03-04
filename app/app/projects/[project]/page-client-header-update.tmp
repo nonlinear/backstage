@@ -1,0 +1,11 @@
+      <div 
+        className="flex items-center gap-6 border-b bg-background relative overflow-hidden" 
+        style={{ 
+          padding: 'var(--spacing-unit)',
+          backgroundImage: 'url(/icon.png)',
+          backgroundPosition: 'bottom right',
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: 'auto 100%',
+          backgroundOrigin: 'padding-box'
+        }}
+      >
