@@ -1,21 +1,20 @@
 "use client"
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import {
   Breadcrumb,
   BreadcrumbItem,
   BreadcrumbList,
-  BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb"
 import {
   Select,
   SelectContent,
   SelectItem,
-  SelectSeparator,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+import { ProjectCard } from "@/components/ProjectCard"
 
 const sections = [
   { value: "projects", label: "Projects", count: 14 },
@@ -23,27 +22,38 @@ const sections = [
   { value: "agents", label: "Agents", count: 8 },
 ]
 
-const projects = [
-  { value: "agregore", label: "Agregore", epicCount: 0 },
-  { value: "backstage", label: "Backstage", epicCount: 19 },
-  { value: "better", label: "Better", epicCount: 0 },
-  { value: "billable-hours", label: "Billable Hours", epicCount: 0 },
-  { value: "discrepancy", label: "Discrepancy", epicCount: 0 },
-  { value: "fitness", label: "Fitness", epicCount: 0 },
-  { value: "i-ching", label: "I Ching", epicCount: 0 },
-  { value: "librarian", label: "Librarian", epicCount: 0 },
-  { value: "memory", label: "Memory", epicCount: 0 },
-  { value: "nonlinear", label: "Nonlinear", epicCount: 0 },
-  { value: "personal", label: "Personal", epicCount: 0 },
-  { value: "skills", label: "Skills", epicCount: 0 },
-  { value: "studio", label: "Studio", epicCount: 0 },
-  { value: "template", label: "Template", epicCount: 1 },
-]
+interface ProjectData {
+  name: string
+  description: string
+  tier: number
+  type: string
+  activeCount: number
+  backlogCount: number
+  publishedCount: number
+  checks: any[]
+}
 
 export default function AllProjectsPage() {
   const router = useRouter()
   const [section, setSection] = useState("projects")
-  const [project, setProject] = useState("all")
+  const [projects, setProjects] = useState<ProjectData[]>([])
+  const [loading, setLoading] = useState(true)
+  
+  useEffect(() => {
+    async function loadProjects() {
+      try {
+        const response = await fetch('/api/projects')
+        const data = await response.json()
+        setProjects(data.projects || [])
+      } catch (error) {
+        console.error('Failed to load projects:', error)
+      } finally {
+        setLoading(false)
+      }
+    }
+    
+    loadProjects()
+  }, [])
   
   const handleSectionChange = (value: string) => {
     setSection(value)
@@ -51,56 +61,29 @@ export default function AllProjectsPage() {
     if (value === "agents") router.push("/agents")
   }
   
-  const handleProjectChange = (value: string) => {
-    setProject(value)
-    if (value === "all") {
-      router.push("/projects/all")
-    } else {
-      router.push(`/projects/${value}`)
-    }
-  }
-  
   const currentSection = sections.find(s => s.value === section)
-  const totalEpics = projects.reduce((sum, p) => sum + p.epicCount, 0)
   
   return (
-    <div className="min-h-screen p-8">
-      <div className="flex items-center gap-6">
-        <h4 className="text-xl font-semibold">Backstage</h4>
+    <div className="h-screen flex flex-col">
+      {/* Fixed breadcrumb header with icon */}
+      <div className="flex items-center gap-6 border-b bg-background header-with-icon" style={{ padding: 'var(--spacing-unit)' }}>
+        <h1 className="text-2xl font-bold">Backstage</h1>
+        <span className="text-muted-foreground">/</span>
         <Breadcrumb>
           <BreadcrumbList>
             <BreadcrumbItem>
               <Select value={section} onValueChange={handleSectionChange}>
-                <SelectTrigger className="justify-start">
+                <SelectTrigger className="justify-start border-0 shadow-none p-0 focus:ring-0 hover:bg-transparent">
                   <SelectValue>
-                    {currentSection?.label}<sup>{currentSection?.count}</sup>
+                    <span className="font-bold text-foreground">
+                      {currentSection?.label}<sup className="text-muted-foreground font-normal">{projects.length || currentSection?.count}</sup>
+                    </span>
                   </SelectValue>
                 </SelectTrigger>
-                <SelectContent position="popper">
+                <SelectContent position="popper" align="start">
                   {sections.map((item) => (
                     <SelectItem key={item.value} value={item.value}>
                       {item.label}<sup className="text-muted-foreground">{item.count}</sup>
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </BreadcrumbItem>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem>
-              <Select value={project} onValueChange={handleProjectChange}>
-                <SelectTrigger className="justify-start">
-                  <SelectValue>
-                    All<sup>{totalEpics}</sup>
-                  </SelectValue>
-                </SelectTrigger>
-                <SelectContent position="popper">
-                  <SelectItem value="all">
-                    All<sup className="text-muted-foreground">{totalEpics}</sup>
-                  </SelectItem>
-                  <SelectSeparator />
-                  {projects.map((item) => (
-                    <SelectItem key={item.value} value={item.value}>
-                      {item.label}<sup className="text-muted-foreground">{item.epicCount}</sup>
                     </SelectItem>
                   ))}
                 </SelectContent>
@@ -110,9 +93,28 @@ export default function AllProjectsPage() {
         </Breadcrumb>
       </div>
       
-      <div className="mt-8">
-        <h2 className="text-2xl font-bold">All Projects</h2>
-        <p className="text-gray-600 mt-2">{totalEpics} total epics across {projects.length} projects</p>
+      {/* Scrollable content */}
+      <div className="flex-1 overflow-y-auto p-8">
+        {loading ? (
+          <div className="text-muted-foreground">Loading projects...</div>
+        ) : (
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3" style={{ gridAutoRows: 'max-content' }}>
+            {projects.map((project) => (
+              <div key={project.name} className="h-fit">
+                <ProjectCard
+                  projectName={project.name}
+                  projectDescription={project.description}
+                  projectTier={project.tier}
+                  projectType={project.type}
+                  activeCount={project.activeCount}
+                  backlogCount={project.backlogCount}
+                  publishedCount={project.publishedCount}
+                  checks={project.checks}
+                />
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
