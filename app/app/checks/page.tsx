@@ -65,19 +65,23 @@ export default function ChecksPage() {
   const currentSection = sections.find(s => s.value === section)
   
   return (
-    <div className="min-h-screen p-8">
-      <div className="flex items-center gap-6">
-        <h4 className="text-xl font-semibold">Backstage</h4>
+    <div className="h-screen flex flex-col">
+      {/* Fixed breadcrumb header with icon */}
+      <div className="flex items-center gap-6 border-b bg-background header-with-icon" style={{ padding: 'var(--spacing-unit)' }}>
+        <h1 className="text-2xl font-bold">Backstage</h1>
+        <span className="text-muted-foreground">/</span>
         <Breadcrumb>
           <BreadcrumbList>
             <BreadcrumbItem>
               <Select value={section} onValueChange={handleSectionChange}>
-                <SelectTrigger className="justify-start">
+                <SelectTrigger className="justify-start border-0 shadow-none p-0 focus:ring-0 hover:bg-transparent">
                   <SelectValue>
-                    {currentSection?.label}<sup>{checks.length || currentSection?.count}</sup>
+                    <span className="font-bold text-foreground">
+                      {currentSection?.label}<sup className="text-muted-foreground font-normal">{checks.length || currentSection?.count}</sup>
+                    </span>
                   </SelectValue>
                 </SelectTrigger>
-                <SelectContent position="popper">
+                <SelectContent position="popper" align="start">
                   {sections.map((item) => (
                     <SelectItem key={item.value} value={item.value}>
                       {item.label}<sup className="text-muted-foreground">{item.count}</sup>
@@ -90,20 +94,23 @@ export default function ChecksPage() {
         </Breadcrumb>
       </div>
       
-      {loading ? (
-        <div className="mt-8 text-muted-foreground">Loading checks...</div>
-      ) : (
-        <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {checks.map((check) => (
-            <Card key={check.name}>
-              <CardHeader>
-                <CardTitle>{check.title}</CardTitle>
-                <CardDescription>{check.description}</CardDescription>
-              </CardHeader>
-            </Card>
-          ))}
-        </div>
-      )}
+      {/* Scrollable content */}
+      <div className="flex-1 overflow-y-auto p-8">
+        {loading ? (
+          <div className="text-muted-foreground">Loading checks...</div>
+        ) : (
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {checks.map((check) => (
+              <Card key={check.name}>
+                <CardHeader>
+                  <CardTitle>{check.title}</CardTitle>
+                  <CardDescription>{check.description}</CardDescription>
+                </CardHeader>
+              </Card>
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   );
 }
