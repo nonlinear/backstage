@@ -194,10 +194,3 @@ sup {
   margin-left: 0.5rem;
   font-weight: normal;
 }
-
-/* All cards sticky with max-width constraint */
-[data-slot="card"] {
-  position: sticky !important;
-  top: 1rem !important;
-  max-width: 300px !important;
-}

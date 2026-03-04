@@ -66,7 +66,10 @@ export function EpicCard({
   const noteContent = notesList.find(n => n.slug === selectedNote)?.content || ""
   
   return (
-      <Card id={version} className={`transition-all duration-300 ${isActiveEpic ? 'w-full max-w-[500px]' : 'w-full max-w-[300px]'}`}>
+      <Card 
+        id={version} 
+        className={`border-2 border-black transition-all duration-300 ${isActiveEpic ? 'w-full max-w-[500px]' : 'w-full max-w-[300px] sticky top-4'}`}
+      >
       <CardHeader>
         {/* Status badge top-right */}
         <div className="flex justify-end mb-1">
