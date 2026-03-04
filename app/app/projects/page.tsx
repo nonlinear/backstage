@@ -131,17 +131,20 @@ export default function AllProjectsPage() {
       <div className="flex-1 overflow-x-auto">
         <div className="flex items-start h-full" style={{ gap: 'calc(var(--spacing-unit) / 2)', padding: 'var(--spacing-unit)' }}>
           {projects.map((project) => (
-            <ProjectCard
-              key={project.name}
-              projectName={project.name}
-              projectDescription={project.description}
-              projectTier={project.tier}
-              projectType={project.type}
-              activeCount={project.activeCount}
-              backlogCount={project.backlogCount}
-              publishedCount={project.publishedCount}
-              checks={project.checks}
-            />
+            <>
+              <div key={`anchor-${project.name}`} id={project.name.toLowerCase()} className="scroll-mt-4" />
+              <ProjectCard
+                key={project.name}
+                projectName={project.name}
+                projectDescription={project.description}
+                projectTier={project.tier}
+                projectType={project.type}
+                activeCount={project.activeCount}
+                backlogCount={project.backlogCount}
+                publishedCount={project.publishedCount}
+                checks={project.checks}
+              />
+            </>
           ))}
           
           {/* Spacer after last card */}
