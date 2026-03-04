@@ -200,3 +200,8 @@ sup {
   position: sticky !important;
   top: 1rem !important;
 }
+
+/* Current card: black border 2px */
+.card.current {
+  border: 2px solid black !important;
+}

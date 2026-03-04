@@ -12,7 +12,7 @@ interface ProjectCardProps {
 export function ProjectCard({ projectName, projectDescription, isCurrent = false, onClick }: ProjectCardProps) {
   return (
     <Card 
-      className={`card ${isCurrent ? 'current' : ''} w-full max-w-[300px] border-2 border-black transition-all duration-300`}
+      className={`card ${isCurrent ? 'current' : ''} w-full max-w-[300px] transition-all duration-300`}
       onClick={onClick}
     >
       <CardHeader>

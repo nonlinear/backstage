@@ -72,7 +72,7 @@ export function EpicCard({
   return (
       <Card 
         id={version} 
-        className={`card ${isCurrent ? 'current' : ''} border-2 border-black transition-all duration-300 ${isActiveEpic ? 'w-full max-w-[500px]' : 'w-full max-w-[300px]'}`}
+        className={`card ${isCurrent ? 'current' : ''} transition-all duration-300 ${isActiveEpic ? 'w-full max-w-[500px]' : 'w-full max-w-[300px]'}`}
         onClick={onCardClick}
       >
       <CardHeader>
