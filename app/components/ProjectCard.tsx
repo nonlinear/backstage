@@ -9,7 +9,7 @@ interface ProjectCardProps {
 
 export function ProjectCard({ projectName, projectDescription }: ProjectCardProps) {
   return (
-    <Card className="w-full max-w-[300px] border-2 border-black sticky top-4 transition-all duration-300">
+    <Card className="card w-full max-w-[300px] border-2 border-black transition-all duration-300">
       <CardHeader>
         <h2 className="text-2xl font-semibold mb-2">{projectName}</h2>
         <p className="text-sm text-muted-foreground">{projectDescription}</p>
