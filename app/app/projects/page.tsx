@@ -86,7 +86,7 @@ export default function AllProjectsPage() {
                 <SelectTrigger className="justify-start border-0 shadow-none p-0 focus:ring-0 hover:bg-transparent">
                   <SelectValue>
                     <span className="font-bold text-foreground">
-                      {currentSection?.label}<sup className="text-muted-foreground font-normal">{projects.length || currentSection?.count}</sup>
+                      {currentSection?.label}<sup className="text-muted-foreground font-normal">{projects.length}</sup>
                     </span>
                   </SelectValue>
                 </SelectTrigger>
