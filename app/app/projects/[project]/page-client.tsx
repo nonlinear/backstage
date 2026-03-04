@@ -171,6 +171,7 @@ export function ProjectPageClient({
       {/* Fixed breadcrumb (2 levels only) */}
       <div className="flex items-center gap-6 border-b bg-background header-with-icon" style={{ padding: 'var(--spacing-unit)' }}>
         <h1 className="text-2xl font-bold">Backstage</h1>
+        <span className="text-muted-foreground">/</span>
         <Breadcrumb>
           <BreadcrumbList>
             <BreadcrumbItem>
