@@ -69,7 +69,7 @@ export function EpicCard({
   const noteContent = notesList.find(n => n.slug === selectedNote)?.content || ""
   
   return (
-      <Card id={version} className="w-full max-w-[300px] transition-all duration-300">
+      <Card id={version} className={`transition-all duration-300 ${isActiveEpic ? 'w-full max-w-[500px]' : 'w-full max-w-[300px]'}`}>
       <CardHeader>
         {/* Status badge top-right */}
         <div className="flex justify-end mb-1">
@@ -94,12 +94,12 @@ export function EpicCard({
       <CardContent>
         {/* Tabs: Tasks and Notes */}
         <Tabs value={activeTab} onValueChange={(v) => onTabChange(v as "tasks" | "notes")} className="w-full">
-          <TabsList className="w-full">
+          <TabsList className="justify-start pt-1">
             <TabsTrigger value="tasks">
-              Tasks<sup className="ml-1">{completedTasks} of {tasks.length}</sup>
+              Tasks<sup className="ml-0.5">{completedTasks} of {tasks.length}</sup>
             </TabsTrigger>
             <TabsTrigger value="notes">
-              Notes<sup className="ml-1">{notesCount}</sup>
+              Notes<sup className="ml-0.5">{notesCount}</sup>
             </TabsTrigger>
           </TabsList>
           
