@@ -147,7 +147,6 @@
   background-size: auto 100%;
   background-repeat: no-repeat;
   background-position: bottom right;
-  transform: scaleX(-1);
   pointer-events: none;
   z-index: 0;
 }
