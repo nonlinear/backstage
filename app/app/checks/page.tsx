@@ -20,6 +20,7 @@ import {
   CardTitle,
   CardDescription,
 } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
 
 const sections = [
   { value: "projects", label: "Projects", count: 14 },
@@ -104,7 +105,12 @@ export default function ChecksPage() {
               <Card key={check.name}>
                 <CardHeader>
                   <CardTitle>{check.title}</CardTitle>
-                  <CardDescription>{check.description}</CardDescription>
+                  <div className="mt-2">
+                    <Badge variant="outline" className="text-xs">
+                      {check.type}
+                    </Badge>
+                  </div>
+                  <CardDescription className="mt-2">{check.description}</CardDescription>
                 </CardHeader>
               </Card>
             ))}
