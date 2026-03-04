@@ -78,15 +78,14 @@ export function EpicCard({
   return (
       <Card 
         id={version} 
-        className={`flex-shrink-0 transition-all duration-300 ${isActiveEpic ? 'w-[500px]' : 'w-[300px]'} h-full overflow-y-auto`}
+        className={`relative flex-shrink-0 transition-all duration-300 ${isActiveEpic ? 'w-[500px]' : 'w-[300px]'} h-full overflow-y-auto`}
       >
+      {/* Status badge top-left (absolute) */}
+      <Badge variant="outline" className="absolute top-4 left-4 text-xs capitalize">
+        {status}
+      </Badge>
+      
       <CardHeader>
-        {/* Status badge top-right */}
-        <div className="flex justify-end mb-1">
-          <Badge variant="outline" className="text-xs capitalize">
-            {status}
-          </Badge>
-        </div>
         
         {/* Title with version superscript */}
         <h3 className="text-xl font-bold mb-2">
