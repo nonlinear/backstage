@@ -1,12 +1,12 @@
 import { NextResponse } from 'next/server'
 import fs from 'fs'
 import path from 'path'
-import matter from 'gray-matter'
+import yaml from 'js-yaml'
 
 const BACKSTAGE_ROOT = path.join(process.env.HOME || '', 'Documents/backstage')
 const PROJECTS_DIR = path.join(BACKSTAGE_ROOT, 'projects')
 
-interface ProjectFrontmatter {
+interface ProjectYaml {
   name: string
   description: string
   tier: number
@@ -20,23 +20,23 @@ export async function GET() {
       .filter(dirent => dirent.isDirectory())
       .map(dirent => dirent.name)
     
-    const projects = projectDirs.map(projectName => {
-      const metaPath = path.join(PROJECTS_DIR, projectName, 'META.md')
-      const roadmapPath = path.join(PROJECTS_DIR, projectName, 'ROADMAP.md')
+    const projects = projectDirs.map(projectDir => {
+      const projectYamlPath = path.join(PROJECTS_DIR, projectDir, 'project.yml')
+      const roadmapPath = path.join(PROJECTS_DIR, projectDir, 'ROADMAP.md')
       
-      let frontmatter: ProjectFrontmatter = {
-        name: projectName,
+      let projectData: ProjectYaml = {
+        name: projectDir,
         description: '',
         tier: 0,
         type: '',
         checks: []
       }
       
-      // Read META.md for project metadata
-      if (fs.existsSync(metaPath)) {
-        const metaContent = fs.readFileSync(metaPath, 'utf-8')
-        const { data } = matter(metaContent)
-        frontmatter = { ...frontmatter, ...data }
+      // Read project.yml for metadata
+      if (fs.existsSync(projectYamlPath)) {
+        const yamlContent = fs.readFileSync(projectYamlPath, 'utf-8')
+        const parsed = yaml.load(yamlContent) as ProjectYaml
+        projectData = { ...projectData, ...parsed }
       }
       
       // Count epics from ROADMAP.md
@@ -67,14 +67,14 @@ export async function GET() {
       }
       
       return {
-        name: frontmatter.name,
-        description: frontmatter.description,
-        tier: frontmatter.tier,
-        type: frontmatter.type,
+        name: projectData.name,
+        description: projectData.description,
+        tier: projectData.tier,
+        type: projectData.type,
         activeCount,
         backlogCount,
         publishedCount,
-        checks: frontmatter.checks || []
+        checks: projectData.checks || []
       }
     })
     
