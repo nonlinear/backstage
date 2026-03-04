@@ -62,7 +62,7 @@ export function EpicCard({
   return (
       <Card 
         id={version} 
-        className={`transition-all duration-300 ${isActiveEpic ? 'w-full max-w-[500px]' : 'w-full max-w-[300px]'} h-full overflow-y-auto`}
+        className={`flex-shrink-0 transition-all duration-300 ${isActiveEpic ? 'w-[500px]' : 'w-[300px]'} h-full overflow-y-auto`}
       >
       <CardHeader>
         {/* Status badge top-right */}

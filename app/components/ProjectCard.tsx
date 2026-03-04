@@ -9,7 +9,7 @@ interface ProjectCardProps {
 
 export function ProjectCard({ projectName, projectDescription }: ProjectCardProps) {
   return (
-    <Card className="w-full max-w-[300px] h-full overflow-y-auto">
+    <Card className="flex-shrink-0 w-[300px] h-full overflow-y-auto">
       <CardHeader>
         <h2 className="text-2xl font-semibold mb-2">{projectName}</h2>
         <p className="text-sm text-muted-foreground">{projectDescription}</p>
