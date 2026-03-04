@@ -28,23 +28,6 @@ const sections = [
   { value: "agents", label: "Agents", count: 8 },
 ]
 
-const projects = [
-  { value: "agregore", label: "Agregore", epicCount: allProjectsEpicCounts["agregore"] || 0 },
-  { value: "backstage", label: "Backstage", epicCount: allProjectsEpicCounts["backstage"] || 0 },
-  { value: "better", label: "Better", epicCount: allProjectsEpicCounts["better"] || 0 },
-  { value: "billable-hours", label: "Billable Hours", epicCount: allProjectsEpicCounts["billable-hours"] || 0 },
-  { value: "discrepancy", label: "Discrepancy", epicCount: allProjectsEpicCounts["discrepancy"] || 0 },
-  { value: "fitness", label: "Fitness", epicCount: allProjectsEpicCounts["fitness"] || 0 },
-  { value: "i-ching", label: "I Ching", epicCount: allProjectsEpicCounts["i-ching"] || 0 },
-  { value: "librarian", label: "Librarian", epicCount: allProjectsEpicCounts["librarian"] || 0 },
-  { value: "memory", label: "Memory", epicCount: allProjectsEpicCounts["memory"] || 0 },
-  { value: "nonlinear", label: "Nonlinear", epicCount: allProjectsEpicCounts["nonlinear"] || 0 },
-  { value: "personal", label: "Personal", epicCount: allProjectsEpicCounts["personal"] || 0 },
-  { value: "skills", label: "Skills", epicCount: allProjectsEpicCounts["skills"] || 0 },
-  { value: "studio", label: "Studio", epicCount: allProjectsEpicCounts["studio"] || 0 },
-  { value: "template", label: "Template", epicCount: allProjectsEpicCounts["template"] || 0 },
-]
-
 interface ProjectPageClientProps {
   projectSlug: string
   projectType: string
@@ -77,6 +60,23 @@ export function ProjectPageClient({
   epics 
 }: ProjectPageClientProps) {
   const router = useRouter()
+  
+  const projects = [
+    { value: "agregore", label: "Agregore", epicCount: allProjectsEpicCounts["agregore"] || 0 },
+    { value: "backstage", label: "Backstage", epicCount: allProjectsEpicCounts["backstage"] || 0 },
+    { value: "better", label: "Better", epicCount: allProjectsEpicCounts["better"] || 0 },
+    { value: "billable-hours", label: "Billable Hours", epicCount: allProjectsEpicCounts["billable-hours"] || 0 },
+    { value: "discrepancy", label: "Discrepancy", epicCount: allProjectsEpicCounts["discrepancy"] || 0 },
+    { value: "fitness", label: "Fitness", epicCount: allProjectsEpicCounts["fitness"] || 0 },
+    { value: "i-ching", label: "I Ching", epicCount: allProjectsEpicCounts["i-ching"] || 0 },
+    { value: "librarian", label: "Librarian", epicCount: allProjectsEpicCounts["librarian"] || 0 },
+    { value: "memory", label: "Memory", epicCount: allProjectsEpicCounts["memory"] || 0 },
+    { value: "nonlinear", label: "Nonlinear", epicCount: allProjectsEpicCounts["nonlinear"] || 0 },
+    { value: "personal", label: "Personal", epicCount: allProjectsEpicCounts["personal"] || 0 },
+    { value: "skills", label: "Skills", epicCount: allProjectsEpicCounts["skills"] || 0 },
+    { value: "studio", label: "Studio", epicCount: allProjectsEpicCounts["studio"] || 0 },
+    { value: "template", label: "Template", epicCount: allProjectsEpicCounts["template"] || 0 },
+  ]
   
   const [section, setSection] = useState("projects")
   const [project, setProject] = useState(projectSlug)
