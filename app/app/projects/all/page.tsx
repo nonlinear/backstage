@@ -99,13 +99,13 @@ export default function AllProjectsPage() {
                 <SelectTrigger className="justify-start border-0 shadow-none p-0 focus:ring-0 hover:bg-transparent">
                   <SelectValue>
                     <span className="font-bold text-foreground">
-                      All<sup className="text-muted-foreground font-normal">{projects.reduce((sum, p) => sum + p.activeCount + p.backlogCount + p.publishedCount, 0)}</sup>
+                      All<sup className="text-muted-foreground font-normal">{projects.length}</sup>
                     </span>
                   </SelectValue>
                 </SelectTrigger>
                 <SelectContent position="popper" align="start">
                   <SelectItem value="all">
-                    All<sup className="text-muted-foreground">{projects.reduce((sum, p) => sum + p.activeCount + p.backlogCount + p.publishedCount, 0)}</sup>
+                    All<sup className="text-muted-foreground">{projects.length}</sup>
                   </SelectItem>
                   <SelectSeparator />
                   {projects.map((project) => (
