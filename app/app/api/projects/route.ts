@@ -2,7 +2,8 @@ import { NextResponse } from 'next/server'
 import fs from 'fs'
 import path from 'path'
 import yaml from 'js-yaml'
-import { getProjectEpics } from '@/lib/epics'
+import { getProjectEpics, getProjectChecks } from '@/lib/epics'
+import { enrichProjectChecks } from '@/lib/checks'
 
 const BACKSTAGE_ROOT = path.join(process.env.HOME || '', 'Documents/backstage/projects')
 
@@ -44,6 +45,10 @@ export async function GET() {
       const backlogCount = epics.filter(e => e.status === 'backlog').length
       const publishedCount = epics.filter(e => e.status === 'published').length
       
+      // Get enriched checks (same as individual project pages)
+      const checkFilenames = getProjectChecks(projectDir)
+      const checks = enrichProjectChecks(projectDir, checkFilenames)
+      
       return {
         name: projectData.name,
         description: projectData.description,
@@ -52,7 +57,7 @@ export async function GET() {
         activeCount,
         backlogCount,
         publishedCount,
-        checks: projectData.checks || []
+        checks
       }
     })
     
