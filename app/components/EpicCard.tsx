@@ -38,6 +38,7 @@ interface EpicCardProps {
   activeTab: "tasks" | "notes"
   isActiveEpic: boolean
   onTabChange: (tab: "tasks" | "notes") => void
+  onCardClick?: () => void
 }
 
 function formatName(name: string): string {
@@ -56,7 +57,8 @@ export function EpicCard({
   notesList = [],
   activeTab,
   isActiveEpic,
-  onTabChange
+  onTabChange,
+  onCardClick
 }: EpicCardProps) {
   const formattedName = formatName(name)
   const completedTasks = tasks.filter(t => t.checked).length
@@ -69,6 +71,7 @@ export function EpicCard({
       <Card 
         id={version} 
         className={`border-2 border-black transition-all duration-300 ${isActiveEpic ? 'w-full max-w-[500px]' : 'w-full max-w-[300px] sticky top-4'}`}
+        onClick={onCardClick}
       >
       <CardHeader>
         {/* Status badge top-right */}

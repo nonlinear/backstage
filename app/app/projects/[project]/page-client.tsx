@@ -118,6 +118,10 @@ export function ProjectPageClient({
     }
   }
   
+  const handleCardClick = (version: string) => {
+    setActiveEpicVersion(version)
+  }
+  
   const currentProject = projects.find(p => p.value === projectSlug)
   const currentSection = sections.find(s => s.value === section)
   const totalEpics = projects.reduce((sum, p) => sum + p.epicCount, 0)
@@ -202,6 +206,7 @@ export function ProjectPageClient({
               activeTab={activeEpicVersion === epic.version ? "notes" : "tasks"}
               isActiveEpic={activeEpicVersion === epic.version}
               onTabChange={(tab) => handleEpicTabChange(epic.version, tab)}
+              onCardClick={() => handleCardClick(epic.version)}
             />
           ))}
         </div>
