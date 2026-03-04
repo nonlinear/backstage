@@ -41,11 +41,8 @@ interface EpicCardProps {
 }
 
 function formatName(name: string): string {
-  // Convert slug to readable title: "backstage-gui" → "Backstage Gui"
+  // Display exactly as it appears in epic.yaml (no alterations)
   return name
-    .split(/[-_]/)
-    .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
-    .join(' ')
 }
 
 export function EpicCard({ 
