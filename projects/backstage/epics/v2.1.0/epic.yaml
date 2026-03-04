@@ -1,7 +1,7 @@
 ---
 name: "Backstage GUI"
 goal: "Read-only interface for projects and epics"
-status: active
+status: published
 type: "undefined"
 tasks:
   # Core Architecture (DONE)
