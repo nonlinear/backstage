@@ -387,6 +387,50 @@ return <div id={id} className="mermaid">{diagram}</div>
 
 ---
 
+### ReloadButton
+
+**Location:** Root layout (`app/layout.tsx`) - appears on all pages
+
+**Props:** None (self-contained component)
+
+**Implementation:**
+```tsx
+"use client"
+import { Button } from "@/components/ui/button"
+import { RotateCw } from "lucide-react"
+
+export function ReloadButton() {
+  const handleReload = () => {
+    window.location.reload()
+  }
+
+  return (
+    <Button
+      variant="outline"
+      size="icon"
+      onClick={handleReload}
+      className="fixed bottom-4 right-4 z-50"
+      aria-label="Reload page"
+    >
+      <RotateCw className="h-4 w-4" />
+    </Button>
+  )
+}
+```
+
+**Features:**
+- Fixed position (bottom-right corner)
+- 16px spacing (Tailwind `bottom-4 right-4`)
+- Icon-only (RotateCw from lucide-react)
+- Outline variant (matches app style)
+- High z-index (floats above all content)
+- Accessible (aria-label)
+- Global (appears on all pages via root layout)
+
+**Why needed:** Quick page refresh to load latest API data (filesystem changes)
+
+---
+
 ## API Endpoints
 
 ### `/api/projects`
