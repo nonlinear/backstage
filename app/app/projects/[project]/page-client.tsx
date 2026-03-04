@@ -146,13 +146,17 @@ export function ProjectPageClient({
   const currentSection = sections.find(s => s.value === section)
   const totalEpics = projects.reduce((sum, p) => sum + p.epicCount, 0)
   
-  // Sort epics by status order (active → backlog → published), then by semver DESC
+  // Sort epics by status order (active → backlog → published), then by semver ASC
   const statusOrder = { active: 1, backlog: 2, published: 3 }
   const sortedEpics = [...epics].sort((a, b) => {
     const statusDiff = (statusOrder[a.status as keyof typeof statusOrder] || 99) - 
                        (statusOrder[b.status as keyof typeof statusOrder] || 99)
     if (statusDiff !== 0) return statusDiff
-    return 0
+    
+    // Within same status, sort by version (semver ascending)
+    const versionA = a.version.replace(/^v/, '')
+    const versionB = b.version.replace(/^v/, '')
+    return versionA.localeCompare(versionB, undefined, { numeric: true, sensitivity: 'base' })
   })
   
   return (
