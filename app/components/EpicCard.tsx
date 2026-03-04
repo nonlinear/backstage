@@ -37,7 +37,9 @@ interface EpicCardProps {
   notesList?: { slug: string; title: string; content: string }[]
   activeTab: "tasks" | "notes"
   isActiveEpic: boolean
+  selectedNote?: string
   onTabChange: (tab: "tasks" | "notes") => void
+  onNoteChange?: (noteSlug: string) => void
 }
 
 export function EpicCard({ 
@@ -51,10 +53,24 @@ export function EpicCard({
   notesList = [],
   activeTab,
   isActiveEpic,
-  onTabChange
+  selectedNote: externalSelectedNote,
+  onTabChange,
+  onNoteChange
 }: EpicCardProps) {
   const completedTasks = tasks.filter(t => t.checked).length
-  const [selectedNote, setSelectedNote] = useState(notesList[0]?.slug || "")
+  const [localSelectedNote, setLocalSelectedNote] = useState(notesList[0]?.slug || "")
+  
+  // Use external or local state
+  const selectedNote = externalSelectedNote !== undefined ? externalSelectedNote : localSelectedNote
+  
+  // Handle note selection
+  const handleNoteSelect = (slug: string) => {
+    if (onNoteChange) {
+      onNoteChange(slug)
+    } else {
+      setLocalSelectedNote(slug)
+    }
+  }
   
   // Find selected note content
   const noteContent = notesList.find(n => n.slug === selectedNote)?.content || ""
@@ -117,7 +133,7 @@ export function EpicCard({
           
           <TabsContent value="notes" className="space-y-3">{notesList.length > 0 ? (
               <>
-                <Select value={selectedNote} onValueChange={setSelectedNote}>
+                <Select value={selectedNote} onValueChange={handleNoteSelect}>
                   <SelectTrigger className="w-full justify-start border-0 shadow-none p-0 focus:ring-0 hover:bg-transparent">
                     <SelectValue>
                       <span className="font-bold text-foreground">

@@ -79,6 +79,7 @@ export function ProjectPageClient({
   const [section, setSection] = useState("projects")
   const [project, setProject] = useState(projectSlug)
   const [activeEpicVersion, setActiveEpicVersion] = useState<string | null>(null)
+  const [selectedNoteByEpic, setSelectedNoteByEpic] = useState<Record<string, string>>({})
   const hasInitialized = useRef(false)
   
   // Read hash on mount to open Notes tab automatically (client-side only, run once)
@@ -87,8 +88,14 @@ export function ProjectPageClient({
     hasInitialized.current = true
     
     const hash = window.location.hash.slice(1) // Remove #
+    const params = new URLSearchParams(window.location.search)
+    const noteParam = params.get('note')
+    
     if (hash && epics.some(e => e.version === hash)) {
       setActiveEpicVersion(hash)
+      if (noteParam) {
+        setSelectedNoteByEpic({ [hash]: noteParam })
+      }
     }
   }, [epics])
   
@@ -112,10 +119,26 @@ export function ProjectPageClient({
     
     // Update URL hash when Notes tab opened
     if (tab === "notes") {
-      window.location.hash = version
+      const selectedNote = selectedNoteByEpic[version]
+      if (selectedNote && selectedNote !== "index") {
+        window.history.replaceState(null, '', `?note=${selectedNote}#${version}`)
+      } else {
+        window.location.hash = version
+      }
     } else {
       // Clear hash when returning to Tasks
       window.history.replaceState(null, '', window.location.pathname)
+    }
+  }
+  
+  const handleNoteChange = (version: string, noteSlug: string) => {
+    setSelectedNoteByEpic(prev => ({ ...prev, [version]: noteSlug }))
+    
+    // Update URL
+    if (noteSlug === "index") {
+      window.history.replaceState(null, '', `#${version}`)
+    } else {
+      window.history.replaceState(null, '', `?note=${noteSlug}#${version}`)
     }
   }
   
@@ -211,7 +234,9 @@ export function ProjectPageClient({
               notesList={epic.notesList}
               activeTab={activeEpicVersion === epic.version ? "notes" : "tasks"}
               isActiveEpic={activeEpicVersion === epic.version}
+              selectedNote={selectedNoteByEpic[epic.version]}
               onTabChange={(tab) => handleEpicTabChange(epic.version, tab)}
+              onNoteChange={(noteSlug) => handleNoteChange(epic.version, noteSlug)}
             />
           ))}
         </div>
