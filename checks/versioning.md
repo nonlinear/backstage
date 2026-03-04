@@ -1,3 +1,9 @@
+---
+title: "Versioning Strategy Guide"
+type: probabilistic
+description: "High-level versioning strategy documentation"
+---
+
 # Versioning - Librarian-Specific Rules
 
 **Reindexing requirement by version type:**

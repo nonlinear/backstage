@@ -1,4 +1,10 @@
 #!/bin/bash
+# ---
+# title: "Epic Status Validator"
+# type: deterministic
+# description: "Validates epic status transitions and consistency"
+# ---
+
 # Epic Status Validator Check
 # Validates all epics have valid status from epics.yaml
 

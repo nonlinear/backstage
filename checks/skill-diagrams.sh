@@ -1,4 +1,10 @@
 #!/bin/bash
+# ---
+# title: "Skill Diagrams Validator"
+# type: deterministic
+# description: "Ensures skill diagrams are present and up-to-date"
+# ---
+
 # skill-diagrams.sh - Verify all SKILL.md files have diagrams
 
 PROJECT_ROOT=~/Documents/skills

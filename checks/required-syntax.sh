@@ -1,4 +1,10 @@
 #!/bin/bash
+# ---
+# title: "Required Syntax Validator"
+# type: deterministic
+# description: "Validates that required frontmatter and sections exist"
+# ---
+
 # DESCRIPTION: Required files exist. Prevents missing structure drift.
 # TYPE: deterministic
 # SCOPE: global

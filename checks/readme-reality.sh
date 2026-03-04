@@ -1,4 +1,10 @@
 #!/bin/bash
+# ---
+# title: "README Reality Check"
+# type: deterministic
+# description: "Validates README claims against actual implementation"
+# ---
+
 # DESCRIPTION: README reflects actual project state. Prevents documentation staleness drift.
 # TYPE: deterministic
 # SCOPE: global

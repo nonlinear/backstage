@@ -1,4 +1,10 @@
 #!/bin/bash
+# ---
+# title: "Epic Branch Validator"
+# type: deterministic
+# description: "Ensures epic branches follow naming conventions"
+# ---
+
 # DESCRIPTION: Work happens inside epic branches. Prevents work on main.
 # TYPE: deterministic
 # SCOPE: global

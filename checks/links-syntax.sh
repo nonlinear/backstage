@@ -1,4 +1,10 @@
 #!/bin/bash
+# ---
+# title: "Links Syntax Validator"
+# type: deterministic
+# description: "Validates markdown link syntax and conventions"
+# ---
+
 # DESCRIPTION: Navigation links work. Prevents broken reference drift.
 # TYPE: deterministic
 # SCOPE: global

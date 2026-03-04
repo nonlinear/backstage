@@ -3,7 +3,6 @@ tier: 1
 type: undefined
 description: "Backstage project lorem ipsum dolor sit amet"
 checks:
-  - README.md
   - dogfooding.md
   - dual-layer-global.sh
   - dual-layer-project.sh

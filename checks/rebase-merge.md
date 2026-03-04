@@ -1,3 +1,9 @@
+---
+title: "Rebase vs Merge Guide"
+type: probabilistic
+description: "Documents when to rebase vs merge"
+---
+
 # Rebase vs Merge
 
 **Use rebase for:**

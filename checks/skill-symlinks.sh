@@ -1,4 +1,10 @@
 #!/bin/bash
+# ---
+# title: "Skill Symlinks Validator"
+# type: deterministic
+# description: "Validates skill symlink integrity"
+# ---
+
 # Detect skills without symlinks in ~/.openclaw/workspace/skills/
 # Exit 0 = missing symlinks (fail)
 # Exit 1 = all symlinks present (pass)

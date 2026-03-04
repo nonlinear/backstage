@@ -1,3 +1,9 @@
+---
+title: "Commit Style Guide"
+type: probabilistic
+description: "Defines commit message conventions and best practices"
+---
+
 # Commit Style
 
 ## Commit Messages

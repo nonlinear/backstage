@@ -1,4 +1,10 @@
 #!/bin/bash
+# ---
+# title: "OpenClaw Skills Location Validator"
+# type: deterministic
+# description: "Ensures skill symlinks point to correct locations"
+# ---
+
 # Check: No user-created skills in OpenClaw workspace
 
 OPENCLAW_SKILLS="$HOME/.openclaw/workspace/skills"

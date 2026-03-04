@@ -1,4 +1,10 @@
 #!/bin/bash
+# ---
+# title: "Context Files Validator"
+# type: deterministic
+# description: "Ensures required context files exist in workspace"
+# ---
+
 # context-files.sh - Verify core identity/context files exist
 
 WORKSPACE=~/.openclaw/workspace

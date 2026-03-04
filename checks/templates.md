@@ -1,3 +1,9 @@
+---
+title: "Templates Guide"
+type: probabilistic
+description: "Documents template usage for projects and epics"
+---
+
 # Template System
 
 **This repo maintains templates for new projects.**

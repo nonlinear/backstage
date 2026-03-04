@@ -1,4 +1,10 @@
 #!/bin/bash
+# ---
+# title: "Broken Links Detector"
+# type: deterministic
+# description: "Scans for broken internal links in markdown files"
+# ---
+
 # broken-links.sh - Check ROADMAP epic-notes references exist
 
 cd ~/Documents/personal/backstage || exit 1

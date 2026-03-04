@@ -1,3 +1,9 @@
+---
+title: "Rebase Cadence Guide"
+type: probabilistic
+description: "Documents recommended rebase frequency and timing"
+---
+
 # Rebase Cadence
 
 **When to offer rebase:**

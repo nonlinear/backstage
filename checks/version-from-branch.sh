@@ -1,4 +1,10 @@
 #!/bin/bash
+# ---
+# title: "Version from Branch Extractor"
+# type: deterministic
+# description: "Extracts epic version from current git branch name"
+# ---
+
 # Version from Branch - Detect protocol version based on current git branch
 
 # Get current branch

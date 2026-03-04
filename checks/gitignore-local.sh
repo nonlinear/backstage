@@ -1,4 +1,10 @@
 #!/bin/bash
+# ---
+# title: "Local Gitignore Validator"
+# type: deterministic
+# description: "Ensures local gitignore patterns are properly configured"
+# ---
+
 # gitignore-local.sh - Verify .git/info/exclude has BYOB entries
 
 EXCLUDE_FILE=".git/info/exclude"

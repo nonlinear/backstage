@@ -1,4 +1,10 @@
 #!/bin/bash
+# ---
+# title: "Navigation Syntax Validator"
+# type: deterministic
+# description: "Validates navigation link syntax in documentation"
+# ---
+
 # DESCRIPTION: Navigation blocks stay current. Prevents stale metadata drift.
 # TYPE: deterministic
 # SCOPE: global

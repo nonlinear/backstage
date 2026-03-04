@@ -1,4 +1,10 @@
 #!/bin/bash
+# ---
+# title: "Obsolete References Detector"
+# type: deterministic
+# description: "Finds references to deleted or moved files"
+# ---
+
 # DESCRIPTION: Detect obsolete patterns (policies/, HEALTH.md, old structure references)
 # TYPE: deterministic
 # SCOPE: global

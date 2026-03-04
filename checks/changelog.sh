@@ -1,4 +1,10 @@
 #!/bin/bash
+# ---
+# title: "Changelog Generator"
+# type: deterministic
+# description: "Generates changelog from git commits and epic completions"
+# ---
+
 # DESCRIPTION: Recent commits exist in CHANGELOG. Prevents undocumented changes drift.
 # TYPE: deterministic
 # SCOPE: global

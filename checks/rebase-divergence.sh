@@ -1,4 +1,10 @@
 #!/bin/bash
+# ---
+# title: "Rebase Divergence Detector"
+# type: deterministic
+# description: "Detects when branches have diverged too far from main"
+# ---
+
 # Check if current branch has diverged from origin/main
 # Exit 0 = diverged (needs rebase)
 # Exit 1 = up to date

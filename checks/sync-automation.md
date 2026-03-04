@@ -1,3 +1,9 @@
+---
+title: "Sync Automation Guide"
+type: probabilistic
+description: "Documents automated synchronization workflows"
+---
+
 # Sync & Automation - Cross-Project Knowledge Sharing
 
 **Purpose:** Propagate global rules from workspace → other projects, keep backstage framework updated.

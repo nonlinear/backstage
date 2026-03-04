@@ -1,4 +1,10 @@
 #!/bin/bash
+# ---
+# title: "Git Hygiene Checker"
+# type: deterministic
+# description: "Validates git repository health and conventions"
+# ---
+
 # DESCRIPTION: Work is committed. Prevents uncommitted changes drift.
 # TYPE: deterministic
 # SCOPE: global

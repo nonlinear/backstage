@@ -1,4 +1,10 @@
 #!/bin/bash
+# ---
+# title: "Backstage Structure Validator"
+# type: deterministic
+# description: "Ensures backstage folder structure matches expected layout"
+# ---
+
 # backstage-structure.sh - Verify ROADMAP/CHANGELOG/epic-notes health
 
 PROJECT_ROOT=~/Documents/personal/backstage

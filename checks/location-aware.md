@@ -1,3 +1,9 @@
+---
+title: "Location-Aware Features Guide"
+type: probabilistic
+description: "Documents location detection and context switching"
+---
+
 # Location-Aware Behavior - Context-Sensitive Mode
 
 **Purpose:** Adapt AI behavior based on physical location + time context.

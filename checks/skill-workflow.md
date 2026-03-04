@@ -1,3 +1,9 @@
+---
+title: "Skill Workflow Guide"
+type: probabilistic
+description: "Documents workflow for creating and publishing skills"
+---
+
 # OpenClaw Skill Workflow
 
 **Context:** The `skill/` folder contains the OpenClaw skill for backstage project management.

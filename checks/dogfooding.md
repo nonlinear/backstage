@@ -1,3 +1,9 @@
+---
+title: "Dogfooding - Backstage Uses Backstage"
+type: probabilistic
+description: "Ensures Backstage project uses its own GUI for epic/project management"
+---
+
 # Dogfooding - Backstage Uses Backstage
 
 **We eat our own dog food.**

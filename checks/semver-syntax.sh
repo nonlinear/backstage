@@ -1,4 +1,10 @@
 #!/bin/bash
+# ---
+# title: "Semver Syntax Validator"
+# type: deterministic
+# description: "Validates semantic versioning format in epic versions"
+# ---
+
 # DESCRIPTION: Versions follow semver. Prevents version chaos drift.
 # TYPE: deterministic
 # SCOPE: global

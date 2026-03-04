@@ -1,3 +1,9 @@
+---
+title: "Branch Workflow Guide"
+type: probabilistic
+description: "Documents git branching strategy for epics and features"
+---
+
 # Branch Workflow
 
 **Semantic Versioning Governance:**

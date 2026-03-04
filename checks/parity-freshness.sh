@@ -1,4 +1,10 @@
 #!/bin/bash
+# ---
+# title: "Parity Freshness Checker"
+# type: deterministic
+# description: "Validates that parity documentation is up-to-date"
+# ---
+
 # parity-freshness.sh - Check if parity docs are stale (>30 days)
 
 PARITY_DIR=~/.openclaw/workspace/parity

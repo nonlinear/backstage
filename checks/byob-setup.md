@@ -1,3 +1,9 @@
+---
+title: "BYOB Setup Guide"
+type: probabilistic
+description: "Instructions for Bring Your Own Backend setup"
+---
+
 # BYOB - Bring Your Own Books
 
 **This is a personal library management system - NOT a collaborative repository.**

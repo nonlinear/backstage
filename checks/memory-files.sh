@@ -1,4 +1,10 @@
 #!/bin/bash
+# ---
+# title: "Memory Files Validator"
+# type: deterministic
+# description: "Ensures memory files follow naming and format conventions"
+# ---
+
 # memory-files.sh - Verify today + yesterday memory files exist
 
 MEMORY_DIR=~/.openclaw/workspace/memory

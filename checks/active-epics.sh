@@ -1,4 +1,10 @@
 #!/bin/bash
+# ---
+# title: "Active Epics Validator"
+# type: deterministic
+# description: "Validates that active epics exist and are properly tracked"
+# ---
+
 # active-epics.sh - Verify active epics have epic-notes
 
 cd ~/Documents/personal/backstage || exit 1

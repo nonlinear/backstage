@@ -1,3 +1,9 @@
+---
+title: "Version Tracking Guide"
+type: probabilistic
+description: "Documents version tracking across epics and releases"
+---
+
 # Version Tracking in Navigation Block
 
 **🚨 CRITICAL: Backstage framework version must stay in sync with CHANGELOG**

@@ -1,4 +1,10 @@
 #!/bin/bash
+# ---
+# title: "Roadmap Tasks Validator"
+# type: deterministic
+# description: "Validates roadmap task syntax and completion tracking"
+# ---
+
 # DESCRIPTION: Completed work marked in ROADMAP. Triggers merge-to-main when all tasks done.
 # TYPE: deterministic
 # SCOPE: global

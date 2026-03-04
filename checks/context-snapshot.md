@@ -1,3 +1,9 @@
+---
+title: "Context Snapshot Guide"
+type: probabilistic
+description: "Documents when and how to capture project context snapshots"
+---
+
 # Context Snapshot (Stateless AI Support)
 
 **Every decision artifact should contain a context header** to help stateless AI reconstruct reasoning without conversation history.

@@ -1,3 +1,9 @@
+---
+title: "No Epic Branches Policy"
+type: probabilistic
+description: "Documents policy against long-lived epic branches"
+---
+
 # No Epic Branches - CRITICAL Project Override
 
 **🚨 OVERRIDE:** Global POLICY says "create epic branches" → **NOT for life/personal project.**

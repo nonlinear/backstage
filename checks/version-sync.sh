@@ -1,4 +1,10 @@
 #!/bin/bash
+# ---
+# title: "Version Synchronization Check"
+# type: deterministic
+# description: "Ensures epic version in YAML matches folder name and git branch"
+# ---
+
 # Version Sync - Auto-sync VERSION file with latest git tag on main branch
 
 BRANCH=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)

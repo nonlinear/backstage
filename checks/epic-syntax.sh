@@ -1,4 +1,10 @@
 #!/bin/bash
+# ---
+# title: "Epic Syntax Checker"
+# type: deterministic
+# description: "Validates epic YAML syntax and required fields"
+# ---
+
 # DESCRIPTION: Epics follow standard format. Prevents roadmap structure drift.
 # TYPE: deterministic
 # SCOPE: global

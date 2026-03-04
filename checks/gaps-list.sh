@@ -1,4 +1,10 @@
 #!/bin/bash
+# ---
+# title: "Gaps List Generator"
+# type: deterministic
+# description: "Generates list of missing documentation and untracked work"
+# ---
+
 # DESCRIPTION: Surfaces known unknowns. Prevents forgotten context drift.
 # TYPE: deterministic
 # SCOPE: global

@@ -1,3 +1,9 @@
+---
+title: "Install and Update Guide"
+type: probabilistic
+description: "Instructions for installing and updating backstage"
+---
+
 # Backstage Installation & Updates
 
 **Backstage is AI-driven - no install scripts.**

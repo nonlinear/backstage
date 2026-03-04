@@ -1,4 +1,10 @@
 #!/bin/bash
+# ---
+# title: "Skill Publish Warning"
+# type: deterministic
+# description: "Warns before publishing skills with sensitive data"
+# ---
+
 # skill-publish-warning.sh - Warn before merging unpublished skill changes to main
 #
 # DESCRIPTION: Detect if project is a published skill with epic changes, warn before merge

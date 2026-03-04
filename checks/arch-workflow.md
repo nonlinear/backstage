@@ -1,3 +1,9 @@
+---
+title: "Architecture Workflow Guide"
+type: probabilistic
+description: "Documents the workflow for architectural decisions and diagrams"
+---
+
 # Architecture Diagrams - Workflow & Automation
 
 **Location:** `backstage/epic-notes/v*.*.0-*.md` (one diagram per epic)
