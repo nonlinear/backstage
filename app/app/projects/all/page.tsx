@@ -89,6 +89,31 @@ export default function AllProjectsPage() {
                 </SelectContent>
               </Select>
             </BreadcrumbItem>
+            <span className="text-muted-foreground">/</span>
+            <BreadcrumbItem>
+              <Select value="all" onValueChange={(value) => {
+                if (value === "all") return
+                router.push(`/projects/${value}`)
+              }}>
+                <SelectTrigger className="justify-start border-0 shadow-none p-0 focus:ring-0 hover:bg-transparent">
+                  <SelectValue>
+                    <span className="font-bold text-foreground">
+                      All<sup className="text-muted-foreground font-normal">{projects.reduce((sum, p) => sum + p.activeCount + p.backlogCount + p.publishedCount, 0)}</sup>
+                    </span>
+                  </SelectValue>
+                </SelectTrigger>
+                <SelectContent position="popper" align="start">
+                  <SelectItem value="all">
+                    All<sup className="text-muted-foreground">{projects.reduce((sum, p) => sum + p.activeCount + p.backlogCount + p.publishedCount, 0)}</sup>
+                  </SelectItem>
+                  {projects.map((project) => (
+                    <SelectItem key={project.name.toLowerCase()} value={project.name.toLowerCase()}>
+                      {project.name}<sup className="text-muted-foreground">{project.activeCount + project.backlogCount + project.publishedCount}</sup>
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </BreadcrumbItem>
           </BreadcrumbList>
         </Breadcrumb>
       </div>
