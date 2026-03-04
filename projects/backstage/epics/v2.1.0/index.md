@@ -22,21 +22,21 @@ Read-only Next.js web app for browsing projects, epics, checks, and agents. Buil
 
 ```mermaid
 graph TD
-    A[App Entry app/page.tsx] -->|redirects to| B[/projects]
+    A[App Entry] -->|redirects to| B[projects page]
     
     B --> C[Projects Page]
     B --> D[Individual Project Page]
     B --> E[Checks Page]
     B --> F[Agents Page]
     
-    C -->|API| G[/api/projects]
-    D -->|API| H[/api/projects + lib/epics.ts]
-    E -->|API| I[/api/checks]
-    F -->|API| J[/api/agents]
+    C -->|API| G[api projects]
+    D -->|API| H[api projects + lib epics]
+    E -->|API| I[api checks]
+    F -->|API| J[api agents]
     
     G -->|reads| K[project.yml files]
-    G -->|uses| L[lib/epics.ts getProjectEpics]
-    G -->|uses| M[lib/checks.ts enrichProjectChecks]
+    G -->|uses| L[lib epics getProjectEpics]
+    G -->|uses| M[lib checks enrichProjectChecks]
     
     H -->|reads| N[epic folders]
     I -->|reads| O[checks folder]
