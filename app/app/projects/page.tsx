@@ -127,28 +127,26 @@ export default function AllProjectsPage() {
         </Breadcrumb>
       </div>
       
-      {/* Scrollable content */}
-      <div className="flex-1 overflow-y-auto p-8">
-        {loading ? (
-          <div className="text-muted-foreground">Loading projects...</div>
-        ) : (
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3" style={{ gridAutoRows: 'max-content' }}>
-            {projects.map((project) => (
-              <div key={project.name} className="h-fit">
-                <ProjectCard
-                  projectName={project.name}
-                  projectDescription={project.description}
-                  projectTier={project.tier}
-                  projectType={project.type}
-                  activeCount={project.activeCount}
-                  backlogCount={project.backlogCount}
-                  publishedCount={project.publishedCount}
-                  checks={project.checks}
-                />
-              </div>
-            ))}
-          </div>
-        )}
+      {/* Horizontal card scroll */}
+      <div className="flex-1 overflow-x-auto">
+        <div className="flex items-start h-full" style={{ gap: 'calc(var(--spacing-unit) / 2)', padding: 'var(--spacing-unit)' }}>
+          {projects.map((project) => (
+            <ProjectCard
+              key={project.name}
+              projectName={project.name}
+              projectDescription={project.description}
+              projectTier={project.tier}
+              projectType={project.type}
+              activeCount={project.activeCount}
+              backlogCount={project.backlogCount}
+              publishedCount={project.publishedCount}
+              checks={project.checks}
+            />
+          ))}
+          
+          {/* Spacer after last card */}
+          <div style={{ width: 'var(--spacing-unit)', flexShrink: 0 }} />
+        </div>
       </div>
     </div>
   );
