@@ -108,11 +108,14 @@ export default function AllProjectsPage() {
                     All<sup className="text-muted-foreground">{projects.length}</sup>
                   </SelectItem>
                   <SelectSeparator />
-                  {projects.map((project) => (
-                    <SelectItem key={project.name.toLowerCase()} value={project.name.toLowerCase()}>
-                      {project.name}<sup className="text-muted-foreground">{project.activeCount + project.backlogCount + project.publishedCount}</sup>
-                    </SelectItem>
-                  ))}
+                  {projects.map((project) => {
+                    const epicCount = project.activeCount + project.backlogCount + project.publishedCount
+                    return (
+                      <SelectItem key={project.name.toLowerCase()} value={project.name.toLowerCase()}>
+                        {project.name}<sup className="text-muted-foreground">{epicCount}</sup>
+                      </SelectItem>
+                    )
+                  })}
                 </SelectContent>
               </Select>
             </BreadcrumbItem>

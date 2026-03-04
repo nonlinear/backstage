@@ -2,9 +2,9 @@ import { NextResponse } from 'next/server'
 import fs from 'fs'
 import path from 'path'
 import yaml from 'js-yaml'
+import { getProjectEpics } from '@/lib/epics'
 
-const BACKSTAGE_ROOT = path.join(process.env.HOME || '', 'Documents/backstage')
-const PROJECTS_DIR = path.join(BACKSTAGE_ROOT, 'projects')
+const BACKSTAGE_ROOT = path.join(process.env.HOME || '', 'Documents/backstage/projects')
 
 interface ProjectYaml {
   name: string
@@ -16,13 +16,12 @@ interface ProjectYaml {
 
 export async function GET() {
   try {
-    const projectDirs = fs.readdirSync(PROJECTS_DIR, { withFileTypes: true })
+    const projectDirs = fs.readdirSync(BACKSTAGE_ROOT, { withFileTypes: true })
       .filter(dirent => dirent.isDirectory())
       .map(dirent => dirent.name)
     
     const projects = projectDirs.map(projectDir => {
-      const projectYamlPath = path.join(PROJECTS_DIR, projectDir, 'project.yml')
-      const roadmapPath = path.join(PROJECTS_DIR, projectDir, 'ROADMAP.md')
+      const projectYamlPath = path.join(BACKSTAGE_ROOT, projectDir, 'project.yml')
       
       let projectData: ProjectYaml = {
         name: projectDir,
@@ -39,32 +38,11 @@ export async function GET() {
         projectData = { ...projectData, ...parsed }
       }
       
-      // Count epics from ROADMAP.md
-      let activeCount = 0
-      let backlogCount = 0
-      let publishedCount = 0
-      
-      if (fs.existsSync(roadmapPath)) {
-        const roadmapContent = fs.readFileSync(roadmapPath, 'utf-8')
-        const lines = roadmapContent.split('\n')
-        
-        let currentSection = ''
-        
-        for (const line of lines) {
-          if (line.startsWith('## 🎯 Active')) {
-            currentSection = 'active'
-          } else if (line.startsWith('## 📋 Backlog')) {
-            currentSection = 'backlog'
-          } else if (line.startsWith('## ✅ Published')) {
-            currentSection = 'published'
-          } else if (line.match(/^- \[v\d+\.\d+\.\d+\]/)) {
-            // Count epic entries
-            if (currentSection === 'active') activeCount++
-            if (currentSection === 'backlog') backlogCount++
-            if (currentSection === 'published') publishedCount++
-          }
-        }
-      }
+      // Count epics using getProjectEpics (same as individual project pages)
+      const epics = getProjectEpics(projectDir)
+      const activeCount = epics.filter(e => e.status === 'active').length
+      const backlogCount = epics.filter(e => e.status === 'backlog').length
+      const publishedCount = epics.filter(e => e.status === 'published').length
       
       return {
         name: projectData.name,
