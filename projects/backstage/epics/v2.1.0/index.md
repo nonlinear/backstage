@@ -1,11 +1,3 @@
----
-name: "Backstage GUI"
-version: "2.1.0"
-status: "active"
-contract_type: "wireframe"
-framework: "shadcn/ui"
----
-
 # Backstage GUI v2.1.0 - Architecture Documentation
 
 **Last Updated:** 2026-03-04  
