@@ -182,7 +182,7 @@ export function ProjectPageClient({
                     </span>
                   </SelectValue>
                 </SelectTrigger>
-                <SelectContent position="popper">
+                <SelectContent position="popper" align="start">
                   {sections.map((item) => (
                     <SelectItem key={item.value} value={item.value}>
                       {item.label}<sup className="text-muted-foreground">{item.count}</sup>
@@ -201,7 +201,7 @@ export function ProjectPageClient({
                     </span>
                   </SelectValue>
                 </SelectTrigger>
-                <SelectContent position="popper">
+                <SelectContent position="popper" align="start">
                   <SelectItem value="all">All<sup className="text-muted-foreground">{totalEpics}</sup></SelectItem>
                   <SelectSeparator />
                   {projects.map((proj) => (
