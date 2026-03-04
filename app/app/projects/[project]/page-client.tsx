@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import {
   Breadcrumb,
@@ -78,6 +78,14 @@ export function ProjectPageClient({
   const [section, setSection] = useState("projects")
   const [project, setProject] = useState(projectSlug)
   const [activeEpicVersion, setActiveEpicVersion] = useState<string | null>(null)
+  
+  // Read hash on mount to open Notes tab automatically
+  useEffect(() => {
+    const hash = window.location.hash.slice(1) // Remove #
+    if (hash && epics.some(e => e.version === hash)) {
+      setActiveEpicVersion(hash)
+    }
+  }, [epics])
   
   const handleSectionChange = (value: string) => {
     setSection(value)
