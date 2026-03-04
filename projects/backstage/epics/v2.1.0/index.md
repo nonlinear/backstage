@@ -67,28 +67,3 @@ flowchart LR
 
 **Status:** 🔄 In progress - card scroll behavior defined
 
----
-
-## Tasks - NOW (Immediate)
-
-### ✅ DONE
-- [x] Use template index.yml across ALL projects
-- [x] Created index.yml for all 13 projects (tier 1, basic descriptions)
-- [x] App: Project list loops through all projects (including template)
-
-### 🔲 TODO
-- [ ] Find better descriptions for each project (replace "X project" placeholders)
-- [ ] Sort project list by most recent (need "updated" or "created" field in index.yml)
-- [ ] Research: Does shadcn/ui have AUTOCOMPLETE component? (for project selection)
-
----
-
-## Tasks - LATER (After v2.1.0)
-
-- [ ] Define Sidebar content/purpose
-- [ ] Define Project Card internal structure (what fields to display)
-- [ ] Add navigation (SELECT changes → route to /projects, /checks, /agents)
-- [ ] Dynamic routing (/projects/[project]/epics)
-- [ ] Epic listing page
-- [ ] Read-only epic viewer
-
