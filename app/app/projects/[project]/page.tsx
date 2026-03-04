@@ -1,4 +1,5 @@
 import { getProjectEpics, getProjectBranch, getProjectChecks } from "@/lib/epics"
+import { enrichProjectChecks } from "@/lib/checks"
 import { ProjectPageClient } from "./page-client"
 import fs from 'fs'
 import path from 'path'
@@ -12,7 +13,8 @@ export default async function ProjectPage({
   const { project } = await params
   const epics = getProjectEpics(project)
   const branch = getProjectBranch(project)
-  const checks = getProjectChecks(project)
+  const checkFilenames = getProjectChecks(project)
+  const checks = enrichProjectChecks(project, checkFilenames)
   
   // Calculate epic counts by status
   const activeCount = epics.filter(e => e.status === 'active').length

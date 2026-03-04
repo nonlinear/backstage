@@ -226,12 +226,11 @@ export function getProjectBranch(projectSlug: string): string {
  * Get checks list for a project
  */
 export function getProjectChecks(projectSlug: string): string[] {
-  const checksPath = path.join(BACKSTAGE_ROOT, projectSlug, 'checks.yaml')
+  const projectPath = path.join(BACKSTAGE_ROOT, projectSlug, 'project.yml')
   
   try {
-    const content = fs.readFileSync(checksPath, 'utf-8')
-    const cleanContent = content.replace(/^---\n?/gm, '').replace(/\n?---$/gm, '')
-    const data = yaml.load(cleanContent) as any
+    const content = fs.readFileSync(projectPath, 'utf-8')
+    const data = yaml.load(content) as any
     return data?.checks || []
   } catch (err) {
     return []

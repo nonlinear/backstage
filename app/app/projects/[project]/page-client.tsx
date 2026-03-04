@@ -20,6 +20,7 @@ import { ProjectCard } from "@/components/ProjectCard"
 import { EpicCard } from "@/components/EpicCard"
 import { Card } from "@/components/ui/card"
 import type { Epic } from "@/lib/epics"
+import type { Check } from "@/lib/checks"
 
 const sections = [
   { value: "projects", label: "Projects", count: 14 },
@@ -51,7 +52,7 @@ interface ProjectPageClientProps {
   projectDescription: string
   projectTier: number
   projectBranch: string
-  projectChecks: string[]
+  projectChecks: Check[]
   projectEpicCount: number
   activeCount: number
   backlogCount: number
@@ -193,6 +194,7 @@ export function ProjectPageClient({
             activeCount={activeCount}
             backlogCount={backlogCount}
             publishedCount={publishedCount}
+            checks={projectChecks}
           />
           
           {/* Epic cards */}
