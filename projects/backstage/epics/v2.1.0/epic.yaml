@@ -21,28 +21,4 @@ tasks:
     checked: true
   - text: "App: Project list loops through all projects (including template)"
     checked: true
-  - text: Find better descriptions for each project (replace "X project" placeholders)
-    checked: false
-  - text: 'Sort project list by most recent (need "updated" or "created" field in index.yml)'
-    checked: false
-  - text: "Research: Does shadcn/ui have AUTOCOMPLETE component? (for project selection)"
-    checked: false
-  
-  # LATER (After v2.1.0)
-  - text: Conversational AI editing (respects checks)
-    checked: false
-  - text: Document GUI design principles
-    checked: false
-  - text: Define Sidebar content/purpose
-    checked: false
-  - text: Define Project Card internal structure (what fields to display)
-    checked: false
-  - text: Add navigation (SELECT changes → route to /projects, /checks, /agents)
-    checked: false
-  - text: Dynamic routing (/projects/[project]/epics)
-    checked: false
-  - text: Epic listing page
-    checked: false
-  - text: Read-only epic viewer
-    checked: false
 ---
