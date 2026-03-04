@@ -81,7 +81,7 @@ export function ProjectCard({
       {showViewEpicsButton && (
         <CardContent className="pt-0">
           <Button 
-            variant="default" 
+            variant="outline" 
             className="w-full"
             onClick={() => router.push(`/projects/${projectName.toLowerCase()}`)}
           >
