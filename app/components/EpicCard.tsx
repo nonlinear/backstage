@@ -126,7 +126,7 @@ export function EpicCard({
             )}
           </TabsContent>
           
-          <TabsContent value="notes" className="space-y-3 max-h-[400px] overflow-y-auto">{notesList.length > 0 ? (
+          <TabsContent value="notes" className="space-y-3">{notesList.length > 0 ? (
               <>
                 <Select value={selectedNote} onValueChange={setSelectedNote}>
                   <SelectTrigger className="w-full justify-start border-0 shadow-none p-0 focus:ring-0 hover:bg-transparent">
