@@ -79,13 +79,15 @@ export function ProjectPageClient({
   const [project, setProject] = useState(projectSlug)
   const [activeEpicVersion, setActiveEpicVersion] = useState<string | null>(null)
   
-  // Read hash on mount to open Notes tab automatically
+  // Read hash on mount to open Notes tab automatically (client-side only)
   useEffect(() => {
+    if (typeof window === 'undefined') return
+    
     const hash = window.location.hash.slice(1) // Remove #
     if (hash && epics.some(e => e.version === hash)) {
       setActiveEpicVersion(hash)
     }
-  }, [epics])
+  }, [])
   
   const handleSectionChange = (value: string) => {
     setSection(value)
