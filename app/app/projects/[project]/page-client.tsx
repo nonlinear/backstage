@@ -96,6 +96,11 @@ export function ProjectPageClient({
       if (noteParam) {
         setSelectedNoteByEpic({ [hash]: noteParam })
       }
+      
+      // Scroll to epic after state update
+      setTimeout(() => {
+        document.getElementById(hash)?.scrollIntoView({ behavior: 'smooth', inline: 'center' })
+      }, 100)
     }
   }, [epics])
   
