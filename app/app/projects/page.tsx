@@ -143,6 +143,7 @@ export default function AllProjectsPage() {
                 backlogCount={project.backlogCount}
                 publishedCount={project.publishedCount}
                 checks={project.checks}
+                showViewEpicsButton={true}
               />
             </>
           ))}

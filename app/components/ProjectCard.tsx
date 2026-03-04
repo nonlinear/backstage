@@ -2,12 +2,14 @@
 
 import { Card, CardHeader, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover"
 import type { Check } from "@/lib/checks"
+import { useRouter } from "next/navigation"
 
 interface ProjectCardProps {
   projectName: string
@@ -18,6 +20,7 @@ interface ProjectCardProps {
   backlogCount: number
   publishedCount: number
   checks: Check[]
+  showViewEpicsButton?: boolean
 }
 
 export function ProjectCard({ 
@@ -28,13 +31,15 @@ export function ProjectCard({
   activeCount, 
   backlogCount, 
   publishedCount,
-  checks
+  checks,
+  showViewEpicsButton = false
 }: ProjectCardProps) {
+  const router = useRouter()
   const totalEpics = activeCount + backlogCount + publishedCount
   
   return (
-    <Card className="flex-shrink-0 w-[300px] h-full overflow-y-auto">
-      <CardHeader>
+    <Card className="flex-shrink-0 w-[300px] flex flex-col">
+      <CardHeader className="flex-1">
         <h2 className="text-2xl font-semibold mb-2">{projectName}</h2>
         <p className="text-sm text-muted-foreground mb-3">{projectDescription}</p>
         
@@ -70,9 +75,17 @@ export function ProjectCard({
         )}
       </CardHeader>
       
-      <CardContent>
-        {/* Content placeholder */}
-      </CardContent>
+      {showViewEpicsButton && (
+        <CardContent className="pt-0">
+          <Button 
+            variant="default" 
+            className="w-full"
+            onClick={() => router.push(`/projects/${projectName.toLowerCase()}`)}
+          >
+            View epics
+          </Button>
+        </CardContent>
+      )}
     </Card>
   )
 }
