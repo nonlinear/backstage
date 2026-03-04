@@ -120,9 +120,9 @@ export default function ChecksPage() {
         {loading ? (
           <div className="text-muted-foreground">Loading checks...</div>
         ) : (
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3" style={{ gridAutoRows: 'max-content' }}>
             {checks.map((check) => (
-              <Card key={check.name}>
+              <Card key={check.name} className="h-fit">
                 <CardHeader>
                   <CardTitle>{check.title}</CardTitle>
                   <div className="mt-2">
