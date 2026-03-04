@@ -38,7 +38,7 @@ export function ProjectCard({
   const totalEpics = activeCount + backlogCount + publishedCount
   
   return (
-    <Card className="flex-shrink-0 w-[300px] flex flex-col">
+    <Card className="flex-shrink-0 w-[300px] h-full flex flex-col">
       <CardHeader className="flex-1">
         <h2 className="text-2xl font-semibold mb-2">{projectName}</h2>
         <p className="text-sm text-muted-foreground mb-3">{projectDescription}</p>
