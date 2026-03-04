@@ -82,7 +82,7 @@ export function ProjectCard({
         <CardContent className="pt-0">
           <Button 
             variant="outline" 
-            className="w-full"
+            className="w-full cursor-pointer"
             onClick={() => router.push(`/projects/${projectName.toLowerCase()}`)}
           >
             View epics
