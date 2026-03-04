@@ -1,5 +1,5 @@
 ---
-name: "backstage-gui"
+name: "Backstage GUI"
 version: "2.1.0"
 status: "active"
 contract_type: "wireframe"
