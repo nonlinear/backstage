@@ -4,6 +4,37 @@ type: probabilistic
 description: "Documents git branching strategy for epics and features"
 ---
 
+```mermaid
+graph TD
+    Start[New Change Needed] --> Decision{What type?}
+    
+    Decision -->|Bug/Typo/Quick Fix| Patch[Patch v0.X.C]
+    Decision -->|New Feature| Minor[Minor v0.Y.0]
+    Decision -->|Breaking Change| Major[Major vX.0.0]
+    
+    Patch --> FastTrack[Fast Track]
+    FastTrack --> MainCommit[Commit to main]
+    FastTrack --> Changelog1[Add to CHANGELOG]
+    Changelog1 --> Tag1[Tag Release]
+    
+    Minor --> Epic[Create Epic in ROADMAP]
+    Major --> Epic
+    
+    Epic --> Renumber[Renumber Existing Epics]
+    Renumber --> Mermaid[Update Subway Map]
+    Mermaid --> Branch[Create Branch vX.Y.Z]
+    Branch --> Work[Work on Branch]
+    Work --> Rebase[Rebase from main regularly]
+    Rebase --> Ready{Epic Complete?}
+    Ready -->|No| Work
+    Ready -->|Yes| PreMerge[backstage-start]
+    PreMerge --> Merge[Merge to main]
+    Merge --> PostMerge[backstage-start again]
+    PostMerge --> Changelog2[Move to CHANGELOG]
+    Changelog2 --> Tag2[Tag Release]
+    Tag2 --> Delete[Delete Branch]
+```
+
 **Semantic Versioning Governance:**
 
 **Format:** vA.B.C
