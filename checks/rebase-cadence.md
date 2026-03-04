@@ -4,8 +4,6 @@ type: probabilistic
 description: "Documents recommended rebase frequency and timing"
 ---
 
-# Rebase Cadence
-
 **When to offer rebase:**
 
 Suggest rebase when **BOTH** conditions are true:

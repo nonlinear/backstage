@@ -4,8 +4,6 @@ type: probabilistic
 description: "Documents when and how to use tables in README"
 ---
 
-# README Tables - Auto-Generated from Frontmatter
-
 **README.md has TWO skill tables, both auto-generated from SKILL.md frontmatter.**
 
 ## Table 1: What's Here

@@ -4,8 +4,6 @@ type: probabilistic
 description: "Documents parallel epic development workflow"
 ---
 
-# Dual Track Development
-
 **Pattern:** Two epics in different projects that retroalimentam (feedback loop)
 
 **Structure:**

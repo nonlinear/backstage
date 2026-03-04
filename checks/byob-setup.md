@@ -4,8 +4,6 @@ type: probabilistic
 description: "Instructions for Bring Your Own Backend setup"
 ---
 
-# BYOB - Bring Your Own Books
-
 **This is a personal library management system - NOT a collaborative repository.**
 
 Each person runs their own instance with their own books. Nothing syncs to GitHub except code/scripts.
@@ -27,7 +25,6 @@ cat .git/info/exclude
 Expected content:
 
 ```
-# BYOB: Bring Your Own Books/Models - Local files (don't sync to GitHub)
 books/**/*.epub
 books/**/*.pkl
 books/**/*.index
@@ -40,10 +37,8 @@ engine/models/
 **2. Add your books:**
 
 ```bash
-# Organize books from Downloads
 python3.11 .github/engine/scripts/organize_books.py
 
-# Generate metadata + indices
 python3.11 engine/scripts/indexer.py
 ```
 

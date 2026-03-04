@@ -4,8 +4,6 @@ type: probabilistic
 description: "Documents semver conventions for epic versioning"
 ---
 
-# Semantic Versioning
-
 **For AI-assisted projects:**
 
 | Type      | Version Change  | Breaking? |

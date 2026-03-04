@@ -4,8 +4,6 @@ type: probabilistic
 description: "Documents git branching strategy for epics and features"
 ---
 
-# Branch Workflow
-
 **Semantic Versioning Governance:**
 
 **Format:** vA.B.C
@@ -103,13 +101,10 @@ v1.0.0 (major - breaking changes)
 2. **gaps/** — Failed experiments, hidden tricks, community discoveries (what we learned NOT to do, or what works that others don't know)
 
 ```bash
-# List all epic notes
 ls epic-notes/
 
-# Search for relevant keywords in epic notes
 grep -r "keyword" epic-notes/
 
-# Check gaps for related discoveries
 ls gaps/
 grep -r "keyword" gaps/
 ```
@@ -206,7 +201,6 @@ Add notes link to ROADMAP on same line as branch:
 ```markdown
 ### [🚧](branch-link) Source Granularity | [notes](epic-notes/v0.4.0.md)
 
-# OR for folder structure:
 
 ### [🚧](branch-link) Source Granularity | [notes](epic-notes/v0.4.0/)
 ```
@@ -274,8 +268,6 @@ git push --force-with-lease origin vX.Y.Z
 ### Step 9: Before Merging - Use backstage-start Workflow
 
 ```bash
-# Run pre-commit workflow (does steps 10-11 automatically)
-# See .github/prompts/backstage-start.prompt.md
 ```
 
 **The backstage-start workflow will:**
@@ -293,7 +285,6 @@ git checkout main
 git pull origin main
 git merge vX.Y.Z --no-ff
 
-# Tag the release
 git tag vX.Y.Z -m "Epic vX.Y complete"
 
 git push origin main
@@ -303,10 +294,8 @@ git push origin vX.Y.Z
 ### Step 11: Delete Feature Branch (Recommended)
 
 ```bash
-# Local
 git branch -d vX.Y.Z
 
-# Remote (optional - keeps history clean)
 git push origin --delete vX.Y.Z
 ```
 

@@ -4,8 +4,6 @@ type: probabilistic
 description: "Instructions for installing and updating backstage"
 ---
 
-# Backstage Installation & Updates
-
 **Backstage is AI-driven - no install scripts.**
 
 ## Initial Install
@@ -13,16 +11,13 @@ description: "Instructions for installing and updating backstage"
 **Clone templates from GitHub:**
 
 ```bash
-# Create backstage folder
 mkdir -p backstage/global
 
-# Download templates
 for file in ROADMAP CHANGELOG POLICY HEALTH; do
   curl -fsSL "https://raw.githubusercontent.com/nonlinear/backstage/main/templates/${file}-template.md" \
     -o "backstage/${file}.md"
 done
 
-# Download global files
 curl -fsSL "https://raw.githubusercontent.com/nonlinear/backstage/main/backstage/global/POLICY.md" \
   -o "backstage/global/POLICY.md"
 curl -fsSL "https://raw.githubusercontent.com/nonlinear/backstage/main/backstage/global/HEALTH.md" \
@@ -36,16 +31,13 @@ curl -fsSL "https://raw.githubusercontent.com/nonlinear/backstage/main/backstage
 **Pull latest global files:**
 
 ```bash
-# Update global POLICY/HEALTH
 curl -fsSL "https://raw.githubusercontent.com/nonlinear/backstage/main/backstage/global/POLICY.md" \
   -o "backstage/global/POLICY.md"
 curl -fsSL "https://raw.githubusercontent.com/nonlinear/backstage/main/backstage/global/HEALTH.md" \
   -o "backstage/global/HEALTH.md"
 
-# Update prompts (if using OpenClaw)
 curl -fsSL "https://raw.githubusercontent.com/nonlinear/backstage/main/.github/prompts/backstage-start.prompt.md" \
   -o ".github/prompts/backstage-start.prompt.md"
-# ... repeat for other prompts
 ```
 
 **What stays unchanged:**

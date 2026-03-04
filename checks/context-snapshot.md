@@ -4,8 +4,6 @@ type: probabilistic
 description: "Documents when and how to capture project context snapshots"
 ---
 
-# Context Snapshot (Stateless AI Support)
-
 **Every decision artifact should contain a context header** to help stateless AI reconstruct reasoning without conversation history.
 
 **Template:**
@@ -32,7 +30,6 @@ description: "Documents when and how to capture project context snapshots"
 **Example:**
 
 ```markdown
-# Mac Studio Comparison
 
 ## Context Snapshot
 - **Why this exists:** Hardware purchase decision for local AI inference + video rendering

@@ -4,8 +4,6 @@ type: probabilistic
 description: "Code and document formatting standards"
 ---
 
-# Formatting Standard
-
 All backstage files (CHECKS, ROADMAP, CHANGELOG, POLICY) must be both **human-readable** (clear, prompt-like, easy to follow) and **machine-readable** (easy for scripts or AI to parse and execute).
 
 **How to format tests and checklists:**

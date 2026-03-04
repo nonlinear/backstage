@@ -4,8 +4,6 @@ type: probabilistic
 description: "High-level versioning strategy documentation"
 ---
 
-# Versioning - Librarian-Specific Rules
-
 **Reindexing requirement by version type:**
 
 | Type      | Version Change  | Requires Reindex? | Breaking? |

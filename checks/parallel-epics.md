@@ -4,8 +4,6 @@ type: probabilistic
 description: "Documents how to manage multiple concurrent epics"
 ---
 
-# Parallel Epics - Overlapping Workstreams
-
 **Principle:** Life epics can run simultaneously, unlike code projects with sequential versions.
 
 ## How Parallel Epics Work

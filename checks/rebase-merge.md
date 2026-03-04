@@ -4,8 +4,6 @@ type: probabilistic
 description: "Documents when to rebase vs merge"
 ---
 
-# Rebase vs Merge
-
 **Use rebase for:**
 
 - ✅ Keeping feature branch current with main
@@ -27,12 +25,9 @@ description: "Documents when to rebase vs merge"
 **Rebase conflicts?**
 
 ```bash
-# During rebase, if conflicts occur:
 git status                    # See conflicting files
-# Fix conflicts in editor
 git add <resolved-files>
 git rebase --continue
 
-# If rebase gets messy:
 git rebase --abort           # Start over
 ```

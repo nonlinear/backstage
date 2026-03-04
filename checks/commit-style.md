@@ -4,8 +4,6 @@ type: probabilistic
 description: "Defines commit message conventions and best practices"
 ---
 
-# Commit Style
-
 ## Commit Messages
 
 **Format:**
@@ -142,9 +140,7 @@ See epic-notes/vX.Y.Z/MAIN.md for details
 **Workflow:**
 
 ```bash
-# On branch: groom ROADMAP, create epic-notes
 git checkout -b grooming/v1.4.0-planning
-# Edit ROADMAP.md, create epic-notes/v1.4.0/
 git add ROADMAP.md epic-notes/
 git commit -m "docs: add v1.4.0 epic - reader integration planning"
 git checkout main
@@ -189,14 +185,11 @@ git push origin main
 **Workflow:**
 
 ```bash
-# BEFORE editing important file:
 git add file.py
 git commit -m "Before editing X: reason for change"
 
-# Make changes
 vim file.py
 
-# After editing:
 git add file.py
 git commit -m "Changed X to Y: what was done"
 ```
@@ -204,13 +197,10 @@ git commit -m "Changed X to Y: what was done"
 **Recovery:**
 
 ```bash
-# See what changed:
 git log --oneline file.py
 git diff HEAD~1 file.py
 
-# Rollback if needed:
 git revert HEAD
-# or
 git checkout HEAD~1 file.py
 ```
 

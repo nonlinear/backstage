@@ -4,8 +4,6 @@ type: probabilistic
 description: "Documents how to write and organize epic notes"
 ---
 
-# Epic Notes - When to Separate Detail from ROADMAP
-
 **Philosophy:** ROADMAP is for **decision-makers** (what/why/done?). Epic-notes are for **implementers** (how/details/research).
 
 ## When to Create epic-notes/

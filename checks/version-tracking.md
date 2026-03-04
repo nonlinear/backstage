@@ -4,8 +4,6 @@ type: probabilistic
 description: "Documents version tracking across epics and releases"
 ---
 
-# Version Tracking in Navigation Block
-
 **🚨 CRITICAL: Backstage framework version must stay in sync with CHANGELOG**
 
 When completing an epic and merging to main:
@@ -17,4 +15,3 @@ When completing an epic and merging to main:
 - Most projects: version lives in package.json, pyproject.toml, etc.
 - Backstage: version lives in POLICY.md (used by all projects)
 
-**Location:** `backstage/global/POLICY.md` → search for `v0.X.0` in navigation block template

@@ -4,8 +4,6 @@ type: probabilistic
 description: "Documents pre-commit checks and workflows"
 ---
 
-# Pre-Commit Workflow
-
 **ALWAYS run before merging to main:**
 
 1. **Use backstage-start prompt** (see `.github/prompts/backstage-start.prompt.md`)
