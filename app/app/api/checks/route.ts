@@ -8,6 +8,7 @@ interface Check {
   title: string
   type: 'deterministic' | 'probabilistic'
   description: string
+  diagram?: string
 }
 
 export async function GET() {
@@ -30,12 +31,19 @@ export async function GET() {
           const nameWithoutExt = filename.replace(/\.(sh|md)$/, '')
           
           let frontmatter: any = {}
+          let diagram: string | undefined
           
           if (filename.endsWith('.md')) {
             // YAML frontmatter
             const match = content.match(/^---\n([\s\S]*?)\n---/)
             if (match) {
               frontmatter = yaml.load(match[1]) || {}
+            }
+            
+            // Extract mermaid diagram (right after frontmatter)
+            const diagramMatch = content.match(/---\n\n```mermaid\n([\s\S]*?)\n```/)
+            if (diagramMatch) {
+              diagram = diagramMatch[1]
             }
           } else if (filename.endsWith('.sh')) {
             // Commented YAML frontmatter
@@ -50,7 +58,8 @@ export async function GET() {
             name: nameWithoutExt,
             title: frontmatter.title || nameWithoutExt,
             type: frontmatter.type || 'deterministic',
-            description: frontmatter.description || ''
+            description: frontmatter.description || '',
+            diagram
           } as Check
         } catch (err) {
           console.error(`Error reading check ${filename}:`, err)

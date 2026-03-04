@@ -1,7 +1,8 @@
 "use client"
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/navigation'
+import mermaid from 'mermaid'
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -19,6 +20,7 @@ import {
   CardHeader,
   CardTitle,
   CardDescription,
+  CardContent,
 } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 
@@ -33,6 +35,24 @@ interface Check {
   title: string
   type: 'deterministic' | 'probabilistic'
   description: string
+  diagram?: string
+}
+
+function MermaidDiagram({ diagram, id }: { diagram: string; id: string }) {
+  const containerRef = useRef<HTMLDivElement>(null)
+  
+  useEffect(() => {
+    if (containerRef.current && diagram) {
+      mermaid.initialize({ startOnLoad: false, theme: 'neutral' })
+      mermaid.render(`mermaid-${id}`, diagram).then(({ svg }) => {
+        if (containerRef.current) {
+          containerRef.current.innerHTML = svg
+        }
+      })
+    }
+  }, [diagram, id])
+  
+  return <div ref={containerRef} className="mermaid-container" />
 }
 
 export default function ChecksPage() {
@@ -112,6 +132,11 @@ export default function ChecksPage() {
                   </div>
                   <CardDescription className="mt-2">{check.description}</CardDescription>
                 </CardHeader>
+                {check.diagram && (
+                  <CardContent>
+                    <MermaidDiagram diagram={check.diagram} id={check.name} />
+                  </CardContent>
+                )}
               </Card>
             ))}
           </div>
