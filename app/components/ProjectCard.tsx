@@ -39,7 +39,7 @@ export function ProjectCard({
   
   return (
     <Card className="flex-shrink-0 w-[300px] h-full flex flex-col">
-      <CardHeader className="flex-1">
+      <CardHeader>
         <h2 className="text-2xl font-semibold mb-2">{projectName}</h2>
         <p className="text-sm text-muted-foreground mb-3">{projectDescription}</p>
         
@@ -74,6 +74,9 @@ export function ProjectCard({
           </div>
         )}
       </CardHeader>
+      
+      {/* Elastic spacer */}
+      <div className="flex-1" />
       
       {showViewEpicsButton && (
         <CardContent className="pt-0">
