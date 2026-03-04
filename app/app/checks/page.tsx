@@ -14,12 +14,25 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+} from "@/components/ui/card"
 
 const sections = [
   { value: "projects", label: "Projects", count: 14 },
   { value: "checks", label: "Checks", count: 71 },
   { value: "agents", label: "Agents", count: 8 },
 ]
+
+// Placeholder check data - we'll populate this properly later
+const checks = Array.from({ length: 71 }, (_, i) => ({
+  id: `check-${i + 1}`,
+  name: `Check ${i + 1}`,
+  description: `Description for check ${i + 1}`,
+}))
 
 export default function ChecksPage() {
   const router = useRouter()
@@ -59,9 +72,15 @@ export default function ChecksPage() {
         </Breadcrumb>
       </div>
       
-      <div className="mt-8">
-        <h2 className="text-2xl font-bold">Checks</h2>
-        <p className="text-gray-600 mt-2">71 checks available</p>
+      <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        {checks.map((check) => (
+          <Card key={check.id}>
+            <CardHeader>
+              <CardTitle>{check.name}</CardTitle>
+              <CardDescription>{check.description}</CardDescription>
+            </CardHeader>
+          </Card>
+        ))}
       </div>
     </div>
   );
