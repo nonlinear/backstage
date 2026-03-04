@@ -20,7 +20,7 @@ export default async function ProjectPage({
   const publishedCount = epics.filter(e => e.status === 'published').length
   
   // Load project metadata
-  const projectPath = path.join(process.env.HOME!, 'Documents/backstage/projects', project, 'index.yml')
+  const projectPath = path.join(process.env.HOME!, 'Documents/backstage/projects', project, 'project.yml')
   let projectType = 'undefined'
   let projectName = project
   let projectDescription = ''
