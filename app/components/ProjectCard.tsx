@@ -53,7 +53,7 @@ export function ProjectCard({
                     {check.name}
                   </Badge>
                 </PopoverTrigger>
-                <PopoverContent className="w-80">
+                <PopoverContent align="start" className="w-80">
                   <div className="space-y-2">
                     <h4 className="font-semibold">{check.title}</h4>
                     <Badge variant="outline" className="text-xs">
