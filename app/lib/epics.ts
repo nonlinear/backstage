@@ -5,6 +5,21 @@ import { getNoteTitles } from './note-titles'
 
 const BACKSTAGE_ROOT = path.join(process.env.HOME!, 'Documents/backstage/projects')
 
+/**
+ * Get list of all project slugs
+ */
+export function getProjects(): string[] {
+  try {
+    return fs.readdirSync(BACKSTAGE_ROOT)
+      .filter(name => {
+        const stat = fs.statSync(path.join(BACKSTAGE_ROOT, name))
+        return stat.isDirectory()
+      })
+  } catch (err) {
+    return []
+  }
+}
+
 export interface Task {
   text: string
   checked: boolean
@@ -242,3 +257,18 @@ export function getProjectChecks(projectSlug: string): string[] {
  */
 // getNotes() removed - now using getNoteTitles() from note-titles.ts
 // getNoteContent() removed - content now included in getNoteTitles() response
+
+/**
+ * Get epic counts for all projects
+ */
+export function getAllProjectsEpicCounts(): Record<string, number> {
+  const projects = getProjects()
+  const counts: Record<string, number> = {}
+  
+  for (const project of projects) {
+    const epics = getProjectEpics(project)
+    counts[project] = epics.length
+  }
+  
+  return counts
+}

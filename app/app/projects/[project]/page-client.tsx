@@ -29,20 +29,20 @@ const sections = [
 ]
 
 const projects = [
-  { value: "agregore", label: "Agregore", epicCount: 0 },
-  { value: "backstage", label: "Backstage", epicCount: 19 },
-  { value: "better", label: "Better", epicCount: 0 },
-  { value: "billable-hours", label: "Billable Hours", epicCount: 0 },
-  { value: "discrepancy", label: "Discrepancy", epicCount: 0 },
-  { value: "fitness", label: "Fitness", epicCount: 0 },
-  { value: "i-ching", label: "I Ching", epicCount: 0 },
-  { value: "librarian", label: "Librarian", epicCount: 0 },
-  { value: "memory", label: "Memory", epicCount: 0 },
-  { value: "nonlinear", label: "Nonlinear", epicCount: 0 },
-  { value: "personal", label: "Personal", epicCount: 0 },
-  { value: "skills", label: "Skills", epicCount: 0 },
-  { value: "studio", label: "Studio", epicCount: 0 },
-  { value: "template", label: "Template", epicCount: 1 },
+  { value: "agregore", label: "Agregore", epicCount: allProjectsEpicCounts["agregore"] || 0 },
+  { value: "backstage", label: "Backstage", epicCount: allProjectsEpicCounts["backstage"] || 0 },
+  { value: "better", label: "Better", epicCount: allProjectsEpicCounts["better"] || 0 },
+  { value: "billable-hours", label: "Billable Hours", epicCount: allProjectsEpicCounts["billable-hours"] || 0 },
+  { value: "discrepancy", label: "Discrepancy", epicCount: allProjectsEpicCounts["discrepancy"] || 0 },
+  { value: "fitness", label: "Fitness", epicCount: allProjectsEpicCounts["fitness"] || 0 },
+  { value: "i-ching", label: "I Ching", epicCount: allProjectsEpicCounts["i-ching"] || 0 },
+  { value: "librarian", label: "Librarian", epicCount: allProjectsEpicCounts["librarian"] || 0 },
+  { value: "memory", label: "Memory", epicCount: allProjectsEpicCounts["memory"] || 0 },
+  { value: "nonlinear", label: "Nonlinear", epicCount: allProjectsEpicCounts["nonlinear"] || 0 },
+  { value: "personal", label: "Personal", epicCount: allProjectsEpicCounts["personal"] || 0 },
+  { value: "skills", label: "Skills", epicCount: allProjectsEpicCounts["skills"] || 0 },
+  { value: "studio", label: "Studio", epicCount: allProjectsEpicCounts["studio"] || 0 },
+  { value: "template", label: "Template", epicCount: allProjectsEpicCounts["template"] || 0 },
 ]
 
 interface ProjectPageClientProps {
@@ -57,6 +57,7 @@ interface ProjectPageClientProps {
   activeCount: number
   backlogCount: number
   publishedCount: number
+  allProjectsEpicCounts: Record<string, number>
   epics: Epic[]
 }
 
@@ -72,6 +73,7 @@ export function ProjectPageClient({
   activeCount,
   backlogCount,
   publishedCount,
+  allProjectsEpicCounts,
   epics 
 }: ProjectPageClientProps) {
   const router = useRouter()
