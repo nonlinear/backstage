@@ -37,9 +37,7 @@ interface EpicCardProps {
   notesList?: { slug: string; title: string; content: string }[]
   activeTab: "tasks" | "notes"
   isActiveEpic: boolean
-  isCurrent: boolean
   onTabChange: (tab: "tasks" | "notes") => void
-  onCardClick?: () => void
 }
 
 export function EpicCard({ 
@@ -53,9 +51,7 @@ export function EpicCard({
   notesList = [],
   activeTab,
   isActiveEpic,
-  isCurrent,
-  onTabChange,
-  onCardClick
+  onTabChange
 }: EpicCardProps) {
   const completedTasks = tasks.filter(t => t.checked).length
   const [selectedNote, setSelectedNote] = useState(notesList[0]?.slug || "")
@@ -66,8 +62,7 @@ export function EpicCard({
   return (
       <Card 
         id={version} 
-        className={`card ${isCurrent ? 'current' : ''} transition-all duration-500 ease-in-out ${isActiveEpic ? 'w-full max-w-[500px]' : 'w-full max-w-[300px]'}`}
-        onClick={onCardClick}
+        className={`transition-all duration-300 ${activeTab === 'notes' ? 'w-full max-w-[500px]' : 'w-full max-w-[300px]'} h-full overflow-y-auto`}
       >
       <CardHeader>
         {/* Status badge top-right */}
@@ -102,7 +97,7 @@ export function EpicCard({
             </TabsTrigger>
           </TabsList>
           
-          <TabsContent value="tasks" className="space-y-2 max-h-[400px] overflow-y-auto">{tasks.length > 0 ? (
+          <TabsContent value="tasks" className="space-y-2">{tasks.length > 0 ? (
               tasks.map((task, idx) => (
                 <div key={idx} className="flex items-start gap-2">
                   <Checkbox 

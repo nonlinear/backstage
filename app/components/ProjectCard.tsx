@@ -5,16 +5,11 @@ import { Card, CardHeader, CardContent } from "@/components/ui/card"
 interface ProjectCardProps {
   projectName: string
   projectDescription: string
-  isCurrent?: boolean
-  onClick?: () => void
 }
 
-export function ProjectCard({ projectName, projectDescription, isCurrent = false, onClick }: ProjectCardProps) {
+export function ProjectCard({ projectName, projectDescription }: ProjectCardProps) {
   return (
-    <Card 
-      className={`card ${isCurrent ? 'current' : ''} w-full max-w-[300px] transition-all duration-300`}
-      onClick={onClick}
-    >
+    <Card className="w-full max-w-[300px] h-full overflow-y-auto">
       <CardHeader>
         <h2 className="text-2xl font-semibold mb-2">{projectName}</h2>
         <p className="text-sm text-muted-foreground">{projectDescription}</p>

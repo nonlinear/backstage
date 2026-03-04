@@ -194,14 +194,3 @@ sup {
   margin-left: 0.5rem;
   font-weight: normal;
 }
-
-/* Cards: all sticky EXCEPT current */
-.card:not(.current) {
-  position: sticky !important;
-  top: 1rem !important;
-}
-
-/* Current card: black border 2px */
-.card.current {
-  border: 2px solid black !important;
-}
