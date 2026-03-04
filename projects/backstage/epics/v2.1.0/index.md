@@ -22,7 +22,7 @@ Read-only Next.js web app for browsing projects, epics, checks, and agents. Buil
 
 ```mermaid
 graph TD
-    A[App Entry: app/page.tsx] -->|redirects to| B[/projects]
+    A[App Entry app/page.tsx] -->|redirects to| B[/projects]
     
     B --> C[Projects Page]
     B --> D[Individual Project Page]
@@ -34,13 +34,13 @@ graph TD
     E -->|API| I[/api/checks]
     F -->|API| J[/api/agents]
     
-    G -->|reads| K[~/Documents/backstage/projects/*/project.yml]
-    G -->|uses| L[lib/epics.ts: getProjectEpics]
-    G -->|uses| M[lib/checks.ts: enrichProjectChecks]
+    G -->|reads| K[project.yml files]
+    G -->|uses| L[lib/epics.ts getProjectEpics]
+    G -->|uses| M[lib/checks.ts enrichProjectChecks]
     
-    H -->|reads| N[~/Documents/backstage/projects/{project}/epics/*/]
-    I -->|reads| O[~/Documents/backstage/checks/]
-    J -->|reads| P[~/Documents/agents/*/README.md]
+    H -->|reads| N[epic folders]
+    I -->|reads| O[checks folder]
+    J -->|reads| P[agents README files]
 ```
 
 ---
@@ -660,15 +660,15 @@ graph LR
 
 ```mermaid
 graph TD
-    A[Filesystem] -->|project.yml| B[/api/projects]
-    A -->|epics/*/epic.yaml| C[lib/epics.ts]
-    A -->|checks/*.md| D[/api/checks]
-    A -->|agents/*/README.md| E[/api/agents]
+    A[Filesystem] -->|project.yml| B[API projects]
+    A -->|epic.yaml files| C[lib epics.ts]
+    A -->|check files| D[API checks]
+    A -->|agent README files| E[API agents]
     
-    B --> F[/projects page]
-    C --> G[/projects/backstage page]
-    D --> H[/checks page]
-    E --> I[/agents page]
+    B --> F[projects page]
+    C --> G[individual project page]
+    D --> H[checks page]
+    E --> I[agents page]
     
     F -->|User clicks| G
     G -->|User navigates| F
