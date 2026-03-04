@@ -22,5 +22,5 @@ tasks:
   - text: "App: Project list loops through all projects (including template)"
     checked: true
   - text: Document all findings
-    checked: false
+    checked: true
 ---
