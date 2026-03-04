@@ -54,7 +54,7 @@ export default function AgentsPage() {
   
   const handleSectionChange = (value: string) => {
     setSection(value)
-    if (value === "projects") router.push("/projects/all")
+    if (value === "projects") router.push("/projects")
     if (value === "checks") router.push("/checks")
   }
   

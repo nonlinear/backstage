@@ -79,7 +79,7 @@ export default function ChecksPage() {
   
   const handleSectionChange = (value: string) => {
     setSection(value)
-    if (value === "projects") router.push("/projects/all")
+    if (value === "projects") router.push("/projects")
     if (value === "agents") router.push("/agents")
   }
   

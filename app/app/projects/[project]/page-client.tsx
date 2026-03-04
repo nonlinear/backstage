@@ -115,7 +115,7 @@ export function ProjectPageClient({
   const handleProjectChange = (value: string) => {
     setProject(value)
     if (value === "all") {
-      router.push("/projects/all")
+      router.push("/projects")
     } else {
       router.push(`/projects/${value}`)
     }
