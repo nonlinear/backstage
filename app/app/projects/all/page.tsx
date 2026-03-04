@@ -64,6 +64,15 @@ export default function AllProjectsPage() {
   
   const currentSection = sections.find(s => s.value === section)
   
+  // Build project selector items (same structure as individual project pages)
+  const projectItems = projects.map(p => ({
+    value: p.name.toLowerCase(),
+    label: p.name,
+    epicCount: p.activeCount + p.backlogCount + p.publishedCount
+  }))
+  
+  const totalEpics = projectItems.reduce((sum, p) => sum + p.epicCount, 0)
+  
   return (
     <div className="h-screen flex flex-col">
       {/* Fixed breadcrumb header with icon */}
@@ -104,18 +113,13 @@ export default function AllProjectsPage() {
                   </SelectValue>
                 </SelectTrigger>
                 <SelectContent position="popper" align="start">
-                  <SelectItem value="all">
-                    All<sup className="text-muted-foreground">{projects.length}</sup>
-                  </SelectItem>
+                  <SelectItem value="all">All<sup className="text-muted-foreground">{totalEpics}</sup></SelectItem>
                   <SelectSeparator />
-                  {projects.map((project) => {
-                    const epicCount = project.activeCount + project.backlogCount + project.publishedCount
-                    return (
-                      <SelectItem key={project.name.toLowerCase()} value={project.name.toLowerCase()}>
-                        {project.name}<sup className="text-muted-foreground">{epicCount}</sup>
-                      </SelectItem>
-                    )
-                  })}
+                  {projectItems.map((proj) => (
+                    <SelectItem key={proj.value} value={proj.value}>
+                      {proj.label}<sup className="text-muted-foreground">{proj.epicCount}</sup>
+                    </SelectItem>
+                  ))}
                 </SelectContent>
               </Select>
             </BreadcrumbItem>
