@@ -120,13 +120,11 @@ export function ProjectPageClient({
   }
   
   const handleCardClick = (version: string) => {
-    setActiveEpicVersion(version)
     setCurrentCard(version)
   }
   
   const handleProjectCardClick = () => {
     setCurrentCard("project")
-    setActiveEpicVersion(null) // Clear epic selection
   }
   
   const currentProject = projects.find(p => p.value === projectSlug)
