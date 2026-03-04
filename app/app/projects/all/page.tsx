@@ -11,6 +11,7 @@ import {
   Select,
   SelectContent,
   SelectItem,
+  SelectSeparator,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
@@ -106,6 +107,7 @@ export default function AllProjectsPage() {
                   <SelectItem value="all">
                     All<sup className="text-muted-foreground">{projects.reduce((sum, p) => sum + p.activeCount + p.backlogCount + p.publishedCount, 0)}</sup>
                   </SelectItem>
+                  <SelectSeparator />
                   {projects.map((project) => (
                     <SelectItem key={project.name.toLowerCase()} value={project.name.toLowerCase()}>
                       {project.name}<sup className="text-muted-foreground">{project.activeCount + project.backlogCount + project.publishedCount}</sup>
