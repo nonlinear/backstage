@@ -37,6 +37,7 @@ interface EpicCardProps {
   notesList?: { slug: string; title: string; content: string }[]
   activeTab: "tasks" | "notes"
   isActiveEpic: boolean
+  isCurrent: boolean
   onTabChange: (tab: "tasks" | "notes") => void
   onCardClick?: () => void
 }
@@ -57,6 +58,7 @@ export function EpicCard({
   notesList = [],
   activeTab,
   isActiveEpic,
+  isCurrent,
   onTabChange,
   onCardClick
 }: EpicCardProps) {
@@ -70,7 +72,7 @@ export function EpicCard({
   return (
       <Card 
         id={version} 
-        className={`card ${isActiveEpic ? 'current' : ''} border-2 border-black transition-all duration-300 ${isActiveEpic ? 'w-full max-w-[500px]' : 'w-full max-w-[300px]'}`}
+        className={`card ${isCurrent ? 'current' : ''} border-2 border-black transition-all duration-300 ${isActiveEpic ? 'w-full max-w-[500px]' : 'w-full max-w-[300px]'}`}
         onClick={onCardClick}
       >
       <CardHeader>

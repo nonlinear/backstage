@@ -78,6 +78,7 @@ export function ProjectPageClient({
   const [section, setSection] = useState("projects")
   const [project, setProject] = useState(projectSlug)
   const [activeEpicVersion, setActiveEpicVersion] = useState<string | null>(null)
+  const [currentCard, setCurrentCard] = useState<string | null>(null) // "project" or epic version
   const hasInitialized = useRef(false)
   
   // Read hash on mount to open Notes tab automatically (client-side only, run once)
@@ -120,6 +121,12 @@ export function ProjectPageClient({
   
   const handleCardClick = (version: string) => {
     setActiveEpicVersion(version)
+    setCurrentCard(version)
+  }
+  
+  const handleProjectCardClick = () => {
+    setCurrentCard("project")
+    setActiveEpicVersion(null) // Clear epic selection
   }
   
   const currentProject = projects.find(p => p.value === projectSlug)
@@ -189,7 +196,12 @@ export function ProjectPageClient({
       <div className="flex-1 overflow-x-auto overflow-y-auto">
         <div className="flex items-start" style={{ gap: 'var(--spacing-unit)', padding: 'var(--spacing-unit)' }}>
           {/* Project card */}
-          <ProjectCard projectName={projectName} projectDescription={projectDescription} />
+          <ProjectCard 
+            projectName={projectName} 
+            projectDescription={projectDescription}
+            isCurrent={currentCard === "project"}
+            onClick={handleProjectCardClick}
+          />
           
           {/* Epic cards */}
           {sortedEpics.map((epic) => (
@@ -205,6 +217,7 @@ export function ProjectPageClient({
               notesList={epic.notesList}
               activeTab={activeEpicVersion === epic.version ? "notes" : "tasks"}
               isActiveEpic={activeEpicVersion === epic.version}
+              isCurrent={currentCard === epic.version}
               onTabChange={(tab) => handleEpicTabChange(epic.version, tab)}
               onCardClick={() => handleCardClick(epic.version)}
             />
