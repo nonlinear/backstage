@@ -13,7 +13,7 @@ export function ReloadButton() {
       variant="outline"
       size="icon"
       onClick={handleReload}
-      className="fixed bottom-[15px] right-[15px] z-50"
+      className="fixed bottom-4 right-4 z-50"
       aria-label="Reload page"
     >
       <RotateCw className="h-4 w-4" />
