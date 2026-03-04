@@ -7,12 +7,20 @@ created: 2026-03-01
 started: 2026-03-01
 completed: null
 tasks:
-  - [ ] Research MCP server options (reddit-mcp-buddy, mcp-reddit, others)
-  - [ ] Test Reddit MCP locally (npx, verify API works)
-  - [ ] Create Dockerfile for Reddit MCP
-  - [ ] Add to docker-compose.yml (~/Apps/)
-  - [ ] Configure OpenClaw gateway to use MCP via HTTP/stdio
-  - [ ] Test: Fetch Reddit opinions for shadcn/ui
-  - [ ] Document in connections/reddit-mcp.md
-  - [ ] (Optional) Add more MCPs to container (GitHub, HackerNews, etc.)
+  - text: "Research MCP server options (reddit-mcp-buddy, mcp-reddit, others)"
+    checked: false
+  - text: "Test Reddit MCP locally (npx, verify API works)"
+    checked: false
+  - text: "Create Dockerfile for Reddit MCP"
+    checked: false
+  - text: "Add to docker-compose.yml (~/Apps/)"
+    checked: false
+  - text: "Configure OpenClaw gateway to use MCP via HTTP/stdio"
+    checked: false
+  - text: "Test: Fetch Reddit opinions for shadcn/ui"
+    checked: false
+  - text: "Document in connections/reddit-mcp.md"
+    checked: false
+  - text: "(Optional) Add more MCPs to container (GitHub, HackerNews, etc.)"
+    checked: false
 ---
