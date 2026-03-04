@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import {
   Breadcrumb,
@@ -27,16 +27,34 @@ const sections = [
   { value: "agents", label: "Agents", count: 8 },
 ]
 
-// Placeholder check data - we'll populate this properly later
-const checks = Array.from({ length: 71 }, (_, i) => ({
-  id: `check-${i + 1}`,
-  name: `Check ${i + 1}`,
-  description: `Description for check ${i + 1}`,
-}))
+interface Check {
+  name: string
+  title: string
+  type: 'deterministic' | 'probabilistic'
+  description: string
+}
 
 export default function ChecksPage() {
   const router = useRouter()
   const [section, setSection] = useState("checks")
+  const [checks, setChecks] = useState<Check[]>([])
+  const [loading, setLoading] = useState(true)
+  
+  useEffect(() => {
+    async function loadChecks() {
+      try {
+        const response = await fetch('/api/checks')
+        const data = await response.json()
+        setChecks(data.checks || [])
+      } catch (error) {
+        console.error('Failed to load checks:', error)
+      } finally {
+        setLoading(false)
+      }
+    }
+    
+    loadChecks()
+  }, [])
   
   const handleSectionChange = (value: string) => {
     setSection(value)
@@ -56,7 +74,7 @@ export default function ChecksPage() {
               <Select value={section} onValueChange={handleSectionChange}>
                 <SelectTrigger className="justify-start">
                   <SelectValue>
-                    {currentSection?.label}<sup>{currentSection?.count}</sup>
+                    {currentSection?.label}<sup>{checks.length || currentSection?.count}</sup>
                   </SelectValue>
                 </SelectTrigger>
                 <SelectContent position="popper">
@@ -72,16 +90,20 @@ export default function ChecksPage() {
         </Breadcrumb>
       </div>
       
-      <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-        {checks.map((check) => (
-          <Card key={check.id}>
-            <CardHeader>
-              <CardTitle>{check.name}</CardTitle>
-              <CardDescription>{check.description}</CardDescription>
-            </CardHeader>
-          </Card>
-        ))}
-      </div>
+      {loading ? (
+        <div className="mt-8 text-muted-foreground">Loading checks...</div>
+      ) : (
+        <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {checks.map((check) => (
+            <Card key={check.name}>
+              <CardHeader>
+                <CardTitle>{check.title}</CardTitle>
+                <CardDescription>{check.description}</CardDescription>
+              </CardHeader>
+            </Card>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
