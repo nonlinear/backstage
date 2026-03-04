@@ -146,8 +146,7 @@
   background-image: url(/icon.png);
   background-size: auto 100%;
   background-repeat: no-repeat;
-  background-position: right bottom;
-  transform: scaleX(-1);
+  background-position: bottom right;
   pointer-events: none;
   z-index: 0;
 }
