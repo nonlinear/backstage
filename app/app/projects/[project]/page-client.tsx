@@ -188,6 +188,11 @@ export function ProjectPageClient({
           <ProjectCard 
             projectName={projectName} 
             projectDescription={projectDescription}
+            projectTier={projectTier}
+            projectType={projectType}
+            activeCount={activeCount}
+            backlogCount={backlogCount}
+            publishedCount={publishedCount}
           />
           
           {/* Epic cards */}
