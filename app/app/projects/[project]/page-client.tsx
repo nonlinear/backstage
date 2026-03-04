@@ -218,7 +218,7 @@ export function ProjectPageClient({
       
       {/* Horizontal card scroll */}
       <div className="flex-1 overflow-x-auto">
-        <div className="flex items-start h-full" style={{ gap: 'var(--spacing-unit)', padding: 'var(--spacing-unit)' }}>
+        <div className="flex items-start h-full" style={{ gap: 'calc(var(--spacing-unit) / 2)', padding: 'var(--spacing-unit)' }}>
           {/* Project card */}
           <ProjectCard 
             projectName={projectName} 
@@ -250,6 +250,9 @@ export function ProjectPageClient({
               onNoteChange={(noteSlug) => handleNoteChange(epic.version, noteSlug)}
             />
           ))}
+          
+          {/* Spacer after last card */}
+          <div style={{ width: 'var(--spacing-unit)', flexShrink: 0 }} />
         </div>
       </div>
     </div>
