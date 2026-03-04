@@ -141,12 +141,12 @@
   position: absolute;
   right: 0;
   bottom: 0;
-  width: 100px;
+  width: auto;
   height: 100%;
   background-image: url(/icon.png);
   background-size: auto 100%;
   background-repeat: no-repeat;
-  background-position: center right;
+  background-position: right center;
   transform: scaleX(-1);
   pointer-events: none;
   z-index: 0;
