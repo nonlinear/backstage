@@ -42,11 +42,6 @@ interface EpicCardProps {
   onCardClick?: () => void
 }
 
-function formatName(name: string): string {
-  // Display exactly as it appears in epic.yaml (no alterations)
-  return name
-}
-
 export function EpicCard({ 
   version, 
   name, 
@@ -62,7 +57,6 @@ export function EpicCard({
   onTabChange,
   onCardClick
 }: EpicCardProps) {
-  const formattedName = formatName(name)
   const completedTasks = tasks.filter(t => t.checked).length
   const [selectedNote, setSelectedNote] = useState(notesList[0]?.slug || "")
   
@@ -85,7 +79,7 @@ export function EpicCard({
         
         {/* Title with version superscript */}
         <h3 className="text-xl font-bold mb-2">
-          {formattedName}<sup className="text-muted-foreground text-sm ml-1">{version}</sup>
+          {name}<sup className="text-muted-foreground text-sm ml-1">{version}</sup>
         </h3>
         
         {/* Goal */}
