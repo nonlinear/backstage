@@ -4,6 +4,19 @@
 # DRY: All components reference this file
 
 # ============================================================================
+# RESERVED NAMES - Do NOT use as project names
+# ============================================================================
+# These names are reserved for system use:
+#   - flagship, experimental, backlog, template (tier names)
+#   - checks, agents, projects (section names)
+#
+# ENFORCEMENT: Manual (check before creating new project)
+# VIOLATION: Will cause routing conflicts (tier:flagship vs project flagship)
+#
+# NOTE: Project "template" already exists and conflicts with tier name.
+#       This is tolerated but should be renamed eventually (e.g., "project-template").
+
+# ============================================================================
 # TIERS - Project priority/maturity levels
 # ============================================================================
 tiers:

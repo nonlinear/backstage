@@ -55,6 +55,15 @@ export default function AllProjectsPage() {
         })
         
         setProjects(sorted)
+        
+        // Auto-scroll to first flagship project on load
+        setTimeout(() => {
+          const firstFlagship = sorted.find((p: ProjectData) => p.tier === 'flagship')
+          if (firstFlagship) {
+            const element = document.getElementById(firstFlagship.name.toLowerCase())
+            element?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+          }
+        }, 100)
       } catch (error) {
         console.error('Failed to load projects:', error)
       } finally {
