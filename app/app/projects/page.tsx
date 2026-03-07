@@ -26,7 +26,7 @@ const sections = [
 interface ProjectData {
   name: string
   description: string
-  tier: number
+  tier: string  // "flagship" | "experimental" | "backlog"
   type: string
   activeCount: number
   backlogCount: number
@@ -103,6 +103,17 @@ export default function AllProjectsPage() {
             <BreadcrumbItem>
               <Select value="all" onValueChange={(value) => {
                 if (value === "all") return
+                // Handle tier filters (scroll to first project of that tier)
+                if (value.startsWith("tier:")) {
+                  const tierName = value.replace("tier:", "")
+                  const firstProjectOfTier = projects.find(p => p.tier === tierName)
+                  if (firstProjectOfTier) {
+                    const element = document.getElementById(firstProjectOfTier.name.toLowerCase())
+                    element?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                  }
+                  return
+                }
+                // Navigate to specific project
                 router.push(`/projects/${value}`)
               }}>
                 <SelectTrigger className="justify-start border-0 shadow-none p-0 focus:ring-0 hover:bg-transparent">
@@ -114,6 +125,9 @@ export default function AllProjectsPage() {
                 </SelectTrigger>
                 <SelectContent position="popper" align="start">
                   <SelectItem value="all">All<sup className="text-muted-foreground">{totalEpics}</sup></SelectItem>
+                  <SelectItem value="tier:flagship">Flagship<sup className="text-muted-foreground">{projects.filter(p => p.tier === 'flagship').length}</sup></SelectItem>
+                  <SelectItem value="tier:experimental">Experimental<sup className="text-muted-foreground">{projects.filter(p => p.tier === 'experimental').length}</sup></SelectItem>
+                  <SelectItem value="tier:backlog">Backlog<sup className="text-muted-foreground">{projects.filter(p => p.tier === 'backlog').length}</sup></SelectItem>
                   <SelectSeparator />
                   {projectItems.map((proj) => (
                     <SelectItem key={proj.value} value={proj.value}>
