@@ -14,7 +14,7 @@ import { useRouter } from "next/navigation"
 interface ProjectCardProps {
   projectName: string
   projectDescription: string
-  projectTier: number
+  projectTier: string | number  // "flagship" | "experimental" | "backlog" | number (legacy)
   projectType: string
   activeCount: number
   backlogCount: number
@@ -38,13 +38,17 @@ export function ProjectCard({
   const totalEpics = activeCount + backlogCount + publishedCount
   
   return (
-    <Card className="flex-shrink-0 w-[300px] h-full flex flex-col">
+    <Card className="flex-shrink-0 w-[300px] h-full flex flex-col relative">
+      {/* Tier badge top-right (absolute, same as EpicCard) */}
+      <Badge variant="outline" className="absolute top-4 right-4 text-xs capitalize">
+        {typeof projectTier === 'string' ? projectTier : `tier-${projectTier}`}
+      </Badge>
+      
       <CardHeader>
         <h2 className="text-2xl font-semibold mb-2">{projectName}</h2>
         <p className="text-sm text-muted-foreground mb-3">{projectDescription}</p>
         
         <div className="space-y-1 text-sm text-muted-foreground">
-          <p><span className="font-medium">Tier:</span> {projectTier}</p>
           <p><span className="font-medium">Type:</span> {projectType}</p>
           <p><span className="font-medium">Epics:</span> {totalEpics} total — {activeCount} active, {publishedCount} completed, {backlogCount} backlog</p>
         </div>

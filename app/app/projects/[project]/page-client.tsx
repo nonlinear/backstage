@@ -33,7 +33,7 @@ interface ProjectPageClientProps {
   projectType: string
   projectName: string
   projectDescription: string
-  projectTier: number
+  projectTier: string | number  // "flagship" | "experimental" | "backlog" | number (legacy)
   projectBranch: string
   projectChecks: Check[]
   projectEpicCount: number

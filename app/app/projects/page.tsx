@@ -45,7 +45,16 @@ export default function AllProjectsPage() {
       try {
         const response = await fetch('/api/projects')
         const data = await response.json()
-        setProjects(data.projects || [])
+        
+        // Sort by tier: flagship → experimental → backlog
+        const tierOrder = { flagship: 1, experimental: 2, backlog: 3 }
+        const sorted = (data.projects || []).sort((a: ProjectData, b: ProjectData) => {
+          const tierA = tierOrder[a.tier as keyof typeof tierOrder] || 99
+          const tierB = tierOrder[b.tier as keyof typeof tierOrder] || 99
+          return tierA - tierB
+        })
+        
+        setProjects(sorted)
       } catch (error) {
         console.error('Failed to load projects:', error)
       } finally {
