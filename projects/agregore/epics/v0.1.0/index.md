@@ -4,7 +4,54 @@
 
 ---
 
+```mermaid
+graph TD
+    A[Friend wants to see what you did] --> B[Install Agregore]
+    B --> C[Find a Friend]
+    B --> D[View Spells]
+    B --> E[Pending]
+    
+    C --> F[3-word passcode + QR code]
+    F --> G{Friend action}
+    G -->|Types passcode| H[Chat Room]
+    G -->|Scans QR code| H
+    G -->|Leaves page| I[Cancel]
+```
+
 # v0.1.0 Discovery - Epic Notes
+
+## define critical user flows
+
+- I am on agregore and want to talk to someone
+- I am on agregore and I want to connect with a friend
+- I like this spell, onboarding to get it 
+  - i have agregore
+  - i dont have agregore
+- i want a friend to be able to see my data (that needs certain spells)
+
+spell discoverability:
+
+1. tags top down (someitmes with variables (json viewer for instance))
+2. tags bottom up
+
+## user personas
+
+- betatester: no nodes around them, keen to build/test stuff
+- main adopter: came over from friends, cares less about agregregore but specific things to do to it
+- ?
+
+## default spells
+
+- Json viewer
+- private communication
+- Markdown viewer (mermaid)
+- Markdown editor
+- versioning spells (allows multi-editors)
+
+## possible phases
+
+1. versioning (it's hard)
+2. private or friend only spells
 
 ## Meet with Nicholas
 
