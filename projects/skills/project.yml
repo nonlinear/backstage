@@ -1,5 +1,5 @@
 name: "Skills"
-tier: 1
+tier: experimental
 type: undefined
 description: "Skills project"
 checks:

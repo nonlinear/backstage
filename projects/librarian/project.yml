@@ -1,5 +1,5 @@
 name: "Librarian"
-tier: 1
+tier: experimental
 type: undefined
 description: "Librarian project"
 checks:

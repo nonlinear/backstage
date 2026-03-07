@@ -1,4 +1,4 @@
 name: "Billable Hours"
-tier: 1
+tier: experimental
 type: undefined
 description: "Billable Hours project"
