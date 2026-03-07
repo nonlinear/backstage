@@ -1,5 +1,5 @@
 name: "Backstage"
-tier: 1
+tier: flagship
 type: undefined
 description: "Backstage project lorem ipsum dolor sit amet"
 checks:
