@@ -205,8 +205,9 @@ export function ProjectPageClient({
                 <SelectContent position="popper" align="start">
                   <SelectItem value="all">All<sup className="text-muted-foreground">{totalEpics}</sup></SelectItem>
                   <SelectItem value="tier:flagship">Flagship<sup className="text-muted-foreground">3</sup></SelectItem>
-                  <SelectItem value="tier:experimental">Experimental<sup className="text-muted-foreground">11</sup></SelectItem>
-                  <SelectItem value="tier:backlog">Backlog<sup className="text-muted-foreground">0</sup></SelectItem>
+                  <SelectItem value="tier:experimental">Experimental<sup className="text-muted-foreground">7</sup></SelectItem>
+                  <SelectItem value="tier:backlog">Backlog<sup className="text-muted-foreground">3</sup></SelectItem>
+                  <SelectItem value="tier:template">Template<sup className="text-muted-foreground">1</sup></SelectItem>
                   <SelectSeparator />
                   {projects.map((proj) => (
                     <SelectItem key={proj.value} value={proj.value}>

@@ -46,8 +46,8 @@ export default function AllProjectsPage() {
         const response = await fetch('/api/projects')
         const data = await response.json()
         
-        // Sort by tier: flagship → experimental → backlog
-        const tierOrder = { flagship: 1, experimental: 2, backlog: 3 }
+        // Sort by tier: flagship → experimental → backlog → template
+        const tierOrder = { flagship: 1, experimental: 2, backlog: 3, template: 4 }
         const sorted = (data.projects || []).sort((a: ProjectData, b: ProjectData) => {
           const tierA = tierOrder[a.tier as keyof typeof tierOrder] || 99
           const tierB = tierOrder[b.tier as keyof typeof tierOrder] || 99
@@ -110,8 +110,7 @@ export default function AllProjectsPage() {
             </BreadcrumbItem>
             <span className="text-muted-foreground">/</span>
             <BreadcrumbItem>
-              <Select value="all" onValueChange={(value) => {
-                if (value === "all") return
+              <Select value="tier:flagship" onValueChange={(value) => {
                 // Handle tier filters (scroll to first project of that tier)
                 if (value.startsWith("tier:")) {
                   const tierName = value.replace("tier:", "")
@@ -128,15 +127,15 @@ export default function AllProjectsPage() {
                 <SelectTrigger className="justify-start border-0 shadow-none p-0 focus:ring-0 hover:bg-transparent">
                   <SelectValue>
                     <span className="font-bold text-foreground">
-                      All<sup className="text-muted-foreground font-normal">{totalEpics}</sup>
+                      All Projects<sup className="text-muted-foreground font-normal">{totalEpics}</sup>
                     </span>
                   </SelectValue>
                 </SelectTrigger>
                 <SelectContent position="popper" align="start">
-                  <SelectItem value="all">All<sup className="text-muted-foreground">{totalEpics}</sup></SelectItem>
                   <SelectItem value="tier:flagship">Flagship<sup className="text-muted-foreground">{projects.filter(p => p.tier === 'flagship').length}</sup></SelectItem>
                   <SelectItem value="tier:experimental">Experimental<sup className="text-muted-foreground">{projects.filter(p => p.tier === 'experimental').length}</sup></SelectItem>
                   <SelectItem value="tier:backlog">Backlog<sup className="text-muted-foreground">{projects.filter(p => p.tier === 'backlog').length}</sup></SelectItem>
+                  <SelectItem value="tier:template">Template<sup className="text-muted-foreground">{projects.filter(p => p.tier === 'template').length}</sup></SelectItem>
                   <SelectSeparator />
                   {projectItems.map((proj) => (
                     <SelectItem key={proj.value} value={proj.value}>

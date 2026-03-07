@@ -22,6 +22,11 @@ tiers:
     description: Ideas, future projects, on hold
     order: 3
 
+  - name: template
+    label: Template
+    description: Scaffolding, boilerplate, reference implementations
+    order: 4
+
 # ============================================================================
 # CHECKS - Global validation scripts (apply to all projects)
 # ============================================================================

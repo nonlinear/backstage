@@ -61,8 +61,8 @@ export async function GET() {
       }
     })
     
-    // Sort by tier (flagship → experimental → backlog) then name
-    const tierOrder: Record<string, number> = { flagship: 1, experimental: 2, backlog: 3 }
+    // Sort by tier (flagship → experimental → backlog → template) then name
+    const tierOrder: Record<string, number> = { flagship: 1, experimental: 2, backlog: 3, template: 4 }
     projects.sort((a, b) => {
       const tierA = typeof a.tier === 'string' ? (tierOrder[a.tier] || 99) : a.tier
       const tierB = typeof b.tier === 'string' ? (tierOrder[b.tier] || 99) : b.tier
