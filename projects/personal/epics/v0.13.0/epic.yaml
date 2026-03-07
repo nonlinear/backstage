@@ -3,7 +3,7 @@ version: v0.13.0
 name: 
 goal: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
 status: backlog
-type: "undefined"
+type: "minor"
 created: null
 started: null
 completed: null
