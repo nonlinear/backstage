@@ -10,7 +10,7 @@ const BACKSTAGE_ROOT = path.join(process.env.HOME || '', 'Documents/backstage/pr
 interface ProjectYaml {
   name: string
   description: string
-  tier: number
+  tier: string | number  // "flagship" | "experimental" | "backlog" or legacy number
   type: string
   checks?: string[]
 }
@@ -27,7 +27,7 @@ export async function GET() {
       let projectData: ProjectYaml = {
         name: projectDir,
         description: '',
-        tier: 0,
+        tier: 'experimental',  // default tier
         type: '',
         checks: []
       }
@@ -61,9 +61,12 @@ export async function GET() {
       }
     })
     
-    // Sort by tier (ascending) then name
+    // Sort by tier (flagship → experimental → backlog) then name
+    const tierOrder: Record<string, number> = { flagship: 1, experimental: 2, backlog: 3 }
     projects.sort((a, b) => {
-      if (a.tier !== b.tier) return a.tier - b.tier
+      const tierA = typeof a.tier === 'string' ? (tierOrder[a.tier] || 99) : a.tier
+      const tierB = typeof b.tier === 'string' ? (tierOrder[b.tier] || 99) : b.tier
+      if (tierA !== tierB) return tierA - tierB
       return a.name.localeCompare(b.name)
     })
     
