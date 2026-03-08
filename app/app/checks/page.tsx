@@ -159,7 +159,7 @@ export default function ChecksPage() {
             {/* Active checks - horizontal scroll, 600px */}
             {currentChecks.length > 0 && (
               <div className="overflow-x-auto overflow-y-hidden border-b">
-                <div className="flex h-full items-start" style={{ gap: 'calc(var(--spacing-unit) / 2)', padding: 'var(--spacing-unit)' }}>
+                <div className="flex h-full items-start" style={{ gap: 'calc(var(--spacing-unit) / 2)', padding: 'calc(var(--spacing-unit) / 2)' }}>
                   {currentChecks.map((check) => (
                     <>
                       <div key={`anchor-${check.name}`} id={check.name} className="scroll-mt-4" />
