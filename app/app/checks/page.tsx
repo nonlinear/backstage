@@ -87,7 +87,7 @@ export default function ChecksPage() {
   
   return (
     <div className="h-screen flex flex-col">
-      {/* Fixed breadcrumb header with icon */}
+      {/* Fixed breadcrumb header */}
       <div className="flex items-center gap-6 border-b bg-background header-with-icon" style={{ padding: 'var(--spacing-unit)' }}>
         <h1 className="text-2xl font-bold">Backstage</h1>
         <span className="text-muted-foreground">/</span>
@@ -111,34 +111,72 @@ export default function ChecksPage() {
                 </SelectContent>
               </Select>
             </BreadcrumbItem>
+            <span className="text-muted-foreground">/</span>
+            <BreadcrumbItem>
+              <Select value="type:all" onValueChange={(value) => {
+                // Filter logic (scroll to first of type)
+                if (value === "type:all") {
+                  window.scrollTo({ top: 0, behavior: 'smooth' })
+                  return
+                }
+                if (value.startsWith("type:")) {
+                  const typeName = value.replace("type:", "")
+                  const firstCheckOfType = checks.find(c => c.type === typeName)
+                  if (firstCheckOfType) {
+                    const element = document.getElementById(firstCheckOfType.name)
+                    element?.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'start' })
+                  }
+                }
+              }}>
+                <SelectTrigger className="justify-start border-0 shadow-none p-0 focus:ring-0 hover:bg-transparent">
+                  <SelectValue>
+                    <span className="font-bold text-foreground">
+                      All
+                    </span>
+                  </SelectValue>
+                </SelectTrigger>
+                <SelectContent position="popper" align="start">
+                  <SelectItem value="type:all">All</SelectItem>
+                  <SelectItem value="type:probabilistic">Probabilistic<sup className="text-muted-foreground">{checks.filter(c => c.type === 'probabilistic').length}</sup></SelectItem>
+                  <SelectItem value="type:deterministic">Deterministic<sup className="text-muted-foreground">{checks.filter(c => c.type === 'deterministic').length}</sup></SelectItem>
+                </SelectContent>
+              </Select>
+            </BreadcrumbItem>
           </BreadcrumbList>
         </Breadcrumb>
       </div>
       
-      {/* Scrollable content */}
-      <div className="flex-1 overflow-y-auto p-8">
+      {/* Horizontal scrollable content */}
+      <div className="flex-1 overflow-x-auto overflow-y-hidden">
         {loading ? (
-          <div className="text-muted-foreground">Loading checks...</div>
+          <p className="text-muted-foreground" style={{ padding: 'var(--spacing-unit)' }}>Loading checks...</p>
         ) : (
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3" style={{ gridAutoRows: 'max-content' }}>
+          <div className="flex h-full items-start" style={{ gap: 'calc(var(--spacing-unit) / 2)', padding: 'var(--spacing-unit)' }}>
             {checks.map((check) => (
-              <Card key={check.name} className="h-fit">
-                <CardHeader>
-                  <CardTitle>{check.title}</CardTitle>
-                  <div className="mt-2">
-                    <Badge variant="outline" className="text-xs">
-                      {check.type}
-                    </Badge>
+              <>
+                <div key={`anchor-${check.name}`} id={check.name} className="scroll-mt-4" />
+                <Card key={check.name} className="flex-none w-[600px] relative" style={{ padding: 'var(--spacing-unit)' }}>
+                  {/* Type badge top-right */}
+                  <Badge variant="outline" className="absolute top-4 right-4 text-xs capitalize">
+                    {check.type}
+                  </Badge>
+                  
+                  <div className="space-y-4 pr-32">
+                    <h2 className="text-2xl font-bold">{check.title}</h2>
+                    <p className="text-muted-foreground">{check.description}</p>
+                    
+                    {check.diagram && (
+                      <div className="mt-4">
+                        <MermaidDiagram diagram={check.diagram} id={check.name} />
+                      </div>
+                    )}
                   </div>
-                  <CardDescription className="mt-2">{check.description}</CardDescription>
-                </CardHeader>
-                {check.diagram && (
-                  <CardContent>
-                    <MermaidDiagram diagram={check.diagram} id={check.name} />
-                  </CardContent>
-                )}
-              </Card>
+                </Card>
+              </>
             ))}
+            
+            {/* Spacer after last card */}
+            <div style={{ width: 'var(--spacing-unit)', flexShrink: 0 }} />
           </div>
         )}
       </div>
