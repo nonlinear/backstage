@@ -152,7 +152,7 @@ export default function AllProjectsPage() {
                     </SelectItem>
                   ))}
                   <SelectSeparator />
-                  <SelectItem value="tier:all">All</SelectItem>
+                  <SelectItem value="tier:all">All<sup className="text-muted-foreground">{totalEpics}</sup></SelectItem>
                   <SelectItem value="tier:flagship">Flagship<sup className="text-muted-foreground">{projects.filter(p => p.tier === 'flagship').length}</sup></SelectItem>
                   <SelectItem value="tier:experimental">Experimental<sup className="text-muted-foreground">{projects.filter(p => p.tier === 'experimental').length}</sup></SelectItem>
                   <SelectItem value="tier:backlog">Backlog<sup className="text-muted-foreground">{projects.filter(p => p.tier === 'backlog').length}</sup></SelectItem>

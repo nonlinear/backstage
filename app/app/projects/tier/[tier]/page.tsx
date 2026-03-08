@@ -141,7 +141,7 @@ export default async function TierProjectsPage(props: { params: Promise<{ tier: 
                     </SelectItem>
                   ))}
                   <SelectSeparator />
-                  <SelectItem value="tier:all">All</SelectItem>
+                  <SelectItem value="tier:all">All<sup className="text-muted-foreground">{allProjects.reduce((sum, p) => sum + p.activeCount + p.backlogCount + p.publishedCount, 0)}</sup></SelectItem>
                   <SelectItem value="tier:flagship">Flagship<sup className="text-muted-foreground">{allProjects.filter(p => p.tier === 'flagship').length}</sup></SelectItem>
                   <SelectItem value="tier:experimental">Experimental<sup className="text-muted-foreground">{allProjects.filter(p => p.tier === 'experimental').length}</sup></SelectItem>
                   <SelectItem value="tier:backlog">Backlog<sup className="text-muted-foreground">{allProjects.filter(p => p.tier === 'backlog').length}</sup></SelectItem>

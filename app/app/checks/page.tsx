@@ -140,7 +140,7 @@ export default function ChecksPage() {
                   </SelectValue>
                 </SelectTrigger>
                 <SelectContent position="popper" align="start">
-                  <SelectItem value="type:all">All</SelectItem>
+                  <SelectItem value="type:all">All<sup className="text-muted-foreground">{checks.length}</sup></SelectItem>
                   <SelectItem value="type:probabilistic">Probabilistic<sup className="text-muted-foreground">{checks.filter(c => c.type === 'probabilistic').length}</sup></SelectItem>
                   <SelectItem value="type:deterministic">Deterministic<sup className="text-muted-foreground">{checks.filter(c => c.type === 'deterministic').length}</sup></SelectItem>
                 </SelectContent>
