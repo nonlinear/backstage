@@ -122,19 +122,17 @@ export default function AgentsPage() {
                   </SelectValue>
                 </SelectTrigger>
                 <SelectContent position="popper" align="start">
-                  <SelectItem value="squad:all">All</SelectItem>
-                  <SelectItem value="squad:main">Main<sup className="text-muted-foreground">{agentsBySquad['main']?.length || 0}</sup></SelectItem>
-                  <SelectItem value="squad:engineering">Engineering<sup className="text-muted-foreground">{agentsBySquad['engineering']?.length || 0}</sup></SelectItem>
-                  <SelectItem value="squad:marketing">Marketing<sup className="text-muted-foreground">{agentsBySquad['marketing']?.length || 0}</sup></SelectItem>
-                  <SelectItem value="squad:operations">Operations<sup className="text-muted-foreground">{agentsBySquad['operations']?.length || 0}</sup></SelectItem>
-                  <SelectSeparator />
-                  <SelectItem value="separator" disabled className="text-xs text-muted-foreground font-semibold">AGENT LIST</SelectItem>
-                  <SelectSeparator />
                   {agents.map((agent) => (
                     <SelectItem key={agent.id} value={agent.id}>
                       {agent.name}
                     </SelectItem>
                   ))}
+                  <SelectSeparator />
+                  <SelectItem value="squad:all">All<sup className="text-muted-foreground">{agents.length}</sup></SelectItem>
+                  <SelectItem value="squad:main">Main<sup className="text-muted-foreground">{agentsBySquad['main']?.length || 0}</sup></SelectItem>
+                  <SelectItem value="squad:research">Research<sup className="text-muted-foreground">{agentsBySquad['research']?.length || 0}</sup></SelectItem>
+                  <SelectItem value="squad:engineering">Engineering<sup className="text-muted-foreground">{agentsBySquad['engineering']?.length || 0}</sup></SelectItem>
+                  <SelectItem value="squad:marketing">Marketing<sup className="text-muted-foreground">{agentsBySquad['marketing']?.length || 0}</sup></SelectItem>
                 </SelectContent>
               </Select>
             </BreadcrumbItem>
