@@ -46,7 +46,8 @@ export async function GET() {
           squad: squad,  // from folder (main, engineering, etc.)
           name: data.name || agentId,
           description: data.description || '',
-          checks: data.checks || []
+          checks: data.checks || [],
+          values: data.values || []
         })
       }
     }

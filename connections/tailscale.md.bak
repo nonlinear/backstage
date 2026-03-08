@@ -1,0 +1,89 @@
+# Ports - Mac Studio Service Mapping
+
+**Last updated:** 2026-02-28 23:51 EST
+
+**Network:**
+- **Local:** `localhost`
+- **Tailscale:** `studio.adal-rigel.ts.net`
+
+**NAS services:** All accessible via `media.adal-rigel.ts.net` (automatic Tailscale exposure)
+
+---
+
+## Mac Studio Services
+
+| Service | Port | Local URL | Tailscale URL |
+|---------|------|-----------|---------------|
+| **OpenClaw Control UI** | 18789 | http://localhost:18789 | https://studio.adal-rigel.ts.net |
+| **Kavita** | 5007 | http://localhost:5007 | http://studio.adal-rigel.ts.net:5007 |
+| **Komga** | 5008 | http://localhost:5008 | http://studio.adal-rigel.ts.net:5008 |
+| **SearXNG** | 8889 | http://localhost:8889 | http://studio.adal-rigel.ts.net:8889 |
+| **OpenProject** | 8087 | http://localhost:8087 | http://studio.adal-rigel.ts.net:8087 |
+
+**Note:** OpenClaw served as HTTPS root (no port in Tailscale URL)
+
+---
+
+## Tailscale Serve Configuration
+
+**Current config:**
+```
+https://studio.adal-rigel.ts.net → http://localhost:18789 (OpenClaw)
+http://studio.adal-rigel.ts.net:5007 → http://localhost:5007 (Kavita)
+http://studio.adal-rigel.ts.net:8087 → http://localhost:8087 (OpenProject)
+```
+
+**Check what's served:**
+```bash
+tailscale serve status
+```
+
+**Expose new service:**
+```bash
+# As HTTPS root (no port)
+tailscale serve https:443 http://localhost:PORT
+
+# As specific port
+tailscale serve http:PORT http://localhost:PORT
+
+# Remove exposure
+tailscale serve reset
+```
+
+---
+
+## Common Tasks
+
+### Check if service is running
+```bash
+docker ps | grep <service-name>
+```
+
+### Test connectivity
+```bash
+# Local
+curl -I http://localhost:<PORT>
+
+# Tailscale
+curl -I http://studio.adal-rigel.ts.net:<PORT>
+```
+
+### Restart service
+```bash
+docker restart <container-name>
+```
+
+---
+
+## Port Conflicts
+
+**To avoid:** Check this file before assigning new ports.
+
+---
+
+## See Also
+
+- `connections/docker.md` - Mac container management
+- `connections/tailscale.md` - Tailscale configuration
+
+| **Backstage UI** | 3000 | http://localhost:3000 | http://studio.adal-rigel.ts.net:3000 |

@@ -19,6 +19,14 @@ import { ProjectCard } from "@/components/ProjectCard"
 
 const sections = [
   { value: "projects", label: "Projects", count: 14 },
+  { value: "checks", label: "Checks", count: 67 },
+  { value: "agents", label: "Agents", count: 8 },
+  { value: "values", label: "Values", count: 20 },
+  { value: "connections", label: "Connections", count: 0 },
+];
+
+const OLD_sections = [
+  { value: "projects", label: "Projects", count: 14 },
   { value: "checks", label: "Checks", count: 71 },
   { value: "agents", label: "Agents", count: 8 },
 ]

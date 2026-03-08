@@ -14,7 +14,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import { CheckCard } from "@/components/CheckCard"
+import { ConnectionCard } from "@/components/ConnectionCard"
 
 const sections = [
   { value: "projects", label: "Projects", count: 14 },
@@ -22,58 +22,51 @@ const sections = [
   { value: "agents", label: "Agents", count: 8 },
   { value: "values", label: "Values", count: 20 },
   { value: "connections", label: "Connections", count: 0 },
-];
-
-const OLD_sections = [
-  { value: "projects", label: "Projects", count: 14 },
-  { value: "checks", label: "Checks", count: 71 },
-  { value: "agents", label: "Agents", count: 8 },
 ]
 
-interface Check {
+interface Connection {
   name: string
   title: string
-  type: 'deterministic' | 'probabilistic'
   description: string
-  diagram?: string
+  content?: string
 }
 
-export default function ChecksPage() {
+export default function ConnectionsPage() {
   const router = useRouter()
-  const [section, setSection] = useState("checks")
-  const [checks, setChecks] = useState<Check[]>([])
+  const [section, setSection] = useState("connections")
+  const [connections, setConnections] = useState<Connection[]>([])
   const [loading, setLoading] = useState(true)
-  const [expandedCheck, setExpandedCheck] = useState<string | null>(null)
+  const [expandedConnection, setExpandedConnection] = useState<string | null>(null)
   
   useEffect(() => {
-    async function loadChecks() {
+    async function loadConnections() {
       try {
-        const response = await fetch('/api/checks')
+        const response = await fetch('/api/connections')
         const data = await response.json()
-        setChecks(data.checks || [])
+        setConnections(data.connections || [])
       } catch (error) {
-        console.error('Failed to load checks:', error)
+        console.error('Failed to load connections:', error)
       } finally {
         setLoading(false)
       }
     }
     
-    loadChecks()
+    loadConnections()
   }, [])
   
   const handleSectionChange = (value: string) => {
     setSection(value)
     if (value === "projects") router.push("/projects")
+    if (value === "checks") router.push("/checks")
     if (value === "agents") router.push("/agents")
     if (value === "values") router.push("/values")
-    if (value === "connections") router.push("/connections")
   }
   
   const currentSection = sections.find(s => s.value === section)
   
   return (
     <div className="h-screen flex flex-col">
-      {/* Fixed breadcrumb header */}
+      {/* Fixed breadcrumb */}
       <div className="flex items-center gap-6 border-b bg-background header-with-icon" style={{ padding: 'var(--spacing-unit)' }}>
         <h1 className="text-2xl font-bold">Backstage</h1>
         <span className="text-muted-foreground">/</span>
@@ -84,14 +77,14 @@ export default function ChecksPage() {
                 <SelectTrigger className="justify-start border-0 shadow-none p-0 focus:ring-0 hover:bg-transparent">
                   <SelectValue>
                     <span className="font-bold text-foreground">
-                      {currentSection?.label}<sup className="text-muted-foreground font-normal">{checks.length}</sup>
+                      {currentSection?.label}<sup className="text-muted-foreground font-normal">{connections.length}</sup>
                     </span>
                   </SelectValue>
                 </SelectTrigger>
                 <SelectContent position="popper" align="start">
                   {sections.map((item) => (
                     <SelectItem key={item.value} value={item.value}>
-                      {item.label}<sup className="text-muted-foreground">{item.count}</sup>
+                      {item.label}<sup className="text-muted-foreground">{item.value === 'connections' ? connections.length : item.count}</sup>
                     </SelectItem>
                   ))}
                 </SelectContent>
@@ -99,55 +92,33 @@ export default function ChecksPage() {
             </BreadcrumbItem>
             <span className="text-muted-foreground">/</span>
             <BreadcrumbItem>
-              <Select value="type:all" onValueChange={(value) => {
-                // Filter logic (scroll to first of type)
-                if (value === "type:all") {
-                  window.scrollTo({ top: 0, behavior: 'smooth' })
-                  return
-                }
-                if (value.startsWith("type:")) {
-                  const typeName = value.replace("type:", "")
-                  const firstCheckOfType = checks.find(c => c.type === typeName)
-                  if (firstCheckOfType) {
-                    const element = document.getElementById(firstCheckOfType.name)
-                    element?.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'start' })
-                  }
-                }
-              }}>
+              <Select value="all">
                 <SelectTrigger className="justify-start border-0 shadow-none p-0 focus:ring-0 hover:bg-transparent">
                   <SelectValue>
-                    <span className="font-bold text-foreground">
-                      All
-                    </span>
+                    <span className="font-bold text-foreground">All</span>
                   </SelectValue>
                 </SelectTrigger>
-                <SelectContent position="popper" align="start">
-                  <SelectItem value="type:all">All<sup className="text-muted-foreground">{checks.length}</sup></SelectItem>
-                  <SelectItem value="type:probabilistic">Probabilistic<sup className="text-muted-foreground">{checks.filter(c => c.type === 'probabilistic').length}</sup></SelectItem>
-                  <SelectItem value="type:deterministic">Deterministic<sup className="text-muted-foreground">{checks.filter(c => c.type === 'deterministic').length}</sup></SelectItem>
-                </SelectContent>
               </Select>
             </BreadcrumbItem>
           </BreadcrumbList>
         </Breadcrumb>
       </div>
       
-      {/* Scrollable content */}
+      {/* Horizontal scroll */}
       <div className="flex-1 overflow-auto">
         {loading ? (
-          <p className="text-muted-foreground" style={{ padding: 'var(--spacing-unit)' }}>Loading checks...</p>
+          <p className="text-muted-foreground" style={{ padding: 'var(--spacing-unit)' }}>Loading connections...</p>
         ) : (
           <div className="flex items-start h-full overflow-x-auto" style={{ gap: 'calc(var(--spacing-unit) / 2)', padding: 'calc(var(--spacing-unit) / 2)' }}>
-            {checks.map((check) => (
-              <CheckCard
-                key={check.name}
-                name={check.name}
-                title={check.title}
-                type={check.type}
-                description={check.description}
-                diagram={check.diagram}
-                isExpanded={expandedCheck === check.name}
-                onClick={() => setExpandedCheck(expandedCheck === check.name ? null : check.name)}
+            {connections.map((connection) => (
+              <ConnectionCard
+                key={connection.name}
+                name={connection.name}
+                title={connection.title}
+                description={connection.description}
+                content={connection.content}
+                isExpanded={expandedConnection === connection.name}
+                onClick={() => setExpandedConnection(expandedConnection === connection.name ? null : connection.name)}
               />
             ))}
             
@@ -157,5 +128,5 @@ export default function ChecksPage() {
         )}
       </div>
     </div>
-  );
+  )
 }
