@@ -190,11 +190,11 @@ export default function ChecksPage() {
             )}
             
             {/* Inactive checks - sticky grid, 300px */}
-            {incurrentChecks.length > 0 && (
+            {nonCurrentChecks.length > 0 && (
               <div style={{ padding: 'var(--spacing-unit)' }}>
                 <h2 className="text-lg font-semibold mb-4 text-muted-foreground">Non-Current Checks</h2>
                 <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                  {incurrentChecks.map((check) => (
+                  {nonCurrentChecks.map((check) => (
                     <Card key={check.name} className="w-[300px]">
                       <CardHeader>
                         <div className="flex items-start justify-between">
