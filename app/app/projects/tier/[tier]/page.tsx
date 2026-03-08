@@ -121,7 +121,7 @@ export default async function TierProjectsPage(props: { params: Promise<{ tier: 
                 }
                 if (value.startsWith("tier:")) {
                   const tierName = value.replace("tier:", "")
-                  router.push(`/projects/${tierName}`)
+                  router.push(`/projects/tier/${tierName}`)
                   return
                 }
                 // Navigate to specific project
