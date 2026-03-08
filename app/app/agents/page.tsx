@@ -143,11 +143,11 @@ export default function AgentsPage() {
       </div>
       
       {/* Horizontal scrollable content */}
-      <div className="flex-1 overflow-x-auto overflow-y-hidden" style={{ padding: 'var(--spacing-unit)' }}>
+      <div className="flex-1 overflow-x-auto overflow-y-hidden">
         {loading ? (
-          <p className="text-muted-foreground">Loading agents...</p>
+          <p className="text-muted-foreground" style={{ padding: 'var(--spacing-unit)' }}>Loading agents...</p>
         ) : (
-          <div className="flex gap-8 h-full items-start">
+          <div className="flex h-full items-start" style={{ gap: 'calc(var(--spacing-unit) / 2)', padding: 'var(--spacing-unit)' }}>
             {agents.map((agent) => (
               <>
                 <div key={`anchor-${agent.id}`} id={agent.id} className="scroll-mt-4" />
