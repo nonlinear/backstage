@@ -1,8 +1,7 @@
 "use client"
 
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import mermaid from 'mermaid'
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -15,14 +14,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardContent,
-} from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
+import { CheckCard } from "@/components/CheckCard"
 
 const sections = [
   { value: "projects", label: "Projects", count: 14 },
@@ -38,32 +30,12 @@ interface Check {
   diagram?: string
 }
 
-function MermaidDiagram({ diagram, id }: { diagram: string; id: string }) {
-  const containerRef = useRef<HTMLDivElement>(null)
-  
-  useEffect(() => {
-    if (containerRef.current && diagram) {
-      mermaid.initialize({ startOnLoad: false, theme: 'neutral' })
-      mermaid.render(`mermaid-${id}`, diagram).then(({ svg }) => {
-        if (containerRef.current) {
-          containerRef.current.innerHTML = svg
-        }
-      })
-    }
-  }, [diagram, id])
-  
-  return <div ref={containerRef} className="mermaid-container" />
-}
-
 export default function ChecksPage() {
   const router = useRouter()
   const [section, setSection] = useState("checks")
   const [checks, setChecks] = useState<Check[]>([])
   const [loading, setLoading] = useState(true)
-  
-  // Separate current and non-current checks
-  const currentChecks = checks.filter(c => c.current === true)
-  const nonCurrentChecks = checks.filter(c => c.current !== true)
+  const [expandedCheck, setExpandedCheck] = useState<string | null>(null)
   
   useEffect(() => {
     async function loadChecks() {
@@ -155,67 +127,23 @@ export default function ChecksPage() {
         {loading ? (
           <p className="text-muted-foreground" style={{ padding: 'var(--spacing-unit)' }}>Loading checks...</p>
         ) : (
-          <>
-            {/* Active checks - horizontal scroll, 600px */}
-            {currentChecks.length > 0 && (
-              <div className="overflow-x-auto overflow-y-hidden border-b">
-                <div className="flex h-full items-start" style={{ gap: 'calc(var(--spacing-unit) / 2)', padding: 'calc(var(--spacing-unit) / 2)' }}>
-                  {currentChecks.map((check) => (
-                    <>
-                      <div key={`anchor-${check.name}`} id={check.name} className="scroll-mt-4" />
-                      <Card key={check.name} className="flex-none w-[600px] relative" style={{ padding: 'var(--spacing-unit)' }}>
-                        {/* Type badge top-right */}
-                        <Badge variant="outline" className="absolute top-4 right-4 text-xs capitalize">
-                          {check.type}
-                        </Badge>
-                        
-                        <div className="space-y-4 pr-32">
-                          <h2 className="text-2xl font-bold">{check.title}</h2>
-                          <p className="text-muted-foreground">{check.description}</p>
-                          
-                          {check.diagram && (
-                            <div className="mt-4">
-                              <MermaidDiagram diagram={check.diagram} id={check.name} />
-                            </div>
-                          )}
-                        </div>
-                      </Card>
-                    </>
-                  ))}
-                  
-                  {/* Spacer after last card */}
-                  <div style={{ width: 'var(--spacing-unit)', flexShrink: 0 }} />
-                </div>
-              </div>
-            )}
+          <div className="flex items-start h-full overflow-x-auto" style={{ gap: 'calc(var(--spacing-unit) / 2)', padding: 'calc(var(--spacing-unit) / 2)' }}>
+            {checks.map((check) => (
+              <CheckCard
+                key={check.name}
+                name={check.name}
+                title={check.title}
+                type={check.type}
+                description={check.description}
+                diagram={check.diagram}
+                isExpanded={expandedCheck === check.name}
+                onClick={() => setExpandedCheck(expandedCheck === check.name ? null : check.name)}
+              />
+            ))}
             
-            {/* Inactive checks - sticky grid, 300px */}
-            {nonCurrentChecks.length > 0 && (
-              <div style={{ padding: 'var(--spacing-unit)' }}>
-                <h2 className="text-lg font-semibold mb-4 text-muted-foreground">Non-Current Checks</h2>
-                <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                  {nonCurrentChecks.map((check) => (
-                    <Card key={check.name} className="w-[300px]">
-                      <CardHeader>
-                        <div className="flex items-start justify-between">
-                          <CardTitle className="text-base">{check.title}</CardTitle>
-                          <Badge variant="outline" className="text-xs capitalize ml-2">
-                            {check.type}
-                          </Badge>
-                        </div>
-                        <CardDescription className="text-sm">{check.description}</CardDescription>
-                      </CardHeader>
-                      {check.diagram && (
-                        <CardContent>
-                          <MermaidDiagram diagram={check.diagram} id={check.name} />
-                        </CardContent>
-                      )}
-                    </Card>
-                  ))}
-                </div>
-              </div>
-            )}
-          </>
+            {/* Spacer after last card */}
+            <div style={{ width: 'var(--spacing-unit)', flexShrink: 0 }} />
+          </div>
         )}
       </div>
     </div>
