@@ -1,0 +1,19 @@
+# Epic Template - Metadata
+# Copy this for new epics
+
+name: "Agents First Pass"
+version: "0.3.0"
+status: "active"
+tier: "infrastructure"
+contract_type: "diagram"
+
+# Optional fields
+framework: "mermaid"
+checklist:
+  required: []
+  banned: []
+dependencies: []
+
+# Metadata
+owner: "kin"
+notes: "Multi-agent system foundation - define roles, comms, memory"
