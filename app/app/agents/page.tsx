@@ -147,18 +147,19 @@ export default function AgentsPage() {
         {loading ? (
           <p className="text-muted-foreground">Loading agents...</p>
         ) : (
-          <div className="flex gap-4 h-full items-start">
+          <div className="flex gap-8 h-full items-start">
             {agents.map((agent) => (
               <>
                 <div key={`anchor-${agent.id}`} id={agent.id} className="scroll-mt-4" />
                 <Card 
                   key={agent.id}
-                  className="flex-none w-80 p-6 cursor-pointer hover:bg-accent transition-colors relative"
+                  className="flex-none w-80 cursor-pointer hover:bg-accent transition-colors relative"
+                  style={{ padding: 'var(--spacing-unit)' }}
                   onClick={() => router.push(`/agents/${agent.squad}/${agent.id}`)}
                 >
                   {/* Squad badge (top-right) */}
                   <Badge 
-                    variant="secondary" 
+                    variant="outline" 
                     className="absolute top-4 right-4 capitalize"
                   >
                     {agent.squad}
