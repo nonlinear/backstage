@@ -11,6 +11,7 @@ import {
   Select,
   SelectContent,
   SelectItem,
+  SelectSeparator,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
@@ -25,8 +26,8 @@ const sections = [
 
 interface AgentData {
   id: string
+  squad: string  // main, engineering, marketing, operations
   name: string
-  type: string  // squad: main, engineering, marketing, operations
   description: string
   checks: any[]
 }
@@ -61,6 +62,13 @@ export default function AgentsPage() {
   
   const currentSection = sections.find(s => s.value === section)
   
+  // Group agents by squad
+  const agentsBySquad = agents.reduce((acc, agent) => {
+    if (!acc[agent.squad]) acc[agent.squad] = []
+    acc[agent.squad].push(agent)
+    return acc
+  }, {} as Record<string, AgentData[]>)
+  
   return (
     <div className="h-screen flex flex-col">
       {/* Fixed breadcrumb header */}
@@ -87,6 +95,49 @@ export default function AgentsPage() {
                 </SelectContent>
               </Select>
             </BreadcrumbItem>
+            <span className="text-muted-foreground">/</span>
+            <BreadcrumbItem>
+              <Select value="squad:all" onValueChange={(value) => {
+                if (value === "squad:all") {
+                  window.scrollTo({ top: 0, behavior: 'smooth' })
+                  return
+                }
+                if (value.startsWith("squad:")) {
+                  const squadName = value.replace("squad:", "")
+                  const firstAgentOfSquad = agents.find(a => a.squad === squadName)
+                  if (firstAgentOfSquad) {
+                    const element = document.getElementById(firstAgentOfSquad.id)
+                    element?.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'start' })
+                  }
+                  return
+                }
+                // Navigate to specific agent
+                router.push(`/agents/${value}`)
+              }}>
+                <SelectTrigger className="justify-start border-0 shadow-none p-0 focus:ring-0 hover:bg-transparent">
+                  <SelectValue>
+                    <span className="font-bold text-foreground">
+                      All
+                    </span>
+                  </SelectValue>
+                </SelectTrigger>
+                <SelectContent position="popper" align="start">
+                  <SelectItem value="squad:all">All</SelectItem>
+                  <SelectItem value="squad:main">Main<sup className="text-muted-foreground">{agentsBySquad['main']?.length || 0}</sup></SelectItem>
+                  <SelectItem value="squad:engineering">Engineering<sup className="text-muted-foreground">{agentsBySquad['engineering']?.length || 0}</sup></SelectItem>
+                  <SelectItem value="squad:marketing">Marketing<sup className="text-muted-foreground">{agentsBySquad['marketing']?.length || 0}</sup></SelectItem>
+                  <SelectItem value="squad:operations">Operations<sup className="text-muted-foreground">{agentsBySquad['operations']?.length || 0}</sup></SelectItem>
+                  <SelectSeparator />
+                  <SelectItem value="separator" disabled className="text-xs text-muted-foreground font-semibold">AGENT LIST</SelectItem>
+                  <SelectSeparator />
+                  {agents.map((agent) => (
+                    <SelectItem key={agent.id} value={agent.id}>
+                      {agent.name}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </BreadcrumbItem>
           </BreadcrumbList>
         </Breadcrumb>
       </div>
@@ -98,25 +149,27 @@ export default function AgentsPage() {
         ) : (
           <div className="flex gap-4 h-full items-start">
             {agents.map((agent) => (
-              <Card 
-                key={agent.id} 
-                id={agent.id}
-                className="flex-none w-80 p-6 cursor-pointer hover:bg-accent transition-colors relative"
-                onClick={() => router.push(`/agents/${agent.id}`)}
-              >
-                {/* Squad badge (top-right) */}
-                <Badge 
-                  variant="secondary" 
-                  className="absolute top-4 right-4 capitalize"
+              <>
+                <div key={`anchor-${agent.id}`} id={agent.id} className="scroll-mt-4" />
+                <Card 
+                  key={agent.id}
+                  className="flex-none w-80 p-6 cursor-pointer hover:bg-accent transition-colors relative"
+                  onClick={() => router.push(`/agents/${agent.squad}/${agent.id}`)}
                 >
-                  {agent.type}
-                </Badge>
-                
-                <div className="space-y-4 pr-24">
-                  <h2 className="text-2xl font-bold">{agent.name}</h2>
-                  <p className="text-muted-foreground">{agent.description}</p>
-                </div>
-              </Card>
+                  {/* Squad badge (top-right) */}
+                  <Badge 
+                    variant="secondary" 
+                    className="absolute top-4 right-4 capitalize"
+                  >
+                    {agent.squad}
+                  </Badge>
+                  
+                  <div className="space-y-4 pr-24">
+                    <h2 className="text-2xl font-bold">{agent.name}</h2>
+                    <p className="text-muted-foreground">{agent.description}</p>
+                  </div>
+                </Card>
+              </>
             ))}
           </div>
         )}
