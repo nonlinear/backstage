@@ -7,6 +7,7 @@ export interface Check {
   title: string
   type: 'deterministic' | 'probabilistic'
   description: string
+  active?: boolean  // Default: true if not specified
 }
 
 export function getCheckMetadata(projectSlug: string, checkFilename: string): Check | null {
@@ -42,7 +43,8 @@ export function getCheckMetadata(projectSlug: string, checkFilename: string): Ch
       name: nameWithoutExt,
       title: frontmatter.title || nameWithoutExt,
       type: frontmatter.type || 'deterministic',
-      description: frontmatter.description || ''
+      description: frontmatter.description || '',
+      active: frontmatter.active !== false  // Default true unless explicitly false
     }
   } catch (err) {
     console.error(`Error reading check ${checkFilename}:`, err)

@@ -61,6 +61,10 @@ export default function ChecksPage() {
   const [checks, setChecks] = useState<Check[]>([])
   const [loading, setLoading] = useState(true)
   
+  // Separate active and inactive checks
+  const activeChecks = checks.filter(c => c.active !== false)
+  const inactiveChecks = checks.filter(c => c.active === false)
+  
   useEffect(() => {
     async function loadChecks() {
       try {
@@ -146,38 +150,72 @@ export default function ChecksPage() {
         </Breadcrumb>
       </div>
       
-      {/* Horizontal scrollable content */}
-      <div className="flex-1 overflow-x-auto overflow-y-hidden">
+      {/* Scrollable content */}
+      <div className="flex-1 overflow-auto">
         {loading ? (
           <p className="text-muted-foreground" style={{ padding: 'var(--spacing-unit)' }}>Loading checks...</p>
         ) : (
-          <div className="flex h-full items-start" style={{ gap: 'calc(var(--spacing-unit) / 2)', padding: 'var(--spacing-unit)' }}>
-            {checks.map((check) => (
-              <>
-                <div key={`anchor-${check.name}`} id={check.name} className="scroll-mt-4" />
-                <Card key={check.name} className="flex-none w-[600px] relative" style={{ padding: 'var(--spacing-unit)' }}>
-                  {/* Type badge top-right */}
-                  <Badge variant="outline" className="absolute top-4 right-4 text-xs capitalize">
-                    {check.type}
-                  </Badge>
+          <>
+            {/* Active checks - horizontal scroll, 600px */}
+            {activeChecks.length > 0 && (
+              <div className="overflow-x-auto overflow-y-hidden border-b">
+                <div className="flex h-full items-start" style={{ gap: 'calc(var(--spacing-unit) / 2)', padding: 'var(--spacing-unit)' }}>
+                  {activeChecks.map((check) => (
+                    <>
+                      <div key={`anchor-${check.name}`} id={check.name} className="scroll-mt-4" />
+                      <Card key={check.name} className="flex-none w-[600px] relative" style={{ padding: 'var(--spacing-unit)' }}>
+                        {/* Type badge top-right */}
+                        <Badge variant="outline" className="absolute top-4 right-4 text-xs capitalize">
+                          {check.type}
+                        </Badge>
+                        
+                        <div className="space-y-4 pr-32">
+                          <h2 className="text-2xl font-bold">{check.title}</h2>
+                          <p className="text-muted-foreground">{check.description}</p>
+                          
+                          {check.diagram && (
+                            <div className="mt-4">
+                              <MermaidDiagram diagram={check.diagram} id={check.name} />
+                            </div>
+                          )}
+                        </div>
+                      </Card>
+                    </>
+                  ))}
                   
-                  <div className="space-y-4 pr-32">
-                    <h2 className="text-2xl font-bold">{check.title}</h2>
-                    <p className="text-muted-foreground">{check.description}</p>
-                    
-                    {check.diagram && (
-                      <div className="mt-4">
-                        <MermaidDiagram diagram={check.diagram} id={check.name} />
-                      </div>
-                    )}
-                  </div>
-                </Card>
-              </>
-            ))}
+                  {/* Spacer after last card */}
+                  <div style={{ width: 'var(--spacing-unit)', flexShrink: 0 }} />
+                </div>
+              </div>
+            )}
             
-            {/* Spacer after last card */}
-            <div style={{ width: 'var(--spacing-unit)', flexShrink: 0 }} />
-          </div>
+            {/* Inactive checks - sticky grid, 300px */}
+            {inactiveChecks.length > 0 && (
+              <div style={{ padding: 'var(--spacing-unit)' }}>
+                <h2 className="text-lg font-semibold mb-4 text-muted-foreground">Inactive Checks</h2>
+                <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                  {inactiveChecks.map((check) => (
+                    <Card key={check.name} className="w-[300px]">
+                      <CardHeader>
+                        <div className="flex items-start justify-between">
+                          <CardTitle className="text-base">{check.title}</CardTitle>
+                          <Badge variant="outline" className="text-xs capitalize ml-2">
+                            {check.type}
+                          </Badge>
+                        </div>
+                        <CardDescription className="text-sm">{check.description}</CardDescription>
+                      </CardHeader>
+                      {check.diagram && (
+                        <CardContent>
+                          <MermaidDiagram diagram={check.diagram} id={check.name} />
+                        </CardContent>
+                      )}
+                    </Card>
+                  ))}
+                </div>
+              </div>
+            )}
+          </>
         )}
       </div>
     </div>
