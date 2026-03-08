@@ -55,11 +55,9 @@
 
 - [x] List all agents (roles, capabilities, models) → `agents-matrix.md`
 - [x] Create agent configs (agent.yml) → `agent-configs-created.md`
-- [x] Customize SOUL.md for Defense, Secretaria, Strategic
-- [ ] Document agent matrix (who does what, supervision level)
-- [ ] Separate VISION.md per agent
-- [ ] Define shared vs agent-specific principles
-- [ ] Surface agents on Backstage UI
+- [x] Customize SOUL.md for Defense, Secretaria, Strategic, Research, UXR, Legal, Design → `soul-customization.md`
+- [x] Define shared vs agent-specific principles → `VISION-SHARED.md` + agent VISION.md
+- [ ] Surface agents on Backstage UI (verify /api/agents picks up new agents)
 - [ ] Agent routing (skill + context based)
 - [ ] Set up Matrix server
 - [ ] Test Matrix actionable things
@@ -95,4 +93,5 @@
 
 **2026-03-08 14:00:** Epic created.  
 **2026-03-08 14:22:** UNSUPERVISED session started.  
-**2026-03-08 14:25:** Agents matrix documented, configs created, SOUL.md customized for Defense/Secretaria/Strategic.
+**2026-03-08 14:25:** Agents matrix documented, configs created, SOUL.md customized.  
+**2026-03-08 14:35:** VISION.md shared + agent-specific completed (all 7 agents). Next: Backstage UI integration.
