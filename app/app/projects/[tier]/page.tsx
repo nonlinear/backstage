@@ -26,7 +26,7 @@ const sections = [
 interface ProjectData {
   name: string
   description: string
-  tier: string  // "flagship" | "experimental" | "backlog"
+  tier: string
   type: string
   activeCount: number
   backlogCount: number
@@ -34,10 +34,11 @@ interface ProjectData {
   checks: any[]
 }
 
-export default function AllProjectsPage() {
+export default async function TierProjectsPage(props: { params: Promise<{ tier: string }> }) {
+  const params = await props.params
   const router = useRouter()
   const [section, setSection] = useState("projects")
-  const [projects, setProjects] = useState<ProjectData[]>([])
+  const [allProjects, setAllProjects] = useState<ProjectData[]>([])
   const [loading, setLoading] = useState(true)
   
   useEffect(() => {
@@ -54,16 +55,7 @@ export default function AllProjectsPage() {
           return tierA - tierB
         })
         
-        setProjects(sorted)
-        
-        // Auto-scroll to first flagship project on load
-        setTimeout(() => {
-          const firstFlagship = sorted.find((p: ProjectData) => p.tier === 'flagship')
-          if (firstFlagship) {
-            const element = document.getElementById(firstFlagship.name.toLowerCase())
-            element?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-          }
-        }, 100)
+        setAllProjects(sorted)
       } catch (error) {
         console.error('Failed to load projects:', error)
       } finally {
@@ -80,20 +72,23 @@ export default function AllProjectsPage() {
     if (value === "agents") router.push("/agents")
   }
   
+  // Filter projects by tier
+  const projects = allProjects.filter(p => p.tier === params.tier)
+  
   const currentSection = sections.find(s => s.value === section)
   
-  // Build project selector items (same structure as individual project pages)
-  const projectItems = projects.map(p => ({
+  // Build project selector items
+  const projectItems = allProjects.map(p => ({
     value: p.name.toLowerCase(),
     label: p.name,
     epicCount: p.activeCount + p.backlogCount + p.publishedCount
   }))
   
-  const totalEpics = projectItems.reduce((sum, p) => sum + p.epicCount, 0)
+  const totalEpics = projects.reduce((sum, p) => sum + p.activeCount + p.backlogCount + p.publishedCount, 0)
   
   return (
     <div className="h-screen flex flex-col">
-      {/* Fixed breadcrumb header with icon */}
+      {/* Fixed breadcrumb header */}
       <div className="flex items-center gap-6 border-b bg-background header-with-icon" style={{ padding: 'var(--spacing-unit)' }}>
         <h1 className="text-2xl font-bold">Backstage</h1>
         <span className="text-muted-foreground">/</span>
@@ -104,7 +99,7 @@ export default function AllProjectsPage() {
                 <SelectTrigger className="justify-start border-0 shadow-none p-0 focus:ring-0 hover:bg-transparent">
                   <SelectValue>
                     <span className="font-bold text-foreground">
-                      {currentSection?.label}<sup className="text-muted-foreground font-normal">{projects.length}</sup>
+                      {currentSection?.label}<sup className="text-muted-foreground font-normal">{allProjects.length}</sup>
                     </span>
                   </SelectValue>
                 </SelectTrigger>
@@ -119,20 +114,14 @@ export default function AllProjectsPage() {
             </BreadcrumbItem>
             <span className="text-muted-foreground">/</span>
             <BreadcrumbItem>
-              <Select value="tier:all" onValueChange={(value) => {
-                // Handle tier filters (scroll to first project of that tier)
+              <Select value={`tier:${params.tier}`} onValueChange={(value) => {
                 if (value === "tier:all") {
-                  // Show all - scroll to top
-                  window.scrollTo({ top: 0, behavior: 'smooth' })
+                  router.push("/projects")
                   return
                 }
                 if (value.startsWith("tier:")) {
                   const tierName = value.replace("tier:", "")
-                  const firstProjectOfTier = projects.find(p => p.tier === tierName)
-                  if (firstProjectOfTier) {
-                    const element = document.getElementById(firstProjectOfTier.name.toLowerCase())
-                    element?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-                  }
+                  router.push(`/projects/${tierName}`)
                   return
                 }
                 // Navigate to specific project
@@ -140,8 +129,8 @@ export default function AllProjectsPage() {
               }}>
                 <SelectTrigger className="justify-start border-0 shadow-none p-0 focus:ring-0 hover:bg-transparent">
                   <SelectValue>
-                    <span className="font-bold text-foreground">
-                      All<sup className="text-muted-foreground font-normal">{totalEpics}</sup>
+                    <span className="font-bold text-foreground capitalize">
+                      {params.tier}<sup className="text-muted-foreground font-normal">{totalEpics}</sup>
                     </span>
                   </SelectValue>
                 </SelectTrigger>
@@ -153,10 +142,10 @@ export default function AllProjectsPage() {
                   ))}
                   <SelectSeparator />
                   <SelectItem value="tier:all">All</SelectItem>
-                  <SelectItem value="tier:flagship">Flagship<sup className="text-muted-foreground">{projects.filter(p => p.tier === 'flagship').length}</sup></SelectItem>
-                  <SelectItem value="tier:experimental">Experimental<sup className="text-muted-foreground">{projects.filter(p => p.tier === 'experimental').length}</sup></SelectItem>
-                  <SelectItem value="tier:backlog">Backlog<sup className="text-muted-foreground">{projects.filter(p => p.tier === 'backlog').length}</sup></SelectItem>
-                  <SelectItem value="tier:template">Template<sup className="text-muted-foreground">{projects.filter(p => p.tier === 'template').length}</sup></SelectItem>
+                  <SelectItem value="tier:flagship">Flagship<sup className="text-muted-foreground">{allProjects.filter(p => p.tier === 'flagship').length}</sup></SelectItem>
+                  <SelectItem value="tier:experimental">Experimental<sup className="text-muted-foreground">{allProjects.filter(p => p.tier === 'experimental').length}</sup></SelectItem>
+                  <SelectItem value="tier:backlog">Backlog<sup className="text-muted-foreground">{allProjects.filter(p => p.tier === 'backlog').length}</sup></SelectItem>
+                  <SelectItem value="tier:template">Template<sup className="text-muted-foreground">{allProjects.filter(p => p.tier === 'template').length}</sup></SelectItem>
                 </SelectContent>
               </Select>
             </BreadcrumbItem>
@@ -167,26 +156,34 @@ export default function AllProjectsPage() {
       {/* Horizontal card scroll */}
       <div className="flex-1 overflow-x-auto">
         <div className="flex items-start h-full" style={{ gap: 'calc(var(--spacing-unit) / 2)', padding: 'var(--spacing-unit)' }}>
-          {projects.map((project) => (
+          {loading ? (
+            <p className="text-muted-foreground">Loading...</p>
+          ) : projects.length === 0 ? (
+            <p className="text-muted-foreground">No projects in {params.tier} tier.</p>
+          ) : (
             <>
-              <div key={`anchor-${project.name}`} id={project.name.toLowerCase()} className="scroll-mt-4" />
-              <ProjectCard
-                key={project.name}
-                projectName={project.name}
-                projectDescription={project.description}
-                projectTier={project.tier}
-                projectType={project.type}
-                activeCount={project.activeCount}
-                backlogCount={project.backlogCount}
-                publishedCount={project.publishedCount}
-                checks={project.checks}
-                showViewEpicsButton={true}
-              />
+              {projects.map((project) => (
+                <>
+                  <div key={`anchor-${project.name}`} id={project.name.toLowerCase()} className="scroll-mt-4" />
+                  <ProjectCard
+                    key={project.name}
+                    projectName={project.name}
+                    projectDescription={project.description}
+                    projectTier={project.tier}
+                    projectType={project.type}
+                    activeCount={project.activeCount}
+                    backlogCount={project.backlogCount}
+                    publishedCount={project.publishedCount}
+                    checks={project.checks}
+                    showViewEpicsButton={true}
+                  />
+                </>
+              ))}
+              
+              {/* Spacer after last card */}
+              <div style={{ width: 'var(--spacing-unit)', flexShrink: 0 }} />
             </>
-          ))}
-          
-          {/* Spacer after last card */}
-          <div style={{ width: 'var(--spacing-unit)', flexShrink: 0 }} />
+          )}
         </div>
       </div>
     </div>
