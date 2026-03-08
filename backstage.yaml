@@ -32,6 +32,41 @@ tiers:
 
   - name: backlog
     label: Backlog
+    description: Paused or lower-priority projects
+    order: 3
+
+  - name: template
+    label: Template
+    description: Boilerplate/starter projects
+    order: 4
+
+# ============================================================================
+# SQUADS - Agent organization/domains
+# ============================================================================
+squads:
+  - name: main
+    label: Main
+    description: Core business strategy and analysis
+    order: 1
+
+  - name: engineering
+    label: Engineering
+    description: Design systems, frontend, architecture
+    order: 2
+
+  - name: marketing
+    label: Marketing
+    description: Brand, content, community
+    order: 3
+
+  - name: operations
+    label: Operations
+    description: Admin, legal, secretarial
+    order: 4
+    order: 2
+
+  - name: backlog
+    label: Backlog
     description: Ideas, future projects, on hold
     order: 3
 
