@@ -1,10 +1,8 @@
-# Epic Template - Metadata
-# Copy this for new epics
+# Epic Metadata
 
 name: "Agents First Pass"
 version: "0.3.0"
 status: "active"
-tier: "infrastructure"
 contract_type: "diagram"
 
 # Optional fields
