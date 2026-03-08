@@ -20,14 +20,15 @@ import { Badge } from "@/components/ui/badge"
 const sections = [
   { value: "projects", label: "Projects", count: 14 },
   { value: "checks", label: "Checks", count: 71 },
-  { value: "agents", label: "Agents", count: 8 },
+  { value: "agents", label: "Agents", count: 3 },
 ]
 
 interface AgentData {
+  id: string
   name: string
-  role: string
+  type: string  // squad: main, engineering, marketing, operations
   description: string
-  created: string
+  checks: any[]
 }
 
 export default function AgentsPage() {
@@ -62,7 +63,7 @@ export default function AgentsPage() {
   
   return (
     <div className="h-screen flex flex-col">
-      {/* Fixed breadcrumb header with icon */}
+      {/* Fixed breadcrumb header */}
       <div className="flex items-center gap-6 border-b bg-background header-with-icon" style={{ padding: 'var(--spacing-unit)' }}>
         <h1 className="text-2xl font-bold">Backstage</h1>
         <span className="text-muted-foreground">/</span>
@@ -90,24 +91,30 @@ export default function AgentsPage() {
         </Breadcrumb>
       </div>
       
-      {/* Scrollable content area */}
-      <div className="flex-1 overflow-y-auto" style={{ padding: 'var(--spacing-unit)' }}>
+      {/* Horizontal scrollable content */}
+      <div className="flex-1 overflow-x-auto overflow-y-hidden" style={{ padding: 'var(--spacing-unit)' }}>
         {loading ? (
           <p className="text-muted-foreground">Loading agents...</p>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" style={{ gridAutoRows: 'max-content' }}>
+          <div className="flex gap-4 h-full items-start">
             {agents.map((agent) => (
-              <Card key={agent.name} className="p-6 h-fit">
-                <div className="space-y-4">
-                  <div>
-                    <h2 className="text-2xl font-bold capitalize mb-2">{agent.name}</h2>
-                    <Badge variant="secondary" className="mb-3">{agent.role}</Badge>
-                    <p className="text-muted-foreground">{agent.description}</p>
-                  </div>
-                  
-                  {agent.created && (
-                    <p className="text-sm text-muted-foreground">Created: {agent.created}</p>
-                  )}
+              <Card 
+                key={agent.id} 
+                id={agent.id}
+                className="flex-none w-80 p-6 cursor-pointer hover:bg-accent transition-colors relative"
+                onClick={() => router.push(`/agents/${agent.id}`)}
+              >
+                {/* Squad badge (top-right) */}
+                <Badge 
+                  variant="secondary" 
+                  className="absolute top-4 right-4 capitalize"
+                >
+                  {agent.type}
+                </Badge>
+                
+                <div className="space-y-4 pr-24">
+                  <h2 className="text-2xl font-bold">{agent.name}</h2>
+                  <p className="text-muted-foreground">{agent.description}</p>
                 </div>
               </Card>
             ))}

@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import fs from 'fs'
 import path from 'path'
+import yaml from 'js-yaml'
 
 export async function GET() {
   try {
@@ -16,41 +17,24 @@ export async function GET() {
         return fs.statSync(fullPath).isDirectory()
       })
     
-    const agents = folders.map(name => {
-      const readmePath = path.join(agentsDir, name, 'README.md')
-      let description = `${name} agent`
-      let role = 'Agent'
-      let created = ''
+    const agents = folders.map(id => {
+      const agentYmlPath = path.join(agentsDir, id, 'agent.yml')
       
-      if (fs.existsSync(readmePath)) {
-        const content = fs.readFileSync(readmePath, 'utf-8')
-        
-        // Extract role from **Role:** line
-        const roleMatch = content.match(/\*\*Role:\*\*\s*(.+)/i)
-        if (roleMatch) {
-          role = roleMatch[1].trim()
-        }
-        
-        // Extract created date
-        const createdMatch = content.match(/\*\*Created:\*\*\s*(.+)/i)
-        if (createdMatch) {
-          created = createdMatch[1].trim()
-        }
-        
-        // Extract first paragraph after Purpose heading as description
-        const purposeMatch = content.match(/##\s*Purpose\s*\n\n(.+?)(?:\n\n|\n---)/s)
-        if (purposeMatch) {
-          description = purposeMatch[1].trim().replace(/\n/g, ' ')
-        }
+      if (!fs.existsSync(agentYmlPath)) {
+        return null
       }
+      
+      const content = fs.readFileSync(agentYmlPath, 'utf-8')
+      const data = yaml.load(content) as any
       
       return {
-        name,
-        role,
-        description,
-        created
+        id,  // folder name
+        name: data.name || id,
+        type: data.type || 'main',
+        description: data.description || '',
+        checks: data.checks || []
       }
-    })
+    }).filter(Boolean)
     
     return NextResponse.json({ agents })
   } catch (error) {
