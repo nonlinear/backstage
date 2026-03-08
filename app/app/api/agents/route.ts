@@ -4,7 +4,7 @@ import path from 'path'
 
 export async function GET() {
   try {
-    const agentsDir = path.join(process.env.HOME!, 'Documents/agents')
+    const agentsDir = path.join(process.env.HOME!, 'Backstage/agents')
     
     if (!fs.existsSync(agentsDir)) {
       return NextResponse.json({ agents: [] })
