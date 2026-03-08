@@ -40,7 +40,7 @@ export function ProjectCard({
   return (
     <Card className="flex-shrink-0 w-[300px] h-full flex flex-col relative">
       {/* Tier badge top-right (absolute, same as EpicCard) */}
-      <Badge variant="outline" className="absolute top-4 right-4 text-xs capitalize">
+      <Badge variant="secondary" className="absolute top-4 right-4 text-xs capitalize">
         {typeof projectTier === 'string' ? projectTier : `tier-${projectTier}`}
       </Badge>
       

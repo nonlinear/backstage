@@ -82,7 +82,7 @@ export function EpicCard({
         className={`relative flex-shrink-0 transition-all duration-300 ${isActiveEpic ? 'w-[500px]' : 'w-[300px]'} h-full overflow-y-auto`}
       >
       {/* Status badge top-right (absolute) */}
-      <Badge variant="outline" className="absolute top-4 right-4 text-xs capitalize">
+      <Badge variant="secondary" className="absolute top-4 right-4 text-xs capitalize">
         {status}
       </Badge>
       
