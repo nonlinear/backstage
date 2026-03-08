@@ -5,7 +5,7 @@ import yaml from 'js-yaml'
 import { getProjectEpics, getProjectChecks } from '@/lib/epics'
 import { enrichProjectChecks } from '@/lib/checks'
 
-const BACKSTAGE_ROOT = path.join(process.env.HOME || '', 'Documents/backstage/projects')
+const BACKSTAGE_ROOT = path.join(process.env.HOME || '', 'Backstage/projects')
 
 interface ProjectYaml {
   name: string
