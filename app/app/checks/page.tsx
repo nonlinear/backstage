@@ -61,9 +61,9 @@ export default function ChecksPage() {
   const [checks, setChecks] = useState<Check[]>([])
   const [loading, setLoading] = useState(true)
   
-  // Separate active and inactive checks
-  const activeChecks = checks.filter(c => c.active !== false)
-  const inactiveChecks = checks.filter(c => c.active === false)
+  // Separate current and non-current checks
+  const currentChecks = checks.filter(c => c.current === true)
+  const nonCurrentChecks = checks.filter(c => c.current !== true)
   
   useEffect(() => {
     async function loadChecks() {
@@ -157,10 +157,10 @@ export default function ChecksPage() {
         ) : (
           <>
             {/* Active checks - horizontal scroll, 600px */}
-            {activeChecks.length > 0 && (
+            {currentChecks.length > 0 && (
               <div className="overflow-x-auto overflow-y-hidden border-b">
                 <div className="flex h-full items-start" style={{ gap: 'calc(var(--spacing-unit) / 2)', padding: 'var(--spacing-unit)' }}>
-                  {activeChecks.map((check) => (
+                  {currentChecks.map((check) => (
                     <>
                       <div key={`anchor-${check.name}`} id={check.name} className="scroll-mt-4" />
                       <Card key={check.name} className="flex-none w-[600px] relative" style={{ padding: 'var(--spacing-unit)' }}>
@@ -190,11 +190,11 @@ export default function ChecksPage() {
             )}
             
             {/* Inactive checks - sticky grid, 300px */}
-            {inactiveChecks.length > 0 && (
+            {incurrentChecks.length > 0 && (
               <div style={{ padding: 'var(--spacing-unit)' }}>
-                <h2 className="text-lg font-semibold mb-4 text-muted-foreground">Inactive Checks</h2>
+                <h2 className="text-lg font-semibold mb-4 text-muted-foreground">Non-Current Checks</h2>
                 <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                  {inactiveChecks.map((check) => (
+                  {incurrentChecks.map((check) => (
                     <Card key={check.name} className="w-[300px]">
                       <CardHeader>
                         <div className="flex items-start justify-between">

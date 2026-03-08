@@ -8,6 +8,7 @@ interface Check {
   title: string
   type: 'deterministic' | 'probabilistic'
   description: string
+  current?: boolean  // defaults to false if not specified
   diagram?: string
 }
 
@@ -59,6 +60,7 @@ export async function GET() {
             title: frontmatter.title || nameWithoutExt,
             type: frontmatter.type || 'deterministic',
             description: frontmatter.description || '',
+            current: frontmatter.current || false,
             diagram
           } as Check
         } catch (err) {
