@@ -1,7 +1,9 @@
 ---
-type: pillar
-trigger: always
-scope: all-agents
+name: "Brevity"
+category: "pillar"
+type: "deterministic"
+active: true
+description: "More words = less attention. Choose precision over prolixity."
 ---
 
 # Brevity (Precision)
