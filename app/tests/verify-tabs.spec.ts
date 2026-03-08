@@ -1,7 +1,7 @@
 import { test } from '@playwright/test';
 
 test('verify agent detail tabs', async ({ page }) => {
-  await page.goto('http://localhost:3004/agents/main/defense');
+  await page.goto('http://localhost:3002/agents/main/defense');
   await page.waitForTimeout(3000);
   
   // Take screenshot

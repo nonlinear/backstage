@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 test('debug agents page', async ({ page }) => {
   // Navigate
-  await page.goto('http://localhost:3004/agents');
+  await page.goto('http://localhost:3002/agents');
   
   // Wait a bit
   await page.waitForTimeout(5000);
@@ -26,7 +26,7 @@ test('debug agents page', async ({ page }) => {
 });
 
 test('debug agent detail', async ({ page }) => {
-  await page.goto('http://localhost:3004/agents/main/defense');
+  await page.goto('http://localhost:3002/agents/main/defense');
   await page.waitForTimeout(5000);
   
   await page.screenshot({ 

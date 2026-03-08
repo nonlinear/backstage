@@ -1,7 +1,7 @@
 import { test } from '@playwright/test';
 
 test('verify notes select has all files', async ({ page }) => {
-  await page.goto('http://localhost:3004/agents/main/defense');
+  await page.goto('http://localhost:3002/agents/main/defense');
   await page.waitForTimeout(2000);
   
   // Click Notes tab
