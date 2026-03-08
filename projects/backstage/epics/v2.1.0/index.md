@@ -824,7 +824,7 @@ interface ProjectCardProps {
 ### Manual Testing Checklist
 
 **Before claiming "done":**
-1. ✅ `curl http://localhost:3002/api/projects | jq` → verify API response
+1. ✅ `curl http://localhost:3004/api/projects | jq` → verify API response
 2. ✅ Open page in browser → take screenshot
 3. ✅ Check browser console → verify no errors
 4. ✅ Test navigation → click buttons/links
@@ -872,7 +872,7 @@ interface ProjectCardProps {
    - `~/Documents/agents/`
 3. Run `npm install` in app directory
 4. Run `npm run dev`
-5. Open http://localhost:3002
+5. Open http://localhost:3004
 
 **If changing data location:**
 1. Update paths in:
@@ -924,7 +924,7 @@ interface ProjectCardProps {
 ```bash
 cd ~/Documents/backstage/app
 npm run dev
-# Open http://localhost:3002
+# Open http://localhost:3004
 ```
 
 ---
