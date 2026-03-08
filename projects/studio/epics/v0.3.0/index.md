@@ -53,7 +53,9 @@
 
 ## Tasks
 
-- [ ] List all agents (roles, capabilities, models)
+- [x] List all agents (roles, capabilities, models) → `agents-matrix.md`
+- [x] Create agent configs (agent.yml) → `agent-configs-created.md`
+- [x] Customize SOUL.md for Defense, Secretaria, Strategic
 - [ ] Document agent matrix (who does what, supervision level)
 - [ ] Separate VISION.md per agent
 - [ ] Define shared vs agent-specific principles
@@ -91,4 +93,6 @@
 
 ## Log
 
-**2026-03-08:** Epic created.
+**2026-03-08 14:00:** Epic created.  
+**2026-03-08 14:22:** UNSUPERVISED session started.  
+**2026-03-08 14:25:** Agents matrix documented, configs created, SOUL.md customized for Defense/Secretaria/Strategic.
