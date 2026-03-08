@@ -119,8 +119,13 @@ export default function AllProjectsPage() {
             </BreadcrumbItem>
             <span className="text-muted-foreground">/</span>
             <BreadcrumbItem>
-              <Select value="tier:flagship" onValueChange={(value) => {
+              <Select value="tier:all" onValueChange={(value) => {
                 // Handle tier filters (scroll to first project of that tier)
+                if (value === "tier:all") {
+                  // Show all - scroll to top
+                  window.scrollTo({ top: 0, behavior: 'smooth' })
+                  return
+                }
                 if (value.startsWith("tier:")) {
                   const tierName = value.replace("tier:", "")
                   const firstProjectOfTier = projects.find(p => p.tier === tierName)
@@ -136,15 +141,18 @@ export default function AllProjectsPage() {
                 <SelectTrigger className="justify-start border-0 shadow-none p-0 focus:ring-0 hover:bg-transparent">
                   <SelectValue>
                     <span className="font-bold text-foreground">
-                      All Projects<sup className="text-muted-foreground font-normal">{totalEpics}</sup>
+                      All<sup className="text-muted-foreground font-normal">{totalEpics}</sup>
                     </span>
                   </SelectValue>
                 </SelectTrigger>
                 <SelectContent position="popper" align="start">
+                  <SelectItem value="tier:all">All</SelectItem>
                   <SelectItem value="tier:flagship">Flagship<sup className="text-muted-foreground">{projects.filter(p => p.tier === 'flagship').length}</sup></SelectItem>
                   <SelectItem value="tier:experimental">Experimental<sup className="text-muted-foreground">{projects.filter(p => p.tier === 'experimental').length}</sup></SelectItem>
                   <SelectItem value="tier:backlog">Backlog<sup className="text-muted-foreground">{projects.filter(p => p.tier === 'backlog').length}</sup></SelectItem>
                   <SelectItem value="tier:template">Template<sup className="text-muted-foreground">{projects.filter(p => p.tier === 'template').length}</sup></SelectItem>
+                  <SelectSeparator />
+                  <SelectItem value="separator" disabled className="text-xs text-muted-foreground font-semibold">PROJECT LIST</SelectItem>
                   <SelectSeparator />
                   {projectItems.map((proj) => (
                     <SelectItem key={proj.value} value={proj.value}>
