@@ -1,0 +1,89 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - generic [ref=e3]:
+      - heading "Backstage" [level=1] [ref=e4]
+      - generic [ref=e5]: /
+      - navigation "breadcrumb" [ref=e6]:
+        - list [ref=e7]:
+          - listitem [ref=e8]:
+            - combobox [ref=e9]:
+              - generic:
+                - generic:
+                  - text: Agents
+                  - superscript: "10"
+              - img
+          - generic [ref=e10]: /
+          - listitem [ref=e11]:
+            - combobox [ref=e12]:
+              - generic:
+                - generic: All
+              - img
+    - generic [ref=e14]:
+      - generic [ref=e15] [cursor=pointer]:
+        - generic [ref=e16]: engineering
+        - generic [ref=e17]:
+          - heading "Design" [level=2] [ref=e18]
+          - paragraph [ref=e19]: UI/UX design, visual design, Figma work - unassisted
+      - generic [ref=e20] [cursor=pointer]:
+        - generic [ref=e21]: engineering
+        - generic [ref=e22]:
+          - heading "Design Engineer" [level=2] [ref=e23]
+          - paragraph [ref=e24]: Component architecture, design systems, frontend implementation
+      - generic [ref=e25] [cursor=pointer]:
+        - generic [ref=e26]: main
+        - generic [ref=e27]:
+          - heading "Business Analyst" [level=2] [ref=e28]
+          - paragraph [ref=e29]: Market research, competitive analysis, business intelligence
+      - generic [ref=e30] [cursor=pointer]:
+        - generic [ref=e31]: main
+        - generic [ref=e32]:
+          - heading "Defense" [level=2] [ref=e33]
+          - paragraph [ref=e34]: Code iteration, debugging, test-driven development - assisted supervision
+      - generic [ref=e35] [cursor=pointer]:
+        - generic [ref=e36]: main
+        - generic [ref=e37]:
+          - heading "Secretaria" [level=2] [ref=e38]
+          - paragraph [ref=e39]: Clerical work, scheduling, admin tasks - assisted supervision
+      - generic [ref=e40] [cursor=pointer]:
+        - generic [ref=e41]: main
+        - generic [ref=e42]:
+          - heading "Strategic" [level=2] [ref=e43]
+          - paragraph [ref=e44]: Epic planning, architecture decisions, multi-project coordination - cloud model
+      - generic [ref=e45] [cursor=pointer]:
+        - generic [ref=e46]: marketing
+        - generic [ref=e47]:
+          - heading "Marketing Strategist" [level=2] [ref=e48]
+          - paragraph [ref=e49]: Brand positioning, content strategy, community engagement
+      - generic [ref=e50] [cursor=pointer]:
+        - generic [ref=e51]: research
+        - generic [ref=e52]:
+          - heading "Legal" [level=2] [ref=e53]
+          - paragraph [ref=e54]: Contracts, compliance, policy analysis - unassisted
+      - generic [ref=e55] [cursor=pointer]:
+        - generic [ref=e56]: research
+        - generic [ref=e57]:
+          - heading "Research Analyst" [level=2] [ref=e58]
+          - paragraph [ref=e59]: Deep investigation, book search, data synthesis - unassisted
+      - generic [ref=e60] [cursor=pointer]:
+        - generic [ref=e61]: research
+        - generic [ref=e62]:
+          - heading "UXR" [level=2] [ref=e63]
+          - paragraph [ref=e64]: User research, personas, flows, interview analysis - unassisted
+  - button "Reload page" [ref=e65] [cursor=pointer]:
+    - img
+  - generic [ref=e70] [cursor=pointer]:
+    - button "Open Next.js Dev Tools" [ref=e71]:
+      - img [ref=e72]
+    - generic [ref=e75]:
+      - button "Open issues overlay" [ref=e76]:
+        - generic [ref=e77]:
+          - generic [ref=e78]: "0"
+          - generic [ref=e79]: "1"
+        - generic [ref=e80]: Issue
+      - button "Collapse issues badge" [ref=e81]:
+        - img [ref=e82]
+  - alert [ref=e84]
+```
