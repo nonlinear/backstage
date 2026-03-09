@@ -1,0 +1,11 @@
+---
+version: v0.25.0
+name: "Local LLM Infrastructure"
+goal: "Self-hosted LLM inference (Qwen, Ollama, llama.cpp, MLX)"
+status: active
+type: "minor"
+created: null
+started: null
+completed: null
+tasks: []
+---
