@@ -1,7 +1,7 @@
 ---
 version: v0.28.0
-name: 
-goal: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+name: "Better backups"
+goal: "Improve backup strategy (automated, verified, offsite)"
 status: backlog
 type: "minor"
 created: null
