@@ -1,7 +1,7 @@
 ---
 version: v0.2.0
-name: 
-goal: "Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit sed quia consequuntur magni dolores."
+name: "Tier logic"
+goal: "Define tiers and what assets each one has"
 status: backlog
 type: "minor"
 created: null

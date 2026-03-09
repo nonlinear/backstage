@@ -4,11 +4,11 @@
 
 ---
 
-# v0.2.0 - Company Skeleton (Open Project + Agent Orchestration)
+# v0.2.0 - Tier Logic
 
-**Epic:** [v0.2.0 Company Skeleton](../ROADMAP.md#v020)
+**Description:** Define tiers and what assets each one has
 
-
+---
 
 ## Tier System Architecture
 
@@ -101,43 +101,6 @@ TIERS
 **Transition:**
 - Prototype stabilizes → Community interest → Someone else maintains → Can move back to Tier 2 (community-maintained)
 
-### Open Project Integration
+---
 
-**Tiers as metadata:**
-- Custom field: `tier: [1|2|3|4]`
-- Filter projects by tier
-- Dashboard: Show tier distribution (how many T1, T2, T3, T4)
-
-**Task assignment:**
-- Tier 1 products → Higher priority tasks
-- Tier 3 products → Low priority, only if time available
-
-**Reporting:**
-- Tier 1: Weekly updates (if active dev)
-- Tier 2: Monthly check-ins (bug fixes, stability)
-- Tier 3: Quarterly review (keep or archive?)
-
-
-## Agent Orchestration + Tiers
-
-**Agents respect tier priority:**
-- **Tier 1:** Agents proactively suggest improvements, monitor metrics, alert Nicholas
-- **Tier 2:** Agents monitor for critical bugs only
-- **Tier 3:** Agents don't monitor (Nicholas manually decides when to check)
-
-**Temporal workflows (future):**
-- Tier 1: Continuous deployment, automated testing, rollback on failure
-- Tier 2: Manual deployment, basic testing
-- Tier 3: No deployment automation (prototype code, manual publish)
-
-
-## Next Steps
-
-1. **Define initial tier criteria** (what makes a product Tier 1 vs Tier 2?)
-2. **Classify existing projects** (contact list game, audio librarian, etc.)
-3. **Open Project tier field** (custom metadata, filterable)
-4. **Agent tier awareness** (how agents prioritize work based on tier)
-5. **Quarterly tier review ritual** (when to promote/demote products)
-
-
-**Updated:** 2026-02-21
+**Updated:** 2026-03-09
