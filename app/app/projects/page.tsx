@@ -86,6 +86,8 @@ export default function AllProjectsPage() {
     setSection(value)
     if (value === "checks") router.push("/checks")
     if (value === "agents") router.push("/agents")
+    if (value === "values") router.push("/values")
+    if (value === "connections") router.push("/connections")
   }
   
   const currentSection = sections.find(s => s.value === section)
