@@ -1,4 +1,5 @@
-# v0.26.0 - Image Tagging System
+# Image Tagging System
+
 
 **Status:** 💡 PLANNED (2026-02-24)  
 **Priority:** MEDIUM (local LLM enables zero-cost tagging)

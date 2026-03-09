@@ -1,7 +1,7 @@
 ---
 version: v0.26.0
-name: 
-goal: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+name: "Travel agent"
+goal: "Automate travelling chores (pre-travel checks, health monitoring)"
 status: backlog
 type: "minor"
 created: null
