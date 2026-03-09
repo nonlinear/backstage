@@ -1,7 +1,7 @@
 ---
 version: v0.20.0
-name: 
-goal: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium totam rem aperiam."
+name: "Open source maps"
+goal: "Replace Google Maps with self-hosted/privacy-first alternative"
 status: backlog
 type: "minor"
 created: null
