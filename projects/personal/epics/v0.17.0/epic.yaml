@@ -1,11 +1,53 @@
 ---
 version: v0.17.0
-name: 
-goal: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium totam rem aperiam."
+name: "Salesman"
+goal: "Automação para compra e venda de produtos (price watching, eBay, marketplaces)"
 status: backlog
 type: "minor"
 created: null
 started: null
 completed: null
-tasks: []
+tasks:
+  - text: "eBay API capabilities (read docs, get API key)"
+    checked: false
+  - text: "changedetection.io integration (test price watch)"
+    checked: false
+  - text: "Shopping APIs (Shop.app, AliExpress, Temu - which have APIs?)"
+    checked: false
+  - text: "Data schema (inventory + watchlist fields)"
+    checked: false
+  - text: "Add product to watchlist (URL, target price, notes)"
+    checked: false
+  - text: "changedetection.io monitors price"
+    checked: false
+  - text: "Parse price changes (extract $ from HTML)"
+    checked: false
+  - text: "Alert when price < target (Telegram notification)"
+    checked: false
+  - text: "Test with 3-5 products"
+    checked: false
+  - text: "Design schema (item, photo, description, min price, status)"
+    checked: false
+  - text: "Add items to inventory"
+    checked: false
+  - text: "View inventory (CLI? Web UI?)"
+    checked: false
+  - text: "Mark as sold/donated/trashed"
+    checked: false
+  - text: "eBay API setup (developer account, keys)"
+    checked: false
+  - text: "Create listing via API (title, description, price, photo)"
+    checked: false
+  - text: "Monitor listing (views, watchers)"
+    checked: false
+  - text: "Detect sale (webhook? polling?)"
+    checked: false
+  - text: "Notify on sale (Telegram)"
+    checked: false
+  - text: "Query multiple platforms (eBay, Amazon, AliExpress, etc.)"
+    checked: false
+  - text: "Parse prices + shipping"
+    checked: false
+  - text: "Return cheapest option"
+    checked: false
 ---

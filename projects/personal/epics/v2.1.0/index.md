@@ -1,4 +1,7 @@
-# v0.17.0 - Location on Screenshots
+# Epic Notes
+
+> Version, name, status → see `epic.yaml`
+
 
 ## Context Snapshot
 - **Why this exists:** Add GPS location metadata to screenshots automatically (helps memory/context when reviewing later)

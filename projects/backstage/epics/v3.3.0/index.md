@@ -1,6 +1,9 @@
-# v0.16.0 - Parity System (Docs ↔️ Reality Convergence)
+# Epic Notes
 
-**Status:** 🆕 NEW (2026-02-09)  
+> Version, name, status → see `epic.yaml`
+
+---
+
 **Priority:** HIGH (affects all projects)  
 **Why epic:** Not just documentation — this is a SYSTEM
 

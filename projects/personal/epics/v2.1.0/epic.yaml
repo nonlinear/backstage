@@ -1,0 +1,41 @@
+---
+version: v2.1.0
+name: "Location on Screenshots"
+goal: "Add GPS location metadata to screenshots automatically"
+status: backlog
+type: "minor"
+created: null
+started: null
+completed: null
+tasks:
+  - text: "Create Shortcuts automation (screenshot → get location → tag EXIF)"
+    checked: false
+  - text: "Test accuracy (does location tag correctly?)"
+    checked: false
+  - text: "Test battery impact (is it noticeable?)"
+    checked: false
+  - text: "Purchase Hazel license (if not already owned)"
+    checked: false
+  - text: "Install exiftool (brew install exiftool)"
+    checked: false
+  - text: "Create Hazel rule (watch Screenshots folder)"
+    checked: false
+  - text: "Write shell script (get location → tag EXIF)"
+    checked: false
+  - text: "Test automation (take screenshot, verify EXIF tagged)"
+    checked: false
+  - text: "Test screenshot sharing (is GPS EXIF visible to others?)"
+    checked: false
+  - text: "Document when to disable (privacy mode, work screenshots)"
+    checked: false
+  - text: "Create toggle (enable/disable automation easily)"
+    checked: false
+  - text: "Adjust accuracy (exact vs approximate location)"
+    checked: false
+  - text: "Monitor battery impact (continuous vs on-demand)"
+    checked: false
+  - text: "Add timestamp metadata (when screenshot taken)"
+    checked: false
+  - text: "Document setup (README for future reference)"
+    checked: false
+---
