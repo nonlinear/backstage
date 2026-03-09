@@ -1,35 +1,8 @@
 "use client"
 
 import { useState, useEffect } from 'react'
-import { useRouter } from 'next/navigation'
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbList,
-} from "@/components/ui/breadcrumb"
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
+import { SectionBreadcrumb } from "@/components/SectionBreadcrumb"
 import { ValueCard } from "@/components/ValueCard"
-
-const sections = [
-  { value: "projects", label: "Projects", count: 14 },
-  { value: "checks", label: "Checks", count: 67 },
-  { value: "agents", label: "Agents", count: 8 },
-  { value: "values", label: "Values", count: 20 },
-  { value: "connections", label: "Connections", count: 0 },
-];
-
-const OLD_sections = [
-  { value: "projects", label: "Projects", count: 14 },
-  { value: "checks", label: "Checks", count: 67 },
-  { value: "agents", label: "Agents", count: 8 },
-  { value: "values", label: "Values", count: 20 },
-]
 
 interface ValueUsage {
   global: boolean
@@ -49,8 +22,6 @@ interface Value {
 }
 
 export default function ValuesPage() {
-  const router = useRouter()
-  const [section, setSection] = useState("values")
   const [values, setValues] = useState<Value[]>([])
   const [loading, setLoading] = useState(true)
   const [expandedValue, setExpandedValue] = useState<string | null>(null)
@@ -98,45 +69,13 @@ export default function ValuesPage() {
     }
   }
   
-  const handleSectionChange = (value: string) => {
-    setSection(value)
-    if (value === "projects") router.push("/projects")
-    if (value === "checks") router.push("/checks")
-    if (value === "agents") router.push("/agents")
-    if (value === "values") router.push("/values")
-    if (value === "connections") router.push("/connections")
-  }
-  
-  const currentSection = sections.find(s => s.value === section)
-  
   return (
     <div className="h-screen flex flex-col">
       {/* Fixed breadcrumb */}
       <div className="flex items-center gap-6 border-b bg-background header-with-icon" style={{ padding: 'var(--spacing-unit)' }}>
         <h1 className="text-2xl font-bold">Backstage</h1>
         <span className="text-muted-foreground">/</span>
-        <Breadcrumb>
-          <BreadcrumbList>
-            <BreadcrumbItem>
-              <Select value={section} onValueChange={handleSectionChange}>
-                <SelectTrigger className="justify-start border-0 shadow-none p-0 focus:ring-0 hover:bg-transparent">
-                  <SelectValue>
-                    <span className="font-bold text-foreground">
-                      {currentSection?.label}<sup className="text-muted-foreground font-normal">{currentSection?.count}</sup>
-                    </span>
-                  </SelectValue>
-                </SelectTrigger>
-                <SelectContent position="popper" align="start">
-                  {sections.map((item) => (
-                    <SelectItem key={item.value} value={item.value}>
-                      {item.label}<sup className="text-muted-foreground">{item.count}</sup>
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </BreadcrumbItem>
-          </BreadcrumbList>
-        </Breadcrumb>
+        <SectionBreadcrumb currentSection="values" />
       </div>
       
       {/* Horizontal scroll */}
