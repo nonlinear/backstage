@@ -1,0 +1,11 @@
+---
+version: v0.33.0
+name: "OpenProject integration"
+goal: "Research OpenProject for project management (not using it)"
+status: done
+type: "minor"
+created: null
+started: null
+completed: null
+tasks: []
+---
