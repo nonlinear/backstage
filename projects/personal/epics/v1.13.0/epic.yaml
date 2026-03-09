@@ -1,6 +1,7 @@
 ---
-name: "reminders-summarize"
-goal: "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+version: v1.13.0
+name: "Summarizer skill"
+goal: "OpenClaw skill for summarizing URLs, podcasts, videos"
 status: backlog
 type: "minor"
 created: null
