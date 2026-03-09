@@ -1,6 +1,8 @@
-# Ports - Mac Studio Service Mapping
+# Tailscale Remote Access - Mac Studio Services
 
-**Last updated:** 2026-03-05 13:30 EST
+**Last updated:** 2026-03-09 13:15 EDT
+
+**Philosophy:** Port without Tailscale = useless. All services must be remotely accessible (server + travel use case).
 
 **Network:**
 - **Local:** `localhost`
@@ -10,40 +12,56 @@
 
 ---
 
-## 🏴 Backstage UI - **SEMPRE RODANDO**
+## 🏴 Critical Services (Always Running + Exposed)
 
-**CRITICAL RULE:** Backstage deve estar SEMPRE online no Tailscale, não pode cair!
+| Service | Port | Local URL | Tailscale URL | Status |
+|---------|------|-----------|---------------|--------|
+| **Backstage UI** | 3004 | http://localhost:3004 | https://studio.adal-rigel.ts.net:3004 | ✅ HTTPS |
+| **OpenClaw Control** | 18789 | http://localhost:18789 | https://studio.adal-rigel.ts.net:18789 | ✅ HTTPS |
+| **Uptime Kuma** | 3011 | http://localhost:3011 | https://studio.adal-rigel.ts.net:3011 | ✅ HTTPS |
 
-- **Local:** `http://localhost:3004`
-- **Tailscale (HTTPS):** `https://studio.adal-rigel.ts.net:3004`
-- **Status:** Rodando via PM2 (production build) + Tailscale serve auto-start
-- **Port Note:** 3004 (NOT 3002 - port conflicts)
+**CRITICAL RULE:** These services must ALWAYS be online and Tailscale-exposed. Port stability check will FAIL if any are down or missing Tailscale proxy.
 
 ---
 
-## Mac Studio Services (All Running)
+## Other Mac Studio Services
 
-| Service | Port | Status | Local URL | Tailscale URL |
-|---------|------|--------|-----------|---------------|
-| **OpenClaw Control UI** | 18789 | ✅ Running | http://localhost:18789 | https://studio.adal-rigel.ts.net |
-| **Uptime Kuma** (monitoring) | 3011 | ✅ Running | http://localhost:3011 | https://studio.adal-rigel.ts.net:3011 |
-| **Mattermost** (chat) | 8065 | ✅ Running | http://localhost:8065 | https://studio.adal-rigel.ts.net:8065 |
-| **Matrix** (Synapse) | 8008 | ✅ Running | http://localhost:8008 | https://studio.adal-rigel.ts.net:8008 |
-| **Backstage (Next.js)** | 3004 | ✅ Running | http://localhost:3004 | https://studio.adal-rigel.ts.net:3004 |
-| **Kavita** (ebooks) | 5007 | ✅ Running | http://localhost:5007 | https://studio.adal-rigel.ts.net:5007 |
-| **Komga** (comics) | 5008 | ✅ Running | http://localhost:5008 | https://studio.adal-rigel.ts.net:5008 |
-| **SearXNG** (search) | 8889 | ✅ Running | http://localhost:8889 | https://studio.adal-rigel.ts.net:8889 |
-| **Zulip** (chat) | 8090 | ✅ Running | http://localhost:8090 | https://studio.adal-rigel.ts.net:8090 |
-| **VNC/Screen Sharing** | 5900 | ⚠️ Not enabled | — | vnc://studio.adal-rigel.ts.net:5900 |
+| Service | Port | Local URL | Tailscale URL | Status |
+|---------|------|-----------|---------------|--------|
+| **Mattermost** (chat) | 8065 | http://localhost:8065 | https://studio.adal-rigel.ts.net:8065 | ✅ HTTPS |
+| **Matrix** (Synapse) | 8008 | http://localhost:8008 | https://studio.adal-rigel.ts.net:8008 | ✅ HTTPS |
+| **Kavita** (ebooks) | 5007 | http://localhost:5007 | https://studio.adal-rigel.ts.net:5007 | ⚠️ HTTP |
+| **Komga** (comics) | 5008 | http://localhost:5008 | https://studio.adal-rigel.ts.net:5008 | ⚠️ HTTP |
+| **SearXNG** (search) | 8889 | http://localhost:8889 | http://studio.adal-rigel.ts.net:8889 | ⚠️ HTTP |
+| **Zulip** (chat) | 8090 | http://localhost:8090 | https://studio.adal-rigel.ts.net:8090 | ⚠️ HTTP |
+| **VNC/Screen Sharing** | 5900 | — | vnc://studio.adal-rigel.ts.net:5900 | ⚠️ Not enabled |
 
 **Port Notes:** 
 - **All ports:** Same locally and via Tailscale (no confusing mappings)
-- **Backstage:** Port 3004 (NOT 3002 due to persistent conflicts)
+- **HTTPS preferred** for secure remote access (especially on iPad/iPhone)
+- **HTTP services** work but not encrypted (use with caution on public networks)
 
-**Note:** 
-- OpenClaw served as HTTPS root (no port in Tailscale URL)
-- All services accessible from iPad/iPhone via Tailscale (subnet routes enabled)
-- VNC needs to be enabled in System Settings > General > Sharing > Screen Sharing
+---
+
+## 📱 iPad/iPhone Access
+
+**Active devices:**
+- iPad Mini (6th gen) - `100.117.167.48` ✅ Online
+- iPhone 11 - Check `tailscale status`
+
+**Quick links for Safari bookmarks:**
+- **Backstage:** https://studio.adal-rigel.ts.net:3004
+- **OpenClaw:** https://studio.adal-rigel.ts.net:18789
+- **Uptime Kuma:** https://studio.adal-rigel.ts.net:3011
+- **Kavita (ebooks):** https://studio.adal-rigel.ts.net:5007
+- **Komga (comics):** https://studio.adal-rigel.ts.net:5008
+
+**How to use:**
+1. Ensure Tailscale app is connected on iPad/iPhone
+2. Open Safari and navigate to any URL above
+3. Services respond as if local (secure Tailscale tunnel)
+
+**Why this matters:** Nicholas travels with iPad - remote access to Backstage/OpenClaw is CRITICAL for work continuity.
 
 ---
 
@@ -172,4 +190,9 @@ launchctl load ~/Library/LaunchAgents/com.nonlinear.tailscale-serve.plist
 
 ---
 
-**Updated:** 2026-03-09 09:26 EDT
+**Updated:** 2026-03-09 13:15 EDT
+
+**See also:**
+- `connections/ports.md` - Port management protocol (hammer + start + expose)
+- `connections/docker.md` - Container management
+- `scripts/port-start.sh` - Automated service startup with Tailscale exposure
