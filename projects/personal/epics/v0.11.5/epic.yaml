@@ -1,11 +1,47 @@
 ---
 version: v0.11.5
-name: 
-goal: "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti."
-status: backlog
+name: "Moon Rituals"
+goal: "Using moon phases for SPLIFF rituals"
+status: active
 type: "patch"
 created: null
 started: null
 completed: null
-tasks: []
+tasks:
+  - text: "Create moon-now skill (fetch current phase from Google Calendar)"
+    checked: false
+  - text: "Add moon phase to 'bom-dia' output"
+    checked: false
+  - text: "Add moon phase to Weather Today oracle"
+    checked: false
+  - text: "Design reminder prompts (new/full/quarter moons)"
+    checked: false
+  - text: "Implement via cron (check daily, send at phase transitions)"
+    checked: false
+  - text: "Test: Verify reminders arrive at correct times"
+    checked: false
+  - text: "Design vision-log skill (voice or text input)"
+    checked: false
+  - text: "Create storage (visions.json or Airtable)"
+    checked: false
+  - text: "Implement vision-recall (query by phase, date range, tags)"
+    checked: false
+  - text: "Test: Log 5 visions, recall by phase"
+    checked: false
+  - text: "Create ritual-prompt skill (phase-appropriate suggestions)"
+    checked: false
+  - text: "Document aspirin moon water ritual (from The Chaos Apple)"
+    checked: false
+  - text: "Set up batching system (create 5-6 sigils at new moon, fire all at full)"
+    checked: false
+  - text: "Test: Complete one SPLIFF cycle (new → full → waning)"
+    checked: false
+  - text: "After 3+ moon cycles, analyze vision data"
+    checked: false
+  - text: "Identify personal patterns (creative phases, energy dips)"
+    checked: false
+  - text: "Adjust rituals based on what works"
+    checked: false
+  - text: "Document learnings in epic note"
+    checked: false
 ---

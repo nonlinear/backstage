@@ -4,11 +4,6 @@
 
 ---
 
-# v0.11.5 / v0.15.0 - Moon Rituals & Daily Skills 🌅🌙
-
-**Epic Note - Full Implementation Details**
-
-
 ## Overview
 
 Merge of Daily Rituals (v0.11.5) + Moon Cycles (v0.15.0) into unified lunar-aligned ritual system.
@@ -173,37 +168,6 @@ Map Double Diamond design process to lunar phases:
 - Document what works for Nicholas specifically
 - Not all rituals will resonate—find the ones that do
 - ADHD-friendly = low activation energy, batching, alarms
-
-
-## 🔧 Implementation Tasks
-
-**Phase 1: Basic Moon Phase Integration**
-- [ ] Create moon-now skill (fetch current phase from Google Calendar)
-- [ ] Add moon phase to "bom-dia" output
-- [ ] Add moon phase to Weather Today oracle
-
-**Phase 2: Proactive Reminders**
-- [ ] Design reminder prompts (new/full/quarter moons)
-- [ ] Implement via cron (check daily, send at phase transitions)
-- [ ] Test: Verify reminders arrive at correct times
-
-**Phase 3: Vision Tracking**
-- [ ] Design vision-log skill (voice or text input)
-- [ ] Create storage (visions.json or Airtable)
-- [ ] Implement vision-recall (query by phase, date range, tags)
-- [ ] Test: Log 5 visions, recall by phase
-
-**Phase 4: SPLIFF Ritual Support**
-- [ ] Create ritual-prompt skill (phase-appropriate suggestions)
-- [ ] Document aspirin moon water ritual (from The Chaos Apple)
-- [ ] Set up batching system (create 5-6 sigils at new moon, fire all at full)
-- [ ] Test: Complete one SPLIFF cycle (new → full → waning)
-
-**Phase 5: Pattern Analysis**
-- [ ] After 3+ moon cycles, analyze vision data
-- [ ] Identify personal patterns (creative phases, energy dips)
-- [ ] Adjust rituals based on what works
-- [ ] Document learnings in epic note
 
 
 ## 🏴 Chaos Magick + ADHD = Natural Match
