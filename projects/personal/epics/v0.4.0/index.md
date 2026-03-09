@@ -20,7 +20,7 @@ Useful utility scripts scattered across `~/Documents/notes/tasks/`:
 
 Current state:
 - ✅ `Sync_settings.py` converted to cronjob (success!)
-- ❌ 5 other script folders remain unconverted
+- ❌ 4 other script folders remain unconverted
 - ❌ User overwhelmed, needs mental space
 
 ---
@@ -66,15 +66,6 @@ Convert to AgentSkills with:
 
 ---
 
-#### `library/`
-**Scripts:**
-- (Need to inventory)
-
-**Potential skill:** Library/book management utilities  
-**Automation:** TBD
-
----
-
 #### `media/`
 **Scripts:**
 - (Need to inventory)
@@ -90,34 +81,6 @@ Convert to AgentSkills with:
 
 **Potential skill:** Reels/video library management  
 **Automation:** TBD
-
----
-
-## Tasks (When Resumed)
-
-### Phase 1: Inventory
-- [ ] List all scripts in each folder
-- [ ] Document what each does
-- [ ] Identify automation opportunities
-- [ ] Prioritize by usefulness
-
-### Phase 2: Design
-- [ ] Group related scripts into skills
-- [ ] Write SKILL.md templates
-- [ ] Plan CLI interfaces
-- [ ] Design cronjob schedules
-
-### Phase 3: Conversion
-- [ ] airtable/ → skill
-- [ ] content/ → skill
-- [ ] library/ → skill
-- [ ] media/ → skill
-- [ ] reels-library/ → skill
-
-### Phase 4: Automation
-- [ ] Create cronjobs where appropriate
-- [ ] Test invocation patterns
-- [ ] Document in workspace POLICY
 
 ---
 
@@ -158,7 +121,7 @@ Convert to AgentSkills with:
 ### Skill Discovery
 ```
 User: "What automations do I have?"
-Me: "You have 6 skills running:
+Me: "You have 5 skills running:
      - Sync settings (weekly)
      - Airtable sync (daily)
      - Content backup (weekly)

@@ -28,8 +28,6 @@ tasks:
     checked: false
   - text: "Convert content/ → skill"
     checked: false
-  - text: "Convert library/ → skill"
-    checked: false
   - text: "Convert media/ → skill"
     checked: false
   - text: "Convert reels-library/ → skill"
