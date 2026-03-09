@@ -1,11 +1,43 @@
 ---
 version: v0.4.0
-name: 
-goal: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+name: "Organize scripts"
+goal: "Turning scripts into skills or corncobs, so they're more useful"
 status: backlog
 type: "minor"
 created: null
 started: null
 completed: null
-tasks: []
+tasks:
+  - text: "List all scripts in each folder"
+    checked: false
+  - text: "Document what each does"
+    checked: false
+  - text: "Identify automation opportunities"
+    checked: false
+  - text: "Prioritize by usefulness"
+    checked: false
+  - text: "Group related scripts into skills"
+    checked: false
+  - text: "Write SKILL.md templates"
+    checked: false
+  - text: "Plan CLI interfaces"
+    checked: false
+  - text: "Design cronjob schedules"
+    checked: false
+  - text: "Convert airtable/ → skill"
+    checked: false
+  - text: "Convert content/ → skill"
+    checked: false
+  - text: "Convert library/ → skill"
+    checked: false
+  - text: "Convert media/ → skill"
+    checked: false
+  - text: "Convert reels-library/ → skill"
+    checked: false
+  - text: "Create cronjobs where appropriate"
+    checked: false
+  - text: "Test invocation patterns"
+    checked: false
+  - text: "Document in workspace POLICY"
+    checked: false
 ---
