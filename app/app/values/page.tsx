@@ -63,6 +63,33 @@ export default function ValuesPage() {
     loadValues()
   }, [])
   
+  // Handle hash on mount (permalink)
+  useEffect(() => {
+    const hash = window.location.hash.slice(1) // Remove '#'
+    if (hash && values.length > 0) {
+      setExpandedValue(hash)
+      // Scroll to target after render
+      setTimeout(() => {
+        const element = document.getElementById(hash)
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        }
+      }, 100)
+    }
+  }, [values])
+  
+  const handleValueClick = (valueName: string) => {
+    const newExpanded = expandedValue === valueName ? null : valueName
+    setExpandedValue(newExpanded)
+    
+    // Update URL hash for permalink
+    if (newExpanded) {
+      window.history.pushState(null, '', `#${valueName}`)
+    } else {
+      window.history.pushState(null, '', window.location.pathname)
+    }
+  }
+  
   const handleSectionChange = (value: string) => {
     setSection(value)
     if (value === "projects") router.push("/projects")
@@ -128,7 +155,7 @@ export default function ValuesPage() {
                 description={value.description}
                 content={value.content}
                 isExpanded={expandedValue === value.name}
-                onClick={() => setExpandedValue(expandedValue === value.name ? null : value.name)}
+                onClick={() => handleValueClick(value.name)}
               />
             ))}
             
