@@ -4,232 +4,190 @@
 
 ---
 
-# v0.14.0 - OpenClaw Walkie-Talkie
-
-**Epic type:** New iOS app (potential revenue stream)
+# v0.14.0 - Self-Promotion & Digital Identity
 
 
-## Context Snapshot
 
-**Why this exists:**  
-Voice-first AI interaction for OpenClaw. iOS app where you TALK to your AI instead of typing. Potential paid app or freemium model.
+## 🎯 Problem
 
-**Problem solved:**  
-Current OpenClaw = desktop/web-centric, typing required. Mobile voice = faster, hands-free, more natural interaction (especially for two-spirit/neurodivergent users who think better by talking).
-
-**Date:** 2026-02-15  
-**Assumptions:**  
-- OpenClaw has voice capabilities (STT/TTS) via Whisper + Kokoro (self-hosted stack)
-- iOS app can connect to gateway via API
-- Push-to-talk OR always-listening modes supported
-- Monetization TBD (one-time purchase? subscription? freemium?)
+**No public presence:**
+- OpenClaw is personal (only Nicholas uses)
+- No community, no users, no feedback
+- No income streams
+- Blog exists but not promoted
 
 
-## Goal
+## 🎯 Goal
 
-Build iOS voice-first app for OpenClaw. Talk to your AI like a walkie-talkie. Ship v1.0 with core functionality, iterate based on usage.
-
-
-## Questions for Nicholas (Disambiguation Protocol)
-
-**To work unsupervised, I need answers to:**
-
-### 1. **Monetization Model**
-- [ ] Free app (gateway pays for hosting)?
-- [ ] One-time purchase ($X)?
-- [ ] Subscription ($X/month)?
-- [ ] Freemium (free basic, paid premium features)?
-- [ ] Which features are free vs paid (if freemium)?
-
-### 2. **Voice Interaction Mode**
-- [ ] Push-to-talk (hold button, release to send)?
-- [ ] Always-listening (wake word like "Hey Claw")?
-- [ ] Toggle mode (tap to start recording, tap to stop)?
-- [ ] All three (user preference)?
-
-### 3. **Gateway Connection**
-- [ ] Connect to user's self-hosted gateway (user provides URL + token)?
-- [ ] Connect to shared/managed gateway (we host, charge for access)?
-- [ ] Hybrid (can connect to either)?
-
-### 4. **iOS App Scope (v1.0)**
-Which features are IN SCOPE for first version?
-- [ ] Voice recording + playback
-- [ ] Text display of conversation (backup/accessibility)
-- [ ] History/transcript view
-- [ ] Offline queue (send when online)
-- [ ] Multiple gateway profiles (switch between work/personal)
-- [ ] Background mode (receive responses while app closed)
-- [ ] Widget support (quick access from home screen)
-- [ ] CarPlay integration (hands-free while driving)
-- [ ] Shortcuts app integration (Siri triggers)
-
-### 5. **Design/UX Reference**
-Any existing apps you want to model this after?
-- [ ] Walkie-talkie apps (Zello, Voxer)?
-- [ ] Voice assistant apps (ChatGPT voice mode, Alexa)?
-- [ ] Messaging apps with voice (Telegram voice messages)?
-- [ ] Other reference? (provide name/screenshots)
-
-### 6. **Technical Stack**
-- [ ] Native Swift + SwiftUI?
-- [ ] React Native (cross-platform iOS + Android)?
-- [ ] Flutter (if we want Android later)?
-- [ ] Which OpenClaw API endpoints will this use? (need API docs)
-
-### 7. **Launch Strategy**
-- [ ] TestFlight beta first (invite-only)?
-- [ ] Public TestFlight (anyone can test)?
-- [ ] Straight to App Store?
-- [ ] Soft launch (limited countries)?
-
-### 8. **Name**
-- [ ] "OpenClaw Walkie-Talkie"?
-- [ ] "Claw Voice"?
-- [ ] "Walkie" (simple)?
-- [ ] Other? (suggest alternatives)
-
-### 9. **Branding**
-- [ ] Use OpenClaw logo/colors?
-- [ ] Separate brand identity?
-- [ ] Minimalist/anarchist aesthetic (black/white, no bullshit)?
-
-### 10. **Who Builds This?**
-- [ ] You (Nicholas) code it?
-- [ ] Me (Kin) design/spec, you implement?
-- [ ] Hire iOS dev?
-- [ ] Contract out full build?
+**Define public presence + explore income:**
+1. Identity (who I am, what I offer)
+2. Content calendar (what to share, where, when)
+3. Blog redesign (nonlinear.nyc v2.0)
+4. Income strategy (3 viable paths)
+5. Community engagement (testers, feedback, growth)
 
 
-## Proposed Architecture (Pending Answers)
+## 📋 Components
 
-**Diagram 1: High-Level Flow**
+### 1. Identity Document
+**Questions to answer:**
+- Who is Nicholas? (two-spirit, Brazilian-American, chaos magick, tech, art)
+- What do I offer? (AI expertise, design thinking, automation, storytelling)
+- What's unique? (familiar-servitor hybrid, anarchist infrastructure, ADHD-friendly tools)
+- Target audience? (Solo devs, ADHD creatives, self-hosters, chaos magicians)
 
-```mermaid
-graph TD
-    A[iOS App] -->|Voice recording| B[STT Whisper]
-    B -->|Text| C[OpenClaw Gateway]
-    C -->|Response text| D[TTS Kokoro]
-    D -->|Audio| A
-    A -->|Optional| E[Text Display]
-    C -->|Optional| F[History/Transcript]
-```
-
-**Diagram 2: Monetization Models (Options)**
-
-```mermaid
-graph LR
-    A[Free App] -->|Gateway hosts| B[Self-hosted users only]
-    C[Paid App] -->|$X one-time| D[All features included]
-    E[Freemium] -->|Free basic| F[Push-to-talk only]
-    E -->|Paid premium| G[Always-listening + history + offline]
-    H[Subscription] -->|$X/month| I[Access to managed gateway]
-```
-
-**Diagram 3: Voice Interaction Modes**
-
-```mermaid
-graph TD
-    A[Push-to-Talk] -->|Hold button| B[Record]
-    B -->|Release| C[Send + process]
-    D[Always-Listening] -->|Wake word| E[Activate]
-    E -->|Auto-detect silence| F[Send + process]
-    G[Toggle] -->|Tap to start| H[Record]
-    H -->|Tap to stop| I[Send + process]
-```
+**Deliverable:** `IDENTITY.md` (public version of USER.md)
 
 
-## Tasks (Blocked Until Disambiguation)
+### 2. Content Calendar
+**Platforms:**
+- **Mastodon** (tech community, open-source, anarchist vibes)
+- **Blog** (long-form, deep dives, tutorials)
+- **WhatsApp/Telegram** (beta testers, close community)
+- **GitHub** (code, skills, open-source contributions)
 
-**Phase 1: Planning**
-- [ ] Answer all 10 disambiguation questions above
-- [ ] Create UX wireframes (low-fi sketches)
-- [ ] Research iOS voice app best practices (App Store guidelines, privacy, permissions)
-- [ ] Define API contract (which OpenClaw endpoints needed)
-- [ ] Choose tech stack (Swift vs React Native vs Flutter)
+**Content types:**
+- Project updates (what I'm building)
+- Tutorials (how to replicate my setups)
+- Philosophy (chaos magick + tech, two-spirit navigation)
+- Behind-the-scenes (workflow, tools, mistakes)
 
-**Phase 2: Design**
-- [ ] High-fi mockups (Figma or Sketch)
-- [ ] Define color palette + typography
-- [ ] Icon design (App Store + in-app)
-- [ ] Prototype interaction flow (InVision or Figma prototype)
-
-**Phase 3: Development**
-- [ ] Set up iOS project (Xcode + repo)
-- [ ] Implement voice recording (AVFoundation)
-- [ ] Implement STT integration (Whisper API or self-hosted)
-- [ ] Implement TTS playback (Kokoro API or self-hosted)
-- [ ] Implement gateway connection (API client)
-- [ ] Implement conversation history (local storage)
-- [ ] Implement offline queue (if in scope)
-- [ ] Implement background mode (if in scope)
-- [ ] Implement widgets (if in scope)
-- [ ] Implement CarPlay (if in scope)
-
-**Phase 4: Testing**
-- [ ] Internal testing (dogfooding)
-- [ ] TestFlight beta (invite-only or public)
-- [ ] Bug fixes + iteration
-- [ ] Performance optimization (battery, network usage)
-- [ ] Accessibility testing (VoiceOver, Dynamic Type)
-
-**Phase 5: Launch**
-- [ ] App Store submission (metadata, screenshots, description)
-- [ ] App Store review (respond to feedback)
-- [ ] Launch announcement (social media, blog post)
-- [ ] Monitor crash reports + user feedback
-
-**Phase 6: Iteration**
-- [ ] Analyze usage patterns
-- [ ] Prioritize feature requests
-- [ ] Ship v1.1, v1.2, etc.
+**Cadence:**
+- Weekly: Mastodon post (quick update, link to blog)
+- Biweekly: Blog post (deep dive, tutorial)
+- Monthly: Community check-in (beta testers, feedback)
 
 
-## Risks & Caveats
+### 3. Blog Redesign (nonlinear.nyc)
+**Current state:** Basic Jekyll site, not updated
 
-**Technical:**
-- iOS voice permissions = users might deny access (UX handles gracefully)
-- Background mode = App Store review scrutiny (need clear use case)
-- Battery usage = voice processing + network = drain (optimize)
+**Goals:**
+- ✅ Modern design (dark mode, accessible)
+- ✅ Photo integration (Immich → blog posts)
+- ✅ Project showcase (portfolio)
+- ✅ RSS feed (Mastodon auto-post)
+- ✅ Comments (Mastodon replies as comments?)
 
-**Monetization:**
-- If paid app = discovery problem (need marketing)
-- If freemium = need compelling premium features (avoid "pay to use basic functionality")
-- If subscription = churn risk (must provide ongoing value)
-
-**Market:**
-- Voice AI apps = crowded space (ChatGPT, Gemini, Perplexity all have voice)
-- Differentiation = OpenClaw's autonomy + self-hosted option + anarchist ethos
-
-**Legal:**
-- App Store guidelines = no cryptocurrency mining, no NSFW, no violence
-- Privacy policy = required for voice recording (even if local-only)
-- Terms of service = required for gateway connection
+**Tech stack:**
+- Keep Jekyll? OR migrate to Astro/Hugo?
+- Photo pipeline (epic exists: photo-pipeline-nonlinear.md)
 
 
-## Success Metrics (TBD)
+### 4. Income Streams (3 Paths)
 
-**v1.0 Launch Goals:**
-- [ ] X downloads in first month
-- [ ] X daily active users
-- [ ] X% retention after 7 days
-- [ ] X average session length
-- [ ] X revenue (if paid/subscription)
+#### Path 1: Donations
+**Platforms:**
+- Ko-fi (one-time + monthly)
+- Patreon (monthly supporters)
+- GitHub Sponsors (if open-sourcing)
 
+**Pitch:** "Support my anarchist AI infrastructure work"
 
-## Related Epics
-
-- **nonlinear v0.11.0** - Memory Architecture (backend for conversation history)
-- **personal v0.18.0** - Open Source Notes (SiYuan mobile UX research transferable)
-- **apps v0.3.0** - Webchat Redesign (design patterns transferable)
+**Effort:** LOW (set up once, passive)  
+**Revenue:** LOW-MED ($50-500/mo realistically)
 
 
-## Notes
+#### Path 2: Consulting/Freelance
+**Services:**
+- AI automation (OpenClaw-style setups for clients)
+- Design thinking workshops
+- Self-hosting guidance (NAS, Paperless, Home Assistant)
 
-**Nicholas's request:** "an ios app wher you can TALK to your AI. maybe charge."
+**Pitch:** "I'll help you build your own AI assistant"
 
-**My interpretation:** Voice-first mobile experience. Monetization TBD (one-time vs subscription vs freemium).
+**Effort:** HIGH (client work, time-intensive)  
+**Revenue:** MED-HIGH ($100-200/hr, project-based)
 
-**Disambiguation strategy:** 10 questions above = minimum info needed to design/build unsupervised.
 
-**Next step:** Nicholas answers questions → I create detailed spec + wireframes + mermaid diagrams → handoff to dev (Nicholas or contractor).
+#### Path 3: Products/SaaS
+**Ideas:**
+- OpenClaw mobile app (freemium model)
+- Hosted OpenClaw (pay for cloud instance)
+- Skill marketplace (sell pre-built skills)
+- Templates/frameworks (design systems, workflows)
+
+**Pitch:** "Tools for self-sufficient creatives"
+
+**Effort:** VERY HIGH (build, maintain, support)  
+**Revenue:** HIGH (scalable, recurring)
+
+
+### 5. Community Engagement (2026-02-09 addition)
+
+**Promotion channels:**
+- **Mastodon** (tech, open-source, anarchist communities)
+- **WhatsApp groups** (beta testers, close friends)
+- **Telegram channels** (public updates, announcements)
+
+**Engagement tactics:**
+- Invite beta testers (usability feedback)
+- Share progress (transparency builds trust)
+- Ask for feedback (community-driven development)
+- Offer early access (supporters get first look)
+
+**Usability testing (future):**
+- Tools: Lookback, Maze, QButterfly (open-source)
+- Non-moderated tests (users test on their own)
+- Feedback loops (iterate based on real use)
+
+**Why it matters:**
+- Community = accountability (keeps me shipping)
+- Feedback = better product (user-driven)
+- Engagement = visibility (word-of-mouth growth)
+
+
+### 6. Donations & Sustainability (2026-02-09 addition)
+
+**Goal:** Financial independence (not reliant on day job only)
+
+**Strategy:**
+1. **Transparent costs:** Share what it costs to run (server, tools, time)
+2. **Value proposition:** What supporters get (early access, input, community)
+3. **Multiple tiers:** $5/mo (supporter), $25/mo (backer), $100/mo (sponsor)
+4. **Rewards:** Shoutouts, beta access, 1-on-1 time, custom skills
+
+**Platforms:**
+- Ko-fi (easiest setup)
+- Patreon (better for tiers + community)
+- OpenCollective (transparent finances)
+
+**Messaging:**
+- "Support anarchist infrastructure work"
+- "Help me build tools for self-sufficient creatives"
+- "Fund my familiar-servitor experiments"
+
+
+## 📊 Success Metrics
+
+### Phase 1: Research ✅
+- [ ] Competitive analysis (who else does this?)
+- [ ] Identity doc written
+- [ ] Content calendar drafted
+
+### Phase 2: Launch ✅
+- [ ] Blog redesigned + 3 posts published
+- [ ] Mastodon active (weekly posts)
+- [ ] Donation platform set up (Ko-fi or Patreon)
+
+### Phase 3: Growth ✅
+- [ ] 100 Mastodon followers
+- [ ] 10+ monthly donors
+- [ ] 1 income stream active ($100+/mo)
+
+
+## 🚀 Next Steps
+
+1. **This week:** Research competitive landscape (similar projects, creators)
+2. **This week:** Draft identity doc (who am I, what I offer)
+3. **Next week:** Content calendar (what to share, where, when)
+4. **Next month:** Launch blog v2.0 + Mastodon presence
+
+
+## 🔗 Related Epics
+
+- **Photo Pipeline → Nonlinear Blog** (content creation)
+- **v0.20.0 OpenClaw Mobile** (product for income Path 3)
+- **Fae Talk** (storytelling, audience building)
+
+
+**Why this matters:** Visibility = opportunities. Income = autonomy. Community = accountability. 🏴
