@@ -1,0 +1,27 @@
+---
+name: "Agent Placeholders"
+goal: "Create agent infrastructure: 21 agents across 7 squads with values injection system and governance architecture"
+status: active
+type: "major"
+created: 2026-03-09
+started: 2026-03-09
+completed: null
+tasks:
+  - Compact values/ (brevity applied to itself)
+  - Create squad structure (7 squads)
+  - Create agent placeholders (21 agents)
+  - Flatten agent hierarchy (squads/<squad>/agents/ → agents/<squad>/)
+  - Document governance architecture
+  - Define values injection model (global → squad → agent)
+  - Design anti-drift monitoring system
+  - Clarify global vs squad-specific values
+  - Inventory values per scope (global, squad, agent)
+  - Personalize agents (IDENTITY.md refinement)
+  - Surface values on app (UI visualization)
+  - Surface squads & agents on app (UI navigation)
+  - Agent skills (per ai-agents-domains.md)
+  - Agent MCP (per ai-agents-domains.md)
+  - Agent librarian searches (per ai-agents-domains.md)
+  - Matrix DM per agent (1-1 communication)
+  - Matrix squad groups (squad-wide rooms)
+---

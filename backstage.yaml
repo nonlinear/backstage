@@ -79,7 +79,6 @@ squads:
 # CHECKS - Global validation scripts (apply to all projects)
 # ============================================================================
 checks:
-  - README.md
   - branch-workflow.md
   - changelog.sh
   - commit-style.md
