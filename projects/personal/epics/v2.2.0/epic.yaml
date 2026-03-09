@@ -1,0 +1,11 @@
+---
+version: v2.2.0
+name: "Meshtastic"
+goal: "Build resilient community infrastructure (mesh networks, mutual aid, off-grid communication)"
+status: backlog
+type: "minor"
+created: null
+started: null
+completed: null
+tasks: []
+---

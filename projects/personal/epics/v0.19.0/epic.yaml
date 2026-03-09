@@ -1,7 +1,7 @@
 ---
 version: v0.19.0
-name: 
-goal: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
+name: "Calendar integration"
+goal: "Home Assistant improvements (guest mode, calendar automations, curtain sync)"
 status: backlog
 type: "minor"
 created: null

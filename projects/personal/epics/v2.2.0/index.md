@@ -1,4 +1,7 @@
-# v0.19.0 - Community Organizing (Resilience Networks)
+# Epic Notes
+
+> Version, name, status → see `epic.yaml`
+
 
 **Status:** 💡 CONCEPT (2026-02-11)
 
