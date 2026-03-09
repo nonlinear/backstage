@@ -1,6 +1,7 @@
 ---
-name: "proton-mail-finder"
-goal: "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti."
+version: v1.9.0
+name: "Proton mail skill"
+goal: "OpenClaw skill for searching Proton Mail"
 status: backlog
 type: "minor"
 created: null
