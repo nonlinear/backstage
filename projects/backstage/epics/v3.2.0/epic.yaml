@@ -1,10 +1,10 @@
 ---
-name: "docker-mcp-infrastructure"
-goal: "Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit sed quia consequuntur magni dolores."
+name: "MCP setup"
+goal: "Configure Model Context Protocol infrastructure for agent tool access (Reddit, GitHub, etc.)"
 status: active
 type: "minor"
-created: 2026-03-01
-started: 2026-03-01
+created: 2026-03-09
+started: 2026-03-09
 completed: null
 tasks:
   - text: "Research MCP server options (reddit-mcp-buddy, mcp-reddit, others)"
