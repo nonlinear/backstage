@@ -1,10 +1,18 @@
 ---
-name: "Website"
-goal: "Hugo-based website with product templates, branding, and CTAs"
-status: active
-type: "web"
-created: 2026-03-06
-started: 2026-03-06
-completed: null
-tasks: []
+name: "PM Tool Evaluation"
+goal: "Deciding on best tool for our studio"
+status: done
+type: "minor"
+created: 2026-02-01
+started: 2026-02-01
+completed: 2026-02-28
+tasks:
+  - text: "Test OpenProject API"
+    checked: true
+  - text: "Test Plane (eliminated - auth broken)"
+    checked: true
+  - text: "Evaluate alternatives (Tuleap, Focalboard, Taiga, Leantime)"
+    checked: true
+  - text: "Decision: Choose Backstage (custom Next.js app)"
+    checked: true
 ---
