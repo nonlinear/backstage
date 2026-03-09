@@ -28,6 +28,8 @@ tasks:
     checked: true
   - text: "Configure Tailscale Split DNS (ts.net → 192.168.1.152)"
     checked: true
+  - text: "Amazon blocker"
+    checked: false
   - text: "Local DNS records (nas.local, pihole.local)"
     checked: false
   - text: "CNAME aliases (jellyfin.home, paperless.home)"
