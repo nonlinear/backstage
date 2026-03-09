@@ -1,0 +1,25 @@
+---
+version: v0.1.0
+name: "Foundation"
+goal: "Setup ReX in MUI project foundation"
+status: backlog
+type: "minor"
+created: null
+started: null
+completed: null
+tasks:
+  - text: "Storybook or not?"
+    checked: false
+  - text: "React + MUI?"
+    checked: false
+  - text: "Parity (design vs implementation)"
+    checked: false
+  - text: "Agents needed (which squad/agents for this work?)"
+    checked: false
+  - text: "Collect inventory (existing ReX components)"
+    checked: false
+  - text: "GitHub repo setup"
+    checked: false
+  - text: "GitHub Pages deployment?"
+    checked: false
+---
