@@ -1,6 +1,8 @@
 # Port Management Protocol
 
-**Philosophy:** Ports are immutable. Don't move them when blocked—fix the blocker.
+**Philosophy:** 
+- Ports are immutable. Don't move them when blocked—fix the blocker.
+- **Port without Tailscale = useless.** Always expose services remotely (server + travel use case).
 
 ---
 
@@ -87,36 +89,60 @@ fi
 
 ---
 
-## Per-Service Clean Start
+## Per-Service Complete Startup
+
+**Use port-start.sh for automatic setup (hammer + start + Tailscale):**
+
+```bash
+# Backstage (complete startup)
+~/Backstage/scripts/port-start.sh backstage
+
+# OpenClaw (complete startup)
+~/Backstage/scripts/port-start.sh openclaw
+
+# Other services
+~/Backstage/scripts/port-start.sh uptime-kuma
+~/Backstage/scripts/port-start.sh kavita
+```
+
+**This handles:**
+1. Clear port conflicts (Tailscale proxies, PM2, stragglers)
+2. Start service
+3. Wait for service to respond
+4. Configure Tailscale HTTPS exposure
+5. Verify remote access works
+
+---
+
+## Manual Per-Service Clean Start (if port-start.sh unavailable)
 
 ### Backstage (Port 3004)
 
 ```bash
 # Clean
-tailscale serve --https=3004 off
-pm2 delete backstage 2>/dev/null || true
-lsof -ti :3004 | xargs kill -9 2>/dev/null || true
+~/Backstage/scripts/port-hammer.sh 3004 backstage
 
 # Start
 pm2 start npm --name backstage --cwd ~/Backstage/app -- start -- --port 3004
 
-# Expose via Tailscale
-tailscale serve --https=3004 http://localhost:3004
+# Wait for service
+sleep 8
+
+# Expose via Tailscale (CRITICAL)
+tailscale serve --bg --https 3004 localhost:3004
 ```
 
 ### OpenClaw (Port 18789)
 
 ```bash
 # Clean
-tailscale serve --https=18789 off
-pm2 delete openclaw 2>/dev/null || true
-lsof -ti :18789 | xargs kill -9 2>/dev/null || true
+~/Backstage/scripts/port-hammer.sh 18789 openclaw
 
 # Start
 openclaw gateway start
 
-# Expose via Tailscale (optional)
-tailscale serve --https=18789 http://localhost:18789
+# Expose via Tailscale (CRITICAL)
+tailscale serve --bg --https 18789 localhost:18789
 ```
 
 ---

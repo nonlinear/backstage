@@ -1,17 +1,25 @@
 #!/bin/bash
 # Port Hammer 🔨
-# Clears port conflicts before starting services
-# Usage: ./port-hammer.sh <port> <service-name>
+# Clears port conflicts AND configures Tailscale exposure
+# Usage: ./port-hammer.sh <port> <service-name> [--no-tailscale]
 
 set -e
 
 PORT=$1
 SERVICE=$2
+SKIP_TAILSCALE=false
 
 if [ -z "$PORT" ] || [ -z "$SERVICE" ]; then
-    echo "Usage: $0 <port> <service-name>"
+    echo "Usage: $0 <port> <service-name> [--no-tailscale]"
     echo "Example: $0 3004 backstage"
+    echo ""
+    echo "Options:"
+    echo "  --no-tailscale    Skip Tailscale exposure configuration"
     exit 1
+fi
+
+if [ "$3" = "--no-tailscale" ]; then
+    SKIP_TAILSCALE=true
 fi
 
 echo "🔨 Hammering port $PORT for $SERVICE..."
@@ -61,6 +69,34 @@ if lsof -i :$PORT 2>/dev/null; then
     exit 1
 else
     echo "   ✓ Port $PORT is clear!"
-    echo ""
-    echo "✅ Port $PORT ready for $SERVICE"
 fi
+echo ""
+
+# 6. Configure Tailscale exposure (unless --no-tailscale)
+if [ "$SKIP_TAILSCALE" = false ]; then
+    echo "6️⃣  Configuring Tailscale exposure..."
+    
+    # Check if service is running first
+    if curl -s -o /dev/null -w "%{http_code}" http://localhost:$PORT --connect-timeout 2 | grep -qE "^(200|301|302|401|403)"; then
+        echo "   ✓ Service responding on localhost:$PORT"
+        
+        # Configure Tailscale serve in background
+        if tailscale serve --bg --https $PORT localhost:$PORT 2>&1 | grep -q "Available within your tailnet"; then
+            echo "   ✓ Tailscale HTTPS proxy configured"
+            echo ""
+            echo "   🌐 Available at: https://studio.adal-rigel.ts.net:$PORT"
+        else
+            echo "   ⚠ Tailscale exposure failed (see error above)"
+            echo "   Manual: tailscale serve --bg --https $PORT localhost:$PORT"
+        fi
+    else
+        echo "   ⚠ Service not responding on localhost:$PORT yet"
+        echo "   Start $SERVICE first, then run:"
+        echo "   tailscale serve --bg --https $PORT localhost:$PORT"
+    fi
+else
+    echo "6️⃣  Skipping Tailscale exposure (--no-tailscale flag)"
+fi
+
+echo ""
+echo "✅ Port $PORT ready for $SERVICE"

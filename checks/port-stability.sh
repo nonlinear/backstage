@@ -24,18 +24,19 @@ for PORT in "${!SERVICES[@]}"; do
     
     echo "Checking $SERVICE on port $PORT..."
     
-    # Check if port is responding
+    # Check if port is responding locally
     if curl -s -o /dev/null -w "%{http_code}" http://localhost:$PORT --connect-timeout 2 | grep -qE "^(200|301|302|401|403)"; then
-        echo "  ✓ Port $PORT responding"
-        
-        # Check Tailscale exposure (if applicable)
-        if tailscale serve status 2>/dev/null | grep -q ":$PORT"; then
-            echo "  ✓ Tailscale proxy configured"
-        else
-            echo "  ⚠ Tailscale proxy missing (may be intentional)"
-        fi
+        echo "  ✓ Port $PORT responding locally"
     else
-        echo "  ❌ Port $PORT not responding"
+        echo "  ❌ Port $PORT not responding locally"
+        FAILED=1
+    fi
+    
+    # Check Tailscale exposure (CRITICAL for remote access)
+    if tailscale serve status 2>/dev/null | grep -q ":$PORT"; then
+        echo "  ✓ Tailscale proxy configured"
+    else
+        echo "  ❌ Tailscale proxy MISSING (service unreachable remotely!)"
         FAILED=1
     fi
     
