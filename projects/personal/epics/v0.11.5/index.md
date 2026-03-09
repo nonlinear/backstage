@@ -187,29 +187,12 @@ Map Double Diamond design process to lunar phases:
 
 ## HEARTBEAT Integration (2026-02-09)
 
-### What Was Added
-**Moon phase + Calendar updates added to HEARTBEAT.md**
-
-**Commands run every heartbeat (~30min during work hours):**
+**Moon phase script added to HEARTBEAT.md:**
 ```bash
-# Moon phase (SPLIFF integration)
 ~/.openclaw/workspace/scripts/get-moon-phase.sh
-
-# Calendar (today + tomorrow)
-export GOG_ACCOUNT=Nicholas.frota@gmail.com
-gog calendar events --today --json > ~/.openclaw/workspace/data/calendar-today.json
-gog calendar events --from "$(date -v+1d '+%Y-%m-%dT00:00:00%z')" --to "$(date -v+1d '+%Y-%m-%dT23:59:59%z')" --json > ~/.openclaw/workspace/data/calendar-tomorrow.json
-
-# Reload Agenda app
-osascript -e 'tell application "Agenda" to activate' -e 'delay 0.5' -e 'tell application "System Events" to keystroke "r" using command down'
 ```
 
-**Why it matters:**
-- Agenda dashboard always current
-- Moon phase visible in work context
-- Calendar alerts work (2h, 30min, at-time)
-
 **Next step:** 
-- Build bom-dia/boa-noite skills (use these data sources)
+- Build bom-dia/boa-noite skills
 - Add moon phase context to morning briefing
 - SPLIFF stage prompts in rituals
