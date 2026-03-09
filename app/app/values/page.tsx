@@ -135,16 +135,6 @@ export default function ValuesPage() {
                 </SelectContent>
               </Select>
             </BreadcrumbItem>
-            <span className="text-muted-foreground">/</span>
-            <BreadcrumbItem>
-              <Select value="all">
-                <SelectTrigger className="justify-start border-0 shadow-none p-0 focus:ring-0 hover:bg-transparent">
-                  <SelectValue>
-                    <span className="font-bold text-foreground">All</span>
-                  </SelectValue>
-                </SelectTrigger>
-              </Select>
-            </BreadcrumbItem>
           </BreadcrumbList>
         </Breadcrumb>
       </div>

@@ -1,0 +1,193 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e1]:
+  - generic [ref=e2]:
+    - generic [ref=e3]:
+      - heading "Backstage" [level=1] [ref=e4]
+      - generic [ref=e5]: /
+      - navigation "breadcrumb" [ref=e6]:
+        - list [ref=e7]:
+          - listitem [ref=e8]:
+            - combobox [active] [ref=e9]:
+              - generic:
+                - generic:
+                  - text: Values
+                  - superscript: "14"
+              - img
+          - generic [ref=e10]: /
+          - listitem [ref=e11]:
+            - combobox [ref=e12]:
+              - generic:
+                - generic:
+                  - text: All
+                  - superscript: "50"
+              - img
+    - generic [ref=e14]:
+      - generic [ref=e15]:
+        - generic [ref=e16]: flagship
+        - generic [ref=e17]:
+          - heading "Agregore" [level=2] [ref=e18]
+          - paragraph [ref=e19]: Agregore project
+          - generic [ref=e20]:
+            - paragraph [ref=e21]: "Type: undefined"
+            - paragraph [ref=e22]: "Epics: 0 total — 0 active, 0 completed, 0 backlog"
+        - button "View epics" [ref=e25] [cursor=pointer]
+      - generic [ref=e26]:
+        - generic [ref=e27]: flagship
+        - generic [ref=e28]:
+          - heading "Backstage" [level=2] [ref=e29]
+          - paragraph [ref=e30]: Backstage project lorem ipsum dolor sit amet
+          - generic [ref=e31]:
+            - paragraph [ref=e32]: "Type: undefined"
+            - paragraph [ref=e33]: "Epics: 20 total — 1 active, 2 completed, 17 backlog"
+          - generic [ref=e34]:
+            - generic [ref=e35] [cursor=pointer]: dogfooding
+            - generic [ref=e36] [cursor=pointer]: dual-layer-global
+            - generic [ref=e37] [cursor=pointer]: dual-layer-project
+            - generic [ref=e38] [cursor=pointer]: global-vs-project
+            - generic [ref=e39] [cursor=pointer]: mermaid-sync
+            - generic [ref=e40] [cursor=pointer]: pre-merge-tasks
+            - generic [ref=e41] [cursor=pointer]: skill-workflow
+            - generic [ref=e42] [cursor=pointer]: templates
+            - generic [ref=e43] [cursor=pointer]: version-from-branch
+            - generic [ref=e44] [cursor=pointer]: version-sync
+            - generic [ref=e45] [cursor=pointer]: version-tracking
+        - button "View epics" [ref=e48] [cursor=pointer]
+      - generic [ref=e49]:
+        - generic [ref=e50]: flagship
+        - generic [ref=e51]:
+          - heading "Studio" [level=2] [ref=e52]
+          - paragraph [ref=e53]: Studio project
+          - generic [ref=e54]:
+            - paragraph [ref=e55]: "Type: undefined"
+            - paragraph [ref=e56]: "Epics: 2 total — 2 active, 0 completed, 0 backlog"
+        - button "View epics" [ref=e59] [cursor=pointer]
+      - generic [ref=e60]:
+        - generic [ref=e61]: experimental
+        - generic [ref=e62]:
+          - heading "Better" [level=2] [ref=e63]
+          - paragraph [ref=e64]: Better project
+          - generic [ref=e65]:
+            - paragraph [ref=e66]: "Type: undefined"
+            - paragraph [ref=e67]: "Epics: 0 total — 0 active, 0 completed, 0 backlog"
+        - button "View epics" [ref=e70] [cursor=pointer]
+      - generic [ref=e71]:
+        - generic [ref=e72]: experimental
+        - generic [ref=e73]:
+          - heading "Billable Hours" [level=2] [ref=e74]
+          - paragraph [ref=e75]: Billable Hours project
+          - generic [ref=e76]:
+            - paragraph [ref=e77]: "Type: undefined"
+            - paragraph [ref=e78]: "Epics: 0 total — 0 active, 0 completed, 0 backlog"
+        - button "View epics" [ref=e81] [cursor=pointer]
+      - generic [ref=e82]:
+        - generic [ref=e83]: experimental
+        - generic [ref=e84]:
+          - heading "Discrepancy" [level=2] [ref=e85]
+          - paragraph [ref=e86]: Discrepancy project
+          - generic [ref=e87]:
+            - paragraph [ref=e88]: "Type: undefined"
+            - paragraph [ref=e89]: "Epics: 0 total — 0 active, 0 completed, 0 backlog"
+        - button "View epics" [ref=e92] [cursor=pointer]
+      - generic [ref=e93]:
+        - generic [ref=e94]: experimental
+        - generic [ref=e95]:
+          - heading "Fitness" [level=2] [ref=e96]
+          - paragraph [ref=e97]: Fitness project
+          - generic [ref=e98]:
+            - paragraph [ref=e99]: "Type: undefined"
+            - paragraph [ref=e100]: "Epics: 0 total — 0 active, 0 completed, 0 backlog"
+        - button "View epics" [ref=e103] [cursor=pointer]
+      - generic [ref=e104]:
+        - generic [ref=e105]: experimental
+        - generic [ref=e106]:
+          - heading "Librarian" [level=2] [ref=e107]
+          - paragraph [ref=e108]: Librarian project
+          - generic [ref=e109]:
+            - paragraph [ref=e110]: "Type: undefined"
+            - paragraph [ref=e111]: "Epics: 0 total — 0 active, 0 completed, 0 backlog"
+          - generic [ref=e112]:
+            - generic [ref=e113] [cursor=pointer]: arch-workflow
+            - generic [ref=e114] [cursor=pointer]: byob-setup
+            - generic [ref=e115] [cursor=pointer]: gitignore-local
+            - generic [ref=e116] [cursor=pointer]: versioning
+        - button "View epics" [ref=e119] [cursor=pointer]
+      - generic [ref=e120]:
+        - generic [ref=e121]: experimental
+        - generic [ref=e122]:
+          - heading "Nonlinear" [level=2] [ref=e123]
+          - paragraph [ref=e124]: Nonlinear project
+          - generic [ref=e125]:
+            - paragraph [ref=e126]: "Type: undefined"
+            - paragraph [ref=e127]: "Epics: 0 total — 0 active, 0 completed, 0 backlog"
+        - button "View epics" [ref=e130] [cursor=pointer]
+      - generic [ref=e131]:
+        - generic [ref=e132]: experimental
+        - generic [ref=e133]:
+          - heading "Personal" [level=2] [ref=e134]
+          - paragraph [ref=e135]: Personal project
+          - generic [ref=e136]:
+            - paragraph [ref=e137]: "Type: undefined"
+            - paragraph [ref=e138]: "Epics: 28 total — 1 active, 0 completed, 27 backlog"
+          - generic [ref=e139]:
+            - generic [ref=e140] [cursor=pointer]: active-epics
+            - generic [ref=e141] [cursor=pointer]: backstage-structure
+            - generic [ref=e142] [cursor=pointer]: broken-links
+            - generic [ref=e143] [cursor=pointer]: context-files
+            - generic [ref=e144] [cursor=pointer]: design-dev-workflow
+            - generic [ref=e145] [cursor=pointer]: epic-branch
+            - generic [ref=e146] [cursor=pointer]: location-aware
+            - generic [ref=e147] [cursor=pointer]: memory-files
+            - generic [ref=e148] [cursor=pointer]: no-epic-branches
+            - generic [ref=e149] [cursor=pointer]: parallel-epics
+            - generic [ref=e150] [cursor=pointer]: parity-freshness
+            - generic [ref=e151] [cursor=pointer]: sync-automation
+        - button "View epics" [ref=e154] [cursor=pointer]
+      - generic [ref=e155]:
+        - generic [ref=e156]: backlog
+        - generic [ref=e157]:
+          - heading "I Ching" [level=2] [ref=e158]
+          - paragraph [ref=e159]: I Ching project
+          - generic [ref=e160]:
+            - paragraph [ref=e161]: "Type: undefined"
+            - paragraph [ref=e162]: "Epics: 0 total — 0 active, 0 completed, 0 backlog"
+        - button "View epics" [ref=e165] [cursor=pointer]
+      - generic [ref=e166]:
+        - generic [ref=e167]: backlog
+        - generic [ref=e168]:
+          - heading "Memory" [level=2] [ref=e169]
+          - paragraph [ref=e170]: Memory project
+          - generic [ref=e171]:
+            - paragraph [ref=e172]: "Type: undefined"
+            - paragraph [ref=e173]: "Epics: 0 total — 0 active, 0 completed, 0 backlog"
+        - button "View epics" [ref=e176] [cursor=pointer]
+      - generic [ref=e177]:
+        - generic [ref=e178]: backlog
+        - generic [ref=e179]:
+          - heading "Skills" [level=2] [ref=e180]
+          - paragraph [ref=e181]: Skills project
+          - generic [ref=e182]:
+            - paragraph [ref=e183]: "Type: undefined"
+            - paragraph [ref=e184]: "Epics: 0 total — 0 active, 0 completed, 0 backlog"
+          - generic [ref=e185]:
+            - generic [ref=e186] [cursor=pointer]: better-schema
+            - generic [ref=e187] [cursor=pointer]: openclaw-skills-location
+            - generic [ref=e188] [cursor=pointer]: readme-tables
+            - generic [ref=e189] [cursor=pointer]: skill-diagrams
+            - generic [ref=e190] [cursor=pointer]: skill-symlinks
+            - generic [ref=e191] [cursor=pointer]: skill-symlinks
+        - button "View epics" [ref=e194] [cursor=pointer]
+      - generic [ref=e195]:
+        - generic [ref=e196]: template
+        - generic [ref=e197]:
+          - heading "Template" [level=2] [ref=e198]
+          - paragraph [ref=e199]: Template project containing epic templates
+          - generic [ref=e200]:
+            - paragraph [ref=e201]: "Type: undefined"
+            - paragraph [ref=e202]: "Epics: 0 total — 0 active, 0 completed, 0 backlog"
+        - button "View epics" [ref=e205] [cursor=pointer]
+  - button "Reload page" [ref=e206] [cursor=pointer]:
+    - img
+  - alert [ref=e207]
+```
