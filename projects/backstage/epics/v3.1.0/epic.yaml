@@ -7,21 +7,38 @@ created: 2026-03-09
 started: 2026-03-09
 completed: null
 tasks:
-  - "[x] Compact values/ (brevity applied to itself)"
-  - "[x] Create squad structure (7 squads)"
-  - "[x] Create agent placeholders (21 agents)"
-  - "[x] Flatten agent hierarchy (squads/<squad>/agents/ → agents/<squad>/)"
-  - "[x] Document governance architecture"
-  - "[x] Define values injection model (global → squad → agent)"
-  - "[x] Design anti-drift monitoring system"
-  - "[x] Clarify global vs squad-specific values"
-  - "[ ] Inventory values per scope (global, squad, agent)"
-  - "[ ] Personalize agents (IDENTITY.md refinement)"
-  - "[ ] Surface values on app (UI visualization)"
-  - "[ ] Surface squads & agents on app (UI navigation)"
-  - "[ ] Agent skills (per ai-agents-domains.md)"
-  - "[ ] Agent MCP (per ai-agents-domains.md)"
-  - "[ ] Agent librarian searches (per ai-agents-domains.md)"
-  - "[ ] Matrix DM per agent (1-1 communication)"
-  - "[ ] Matrix squad groups (squad-wide rooms)"
+  - text: "Compact values/ (brevity applied to itself)"
+    checked: true
+  - text: "Create squad structure (7 squads)"
+    checked: true
+  - text: "Create agent placeholders (21 agents)"
+    checked: true
+  - text: "Flatten agent hierarchy (squads/<squad>/agents/ → agents/<squad>/)"
+    checked: true
+  - text: "Document governance architecture"
+    checked: true
+  - text: "Define values injection model (global → squad → agent)"
+    checked: true
+  - text: "Design anti-drift monitoring system"
+    checked: true
+  - text: "Clarify global vs squad-specific values"
+    checked: true
+  - text: "Inventory values per scope (global, squad, agent)"
+    checked: false
+  - text: "Personalize agents (IDENTITY.md refinement)"
+    checked: false
+  - text: "Surface values on app (UI visualization)"
+    checked: false
+  - text: "Surface squads & agents on app (UI navigation)"
+    checked: false
+  - text: "Agent skills (per ai-agents-domains.md)"
+    checked: false
+  - text: "Agent MCP (per ai-agents-domains.md)"
+    checked: false
+  - text: "Agent librarian searches (per ai-agents-domains.md)"
+    checked: false
+  - text: "Matrix DM per agent (1-1 communication)"
+    checked: false
+  - text: "Matrix squad groups (squad-wide rooms)"
+    checked: false
 ---
