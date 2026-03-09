@@ -1,0 +1,16 @@
+name: Port Stability
+description: Verify services running on expected ports with no drift
+category: infrastructure
+executable: checks/port-stability.sh
+checkpoints:
+  - pre-deploy
+  - daily-health
+  - post-reboot
+exit_codes:
+  0: All ports stable
+  1: Port moved or service down
+created: 2026-03-09
+related:
+  - connections/ports.md
+  - connections/backstage.md
+  - connections/tailscale.md
