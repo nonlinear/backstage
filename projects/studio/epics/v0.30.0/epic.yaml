@@ -1,0 +1,11 @@
+---
+version: v0.30.0
+name: "Execution decision value"
+goal: "Protocol for deciding when to execute vs ask permission"
+status: backlog
+type: "minor"
+created: null
+started: null
+completed: null
+tasks: []
+---
