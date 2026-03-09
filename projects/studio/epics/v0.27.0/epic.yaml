@@ -1,0 +1,11 @@
+---
+version: v0.27.0
+name: "Web Search Infrastructure"
+goal: "Building a reliable websearch for research (agents need this)"
+status: backlog
+type: "minor"
+created: null
+started: null
+completed: null
+tasks: []
+---
