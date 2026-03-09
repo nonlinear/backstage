@@ -1,0 +1,11 @@
+---
+version: v0.24.0
+name: "Mastodon migration"
+goal: "Move from Twitter/X to Mastodon (self-hosted or federated instance)"
+status: backlog
+type: "minor"
+created: null
+started: null
+completed: null
+tasks: []
+---
