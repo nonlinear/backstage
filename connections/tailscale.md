@@ -14,10 +14,10 @@
 
 **CRITICAL RULE:** Backstage deve estar SEMPRE online no Tailscale, não pode cair!
 
-- **Local:** `http://localhost:3002`
-- **Tailscale (direto):** `https://studio.adal-rigel.ts.net:3002`
-- **Tailscale (root path):** `https://studio.adal-rigel.ts.net/backstage`
-- **Status:** Rodando via Next.js dev server + Tailscale serve auto-start
+- **Local:** `http://localhost:3004`
+- **Tailscale (HTTPS):** `https://studio.adal-rigel.ts.net:3004`
+- **Status:** Rodando via PM2 (production build) + Tailscale serve auto-start
+- **Port Note:** 3004 (NOT 3002 - port conflicts)
 
 ---
 
@@ -26,7 +26,7 @@
 | Service | Port | Status | Local URL | Tailscale URL |
 |---------|------|--------|-----------|---------------|
 | **OpenClaw Control UI** | 18789 | ✅ Running | http://localhost:18789 | https://studio.adal-rigel.ts.net |
-| **Uptime Kuma** (monitoring) | 3010 | ✅ Running | http://localhost:3010 | https://studio.adal-rigel.ts.net:3010 |
+| **Uptime Kuma** (monitoring) | 3011 | ✅ Running | http://localhost:3011 | https://studio.adal-rigel.ts.net:3011 |
 | **Mattermost** (chat) | 8065 | ✅ Running | http://localhost:8065 | https://studio.adal-rigel.ts.net:8065 |
 | **Matrix** (Synapse) | 8008 | ✅ Running | http://localhost:8008 | https://studio.adal-rigel.ts.net:8008 |
 | **Backstage (Next.js)** | 3004 | ✅ Running | http://localhost:3004 | https://studio.adal-rigel.ts.net:3004 |
@@ -35,6 +35,10 @@
 | **SearXNG** (search) | 8889 | ✅ Running | http://localhost:8889 | https://studio.adal-rigel.ts.net:8889 |
 | **Zulip** (chat) | 8090 | ✅ Running | http://localhost:8090 | https://studio.adal-rigel.ts.net:8090 |
 | **VNC/Screen Sharing** | 5900 | ⚠️ Not enabled | — | vnc://studio.adal-rigel.ts.net:5900 |
+
+**Port Notes:** 
+- **All ports:** Same locally and via Tailscale (no confusing mappings)
+- **Backstage:** Port 3004 (NOT 3002 due to persistent conflicts)
 
 **Note:** 
 - OpenClaw served as HTTPS root (no port in Tailscale URL)
@@ -121,7 +125,7 @@ docker restart <container-name>
 - `connections/docker.md` - Mac container management
 - `connections/tailscale.md` - Tailscale configuration
 
-| **Backstage UI** | 3002 | http://localhost:3002 | https://studio.adal-rigel.ts.net:3002 OR https://studio.adal-rigel.ts.net/backstage |
+| **Backstage UI** | 3004 | http://localhost:3004 | https://studio.adal-rigel.ts.net:3004 |
 | **Zulip** | 8090 | http://localhost:8090 | https://studio.adal-rigel.ts.net:8090 |
 
 ---
@@ -138,8 +142,9 @@ docker restart <container-name>
 3. Expõe todos os serviços automaticamente
 
 **Serviços expostos:**
-- OpenClaw (HTTPS root + /backstage)
-- Backstage UI (porta 3000)
+- OpenClaw (HTTPS root)
+- Backstage UI (porta 3004, HTTPS)
+- Uptime Kuma (porta 3011, HTTPS)
 - Kavita (porta 5007)
 - Komga (porta 5008)
 - OpenProject (porta 8087)
@@ -167,4 +172,4 @@ launchctl load ~/Library/LaunchAgents/com.nonlinear.tailscale-serve.plist
 
 ---
 
-**Updated:** 2026-03-01 22:05 EST
+**Updated:** 2026-03-09 09:26 EDT
