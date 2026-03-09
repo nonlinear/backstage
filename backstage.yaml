@@ -17,6 +17,16 @@
 #       This is tolerated but should be renamed eventually (e.g., "project-template").
 
 # ============================================================================
+# VALUES - Global policies (auto-inject to ALL agents)
+# ============================================================================
+values:
+  - brevity
+  - parity-contract
+  - auditability
+  - research
+  - honesty
+
+# ============================================================================
 # TIERS - Project priority/maturity levels
 # ============================================================================
 tiers:
@@ -63,7 +73,6 @@ squads:
     label: Operations
     description: Admin, legal, secretarial
     order: 4
-    order: 2
 
   - name: backlog
     label: Backlog
