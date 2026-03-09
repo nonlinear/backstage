@@ -1,11 +1,41 @@
 ---
 version: v0.10.0
-name: 
-goal: "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti."
+name: "Pi-hole, advanced"
+goal: "Utilize pi-hole for more stuff"
 status: backlog
 type: "minor"
 created: null
 started: null
 completed: null
-tasks: []
+tasks:
+  - text: "Docker container on NAS (192.168.1.152)"
+    checked: true
+  - text: "Port 8053 (web UI) + 53 (DNS)"
+    checked: true
+  - text: "6 aggressive blocklists (300k+ domains)"
+    checked: true
+  - text: "Router DNS configured (Verizon FiOS)"
+    checked: true
+  - text: "Primary DNS: 192.168.1.152 (Pi-hole)"
+    checked: true
+  - text: "Secondary DNS: 1.1.1.1 (Cloudflare fallback)"
+    checked: true
+  - text: "All devices on network = auto-blocked ads"
+    checked: true
+  - text: "Add regex filters (telemetry, tracking, analytics, doubleclick)"
+    checked: true
+  - text: "Add IoT blocklists (SmartTV, extended tracking)"
+    checked: true
+  - text: "Configure Tailscale Split DNS (ts.net → 192.168.1.152)"
+    checked: true
+  - text: "Local DNS records (nas.local, pihole.local)"
+    checked: false
+  - text: "CNAME aliases (jellyfin.home, paperless.home)"
+    checked: false
+  - text: "Query Log monitoring (analytics)"
+    checked: false
+  - text: "Conditional Forwarding (device names)"
+    checked: false
+  - text: "DHCP server (replace router DHCP - advanced)"
+    checked: false
 ---
