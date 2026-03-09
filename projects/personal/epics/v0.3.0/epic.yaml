@@ -1,10 +1,30 @@
 ---
-name: "null"
-goal: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+name: "Moodboard"
+goal: "Tagging inspiration images for retrieval"
 status: backlog
 type: "minor"
 created: null
 started: null
 completed: null
-tasks: []
+tasks:
+  - text: "Install CLIP model (Hugging Face)"
+    checked: false
+  - text: "Create index schema (FAISS + SQLite)"
+    checked: false
+  - text: "Build incremental indexer script"
+    checked: false
+  - text: "Run initial index (overnight)"
+    checked: false
+  - text: "Text search function"
+    checked: false
+  - text: "Image search function (similarity)"
+    checked: false
+  - text: "CLI interface (inspiration-search)"
+    checked: false
+  - text: "Connect to gallery renderer"
+    checked: false
+  - text: "Test end-to-end workflow"
+    checked: false
+  - text: "Error handling (missing images, bad queries)"
+    checked: false
 ---
