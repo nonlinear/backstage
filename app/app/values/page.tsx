@@ -31,6 +31,13 @@ const OLD_sections = [
   { value: "values", label: "Values", count: 20 },
 ]
 
+interface ValueUsage {
+  global: boolean
+  projects: string[]
+  squads: string[]
+  agents: string[]
+}
+
 interface Value {
   name: string
   title: string
@@ -38,6 +45,7 @@ interface Value {
   type: 'deterministic' | 'probabilistic'
   description: string
   content?: string
+  usage?: ValueUsage
 }
 
 export default function ValuesPage() {
@@ -154,6 +162,7 @@ export default function ValuesPage() {
                 type={value.type}
                 description={value.description}
                 content={value.content}
+                usage={value.usage}
                 isExpanded={expandedValue === value.name}
                 onClick={() => handleValueClick(value.name)}
               />
