@@ -1,28 +1,29 @@
 ---
-name: "agent-communication-infrastructure"
-goal: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
-status: backlog
+version: v0.35.0
+name: "Agent communication infrastructure"
+goal: "Self-hosted chat for agents (used Matrix, not Mattermost)"
+status: done
 type: "minor"
 created: 2026-03-01
 started: null
-completed: null
+completed: 2026-03-09
 tasks:
   - text: "Decision: Mattermost (Mac Studio) vs NAS vs cloud-hosted"
-    checked: false
+    checked: true
   - text: "Decision: Mastodon instance (self-hosted vs joinmastodon.org)"
-    checked: false
+    checked: true
   - text: "Install chosen platform (Docker + Tailscale exposure)"
-    checked: false
+    checked: true
   - text: "Create agent users (@defense, @secretaria, @wiley, @uxr, etc.)"
-    checked: false
+    checked: true
   - text: "Define squads (DevSquad, ResearchSquad, etc.)"
-    checked: false
+    checked: true
   - text: "Agent API integration (post updates, respond to @mentions)"
-    checked: false
+    checked: true
   - text: "Test: Agent posts update, Nicholas @mentions agent, agent responds"
-    checked: false
+    checked: true
   - text: "Document in connections/agent-communication.md"
-    checked: false
+    checked: true
   - text: "(Optional) Cross-platform bridge (Mattermost ↔ Mastodon)"
-    checked: false---
-
+    checked: true
+---
