@@ -1,0 +1,26 @@
+---
+name: "High auditability"
+goal: "Track sources used, create reports"
+status: backlog
+type: "minor"
+created: 2026-03-10
+started: null
+completed: null
+tasks:
+  - text: "Design audit.jsonl schema (timestamp, requester, query, results)"
+    checked: false
+  - text: "Log every librarian query (append-only)"
+    checked: false
+  - text: "Track which sources were cited vs ignored"
+    checked: false
+  - text: "CLI: librarian audit --requester AGENT (who used what)"
+    checked: false
+  - text: "CLI: librarian audit --source TITLE (where was book cited)"
+    checked: false
+  - text: "CLI: librarian audit --unused (seen but not cited)"
+    checked: false
+  - text: "Generate audit reports (weekly/monthly summaries)"
+    checked: false
+  - text: "Detect bias patterns (agent ignores certain topics)"
+    checked: false
+---
