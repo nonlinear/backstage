@@ -1,0 +1,22 @@
+---
+name: "Multi-topic search"
+goal: "Search multiple topics in parallel, merge and rank results across epistemic domains"
+status: backlog
+type: "minor"
+created: 2026-03-10
+started: null
+completed: null
+tasks:
+  - text: "Implement parallel topic scan (ThreadPoolExecutor)"
+    checked: false
+  - text: "Cross-topic result merging (preserve topic boundaries)"
+    checked: false
+  - text: "Cross-topic reranking (score normalization)"
+    checked: false
+  - text: "Return format: grouped by topic + cross-topic top-k"
+    checked: false
+  - text: "Benchmark: single-topic vs multi-topic latency"
+    checked: false
+  - text: "Update MCP tool schema (topics: list[str])"
+    checked: false
+---
