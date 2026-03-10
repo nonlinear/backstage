@@ -145,9 +145,23 @@ export function EpicCard({
                         {taskGroup.group}
                       </h4>
                       {taskGroup.items.map((task, taskIdx) => {
-                        const taskText = typeof task === 'object' && task !== null && 'text' in task 
-                          ? String(task.text) 
-                          : String(task)
+                        console.log(`Rendering task ${taskIdx}:`, typeof task, task)
+                        console.log(`  task.text type:`, typeof task.text, task.text)
+                        
+                        // Defensive: extract text from any structure
+                        let displayText = '[NO TEXT]'
+                        if (task && typeof task === 'object') {
+                          if ('text' in task) {
+                            displayText = typeof task.text === 'string' ? task.text : JSON.stringify(task.text)
+                          } else if ('name' in task) {
+                            displayText = String((task as any).name)
+                          } else {
+                            displayText = JSON.stringify(task)
+                          }
+                        } else {
+                          displayText = String(task)
+                        }
+                        
                         return (
                           <div key={taskIdx} className="flex items-start gap-2 ml-4">
                             <Checkbox 
@@ -156,7 +170,7 @@ export function EpicCard({
                               className="mt-0.5"
                             />
                             <label className="text-sm leading-tight">
-                              {taskText}
+                              {displayText}
                             </label>
                           </div>
                         )
