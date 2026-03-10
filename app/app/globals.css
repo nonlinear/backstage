@@ -193,3 +193,8 @@ sup {
   margin-left: 0.5rem;
   font-weight: normal;
 }
+
+/* Done epics: opacity 50% unless current */
+.done:not(.current) {
+  opacity: 0.5;
+}
