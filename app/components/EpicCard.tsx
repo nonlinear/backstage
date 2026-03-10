@@ -117,26 +117,6 @@ export function EpicCard({
       </CardHeader>
       
       <CardContent>
-        {/* DEBUG logging */}
-        {(() => {
-          console.log('=== EPIC CARD DEBUG ===')
-          console.log('Epic version:', epic.version)
-          console.log('Tasks length:', tasks.length)
-          console.log('Tasks[0] type:', typeof tasks[0])
-          console.log('Tasks[0] raw:', tasks[0])
-          if (tasks[0] && 'group' in tasks[0]) {
-            console.log('Tasks[0].group:', (tasks[0] as any).group)
-            console.log('Tasks[0].items:', (tasks[0] as any).items)
-            if (Array.isArray((tasks[0] as any).items) && (tasks[0] as any).items[0]) {
-              console.log('First item:', (tasks[0] as any).items[0])
-              console.log('First item.text:', (tasks[0] as any).items[0].text)
-              console.log('First item.text type:', typeof (tasks[0] as any).items[0].text)
-            }
-          }
-          console.log('====================')
-          return null
-        })()}
-        
         {/* Tabs: Tasks and Notes */}
         <Tabs value={activeTab} onValueChange={(v) => onTabChange(v as "tasks" | "notes")} className="w-full">
           <TabsList className="justify-start pt-1">
@@ -165,32 +145,35 @@ export function EpicCard({
                         {taskGroup.group}
                       </h4>
                       {taskGroup.items.map((task, taskIdx) => {
-                        console.log(`Rendering task ${taskIdx}:`, typeof task, task)
-                        console.log(`  task.text type:`, typeof task.text, task.text)
+                        // ULTRA-AGGRESSIVE: stringify everything
+                        const taskObj = task && typeof task === 'object' ? task : { text: String(task), checked: false }
+                        let textValue = ''
                         
-                        // Defensive: extract text from any structure
-                        let displayText = '[NO TEXT]'
-                        if (task && typeof task === 'object') {
-                          if ('text' in task) {
-                            displayText = typeof task.text === 'string' ? task.text : JSON.stringify(task.text)
-                          } else if ('name' in task) {
-                            displayText = String((task as any).name)
-                          } else {
-                            displayText = JSON.stringify(task)
-                          }
+                        // Try every possible extraction
+                        if ('text' in taskObj) {
+                          textValue = typeof taskObj.text === 'string' 
+                            ? taskObj.text 
+                            : JSON.stringify(taskObj.text)
+                        } else if ('name' in taskObj) {
+                          textValue = String(taskObj.name)
                         } else {
-                          displayText = String(task)
+                          textValue = JSON.stringify(taskObj)
+                        }
+                        
+                        // Final fallback
+                        if (!textValue || textValue === '[object Object]') {
+                          textValue = `[DEBUG: ${JSON.stringify(taskObj)}]`
                         }
                         
                         return (
                           <div key={taskIdx} className="flex items-start gap-2 ml-4">
                             <Checkbox 
-                              checked={typeof task === 'object' && 'checked' in task ? task.checked : false}
+                              checked={Boolean(taskObj.checked)}
                               disabled
                               className="mt-0.5"
                             />
                             <label className="text-sm leading-tight">
-                              {displayText}
+                              {textValue}
                             </label>
                           </div>
                         )
