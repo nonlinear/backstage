@@ -131,7 +131,7 @@ export function EpicCard({
           <TabsContent value="tasks" className="space-y-2">{tasks.length > 0 ? (
               tasks.map((item, idx) => {
                 // Task group
-                if ('group' in item) {
+                if ('group' in item && 'items' in item) {
                   return (
                     <div key={idx} className="space-y-2">
                       <h4 className="text-sm font-semibold text-muted-foreground mt-2">
@@ -153,18 +153,22 @@ export function EpicCard({
                   )
                 }
                 // Flat task
-                return (
-                  <div key={idx} className="flex items-start gap-2">
-                    <Checkbox 
-                      checked={item.checked}
-                      disabled
-                      className="mt-0.5"
-                    />
-                    <label className="text-sm leading-tight">
-                      {item.text}
-                    </label>
-                  </div>
-                )
+                if ('text' in item && 'checked' in item) {
+                  return (
+                    <div key={idx} className="flex items-start gap-2">
+                      <Checkbox 
+                        checked={item.checked}
+                        disabled
+                        className="mt-0.5"
+                      />
+                      <label className="text-sm leading-tight">
+                        {item.text}
+                      </label>
+                    </div>
+                  )
+                }
+                // Fallback (should never happen)
+                return null
               })
             ) : (
               <p className="text-xs text-muted-foreground italic">No tasks</p>
