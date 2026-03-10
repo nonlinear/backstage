@@ -39,7 +39,7 @@ interface ProjectPageClientProps {
   projectEpicCount: number
   activeCount: number
   backlogCount: number
-  publishedCount: number
+  doneCount: number
   allProjectsEpicCounts: Record<string, number>
   epics: Epic[]
 }
@@ -55,7 +55,7 @@ export function ProjectPageClient({
   projectEpicCount,
   activeCount,
   backlogCount,
-  publishedCount,
+  doneCount,
   allProjectsEpicCounts,
   epics 
 }: ProjectPageClientProps) {
@@ -153,8 +153,8 @@ export function ProjectPageClient({
   const currentSection = sections.find(s => s.value === section)
   const totalEpics = projects.reduce((sum, p) => sum + p.epicCount, 0)
   
-  // Sort epics by status order (active → backlog → published), then by semver ASC
-  const statusOrder = { active: 1, backlog: 2, published: 3 }
+  // Sort epics by status order (active → backlog → done), then by semver ASC
+  const statusOrder = { active: 1, backlog: 2, done: 3 }
   const sortedEpics = [...epics].sort((a, b) => {
     const statusDiff = (statusOrder[a.status as keyof typeof statusOrder] || 99) - 
                        (statusOrder[b.status as keyof typeof statusOrder] || 99)
@@ -232,7 +232,7 @@ export function ProjectPageClient({
             projectType={projectType}
             activeCount={activeCount}
             backlogCount={backlogCount}
-            publishedCount={publishedCount}
+            doneCount={doneCount}
             checks={projectChecks}
           />
           

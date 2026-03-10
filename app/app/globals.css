@@ -198,3 +198,8 @@ sup {
 .done:not(.current) {
   opacity: 0.5;
 }
+
+/* Active epics: 2px border */
+.active {
+  border: 2px solid hsl(var(--border));
+}

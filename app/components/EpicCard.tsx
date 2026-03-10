@@ -94,7 +94,7 @@ export function EpicCard({
     <>
       <div id={version} className="scroll-mt-4" />
       <Card 
-        className={`relative flex-shrink-0 transition-all duration-300 ${isActiveEpic ? 'w-[500px] current' : 'w-[300px]'} ${status === 'done' ? 'done' : ''} h-full overflow-y-auto`}
+        className={`relative flex-shrink-0 transition-all duration-300 ${isActiveEpic ? 'w-[500px] current' : 'w-[300px]'} ${status === 'done' ? 'done' : ''} ${status === 'active' ? 'active' : ''} h-full overflow-y-auto`}
       >
       {/* Status badge top-right (absolute) */}
       <Badge variant="outline" className="absolute top-4 right-4 text-xs capitalize">
