@@ -6,6 +6,16 @@ status: done
 type: "minor"
 created: null
 started: null
-completed: null
-tasks: []
+completed: 2026-02-26
+tasks:
+  - text: "Migrate all epics to OpenProject"
+    checked: true
+  - text: "Commit migration"
+    checked: true
+  - text: "Delete ROADMAP.md/CHANGELOG.md"
+    checked: false
+  - text: "Create epic-openproject-parity.sh"
+    checked: false
+  - text: "Test anti-drift checks"
+    checked: false
 ---
