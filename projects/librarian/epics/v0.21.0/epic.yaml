@@ -1,35 +1,35 @@
 ---
 name: "Reader comparison"
 goal: "Find reader with deep links OR search URL params (remove folder-friendly if reader auto-loads)"
-status: active
+status: done
 type: "minor"
 created: null
 started: 2026-03-10
-completed: null
+completed: 2026-03-10
 tasks:
   # Research: Deep Link Support
   - text: "Test Komga: Does search accept URL params?"
-    checked: false
+    checked: true
   - text: "Test Calibre-web: Search URL structure"
-    checked: false
+    checked: true
   - text: "Test Kavita: Confirm no search params (known limitation)"
     checked: true
   - text: "Document findings in comparison table"
-    checked: false
+    checked: true
   
   # Automation Viability
   - text: "If search URL works: Can we auto-open book from librarian results?"
-    checked: false
+    checked: true
   - text: "If deep link works: Direct chapter/page navigation possible?"
-    checked: false
+    checked: true
   - text: "Folder-friendly still needed? (if reader auto-loads on boot)"
-    checked: false
+    checked: true
   
   # Final Decision
   - text: "Pick winner based on: search URL > full-text search > folder-friendly"
-    checked: false
+    checked: true
   - text: "Test migration (if switching from Kavita)"
-    checked: false
+    checked: true
   - text: "Update connections/reader.md with final choice"
-    checked: false
+    checked: true
 ---
