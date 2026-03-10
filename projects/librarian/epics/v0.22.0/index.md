@@ -171,6 +171,154 @@ jq 'select(.requester == "agent:marketing" and .results[] | select(.title == "De
 
 ---
 
+## Bias Detection Patterns
+
+**What constitutes bias:**
+
+### 1. Topic Avoidance
+```bash
+# Agent never queries certain topics (despite relevance)
+jq -r '[.requester, .topics_scanned[]] | @tsv' audit.jsonl | \
+  grep agent:marketing | cut -f2 | sort | uniq -c
+
+# If anarchy appears 0 times but finance 50 times → topic bias
+```
+
+**Example:**
+- Marketing agent: 47 queries, 0 anarchist sources consulted
+- Pattern: Avoids anti-capitalist perspectives
+- **Red flag:** Proposals lack critical economic analysis
+
+---
+
+### 2. Selective Citation (Confirmation Bias)
+```bash
+# Agent queries source but never cites it
+jq 'select(.results[] | select(.cited == false)) | {req: .requester, title: .results[].title}' audit.jsonl | \
+  jq -s 'group_by(.req) | map({agent: .[0].req, ignored: map(.title) | unique})'
+```
+
+**Example:**
+- Agent queries "Debt: First 5000 Years" (5 times)
+- Never cites it (cited: false on all)
+- Pattern: Saw source, rejected without engagement
+- **Red flag:** Ignores inconvenient sources
+
+---
+
+### 3. Author Preference Bias
+```bash
+# Agent disproportionately cites certain authors
+jq 'select(.results[] | select(.cited == true)) | {req: .requester, author: .results[].author}' audit.jsonl | \
+  jq -s 'group_by(.req) | map({agent: .[0].req, authors: (map(.author) | group_by(.) | map({name: .[0], count: length}) | sort_by(.count) | reverse)})'
+```
+
+**Example:**
+- Legal agent: 80% citations from Graeber, 5% from others
+- Pattern: Over-reliance on single perspective
+- **Red flag:** Narrow epistemic base
+
+---
+
+### 4. Recency Bias
+```bash
+# Agent prefers newer sources over canonical older ones
+jq 'select(.results[] | select(.cited == true)) | {title: .results[].title, year: .results[].year}' audit.jsonl | \
+  jq -s 'group_by(.year) | map({year: .[0].year, count: length})'
+```
+
+**Example:**
+- Agent cites books from 2020+ (90% of citations)
+- Ignores foundational texts from 1960-2000
+- Pattern: Novelty over authority
+- **Red flag:** Missing historical context
+
+---
+
+### 5. Complexity Avoidance
+```bash
+# Agent ignores high-score matches if they're from dense/technical sources
+jq 'select(.results[] | select(.score > 0.85 and .cited == false)) | {req: .requester, title: .results[].title, score: .results[].score}' audit.jsonl
+```
+
+**Example:**
+- Query returns "Capital Vol. 1" (score: 0.95)
+- Agent cites "Economics for Dummies" (score: 0.65)
+- Pattern: Avoids difficult sources
+- **Red flag:** Superficial research
+
+---
+
+### 6. Time-of-Day Patterns (Fatigue Bias)
+```bash
+# Agent cites fewer sources late in session
+jq -r '[.timestamp, (.results[] | select(.cited == true) | 1)] | @tsv' audit.jsonl | \
+  awk '{print substr($1, 12, 2)}' | sort | uniq -c
+```
+
+**Example:**
+- Morning queries (8am-12pm): 3.2 sources cited/query
+- Evening queries (6pm-10pm): 1.1 sources cited/query
+- Pattern: Quality degrades over time
+- **Red flag:** Agent needs rest/reload
+
+---
+
+### 7. Context Absence Bias
+```bash
+# Agent queries without context (fishing for confirmation?)
+jq 'select(.context == null or .context == "") | {req: .requester, query: .query}' audit.jsonl | \
+  jq -s 'group_by(.req) | map({agent: .[0].req, contextless: length})'
+```
+
+**Example:**
+- Agent makes 15 queries without `context` field
+- Pattern: Ad-hoc queries, not tied to epic/decision
+- **Red flag:** Undirected research, fishing for quotes
+
+---
+
+## Reporting Bias (Automated Alerts)
+
+**Weekly bias report:**
+```
+Librarian Bias Detection Report (2026-03-03 → 2026-03-10)
+
+🚨 RED FLAGS:
+
+1. agent:marketing - Topic avoidance (anarchy: 0%)
+   - 47 queries, 0 anarchist sources consulted
+   - Recommend: Explicit prompt to check anti-capitalist perspectives
+
+2. agent:legal - Author preference (Graeber: 80%)
+   - Over-reliance on single author
+   - Recommend: Diversify citations
+
+3. agent:defense - Complexity avoidance
+   - High-score sources ignored (avg score ignored: 0.88)
+   - Recommend: Review query methodology
+
+✅ HEALTHY PATTERNS:
+
+- user:nicholas - Balanced topic coverage (all topics >5%)
+- agent:uxr - Diverse author citations (no author >30%)
+```
+
+---
+
+**Automated alerts (Telegram):**
+```
+🚨 Bias Alert: agent:marketing
+
+Query: "debt vs equity financing"
+Result: "Debt: First 5000 Years" (score 0.92, NOT cited)
+
+Pattern: 5th time seeing this source, 0 citations.
+Possible confirmation bias - recommend review.
+```
+
+---
+
 ## Tasks (Roadmap)
 
 ### Phase 1: MCP Server + In-Memory Indexes (MVP)
