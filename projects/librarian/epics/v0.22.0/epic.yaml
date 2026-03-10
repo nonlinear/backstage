@@ -61,20 +61,7 @@ tasks:
       - text: "Test with real books (check metadata quality)"
         checked: false
   
-  - group: "Phase 5: File Watcher (Auto-Reindex)"
-    items:
-      - text: "Install watchdog library"
-        checked: false
-      - text: "Monitor ~/Documents/librarian/books/ folders"
-        checked: false
-      - text: "On file add/modify: Reindex file automatically"
-        checked: false
-      - text: "Hot-reload index in MCP server (update RAM copy)"
-        checked: false
-      - text: "Notify connected clients (optional: new content available)"
-        checked: false
-  
-  - group: "Phase 6: Audit Analytics (CLI Tools)"
+  - group: "Phase 5: Audit Analytics (CLI Tools)"
     items:
       - text: "CLI: librarian audit --requester defense"
         checked: false
@@ -87,7 +74,7 @@ tasks:
       - text: "Output format: Human-readable + JSON"
         checked: false
   
-  - group: "Phase 7: Multi-Topic Tags (Optional)"
+  - group: "Phase 6: Multi-Topic Tags (Optional)"
     items:
       - text: "Add tags field to metadata.json"
         checked: false

@@ -1,0 +1,26 @@
+---
+name: "Auto indexing"
+goal: "Watch folders, automatically reindex on changes"
+status: backlog
+type: "minor"
+created: 2026-03-10
+started: null
+completed: null
+tasks:
+  - text: "Install watchdog library (Python file monitoring)"
+    checked: false
+  - text: "Create file watcher for ~/Documents/librarian/books/"
+    checked: false
+  - text: "Detect file changes (.epub, .pdf added/modified)"
+    checked: false
+  - text: "Auto-reindex changed files only (incremental)"
+    checked: false
+  - text: "LaunchDaemon: Start watcher at boot (always-on)"
+    checked: false
+  - text: "Hot-reload indexes in MCP server (if running)"
+    checked: false
+  - text: "Notify on reindex complete (optional: Telegram)"
+    checked: false
+  - text: "Test: Add book → verify auto-indexed within 30s"
+    checked: false
+---

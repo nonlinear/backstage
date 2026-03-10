@@ -390,24 +390,7 @@ Possible confirmation bias - recommend review.
 
 ---
 
-### Phase 5: File Watcher (Auto-Reindex)
-
-**Goal:** Add book → automatically indexed, no manual reindex
-
-**Tasks:**
-- [ ] Install `watchdog` library
-- [ ] Monitor `~/Documents/librarian/books/` folders
-- [ ] On file add/modify: Reindex file automatically
-- [ ] Hot-reload index in MCP server (update RAM copy)
-- [ ] Notify connected clients (optional: "new content available")
-
-**Deliverable:** Add EPUB to folder → indexed automatically, queries include it immediately
-
-**Effort:** 4h
-
----
-
-### Phase 6: Audit Analytics (CLI Tools)
+### Phase 5: Audit Analytics (CLI Tools)
 
 **Goal:** Query audit trail (who used what?)
 
@@ -424,7 +407,7 @@ Possible confirmation bias - recommend review.
 
 ---
 
-### Phase 7: Multi-Topic Tags (Optional)
+### Phase 6: Multi-Topic Tags (Optional)
 
 **Goal:** Books can belong to multiple topics
 
@@ -466,8 +449,7 @@ Possible confirmation bias - recommend review.
 - ✅ Agent cites: "Building Microservices (Newman, Ch.3, p.42): [snippet]"
 - ✅ Nicholas can verify agent checked sources (`audit.jsonl`)
 
-**Polished (Phase 5-7):**
-- ✅ Add book → auto-indexed (file watcher)
+**Polished (Phase 5-6):**
 - ✅ Audit analytics CLI (query who used what)
 - ✅ Multi-topic tags (books in multiple categories)
 
