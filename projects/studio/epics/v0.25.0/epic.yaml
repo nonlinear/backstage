@@ -7,5 +7,19 @@ type: "minor"
 created: null
 started: null
 completed: null
-tasks: []
+tasks:
+  - text: "Test qwen3.5 with llama.cpp (direct CLI)"
+    checked: false
+  - text: "Test qwen3.5 with llama.cpp + OpenClaw (model provider integration)"
+    checked: false
+  - text: "Test qwen3.5 with Ollama (API server)"
+    checked: false
+  - text: "Test qwen3.5 with Ollama + OpenClaw (model provider integration)"
+    checked: false
+  - text: "Define primary engine (llama.cpp vs Ollama)"
+    checked: false
+  - text: "Define secondary engine (fallback)"
+    checked: false
+  - text: "Design routing logic (how to choose engine per request)"
+    checked: false
 ---
