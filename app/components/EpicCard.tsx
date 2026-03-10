@@ -130,6 +130,7 @@ export function EpicCard({
           
           <TabsContent value="tasks" className="space-y-2">{tasks.length > 0 ? (
               tasks.map((item, idx) => {
+                console.log('Task', idx, ':', typeof item, JSON.stringify(item).substring(0, 100))
                 // Task group
                 if ('group' in item && 'items' in item) {
                   return (
