@@ -25,6 +25,13 @@ export interface Task {
   checked: boolean
 }
 
+export interface TaskGroup {
+  group: string
+  items: Task[]
+}
+
+export type TaskItem = Task | TaskGroup
+
 export interface Epic {
   notesList: { slug: string; title: string; content: string }[]
   version: string
@@ -32,7 +39,7 @@ export interface Epic {
   description: string
   status: string
   goal?: string
-  tasks: Task[]
+  tasks: TaskItem[]
   notesCount: number
 }
 
@@ -75,7 +82,7 @@ function countNotes(epicPath: string): number {
 /**
  * Parse tasks from epic.yaml or index.md
  */
-function parseTasks(epicPath: string): Task[] {
+function parseTasks(epicPath: string): TaskItem[] {
   // Try epic.yaml first
   const epicYamlPath = path.join(epicPath, 'epic.yaml')
   if (fs.existsSync(epicYamlPath)) {
@@ -86,6 +93,17 @@ function parseTasks(epicPath: string): Task[] {
       
       if (Array.isArray(data.tasks)) {
         return data.tasks.map((t: any) => {
+          // Task group (has 'group' and 'items')
+          if (t.group && Array.isArray(t.items)) {
+            return {
+              group: t.group,
+              items: t.items.map((item: any) => ({
+                text: item.text || item.name || String(item),
+                checked: item.checked === true
+              }))
+            }
+          }
+          // Flat task (string or {text, checked})
           if (typeof t === 'string') {
             return { text: t, checked: false }
           }
@@ -109,6 +127,17 @@ function parseTasks(epicPath: string): Task[] {
         const frontmatter = yaml.load(frontmatterMatch[1]) as any
         if (Array.isArray(frontmatter.tasks)) {
           return frontmatter.tasks.map((t: any) => {
+            // Task group
+            if (t.group && Array.isArray(t.items)) {
+              return {
+                group: t.group,
+                items: t.items.map((item: any) => ({
+                  text: item.text || item.name || String(item),
+                  checked: item.checked === true
+                }))
+              }
+            }
+            // Flat task
             if (typeof t === 'string') {
               return { text: t, checked: false }
             }

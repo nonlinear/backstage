@@ -24,7 +24,7 @@ import {
   TabsTrigger,
 } from "@/components/ui/tabs"
 import { Checkbox } from "@/components/ui/checkbox"
-import type { Task } from "@/lib/epics"
+import type { Task, TaskGroup, TaskItem } from "@/lib/epics"
 
 interface EpicCardProps {
   version: string
@@ -32,7 +32,7 @@ interface EpicCardProps {
   description?: string
   status: string
   goal?: string
-  tasks?: Task[]
+  tasks?: TaskItem[]
   notesCount?: number
   notesList?: { slug: string; title: string; content: string }[]
   activeTab: "tasks" | "notes"
@@ -57,7 +57,22 @@ export function EpicCard({
   onTabChange,
   onNoteChange
 }: EpicCardProps) {
-  const completedTasks = tasks.filter(t => t.checked).length
+  // Count completed tasks (flat + grouped)
+  const completedTasks = tasks.reduce((count, item) => {
+    if ('group' in item) {
+      return count + item.items.filter(t => t.checked).length
+    }
+    return count + (item.checked ? 1 : 0)
+  }, 0)
+  
+  // Count total tasks
+  const totalTasks = tasks.reduce((count, item) => {
+    if ('group' in item) {
+      return count + item.items.length
+    }
+    return count + 1
+  }, 0)
+  
   const [localSelectedNote, setLocalSelectedNote] = useState(notesList[0]?.slug || "")
   
   // Use external or local state
@@ -106,7 +121,7 @@ export function EpicCard({
         <Tabs value={activeTab} onValueChange={(v) => onTabChange(v as "tasks" | "notes")} className="w-full">
           <TabsList className="justify-start pt-1">
             <TabsTrigger value="tasks">
-              Tasks<sup className="ml-0.5">{completedTasks} of {tasks.length}</sup>
+              Tasks<sup className="ml-0.5">{completedTasks} of {totalTasks}</sup>
             </TabsTrigger>
             <TabsTrigger value="notes">
               Notes<sup className="ml-0.5">{notesCount}</sup>
@@ -114,18 +129,43 @@ export function EpicCard({
           </TabsList>
           
           <TabsContent value="tasks" className="space-y-2">{tasks.length > 0 ? (
-              tasks.map((task, idx) => (
-                <div key={idx} className="flex items-start gap-2">
-                  <Checkbox 
-                    checked={task.checked}
-                    disabled
-                    className="mt-0.5"
-                  />
-                  <label className="text-sm leading-tight">
-                    {task.text}
-                  </label>
-                </div>
-              ))
+              tasks.map((item, idx) => {
+                // Task group
+                if ('group' in item) {
+                  return (
+                    <div key={idx} className="space-y-2">
+                      <h4 className="text-sm font-semibold text-muted-foreground mt-2">
+                        {item.group}
+                      </h4>
+                      {item.items.map((task, taskIdx) => (
+                        <div key={taskIdx} className="flex items-start gap-2 ml-4">
+                          <Checkbox 
+                            checked={task.checked}
+                            disabled
+                            className="mt-0.5"
+                          />
+                          <label className="text-sm leading-tight">
+                            {task.text}
+                          </label>
+                        </div>
+                      ))}
+                    </div>
+                  )
+                }
+                // Flat task
+                return (
+                  <div key={idx} className="flex items-start gap-2">
+                    <Checkbox 
+                      checked={item.checked}
+                      disabled
+                      className="mt-0.5"
+                    />
+                    <label className="text-sm leading-tight">
+                      {item.text}
+                    </label>
+                  </div>
+                )
+              })
             ) : (
               <p className="text-xs text-muted-foreground italic">No tasks</p>
             )}
