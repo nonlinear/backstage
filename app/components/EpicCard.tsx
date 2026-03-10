@@ -145,35 +145,18 @@ export function EpicCard({
                         {taskGroup.group}
                       </h4>
                       {taskGroup.items.map((task, taskIdx) => {
-                        // ULTRA-AGGRESSIVE: stringify everything
-                        const taskObj = task && typeof task === 'object' ? task : { text: String(task), checked: false }
-                        let textValue = ''
-                        
-                        // Try every possible extraction
-                        if ('text' in taskObj) {
-                          textValue = typeof taskObj.text === 'string' 
-                            ? taskObj.text 
-                            : JSON.stringify(taskObj.text)
-                        } else if ('name' in taskObj) {
-                          textValue = String(taskObj.name)
-                        } else {
-                          textValue = JSON.stringify(taskObj)
-                        }
-                        
-                        // Final fallback
-                        if (!textValue || textValue === '[object Object]') {
-                          textValue = `[DEBUG: ${JSON.stringify(taskObj)}]`
-                        }
-                        
+                        const taskText = typeof task === 'object' && task !== null && 'text' in task 
+                          ? String(task.text) 
+                          : String(task)
                         return (
                           <div key={taskIdx} className="flex items-start gap-2 ml-4">
                             <Checkbox 
-                              checked={Boolean(taskObj.checked)}
+                              checked={typeof task === 'object' && 'checked' in task ? task.checked : false}
                               disabled
                               className="mt-0.5"
                             />
                             <label className="text-sm leading-tight">
-                              {textValue}
+                              {taskText}
                             </label>
                           </div>
                         )
