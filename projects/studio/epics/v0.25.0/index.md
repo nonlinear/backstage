@@ -4,10 +4,12 @@
 
 Location: `~/.ollama/models/blobs/`
 
+**Benchmark:** qwen2.5:32b, prompt "Write a haiku about code" (2026-03-10)
+
 | Model | Size | llama.cpp | llama.cpp + OpenClaw | Ollama | Ollama + OpenClaw |
 |-------|------|-----------|----------------------|--------|-------------------|
 | [qwen3.5:27b](https://ollama.com/library/qwen3.5:27b) | 17 GB | *Pending* | *Pending* | *Pending* | *Pending* |
-| [qwen2.5:32b](https://ollama.com/library/qwen2.5:32b) | 19 GB | *Pending* | *Pending* | ✅ | *Pending* |
+| [qwen2.5:32b](https://ollama.com/library/qwen2.5:32b) | 19 GB | *Pending* | *Pending* | ✅ 23.75 tok/s | *Pending* |
 | [qwen3.5:35b](https://ollama.com/library/qwen3.5:35b) | 23 GB | *Pending* | *Pending* | *Pending* | *Pending* |
 | [qwen2.5-7b](https://ollama.com/library/qwen2.5-7b) | 4.7 GB | *Pending* | *Pending* | *Pending* | *Pending* |
 
@@ -53,23 +55,4 @@ Phase 1 installs ~24GB. Scale to 72B when needed.
 - **ollama** (`/opt/homebrew/bin/ollama`) - Model runtime + API server
 - **llama-cli** (`/opt/homebrew/bin/llama-cli`) - llama.cpp CLI inference
 - **llama-server** (`/opt/homebrew/bin/llama-server`) - llama.cpp HTTP server (Metal accelerated)
-
----
-
-## Benchmark Results (2026-03-10)
-
-**Test:** qwen2.5:32b, prompt "Write a haiku about code", same hardware
-
-| Engine | Tokens/s | Load time | Stable | Status |
-|--------|----------|-----------|--------|--------|
-| **Ollama** | **23.75** | N/A (daemon) | ✅ | **Winner** |
-| node-llama-cpp | 12.25 | 1.14s | ❌ Crash | Tested |
-| llama-cpp CLI | - | - | - | *Pending* |
-
-**Ollama wins:** 2x faster, stable, no setup overhead.
-
-**Details:**
-- **Ollama:** 14.10 tok/s (prompt eval), 23.75 tok/s (generation), 12.3s total
-- **node-llama-cpp:** 12.25 tok/s, crashed on cleanup (Metal bug)
-- **llama-cpp:** Test incomplete (hung during execution)
 
