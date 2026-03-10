@@ -1,0 +1,51 @@
+---
+name: "Librarian as MCP"
+goal: "Move librarian to MCP server (auto-detect topics, keep as tags)"
+status: active
+type: "minor"
+created: 2026-03-10
+started: 2026-03-10
+completed: null
+tasks:
+  - group: "Research: MCP Migration Effort"
+    items:
+      - text: "How hard is it to move to MCP?"
+        checked: false
+      - text: "What changes to research.py?"
+        checked: false
+      - text: "What changes to index_library.py?"
+        checked: false
+      - text: "Can we keep existing folder structure?"
+        checked: false
+  
+  - group: "Auto-Detect Topics"
+    items:
+      - text: "Replace manual --topics with auto-detect"
+        checked: false
+      - text: "Scan all indexed topics for query"
+        checked: false
+      - text: "Return top-k results across ALL topics"
+        checked: false
+      - text: "Performance: Can we scan 20+ topics quickly?"
+        checked: false
+  
+  - group: "Topics as Tags"
+    items:
+      - text: "Keep topics in metadata (not folders?)"
+        checked: false
+      - text: "Allow multi-topic books (cross-tagging)"
+        checked: false
+      - text: "Query by tag filter (optional)"
+        checked: false
+  
+  - group: "MCP Server Implementation"
+    items:
+      - text: "Create MCP server wrapper"
+        checked: false
+      - text: "Expose search tool (query + optional tags)"
+        checked: false
+      - text: "Test with OpenClaw MCP client"
+        checked: false
+      - text: "Update SKILL.md (MCP vs script usage)"
+        checked: false
+---
