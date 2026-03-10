@@ -2,18 +2,20 @@
 
 ### Models Downloaded (GGUF)
 
-Location: `~/.ollama/models/blobs/`
+Location: `~/.ollama/models/blobs/` — Total: ~64 GB (4 models)
 
-**Benchmark:** qwen2.5:32b, prompt "Write a haiku about code" (2026-03-10)
+**Benchmark:** Prompt "Write a haiku about code" (2026-03-10, warm start)
 
-| Model | Size | Ollama | llama-server | llama-cli | node-llama-cpp |
-|-------|------|--------|--------------|-----------|----------------|
-| [qwen3.5:27b](https://ollama.com/library/qwen3.5:27b) | 17 GB | *Pending* | *Pending* | *Pending* | *Pending* |
-| [qwen2.5:32b](https://ollama.com/library/qwen2.5:32b) | 19 GB | ✅ 23.75 tok/s | *Pending* ¹ | *Pending* ² | ❌ 12.25 tok/s (crash) ³ |
-| [qwen3.5:35b](https://ollama.com/library/qwen3.5:35b) | 23 GB | *Pending* | *Pending* | *Pending* | *Pending* |
-| [qwen2.5-7b](https://ollama.com/library/qwen2.5-7b) | 4.7 GB | *Pending* | *Pending* | *Pending* | *Pending* |
-
-**Total:** ~64 GB (4 models)
+| Engine | Metric | [qwen3.5:27b](https://ollama.com/library/qwen3.5:27b) (17GB) | [qwen2.5:32b](https://ollama.com/library/qwen2.5:32b) (19GB) | [qwen3.5:35b](https://ollama.com/library/qwen3.5:35b) (23GB) | [qwen2.5-7b](https://ollama.com/library/qwen2.5-7b) (4.7GB) |
+|--------|--------|-------|-------|-------|-------|
+| **Ollama** | TTFT | *Pending* | *Pending* | *Pending* | *Pending* |
+| **Ollama** | tok/s | *Pending* | ✅ 23.75 | *Pending* | *Pending* |
+| **llama-server** ¹ | TTFT | *Pending* | *Pending* | *Pending* | *Pending* |
+| **llama-server** ¹ | tok/s | *Pending* | *Pending* | *Pending* | *Pending* |
+| **llama-cli** ² | TTFT | *Pending* | *Pending* | *Pending* | *Pending* |
+| **llama-cli** ² | tok/s | *Pending* | *Pending* | *Pending* | *Pending* |
+| **node-llama-cpp** ³ | TTFT | *Pending* | *Pending* | *Pending* | *Pending* |
+| **node-llama-cpp** ³ | tok/s | *Pending* | ❌ 12.25 (crash) | *Pending* | *Pending* |
 
 **Footnotes:**
 - **¹ llama-server config:** `--n-gpu-layers 999 --ctx-size 4096 --port 8080` (Metal full)
