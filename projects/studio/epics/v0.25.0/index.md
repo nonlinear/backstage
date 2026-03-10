@@ -2,20 +2,22 @@
 
 ### Models Downloaded (GGUF)
 
-Location: `~/.ollama/models/blobs/` — Total: ~64 GB (4 models)
+Location: `~/.ollama/models/blobs/`
+
+**Models:** qwen3.5:9b, qwen3.5:27b, qwen3.5:35b
 
 **Benchmark:** Prompt "Write a haiku about code" (2026-03-10, warm start)
 
-| Engine | Metric | [qwen3.5:27b](https://ollama.com/library/qwen3.5:27b) (17GB) | [qwen2.5:32b](https://ollama.com/library/qwen2.5:32b) (19GB) | [qwen3.5:35b](https://ollama.com/library/qwen3.5:35b) (23GB) | [qwen2.5-7b](https://ollama.com/library/qwen2.5-7b) (4.7GB) |
-|--------|--------|-------|-------|-------|-------|
-| **Ollama** | TTFT | *Pending* | *Pending* | *Pending* | *Pending* |
-| **Ollama** | tok/s | *Pending* | ✅ 23.75 | *Pending* | *Pending* |
-| **llama-server** ¹ | TTFT | *Pending* | *Pending* | *Pending* | *Pending* |
-| **llama-server** ¹ | tok/s | *Pending* | *Pending* | *Pending* | *Pending* |
-| **llama-cli** ² | TTFT | *Pending* | *Pending* | *Pending* | *Pending* |
-| **llama-cli** ² | tok/s | *Pending* | *Pending* | *Pending* | *Pending* |
-| **node-llama-cpp** ³ | TTFT | *Pending* | *Pending* | *Pending* | *Pending* |
-| **node-llama-cpp** ³ | tok/s | *Pending* | ❌ 12.25 (crash) | *Pending* | *Pending* |
+| Engine | Metric | [qwen3.5:9b](https://ollama.com/library/qwen3.5:9b) | [qwen3.5:27b](https://ollama.com/library/qwen3.5:27b) | [qwen3.5:35b](https://ollama.com/library/qwen3.5:35b) |
+|--------|--------|-------|-------|-------|
+| **Ollama** | TTFT | *Pending* | *Pending* | *Pending* |
+| **Ollama** | tok/s | *Pending* | *Pending* | *Pending* |
+| **llama-server** ¹ | TTFT | *Pending* | *Pending* | *Pending* |
+| **llama-server** ¹ | tok/s | *Pending* | *Pending* | *Pending* |
+| **llama-cli** ² | TTFT | *Pending* | *Pending* | *Pending* |
+| **llama-cli** ² | tok/s | *Pending* | *Pending* | *Pending* |
+| **node-llama-cpp** ³ | TTFT | *Pending* | *Pending* | *Pending* |
+| **node-llama-cpp** ³ | tok/s | *Pending* | *Pending* | *Pending* |
 
 **Footnotes:**
 - **¹ llama-server config:** `--n-gpu-layers 999 --ctx-size 4096 --port 8080` (Metal full)
