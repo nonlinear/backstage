@@ -7,83 +7,77 @@ created: 2026-03-10
 started: 2026-03-10
 completed: null
 tasks:
-  - group: "Phase 1: MCP Server + In-Memory Indexes"
-    items:
-      - text: "Research MCP Python SDK (setup, tool exposure)"
-        checked: false
-      - text: "Create MCP server scaffold (librarian_mcp.py)"
-        checked: false
-      - text: "Load ALL FAISS indexes at startup (into RAM)"
-        checked: false
-      - text: "Expose search(query, requester, context) tool"
-        checked: false
-      - text: "Test query speed (target <200ms)"
-        checked: false
-      - text: "Backward compat: Keep CLI script working"
-        checked: false
+  # Phase 1: MCP Server + In-Memory Indexes
+  - text: "Research MCP Python SDK (setup, tool exposure)"
+    checked: false
+  - text: "Create MCP server scaffold (librarian_mcp.py)"
+    checked: false
+  - text: "Load ALL FAISS indexes at startup (into RAM)"
+    checked: false
+  - text: "Expose search(query, requester, context) tool"
+    checked: false
+  - text: "Test query speed (target <200ms)"
+    checked: false
+  - text: "Backward compat: Keep CLI script working"
+    checked: false
   
-  - group: "Phase 2: Auto-Detect Topics (Parallel Scan)"
-    items:
-      - text: "Implement parallel FAISS batch search (ThreadPoolExecutor)"
-        checked: false
-      - text: "Benchmark: Sequential vs parallel (quantify speedup)"
-        checked: false
-      - text: "Default behavior: Scan ALL topics (no manual selection)"
-        checked: false
-      - text: "Optional filter: search(query, topics=['chaos-magick'])"
-        checked: false
-      - text: "Return top-k across entire library (deduplicate by score)"
-        checked: false
+  # Phase 2: Auto-Detect Topics (Parallel Scan)
+  - text: "Implement parallel FAISS batch search (ThreadPoolExecutor)"
+    checked: false
+  - text: "Benchmark: Sequential vs parallel (quantify speedup)"
+    checked: false
+  - text: "Default behavior: Scan ALL topics (no manual selection)"
+    checked: false
+  - text: "Optional filter: search(query, topics=['chaos-magick'])"
+    checked: false
+  - text: "Return top-k across entire library (deduplicate by score)"
+    checked: false
   
-  - group: "Phase 3: Audit Log (Epistemology Trail)"
-    items:
-      - text: "Create audit.jsonl (append-only log)"
-        checked: false
-      - text: "Log every query: timestamp, requester, query, results"
-        checked: false
-      - text: "Add mark_citation(query_id, result_id) tool"
-        checked: false
-      - text: "Update audit entry when citation marked (cited: true)"
-        checked: false
-      - text: "Test: Agent calls search → cites result → verify log"
-        checked: false
+  # Phase 3: Audit Log (Epistemology Trail)
+  - text: "Create audit.jsonl (append-only log)"
+    checked: false
+  - text: "Log every query: timestamp, requester, query, results"
+    checked: false
+  - text: "Add mark_citation(query_id, result_id) tool"
+    checked: false
+  - text: "Update audit entry when citation marked (cited: true)"
+    checked: false
+  - text: "Test: Agent calls search → cites result → verify log"
+    checked: false
   
-  - group: "Phase 4: Citation Quality (Metadata Extraction)"
-    items:
-      - text: "Extract chapter/section from EPUB metadata"
-        checked: false
-      - text: "Extract page numbers from PDF (if available)"
-        checked: false
-      - text: "Return snippet context (±500 chars around match)"
-        checked: false
-      - text: "Format citation: 'Title (Author, Ch.3, p.42): [snippet]'"
-        checked: false
-      - text: "Test with real books (check metadata quality)"
-        checked: false
+  # Phase 4: Citation Quality (Metadata Extraction)
+  - text: "Extract chapter/section from EPUB metadata"
+    checked: false
+  - text: "Extract page numbers from PDF (if available)"
+    checked: false
+  - text: "Return snippet context (±500 chars around match)"
+    checked: false
+  - text: "Format citation: 'Title (Author, Ch.3, p.42): [snippet]'"
+    checked: false
+  - text: "Test with real books (check metadata quality)"
+    checked: false
   
-  - group: "Phase 5: Audit Analytics (CLI Tools)"
-    items:
-      - text: "CLI: librarian audit --requester defense"
-        checked: false
-      - text: "CLI: librarian audit --source 'Building Microservices'"
-        checked: false
-      - text: "CLI: librarian audit --unused (seen but not cited)"
-        checked: false
-      - text: "CLI: librarian audit --bias (detect patterns)"
-        checked: false
-      - text: "Output format: Human-readable + JSON"
-        checked: false
+  # Phase 5: Audit Analytics (CLI Tools)
+  - text: "CLI: librarian audit --requester defense"
+    checked: false
+  - text: "CLI: librarian audit --source 'Building Microservices'"
+    checked: false
+  - text: "CLI: librarian audit --unused (seen but not cited)"
+    checked: false
+  - text: "CLI: librarian audit --bias (detect patterns)"
+    checked: false
+  - text: "Output format: Human-readable + JSON"
+    checked: false
   
-  - group: "Phase 6: Multi-Topic Tags (Optional)"
-    items:
-      - text: "Add tags field to metadata.json"
-        checked: false
-      - text: "Keep folder structure as primary tag (backward compat)"
-        checked: false
-      - text: "Allow books to appear in multiple topics"
-        checked: false
-      - text: "Query filter: search(query, tags=['anarchy', 'economics'])"
-        checked: false
-      - text: "Migration: Scan existing books, suggest tags"
-        checked: false
+  # Phase 6: Multi-Topic Tags (Optional)
+  - text: "Add tags field to metadata.json"
+    checked: false
+  - text: "Keep folder structure as primary tag (backward compat)"
+    checked: false
+  - text: "Allow books to appear in multiple topics"
+    checked: false
+  - text: "Query filter: search(query, tags=['anarchy', 'economics'])"
+    checked: false
+  - text: "Migration: Scan existing books, suggest tags"
+    checked: false
 ---

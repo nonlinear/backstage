@@ -7,44 +7,41 @@ created: null
 started: null
 completed: 2026-03-10
 tasks:
-  - group: "Removed (Enforcement)"
-    items:
-      - text: "ZERO TOLERANCE warnings (8 instances)"
-        checked: true
-      - text: "MANDATORY CHECKLIST"
-        checked: true
-      - text: "READ THIS FIRST threats"
-        checked: true
-      - text: "Protocol repetition (4 times)"
-        checked: true
-      - text: "Response format template"
-        checked: true
+  # Removed (Enforcement)
+  - text: "ZERO TOLERANCE warnings (8 instances)"
+    checked: true
+  - text: "MANDATORY CHECKLIST"
+    checked: true
+  - text: "READ THIS FIRST threats"
+    checked: true
+  - text: "Protocol repetition (4 times)"
+    checked: true
+  - text: "Response format template"
+    checked: true
   
-  - group: "Added (Documentation)"
-    items:
-      - text: "Frontmatter metadata (emoji, deps, os)"
-        checked: true
-      - text: "When to use triggers"
-        checked: true
-      - text: "Quick start (wrapper first)"
-        checked: true
-      - text: "Wrapper documentation"
-        checked: true
-      - text: "Direct usage (advanced)"
-        checked: true
-      - text: "Scannable format (headings, bullets)"
-        checked: true
+  # Added (Documentation)
+  - text: "Frontmatter metadata (emoji, deps, os)"
+    checked: true
+  - text: "When to use triggers"
+    checked: true
+  - text: "Quick start (wrapper first)"
+    checked: true
+  - text: "Wrapper documentation"
+    checked: true
+  - text: "Direct usage (advanced)"
+    checked: true
+  - text: "Scannable format (headings, bullets)"
+    checked: true
   
-  - group: "Kept (Essential)"
-    items:
-      - text: "Syntax examples"
-        checked: true
-      - text: "Topic list"
-        checked: true
-      - text: "Indexing instructions"
-        checked: true
-      - text: "Troubleshooting"
-        checked: true
-      - text: "Kavita integration"
-        checked: true
+  # Kept (Essential)
+  - text: "Syntax examples"
+    checked: true
+  - text: "Topic list"
+    checked: true
+  - text: "Indexing instructions"
+    checked: true
+  - text: "Troubleshooting"
+    checked: true
+  - text: "Kavita integration"
+    checked: true
 ---

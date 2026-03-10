@@ -7,93 +7,85 @@ created: null
 started: null
 completed: null
 tasks:
-  - group: "Phase 1: Infrastructure"
-    items:
-      - text: "Design BaseExtractor interface"
-        checked: false
-      - text: "Refactor EPUB extractor to BaseExtractor"
-        checked: false
-      - text: "Add format detection (extension → extractor)"
-        checked: false
-      - text: "Update metadata schema (format field)"
-        checked: false
-      - text: "Test backward compatibility"
-        checked: false
+  # Phase 1: Infrastructure
+  - text: "Design BaseExtractor interface"
+    checked: false
+  - text: "Refactor EPUB extractor to BaseExtractor"
+    checked: false
+  - text: "Add format detection (extension → extractor)"
+    checked: false
+  - text: "Update metadata schema (format field)"
+    checked: false
+  - text: "Test backward compatibility"
+    checked: false
   
-  - group: "Phase 2: Excel Support"
-    items:
-      - text: "Research library (openpyxl vs pandas)"
-        checked: false
-      - text: "Implement ExcelExtractor"
-        checked: false
-      - text: "Define chunk strategy (sheet/row/range)"
-        checked: false
-      - text: "Test with real spreadsheets"
-        checked: false
-      - text: "Update SKILL.md with Excel examples"
-        checked: false
+  # Phase 2: Excel Support
+  - text: "Research library (openpyxl vs pandas)"
+    checked: false
+  - text: "Implement ExcelExtractor"
+    checked: false
+  - text: "Define chunk strategy (sheet/row/range)"
+    checked: false
+  - text: "Test with real spreadsheets"
+    checked: false
+  - text: "Update SKILL.md with Excel examples"
+    checked: false
   
-  - group: "Phase 3: Web Archive"
-    items:
-      - text: "Design archive structure"
-        checked: false
-      - text: "Implement HTML scraper (requests + BeautifulSoup)"
-        checked: false
-      - text: "Implement HTMLExtractor"
-        checked: false
-      - text: "Add CLI: librarian archive <URL>"
-        checked: false
-      - text: "Test with common sites"
-        checked: false
+  # Phase 3: Web Archive
+  - text: "Design archive structure"
+    checked: false
+  - text: "Implement HTML scraper (requests + BeautifulSoup)"
+    checked: false
+  - text: "Implement HTMLExtractor"
+    checked: false
+  - text: "Add CLI: librarian archive <URL>"
+    checked: false
+  - text: "Test with common sites"
+    checked: false
   
-  - group: "Phase 4: PowerPoint"
-    items:
-      - text: "Research python-pptx library"
-        checked: false
-      - text: "Implement PowerPointExtractor"
-        checked: false
-      - text: "Define chunk strategy (slide-level)"
-        checked: false
-      - text: "Test with real presentations"
-        checked: false
+  # Phase 4: PowerPoint
+  - text: "Research python-pptx library"
+    checked: false
+  - text: "Implement PowerPointExtractor"
+    checked: false
+  - text: "Define chunk strategy (slide-level)"
+    checked: false
+  - text: "Test with real presentations"
+    checked: false
   
-  - group: "Phase 5: Markdown"
-    items:
-      - text: "Implement MarkdownExtractor"
-        checked: false
-      - text: "Define chunk strategy (section-level)"
-        checked: false
-      - text: "Test with personal notes"
-        checked: false
+  # Phase 5: Markdown
+  - text: "Implement MarkdownExtractor"
+    checked: false
+  - text: "Define chunk strategy (section-level)"
+    checked: false
+  - text: "Test with personal notes"
+    checked: false
   
-  - group: "Phase 6: PDF Enhancement"
-    items:
-      - text: "Improve text extraction"
-        checked: false
-      - text: "Extract page numbers correctly"
-        checked: false
-      - text: "Handle multi-column layouts"
-        checked: false
+  # Phase 6: PDF Enhancement
+  - text: "Improve text extraction"
+    checked: false
+  - text: "Extract page numbers correctly"
+    checked: false
+  - text: "Handle multi-column layouts"
+    checked: false
   
-  - group: "Phase 7: Integration"
-    items:
-      - text: "Update research.py for all formats"
-        checked: false
-      - text: "Update citation format (format-specific)"
-        checked: false
-      - text: "Add --format filter"
-        checked: false
-      - text: "Test cross-format queries"
-        checked: false
+  # Phase 7: Integration
+  - text: "Update research.py for all formats"
+    checked: false
+  - text: "Update citation format (format-specific)"
+    checked: false
+  - text: "Add --format filter"
+    checked: false
+  - text: "Test cross-format queries"
+    checked: false
   
-  - group: "Phase 8: Documentation"
-    items:
-      - text: "Update README with formats"
-        checked: false
-      - text: "Add examples for each format"
-        checked: false
-      - text: "Document extraction limitations"
-        checked: false
-      - text: "Update SKILL.md"
-        checked: false
+  # Phase 8: Documentation
+  - text: "Update README with formats"
+    checked: false
+  - text: "Add examples for each format"
+    checked: false
+  - text: "Document extraction limitations"
+    checked: false
+  - text: "Update SKILL.md"
+    checked: false
 ---
