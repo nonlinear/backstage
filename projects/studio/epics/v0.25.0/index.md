@@ -54,3 +54,22 @@ Phase 1 installs ~24GB. Scale to 72B when needed.
 - **llama-cli** (`/opt/homebrew/bin/llama-cli`) - llama.cpp CLI inference
 - **llama-server** (`/opt/homebrew/bin/llama-server`) - llama.cpp HTTP server (Metal accelerated)
 
+---
+
+## Benchmark Results (2026-03-10)
+
+**Test:** qwen2.5:32b, prompt "Write a haiku about code", same hardware
+
+| Engine | Tokens/s | Load time | Stable | Status |
+|--------|----------|-----------|--------|--------|
+| **Ollama** | **23.75** | N/A (daemon) | ✅ | **Winner** |
+| node-llama-cpp | 12.25 | 1.14s | ❌ Crash | Tested |
+| llama-cpp CLI | - | - | - | *Pending* |
+
+**Ollama wins:** 2x faster, stable, no setup overhead.
+
+**Details:**
+- **Ollama:** 14.10 tok/s (prompt eval), 23.75 tok/s (generation), 12.3s total
+- **node-llama-cpp:** 12.25 tok/s, crashed on cleanup (Metal bug)
+- **llama-cpp:** Test incomplete (hung during execution)
+
