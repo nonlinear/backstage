@@ -8,14 +8,45 @@ created: null
 started: null
 completed: 2026-02-26
 tasks:
-  - text: "Migrate all epics to OpenProject"
-    checked: true
-  - text: "Commit migration"
-    checked: true
-  - text: "Delete ROADMAP.md/CHANGELOG.md"
-    checked: false
-  - text: "Create epic-openproject-parity.sh"
-    checked: false
-  - text: "Test anti-drift checks"
-    checked: false
+  - group: "Phase 1: Structure"
+    items:
+      - text: "Migrate all epics to OpenProject"
+        checked: true
+      - text: "Commit migration"
+        checked: true
+      - text: "Delete ROADMAP.md/CHANGELOG.md"
+        checked: false
+      - text: "Create epic-openproject-parity.sh"
+        checked: false
+      - text: "Test anti-drift checks"
+        checked: false
+  
+  - group: "Phase 2: HTML Reader"
+    items:
+      - text: "Create localhost server for epic-notes/"
+        checked: false
+      - text: "Auto-generate INDEX.html"
+        checked: false
+      - text: "Test Tailscale access from iPad"
+        checked: false
+      - text: "Markdown → HTML rendering"
+        checked: false
+  
+  - group: "Phase 3: Diagram Integration"
+    items:
+      - text: "Simplified diagram contract (HTML+CSS)"
+        checked: false
+      - text: "Screenshot/export workflow"
+        checked: false
+      - text: "Night Shift auto-generation (Qwen)"
+        checked: false
+  
+  - group: "Phase 4: Optimization"
+    items:
+      - text: "Custom fields (Tier, Maturity)"
+        checked: false
+      - text: "Bulk grooming tools"
+        checked: false
+      - text: "OpenProject → custom solution (if needed)"
+        checked: false
 ---
