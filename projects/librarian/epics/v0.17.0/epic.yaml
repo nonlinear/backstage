@@ -1,10 +1,18 @@
 ---
-name: "indexing-bug-subfolders"
-goal: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium totam rem aperiam."
-status: backlog
+name: "Indexing subfolders"
+goal: "Fix index_library.py to handle book subdirectories"
+status: done
 type: "minor"
 created: null
 started: null
-completed: null
-tasks: []
+completed: 2026-03-10
+tasks:
+  - text: "Identify subfolder indexing bug"
+    checked: true
+  - text: "Fix recursive directory traversal"
+    checked: true
+  - text: "Test with nested book folders"
+    checked: true
+  - text: "Verify all books indexed"
+    checked: true
 ---
