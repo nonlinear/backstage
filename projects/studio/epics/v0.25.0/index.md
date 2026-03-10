@@ -6,7 +6,7 @@ Location: `~/.ollama/models/blobs/`
 
 **Models:** qwen3.5:9b, qwen3.5:27b, qwen3.5:35b
 
-**Benchmark:** Prompt "Write a haiku about code" (2026-03-10, warm start)
+**Benchmark:** Prompt "Write a haiku about code" (2026-03-10, warm start, **no-thinking mode**)
 
 | Engine | Metric | [qwen3.5:9b](https://ollama.com/library/qwen3.5:9b) | [qwen3.5:27b](https://ollama.com/library/qwen3.5:27b) | [qwen3.5:35b](https://ollama.com/library/qwen3.5:35b) |
 |--------|--------|-------|-------|-------|
