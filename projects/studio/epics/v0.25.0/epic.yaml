@@ -8,18 +8,14 @@ created: null
 started: null
 completed: null
 tasks:
-  - text: "Test qwen3.5 with llama.cpp (direct CLI)"
+  - text: "Direct tests, 2 parameters"
     checked: false
-  - text: "Test qwen3.5 with llama.cpp + OpenClaw (model provider integration)"
+  - text: "Decide on which one to use"
     checked: false
-  - text: "Test qwen3.5 with Ollama (API server)"
+  - text: "Formalize how to swap (2 configs)"
     checked: false
-  - text: "Test qwen3.5 with Ollama + OpenClaw (model provider integration)"
+  - text: "Decide conditions on Model Routing"
     checked: false
-  - text: "Define primary engine (llama.cpp vs Ollama)"
-    checked: false
-  - text: "Define secondary engine (fallback)"
-    checked: false
-  - text: "Design routing logic (how to choose engine per request)"
+  - text: "Model routing"
     checked: false
 ---
