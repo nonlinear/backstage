@@ -6,10 +6,10 @@ Location: `~/.ollama/models/blobs/`
 
 | Model | Size | llama.cpp | llama.cpp + OpenClaw | Ollama | Ollama + OpenClaw |
 |-------|------|-----------|----------------------|--------|-------------------|
-| [qwen3.5:27b](https://ollama.com/library/qwen3.5:27b) | 17 GB | ✅ | ❌ | ✅ | ❌ |
-| [qwen2.5:32b](https://ollama.com/library/qwen2.5:32b) | 19 GB | ✅ | ❌ | ✅ | ❌ |
-| [qwen3.5:35b](https://ollama.com/library/qwen3.5:35b) | 23 GB | ✅ | ❌ | ✅ | ❌ |
-| [qwen2.5-7b](https://ollama.com/library/qwen2.5-7b) | 4.7 GB | ✅ | ❌ | ✅ | ❌ |
+| [qwen3.5:27b](https://ollama.com/library/qwen3.5:27b) | 17 GB | Pending | Pending | ✅ | ❌ |
+| [qwen2.5:32b](https://ollama.com/library/qwen2.5:32b) | 19 GB | ✅ | Pending | ✅ | ❌ |
+| [qwen3.5:35b](https://ollama.com/library/qwen3.5:35b) | 23 GB | ✅ | Pending | ✅ | ❌ |
+| [qwen2.5-7b](https://ollama.com/library/qwen2.5-7b) | 4.7 GB | ✅ | *Pending* | ✅ | ❌ |
 
 **Total:** ~64 GB (4 models)
 
