@@ -6,10 +6,10 @@ Location: `~/.ollama/models/blobs/`
 
 **Benchmark:** qwen2.5:32b, prompt "Write a haiku about code" (2026-03-10)
 
-| Model | Size | llama.cpp | llama.cpp + OpenClaw | Ollama | Ollama + OpenClaw |
-|-------|------|-----------|----------------------|--------|-------------------|
+| Model | Size | llama.cpp | node-llama-cpp | Ollama | OpenClaw |
+|-------|------|-----------|----------------|--------|----------|
 | [qwen3.5:27b](https://ollama.com/library/qwen3.5:27b) | 17 GB | *Pending* | *Pending* | *Pending* | *Pending* |
-| [qwen2.5:32b](https://ollama.com/library/qwen2.5:32b) | 19 GB | *Pending* | *Pending* | ✅ 23.75 tok/s | *Pending* |
+| [qwen2.5:32b](https://ollama.com/library/qwen2.5:32b) | 19 GB | *Pending* | ❌ 12.25 tok/s (crash) | ✅ 23.75 tok/s | *Pending* |
 | [qwen3.5:35b](https://ollama.com/library/qwen3.5:35b) | 23 GB | *Pending* | *Pending* | *Pending* | *Pending* |
 | [qwen2.5-7b](https://ollama.com/library/qwen2.5-7b) | 4.7 GB | *Pending* | *Pending* | *Pending* | *Pending* |
 
