@@ -9,11 +9,16 @@ Location: `~/.ollama/models/blobs/`
 | Model | Size | Ollama | llama-server | llama-cli | node-llama-cpp |
 |-------|------|--------|--------------|-----------|----------------|
 | [qwen3.5:27b](https://ollama.com/library/qwen3.5:27b) | 17 GB | *Pending* | *Pending* | *Pending* | *Pending* |
-| [qwen2.5:32b](https://ollama.com/library/qwen2.5:32b) | 19 GB | ✅ 23.75 tok/s | *Pending* | *Pending* | ❌ 12.25 tok/s (crash) |
+| [qwen2.5:32b](https://ollama.com/library/qwen2.5:32b) | 19 GB | ✅ 23.75 tok/s | *Pending* ¹ | *Pending* ² | ❌ 12.25 tok/s (crash) ³ |
 | [qwen3.5:35b](https://ollama.com/library/qwen3.5:35b) | 23 GB | *Pending* | *Pending* | *Pending* | *Pending* |
 | [qwen2.5-7b](https://ollama.com/library/qwen2.5-7b) | 4.7 GB | *Pending* | *Pending* | *Pending* | *Pending* |
 
 **Total:** ~64 GB (4 models)
+
+**Footnotes:**
+- **¹ llama-server config:** `--n-gpu-layers 999 --ctx-size 4096 --port 8080` (Metal full)
+- **² llama-cli config:** `--n-gpu-layers 999 --ctx-size 2048 --threads 8 --n-predict 50`
+- **³ node-llama-cpp:** Default config (auto Metal detection), crashed on cleanup (SIGABRT)
 
 ## Engine Choice
 
