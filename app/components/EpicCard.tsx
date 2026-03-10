@@ -144,18 +144,23 @@ export function EpicCard({
                       <h4 className="text-sm font-semibold text-muted-foreground mt-2">
                         {taskGroup.group}
                       </h4>
-                      {taskGroup.items.map((task, taskIdx) => (
-                        <div key={taskIdx} className="flex items-start gap-2 ml-4">
-                          <Checkbox 
-                            checked={task.checked}
-                            disabled
-                            className="mt-0.5"
-                          />
-                          <label className="text-sm leading-tight">
-                            {task.text}
-                          </label>
-                        </div>
-                      ))}
+                      {taskGroup.items.map((task, taskIdx) => {
+                        const taskText = typeof task === 'object' && task !== null && 'text' in task 
+                          ? String(task.text) 
+                          : String(task)
+                        return (
+                          <div key={taskIdx} className="flex items-start gap-2 ml-4">
+                            <Checkbox 
+                              checked={typeof task === 'object' && 'checked' in task ? task.checked : false}
+                              disabled
+                              className="mt-0.5"
+                            />
+                            <label className="text-sm leading-tight">
+                              {taskText}
+                            </label>
+                          </div>
+                        )
+                      })}
                     </div>
                   )
                 }
