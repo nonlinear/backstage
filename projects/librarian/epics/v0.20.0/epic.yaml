@@ -1,10 +1,54 @@
 ---
 name: "Usage analytics"
-goal: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+goal: "Better auditability: rank topics, detect patterns, identify gaps"
 status: backlog
 type: "minor"
 created: null
 started: null
 completed: null
-tasks: []
+tasks:
+  - group: "Phase 1: Topic Ranking"
+    items:
+      - text: "Design CLI flags (--rank-topics, --rank-by-success, --rank-by-recency)"
+        checked: false
+      - text: "Implement ranking logic (count, success rate, last timestamp)"
+        checked: false
+      - text: "Output formats (human-readable + JSON)"
+        checked: false
+  
+  - group: "Phase 2: Query Pattern Detection"
+    items:
+      - text: "Extract most frequent search terms per topic"
+        checked: false
+      - text: "Group similar queries (fuzzy matching)"
+        checked: false
+      - text: "Identify multi-word vs single-word patterns"
+        checked: false
+  
+  - group: "Phase 3: Time-Based Analysis"
+    items:
+      - text: "Queries per week/month trends"
+        checked: false
+      - text: "Topic popularity shifts"
+        checked: false
+      - text: "Session correlation (topics within 1-hour window)"
+        checked: false
+  
+  - group: "Phase 4: Integration"
+    items:
+      - text: "Add top 5 topics to research.py --help"
+        checked: false
+      - text: "Suggest topics based on common queries"
+        checked: false
+      - text: "Document analytics commands in SKILL.md"
+        checked: false
+  
+  - group: "Phase 5: Quick Similarity Scan"
+    items:
+      - text: "Add --quick-scan flag (top-k 1 across ALL topics)"
+        checked: false
+      - text: "Return similarity scores without full results"
+        checked: false
+      - text: "Auto-filter by threshold (--threshold 75)"
+        checked: false
 ---
