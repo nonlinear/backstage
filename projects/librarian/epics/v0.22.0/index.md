@@ -10,6 +10,33 @@
 
 ---
 
+## User Flow Diagram
+
+```mermaid
+flowchart TD
+    A[User: 'What do my books say about microservices?'] --> B[OpenClaw receives message]
+    B --> C{MCP server running?}
+    C -->|No| D[Error: Librarian offline]
+    C -->|Yes| E[OpenClaw discovers librarian_search tool]
+    E --> F[OpenClaw calls MCP tool]
+    F --> G[librarian_search query='microservices', requester='user:nicholas']
+    G --> H[MCP: Indexes already in RAM instant lookup]
+    H --> I[MCP: Parallel scan all topics]
+    I --> J[MCP: Returns results with metadata]
+    J --> K[OpenClaw formats response]
+    K --> L[User sees formatted answer]
+    
+    G --> M[Audit: Log query to audit.jsonl]
+    M --> N[timestamp, requester, query, topics_scanned, results]
+    
+    style A fill:#e1f5ff
+    style L fill:#d4edda
+    style M fill:#fff3cd
+    style H fill:#f8d7da
+```
+
+---
+
 ## Context
 
 **Why this matters:**
