@@ -96,20 +96,31 @@ function parseTasks(epicPath: string): TaskItem[] {
           // Task group (has 'group' and 'items')
           if (t.group && Array.isArray(t.items)) {
             return {
-              group: t.group,
-              items: t.items.map((item: any) => ({
-                text: item.text || item.name || String(item),
-                checked: item.checked === true
-              }))
+              group: String(t.group),
+              items: t.items.map((item: any) => {
+                // Force primitive string extraction (YAML can return complex objects)
+                let textValue = item.text || item.name || item
+                if (typeof textValue === 'object') {
+                  textValue = JSON.stringify(textValue)
+                }
+                return {
+                  text: String(textValue),
+                  checked: Boolean(item.checked)
+                }
+              })
             }
           }
           // Flat task (string or {text, checked})
           if (typeof t === 'string') {
-            return { text: t, checked: false }
+            return { text: String(t), checked: false }
+          }
+          let textValue = t.text || t.name || t
+          if (typeof textValue === 'object') {
+            textValue = JSON.stringify(textValue)
           }
           return {
-            text: t.text || t.name || String(t),
-            checked: t.checked === true
+            text: String(textValue),
+            checked: Boolean(t.checked)
           }
         })
       }
