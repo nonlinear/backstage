@@ -31,10 +31,10 @@ function detectValueUsage(valueName: string): ValueUsage {
   
   const backstageRoot = path.join(process.cwd(), '..')
   
-  // Check global (backstage.yaml)
+  // Check global (organization.yaml)
   try {
-    const backstageYaml = path.join(backstageRoot, 'backstage.yaml')
-    console.log('[detectValueUsage] Checking backstage.yaml:', backstageYaml, 'Exists:', fs.existsSync(backstageYaml))
+    const backstageYaml = path.join(backstageRoot, 'organization.yaml')
+    console.log('[detectValueUsage] Checking organization.yaml:', backstageYaml, 'Exists:', fs.existsSync(backstageYaml))
     if (fs.existsSync(backstageYaml)) {
       const content = fs.readFileSync(backstageYaml, 'utf-8')
       const data: any = yaml.load(content)
@@ -47,7 +47,7 @@ function detectValueUsage(valueName: string): ValueUsage {
       }
     }
   } catch (err) {
-    console.error('Error reading backstage.yaml:', err)
+    console.error('Error reading organization.yaml:', err)
   }
   
   // Check squads (now in agents/<squad>/squad.yaml)

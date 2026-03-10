@@ -127,7 +127,7 @@ checks:
 # EPICS - Status lifecycle and transitions
 # ============================================================================
 epics:
-  # Canonical order: active → backlog → published
+  # Canonical order: active → backlog → done
   statuses:
     active:
       order: 1
@@ -137,7 +137,7 @@ epics:
         - "Has git branch (not on main)"
         - "Not all tasks checked"
       can_transition_to:
-        - published
+        - done
         - backlog
     
     backlog:
@@ -150,7 +150,7 @@ epics:
       can_transition_to:
         - active
     
-    published:
+    done:
       order: 3
       description: "All tasks checked. Terminal state."
       conditions:
@@ -163,7 +163,7 @@ epics:
     backlog_to_active:
       trigger: "Add tasks or create branch"
     
-    active_to_published:
+    active_to_done:
       trigger: "Check all tasks"
       
     active_to_backlog:
@@ -174,7 +174,7 @@ epics:
   display_order:
     - active
     - backlog
-    - published
+    - done
 
 # ============================================================================
 # GLOSSARY - Terminology and structure definitions
