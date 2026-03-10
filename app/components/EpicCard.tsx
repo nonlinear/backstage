@@ -130,9 +130,15 @@ export function EpicCard({
           
           <TabsContent value="tasks" className="space-y-2">{tasks.length > 0 ? (
               tasks.map((item, idx) => {
+                console.log(`Task ${idx}:`, item)
+                console.log(`  Has group?`, 'group' in item)
+                console.log(`  Has items?`, 'items' in item)
+                console.log(`  Has text?`, 'text' in item)
+                
                 // Task group
                 if ('group' in item && 'items' in item) {
                   const taskGroup = item as { group: string; items: Array<{ text: string; checked: boolean }> }
+                  console.log(`  Rendering group: ${taskGroup.group}`)
                   return (
                     <div key={idx} className="space-y-2">
                       <h4 className="text-sm font-semibold text-muted-foreground mt-2">
@@ -156,6 +162,7 @@ export function EpicCard({
                 // Flat task
                 if ('text' in item && 'checked' in item) {
                   const flatTask = item as { text: string; checked: boolean }
+                  console.log(`  Rendering flat task: ${flatTask.text}`)
                   return (
                     <div key={idx} className="flex items-start gap-2">
                       <Checkbox 
@@ -170,7 +177,8 @@ export function EpicCard({
                   )
                 }
                 // Fallback (should never happen)
-                return null
+                console.log(`  FALLBACK - rendering null`)
+                return <div key={idx} className="text-red-500">DEBUG: {JSON.stringify(item)}</div>
               })
             ) : (
               <p className="text-xs text-muted-foreground italic">No tasks</p>
