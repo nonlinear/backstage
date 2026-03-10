@@ -117,6 +117,26 @@ export function EpicCard({
       </CardHeader>
       
       <CardContent>
+        {/* DEBUG logging */}
+        {(() => {
+          console.log('=== EPIC CARD DEBUG ===')
+          console.log('Epic version:', epic.version)
+          console.log('Tasks length:', tasks.length)
+          console.log('Tasks[0] type:', typeof tasks[0])
+          console.log('Tasks[0] raw:', tasks[0])
+          if (tasks[0] && 'group' in tasks[0]) {
+            console.log('Tasks[0].group:', (tasks[0] as any).group)
+            console.log('Tasks[0].items:', (tasks[0] as any).items)
+            if (Array.isArray((tasks[0] as any).items) && (tasks[0] as any).items[0]) {
+              console.log('First item:', (tasks[0] as any).items[0])
+              console.log('First item.text:', (tasks[0] as any).items[0].text)
+              console.log('First item.text type:', typeof (tasks[0] as any).items[0].text)
+            }
+          }
+          console.log('====================')
+          return null
+        })()}
+        
         {/* Tabs: Tasks and Notes */}
         <Tabs value={activeTab} onValueChange={(v) => onTabChange(v as "tasks" | "notes")} className="w-full">
           <TabsList className="justify-start pt-1">
