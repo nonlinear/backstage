@@ -1,15 +1,15 @@
 # v0.25.0 - Local LLM Infrastructure
 
-### Models Downloaded
+### Models Downloaded (GGUF)
 
 Location: `~/.ollama/models/blobs/`
 
-| Model       | Size   | Downloaded | Notes                |
-| ----------- | ------ | ---------- | -------------------- |
-| qwen3.5:27b | 17 GB  | 2026-03-05 | -                    |
-| qwen2.5:32b | 19 GB  | 2026-03-04 | Code agents, Defense |
-| qwen3.5:35b | 23 GB  | 2026-03-04 | -                    |
-| qwen2.5-7b  | 4.7 GB | 2026-03-04 | Secretaria           |
+| Model | Size | llama.cpp | llama.cpp + OpenClaw | Ollama | Ollama + OpenClaw |
+|-------|------|-----------|----------------------|--------|-------------------|
+| [qwen3.5:27b](https://ollama.com/library/qwen3.5:27b) | 17 GB | ✅ | ❌ | ✅ | ❌ |
+| [qwen2.5:32b](https://ollama.com/library/qwen2.5:32b) | 19 GB | ✅ | ❌ | ✅ | ❌ |
+| [qwen3.5:35b](https://ollama.com/library/qwen3.5:35b) | 23 GB | ✅ | ❌ | ✅ | ❌ |
+| [qwen2.5-7b](https://ollama.com/library/qwen2.5-7b) | 4.7 GB | ✅ | ❌ | ✅ | ❌ |
 
 **Total:** ~64 GB (4 models)
 
