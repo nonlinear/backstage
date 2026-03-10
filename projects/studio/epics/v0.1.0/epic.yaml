@@ -1,10 +1,16 @@
 ---
 name: "server-migration"
-goal: "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti."
+goal: "Migrate from MacBook M3 to always-on server"
 status: roadmap
 type: "minor"
 created: null
 started: null
 completed: null
-tasks: []
+tasks:
+  - OpenClaw running 24/7
+  - Files synced
+  - Skills/memory intact
+  - Apps configured
+  - Remote access working
+  - Migration documented
 ---
