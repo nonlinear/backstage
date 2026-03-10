@@ -30,3 +30,26 @@
 **Strategic = cloud (Claude)**
 
 Phase 1 installs ~24GB. Scale to 72B when needed.
+
+---
+
+## Inventory (2026-03-10)
+
+### Engines Installed
+
+- **ollama** (`/opt/homebrew/bin/ollama`) - Model runtime + API server
+- **llama-cli** (`/opt/homebrew/bin/llama-cli`) - llama.cpp CLI inference
+- **llama-server** (`/opt/homebrew/bin/llama-server`) - llama.cpp HTTP server (Metal accelerated)
+
+### Models Downloaded (Ollama)
+
+Location: `~/.ollama/models/blobs/`
+
+| Model | Size | Downloaded | Notes |
+|-------|------|------------|-------|
+| qwen3.5:27b | 17 GB | 2026-03-05 | - |
+| qwen2.5:32b | 19 GB | 2026-03-04 | Code agents, Defense |
+| qwen3.5:35b | 23 GB | 2026-03-04 | - |
+| qwen2.5-7b | 4.7 GB | 2026-03-04 | Secretaria |
+
+**Total:** ~64 GB (4 models)
