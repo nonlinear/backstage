@@ -1,51 +1,102 @@
 ---
 name: "Librarian as MCP"
-goal: "Move librarian to MCP server (auto-detect topics, keep as tags)"
+goal: "MCP server for agent epistemology validation (anti-drift via audit trail + fast queries)"
 status: active
 type: "minor"
 created: 2026-03-10
 started: 2026-03-10
 completed: null
 tasks:
-  - group: "Research: MCP Migration Effort"
+  - group: "Phase 1: MCP Server + In-Memory Indexes"
     items:
-      - text: "How hard is it to move to MCP?"
+      - text: "Research MCP Python SDK (setup, tool exposure)"
         checked: false
-      - text: "What changes to research.py?"
+      - text: "Create MCP server scaffold (librarian_mcp.py)"
         checked: false
-      - text: "What changes to index_library.py?"
+      - text: "Load ALL FAISS indexes at startup (into RAM)"
         checked: false
-      - text: "Can we keep existing folder structure?"
+      - text: "Expose search(query, requester, context) tool"
+        checked: false
+      - text: "Test query speed (target <200ms)"
+        checked: false
+      - text: "Backward compat: Keep CLI script working"
         checked: false
   
-  - group: "Auto-Detect Topics"
+  - group: "Phase 2: Auto-Detect Topics (Parallel Scan)"
     items:
-      - text: "Replace manual --topics with auto-detect"
+      - text: "Implement parallel FAISS batch search (ThreadPoolExecutor)"
         checked: false
-      - text: "Scan all indexed topics for query"
+      - text: "Benchmark: Sequential vs parallel (quantify speedup)"
         checked: false
-      - text: "Return top-k results across ALL topics"
+      - text: "Default behavior: Scan ALL topics (no manual selection)"
         checked: false
-      - text: "Performance: Can we scan 20+ topics quickly?"
+      - text: "Optional filter: search(query, topics=['chaos-magick'])"
+        checked: false
+      - text: "Return top-k across entire library (deduplicate by score)"
         checked: false
   
-  - group: "Topics as Tags"
+  - group: "Phase 3: Audit Log (Epistemology Trail)"
     items:
-      - text: "Keep topics in metadata (not folders?)"
+      - text: "Create audit.jsonl (append-only log)"
         checked: false
-      - text: "Allow multi-topic books (cross-tagging)"
+      - text: "Log every query: timestamp, requester, query, results"
         checked: false
-      - text: "Query by tag filter (optional)"
+      - text: "Add mark_citation(query_id, result_id) tool"
+        checked: false
+      - text: "Update audit entry when citation marked (cited: true)"
+        checked: false
+      - text: "Test: Agent calls search → cites result → verify log"
         checked: false
   
-  - group: "MCP Server Implementation"
+  - group: "Phase 4: Citation Quality (Metadata Extraction)"
     items:
-      - text: "Create MCP server wrapper"
+      - text: "Extract chapter/section from EPUB metadata"
         checked: false
-      - text: "Expose search tool (query + optional tags)"
+      - text: "Extract page numbers from PDF (if available)"
         checked: false
-      - text: "Test with OpenClaw MCP client"
+      - text: "Return snippet context (±500 chars around match)"
         checked: false
-      - text: "Update SKILL.md (MCP vs script usage)"
+      - text: "Format citation: 'Title (Author, Ch.3, p.42): [snippet]'"
+        checked: false
+      - text: "Test with real books (check metadata quality)"
+        checked: false
+  
+  - group: "Phase 5: File Watcher (Auto-Reindex)"
+    items:
+      - text: "Install watchdog library"
+        checked: false
+      - text: "Monitor ~/Documents/librarian/books/ folders"
+        checked: false
+      - text: "On file add/modify: Reindex file automatically"
+        checked: false
+      - text: "Hot-reload index in MCP server (update RAM copy)"
+        checked: false
+      - text: "Notify connected clients (optional: new content available)"
+        checked: false
+  
+  - group: "Phase 6: Audit Analytics (CLI Tools)"
+    items:
+      - text: "CLI: librarian audit --requester defense"
+        checked: false
+      - text: "CLI: librarian audit --source 'Building Microservices'"
+        checked: false
+      - text: "CLI: librarian audit --unused (seen but not cited)"
+        checked: false
+      - text: "CLI: librarian audit --bias (detect patterns)"
+        checked: false
+      - text: "Output format: Human-readable + JSON"
+        checked: false
+  
+  - group: "Phase 7: Multi-Topic Tags (Optional)"
+    items:
+      - text: "Add tags field to metadata.json"
+        checked: false
+      - text: "Keep folder structure as primary tag (backward compat)"
+        checked: false
+      - text: "Allow books to appear in multiple topics"
+        checked: false
+      - text: "Query filter: search(query, tags=['anarchy', 'economics'])"
+        checked: false
+      - text: "Migration: Scan existing books, suggest tags"
         checked: false
 ---

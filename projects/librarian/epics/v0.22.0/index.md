@@ -6,111 +6,374 @@
 
 # v0.22.0 - Librarian as MCP
 
-**Goal:** Move librarian from script to MCP server (auto-detect topics, keep as tags).
+**Goal:** Transform Librarian into MCP server for agent epistemology validation (anti-drift via audit trail + fast queries).
 
 ---
 
 ## Context
 
-**Current architecture:**
-- CLI script: `research.py "query" --topics chaos-magick,anarchy`
-- Manual topic selection (user must know which topics)
-- Folder-based organization: `books/chaos-magick/`, `books/anarchy/`
+**Why this matters:**
 
-**MCP vision:**
-- Tool exposed via MCP server
-- Auto-detect relevant topics (scan ALL indexes)
-- Topics as tags (metadata, not folder structure)
-- OpenClaw calls via MCP client (no shell wrapper)
+Nicholas will REQUIRE agents to check library before proposing solutions. Librarian becomes **epistemology validator** - agents must cite authoritative sources or explain divergence.
 
----
+**Example workflow:**
+```
+Agent: "Propõe microservices pra X"
+Nicholas: "Check systems design books first"
+Agent → librarian_search("microservices vs monolith")
+Agent: "Building Microservices (Newman, Ch.3) says:
+       - Microservices = good if >5 teams
+       - Monolith = better if <3 devs
+       Our case: 1 dev → monolith recommended.
+       Still propose microservices? Here's why: [divergence explanation]"
+```
 
-## Questions to Answer
-
-### 1. How hard is it to move to MCP?
-
-**Need to research:**
-- MCP server SDK (Python available?)
-- Wrapper complexity (expose existing research.py as tool?)
-- Breaking changes (can we keep current CLI for backward compat?)
-
-### 2. Auto-detect topics
-
-**Current:** User must specify `--topics chaos-magick,anarchy`
-
-**Proposed:** Query scans ALL topics, returns top-k across entire library
-
-**Trade-offs:**
-- ✅ **Pro:** No manual topic selection
-- ✅ **Pro:** Discover content in unexpected topics
-- ❌ **Con:** Slower (scan 20+ indexes vs 2-3)
-- ❌ **Con:** May return irrelevant results
-
-**Mitigation:**
-- Keep `--topics` as optional filter (power users)
-- Cache/optimize FAISS queries (batch search?)
-- Limit total results (top 10 across ALL topics)
-
-### 3. Keep topics as tags?
-
-**Current:** Topics = folder names (`books/chaos-magick/`)
-
-**Proposed:** Topics = metadata tags (books can have multiple)
-
-**Use cases:**
-- Book spans multiple topics (e.g., "Debt" = anarchy + economics + history)
-- Same book in multiple contexts
-- Search by tag filter: `query="debt" tags=anarchy,economics`
-
-**Migration:**
-- Folder structure still valid (1 folder = 1 primary tag)
-- Add `tags` field to metadata.json
-- Support both: folder-based + multi-tag
+**Audit trail = trust.** Nicholas can verify agent checked sources (timestamp, query, results, citations).
 
 ---
 
-## Tasks
+## Current Architecture
 
-*(See epic.yaml for grouped tasks)*
+**CLI script:**
+- `research.py "query" --topics chaos-magick,anarchy`
+- Manual topic selection
+- Reload indexes every query (~2-5s latency)
+- No audit log
+
+**Problems:**
+- ❌ Slow (reload FAISS indexes every query)
+- ❌ Agent doesn't know which topics (manual selection)
+- ❌ No audit trail (who queried what?)
+- ❌ Shell wrapper friction (not native OpenClaw)
+
+---
+
+## MCP Vision
+
+**Server-first architecture:**
+- Load ALL indexes in RAM at boot (~10s startup, instant queries)
+- Auto-detect relevant topics (scan entire library)
+- Audit log (`audit.jsonl`) tracks all queries + citations
+- MCP native (OpenClaw calls tool directly)
+
+**Performance:**
+- Current: ~2-5s per query (reload indexes)
+- MCP: ~50-200ms per query (indexes in RAM)
+- Trade-off: Slower startup, MUCH faster queries
+
+---
+
+## Raciocínio: Como fazer rápido?
+
+### Problem: Index Load Bottleneck
+
+**Current approach (SLOW):**
+```python
+# Every query:
+index = faiss.read_index(f"books/{topic}/index.faiss")  # 1-2s
+results = index.search(query_embedding, k=10)           # 50ms
+```
+
+**MCP approach (FAST):**
+```python
+# At boot (once):
+indexes = {}
+for topic in topics:
+    indexes[topic] = faiss.read_index(f"books/{topic}/index.faiss")  # 10s total
+
+# Every query (instant):
+results = indexes[topic].search(query_embedding, k=10)  # 50ms
+```
+
+**Speed improvement:** 40-100x faster queries (2-5s → 50-200ms)
+
+---
+
+### Problem: Multi-Topic Scan
+
+**Naive approach (SLOW):**
+```python
+# Sequential scan (20 topics × 50ms = 1s)
+for topic in all_topics:
+    results = indexes[topic].search(query, k=10)
+```
+
+**Optimized approach (FAST):**
+```python
+# Parallel batch search
+import concurrent.futures
+
+with ThreadPoolExecutor() as executor:
+    futures = {executor.submit(indexes[t].search, query, k=10): t for t in topics}
+    results = [f.result() for f in futures]
+# 20 topics in ~100ms (parallel)
+```
+
+**Speed improvement:** 10x faster multi-topic (1s → 100ms)
+
+---
+
+### Problem: Indexing Bottleneck
+
+**Current:**
+- Manual reindex: `python index_library.py --smart` (~5min for full library)
+- No incremental indexing
+
+**Optimization 1: Smart Indexing (already exists)**
+```python
+# Only reindex changed files
+if file_mtime > index_mtime:
+    reindex(file)
+```
+
+**Optimization 2: File Watcher (auto-reindex)**
+```python
+from watchdog import FileSystemEventHandler
+
+class BookWatcher(FileSystemEventHandler):
+    def on_modified(self, event):
+        if event.src_path.endswith(('.epub', '.pdf')):
+            topic = extract_topic(event.src_path)
+            reindex_file(topic, event.src_path)
+            reload_index(topic)  # Hot-reload in MCP server
+```
+
+**Speed improvement:** Instant updates (no manual reindex)
+
+---
+
+## Audit Trail Architecture
+
+**What to log:**
+```jsonl
+{"timestamp": "2026-03-10T12:15:00Z", "requester": "agent:defense", "query": "microservices patterns", "topics_scanned": ["systems", "software-engineering"], "results": [{"title": "Building Microservices", "author": "Newman", "score": 0.92, "cited": false}], "context": "epic:v0.5.0-architecture"}
+{"timestamp": "2026-03-10T12:16:30Z", "requester": "agent:defense", "action": "cite", "query_id": "abc123", "result_id": 0, "cited": true}
+```
+
+**File:** `~/Documents/librarian/audit.jsonl` (append-only)
+
+**Why JSONL:**
+- Append-only (no corruption risk)
+- Grep-able (search by requester, source, date)
+- Analytics-friendly (load into pandas/jq)
+
+**Audit queries:**
+```bash
+# What sources did agent X use?
+jq 'select(.requester == "agent:defense") | .results[].title' audit.jsonl | sort | uniq -c
+
+# Was source Y consulted for decision Z?
+jq 'select(.context == "epic:v0.5.0" and .results[].title == "Building Microservices")' audit.jsonl
+
+# Agent saw source but didn't cite? (bias detection)
+jq 'select(.requester == "agent:marketing" and .results[] | select(.title == "Debt" and .cited == false))' audit.jsonl
+```
+
+---
+
+## Tasks (Roadmap)
+
+### Phase 1: MCP Server + In-Memory Indexes (MVP)
+
+**Goal:** Fast queries, agent-accessible
+
+**Tasks:**
+- [ ] Research MCP Python SDK (setup, tool exposure)
+- [ ] Create MCP server scaffold (`librarian_mcp.py`)
+- [ ] Load ALL FAISS indexes at startup (into RAM)
+- [ ] Expose `search(query, requester, context)` tool
+- [ ] Test query speed (target <200ms)
+- [ ] Backward compat: Keep CLI script working
+
+**Deliverable:** Agent can call `librarian_search("microservices")` via MCP, gets results in <200ms
+
+**Effort:** 6-8h
+
+---
+
+### Phase 2: Auto-Detect Topics (Parallel Scan)
+
+**Goal:** Agent doesn't need to know topics, scan entire library
+
+**Tasks:**
+- [ ] Implement parallel FAISS batch search (ThreadPoolExecutor)
+- [ ] Benchmark: Sequential vs parallel (quantify speedup)
+- [ ] Default behavior: Scan ALL topics (no manual selection)
+- [ ] Optional filter: `search(query, topics=["chaos-magick"])`
+- [ ] Return top-k across entire library (deduplicate by score)
+
+**Deliverable:** Agent queries "servitors" → results from chaos-magick + occult + philosophy (auto-detected)
+
+**Effort:** 4h
+
+---
+
+### Phase 3: Audit Log (Epistemology Trail)
+
+**Goal:** Track who queried what, which sources cited
+
+**Tasks:**
+- [ ] Create `audit.jsonl` (append-only log)
+- [ ] Log every query: timestamp, requester, query, topics_scanned, results
+- [ ] Add `mark_citation(query_id, result_id)` tool (agent marks what it cited)
+- [ ] Update audit entry when citation marked (`cited: true`)
+- [ ] Test: Agent calls search → cites result → verify audit log
+
+**Deliverable:** Nicholas can verify agent checked sources via `audit.jsonl`
+
+**Effort:** 4h
+
+---
+
+### Phase 4: Citation Quality (Metadata Extraction)
+
+**Goal:** Agent can cite properly (title, author, chapter, page)
+
+**Tasks:**
+- [ ] Extract chapter/section from EPUB metadata (if available)
+- [ ] Extract page numbers from PDF (if available)
+- [ ] Return snippet context (±500 chars around match)
+- [ ] Format citation: `"Building Microservices (Newman, Ch.3, p.42): [snippet]"`
+- [ ] Test with real books (check metadata quality)
+
+**Deliverable:** Agent cites with full attribution (not just "book says X")
+
+**Effort:** 4-6h
+
+---
+
+### Phase 5: File Watcher (Auto-Reindex)
+
+**Goal:** Add book → automatically indexed, no manual reindex
+
+**Tasks:**
+- [ ] Install `watchdog` library
+- [ ] Monitor `~/Documents/librarian/books/` folders
+- [ ] On file add/modify: Reindex file automatically
+- [ ] Hot-reload index in MCP server (update RAM copy)
+- [ ] Notify connected clients (optional: "new content available")
+
+**Deliverable:** Add EPUB to folder → indexed automatically, queries include it immediately
+
+**Effort:** 4h
+
+---
+
+### Phase 6: Audit Analytics (CLI Tools)
+
+**Goal:** Query audit trail (who used what?)
+
+**Tasks:**
+- [ ] CLI: `librarian audit --requester defense` (sources used by agent)
+- [ ] CLI: `librarian audit --source "Building Microservices"` (where book was cited)
+- [ ] CLI: `librarian audit --unused` (sources seen but not cited)
+- [ ] CLI: `librarian audit --bias` (detect patterns: agent X ignores topic Y)
+- [ ] Output format: Human-readable + JSON
+
+**Deliverable:** Nicholas can audit agent epistemology behavior
+
+**Effort:** 4h
+
+---
+
+### Phase 7: Multi-Topic Tags (Optional)
+
+**Goal:** Books can belong to multiple topics
+
+**Tasks:**
+- [ ] Add `tags` field to metadata.json
+- [ ] Keep folder structure as primary tag (backward compat)
+- [ ] Allow books to appear in multiple topics
+- [ ] Query filter: `search(query, tags=["anarchy", "economics"])`
+- [ ] Migration: Scan existing books, suggest tags (manual approval)
+
+**Deliverable:** "Debt: First 5000 Years" appears in anarchy + economics + history
+
+**Effort:** 4h
+
+---
+
+## Performance Targets
+
+| Metric | Current (CLI) | Target (MCP) |
+|--------|--------------|--------------|
+| **Single query** | 2-5s | <200ms |
+| **Multi-topic (20 topics)** | 40-100s | <500ms |
+| **Index load** | Every query | Once (at boot) |
+| **Startup time** | Instant | ~10s |
+| **Memory usage** | ~100MB | ~2GB (all indexes) |
+| **Reindex** | Manual (~5min) | Auto (file watcher) |
 
 ---
 
 ## Success Criteria
 
-- ✅ MCP server running (localhost or remote)
-- ✅ OpenClaw calls librarian via MCP (no shell script)
-- ✅ Auto-detect works (scan all topics, return top-k)
-- ✅ Topics as tags (optional multi-tagging)
-- ✅ Backward compatible (CLI script still works)
+**MVP (Phase 1-2):**
+- ✅ Agent calls `librarian_search("microservices")`
+- ✅ Returns results <200ms (indexes in RAM)
+- ✅ Auto-detects relevant topics (no manual selection)
+
+**Production (Phase 3-4):**
+- ✅ Audit log tracks all queries + citations
+- ✅ Agent cites: "Building Microservices (Newman, Ch.3, p.42): [snippet]"
+- ✅ Nicholas can verify agent checked sources (`audit.jsonl`)
+
+**Polished (Phase 5-7):**
+- ✅ Add book → auto-indexed (file watcher)
+- ✅ Audit analytics CLI (query who used what)
+- ✅ Multi-topic tags (books in multiple categories)
 
 ---
 
 ## Open Questions
 
-**Q1: Keep folder structure?**
-- **Option A:** Folders = primary tag (backward compat)
-- **Option B:** Flat structure + tags only (big migration)
-- **Lean toward A** (folder-friendly still valuable)
+**Q1: RAM usage acceptable?**
+- All indexes in RAM = ~2GB
+- Is this OK for Mac Studio? (32GB total)
+- **Decision:** YES (2GB/32GB = 6%, acceptable)
 
-**Q2: Performance of scanning 20+ topics?**
-- Test with current library (how slow is it?)
-- Optimize if needed (batch FAISS queries?)
+**Q2: MCP server always-on or on-demand?**
+- **Option A:** LaunchDaemon (starts at boot, always running)
+- **Option B:** On-demand (OpenClaw starts when needed)
+- **Lean toward A** (instant queries > save RAM)
 
-**Q3: MCP server hosting?**
-- **Option A:** Same host as OpenClaw (localhost)
-- **Option B:** Separate service (remote server)
-- **Start with A** (simple > complex)
+**Q3: Audit log rotation?**
+- `audit.jsonl` grows forever (append-only)
+- Rotate monthly? Archive old logs?
+- **Decision:** Defer to Phase 6 (monitor growth first)
 
----
-
-## Next Steps
-
-1. Research MCP Python SDK
-2. Prototype: Expose research.py as MCP tool
-3. Test auto-detect performance (scan all topics)
-4. Design tags schema (metadata.json extension)
-5. Implement + test with OpenClaw
+**Q4: What if agent doesn't cite sources?**
+- Audit shows query but `cited: false`
+- Nicholas: Red flag, ask agent why
+- Future: Auto-flag uncited queries (bias detection)
 
 ---
 
-*Created: 2026-03-10*
+## Analogies
+
+**SearXNG** = meta-search for web (Google + Bing + DDG)  
+**Librarian MCP** = meta-search for library (chaos-magick + systems + finance)
+
+**Git** = audit log for code (`git blame`)  
+**Librarian audit** = audit log for epistemology (`librarian audit --source`)
+
+**Calibre** = library management (metadata search)  
+**Librarian** = library epistemology (semantic search + audit trail)
+
+---
+
+## Next Steps (Prototype Phase 1)
+
+1. **Install MCP Python SDK**
+2. **Scaffold MCP server** (`librarian_mcp.py`)
+3. **Load 1 index in RAM** (test memory usage)
+4. **Expose `search()` tool** (basic query)
+5. **Benchmark:** CLI vs MCP (quantify speedup)
+6. **Decide:** Worth the effort? (if >10x faster, proceed)
+
+**Estimated time:** 2-3h for prototype, then decide roadmap priority.
+
+---
+
+*Created: 2026-03-10*  
+*Updated: 2026-03-10 (audit trail, performance optimization, task breakdown)*
