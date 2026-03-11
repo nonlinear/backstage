@@ -37,10 +37,21 @@ LibraryBrowser
 
 ## Technical Decisions
 
-### EPUB.js (Chosen)
-- **Pros:** MIT license, active maintenance, CFI support, responsive
-- **Cons:** Large bundle (~200KB), requires careful CSS overrides
-- **Alternatives:** Readium (complex), Foliate (Linux-only)
+### EPUB Engine Comparison
+
+| Engine | License | Bundle Size | CFI Support | Maintenance | Platform | Verdict |
+|--------|---------|-------------|-------------|-------------|----------|---------|
+| **epub.js** | MIT | ~200KB | ✅ Yes | ✅ Active | Browser | ✅ **CHOSEN** |
+| Readium | BSD-3 | ~500KB | ✅ Yes | ✅ Active | Browser | ❌ Too heavy |
+| Foliate-js | GPL-3 | ~150KB | ✅ Yes | ⚠️ Fork | Browser | ⚠️ Less docs |
+
+**Why epub.js:**
+- **Used by:** Calibre Web, Readium Cloud, Apple Books (WebKit)
+- **Repo:** https://github.com/futurepress/epub.js
+- **Features:** TOC, highlights, bookmarks, themes, pagination
+- **Embed:** Client-side rendering (no backend needed)
+- **Responsive:** Portrait/landscape CSS adapts automatically
+- **Bundle:** Lazy load on reader open (not index view) = minimal impact
 
 ### Page Memory Storage
 - **Format:** `{ bookPath: string, cfi: string, progress: number, pinnedAt: timestamp }`
