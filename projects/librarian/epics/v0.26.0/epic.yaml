@@ -1,0 +1,131 @@
+---
+name: "Context-aware search"
+goal: "Librarian MCP understands conversation history and related queries"
+status: backlog
+type: "minor"
+created: 2026-03-10
+started: null
+completed: null
+tasks:
+  - text: "Design context protocol (what to pass to MCP?)"
+    checked: false
+  - text: "MCP tool: add 'context' parameter (list of prior messages)"
+    checked: false
+  - text: "Context injection strategies (prepend, embed separately, hybrid)"
+    checked: false
+  - text: "Test: 'What about mutual aid?' should know prior 'Graeber debt' query"
+    checked: false
+  - text: "SKILL: track last N queries in session memory"
+    checked: false
+  - text: "SKILL: reformulate query with context before calling MCP"
+    checked: false
+  - text: "Benchmark: context-aware vs isolated queries (quality improvement?)"
+    checked: false
+  - text: "Document context protocol in connections/librarian-mcp.md"
+    checked: false
+notes: |
+  ## Problem
+  
+  Current MCP (v0.22.0) treats each query as isolated:
+  
+  ```
+  User: "What does Graeber say about debt?"
+  MCP: [search "debt"]
+  
+  User: "And what about mutual aid?"
+  MCP: [search "mutual aid"]  ← Doesn't know Graeber was mentioned
+  ```
+  
+  ## Goal
+  
+  MCP should understand conversation flow:
+  
+  ```
+  User: "What does Graeber say about debt?"
+  MCP: [search "Graeber debt"]
+  
+  User: "And what about mutual aid?"
+  MCP: [search "Graeber mutual aid"]  ← Knows to keep Graeber in context
+  ```
+  
+  ## Design Options
+  
+  ### Option A: SKILL reformulates (simple)
+  - SKILL tracks last N queries
+  - SKILL rewrites query before sending to MCP
+  - Example: "And mutual aid?" → "Graeber mutual aid"
+  - **Pro:** No MCP changes needed
+  - **Con:** SKILL does LLM work (expensive, error-prone)
+  
+  ### Option B: MCP receives context (proper)
+  - MCP tool accepts `context: list[str]` parameter
+  - MCP embeds context + query together
+  - Example: 
+    ```python
+    search_library(
+      query="mutual aid",
+      context=["Previous: Graeber debt"]
+    )
+    ```
+  - **Pro:** MCP handles embeddings (better quality)
+  - **Con:** Requires MCP changes
+  
+  ### Option C: Hybrid (best?)
+  - SKILL does light reformulation (entity extraction)
+  - MCP receives both raw query + extracted entities
+  - Example:
+    ```python
+    search_library(
+      query="mutual aid",
+      entities=["Graeber"],
+      context=["debt"]
+    )
+    ```
+  - **Pro:** Clear separation of concerns
+  - **Con:** More complex protocol
+  
+  ## Research Questions
+  
+  1. **How much context helps?**
+     - Last 1 message? Last 3? Full session?
+     - Benchmark: isolated vs 1-context vs 3-context
+  
+  2. **Embedding strategy?**
+     - Prepend context to query: "Graeber debt. mutual aid"
+     - Embed separately, merge vectors
+     - Use different weights (query=1.0, context=0.5)
+  
+  3. **Entity extraction?**
+     - Simple regex (author names, book titles)
+     - NER model (overkill?)
+     - Just pass raw previous queries
+  
+  4. **Session boundaries?**
+     - Reset context after topic switch?
+     - Decay older context (weighted by recency)?
+  
+  ## Quality Improvement Estimate
+  
+  **Hypothesis:** Context helps on follow-up queries (20-30% of total)
+  
+  **Test cases:**
+  - "Graeber debt" → "And mutual aid?" (should keep Graeber)
+  - "Design systems" → "Best practices?" (should stay in design_system topic)
+  - "Phil Hine gnosis" → "What about servitors?" (should keep Phil Hine)
+  
+  **Success metric:** 
+  - Isolated query returns results from ANY author
+  - Context-aware query returns results from SAME author
+  - Measure: author consistency in follow-ups
+  
+  ## Related Epics
+  
+  - v0.23.0: Audit trail (tracks context usage)
+  - v0.25.0: Multi-topic search (context helps choose topics)
+  
+  ## Open Questions
+  
+  - Should context persist across sessions? (probably not)
+  - Should context include cited sources? (maybe - reinforcement learning)
+  - How to handle context contradictions? ("Forget Graeber, search Harvey")
+---
