@@ -10,17 +10,23 @@ description: |
   Single process lifecycle (GUI UP = watcher UP)
 
 tasks:
-  - text: "Create Flask app scaffold (librarian_app.py)"
-    checked: false
+  - text: "Create Next.js app scaffold (same framework as Backstage)"
+    checked: true
   - text: "Load .library-index.json and render topics"
+    checked: true
+  - text: "Add dropdown navigation (topic + subtopic)"
+    checked: true
+  - text: "Display books as cards (grid layout)"
+    checked: true
+  - text: "Extract EPUB covers (book.epub → book.jpg, same folder)"
+    checked: true
+  - text: "Update reindexing to regenerate covers on file changes"
     checked: false
-  - text: "Add search/filter UI for topics"
+  - text: "Show covers in GUI cards"
     checked: false
   - text: "Implement file watcher (watchdog) for books/"
     checked: false
   - text: "Trigger reindex on file add/remove/modify"
-    checked: false
-  - text: "Bundle GUI + watcher in single process"
     checked: false
   - text: "Test: add book → auto-reindex → GUI updates"
     checked: false
