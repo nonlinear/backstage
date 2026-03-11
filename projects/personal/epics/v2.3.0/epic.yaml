@@ -1,0 +1,11 @@
+---
+version: v2.3.0
+name: "Arr Suite Media Automation"
+goal: "Automate media download and organization using arr suite (Sonarr, Radarr, Lidarr, Prowlarr)"
+status: backlog
+type: "minor"
+created: 2026-03-11
+started: null
+completed: null
+tasks: []
+---
