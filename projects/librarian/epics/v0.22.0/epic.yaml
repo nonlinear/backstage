@@ -21,13 +21,13 @@ tasks:
   - text: "Create Dockerfile + docker-compose.yml"
     checked: true
   - text: "Build Docker image (test container)"
-    checked: false
+    checked: true
   - text: "Test MCP via Docker (STDIO communication)"
-    checked: false
+    checked: true
   - text: "Benchmark: CLI vs MCP latency (prove speedup)"
-    checked: false
+    checked: true
   - text: "Document usage in connections/librarian-mcp.md"
-    checked: false
+    checked: true
   - text: "Update librarian skill to call MCP (thin wrapper)"
     checked: false
 ---
