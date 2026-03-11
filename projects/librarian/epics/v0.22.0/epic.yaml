@@ -1,11 +1,11 @@
 ---
 name: "Librarian as MCP"
 goal: "MCP server for faster queries (persistent process, indexes in RAM)"
-status: active
+status: done
 type: "minor"
 created: 2026-03-10
 started: 2026-03-10
-completed: null
+completed: 2026-03-10
 tasks:
   # MVP: Single-topic search via MCP
   - text: "Install MCP Python SDK in venv"
@@ -29,6 +29,6 @@ tasks:
   - text: "Document usage in connections/librarian-mcp.md"
     checked: true
   - text: "Update librarian skill to call MCP (thin wrapper)"
-    checked: false
+    checked: true
 ---
 
