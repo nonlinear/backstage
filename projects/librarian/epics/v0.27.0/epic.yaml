@@ -1,0 +1,67 @@
+version: "0.27.0"
+title: "GUI Index Browser + Auto-Indexing"
+status: active
+started: 2026-03-10
+squad: librarian
+
+description: |
+  Web GUI to visualize topics + books from .library-index.json
+  Auto-indexing via file watcher (watchdog)
+  Single process lifecycle (GUI UP = watcher UP)
+
+tasks:
+  - text: "Create Flask app scaffold (librarian_app.py)"
+    checked: false
+  - text: "Load .library-index.json and render topics"
+    checked: false
+  - text: "Add search/filter UI for topics"
+    checked: false
+  - text: "Implement file watcher (watchdog) for books/"
+    checked: false
+  - text: "Trigger reindex on file add/remove/modify"
+    checked: false
+  - text: "Bundle GUI + watcher in single process"
+    checked: false
+  - text: "Test: add book → auto-reindex → GUI updates"
+    checked: false
+  - text: "Update localhost-manager.sh (port 8766)"
+    checked: false
+  - text: "Document in connections/librarian-gui.md"
+    checked: false
+
+notes: |
+  ## Design Decisions
+  
+  **Single process architecture:**
+  - Flask GUI (port 8766)
+  - Watchdog observer (background thread)
+  - MCP server stays separate (different lifecycle)
+  
+  **Watcher triggers:**
+  - File added → reindex topic → reload GUI
+  - File removed → reindex topic → reload GUI
+  - File modified → reindex topic → reload GUI
+  
+  **GUI features:**
+  - List all 73 topics
+  - Show books per topic
+  - Search/filter topics
+  - Click topic → expand books
+  - Minimal UI (no heavy JS framework)
+  
+  **Port:** 8766 (already configured in localhost-manager.sh)
+  
+  ## Tech Stack
+  
+  - Flask (web framework)
+  - watchdog (file watching)
+  - Jinja2 (templating)
+  - JSON (data source: .library-index.json)
+  
+  ## Success Criteria
+  
+  - GUI shows all topics + books
+  - Search filters topics instantly
+  - Add book → <10s auto-reindex → GUI updates
+  - Single command to start everything
+  - Works on localhost:8766
