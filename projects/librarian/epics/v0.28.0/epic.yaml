@@ -1,0 +1,109 @@
+name: "Librarian as Reader"
+status: active
+epic_id: v0.28.0
+created: 2026-03-10
+squad: engineering
+tier: flagship
+
+goal: |
+  Turn Librarian GUI into full EPUB reader with page memory, deep linking, 
+  and portrait/landscape layouts. Replace Kavita for reading + research workflow.
+
+success_criteria:
+  - EPUB files render correctly in browser
+  - Page position persisted (pinned books)
+  - Deep links work: /AI/policy#book.epub → Opens reader at last page
+  - Portrait/landscape CSS adapts to screen orientation
+  - Warning banner: "Return to reading?" if pinned book + deeplink exists
+
+tasks:
+  - group: "Phase 1: EPUB Rendering"
+    items:
+      - text: "Research EPUB.js library (client-side rendering)"
+        checked: false
+      - text: "Install epub.js in Librarian app"
+        checked: false
+      - text: "Create EpubReader component (portrait layout)"
+        checked: false
+      - text: "Test with sample book (verify TOC, pagination, fonts)"
+        checked: false
+  
+  - group: "Phase 2: Page Memory"
+    items:
+      - text: "Design storage: localStorage per book (CFI = location)"
+        checked: false
+      - text: "Pin/unpin button (star icon in book card)"
+        checked: false
+      - text: "Save current CFI on page turn"
+        checked: false
+      - text: "Load last CFI when opening pinned book"
+        checked: false
+  
+  - group: "Phase 3: Deep Linking"
+    items:
+      - text: "Update routing: /AI/policy#book.epub → Open reader if exists"
+        checked: false
+      - text: "Reader opens at saved CFI (if pinned)"
+        checked: false
+      - text: "Breadcrumb shows: Librarian / AI / policy / Book Title"
+        checked: false
+  
+  - group: "Phase 4: Layouts"
+    items:
+      - text: "Portrait CSS (default, mobile-friendly)"
+        checked: false
+      - text: "Landscape CSS (desktop, wider columns)"
+        checked: false
+      - text: "CSS media query: @media (orientation: landscape)"
+        checked: false
+      - text: "Test on iPad Mini (portrait + landscape)"
+        checked: false
+  
+  - group: "Phase 5: UX Polish"
+    items:
+      - text: "Warning banner: 'Return to reading X?' (if pinned + deeplink)"
+        checked: false
+      - text: "Close button → Returns to topic view"
+        checked: false
+      - text: "Progress indicator (% read)"
+        checked: false
+      - text: "Font size controls (+/-)"
+        checked: false
+
+research_questions:
+  - "EPUB.js vs other libraries (Readium, Foliate)?"
+  - "CFI (Canonical Fragment Identifier) = best way to save position?"
+  - "localStorage vs IndexedDB for page memory?"
+  - "Deep link precedence: Hash navigation vs reader state?"
+
+risks:
+  - "EPUB rendering in browser = complex (fonts, images, CSS)"
+  - "CFI parsing may fail on malformed EPUBs"
+  - "localStorage size limits (5-10MB) may be issue for many books"
+
+dependencies:
+  - epic/v0.27.0 (GUI Index Browser) must be stable first
+
+notes: |
+  **Context:**
+  - Nicholas wants to replace Kavita (Docker container, separate app)
+  - Librarian GUI = index browser + reader in one
+  - Pinned books = frequently read (save position, warn on deeplink)
+  
+  **User flow:**
+  1. Browse library → Click book card → Opens reader
+  2. Read book → Position auto-saved (if pinned)
+  3. Close reader → Returns to topic view
+  4. Navigate away → Deeplink with hash
+  5. Return to site → "Return to reading X?" (if pinned + hash matches)
+  
+  **Technical:**
+  - EPUB.js = MIT license, actively maintained
+  - CFI = standard for EPUB position (like page number)
+  - localStorage = simple, 5MB limit (good enough for metadata)
+  - Portrait/landscape = CSS media queries (no JS needed)
+  
+  **Design inspiration:**
+  - Apple Books (iOS) - pin/unpin UX
+  - Calibre Web - EPUB.js integration
+  - Kavita - return to reading banner
