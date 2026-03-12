@@ -1,0 +1,103 @@
+version: "3.7.0"
+title: "Fixes"
+status: active
+started: 2026-03-12
+priority: minor
+squad: backstage
+
+description: |
+  Minor fixes for Backstage UI - current card state vs notes tab, hot reload for external YAML files
+
+tasks:
+  - group: "Current Card State Bug"
+    items:
+      - text: "Fix: Current state ≠ Notes tab (separate concerns)"
+        checked: false
+      - text: "Current card should NOT auto-open notes"
+        checked: false
+      - text: "Current card should NOT change width to 500px"
+        checked: false
+      - text: "Current card should NOT block clicking other tabs"
+        checked: false
+      - text: "Test: Click tasks tab on current card (should work)"
+        checked: false
+  
+  - group: "Hot Reload for External YAML"
+    items:
+      - text: "Add chokidar dependency (npm install chokidar)"
+        checked: false
+      - text: "Create app/lib/watch-projects.js (file watcher)"
+        checked: false
+      - text: "Watch projects/**/*.yaml for changes"
+        checked: false
+      - text: "Revalidate /projects route on change"
+        checked: false
+      - text: "Test: Edit epic.yaml → browser auto-reloads"
+        checked: false
+
+notes: |
+  ## Context (Grooming Session 2026-03-12)
+  
+  **Discovered during Pomodoro grooming:**
+  - Current card behavior blocks navigation
+  - No hot reload = have to restart Backstage every YAML edit
+  - Both issues make grooming inefficient
+  
+  ## Current Card Bug
+  
+  **Problem:** Current (state) conflated with Notes (tab)
+  
+  **Current behavior (WRONG):**
+  - Current card opens notes automatically
+  - Current card → 500px width
+  - If current, can't click tasks (reverts to notes)
+  
+  **Expected:**
+  - **Current = STATE** (which card selected)
+  - **Notes = TAB** (which content shown)
+  - Current should NOT auto-open any tab
+  - Current should NOT change width
+  - Current should allow clicking any tab
+  
+  **Notes tab (CORRECT already):**
+  - Click notes → becomes current ✅
+  - Opens notes content ✅
+  - Width 600px ✅
+  
+  ## Hot Reload Solution
+  
+  **Use chokidar file watcher:**
+  
+  ```javascript
+  // app/lib/watch-projects.js
+  import chokidar from 'chokidar';
+  import { revalidatePath } from 'next/cache';
+  
+  if (process.env.NODE_ENV === 'development') {
+    const watcher = chokidar.watch('../projects/**/*.yaml', {
+      ignoreInitial: true,
+    });
+  
+    watcher.on('change', (path) => {
+      console.log(`Detected change in ${path}, revalidating...`);
+      revalidatePath('/projects');
+    });
+  }
+  ```
+  
+  **Import in layout.tsx:**
+  ```typescript
+  import '../lib/watch-projects';
+  ```
+  
+  ## Success Criteria
+  
+  - [ ] Current card works independently of tab selection
+  - [ ] Can click any tab on current card
+  - [ ] YAML changes trigger browser reload automatically
+  - [ ] No more manual Backstage restarts during grooming
+  
+  ## Impact
+  
+  **Before:** Grooming frustrating (constant restarts, broken navigation)
+  **After:** Grooming smooth (immediate feedback, proper navigation)
