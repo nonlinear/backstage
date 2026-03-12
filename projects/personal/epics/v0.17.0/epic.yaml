@@ -1,13 +1,13 @@
 ---
-version: v0.17.0
 name: "Salesman"
 goal: "Automação para compra e venda de produtos (price watching, eBay, marketplaces)"
 status: backlog
 type: "minor"
-created: null
+created: 2026-02-11
 started: null
 completed: null
 tasks:
+  # Phase 1: Research
   - text: "eBay API capabilities (read docs, get API key)"
     checked: false
   - text: "changedetection.io integration (test price watch)"
@@ -16,6 +16,8 @@ tasks:
     checked: false
   - text: "Data schema (inventory + watchlist fields)"
     checked: false
+  
+  # Phase 2: Price Watching
   - text: "Add product to watchlist (URL, target price, notes)"
     checked: false
   - text: "changedetection.io monitors price"
@@ -26,6 +28,8 @@ tasks:
     checked: false
   - text: "Test with 3-5 products"
     checked: false
+  
+  # Phase 3: Inventory Tracking
   - text: "Design schema (item, photo, description, min price, status)"
     checked: false
   - text: "Add items to inventory"
@@ -34,6 +38,8 @@ tasks:
     checked: false
   - text: "Mark as sold/donated/trashed"
     checked: false
+  
+  # Phase 4: eBay Integration
   - text: "eBay API setup (developer account, keys)"
     checked: false
   - text: "Create listing via API (title, description, price, photo)"
@@ -44,10 +50,20 @@ tasks:
     checked: false
   - text: "Notify on sale (Telegram)"
     checked: false
+  
+  # Phase 5: Price Comparison
   - text: "Query multiple platforms (eBay, Amazon, AliExpress, etc.)"
     checked: false
   - text: "Parse prices + shipping"
     checked: false
   - text: "Return cheapest option"
+    checked: false
+  
+  # Phase 6: Automation
+  - text: "Daily price check (cron job)"
+    checked: false
+  - text: "Weekly inventory review (remind to list items)"
+    checked: false
+  - text: "Monthly sales report (what sold, revenue)"
     checked: false
 ---

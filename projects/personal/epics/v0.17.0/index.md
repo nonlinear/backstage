@@ -1,35 +1,18 @@
-# Epic Notes
+# Salesman 💰
 
-> Version, name, status → see `epic.yaml`
+**Goal:** Automação para compra e venda de produtos (price watching, eBay, marketplaces).
 
----
-
-
-**Goal:** Automação para compra e venda de produtos (price watching, eBay, marketplaces)
+**Problem:** Manual price tracking, missed deals, no inventory management, manual listings = lost money.
 
 ---
 
-## Problem
+## Solution: Automated Workflows
 
-**Manual work:**
-- Tracking prices manually across multiple sites
-- Missing deals (price dropped, didn't see it)
-- No inventory management (what I own, what I want to sell)
-- Listing items manually (eBay, Mercado Livre, etc.)
-- No comparison across platforms (which site is cheapest?)
-
-**Result:** Lost money (missed deals, sold too cheap, bought too expensive)
-
----
-
-## Solution
-
-**Automated workflows:**
 1. **Price watching** - Monitor products, alert when price drops
 2. **Inventory tracking** - What I own, what I want to sell, target prices
 3. **Marketplace integration** - eBay listings, sales notifications
 4. **Price comparison** - Best deal across platforms
-5. **Alert system** - Telegram notifications for price drops, sales, etc.
+5. **Alert system** - Telegram notifications (price drops, sales)
 
 ---
 
@@ -54,7 +37,7 @@
 
 ---
 
-## Tech Stack (TBD)
+## Tech Stack
 
 **Already have:**
 - **changedetection.io** (running on NAS, port 5555) - price watch for sites without API
@@ -74,7 +57,6 @@
 - **Spreadsheet?** (simple, portable)
 
 ---
-
 
 ## Success Criteria
 
@@ -102,8 +84,3 @@
 - Nicholas prefers: Temu > Shop.app > AliExpress >> Amazon (avoid Amazon)
 - Telegram notifications = primary alert method
 - Voice interface = future (v2.0 - "quanto tá custando X?")
-
----
-
-**Created:** 2026-02-11  
-**Last Updated:** 2026-02-11
