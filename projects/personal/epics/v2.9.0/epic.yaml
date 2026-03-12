@@ -1,0 +1,124 @@
+version: "2.9.0"
+title: "Pomo Timer"
+status: backlog
+started: null
+squad: personal
+
+description: |
+  Visual timer that opens on each Pomodoro session, always-on-top window.
+  Shows countdown, progress bar, current epic/task name.
+
+tasks:
+  - group: "Timer UI"
+    items:
+      - text: "Create always-on-top window"
+        checked: false
+      - text: "Display countdown (MM:SS format)"
+        checked: false
+      - text: "Progress bar (visual time remaining)"
+        checked: false
+      - text: "Show current epic/task name"
+        checked: false
+      - text: "Clean, minimal design (not distracting)"
+        checked: false
+  
+  - group: "Integration"
+    items:
+      - text: "Launch from pomo skill automatically"
+        checked: false
+      - text: "Close automatically when Pomodoro ends"
+        checked: false
+      - text: "5-min warning notification"
+        checked: false
+      - text: "Completion notification"
+        checked: false
+  
+  - group: "Tech Stack"
+    items:
+      - text: "Research: Electron vs Tauri vs native"
+        checked: false
+      - text: "Implement timer app"
+        checked: false
+      - text: "Package as standalone executable"
+        checked: false
+
+notes: |
+  ## Context (2026-03-12)
+  
+  **Triggered by:** Pomodoro grooming session
+  **User quote:** "no futuro a gente cria um timer app"
+  
+  **Current limitation:**
+  - macOS notifications only (not visible during work)
+  - No visual countdown (can't see time remaining)
+  - Calendar event created but not shown
+  
+  ## Design Requirements
+  
+  **Always-on-top window:**
+  - Stays visible over all apps
+  - Small, unobtrusive
+  - Corner of screen (user-configurable?)
+  
+  **Display:**
+  - Countdown: MM:SS (e.g., "23:45")
+  - Progress bar (visual fill)
+  - Epic/task name: "🍅 Grooming" or "🍅 v3.7.0 - Fixes"
+  
+  **Behavior:**
+  - Opens when `pomo` starts
+  - Updates every second
+  - ⏰ 5-min warning (visual + sound?)
+  - ⏱️ Completion (visual + sound + reflection prompt)
+  - Closes after reflection submitted
+  
+  ## Tech Stack Options
+  
+  **Option 1: Electron**
+  - Pro: Web tech (HTML/CSS/JS), easy to build
+  - Con: Heavy (100+ MB for simple timer)
+  
+  **Option 2: Tauri**
+  - Pro: Lightweight (Rust + web frontend), <10 MB
+  - Con: Needs Rust setup
+  
+  **Option 3: Native (Swift)**
+  - Pro: Smallest, fastest, macOS-native
+  - Con: Swift learning curve
+  
+  **Recommendation:** Start with Tauri (good balance)
+  
+  ## Integration with Pomo Skill
+  
+  **Launch:**
+  ```bash
+  # In pomo skill, after Calendar event created:
+  open ~/Apps/pomo-timer.app --args \
+    --duration 1500 \
+    --epic "Grooming" \
+    --calendar-id "3ereknsu7kib91qtavo00kdmro"
+  ```
+  
+  **Communication:**
+  - Timer reads args (duration, epic name, calendar ID)
+  - On completion → trigger reflection prompt
+  - On reflection submit → update Calendar event notes
+  
+  ## Success Criteria
+  
+  - [ ] Timer opens automatically on `pomo` start
+  - [ ] Always visible during work (on top)
+  - [ ] Shows accurate countdown
+  - [ ] Visual progress bar
+  - [ ] 5-min warning works
+  - [ ] Completion notification works
+  - [ ] Reflection prompt triggered
+  - [ ] Calendar event updated with reflection
+  
+  ## Future Enhancements
+  
+  - Pause/resume timer
+  - Custom durations (15min, 30min, 45min)
+  - Sound effects (tick-tock, completion bell)
+  - Theme customization
+  - Stats (Pomodoros completed today/week)
