@@ -1,6 +1,6 @@
 ---
-name: "agents-and-checks"
-goal: "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti."
+name: "check enforcement"
+goal: "How checks validate, execute, and report"
 status: backlog
 type: "minor"
 created: 2026-03-01

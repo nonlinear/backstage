@@ -80,7 +80,7 @@ export function ProjectPageClient({
   
   const [section, setSection] = useState("projects")
   const [project, setProject] = useState(projectSlug)
-  const [activeEpicVersion, setActiveEpicVersion] = useState<string | null>(null)
+  const [currentEpicVersion, setActiveEpicVersion] = useState<string | null>(null)
   const [selectedNoteByEpic, setSelectedNoteByEpic] = useState<Record<string, string>>({})
   const hasInitialized = useRef(false)
   
@@ -248,11 +248,12 @@ export function ProjectPageClient({
               tasks={epic.tasks}
               notesCount={epic.notesCount}
               notesList={epic.notesList}
-              activeTab={activeEpicVersion === epic.version ? "notes" : "tasks"}
-              isActiveEpic={activeEpicVersion === epic.version}
+              activeTab={currentEpicVersion === epic.version ? "notes" : "tasks"}
+              isCurrentEpic={currentEpicVersion === epic.version}
               selectedNote={selectedNoteByEpic[epic.version]}
               onTabChange={(tab) => handleEpicTabChange(epic.version, tab)}
               onNoteChange={(noteSlug) => handleNoteChange(epic.version, noteSlug)}
+              onCardClick={() => setActiveEpicVersion(epic.version)}
             />
           ))}
           

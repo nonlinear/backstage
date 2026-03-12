@@ -36,10 +36,11 @@ interface EpicCardProps {
   notesCount?: number
   notesList?: { slug: string; title: string; content: string }[]
   activeTab: "tasks" | "notes"
-  isActiveEpic: boolean
+  isCurrentEpic: boolean
   selectedNote?: string
   onTabChange: (tab: "tasks" | "notes") => void
   onNoteChange?: (noteSlug: string) => void
+  onCardClick?: () => void
 }
 
 export function EpicCard({ 
@@ -52,10 +53,11 @@ export function EpicCard({
   notesCount = 0,
   notesList = [],
   activeTab,
-  isActiveEpic,
+  isCurrentEpic,
   selectedNote: externalSelectedNote,
   onTabChange,
-  onNoteChange
+  onNoteChange,
+  onCardClick
 }: EpicCardProps) {
   // Count completed tasks (flat + grouped)
   const completedTasks = tasks.reduce((count, item) => {
@@ -94,7 +96,8 @@ export function EpicCard({
     <>
       <div id={version} className="scroll-mt-4" />
       <Card 
-        className={`relative flex-shrink-0 transition-all duration-300 ${isActiveEpic ? 'w-[500px] current' : 'w-[300px]'} ${status === 'done' ? 'done' : ''} ${status === 'active' ? 'active' : ''} h-full overflow-y-auto`}
+        onClick={onCardClick}
+        className={`relative flex-shrink-0 transition-all duration-300 cursor-pointer ${isCurrentEpic ? 'w-[500px] current' : 'w-[300px]'} ${status === 'done' ? 'done' : ''} ${status === 'active' ? 'active' : ''} ${status === 'done' && !isCurrentEpic ? 'opacity-50' : 'opacity-100'} h-full overflow-y-auto`}
       >
       {/* Status badge top-right (absolute) */}
       <Badge variant="outline" className="absolute top-4 right-4 text-xs capitalize">

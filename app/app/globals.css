@@ -201,5 +201,5 @@ sup {
 
 /* Active epics: 2px border */
 .active {
-  border: 2px solid hsl(var(--border));
+  border: 2px solid hsl(var(--primary));
 }

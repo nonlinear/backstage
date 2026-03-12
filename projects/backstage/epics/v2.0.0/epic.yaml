@@ -1,7 +1,7 @@
 ---
 name: "backstage 2.0"
 goal: "Centralizing all projects epics into one point."
-status: published
+status: done
 type: "major"
 created: 2026-02-20
 started: 2026-02-20
