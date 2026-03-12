@@ -8,10 +8,16 @@ created: 2026-03-12
 started: 2026-03-12
 completed: null
 tasks:
-  - "✅ Install Uptime Kuma on NAS (Docker via Portainer, port 3001)"
-  - "✅ Expose via Tailscale: https://media.adal-rigel.ts.net:3001"
-  - "✅ Create 17 monitors (Mac + NAS services + Tailscale health)"
-  - "⏳ Configure Telegram notifications"
-  - "⏳ Test failure scenarios"
-  - "⏳ Document auto-add workflow for new services"
+  - text: "Install Uptime Kuma on NAS (Docker via Portainer, port 3001)"
+    checked: true
+  - text: "Expose via Tailscale: https://media.adal-rigel.ts.net:3001"
+    checked: true
+  - text: "Create 17 monitors (Mac + NAS services + Tailscale health)"
+    checked: true
+  - text: "Configure Telegram notifications"
+    checked: false
+  - text: "Test failure scenarios"
+    checked: false
+  - text: "Document auto-add workflow for new services"
+    checked: false
 ---
