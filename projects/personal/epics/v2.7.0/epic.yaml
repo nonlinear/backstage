@@ -1,0 +1,41 @@
+---
+name: "Meshtastic"
+goal: "Build resilient community infrastructure (mesh networks, mutual aid, off-grid communication)"
+status: backlog
+type: "major"
+created: 2026-03-12
+started: null
+completed: null
+tasks:
+  # Phase 1: Hardware
+  - text: "Buy T-Beam or Heltec V3 devices (2-3 nodes)"
+    checked: false
+  - text: "Flash Meshtastic firmware"
+    checked: false
+  - text: "Test basic mesh (home + backpack + bike)"
+    checked: false
+  
+  # Phase 2: Network Setup
+  - text: "Configure channels (community, emergency, mutual aid)"
+    checked: false
+  - text: "Set up MQTT bridge (mesh → internet gateway)"
+    checked: false
+  - text: "Test range (urban environment)"
+    checked: false
+  
+  # Phase 3: Community Onboarding
+  - text: "Document setup guide (non-technical)"
+    checked: false
+  - text: "Host workshop (install + configure)"
+    checked: false
+  - text: "Create mutual aid directory (neighbors, resources)"
+    checked: false
+  
+  # Phase 4: Integration
+  - text: "OpenClaw Meshtastic skill (send/receive messages)"
+    checked: false
+  - text: "Emergency alerts (broadcast to mesh)"
+    checked: false
+  - text: "Offline-first apps (maps, schedules, contacts)"
+    checked: false
+---
