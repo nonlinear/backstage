@@ -1,18 +1,18 @@
 ---
-name: "backstage 2.0"
-goal: "Centralizing all projects epics into one point."
-status: done
-type: "major"
-created: 2026-02-20
-started: 2026-02-20
-completed: 2026-03-01
+version: v2.0.0
+name: "Backstage as Checkpoints"
+goal: "Research architectural patterns for Backstage 2.0 checkpoint system - declarative policy execution, versionable, auditable, hierarchical governance for 15 agents + multiple projects"
+status: backlog
+type: major
+created: 2026-02-26
+started: null
+completed: null
 tasks:
-  - Centralize checks in ~/Documents/backstage/checks/ ✅
-  - Migrate projects to ~/Documents/backstage/projects/ ✅
-  - Epic folders (yaml + index.md, not markdown files) ✅
-  - Create checks.yaml manifests ✅
-  - Refactor backstage skill for new structure ✅
-  - Global + project checks composite execution ✅
-  - Update SKILL.md diagram to match implementation ✅
-  - Document architecture (syntax: project/epic types/task/notes) ✅
+  - "Research OPA (hierarchical policies, conflict resolution, audit logs)"
+  - "Research Temporal (workflow orchestration, event triggers, retry patterns)"
+  - "Research TLA+ (formal verification, state consistency, edge cases)"
+  - "Document findings in ~/Documents/personal/ideas/checkpoint-research-*.md"
+  - "Compare approaches (what to adopt, what to avoid)"
+  - "Design Minimal Viable Checkpoint (MVC) architecture"
+  - "Propose epic v0.32.0: MVC implementation"
 ---
