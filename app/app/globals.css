@@ -195,7 +195,8 @@ sup {
 }
 
 /* Done epics: opacity 50% unless current */
-.done:not(.current) {
+.done:not(.current),
+.archive:not(.current) {
   opacity: 0.5;
 }
 

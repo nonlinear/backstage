@@ -153,8 +153,8 @@ export function ProjectPageClient({
   const currentSection = sections.find(s => s.value === section)
   const totalEpics = projects.reduce((sum, p) => sum + p.epicCount, 0)
   
-  // Sort epics by status order (active → backlog → done), then by semver ASC
-  const statusOrder = { active: 1, backlog: 2, done: 3 }
+  // Sort epics by status order (active → backlog → archive → done), then by semver ASC
+  const statusOrder = { active: 1, backlog: 2, archive: 3, done: 3 }
   const sortedEpics = [...epics].sort((a, b) => {
     const statusDiff = (statusOrder[a.status as keyof typeof statusOrder] || 99) - 
                        (statusOrder[b.status as keyof typeof statusOrder] || 99)
