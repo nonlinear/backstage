@@ -1,15 +1,5 @@
 # v2.1.0 - Uptime Alerts
 
-**Status:** 🟢 Active  
-**Created:** 2026-03-12  
-**Owner:** Nicholas
-
----
-
-## 🎯 Goal
-
-Reliable monitoring of Mac Studio infrastructure via Uptime Kuma on NAS with Telegram alerts.
-
 **Why NAS?**
 - Mac Studio can reboot/crash → Kuma on Mac = silent failure
 - Nicholas travels with iPad → needs remote alerts when Mac is down
