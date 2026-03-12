@@ -1,6 +1,6 @@
-# Epic Notes
+# Security & Secrets Management
 
-> Version, name, status → see `epic.yaml`
+Fortifying security so system is dependable.
 
 ---
 
@@ -15,69 +15,110 @@ Encrypted DMG with Touch ID/Face ID unlock, auto-dismounts on screen lock/idle.
 ### Layer 3: Intrusion Detection (Stealth Surveillance)
 If unauthorized access detected → silent webcam snapshot + screenshot + location + SMS alert.
 
-## Implementation Options
+---
 
-**Option A: Encrypted Secrets Only (Minimal)**
-- Tokens in macOS Keychain
-- Git ignore rules
-- Simple, but still vulnerable to unlocked laptop access
+## Biometric Token Vault
 
-**Option B: Keychain + Biometrics (Moderate)**
-- Tokens in Keychain
-- Encrypted DMG for workspace (Touch ID unlock)
-- Auto-lock on idle
-- Strong protection, reasonable effort
+**Problem:** Tokens stored in plaintext `.env`
+- ✅ Works for automation (cron, heartbeat, API calls)
+- ❌ Security risk if machine compromised
+- ❌ No audit trail (who accessed what token when)
+- ❌ No revocation (if token leaked, must regenerate)
 
-**Option C: Full Hardening (Maximum - RECOMMENDED)**
-- Layer 1: Obfuscated paths
-- Layer 2: Encrypted DMG + biometric unlock
-- Layer 3: Stealth surveillance
-- Defense in depth, paranoia-grade security
+**Solution:** Tokens stored in encrypted vault (macOS Keychain)
+- **First access per session:** Requires Touch ID / Face ID (Nicholas present)
+- **Subsequent accesses:** Token cached in memory (session-only)
+- **Automation friendly:** Once unlocked, cron/heartbeat work unattended
 
-## Attack Vectors Prevented
+**User experience:**
+1. Claw needs Jira token (first time today)
+2. macOS prompt: "OpenClaw wants to access Jira token" → Touch ID
+3. Nicholas approves (muscle memory, takes 1 second)
+4. Token cached for rest of session
+5. Next API call → uses cached token (no prompt)
 
-**Before:**
-- Tokens in git commits
-- Tokens in screenshots
-- Unencrypted NAS backups
-- Unlocked laptop = full access
-- Script kiddies targeting known paths
+**Nicholas happy:** Biometric = legitimate gate, muscle memory  
+**Claw happy:** Automation still works  
+**Security happy:** No plaintext tokens, audit trail
 
-**After:**
-- Tokens encrypted in Keychain
-- Obfuscated paths
-- Biometric locks
-- Stealth surveillance
-- Auto-lock on idle
+---
 
-## Matt Ganzak Security Tips
+## macOS Keychain Implementation
 
-**Source:** https://www.instagram.com/p/DUVvUMrEQnh/
-
-**Already Implemented:**
-- ✅ Never run as root
-- ✅ Tailscale installed
-- ✅ Allowlist users (pairing)
-- ✅ DMs only (webchat 1:1)
-
-**Not Yet Implemented:**
-- Change default port (18789 → random)
-- SSH keys + Fail2ban (NAS)
-- Firewall with UFW (NAS)
-- Bot self-audits security logs
-- Real-time alerts (24/7 monitoring)
-
-## Files to Protect
-
+**Storage:**
+```bash
+# Store token (prompts for Touch ID)
+security add-generic-password \
+  -a "$USER" \
+  -s "WILEY_JIRA_TOKEN" \
+  -w "token_value" \
+  -T "/usr/bin/security" \
+  -T "/usr/bin/python3"
 ```
-~/.config/system-prefs/  (obfuscated from ~/.openclaw)
-├── secrets/ (encrypted DMG, biometric unlock)
-│   ├── graph-tokens.json
-│   ├── jira-api-key
-│   ├── nas-credentials
-│   └── telegram-bot-token
-└── workspace/
+
+**Retrieval:**
+```bash
+# First access → Touch ID prompt
+# Subsequent → cached until reboot/timeout
+security find-generic-password \
+  -a "$USER" \
+  -s "WILEY_JIRA_TOKEN" \
+  -w
 ```
+
+**Python wrapper:**
+```python
+import subprocess
+import os
+
+_token_cache = {}
+
+def get_token(service_name):
+    # Check session cache
+    if service_name in _token_cache:
+        return _token_cache[service_name]
+    
+    # Request from Keychain (may prompt Touch ID)
+    result = subprocess.run(
+        ['security', 'find-generic-password', 
+         '-a', os.getenv('USER'),
+         '-s', service_name,
+         '-w'],
+        capture_output=True,
+        text=True
+    )
+    
+    if result.returncode == 0:
+        token = result.stdout.strip()
+        _token_cache[service_name] = token  # Cache for session
+        return token
+    else:
+        raise Exception(f"Failed to get token: {result.stderr}")
+```
+
+---
+
+## Migration Plan (Biometric Vault)
+
+**Phase 1:** Wrapper library
+- Create `~/Documents/life/scripts/secure_tokens.py`
+- Wrapper tries Keychain first, falls back to .env
+- Gradual migration (both work during transition)
+
+**Phase 2:** Move critical tokens
+- Jira, Figma, GitHub → Keychain
+- Less sensitive (NAS password) → can stay in .env
+
+**Phase 3:** Deprecate .env
+- Once all tokens migrated
+- Keep .env for non-secret config (URLs, account IDs)
+
+**Phase 4:** Audit & test
+- Verify cron jobs work after first Touch ID unlock
+- Test session cache timeout
+- Confirm automation still unattended
+
+---
 
 ## Stealth Surveillance Implementation
 
@@ -102,6 +143,27 @@ curl -F photo=@/tmp/.sys_snapshot.jpg \
 - Evidence sent before intruder can stop it
 - Works even if network disconnected (queue)
 
+---
+
+## Matt Ganzak Security Tips
+
+**Source:** https://www.instagram.com/p/DUVvUMrEQnh/
+
+**Already Implemented:**
+- ✅ Never run as root
+- ✅ Tailscale installed
+- ✅ Allowlist users (pairing)
+- ✅ DMs only (webchat 1:1)
+
+**Not Yet Implemented:**
+- Change default port (18789 → random)
+- SSH keys + Fail2ban (NAS)
+- Firewall with UFW (NAS)
+- Bot self-audits security logs
+- Real-time alerts (24/7 monitoring)
+
+---
+
 ## Priority Order
 
 **IMMEDIATE:**
@@ -120,6 +182,24 @@ curl -F photo=@/tmp/.sys_snapshot.jpg \
 - Move to dedicated server
 - Full hardening (all best practices)
 
+---
+
+## Open Questions (Biometric Vault)
+
+1. **Cron jobs without user session:** How to handle 3am automated tasks?
+   - Possible: Keep SOME tokens in .env (least sensitive)
+   - Or: Run cron jobs in LaunchAgent (has keychain access)
+
+2. **Server migration:** When Claw moves to always-on server?
+   - Keychain won't work (no Touch ID on headless server)
+   - May need different solution (encrypted .env with key in Keychain?)
+
+3. **Token rotation:** How to update tokens in Keychain?
+   - Manual: `security delete-generic-password` + `add-generic-password`
+   - Or: Script that prompts for new token, stores automatically
+
+---
+
 ## Security Audit
 
 **Scorecard:**
@@ -128,6 +208,3 @@ curl -F photo=@/tmp/.sys_snapshot.jpg \
 - 🔴 High risk: 1/10 points (default port)
 
 **Next review:** Monthly security audit
-
-**Updated:** 2026-02-10 (Matt Ganzak tips)  
-**Owner:** Nicholas (with Claw implementation)
