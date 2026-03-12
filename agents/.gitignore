@@ -1,0 +1,7 @@
+# Agent memory logs (personal, generated at runtime)
+*/*/memory/*.md
+*/memory/*.md
+
+# Keep memory folders themselves
+!*/*/memory/
+!*/memory/
