@@ -1,0 +1,41 @@
+---
+name: "Image Tagging System"
+goal: "Auto-tag 22,528 design inspiration images with visual style metadata using local Qwen2-VL 72B"
+status: backlog
+type: "minor"
+created: 2026-03-12
+started: null
+completed: null
+tasks:
+  # Architecture
+  - text: "Design SQLite schema (images, tags, paths tables)"
+    checked: false
+  - text: "Define tag vocabulary (200-300 visual style terms)"
+    checked: false
+  - text: "Build hash-based file tracking (SHA256)"
+    checked: false
+  
+  # Vision Pipeline
+  - text: "Set up Qwen2-VL 72B model (local inference)"
+    checked: false
+  - text: "Build batch tagging script (process 22k images)"
+    checked: false
+  - text: "Test tag quality (sample 100 images, verify accuracy)"
+    checked: false
+  
+  # Search & Query
+  - text: "Build search CLI (query by tags, exclude tags)"
+    checked: false
+  - text: "Build web UI (browse, filter, search)"
+    checked: false
+  - text: "Test search performance (22k database)"
+    checked: false
+  
+  # Edge Cases
+  - text: "Handle file moves (update path table)"
+    checked: false
+  - text: "Handle duplicates (same hash = same tags)"
+    checked: false
+  - text: "Incremental tagging (only new/untagged images)"
+    checked: false
+---
