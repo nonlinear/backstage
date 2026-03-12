@@ -1,0 +1,69 @@
+---
+name: "Backstage Context Switch Merge"
+goal: "Merge context-switch workflow into backstage for morning/evening rituals, session state tracking, and project switching"
+status: done
+type: "minor"
+created: 2026-02-25
+started: 2026-02-25
+completed: 2026-03-12
+tasks:
+  # Session state
+  - text: "Create .current-context.json tracking (project, epic, timestamp)"
+    checked: true
+  - text: "Create .context-history-YYYY-MM-DD.jsonl (append-only log)"
+    checked: true
+  - text: "Add state helpers (get_current, set_context, clear_context)"
+    checked: true
+  
+  # Morning ritual
+  - text: "Implement backstage morning (or --morning)"
+    checked: true
+  - text: "Run health checks on main project"
+    checked: true
+  - text: "If M-F, also run wiley health checks"
+    checked: true
+  - text: "Set current context to main"
+    checked: true
+  
+  # Evening ritual
+  - text: "Implement backstage evening (or --evening)"
+    checked: true
+  - text: "Close current project (health check)"
+    checked: true
+  - text: "Victory lap (read history, summarize work)"
+    checked: true
+  - text: "Clear context state"
+    checked: true
+  
+  # Project switching
+  - text: "Detect project vs epic (backstage folder check)"
+    checked: true
+  - text: "If switching projects: close current, open new (2 health checks)"
+    checked: true
+  - text: "If switching epic: single health check, update context"
+    checked: true
+  
+  # Migration
+  - text: "Move .current-context.json to ~/.openclaw/workspace/"
+    checked: true
+  - text: "Archive .context-history-*.jsonl files"
+    checked: true
+  - text: "Update AGENTS.md references (remove context-switch)"
+    checked: true
+  
+  # Documentation
+  - text: "Update backstage SKILL.md with full trigger list"
+    checked: true
+  - text: "Document state files (location, format, usage)"
+    checked: true
+  - text: "Add examples (morning, evening, switching)"
+    checked: true
+  
+  # Cleanup
+  - text: "Delete .context-switch.disabled/ folder"
+    checked: true
+  - text: "Test morning/evening workflows"
+    checked: true
+  - text: "Verify state tracking works"
+    checked: true
+---
