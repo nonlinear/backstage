@@ -1,11 +1,52 @@
 ---
-version: v0.20.0
-name: "Open source maps"
-goal: "Replace Google Maps with self-hosted/privacy-first alternative"
+name: "Open Source Maps"
+goal: "Replace Google Maps with self-hosted/privacy-first alternative for navigation + photo location"
 status: backlog
 type: "minor"
-created: null
+created: 2026-02-15
 started: null
 completed: null
-tasks: []
+tasks:
+  # Phase 1: Navigation (Organic Maps)
+  - text: "Download Organic Maps app (iOS/Android)"
+    checked: false
+  - text: "Download offline maps (Brooklyn, NYC, USA)"
+    checked: false
+  - text: "Test navigation (search, directions, POI)"
+    checked: false
+  - text: "Compare to Google Maps (UX, accuracy)"
+    checked: false
+  
+  # Phase 2: Photo Location (Choose One)
+  # Option A: Nextcloud Maps
+  - text: "Decide: Nextcloud Maps OR MapLibre DIY"
+    checked: false
+  - text: "If Nextcloud: Install Nextcloud (Docker)"
+    checked: false
+  - text: "If Nextcloud: Install Nextcloud Maps app"
+    checked: false
+  - text: "If Nextcloud: Upload photos (auto-geotagged)"
+    checked: false
+  - text: "If Nextcloud: Test routing (GraphHopper or OSRM)"
+    checked: false
+  
+  # Option B: MapLibre DIY
+  - text: "If MapLibre: Run tile server (Tileserver GL Docker)"
+    checked: false
+  - text: "If MapLibre: Run OSRM (routing backend Docker)"
+    checked: false
+  - text: "If MapLibre: Build web UI (MapLibre JS + Immich photo layer)"
+    checked: false
+  - text: "If MapLibre: Test photo overlay (Immich integration)"
+    checked: false
+  
+  # Phase 3: Location Tracking (OwnTracks)
+  - text: "Install OwnTracks app (iOS)"
+    checked: false
+  - text: "Configure MQTT server (Mosquitto Docker)"
+    checked: false
+  - text: "Add to Home Assistant"
+    checked: false
+  - text: "Test location tracking (arrive home automation)"
+    checked: false
 ---

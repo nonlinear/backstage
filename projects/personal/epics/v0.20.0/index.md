@@ -1,150 +1,124 @@
-# Epic Notes
+# Open Source Maps
 
-> Version, name, status → see `epic.yaml`
+**Problem:** Google Maps = privacy concerns, no self-hosted option, no Immich photo location integration.
 
----
-
-## Context
-
-Replace Google Maps with self-hosted/privacy-first open-source alternative. Need navigation + photo location + offline support.
-
-**Challenge:** No single OSM solution does everything (ecosystem fragmented)
+**Solution:** Replace with open-source alternatives (navigation + photo location + tracking).
 
 ---
 
 ## Requirements
 
-1. **Directions** - Turn-by-turn navigation
+1. **Directions (routing)** - Turn-by-turn navigation
 2. **App integration** - iOS/Android apps
-3. **Offline support** - Downloaded maps, no internet
-4. **Immich photo overlay** (bonus) - Show photos on map
+3. **Offline support** - No internet needed (downloaded maps)
+4. **Immich photo location overlay** (bonus) - Show photos on map
+
+**Challenge:** No single OSM solution does everything (ecosystem fragmented).
 
 ---
 
-## Options
+## Recommended Stack
 
-### Organic Maps (BEST for Navigation)
+### For Navigation (Daily Use)
+**Organic Maps** (iOS/Android app)
 
-**Features:**
-- ✅ Directions (OSM routing)
-- ✅ Native iOS/Android apps
-- ✅ Offline (download regions)
-- ❌ No Immich integration
+**Why:**
+- Best offline maps (download entire countries)
+- Fast, privacy-first, no tracking
+- Free
+- Replaces Google Maps for navigation
 
-**Pros:** Best offline, fast, privacy-first, free  
-**Cons:** No photo integration, mobile-only
-
-**Download:** App Store / Google Play
-
----
-
-### Nextcloud Maps (BEST for Photos)
-
-**Features:**
-- ✅ Self-hosted (own server)
-- ✅ Photo geotag integration
-- ✅ Routing (GraphHopper/OSRM)
-- ⚠️ Requires Nextcloud stack (heavy)
-
-**Pros:** Photo integration, self-hosted, web + mobile  
-**Cons:** Requires Nextcloud (overkill if only for maps), slower
-
-**Use case:** Only if already running Nextcloud
+**Setup:**
+1. Download Organic Maps (App Store / Google Play)
+2. Download offline maps (Settings → Download maps)
+3. Use for navigation (search, directions, POI)
 
 ---
 
-### OwnTracks (Location Tracking)
+### For Photo Location Overlay
+**Nextcloud Maps** (if running Nextcloud) OR **MapLibre DIY** (full control)
 
-**Features:**
-- ✅ Track devices on map
-- ✅ Self-hosted (MQTT/HTTP)
-- ✅ Home Assistant integration
-- ❌ Not a full maps app (no directions)
+**Nextcloud Maps:**
+- Easiest if already running Nextcloud
+- Photo geotag integration (auto)
+- Routing via GraphHopper or OSRM
 
-**Use case:** Complement to Organic Maps (tracking + automation)
-
----
-
-### MapLibre + OSRM (DIY Full Control)
-
-**Stack:**
-- MapLibre (renderer)
-- OSRM (routing)
-- Tile server (OSM tiles)
-- Custom Immich overlay
-
-**Pros:** Full control, custom photo layer  
-**Cons:** Complex setup, bandwidth-heavy, maintenance
-
-**Use case:** Only if want full DIY control (overkill for most)
+**MapLibre DIY:**
+- Full control (custom tiles, routing, styling)
+- Custom Immich integration
+- More complex setup (tile server + OSRM + web UI)
 
 ---
 
-## Comparison
+### For Location Tracking (HA Integration)
+**OwnTracks** (self-hosted location tracking)
 
-| Feature | Organic Maps | Nextcloud Maps | OwnTracks | MapLibre DIY |
-|---------|--------------|----------------|-----------|--------------|
-| **Directions** | ✅ | ✅ | ❌ | ✅ |
-| **Offline** | ✅ | ⚠️ | ❌ | ✅ (cached) |
-| **Photos** | ❌ | ✅ | ❌ | ✅ (custom) |
-| **Self-hosted** | ❌ | ✅ | ✅ | ✅ |
-| **Setup** | Easy | Medium | Medium | Hard |
-| **App** | ✅ | ✅ | ✅ | Web (PWA) |
+**Why:**
+- Track devices on map
+- Home Assistant automations (arrive home → lights on)
 
-**Winner (Navigation):** Organic Maps  
-**Winner (Photos):** Nextcloud Maps OR MapLibre DIY
+**Setup:**
+1. Install OwnTracks app (iOS/Android)
+2. Configure MQTT server (Mosquitto)
+3. Add to Home Assistant
 
 ---
 
-## Recommendation
+## Options Comparison
 
-**Use multiple tools:**
+| Feature | Organic Maps | Nextcloud Maps | MapLibre + OSRM |
+|---------|--------------|----------------|-----------------|
+| **Directions** | ✅ Yes | ✅ Yes | ✅ Yes |
+| **Offline** | ✅ Yes | ⚠️ Unclear | ✅ Yes (cached) |
+| **Photo integration** | ❌ No | ✅ Yes | ✅ Yes (custom) |
+| **Self-hosted** | ❌ No (app only) | ✅ Yes | ✅ Yes |
+| **Setup complexity** | ✅ Easy | ⚠️ Medium | ❌ Hard |
+| **iOS/Android app** | ✅ Yes | ✅ Yes | ⚠️ Web only (PWA) |
 
-1. **Organic Maps** - Daily navigation (replaces Google Maps)
-2. **Nextcloud Maps** OR **MapLibre** - Photo location overlay
-3. **OwnTracks** - Location tracking (HA integration, optional)
-
-**No single solution does everything.**
+**Winner (Navigation):** Organic Maps (best offline, easy setup)  
+**Winner (Photo Integration):** Nextcloud Maps (if running Nextcloud) OR MapLibre DIY (full control)
 
 ---
 
 ## Trade-Offs
 
-- Organic Maps = navigation (no photos)
+**No single solution does everything:**
+- Organic Maps = navigation (no photo integration)
 - Nextcloud Maps = photos (heavier stack)
-- MapLibre DIY = full control (complex)
+- MapLibre DIY = full control (complex setup)
+
+**Recommendation:** Use multiple tools
+- **Organic Maps** for daily navigation
+- **Nextcloud Maps** OR **MapLibre** for photo location
+- **OwnTracks** for location tracking (optional, HA integration)
 
 ---
 
 ## Open Questions
 
-1. **Nextcloud or MapLibre?** Already running Nextcloud?
-   - Yes → Nextcloud Maps (easier)
-   - No → MapLibre DIY (more work, more control)
+1. **Nextcloud or MapLibre?** Do you already run Nextcloud?
+   - If yes → Nextcloud Maps (easier)
+   - If no → MapLibre DIY (more work, more control)
 
-2. **Photo overlay priority?** How important?
-   - High → MapLibre DIY
-   - Medium → Nextcloud Maps
-   - Low → Organic Maps only
+2. **Immich integration priority?** How important is photo location overlay?
+   - High → invest in MapLibre DIY
+   - Medium → try Nextcloud Maps
+   - Low → just use Organic Maps (navigation only)
 
-3. **Self-hosted tiles?** Want to host?
-   - Pros: Privacy, offline
-   - Cons: Bandwidth, maintenance
-
-4. **OSM updates?** How often?
-   - Organic: Auto-updates
-   - Self-hosted: Manual (monthly/quarterly)
+3. **Self-hosted tile server?** Do you want to host tiles?
+   - Pros: Privacy, offline, no third-party
+   - Cons: Bandwidth (tiles = lots of data), maintenance
 
 ---
 
 ## Success Criteria
 
-- ✅ Self-hosted or privacy-first maps working
-- ✅ Offline maps downloaded
-- ✅ Photo location overlay (Immich or Nextcloud)
+- ✅ Privacy-first maps working (navigation + directions)
+- ✅ Offline maps downloaded (no internet needed)
+- ✅ Photo location overlay (Immich photos on map)
 - ✅ Google Maps replaced for daily use
-- ✅ Optional: OwnTracks + HA integration
+- ✅ Optional: OwnTracks + HA integration (location tracking)
 
 ---
 
-**Next:** Download Organic Maps, test navigation, decide on photo integration
+**Status:** Research phase. Download Organic Maps first, decide on photo integration later.
