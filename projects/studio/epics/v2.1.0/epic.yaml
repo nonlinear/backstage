@@ -1,0 +1,17 @@
+---
+version: v2.1.0
+name: "Uptime Alerts"
+goal: "Reliable monitoring of Mac Studio infrastructure via Uptime Kuma on NAS with Telegram alerts"
+status: active
+type: minor
+created: 2026-03-12
+started: 2026-03-12
+completed: null
+tasks:
+  - "✅ Install Uptime Kuma on NAS (Docker via Portainer, port 3001)"
+  - "✅ Expose via Tailscale: https://media.adal-rigel.ts.net:3001"
+  - "✅ Create 17 monitors (Mac + NAS services + Tailscale health)"
+  - "⏳ Configure Telegram notifications"
+  - "⏳ Test failure scenarios"
+  - "⏳ Document auto-add workflow for new services"
+---
