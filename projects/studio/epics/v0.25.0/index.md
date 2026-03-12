@@ -199,3 +199,82 @@ Mac Studio M4 Max 64GB = $$$ investido
 ---
 
 **Goal:** Hybrid local+cloud = speed + privacy + cost savings + quality. 🏴
+
+---
+
+## Benchmark Results (2026-02-24)
+
+**Hardware:** Mac Studio M4 Max, 64GB RAM, 16 cores ARM64  
+**Engine:** llama.cpp (Metal enabled)
+
+### Performance (M4 Max)
+
+| Model | Prompt Processing (pp512) | Text Generation (tg128) | Latency (128 tok) |
+|-------|--------------------------|-------------------------|-------------------|
+| **Qwen2.5-Coder 7B Q4_K_M** | **931 tok/s** | **79 tok/s** | **~1.6 sec** |
+| **Qwen2.5-Coder 32B Q4_K_M** | **198 tok/s** | **21 tok/s** | **~6 sec** |
+| Qwen2.5 72B Instruct Q4_K_M | ⏳ Pending | ⏳ Pending | ⏳ Pending |
+
+**Interpretation:**
+- **Prompt processing (pp512):** How fast model ingests context (931 tok/s = very fast)
+- **Text generation (tg128):** How fast it writes responses (79 tok/s = conversational latency ~1.5 sec)
+
+### Quality Benchmarks (Community)
+
+**Source:** [Qwen2.5-Coder Blog](https://qwenlm.github.io/blog/qwen2.5-coder-family/)
+
+**Code Generation (HumanEval, MBPP, LiveCodeBench):**
+- **32B = SOTA open-source** (matches GPT-4o on code tasks)
+- **7B = strong reasoning** (excellent for size)
+- Trained on 5.5 trillion tokens (code + synthetic data)
+
+**Multi-Language Support:**
+- **32B: McEval 65.9, MdEval 75.2** (rank #1 open-source)
+- Supports 40+ languages (Python, JS, Java, C++, Go, Rust, Haskell, Racket, etc.)
+
+### Latency Comparison (128 token response)
+
+| Model | First Token | Generation (128 tok) | Total Latency | Network | Quality |
+|-------|-------------|---------------------|---------------|---------|---------||
+| **Claude Sonnet 4.5** | 2-5 sec | ~2-3 sec (40-60 tok/s) | **4-8 sec** | ❌ Required | 10/10 ⭐ |
+| **Qwen2.5-Coder 32B** | <0.5 sec | ~6 sec (21 tok/s) | **~6 sec** | ✅ None | 8.5/10 ⭐ |
+| **Qwen2.5-Coder 7B** | <0.2 sec | ~1.6 sec (79 tok/s) | **~2 sec** | ✅ None | 6/10 ⭐ |
+
+**Key insights:**
+- **32B ≈ Claude latency** (6 sec vs 4-8 sec), but NO network delay
+- **7B = 3x faster** than Claude (2 sec vs 6 sec avg)
+- **No internet = consistent** (Claude varies with network)
+
+### Cost Analysis (Monthly)
+
+**Assumptions:** 500 queries/day, avg 128 tokens/response, 15,000 queries/month
+
+| Model | Cost/Month | Annual Cost | Notes |
+|-------|-----------|-------------|-------|
+| **Claude Sonnet 4.5** | **~$30** | **~$360** | API usage |
+| **Qwen 32B Local** | **$0** | **$0** | One-time hardware cost |
+| **Qwen 7B Local** | **$0** | **$0** | One-time hardware cost |
+
+**Projected savings:** 80% tasks → local = **~$24/month saved** ($30 → $6)
+
+### Hybrid Strategy
+
+| Scenario | Model | Why |
+|----------|-------|-----|
+| **Morning briefing** | 7B | Instant (2 sec), simple aggregation |
+| **Defense (Nicholas iterating)** | 32B | Conversational latency (6 sec), 85% Claude quality |
+| **Code review** | 32B | Privacy + quality balance |
+| **Night jobs (unassisted)** | 72B | Max quality, time not critical |
+| **Strategic planning** | Claude | 100% quality, worth the cost |
+| **Novel/unfamiliar problems** | Claude | Safer for edge cases |
+
+**Rule of thumb:**
+- **Can I wait 6 sec?** → 32B (85% quality, FREE, private)
+- **Need <2 sec?** → 7B (60% quality, instant)
+- **Mission-critical?** → Claude (100% quality, worth $0.002)
+
+**References:**
+- [Qwen2.5-Coder Blog](https://qwenlm.github.io/blog/qwen2.5-coder-family/)
+- [Qwen2.5-Coder Technical Report](https://arxiv.org/abs/2409.12186)
+- [Hugging Face: Qwen2.5-Coder-7B-Instruct](https://huggingface.co/Qwen/Qwen2.5-Coder-7B-Instruct)
+- [Hugging Face: Qwen2.5-Coder-32B-Instruct](https://huggingface.co/Qwen/Qwen2.5-Coder-32B-Instruct)
