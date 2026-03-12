@@ -1,28 +1,8 @@
-# Epic Notes
+# Feedback Loops
 
-> Version, name, status → see `epic.yaml`
+**Philosophy:** No paywall = marketing + UX converge. Feedback as stakeholder input.
 
 ---
-
-# v0.22.0 - Feedback Loops
-
-**Epic:** [v0.22.0 Feedback Loops](../ROADMAP.md#v0220)
-
-
-
-## Philosophy
-
-### No Paywall = Merged Departments
-- **Traditional model:** Before paywall = marketing, after paywall = user
-- **Our model:** No paywall = marketing + UX converge (same people, same journey)
-- **Implication:** Growth strategist + UX researcher have overlapping skillsets
-
-### Feedback as Stakeholder Input
-- **No customer vs user distinction** - Everyone contributes (donors, users, partners)
-- **All feedback = roadmap input** - Analytics, user testing, social reactions
-- **Self-hosted analytics** - Privacy-first, no surveillance capitalism
-- **Nicholas as stakeholder** - Departments (agents) demo work, Nicholas gives feedback, refines autonomous checks over time
-
 
 ## Internal Feedback Loop (Nicholas ← Agents)
 
@@ -37,16 +17,17 @@
 - **Refinement** - Identify patterns → improve autonomous checks → reduce zig-zag
 
 ### Reducing Zig-Zag (Continuous Improvement)
-- **Pattern detection** - If Nicholas rejects same type of work repeatedly → create check
+- **Pattern detection** - Nicholas rejects same type of work repeatedly → create check
 - **Autonomous checks** - Agents self-validate before showing Nicholas (fewer iterations)
 - **Check library** - QA checks, design checks, accessibility checks, ethical checks
-- **Example:** If Nicholas always says "make it more accessible" → add accessibility check to QA agent
+- **Example:** If Nicholas always says "make it more accessible" → add accessibility check
 
 ### Workflow Optimization Specialist Role
 - **Audits published epics** - What went well? What created friction?
-- **Suggests process improvements** - New checks, better agent communication, refined workflows
+- **Suggests process improvements** - New checks, better agent communication
 - **Reduces Nicholas's cognitive load** - Over time, agents need less direction
 
+---
 
 ## Analytics Tooling
 
@@ -64,6 +45,7 @@
 - **NAS or Mac Studio** - Self-hosted, full data ownership
 - **Tailscale accessible** - Remote monitoring via MagicDNS
 
+---
 
 ## User Testing Workflows
 
@@ -82,6 +64,7 @@
 - **Test scenarios** - Task-based testing, edge case exploration
 - **Consent forms** - Privacy-first, transparent data usage
 
+---
 
 ## Social Media Monitoring
 
@@ -95,6 +78,7 @@
 - **Automated:** Webhooks, RSS feeds, API integrations
 - **Manual:** Weekly review sessions, community check-ins
 
+---
 
 ## Growth Strategist vs UX Research
 
@@ -111,6 +95,7 @@
 - **May merge roles** - One person/agent handles both (growth + UX)
 - **Or collaborate closely** - Weekly sync, shared dashboards
 
+---
 
 ## Feedback → Roadmap Integration
 
@@ -129,15 +114,6 @@
 - **Monthly retrospectives** - Bigger patterns, strategic shifts
 - **Quarterly recaps** - Major direction changes, epic planning
 
+---
 
-## Next Steps
-
-1. **Choose analytics tool** (PostHog, Matomo, or Plausible)
-2. **Install on NAS/server** (Docker, Tailscale accessible)
-3. **Define metrics** (what to track, what NOT to track)
-4. **User testing templates** (interview scripts, consent forms)
-5. **Social media monitoring** (webhooks, RSS, weekly manual review)
-6. **Feedback → roadmap process** (how insights become tasks)
-
-
-**Updated:** 2026-02-21
+**Philosophy:** No paywall = merged departments. All feedback = roadmap input. Self-hosted analytics = privacy-first.

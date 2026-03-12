@@ -1,11 +1,53 @@
 ---
-version: v0.22.0
-name: "Funnels for commons"
-goal: "Utilizing communities for micro volunteering"
+name: "Feedback Loops"
+goal: "Self-hosted analytics + user testing workflows + agent demos (Nicholas as stakeholder)"
 status: backlog
 type: "minor"
-created: null
+created: 2026-02-21
 started: null
 completed: null
-tasks: []
+tasks:
+  # Analytics Setup
+  - text: "Choose analytics tool (PostHog, Matomo, or Plausible)"
+    checked: false
+  - text: "Install on NAS/server (Docker, Tailscale accessible)"
+    checked: false
+  - text: "Define metrics (what to track, what NOT to track)"
+    checked: false
+  
+  # User Testing
+  - text: "Create interview scripts (standardized questions, follow-ups)"
+    checked: false
+  - text: "Create consent forms (privacy-first, transparent data usage)"
+    checked: false
+  - text: "Design test scenarios (task-based testing, edge cases)"
+    checked: false
+  - text: "Set up recruitment process (community-first, open calls)"
+    checked: false
+  
+  # Social Media Monitoring
+  - text: "Configure webhooks (GitHub, Instagram, Twitter/Mastodon)"
+    checked: false
+  - text: "Set up RSS feeds for community channels"
+    checked: false
+  - text: "Document weekly review process"
+    checked: false
+  
+  # Feedback → Roadmap Integration
+  - text: "Document lifecycle: Collect → Analyze → Act"
+    checked: false
+  - text: "Set up analytics dashboard (PostHog/Matomo/Plausible)"
+    checked: false
+  - text: "Define cadence (weekly reviews, monthly retros, quarterly recaps)"
+    checked: false
+  
+  # Internal Loop (Nicholas ← Agents)
+  - text: "Document agent demo workflow (proposals, progress reports)"
+    checked: false
+  - text: "Create check library (QA, design, accessibility, ethical)"
+    checked: false
+  - text: "Set up pattern detection (reduce Nicholas's zig-zag)"
+    checked: false
+  - text: "Define Workflow Optimization Specialist role"
+    checked: false
 ---
