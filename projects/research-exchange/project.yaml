@@ -1,7 +1,7 @@
 ---
 name: "Research Exchange"
 goal: "Redesign/rebuild ReX submission system components in Material-UI"
-tier: "experimental"
+tier: "flagship"
 type: "product"
 status: "backlog"
 owner: "Nicholas"
