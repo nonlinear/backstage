@@ -1,7 +1,7 @@
 ---
 name: "update-backstage-security-minimalism"
 goal: "Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit sed quia non numquam."
-status: backlog
+status: done
 type: "patch"
 created: null
 started: null
