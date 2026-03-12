@@ -1,11 +1,37 @@
 ---
-version: v0.27.0
 name: "Web Search Infrastructure"
-goal: "Building a reliable websearch for research (agents need this)"
+goal: "Self-hosted SearXNG for reliable web search, zero latency, zero cost, maximum agency"
 status: backlog
 type: "minor"
-created: null
+created: 2026-02-25
 started: null
 completed: null
-tasks: []
+tasks:
+  # Phase 1: NOW
+  - text: "Create web-search.sh wrapper (localhost:8889 endpoint)"
+    checked: false
+  - text: "Format output: [engine] title, url, ---"
+    checked: false
+  - text: "Error handling (fallback to web_fetch)"
+    checked: false
+  - text: "Limit results (default 5)"
+    checked: false
+  - text: "Update AGENTS.md (Web Search Protocol section)"
+    checked: false
+  - text: "Document triggers: external questions, docs, 'does X support Y?'"
+    checked: false
+  - text: "Test with Kavita research (deep linking, komga search)"
+    checked: false
+  - text: "Verify vs web_fetch (which faster?)"
+    checked: false
+  
+  # Phase 2: FUTURE
+  - text: "Query cache implementation (24h TTL)"
+    checked: false
+  - text: "Additional engines (Brave, Qwant, Startpage)"
+    checked: false
+  - text: "Logs/analytics system (searxng-queries.jsonl)"
+    checked: false
+  - text: "Master Search epic planning"
+    checked: false
 ---
