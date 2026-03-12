@@ -8,7 +8,7 @@ started: 2026-03-11
 completed: null
 tasks:
   - text: "Agent and squad template (yaml + soul.md + ENFORCEMENT.md)"
-    checked: false
+    checked: true
   - text: "Values composite watcher (org → squad → agent → .values.md)"
     checked: false
   - text: "Library composite watcher (org → squad → agent → .library.md)"
@@ -16,7 +16,7 @@ tasks:
   - text: "Ensure OpenClaw sees agents folder (config + discovery)"
     checked: false
   - text: "Duplicate squads and agents from affordances list"
-    checked: false
+    checked: true
   - text: "Organize values across organization, squad, agent yaml"
     checked: false
   - text: "Agent and squad status (active/backlog filtering)"
