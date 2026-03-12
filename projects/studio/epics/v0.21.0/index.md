@@ -1,41 +1,41 @@
-# Epic Notes
+# Business Model for Commons
 
-> Version, name, status → see `epic.yaml`
+**Philosophy:** No paywall = marketing + UX converge. Design studio as dev house. Commons-focused, low overhead, self-hosted infrastructure.
 
 ---
 
-# v0.21.0 - Business Model for Commons
+## No Paywall Model
 
-**Epic:** [v0.21.0 Business Model for Commons](../ROADMAP.md#v0210)
+**Revenue streams:**
+- Donations, grants, partnerships (not sales)
+- Top of mind > direct profit
+- Reverberação, recognition, collaboration
 
+**Implications:**
+- Marketing + UX converge (no commercial separation)
+- Feedback = stakeholder input (users, donors, partners equal)
+- Metrics: engagement, impact (NOT conversion rates)
 
+---
 
-## Philosophy
+## Design Studio as Dev House
 
-### No Paywall Model
-- **Marketing + UX converge** - No commercial separation (before/after paywall)
-- **Feedback = stakeholder input** - Users, donors, partners all contribute equally
-- **Revenue streams:** Donations, grants, partnerships (not sales)
-- **Top of mind > direct profit** - Reverberação, recognition, collaboration
+**Full stack:**
+- Develop + deploy + publish (complete products)
+- Design-driven (design is differentiator, not limitation)
+- Not all prototypes become products (experiments stay experiments)
+- Open source (stable prototypes picked up by others)
 
-### Design Studio as Dev House
-- **Full stack:** Develop + deploy + publish (complete products)
-- **Design-driven:** Design is differentiator, not limitation
-- **Not all prototypes become products** - Some experiments stay experiments
-- **Open source:** Stable prototypes can be picked up by others
-- **Checkpoints matter** - Validate concept → test → decide (support vs archive)
-- **All documented** - Even experimental code has value (learning, portfolio)
+**Philosophy:**
+- Checkpoints matter (validate → test → decide: support vs archive)
+- All documented (even experimental code has value)
 
-### Commons-Focused
-- **Low overhead** - Nicholas-only operation (presented as team)
-- **Self-hosted infrastructure** - Mac Studio, NAS, anarchist stack
-- **Ethical alignment** - Anti-surveillance, pro-autonomy, anti-commercialization
-
+---
 
 ## Agent Hierarchy
 
 ### First Agent: Business Strategist
-**Role:** Maps company vision, mission, positionamento  
+**Role:** Maps company vision, mission, posicionamento  
 **Spawns:** HR bot (detects skill gaps, creates other agents)
 
 ### Agent Roles Needed
@@ -44,10 +44,10 @@
 3. **Marketing** - Brand positioning, social media, content strategy
 4. **Growth Strategist** - Metrics, funnel optimization, donor acquisition
 5. **UX Research** - User testing, qualitative/quantitative analysis
-6. **Finance/Accounting** - Donations, grants, budget management, tax compliance
+6. **Finance/Accounting** - Donations, grants, budget, tax compliance
 7. **Developers** - Implementation, deployment, technical architecture
 8. **QA** - Testing, quality assurance, bug detection
-9. **Workflow Optimization Specialist** - Audits published epics, suggests process improvements, retrospective analysis
+9. **Workflow Optimization Specialist** - Audits epics, suggests process improvements
 10. **HR Bot** - Skill gap detection, canonical book suggestions, agent creation
 
 ### Agent Communication
@@ -56,12 +56,12 @@
 - **Approval final** - Nicholas gives green light, agents execute
 
 ### Future: Autonomous Task Assignment
-- **Agents pick epics/tasks** - Without supervision (self-assignment)
-- **Supervision at approval level** - Nicholas reviews output, not process
-- **Task metadata:** `assignee: <agent-name>`, `blockers: [list]`
-- **When migrating to Open Project:** Can assign QUEM (who) + blockers per task
-- **Even without agents implemented:** Structure supports future automation
+- Agents pick epics/tasks without supervision (self-assignment)
+- Supervision at approval level (Nicholas reviews output, not process)
+- Task metadata: `assignee: <agent-name>`, `blockers: [list]`
+- Structure supports future automation (even before agents implemented)
 
+---
 
 ## Canonical Books (To Index in Librarian)
 
@@ -79,6 +79,7 @@
 - The Design Studio Method
 - Strategic Design Thinking
 
+---
 
 ## Intake Questions (Foundational Strategy)
 
@@ -102,14 +103,6 @@
 2. How do agents communicate? (drafts → questions → approval)
 3. Temporal for orchestration? (workflow engine, retries, state management)
 
+---
 
-## Next Steps
-
-1. **Answer intake questions** (foundational strategy session with business strategist)
-2. **Index canonical books** (Librarian integration, per-agent knowledge base)
-3. **Define legal structure** (research entity types, tax implications)
-4. **Map agent hierarchy** (which roles, which order, how they spawn)
-5. **HR bot prototype** (skill gap detection, book suggestions)
-
-
-**Updated:** 2026-02-21
+**Philosophy:** Commons-focused, ethical alignment (anti-surveillance, pro-autonomy, anti-commercialization). Low overhead (Nicholas-only operation, presented as team). Self-hosted infrastructure (Mac Studio, NAS, anarchist stack).
