@@ -1,13 +1,13 @@
 ---
-version: v0.18.0
-name: "Open source notes"
-goal: "Self-hosted notes + reminders (replace Apple Notes/Reminders)"
+name: "Open Source Notes"
+goal: "Self-hosted notes + reminders (replace/supplement Apple Notes + Reminders)"
 status: backlog
 type: "minor"
-created: null
+created: 2026-02-14
 started: null
 completed: null
 tasks:
+  # Phase 1: Docker Setup (SiYuan)
   - text: "Install Docker on NAS or Mac"
     checked: false
   - text: "Run SiYuan container"
@@ -16,6 +16,8 @@ tasks:
     checked: false
   - text: "Create account (local, self-hosted)"
     checked: false
+  
+  # Phase 2: iOS App Configuration
   - text: "Download SiYuan iOS app (App Store)"
     checked: false
   - text: "Configure server URL (NAS or localhost)"
@@ -24,12 +26,16 @@ tasks:
     checked: false
   - text: "Test offline mode (airplane mode → create → sync)"
     checked: false
+  
+  # Phase 3: Siri Integration
   - text: "Test Siri commands"
     checked: false
   - text: "Configure Shortcuts (custom Siri commands if needed)"
     checked: false
   - text: "Test voice dictation (speak note content)"
     checked: false
+  
+  # Phase 4: Migration from Apple Notes
   - text: "Export Apple Notes (manual copy or automation script)"
     checked: false
   - text: "Import to SiYuan (paste markdown, preserve tags)"
@@ -38,6 +44,8 @@ tasks:
     checked: false
   - text: "Test search (find old notes)"
     checked: false
+  
+  # Phase 5: Backup Strategy
   - text: "Document data location (~/siyuan/workspace/)"
     checked: false
   - text: "Setup backup (rsync, Time Machine, or NAS backup)"
