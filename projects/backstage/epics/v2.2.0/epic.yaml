@@ -1,7 +1,7 @@
 ---
 name: "check enforcement"
 goal: "How checks validate, execute, and report"
-status: backlog
+status: archive
 type: "minor"
 created: 2026-03-01
 started: null

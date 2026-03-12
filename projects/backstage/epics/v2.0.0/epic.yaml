@@ -22,4 +22,22 @@ tasks:
     checked: false
   - text: "Propose epic v0.32.0: MVC implementation"
     checked: false
+  - text: "Define agent domains (scope boundaries)"
+    checked: false
+  - text: "Design check architecture (after agents exist)"
+    checked: false
+  - text: "Implement agent runtime"
+    checked: false
+  - text: "Implement check execution framework"
+    checked: false
+  - text: "Document agent-check relationship"
+    checked: false
+  - text: "Design checkpoint enforcement architecture"
+    checked: false
+  - text: "Implement watchers"
+    checked: false
+  - text: "Design git commit structure"
+    checked: false
+  - text: "Implement composable YAML generation"
+    checked: false
 ---
