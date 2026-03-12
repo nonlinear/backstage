@@ -1,0 +1,79 @@
+---
+name: "Finances - Intelligent Money Management"
+goal: "Financial automation: tax debt negotiation, mortgage optimization, Paperless + Actual Budget integration"
+status: backlog
+type: "major"
+created: 2026-03-12
+started: null
+completed: null
+tasks:
+  # Phase 1: NYS Tax Debt Resolution (URGENT)
+  - text: "Call NYS Department: 518-457-5434 (weekday morning)"
+    checked: false
+  - text: "Call 'Your voice at Tax Dept': 518-530-4357 (weekday morning)"
+    checked: false
+  - text: "Research 'Compromise in Lieu of Taxes' (NYS OIC equivalent)"
+    checked: false
+  - text: "Gather 2023 tax returns for Jenn"
+    checked: false
+  - text: "Collect all NYS tax documentation"
+    checked: false
+  - text: "Upload NYS docs to Paperless (tag: NYS, tax, 2023)"
+    checked: false
+  
+  # Phase 2: Mortgage Optimization
+  - text: "Gather mortgage details (rate, balance, term remaining)"
+    checked: false
+  - text: "Identify other debts (credit cards, loans, APRs)"
+    checked: false
+  - text: "Calculate monthly budget surplus"
+    checked: false
+  - text: "Build mortgage prepayment calculator (show scenarios)"
+    checked: false
+  - text: "Build debt avalanche tracker (prioritize highest APR)"
+    checked: false
+  - text: "Decide strategy: bi-weekly, lump sum, or avalanche first"
+    checked: false
+  
+  # Phase 3: Paperless Integration
+  - text: "Configure Paperless API access (http://192.168.1.152:8010/api)"
+    checked: false
+  - text: "Build auto-upload script (tax docs, bills, receipts)"
+    checked: false
+  - text: "Set up tags & correspondents (IRS, NYS, banks, Brazil consulate)"
+    checked: false
+  - text: "Upload Brazilian documents (passport YC132899, RG, CPF)"
+    checked: false
+  - text: "Create retention policy (auto-delete old receipts)"
+    checked: false
+  
+  # Phase 4: Actual Budget Integration
+  - text: "Link bank accounts to Actual Budget (auto-import)"
+    checked: false
+  - text: "Set up categories (Fixed, Variable, Goals)"
+    checked: false
+  - text: "Add all debts (balance, APR, minimum payment)"
+    checked: false
+  - text: "Configure spending alerts ('80% grocery budget')"
+    checked: false
+  - text: "Monthly budget review automation (OpenClaw pulls report)"
+    checked: false
+  
+  # Phase 5: Tax Automation (Read-Only)
+  - text: "Research IRS.gov login flow (2FA handling)"
+    checked: false
+  - text: "Research NYS Tax portal login"
+    checked: false
+  - text: "Build Selenium read-only scraper (IRS + NYS)"
+    checked: false
+  - text: "Schedule monthly scrape → auto-upload to Paperless"
+    checked: false
+  
+  # Phase 6: Wiley Time Tracking
+  - text: "IEEE timelog: Weekly offset (Mon, max 10h/week in past)"
+    checked: false
+  - text: "Monthly timelog review (5 days before month-end)"
+    checked: false
+  - text: "Future: Auto-detect billable work from Jira"
+    checked: false
+---
