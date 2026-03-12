@@ -34,6 +34,17 @@ tasks:
         checked: false
       - text: "Test: Edit epic.yaml → browser auto-reloads"
         checked: false
+  
+  - group: "Agents Section Broken"
+    items:
+      - text: "Investigate: Agents section worked before, broken now"
+        checked: false
+      - text: "Check what changed (git log, recent commits)"
+        checked: false
+      - text: "Fix agents listing/display"
+        checked: false
+      - text: "Test: Agents section shows correctly"
+        checked: false
 
 notes: |
   ## Context (Grooming Session 2026-03-12)
