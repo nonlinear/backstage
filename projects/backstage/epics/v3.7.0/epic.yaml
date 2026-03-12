@@ -1,6 +1,6 @@
 version: "3.7.0"
 title: "Fixes"
-status: active
+status: archive
 started: 2026-03-12
 priority: minor
 squad: backstage
