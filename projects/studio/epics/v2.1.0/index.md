@@ -1,4 +1,4 @@
-# v2.1.0 - Uptime Alerts
+# Uptime Alerts
 
 **Why NAS?**
 - Mac Studio can reboot/crash → Kuma on Mac = silent failure
