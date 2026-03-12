@@ -1,34 +1,33 @@
 ---
-version: v0.33.0
-name: "OpenProject integration"
-goal: "Research OpenProject for project management (not using it)"
+name: "OpenProject Migration"
+goal: "Establish robust structure for project/epic tracking with OpenProject as tracker and Markdown as documentation"
 status: done
-type: "minor"
-created: null
-started: null
-completed: 2026-02-26
+type: "major"
+created: 2026-02-26
+started: 2026-02-26
+completed: 2026-03-12
 tasks:
   # Phase 1: Structure
   - text: "Migrate all epics to OpenProject"
     checked: true
-  - text: "Commit migration"
+  - text: "Commit migration to git"
     checked: true
   - text: "Delete ROADMAP.md/CHANGELOG.md"
-    checked: false
+    checked: true
   - text: "Create epic-openproject-parity.sh"
-    checked: false
+    checked: true
   - text: "Test anti-drift checks"
-    checked: false
+    checked: true
   
   # Phase 2: HTML Reader
   - text: "Create localhost server for epic-notes/"
-    checked: false
+    checked: true
   - text: "Auto-generate INDEX.html"
-    checked: false
+    checked: true
   - text: "Test Tailscale access from iPad"
-    checked: false
+    checked: true
   - text: "Markdown → HTML rendering"
-    checked: false
+    checked: true
   
   # Phase 3: Diagram Integration
   - text: "Simplified diagram contract (HTML+CSS)"
