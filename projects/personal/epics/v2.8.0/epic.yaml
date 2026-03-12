@@ -1,0 +1,71 @@
+version: "2.8.0"
+title: "Prepare iPad for Kids"
+status: active
+started: 2026-03-12
+squad: personal
+
+description: |
+  Set up iPad with iCloud account, Tailscale, and media apps (Kavita, Komga, Jellyfin)
+  for kids to access comics, books, and videos remotely.
+
+tasks:
+  - group: "Account Setup"
+    items:
+      - text: "Set iCloud account on iPad"
+        checked: false
+      - text: "Install Tailscale on iPad"
+        checked: false
+      - text: "Configure Tailscale (adal-rigel network)"
+        checked: false
+  
+  - group: "Media Apps"
+    items:
+      - text: "Install Kavita app (books/comics)"
+        checked: false
+      - text: "Configure Kavita (both kids' accounts)"
+        checked: false
+      - text: "Install Komga app (manga/comics)"
+        checked: false
+      - text: "Configure Komga (both kids' accounts)"
+        checked: false
+      - text: "Install Jellyfin app (videos)"
+        checked: false
+      - text: "Configure Jellyfin (both kids' accounts)"
+        checked: false
+
+notes: |
+  ## Context
+  
+  **iPad:** iPad Mini (or other model)
+  **Purpose:** Kids access to media library via Tailscale
+  
+  ## Tailscale URLs (when connected)
+  
+  - **Kavita:** https://media.adal-rigel.ts.net:5007
+  - **Komga:** https://media.adal-rigel.ts.net:5009
+  - **Jellyfin:** https://media.adal-rigel.ts.net:8096
+  
+  ## Kids Accounts
+  
+  **Create separate accounts for:**
+  - Kid 1
+  - Kid 2
+  
+  **Each account needs:**
+  - Username/password
+  - Access restrictions (age-appropriate content)
+  - Reading progress tracking
+  
+  ## App Installation
+  
+  **iOS Apps:**
+  - Kavita: Search App Store (or use web app)
+  - Komga: Web app (no official iOS app)
+  - Jellyfin: Search App Store
+  
+  ## Success Criteria
+  
+  - [ ] iPad connects to Tailscale automatically
+  - [ ] Both kids can log into Kavita, Komga, Jellyfin
+  - [ ] Reading progress syncs across devices
+  - [ ] Parental controls configured (if needed)
