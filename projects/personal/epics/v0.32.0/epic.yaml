@@ -1,0 +1,43 @@
+---
+name: "Simplify Skills System"
+goal: "Move all skills to workspace, remove symlinks, reduce infrastructure overhead from 3 steps to 1 step"
+status: done
+type: "minor"
+created: 2026-02-26
+started: 2026-02-26
+completed: 2026-03-12
+tasks:
+  # Phase 1: Move Skills
+  - text: "List current skills (ls ~/Documents/skills/)"
+    checked: true
+  - text: "Move each to ~/.openclaw/workspace/skills/"
+    checked: true
+  - text: "Verify no symlinks remain in workspace"
+    checked: true
+  - text: "Test skill loading (OpenClaw recognizes skills)"
+    checked: true
+  
+  # Phase 2: Update References
+  - text: "Update AGENTS.md (skill paths)"
+    checked: true
+  - text: "Update connections/ docs (skill management)"
+    checked: true
+  - text: "Update SOUL.md (skill references if any)"
+    checked: true
+  
+  # Phase 3: Cleanup
+  - text: "Delete old ~/Documents/skills/ (after verification)"
+    checked: true
+  - text: "Remove symlink creation logic (if scripted)"
+    checked: true
+  - text: "Verify auto-commit includes skills (git status in workspace)"
+    checked: true
+  
+  # Phase 4: Documentation
+  - text: "Update TOOLS.md (skills location)"
+    checked: true
+  - text: "Update any skill READMEs (paths)"
+    checked: true
+  - text: "Document new workflow (create skill directly in workspace)"
+    checked: true
+---
