@@ -1,0 +1,31 @@
+---
+name: "Tailscale Reliability"
+goal: "Ensure Tailscale + port exposure always work after restart/travel"
+status: done
+type: "minor"
+created: 2026-03-01
+started: 2026-03-01
+completed: 2026-03-12
+tasks:
+  # Auto-start
+  - text: "Ensure Tailscale auto-starts on boot (brew services start tailscale)"
+    checked: true
+  - text: "Verify brew services list shows 'started'"
+    checked: true
+  - text: "Test: Restart Mac, check tailscale status immediately"
+    checked: true
+  
+  # Serve configs
+  - text: "Verify tailscale serve configs persist after restart"
+    checked: true
+  - text: "Test all exposed ports from iPad"
+    checked: true
+  
+  # Documentation
+  - text: "Create iPhone troubleshooting guide (connections/tailscale-iphone.md)"
+    checked: true
+  - text: "Document all exposed services in connections/tailscale.md"
+    checked: true
+  - text: "Fill in unknown services (ports 8087, 8090, 3000)"
+    checked: true
+---
