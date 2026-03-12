@@ -1,38 +1,39 @@
-# Uptime Alerts
+# Uptime Alerts + NAS Production Hardening
 
+**Goal:** Production-grade NAS infrastructure: monitoring (Uptime Kuma), alerts (Telegram), backups, auto-recovery.
+
+**Why critical:** Pi-hole Global DNS = single point of failure. Need monitoring + alerts + failover before enabling.
+
+---
+
+## Problem
+
+**Current state:**
+- ✅ NAS running critical services (Pi-hole, Home Assistant, Paperless, etc.)
+- ❌ **No monitoring** (if service dies, no alert) → **FIXED: Uptime Kuma**
+- ❌ **No backups** (data loss risk)
+- ❌ **No auto-recovery** (manual intervention needed)
+
+**Risk scenario:**
+- Enable Pi-hole Global DNS → NAS becomes critical for EVERYONE on tailnet
+- NAS dies → **DNS stops → Internet stops for all devices**
+- No alert → We don't know until someone complains
+
+**This is unacceptable for production.**
+
+---
+
+## Solution: Three Pillars
+
+### 1. 📊 Monitoring (Uptime Kuma)
 **Why NAS?**
 - Mac Studio can reboot/crash → Kuma on Mac = silent failure
 - Nicholas travels with iPad → needs remote alerts when Mac is down
 - External monitoring = "firefighter outside the burning building"
 
----
-
-## Tasks
-
-### Phase 3: Alerts
-- [ ] Configure Telegram notifications
-  - Bot token: `$TELEGRAM_BOT_TOKEN` (in .env)
-  - Chat ID: `$TELEGRAM_CHAT_ID`
-  - Test: Send alert when service goes down
-- [ ] Alert templates (concise, actionable)
-- [ ] Test failure scenarios (docker stop → verify alert received)
-
-### Phase 4: Automation
-- [ ] Auto-add new apps to Kuma
-  - When new port opens → auto-create monitor?
-  - Script vs manual workflow?
-- [ ] Document: "New service checklist" (Docker → Tailscale → Kuma)
-
----
-
-## Done
-
-### Phase 1: Setup
+**Done:**
 - ✅ Installed Uptime Kuma on NAS (Docker, port 3001)
 - ✅ Exposed via Tailscale: https://media.adal-rigel.ts.net:3001
-- ✅ Updated `connections/tailscale.md` (subnet routes philosophy)
-
-### Phase 2: Monitors
 - ✅ Created 17 monitors:
   - **Tailscale Health:** Studio, NAS
   - **Mac Studio (5):** Backstage, Librarian, Shelfmark, OpenClaw, Uptime Kuma
@@ -42,17 +43,50 @@
 
 ---
 
-## Research
+### 2. 🚨 Alerts (Telegram Integration)
+- **Telegram notifications** (service down, high CPU, disk full)
+- **Escalation levels** (warning → critical → emergency)
+- **Smart throttling** (don't spam, batch alerts)
 
-### Monitoring Philosophy
-- **Subnet routes = automatic** (every port exposed via Tailscale)
-- **No `tailscale serve` needed** (deprecated for this use case)
-- **Monitor Tailscale URLs only** (local = tailscale when subnet routes enabled)
+**Implementation:**
+```yaml
+# Uptime Kuma Telegram config
+Bot token: $TELEGRAM_BOT_TOKEN (in .env)
+Chat ID: $TELEGRAM_CHAT_ID
+Templates: Concise, actionable
+```
 
-### What to Monitor
-- **Critical:** Services Nicholas uses remotely (Jellyfin, Paperless, Home Assistant)
-- **Infrastructure:** Tailscale connectivity (Studio, NAS)
-- **Development:** Backstage, Librarian, OpenClaw
+---
+
+### 3. 💾 Backups + Auto-Recovery
+
+**Auto-Recovery:**
+- Docker restart policies (`--restart=unless-stopped`)
+- Watchdog script (cron every 5min, restart failed containers)
+- Self-healing containers
+
+**Backups:**
+- Config backups (Pi-hole settings, HA automations, Docker configs)
+- Data backups (Paperless docs, critical data)
+- Restore testing (quarterly, verify backups work)
+
+**Failover DNS:**
+- Primary: 192.168.1.152 (Pi-hole)
+- Secondary: 1.1.1.1 (Cloudflare)
+- Graceful degradation (ads not blocked, but internet works)
+
+---
+
+## Success Criteria
+
+**Before enabling Pi-hole Global DNS:**
+- ✅ Monitoring dashboard shows NAS health (**DONE: Uptime Kuma**)
+- ✅ Alerts working (tested via manual trigger)
+- ✅ Auto-recovery tested (kill container → auto-restart)
+- ✅ Backups running (daily, verified restore)
+- ✅ Failover DNS tested (Pi-hole down → 1.1.1.1 works)
+
+**Then and only then:** Enable Global DNS safely.
 
 ---
 
