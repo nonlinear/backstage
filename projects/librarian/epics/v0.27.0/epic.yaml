@@ -1,161 +1,96 @@
 version: "0.27.0"
-title: "Librarian GUI"
+title: "Cover Extraction"
 status: active
 started: 2026-03-10
 squad: librarian
 
 description: |
-  Web GUI for Librarian - index browser, EPUB reader, always-on web app
-  Accessible via Tailscale remotely (iPad/iPhone)
-  Production-ready, auto-healing, persistent service
+  Extract EPUB covers automatically, store in covers/ folder (not hidden, committed to git)
+  Scan books/ recursively, skip covers/ folder to avoid processing extracted images
+  Generate .jpg covers at 300px width for GUI display
 
 tasks:
-  - group: "Phase 1: GUI Foundation"
+  - group: "Cover Extraction Implementation"
     items:
-      - text: "Create Next.js app scaffold (same framework as Backstage)"
-        checked: true
-      - text: "Load .library-index.json and render topics"
-        checked: true
-      - text: "Add dropdown navigation (topic + subtopic)"
-        checked: true
-      - text: "Display books as cards (horizontal scroll)"
-        checked: true
-      - text: "Extract EPUB covers (book.epub → book.jpg)"
-        checked: true
-      - text: "Show covers in GUI cards (300px width)"
-        checked: true
-      - text: "URL routing (/ROOT/TOPIC pattern)"
-        checked: true
-      - text: "Hash scroll (#book.epub → card)"
-        checked: true
-      - text: "Superscript counts (N books, +N topics)"
-        checked: true
-      - text: "Capitalize topic names"
-        checked: true
-  
-  - group: "Phase 2: Production Deployment"
-    items:
-      - text: "Update title metadata (Librarian, not Index Browser)"
+      - text: "Create covers/ folder (visible, not hidden)"
         checked: false
-      - text: "Configure app icon (favicon + PWA manifest)"
+      - text: "Update extract-covers.py to output to covers/"
         checked: false
-      - text: "Tailscale serve config (port 8766)"
+      - text: "Filter scan to skip covers/ folder (if 'covers' in p.parts: continue)"
         checked: false
-      - text: "Test remote access (iPad/iPhone)"
+      - text: "Test: extract covers → verify in covers/"
         checked: false
-      - text: "LaunchAgent for auto-start on boot"
+      - text: "Commit covers/ to git (no .gitignore)"
         checked: false
-      - text: "Health check script (restart if down)"
-        checked: false
-      - text: "Uptime Kuma monitor (alert on failure)"
+      - text: "Update GUI to load covers from covers/ folder"
         checked: false
   
-  - group: "Phase 3: Auto-Indexing"
+  - group: "Documentation"
     items:
-      - text: "Implement file watcher (watchdog) for books/"
+      - text: "Document covers/ strategy in epic notes"
         checked: false
-      - text: "Trigger reindex on file add/remove/modify"
-        checked: false
-      - text: "Update covers on reindex"
-        checked: false
-      - text: "Test: add book → auto-reindex → GUI updates"
-        checked: false
-  
-  - group: "Phase 4: Documentation"
-    items:
-      - text: "Update localhost-manager.sh (port 8766)"
-        checked: false
-      - text: "Document in connections/librarian-gui.md"
-        checked: false
-      - text: "Add to ports.md (8766 = Librarian GUI)"
+      - text: "Update README with covers/ location"
         checked: false
 
 notes: |
-  ## Critical Requirements (2026-03-10 22:16)
+  ## Design Decision: covers/ Folder (2026-03-12)
   
-  **Title:** "Librarian" (NOT "Index Browser")
-  - App title, browser tab, metadata
+  **Location:** `~/Documents/librarian/covers/`
   
-  **Icon:**
-  - Background watermark (header-with-icon CSS)
-  - Favicon (browser tab)
-  - PWA app icon (installable web app)
+  **Strategy:**
+  - **Visible folder** (NOT hidden with `.`)
+  - **Committed to git** (NOT in .gitignore)
+  - **Scan filter:** Skip `covers/` when scanning books
   
-  **Tailscale:**
-  - Accessible remotely via https://librarian.adal-rigel.ts.net
-  - Must survive reboot
-  - Must survive Mac sleep/wake
+  **Why visible:**
+  - Need to commit covers for GUI (part of repo)
+  - Hidden folders (`.covers/`) would need explicit gitignore exception
+  - Simpler to keep visible and filter during scan
   
-  **Always-on:**
-  - LaunchAgent (auto-start on boot)
-  - Health check (restart if crashed)
-  - Uptime Kuma monitoring (Telegram alerts)
+  **Scan filter implementation:**
+  ```python
+  epubs = [
+      p for p in books_dir.rglob('*.epub')
+      if 'covers' not in p.parts  # Skip covers/ folder
+  ]
+  ```
   
-  **Web App:**
-  - PWA manifest (installable on iPad)
-  - Offline-capable (future)
-  - Fast load times
+  ## File Structure
   
-  ## Design Decisions
+  ```
+  ~/Documents/librarian/
+    ├── books/
+    │   ├── AI/
+    │   │   └── policy/
+    │   │       └── book.epub
+    │   └── ...
+    ├── covers/           # Extracted covers (committed)
+    │   ├── ABC123.jpg
+    │   └── XYZ789.jpg
+    ├── librarian.db
+    └── .library-index.json
+  ```
   
-  **Single process architecture:**
-  - Next.js app (port 8766)
-  - Watchdog observer (background thread)
-  - MCP server stays separate (different lifecycle)
+  ## Cover Naming
   
-  **Watcher triggers:**
-  - File added → reindex topic → reload GUI
-  - File removed → reindex topic → reload GUI
-  - File modified → reindex topic → reload GUI
+  **Format:** Hash of relative path (same as current)
+  - `books/AI/policy/book.epub` → `covers/ABC123.jpg`
+  - Ensures unique filenames
+  - No filesystem path issues
   
-  **GUI features (current):**
-  - ✅ List all 73 topics (grouped by root folder)
-  - ✅ Show books per topic (horizontal scroll)
-  - ✅ Cover images (171 extracted)
-  - ✅ URL routing (/AI/policy)
-  - ✅ Hash scroll (#book.epub)
-  - ⏸️ Search/filter (future)
-  - ⏸️ EPUB reader (epic v0.28.0)
+  ## Git Strategy
   
-  **Port:** 8766 (fixed, never change)
+  **DO commit:**
+  - `covers/*.jpg` (GUI needs them)
   
-  ## Tech Stack
-  
-  - Next.js 16.1.6 (Turbopack)
-  - React 19.2.3
-  - Shadcn UI (copied from Backstage)
-  - Tailwind CSS
-  - TypeScript
-  - 711 packages installed
+  **DO NOT gitignore:**
+  - Covers are part of the repo (not temp files)
   
   ## Success Criteria
   
-  **Phase 1 (DONE):**
-  - ✅ GUI shows all topics + books
-  - ✅ Horizontal scroll layout (Backstage pattern)
-  - ✅ Cover images displayed
-  - ✅ URL routing + hash scroll
-  
-  **Phase 2 (IN PROGRESS):**
-  - [ ] Title = "Librarian" everywhere
-  - [ ] Icon in browser tab + background
-  - [ ] Tailscale remote access working
-  - [ ] Auto-start on boot (LaunchAgent)
-  - [ ] Health monitoring (Kuma)
-  
-  **Phase 3 (PENDING):**
-  - [ ] Add book → <10s auto-reindex → GUI updates
-  - [ ] Covers regenerated on reindex
-  
-  **Phase 4 (PENDING):**
-  - [ ] Documentation complete
-  - [ ] localhost-manager.sh updated
-  - [ ] ports.md entry added
-  
-  ## Dependencies
-  
-  **Blocked by:**
-  - Epic v0.36.0 (App Healing) - need stable Tailscale + health check patterns
-  
-  **Blocks:**
-  - Epic v0.28.0 (EPUB Reader) - needs stable GUI first
+  - [ ] `covers/` folder exists
+  - [ ] `extract-covers.py` outputs to `covers/`
+  - [ ] Book scan skips `covers/` folder
+  - [ ] GUI loads covers from `covers/`
+  - [ ] Covers committed to git
+  - [ ] No .gitignore for covers/
