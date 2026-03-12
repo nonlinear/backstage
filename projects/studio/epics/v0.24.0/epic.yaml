@@ -1,11 +1,59 @@
 ---
-version: v0.24.0
-name: "Mastodon migration"
-goal: "Move from Twitter/X to Mastodon (self-hosted or federated instance)"
+name: "Mastodon Migration + Studio Accounts"
+goal: "Reduce hosting costs ($35→$10/mo) + create nonlinear.studio multi-account server"
 status: backlog
 type: "minor"
-created: null
+created: 2026-02-24
 started: null
 completed: null
-tasks: []
+tasks:
+  # Cost Reduction Research
+  - text: "Research Mastodon VPS requirements (RAM, storage, bandwidth)"
+    checked: false
+  - text: "Compare VPS providers (DigitalOcean vs Linode vs Hetzner)"
+    checked: false
+  - text: "Test Mastodon Docker setup on NAS (trial run)"
+    checked: false
+  - text: "Calculate actual break-even (time vs money vs risk)"
+    checked: false
+  
+  # Studio Server Setup
+  - text: "Set up VPS/NAS with Mastodon Docker"
+    checked: false
+  - text: "Configure nonlinear.studio domain (DNS + SSL)"
+    checked: false
+  - text: "Create 5 accounts (kin, wiley, librarian, fitness, main)"
+    checked: false
+  - text: "Document posting rules (who posts what)"
+    checked: false
+  
+  # Migration
+  - text: "Export data from mastohost (posts, followers, media)"
+    checked: false
+  - text: "Import data to new server"
+    checked: false
+  - text: "Test federation (verify other servers can see posts)"
+    checked: false
+  - text: "Update DNS (social.praxis.nyc → nonlinear.studio)"
+    checked: false
+  - text: "Announce migration on old account"
+    checked: false
+  - text: "Cancel mastohost subscription"
+    checked: false
+  
+  # Auto-Posting Integration
+  - text: "Create mastodon-post.sh script (API wrapper)"
+    checked: false
+  - text: "Get API tokens for each account"
+    checked: false
+  - text: "Test skills → Mastodon posting"
+    checked: false
+  
+  # Maintenance
+  - text: "Set up automated backups (daily snapshots)"
+    checked: false
+  - text: "Document update process"
+    checked: false
+  - text: "Configure monitoring (uptime, errors)"
+    checked: false
 ---
