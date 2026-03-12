@@ -30,33 +30,13 @@
 
 ## Tasks
 
-### Research Tracks
-
-**1. Open Policy Agent (OPA)**
-- How does OPA handle conflict resolution?
-- Versioning policies?
-- Performance at scale (100s of checks)?
-- Integration patterns (CLI, API, embedded)?
-- Output: `~/Documents/personal/ideas/checkpoint-research-opa.md`
-
-**2. Temporal.io**
-- How to model checkpoint workflows?
-- Dependency graphs (DAGs)?
-- Retry strategies for probabilistic checks?
-- Cost tracking (time, resources)?
-- Output: `~/Documents/personal/ideas/checkpoint-research-temporal.md`
-
-**3. Formal Methods (TLA+)**
-- Can we model checkpoint resolution formally?
-- Prove no deadlocks / conflicts?
-- Edge cases (horizontal conflict, circular deps)?
-- Verification tools (model checking)?
-- Output: `~/Documents/personal/ideas/checkpoint-research-formal.md`
-
-**4. Compare & Design**
-- Compare approaches (what to adopt, what to avoid)
-- Design Minimal Viable Checkpoint (MVC) architecture
-- Propose epic v0.32.0: MVC implementation
+- [ ] Research OPA (hierarchical policies, conflict resolution, audit logs)
+- [ ] Research Temporal (workflow orchestration, event triggers, retry patterns)
+- [ ] Research TLA+ (formal verification, state consistency, edge cases)
+- [ ] Document findings in `~/Documents/personal/ideas/checkpoint-research-*.md`
+- [ ] Compare approaches (what to adopt, what to avoid)
+- [ ] Design Minimal Viable Checkpoint (MVC) architecture
+- [ ] Propose epic v0.32.0: MVC implementation
 
 ---
 
