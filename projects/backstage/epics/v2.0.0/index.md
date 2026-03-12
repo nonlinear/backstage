@@ -28,18 +28,6 @@
 
 ---
 
-## Tasks
-
-- [ ] Research OPA (hierarchical policies, conflict resolution, audit logs)
-- [ ] Research Temporal (workflow orchestration, event triggers, retry patterns)
-- [ ] Research TLA+ (formal verification, state consistency, edge cases)
-- [ ] Document findings in `~/Documents/personal/ideas/checkpoint-research-*.md`
-- [ ] Compare approaches (what to adopt, what to avoid)
-- [ ] Design Minimal Viable Checkpoint (MVC) architecture
-- [ ] Propose epic v0.32.0: MVC implementation
-
----
-
 ## Success Criteria
 
 ✅ **Research complete:**
