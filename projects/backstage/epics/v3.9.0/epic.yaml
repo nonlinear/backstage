@@ -1,0 +1,20 @@
+---
+name: "Stack as Domain"
+goal: "When computer languages/stacks are listed per project, provide new affordances (MCP servers, skills) and checks automatically"
+status: backlog
+type: "minor"
+created: 2026-03-13
+started: null
+completed: null
+tasks:
+  - text: "Define stack taxonomy (Hugo, Next.js, Python, etc.)"
+    checked: false
+  - text: "Map stacks → default checks (build validation, link checking, etc.)"
+    checked: false
+  - text: "Map stacks → MCP servers (language-specific tooling)"
+    checked: false
+  - text: "Map stacks → skills (deployment workflows, versioning)"
+    checked: false
+  - text: "Design stack declaration in project metadata"
+    checked: false
+---
