@@ -15,6 +15,8 @@ tasks:
         checked: false
       - text: "Read [3-layer memory tutorial](https://www.reddit.com/r/openclaw/comments/1rnku5b/)"
         checked: false
+      - text: "Read [hybrid RAG post](https://www.reddit.com/r/openclaw/comments/1rnku5b/) - retrieval optimization"
+        checked: false
   
   - group: "L3: Reference Layer (new)"
     items:
@@ -67,6 +69,30 @@ tasks:
       - text: "Document: Breadcrumb > full reference (bridge L2→L3)"
         checked: false
       - text: "Add to SOUL.md: checkpoint discipline (capture decisions)"
+        checked: false
+  
+  - group: "Hybrid RAG Retrieval (critical behavioral fix)"
+    reference: "https://www.reddit.com/r/openclaw/comments/..."
+    items:
+      - text: "Install Ollama (if not already installed)"
+        checked: false
+      - text: "Pull nomic-embed-text model (ollama pull nomic-embed-text)"
+        checked: false
+      - text: "Configure memorySearch in openclaw.json (hybrid: vector 0.7 + BM25 0.3)"
+        checked: false
+      - text: "Enable MMR (lambda: 0.7) to reduce redundant results"
+        checked: false
+      - text: "Enable temporal decay (halfLifeDays: 30) for recency bias"
+        checked: false
+      - text: "Add Memory Search Protocol to AGENTS.md (MANDATORY before ls/open files)"
+        checked: false
+      - text: "Set up hourly reindexing cron job (new files won't auto-index)"
+        checked: false
+      - text: "Test retrieval: semantic query → ranked results → similarity scores 0.45-0.48"
+        checked: false
+      - text: "Test multilingual (Spanish/Portuguese memory logs work with nomic-embed-text)"
+        checked: false
+      - text: "Document: memory_search BEFORE file browsing (behavioral rule)"
         checked: false
   
   - group: "Validation"
@@ -228,3 +254,145 @@ notes: |
   - [ ] Agent aligned with SOUL.md (no drift)
   - [ ] Full project visibility via checkboard
   - [ ] Auto-checkpoint fires before compaction (nothing lost)
+  - [ ] memory_search returns relevant results (similarity 0.45-0.48)
+  - [ ] Agent uses memory_search BEFORE browsing files manually
+  
+  ---
+  
+  ## Hybrid RAG Retrieval (Complements 3-Layer Architecture)
+  
+  **Source:** https://www.reddit.com/r/openclaw/comments/... (hybrid RAG post)
+  
+  **Problem solved:** "My agent did not have a memory problem. It had a retrieval problem."
+  
+  ### The Issue
+  
+  - Months of memory logs stored ✅
+  - But: Agent couldn't FIND relevant info efficiently ❌
+  - Pattern: `ls` → open files blindly → spend tokens → miss context
+  - **Not a storage problem. A retrieval by meaning problem.**
+  
+  ### Hybrid RAG Solution
+  
+  **Configuration:**
+  ```json
+  "memorySearch": {
+    "provider": "ollama",
+    "query": {
+      "hybrid": {
+        "enabled": true,
+        "vectorWeight": 0.7,     // Semantic similarity (cosine)
+        "textWeight": 0.3,       // BM25 keyword matching
+        "mmr": { "enabled": true, "lambda": 0.7 },  // Reduce redundant results
+        "temporalDecay": { "enabled": true, "halfLifeDays": 30 }  // Recent > old
+      }
+    }
+  }
+  ```
+  
+  **What each part does:**
+  - **Vector (0.7):** Semantic proximity via nomic-embed-text embeddings
+  - **BM25 (0.3):** Exact names, versions, IDs (keyword matching)
+  - **MMR (lambda 0.7):** Maximal Marginal Relevance = less duplication in results
+  - **Temporal decay (30 days):** Recent logs weighted higher
+  
+  **Stack:**
+  - OpenClaw (local, self-hosted)
+  - Ollama + nomic-embed-text:latest (local embeddings)
+  - SQLite + sqlite-vec + FTS5 (auto-created by OpenClaw)
+  - No external APIs
+  
+  ### Critical Behavioral Fix
+  
+  > "Enabling the tool was not enough. If you do not explicitly tell the agent to use memorySearch before reading files directly, it will often skip it and take the slower, token-heavy route anyway."
+  
+  **AGENTS.md rule (MANDATORY):**
+  
+  ```markdown
+  ## Memory Search Protocol
+  
+  BEFORE reading files directly or running ls:
+  
+  1. ✅ Run memory_search with semantic query
+  2. ✅ Review ranked results (similarity scores)
+  3. ✅ Open best match from search results
+  4. ❌ ONLY browse folders if search returns NOTHING relevant
+  
+  Never skip memory_search to go straight to ls + open files.
+  
+  Example:
+  - Query: "Pomodoro session notes from last week"
+  - memory_search finds: memory/2026-03-05.md (score 0.47)
+  - Open that file FIRST, don't browse memory/ manually
+  ```
+  
+  **The instruction became part of normal workflow.** Behavioral change = as important as technical change.
+  
+  ### Before vs After
+  
+  **Before:**
+  - Browse folders blindly
+  - Open files hoping wording matches
+  - Waste tokens, miss context
+  
+  **After:**
+  - Run memory_search with semantic query
+  - Retrieve ranked results (similarity scores)
+  - Open best match
+  - Answer from actual past notes
+  
+  **Similarity scores:** 0.45-0.48 for relevant results (normal for nomic-embed-text on prose logs)
+  
+  ### Practical Notes
+  
+  **1. Context limit:**
+  - nomic-embed-text = 2048 tokens (NOT 8192)
+  - Large files may get truncated at indexing time
+  
+  **2. Multilingual:**
+  - Spanish/Portuguese memory logs work well
+  - nomic-embed-text handles multiple languages without issues
+  
+  **3. Quality depends on notes:**
+  - Vague logs = vague search results
+  - Semantic search can't fix poorly written memory
+  
+  **4. Reindexing required:**
+  - New files NOT auto-added to vector index
+  - Need hourly cron job to reindex
+  - Without it, search only covers files from initial index creation
+  
+  **5. Common mistake:**
+  - Setting `provider: "openai"` + pointing baseUrl to Ollama ❌
+  - Must use `provider: "ollama"` directly ✅
+  
+  ### How This Complements 3-Layer Memory
+  
+  | Post | Focus | What it solves |
+  |------|-------|----------------|
+  | **3-layer memory** | Architecture (L1/L2/L3 structure) | How to ORGANIZE memory |
+  | **Hybrid RAG** | Retrieval optimization | How to SEARCH memory effectively |
+  
+  **They work together:**
+  - 3-layer = structure (what files, where, why)
+  - Hybrid RAG = retrieval (how to find relevant info fast)
+  - Structure without retrieval = organized but inaccessible
+  - Retrieval without structure = fast search, poor organization
+  
+  **Combined result:**
+  - Agent knows WHERE to store things (3-layer)
+  - Agent knows HOW to find things (hybrid RAG)
+  - Context recovery <2min (3-layer triggers + semantic search)
+  
+  ### Implementation in v0.11.0
+  
+  **Phase 1:** 3-layer structure (L1/L2/L3, token budget)
+  **Phase 2:** Five triggers (recover, checkpoint, trim, recalibrate, checkboard)
+  **Phase 3:** Hybrid RAG (memorySearch config, behavioral rule, reindexing)
+  
+  **Why this order:**
+  - Structure FIRST (organize what exists)
+  - Triggers SECOND (maintain structure over time)
+  - RAG LAST (optimize retrieval on organized structure)
+  
+  **Don't enable RAG on disorganized memory** = garbage in, garbage out.
