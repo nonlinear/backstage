@@ -7,5 +7,98 @@ type: "minor"
 created: 2026-03-11
 started: null
 completed: null
-tasks: []
+tasks:
+  - group: "Core Stack"
+    items:
+      - text: "Install Radarr (movies)"
+        checked: false
+      - text: "Install Sonarr (TV shows)"
+        checked: false
+      - text: "Install Prowlarr (indexer manager)"
+        checked: false
+      - text: "Install qBittorrent (torrent client)"
+        checked: false
+      - text: "Install Jellyfin (media server - already have, verify config)"
+        checked: false
+  
+  - group: "Helper Tools"
+    items:
+      - text: "Install Seerr (request management - replaces Jellyseerr/Ombi)"
+        checked: false
+      - text: "Install Fileflows (file processing automation)"
+        checked: false
+      - text: "Install Unpackerr (auto-extract compressed downloads)"
+        checked: false
+  
+  - group: "Configuration"
+    items:
+      - text: "Configure Prowlarr indexers"
+        checked: false
+      - text: "Link Prowlarr → Sonarr/Radarr"
+        checked: false
+      - text: "Configure download paths (consistent across all *arr apps)"
+        checked: false
+      - text: "Configure media library paths (Jellyfin import locations)"
+        checked: false
+      - text: "Set up quality profiles (1080p, 4K, etc.)"
+        checked: false
+      - text: "Configure auto-import rules"
+        checked: false
+  
+  - group: "Maintenance Protocol"
+    items:
+      - text: "Weekly: Check stale downloads (manual cleanup)"
+        checked: false
+      - text: "Weekly: Fix failed imports (manual intervention)"
+        checked: false
+      - text: "Document known issues: Fileflows flow breaks (rare)"
+        checked: false
+      - text: "Document known issues: Jellyfin update breakage (rare)"
+        checked: false
+
+notes: |
+  ## Stack Stability Report (Reddit r/selfhosted)
+  
+  **User experience:** "Arr stack is incredibly stable lol."
+  
+  **Years of uptime:** Rock solid for many years with auto-updates enabled.
+  
+  **Rare issues:**
+  - Jellyfin broke once after 1 update
+  - Fileflows flow (internal script) broke once (unrelated to auto-updates)
+  
+  **Manual maintenance required:**
+  - Weekly: Fix stale downloads
+  - Weekly: Import failed-to-import movies/shows
+  - User prefers manual weekly cleanup over adding more helper services
+  
+  **Philosophy:** "Easier to do this weekly than setting up yet another helper service to fix these for me. 😅"
+  
+  ## Stack Components
+  
+  **Core:**
+  - Radarr (movies)
+  - Sonarr (TV shows)
+  - Prowlarr (indexer manager)
+  - qBittorrent (torrent client)
+  - Jellyfin/Emby (media server)
+  
+  **Helpers:**
+  - Seerr (request management - replaces Jellyseerr/Ombi)
+  - Fileflows (file processing automation)
+  - Unpackerr (auto-extract compressed downloads)
+  
+  **Custom:**
+  - "some of my own vibecoded garbage" (user's custom scripts)
+  
+  ## Success Criteria
+  
+  - [ ] All core apps installed + configured
+  - [ ] Auto-download working (request → download → import → available in Jellyfin)
+  - [ ] Weekly maintenance routine documented
+  - [ ] Known issues documented (for troubleshooting)
+  
+  ## Reference
+  
+  - Reddit thread: https://www.reddit.com/r/selfhosted/comments/1rm2wj7/comment/o8xdsvs/
 ---
