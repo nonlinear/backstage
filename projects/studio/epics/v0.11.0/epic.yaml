@@ -1,14 +1,230 @@
 ---
 name: "memory-architecture"
-goal: "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+goal: "3-layer memory system (Brain/Memory/Reference) with 5 triggers (recover/checkpoint/trim/recalibrate/checkboard) to stop agents starting from zero"
 status: backlog
 type: "minor"
 created: null
 started: null
 completed: null
 tasks:
-  - text: "Investigate [showboat](https://github.com/simonw/showboat?tab=readme-ov-file)"
-    checked: false
-  - text: "Investigate [cognetivy](https://github.com/meitarbe/cognetivy)"
-    checked: false
----
+  - group: "Research"
+    items:
+      - text: "Investigate [showboat](https://github.com/simonw/showboat?tab=readme-ov-file)"
+        checked: false
+      - text: "Investigate [cognetivy](https://github.com/meitarbe/cognetivy)"
+        checked: false
+      - text: "Read [3-layer memory tutorial](https://www.reddit.com/r/OpenClaw/comments/...)"
+        checked: false
+  
+  - group: "L3: Reference Layer (new)"
+    items:
+      - text: "Create reference/ directory structure"
+        checked: false
+      - text: "Migrate deep docs from AGENTS.md → reference/ (SOPs, frameworks)"
+        checked: false
+      - text: "Create breadcrumb files in memory/ (4KB max, pointers to reference/)"
+        checked: false
+      - text: "Document L3 convention in AGENTS.md (when to use reference/)"
+        checked: false
+  
+  - group: "Token Budget Enforcement"
+    items:
+      - text: "Set L1 budget: 500-1000 tokens per file, <7000 total"
+        checked: false
+      - text: "Create token measurement script (count current L1 usage)"
+        checked: false
+      - text: "Document budget in AGENTS.md (why it matters)"
+        checked: false
+  
+  - group: "Five Triggers (skills)"
+    items:
+      - text: "Create 'recover' trigger (context rebuild post-reset)"
+        checked: false
+      - text: "Create 'checkpoint' trigger (manual session capture)"
+        checked: false
+      - text: "Create 'trim' trigger (L1 maintenance, move excess to L2/L3)"
+        checked: false
+      - text: "Create 'recalibrate' trigger (drift correction, re-read L1)"
+        checked: false
+      - text: "Create 'checkboard' trigger (all projects status dump)"
+        checked: false
+  
+  - group: "Auto-Checkpoint (critical)"
+    items:
+      - text: "Inject checkpoint into auto-compaction prompt (25k tokens before limit)"
+        checked: false
+      - text: "Test: Fill context → verify checkpoint fires → verify nothing lost"
+        checked: false
+      - text: "Document: Manual vs auto checkpoint (safety net)"
+        checked: false
+  
+  - group: "Write Discipline Protocol"
+    items:
+      - text: "Document: Write before you move (4-word rule)"
+        checked: false
+      - text: "Document: Never duplicate across layers (pointer > content)"
+        checked: false
+      - text: "Document: Breadcrumb > full reference (bridge L2→L3)"
+        checked: false
+      - text: "Add to SOUL.md: checkpoint discipline (capture decisions)"
+        checked: false
+  
+  - group: "Validation"
+    items:
+      - text: "Test recover: Reset session → recover → verify full context"
+        checked: false
+      - text: "Test checkpoint: Session work → checkpoint → verify captured"
+        checked: false
+      - text: "Test trim: Bloat L1 files → trim → verify <7000 tokens"
+        checked: false
+      - text: "Test recalibrate: Drift agent → recalibrate → verify alignment"
+        checked: false
+      - text: "Test checkboard: Multiple projects → checkboard → verify visibility"
+        checked: false
+      - text: "Test auto-checkpoint: Fill context → verify fires → verify captures"
+        checked: false
+
+notes: |
+  ## Source
+  
+  Reddit tutorial: [3-layer memory system for OpenClaw agents](https://www.reddit.com/r/OpenClaw/comments/...)
+  
+  **Author:** Real estate multi-agent operation user
+  **Problem solved:** Agents starting every session from zero (context loss)
+  **Cost:** Trust erosion, repeated work, missed deadlines
+  
+  ## Architecture
+  
+  **L1: Brain** (root workspace, injected every turn)
+  - SOUL.md, AGENTS.md, MEMORY.md, USER.md, TOOLS.md, IDENTITY.md, HEARTBEAT.md
+  - Budget: 500-1000 tokens/file, <7000 total
+  - Only human or checkpoint updates (agents don't change own rules)
+  
+  **L2: Memory** (memory/, searched semantically)
+  - Daily notes: `memory/YYYY-MM-DD.md` (OpenClaw convention)
+  - Breadcrumbs: `memory/[topic].md` (our addition, 4KB max, pointers to L3)
+  - OpenClaw's `memory_search` tool searches this automatically
+  
+  **L3: Reference** (reference/, opened on demand)
+  - Our addition, not OpenClaw convention
+  - SOPs, frameworks, playbooks, research
+  - Accessed via pointer from L2 breadcrumbs
+  - Not searched (too heavy), loaded when specific task needs depth
+  
+  ## Flow
+  
+  L1 (always loaded) → search L2 (memory) → open L3 (reference) on demand
+  
+  **Never duplicate across layers.** Pointer in L1 replaces content. Breadcrumb in L2 replaces opening L3 blindly.
+  
+  ## Five Triggers
+  
+  **recover:** Full context rebuild (post-reset, post-compaction, lost thread)
+  - Find recent session transcript (last 5-10 messages)
+  - Extract search signals (names, topics, deals, tasks)
+  - Search L2 (daily notes, breadcrumbs)
+  - Follow pointers to L3 if needed
+  - Synthesize: what's active, unfinished, direction
+  - **This solved "starting from zero" problem**
+  
+  **checkpoint:** Capture what actually happened
+  - Route by content type:
+    - Behavioral rule → AGENTS.md
+    - Tool workaround → TOOLS.md
+    - Preference change → USER.md
+    - Active state → MEMORY.md
+    - Completed work → memory/YYYY-MM-DD.md
+    - Domain knowledge → memory/ breadcrumb
+  - Manual during sessions
+  - **Auto-triggered 25k tokens before context window fills** (injected into compaction prompt)
+  - Safety net: nothing lost even if manual checkpoint forgotten
+  
+  **trim:** Maintenance cycle (prevent L1 bloat)
+  - Measure every L1 file
+  - Move excess to L2/L3 (completed work → daily notes, details → reference with pointer)
+  - Resolve duplicates across files
+  - Report before/after token counts
+  - **Frequency:** Weekly minimum, more if heavy usage
+  - **Why:** Bloated files get skimmed, instructions missed, performance degrades
+  
+  **recalibrate:** Drift correction
+  - Re-read every L1 file word-for-word
+  - Compare recent behavior vs file content
+  - Report: where I drifted, what I was doing wrong, what files say, what I'm correcting
+  - If no drift, confirm with specific aligned behavior example
+  - **Prevents personality drift over weeks/months**
+  
+  **checkboard:** Full board dump
+  - All active projects grouped by status (active, pending, blocked, backlog)
+  - One line per item
+  - Flag stale items (no progress 7+ days)
+  - Complete visibility in one word
+  
+  ## Write Discipline (The Hard Part)
+  
+  > "The architecture only works if every agent writes to it honestly and reads from it consistently."
+  
+  **Write before you move.** (4-word rule)
+  
+  - Skip checkpoint = session decisions gone
+  - Bloated L1 = agents skim, miss instructions
+  - No breadcrumbs = L3 invisible
+  
+  **Never duplicate information across layers:**
+  - One home per fact
+  - Pointer in L1 replaces content
+  - Breadcrumb in L2 replaces opening L3 blindly
+  
+  ## Critical Insights
+  
+  **L2 accuracy depends on what gets written:**
+  - Agent takes action but doesn't capture = state file lies
+  - System confidently returns stale information
+  
+  **Breadcrumbs are bridge L2→L3:**
+  - Search finds breadcrumb
+  - Breadcrumb points to depth
+  - Agent doesn't load full reference for one fact
+  
+  **Auto-checkpoint = safety net:**
+  - Manual checkpoints = discipline
+  - Auto-compaction checkpoints = insurance
+  
+  ## Results (Author's Production Use)
+  
+  **Before:** "Explain everything from scratch" every session
+  **After:** Agent runs `recover`, fully oriented in <2 minutes
+  
+  **Mistakes from forgotten context:** Near zero
+  **Real win:** Trust → delegation → stop being bottleneck
+  
+  ## What Author Would Do Differently
+  
+  1. Start with ONE agent, ONE workspace (get memory working first)
+  2. Keep MEMORY.md ruthlessly short (present tense, one line/item)
+  3. Build breadcrumb files early (bridge quick recall ↔ deep reference)
+  4. Never duplicate across layers (one home per fact)
+  5. Set up `recover` FIRST (most-used trigger)
+  6. Inject `checkpoint` into auto-compaction prompt (safety net)
+  
+  ## Implementation Order (Recommended)
+  
+  1. **L3 setup** (reference/ directory, migrate deep docs)
+  2. **Token budget** (measure L1, document targets)
+  3. **recover trigger** (most impactful, use first)
+  4. **checkpoint trigger** (manual version)
+  5. **Auto-checkpoint injection** (safety net)
+  6. **trim trigger** (maintenance)
+  7. **recalibrate trigger** (drift correction)
+  8. **checkboard trigger** (visibility)
+  9. **Breadcrumb files** (L2→L3 bridge)
+  10. **Write discipline docs** (AGENTS.md, SOUL.md)
+  
+  ## Success Metrics
+  
+  - [ ] Agent recovers full context in <2min post-reset
+  - [ ] Zero context-loss mistakes per week
+  - [ ] L1 files stay <7000 tokens total
+  - [ ] Agent aligned with SOUL.md (no drift)
+  - [ ] Full project visibility via checkboard
+  - [ ] Auto-checkpoint fires before compaction (nothing lost)
