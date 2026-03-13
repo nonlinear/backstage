@@ -141,8 +141,8 @@ graph TD
 
 ## Individual Agents
 
-| Agent | Slug | Squad | Domain | Library | Skills | Checks [ℹ️](./checks-marketplace.md) | APIs |
-|-------|------|-------|--------|---------|--------|--------|------|
+| Agent | Slug | Squad | Domain | Library | Skills | Checks [ℹ️](./checks-marketplace.md) | APIs | Matrix Room |
+|-------|------|-------|--------|---------|--------|--------|------|-------------|
 | **Orchestrator** | ✅ orchestrator | Meta | Coordination | [management](~/Documents/librarian/books/management/), [theory](~/Documents/librarian/books/theory/), [AI](~/Documents/librarian/books/AI/) | [self-improving](https://clawhub.ai/skills/self-improving-agent), [capability-evolver](https://clawhub.ai/skills/capability-evolver), [thinking-partner](https://clawhub.ai/skills/thinking-partner) | org-chart, dependencies | OpenProject, All APIs |
 | **Business Analyst** | ✅ business-analyst | Meta | Requirements | [management](~/Documents/librarian/books/management/), [finances](~/Documents/librarian/books/finances/), product-mgmt | [clawdhub](https://clawhub.ai/skills/clawdhub), Library Search | determinism, success, gaps | OpenProject, All APIs |
 | **Librarian** | ✅ librarian | Meta | Knowledge | All books | [markdown-converter](https://clawhub.ai/skills/markdown-converter), [whisper](https://clawhub.ai/skills/openai-whisper), Library Search | format, completeness, drift | All agents, Anna's |
