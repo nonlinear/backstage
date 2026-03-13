@@ -98,4 +98,42 @@ tasks:
     checked: false
   - text: "Document in connections/openclaw-monitoring.md"
     checked: false
+
+  - group: "OpenClaw Security Hardening"
+    reference: "https://docs.openclaw.ai/gateway/security"
+    items:
+      - text: "Run `openclaw security audit` (baseline check)"
+        checked: false
+      - text: "Run `openclaw security audit --deep` (live Gateway probe)"
+        checked: false
+      - text: "Apply hardened baseline config (60-second hardening)"
+        checked: false
+      - text: "Set gateway.mode: local, bind: loopback"
+        checked: false
+      - text: "Set gateway.auth.mode: token (long random token)"
+        checked: false
+      - text: "Set session.dmScope: per-channel-peer (isolate DMs)"
+        checked: false
+      - text: "Set tools.profile: messaging (disable automation/runtime/fs by default)"
+        checked: false
+      - text: "Set tools.deny: [group:automation, group:runtime, group:fs, sessions_spawn, sessions_send]"
+        checked: false
+      - text: "Set tools.fs.workspaceOnly: true (prevent directory traversal)"
+        checked: false
+      - text: "Set tools.exec.security: deny, ask: always"
+        checked: false
+      - text: "Set tools.elevated.enabled: false"
+        checked: false
+      - text: "Fix any CRITICAL findings from audit (fs perms, gateway bind/auth, Tailscale Funnel)"
+        checked: false
+      - text: "Fix WARN findings (browser control exposure, plugin allowlists)"
+        checked: false
+      - text: "Review credential storage locations (~/.openclaw/credentials/)"
+        checked: false
+      - text: "Verify ~/.openclaw permissions (not world-readable/writable)"
+        checked: false
+      - text: "Document trust boundary (personal assistant model, not multi-tenant)"
+        checked: false
+      - text: "Re-run audit after hardening (verify all critical issues fixed)"
+        checked: false
 ---
