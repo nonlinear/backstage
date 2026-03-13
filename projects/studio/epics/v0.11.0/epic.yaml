@@ -13,7 +13,7 @@ tasks:
         checked: false
       - text: "Investigate [cognetivy](https://github.com/meitarbe/cognetivy)"
         checked: false
-      - text: "Read [3-layer memory tutorial](https://www.reddit.com/r/OpenClaw/comments/...)"
+      - text: "Read [3-layer memory tutorial](https://www.reddit.com/r/openclaw/comments/1rnku5b/)"
         checked: false
   
   - group: "L3: Reference Layer (new)"
@@ -87,7 +87,7 @@ tasks:
 notes: |
   ## Source
   
-  Reddit tutorial: [3-layer memory system for OpenClaw agents](https://www.reddit.com/r/OpenClaw/comments/...)
+  **Reddit tutorial:** https://www.reddit.com/r/openclaw/comments/1rnku5b/i_built_a_3layer_memory_system_that_stopped_my/
   
   **Author:** Real estate multi-agent operation user
   **Problem solved:** Agents starting every session from zero (context loss)
