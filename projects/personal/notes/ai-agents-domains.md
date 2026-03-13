@@ -6,8 +6,8 @@
 
 
 
-| # | Agent | Squad | Domain | Library | Skills | Checks [ℹ️](./checks-marketplace.md) | APIs | Repo | Unsupervised LLM | Journal | Epic Role |
-|---|-------|-------|--------|---------|--------|--------|------|------|------------------|---------|-----------|
+| # | Agent | Squad | Domain | Library | Skills | Checks [ℹ️](./checks-marketplace.md) | APIs | Repo | Unsupervised LLM | Journal | Epic Role | Matrix Room |
+|---|-------|-------|--------|---------|--------|--------|------|------|------------------|---------|-----------|-------------|
 | 1 | **Secretaria** | Support | Clerical | [management](~/Documents/librarian/books/management/), memory, gtd | Universal | response-time, accuracy | Files, Calendar, Memory | | Qwen 7B | JSONL | Fetch/Status |
 | 2 | **UXR** | Design | Research | [cognition](~/Documents/librarian/books/cognition/), [psychology](~/Documents/librarian/books/psychology/), user-research | [reddit-insights](https://clawhub.ai/skills/reddit-insights), [market-research](https://clawhub.ai/skills/market-research) | validation, methodology | Survey, Analytics | | Qwen 72B | Audio | Validate |
 | 3 | **Design** | Design | Visual | [design](~/Documents/librarian/books/design/), [usability](~/Documents/librarian/books/design/usability/), [creativity](~/Documents/librarian/books/creativity/) | [ui-ux-design](https://clawhub.ai/skills/ui-ux-design), [peekaboo](https://clawhub.ai/skills/peekaboo) | spacing, color, a11y, responsive | Figma, Chrome | | Qwen2-VL 72B | Screenshots | Execute |
@@ -21,7 +21,7 @@
 | 11 | **Growth** | Marketing | Acquisition | [finances](~/Documents/librarian/books/finances/), [management](~/Documents/librarian/books/management/), analytics | [ga4-analytics](https://clawhub.ai/skills/ga4-analytics) | funnel, ab-validity | Analytics, Experiments | | Qwen 32B | Experiment logs | Execute |
 | 12 | **Infrastructure** | Engineering | DevOps | [cybersecurity](~/Documents/librarian/books/cybersecurity/), [technology](~/Documents/librarian/books/technology/), devops | [devops](https://clawhub.ai/skills/devops), [automation-workflows](https://clawhub.ai/skills/automation-workflows) | backup, disk, uptime | NAS, Docker, HA | | Qwen 32B | System logs | Execute |
 | 13 | **Orchestrator** | Meta | Coordination | [management](~/Documents/librarian/books/management/), [theory](~/Documents/librarian/books/theory/), [AI](~/Documents/librarian/books/AI/) | [self-improving](https://clawhub.ai/skills/self-improving-agent), [capability-evolver](https://clawhub.ai/skills/capability-evolver), [thinking-partner](https://clawhub.ai/skills/thinking-partner) | org-chart, dependencies | OpenProject, All APIs | | Qwen 72B | Strategy | Coordinate |
-| 14 | **Business Analyst** | Meta | Requirements | [management](~/Documents/librarian/books/management/), [finances](~/Documents/librarian/books/finances/), product-mgmt | [clawdhub](https://clawhub.ai/skills/clawdhub), Library Search | determinism, success, gaps | OpenProject, All APIs | | Qwen 32B | Epic notes | Groom |
+| 14 | **Business Analyst** | Meta | Requirements | [management](~/Documents/librarian/books/management/), [finances](~/Documents/librarian/books/finances/), product-mgmt | [clawdhub](https://clawhub.ai/skills/clawdhub), Library Search | determinism, success, gaps | OpenProject, All APIs | | Qwen 32B | Epic notes | Groom | `!EQyjalpjgFwRZGsril:studio.adal-rigel.ts.net` |  |
 | 15 | **Finances** | Resources | Financial Planning | [finances](~/Documents/librarian/books/finances/), accounting, tax | | budget, tax, expense-tracking | | | Qwen 32B | Ledgers | Track |
 
 ---
