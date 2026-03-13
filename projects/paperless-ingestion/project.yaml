@@ -1,0 +1,20 @@
+---
+name: Paperless Ingestion
+description: Document scanning, OCR processing, and financial document management via Paperless-ngx
+status: active
+created: 2026-03-13
+---
+
+# Paperless Ingestion
+
+**Purpose:** Automate document digitization and financial tracking.
+
+**Components:**
+- Scan-to-OCR workflow
+- Financial Advisor agent integration
+- Paperless-ngx API automation
+
+**Infrastructure:**
+- Paperless-ngx: http://$NAS_HOST:8010
+- Scanner integration (local/network)
+- OCR engine (Tesseract via Paperless)

@@ -1,0 +1,77 @@
+---
+version: v0.2.0
+name: Financial Advisor Agent
+status: planning
+created: 2026-03-13
+---
+
+# Epic v0.2.0: Financial Advisor Agent
+
+**Goal:** Create AI agent that analyzes financial documents in Paperless-ngx and provides insights.
+
+**Context:** Ingested receipts, invoices, bills, contracts need categorization, tracking, and reporting.
+
+---
+
+## Tasks
+
+### 1. Agent Framework
+- [ ] Define agent role (financial analysis, budget tracking, anomaly detection)
+- [ ] Create agent workspace (~/Backstage/agents/resources/financial-advisor/)
+- [ ] Write SOUL.md (personality, boundaries, financial literacy)
+- [ ] Register in OpenClaw (agent.yaml)
+
+### 2. Paperless Integration
+- [ ] Document Paperless API (search, filter, metadata)
+- [ ] Create skill: paperless-search
+- [ ] Create skill: paperless-tag-automation
+- [ ] Test document retrieval by type/correspondent/date
+
+### 3. Financial Analysis Skills
+- [ ] Receipt categorization (groceries, utilities, healthcare, etc.)
+- [ ] Expense tracking (monthly summaries)
+- [ ] Budget variance detection (overspend alerts)
+- [ ] Invoice payment tracking (due dates, overdue warnings)
+- [ ] Tax document organization (1099s, W2s, receipts)
+
+### 4. Reporting & Insights
+- [ ] Monthly expense report generator
+- [ ] Category breakdown (pie charts, trends)
+- [ ] Anomaly detection (unusual spending, duplicate charges)
+- [ ] Tax readiness report (deductible expenses)
+
+### 5. Automation
+- [ ] Auto-tag new documents (correspondent → category)
+- [ ] Scheduled reports (monthly via Matrix DM)
+- [ ] Proactive alerts (budget exceeded, bill due soon)
+- [ ] Integration with calendar (bill payment reminders)
+
+---
+
+## Dependencies
+
+**Blocked by:**
+- Epic v0.1.0 (Scan-to-OCR) - needs document corpus
+
+**Infrastructure:**
+- Paperless-ngx API accessible
+- Matrix DM for agent (create room)
+- Agent registered in OpenClaw
+
+**Library topics:**
+- finances/ (budgeting, accounting, tax)
+- management/ (organization, decision-making)
+
+---
+
+## Success Criteria
+
+- [ ] Agent categorizes 90%+ of documents correctly
+- [ ] Monthly expense report auto-generated
+- [ ] Proactive alerts (budget, due dates)
+- [ ] Tax document folder organized
+- [ ] Agent responds to natural language queries ("How much did I spend on groceries last month?")
+
+---
+
+**Next:** Define agent role and create workspace structure

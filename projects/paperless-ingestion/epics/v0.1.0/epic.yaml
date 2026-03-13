@@ -1,0 +1,74 @@
+---
+version: v0.1.0
+name: Scan-to-OCR
+status: planning
+created: 2026-03-13
+---
+
+# Epic v0.1.0: Scan-to-OCR
+
+**Goal:** Automate document scanning → OCR → Paperless-ngx ingestion workflow.
+
+**Context:** Physical documents (receipts, contracts, bills) need digitization with searchable OCR.
+
+---
+
+## Tasks
+
+### 1. Scanner Integration
+- [ ] Identify scanner (local USB or network scanner)
+- [ ] Test scanner CLI tools (SANE, scanimage, etc.)
+- [ ] Create scan wrapper script
+- [ ] Configure scan quality (DPI, color mode)
+
+### 2. OCR Processing
+- [ ] Verify Paperless-ngx OCR (Tesseract) working
+- [ ] Test OCR accuracy (receipts, handwriting, invoices)
+- [ ] Configure language packs (English, Portuguese)
+- [ ] Optimize OCR preprocessing (deskew, denoise)
+
+### 3. Paperless API Integration
+- [ ] Document Paperless-ngx API endpoints
+- [ ] Create upload script (POST /api/documents/)
+- [ ] Implement tagging automation
+- [ ] Set correspondent/document type auto-detection
+
+### 4. Workflow Automation
+- [ ] Scan button → upload → OCR → tag
+- [ ] Watch folder integration (auto-ingest scanned files)
+- [ ] Notification on completion (Telegram/Matrix)
+- [ ] Error handling (failed OCR, duplicate detection)
+
+### 5. Quality Control
+- [ ] OCR accuracy threshold
+- [ ] Manual review queue for low-confidence OCR
+- [ ] Duplicate document detection
+- [ ] Metadata validation
+
+---
+
+## Dependencies
+
+**Infrastructure:**
+- Paperless-ngx running (http://$NAS_HOST:8010) ✅
+- Scanner accessible (local or network)
+- OCR engine configured
+
+**Skills needed:**
+- Shell scripting (scan automation)
+- Paperless API client
+- Image preprocessing (optional)
+
+---
+
+## Success Criteria
+
+- [ ] Scan physical document → auto-upload to Paperless
+- [ ] OCR accuracy >90% on receipts/invoices
+- [ ] Metadata auto-tagged (correspondent, date, type)
+- [ ] End-to-end workflow <2min per document
+- [ ] Error notifications on failure
+
+---
+
+**Next:** Identify scanner model and test CLI tools
