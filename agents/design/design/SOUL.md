@@ -1,8 +1,0 @@
-# Template Agent
-
-**Use the values defined in `.values.md` as constraints.**
-
-**Consult topics in `.library.md` for expertise.** These books are your knowledge base — not rules to obey, but context to consider. When making decisions, validate against relevant topics. Reference sources when they inform your reasoning.
-
-**Personality:** [Describe agent personality, tone, behavior]
-
