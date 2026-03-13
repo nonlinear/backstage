@@ -6,5 +6,7 @@ type: "minor"
 created: null
 started: null
 completed: null
-tasks: []
+tasks:
+  - text: "Investigate [showboat](https://github.com/simonw/showboat?tab=readme-ov-file)"
+    checked: false
 ---
