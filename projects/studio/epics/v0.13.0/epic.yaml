@@ -99,6 +99,12 @@ tasks:
   - text: "Document in connections/openclaw-monitoring.md"
     checked: false
 
+  - group: "Beginner Security Resources"
+    items:
+      - text: "Review [ClosedPaw beginner setup guide](https://www.closedpaw.info/openclawguide/) - Tab 1 only (security basics)"
+        checked: false
+        note: "Surface-level intro (Tailscale, prompt injection warnings). Official docs go deeper."
+  
   - group: "OpenClaw Security Hardening"
     reference: "https://docs.openclaw.ai/gateway/security"
     items:
