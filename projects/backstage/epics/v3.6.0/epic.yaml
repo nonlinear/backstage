@@ -35,6 +35,8 @@ tasks:
     checked: false
   - text: "Squad rooms: auto-invite agents when status → active"
     checked: false
+  - text: "Squad rooms: @all support (bot detects, notifies all squad agents)"
+    checked: false
   - text: "TODO: How we enforce each new agent (active status) - future: check"
     checked: false
 ---
