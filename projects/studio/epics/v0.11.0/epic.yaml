@@ -9,4 +9,6 @@ completed: null
 tasks:
   - text: "Investigate [showboat](https://github.com/simonw/showboat?tab=readme-ov-file)"
     checked: false
+  - text: "Investigate [cognetivy](https://github.com/meitarbe/cognetivy)"
+    checked: false
 ---
