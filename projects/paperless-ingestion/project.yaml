@@ -1,11 +1,12 @@
 ---
-name: Paperless Ingestion
+name: paperless ingestion
+tier: experimental
 description: Document scanning, OCR processing, and financial document management via Paperless-ngx
 status: active
 created: 2026-03-13
 ---
 
-# Paperless Ingestion
+# paperless ingestion
 
 **Purpose:** Automate document digitization and financial tracking.
 
