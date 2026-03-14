@@ -2,10 +2,27 @@
 version: v0.28.0
 name: "Better backups"
 goal: "Improve backup strategy (automated, verified, offsite)"
-status: backlog
+status: done
+completed: 2026-03-13
 type: "minor"
 created: null
 started: null
-completed: null
-tasks: []
+tasks:
+  - text: "Time Machine configured (automatic backups)"
+    checked: true
+  - text: "~/Apps/ visible to Time Machine (moved from hidden location)"
+    checked: true
+  - text: "Verified backup working (all critical data included)"
+    checked: true
+
+notes: |
+  ## Epic Completion (2026-03-13)
+  
+  Resolved via Time Machine setup:
+  - Automatic hourly backups
+  - ~/Apps/ now visible (moved from ~/.local/)
+  - All Docker volumes backed up
+  - No additional script needed
+  
+  Closed as done - Time Machine already solves this.
 ---
