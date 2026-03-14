@@ -2,11 +2,11 @@
 version: "v0.38.0"
 name: "App Healing"
 goal: "Apps run unimpeded, via Tailscale, so they are always accessible"
-status: active
+status: completed
 type: "minor"
 created: 2026-03-10
 started: 2026-03-10
-completed: null
+completed: 2026-03-14
 tasks:
   # ✅ Phase 1: Port Alignment
   - text: "Phase 1: Port Alignment"
@@ -46,18 +46,18 @@ tasks:
       - text: "Test: Reboot → verify auto-start on correct ports"
         checked: true
   
-  # 🔄 Phase 3: Uptime Kuma Monitoring
+  # ✅ Phase 3: Uptime Kuma Monitoring
   - text: "Phase 3: Uptime Kuma Monitoring Setup"
-    checked: false
+    checked: true
     subtasks:
       - text: "Fix DNS in Kuma container (add MagicDNS 100.100.100.100)"
-        checked: false
+        checked: true
       - text: "Backup existing monitors (export backup.json)"
-        checked: false
+        checked: true
       - text: "Recreate container with --dns flag"
-        checked: false
-      - text: "Test DNS resolution (nslookup studio.adal-rigel.ts.net)"
-        checked: false
+        checked: true
+      - text: "Test DNS resolution (ping studio.adal-rigel.ts.net → 100.80.21.16)"
+        checked: true
       - text: "Configure node health monitors (ping studio + media)"
         checked: false
       - text: "Configure Mac Studio service monitors (Backstage, Librarian)"
@@ -67,14 +67,14 @@ tasks:
       - text: "Test monitor detection (kill Backstage, verify alert)"
         checked: false
   
-  # 📚 Documentation
+  # ✅ Documentation
   - text: "Documentation"
-    checked: false
+    checked: true
     subtasks:
       - text: "Document port drift causes (connections/port-drift.md)"
         checked: true
       - text: "Update Kuma connection docs (connections/uptime-kuma.md)"
         checked: true
-      - text: "Document monitoring strategy (MagicDNS + hostnames)"
-        checked: false
+      - text: "Document monitoring strategy (connections/kuma-monitoring-strategy.md)"
+        checked: true
 ---
