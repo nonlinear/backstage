@@ -1,4 +1,4 @@
-version: "0.0.3"
+version: "3.3.1"
 title: "Fixes"
 status: backlog
 started: null
@@ -6,22 +6,9 @@ priority: patch
 squad: backstage
 
 description: |
-  Minor fixes for Backstage UI - current card state vs notes tab, hot reload for external YAML files
+  Minor fixes for Backstage UI - hot reload for external YAML files, markdown visualization improvements
 
 tasks:
-  - group: "Current Card State Bug"
-    items:
-      - text: "Fix: Current state ≠ Notes tab (separate concerns)"
-        checked: false
-      - text: "Current card should NOT auto-open notes"
-        checked: false
-      - text: "Current card should NOT change width to 500px"
-        checked: false
-      - text: "Current card should NOT block clicking other tabs"
-        checked: false
-      - text: "Test: Click tasks tab on current card (should work)"
-        checked: false
-  
   - group: "Hot Reload for External YAML"
     items:
       - text: "Add chokidar dependency (npm install chokidar)"
