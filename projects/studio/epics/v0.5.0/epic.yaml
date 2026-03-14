@@ -1,10 +1,132 @@
 ---
+version: "0.5.0"
 name: "self-promotion"
-goal: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
+goal: "Research-driven personal branding strategy (positioning, narrative, content tactics)"
 status: backlog
-type: "minor"
-created: null
+type: minor
+created: 2026-03-13
 started: null
 completed: null
-tasks: []
+
+tasks:
+  - group: "Research & Analysis"
+    items:
+      - text: "Run research prompt on nonlinear.nyc (themes, strengths, unique value)"
+        checked: false
+      - text: "Analyze GitHub profile + projects (README quality, descriptions)"
+        checked: false
+      - text: "Review existing social media presence (LinkedIn, Twitter, etc.)"
+        checked: false
+      - text: "Identify competitors/inspirations (similar profiles in AI/ML + design)"
+        checked: false
+      - text: "Define target audiences (3-5 personas)"
+        checked: false
+  
+  - group: "Brand Strategy"
+    items:
+      - text: "Core positioning statement (1 sentence, unique angle)"
+        checked: false
+      - text: "Personal narrative/story (meta-cognitive tooling, bridge design/dev/AI)"
+        checked: false
+      - text: "Key messages matrix (platform × audience)"
+        checked: false
+      - text: "Visual identity guidelines (colors, typography, imagery)"
+        checked: false
+      - text: "Tone of voice guide (professional, experimental, accessible)"
+        checked: false
+  
+  - group: "Content Strategy"
+    items:
+      - text: "Platform-specific tactics (GitHub, nonlinear.nyc, LinkedIn, Twitter)"
+        checked: false
+      - text: "Content types per platform (essays, repos, insights, WIP)"
+        checked: false
+      - text: "Posting cadence recommendations (realistic, sustainable)"
+        checked: false
+      - text: "Cross-promotion strategy (link platforms, repurpose content)"
+        checked: false
+  
+  - group: "Implementation"
+    items:
+      - text: "Quick wins: bio updates, featured repos, pinned tweets"
+        checked: false
+      - text: "Profile optimization checklist (LinkedIn, GitHub, etc.)"
+        checked: false
+      - text: "Content calendar template (cadence, types, cross-promo)"
+        checked: false
+      - text: "Metrics to track (engagement, reach, conversion)"
+        checked: false
+
+notes: |
+  ## Context (2026-03-13)
+  
+  Tasks extracted from index.md and organized into 4 groups.
+  
+  ## Problem
+  
+  Multiple platforms (nonlinear.nyc, GitHub, social media) but:
+  - ❌ No unified brand strategy
+  - ❌ No clear audience targeting
+  - ❌ Inconsistent messaging
+  
+  ## Unique Positioning (Draft)
+  
+  "AI-augmented knowledge worker who builds tools for thinking and creating"
+  
+  **Themes:**
+  - AI/ML integration (Librarian, OpenClaw)
+  - Design systems (Storybook, ReX)
+  - Knowledge management (notes, commons garden)
+  - Creative coding + publishing
+  
+  **Angle:**
+  - Meta-cognitive tooling (AI assists human thought)
+  - Bridge between design/dev/AI
+  - Documentation as craft
+  
+  ## Content Pillars (Draft)
+  
+  1. AI + human collaboration
+  2. Design systems + tooling
+  3. Knowledge management
+  4. Creative coding
+  
+  ## Platform Breakdown
+  
+  - **GitHub:** Technical depth, open source
+  - **nonlinear.nyc:** Essays, experiments, portfolio
+  - **LinkedIn:** Professional positioning
+  - **Twitter:** Quick insights, work-in-progress
+  
+  ## Research Prompt Example
+  
+  ```
+  /research "Nicholas Frota personal brand positioning"
+  
+  Context:
+  - Site: nonlinear.nyc
+  - Projects: Librarian, Storybook, commons garden, mesa
+  - Interests: AI/ML, design systems, knowledge management
+  
+  Goals:
+  1. Identify unique positioning
+  2. Competitive landscape
+  3. Audience personas
+  4. Content opportunities
+  ```
+  
+  ## Deliverables
+  
+  1. Brand Strategy Doc (positioning, narrative, personas)
+  2. Content Guidelines (tone, messages, visual identity)
+  3. Implementation Checklist (profile updates, quick wins)
+  4. Content Calendar Framework (cadence, types, cross-promo)
+  
+  ## Success Criteria
+  
+  - Clear positioning statement (1 sentence)
+  - Audience personas defined (3-5)
+  - Platform strategies documented
+  - 10 quick wins identified & prioritized
+  - Content calendar template ready
 ---
