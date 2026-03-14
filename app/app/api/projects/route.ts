@@ -44,6 +44,7 @@ export async function GET() {
       const activeCount = epics.filter(e => e.status === 'active').length
       const backlogCount = epics.filter(e => e.status === 'backlog').length
       const doneCount = epics.filter(e => e.status === 'done').length
+      const archiveCount = epics.filter(e => e.status === 'archive').length
       
       // Get enriched checks (same as individual project pages)
       const checkFilenames = getProjectChecks(projectDir)
@@ -57,6 +58,7 @@ export async function GET() {
         activeCount,
         backlogCount,
         publishedCount: doneCount,  // API still uses publishedCount for compatibility
+        archiveCount,
         checks
       }
     })

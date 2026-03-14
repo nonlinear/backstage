@@ -19,6 +19,7 @@ interface ProjectCardProps {
   activeCount: number
   backlogCount: number
   publishedCount: number
+  archiveCount?: number
   checks: Check[]
   showViewEpicsButton?: boolean
 }
@@ -31,11 +32,12 @@ export function ProjectCard({
   activeCount, 
   backlogCount, 
   publishedCount,
+  archiveCount = 0,
   checks,
   showViewEpicsButton = false
 }: ProjectCardProps) {
   const router = useRouter()
-  const totalEpics = activeCount + backlogCount + publishedCount
+  const totalEpics = activeCount + backlogCount + publishedCount + archiveCount
   
   return (
     <Card className="flex-shrink-0 w-[300px] h-full flex flex-col relative">
@@ -50,7 +52,7 @@ export function ProjectCard({
         
         <div className="space-y-1 text-sm text-muted-foreground">
           <p><span className="font-medium">Type:</span> {projectType}</p>
-          <p><span className="font-medium">Epics:</span> {totalEpics} total — {activeCount} active, {publishedCount} completed, {backlogCount} backlog</p>
+          <p><span className="font-medium">Epics:</span> {totalEpics} total — {activeCount} active, {publishedCount} done, {backlogCount} backlog{archiveCount > 0 ? `, ${archiveCount} archived` : ''}</p>
         </div>
         
         {checks.length > 0 && (

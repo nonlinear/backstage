@@ -39,6 +39,7 @@ interface ProjectData {
   activeCount: number
   backlogCount: number
   publishedCount: number
+  archiveCount?: number
   checks: any[]
 }
 
@@ -96,7 +97,7 @@ export default function AllProjectsPage() {
   const projectItems = projects.map(p => ({
     value: p.name.toLowerCase(),
     label: p.name,
-    epicCount: p.activeCount + p.backlogCount + p.publishedCount
+    epicCount: p.activeCount + p.backlogCount + p.publishedCount + (p.archiveCount || 0)
   }))
   
   const totalEpics = projectItems.reduce((sum, p) => sum + p.epicCount, 0)
@@ -189,6 +190,7 @@ export default function AllProjectsPage() {
                 activeCount={project.activeCount}
                 backlogCount={project.backlogCount}
                 publishedCount={project.publishedCount}
+                archiveCount={project.archiveCount}
                 checks={project.checks}
                 showViewEpicsButton={true}
               />
