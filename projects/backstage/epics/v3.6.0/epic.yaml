@@ -30,7 +30,7 @@ tasks:
   - text: "Matrix webhook (ISOLATED per agent)"
     checked: false
   - text: "Agents on active status: DM on Matrix"
-    checked: false
+    checked: true
   - text: "Squad group with @ mention support"
     checked: false
   - text: "Squad rooms: auto-invite agents when status → active"
