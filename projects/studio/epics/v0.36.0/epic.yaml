@@ -12,35 +12,35 @@ tasks:
   - group: "Check Library Architecture"
     items:
       - text: "Define check file format (YAML metadata + external code)"
-        checked: false
+        checked: true
       - text: "Create check directory structure (executor.py, fixtures/, README.md)"
         checked: false
       - text: "Implement determinism levels (strict, contextual, LLM-assisted)"
-        checked: false
+        checked: true
       - text: "Design quality profile system (design-default-v1, avoid YAML duplication)"
-        checked: false
+        checked: true
       - text: "Decide check storage location (~/Documents/checks/ vs separate repo)"
         checked: false
   
   - group: "Agent Organization (Synthetic Company Model)"
     items:
       - text: "Define agent structure (name, library, checks, APIs, repository, journal)"
-        checked: false
+        checked: true
       - text: "Implement domain-based organization (UXR, Design, Dev, Marketing, Legal, etc.)"
-        checked: false
+        checked: true
       - text: "Design proactive participation model (self-nominate, decline epics)"
-        checked: false
+        checked: true
       - text: "Create epic participation protocol (all applicable domains MUST participate)"
-        checked: false
+        checked: true
       - text: "Decide agent naming (role titles vs actual names)"
-        checked: false
+        checked: true
   
   - group: "PM Tool Integration (OpenProject/Plane)"
     items:
       - text: "Define separation of concerns (PM layer vs Orchestration layer)"
-        checked: false
+        checked: true
       - text: "Design task declaration format (domain, checks, success_criteria)"
-        checked: false
+        checked: true
       - text: "Implement agent workflow (pick task → load checks → execute → update status)"
         checked: false
       - text: "Create API integration (last mile, not rebuilding existing tools)"
@@ -51,35 +51,35 @@ tasks:
   - group: "Pipeline Evolution Strategy"
     items:
       - text: "Phase 1: High maintenance (Nicholas approves everything)"
-        checked: false
+        checked: true
       - text: "Phase 2: Plateau (≥90% auto-approve, checks robust)"
         checked: false
       - text: "Phase 3: Sample-based review (trust + spot checks, Nicholas exits loop)"
         checked: false
       - text: "Define maturity metrics (when to transition phases)"
-        checked: false
+        checked: true
   
   - group: "Librarian Integration"
     items:
       - text: "Design topic research → check proposal workflow"
-        checked: false
+        checked: true
       - text: "Implement human validation (proposals not auto-executable)"
-        checked: false
+        checked: true
       - text: "Create check proposal format (research → YAML spec → validation)"
         checked: false
       - text: "Prevent self-mutating governance (no arbitrary check generation)"
-        checked: false
+        checked: true
   
   - group: "Execution Model"
     items:
       - text: "Phase 1: Python-based checks (standard I/O, JSON in/out)"
-        checked: false
+        checked: true
       - text: "Phase 2: Container-per-check (stdin → JSON, stdout → JSON, exit code)"
         checked: false
       - text: "Implement CI/CD compatibility (fixture testing, snapshots)"
         checked: false
       - text: "Design execution isolation (sandbox safety)"
-        checked: false
+        checked: true
   
   - group: "Open Decisions (Deferred)"
     items:
