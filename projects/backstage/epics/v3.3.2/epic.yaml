@@ -1,0 +1,21 @@
+---
+version: "3.3.2"
+title: "Fix Agents Section"
+status: backlog
+started: null
+priority: patch
+squad: backstage
+
+description: |
+  Agents section broken - investigate what changed and restore functionality
+
+tasks:
+  - text: "Investigate: Agents section worked before, broken now"
+    checked: false
+  - text: "Check what changed (git log, recent commits)"
+    checked: false
+  - text: "Fix agents listing/display"
+    checked: false
+  - text: "Test: Agents section shows correctly"
+    checked: false
+---

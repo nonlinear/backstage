@@ -1,0 +1,21 @@
+---
+version: "3.3.3"
+title: "Markdown Visualization Improvements"
+status: backlog
+started: null
+priority: patch
+squad: backstage
+
+description: |
+  Improve markdown note viewing experience - better visualizer, fullscreen, actions, permalinks
+
+tasks:
+  - text: "Shop for better visualizers (react-markdown alternatives)"
+    checked: false
+  - text: "Markdown fullscreen option (expand note to full viewport)"
+    checked: false
+  - text: "Open file/copy text/copy link/return actions (note toolbar)"
+    checked: false
+  - text: "Markdown permalink (how? hash-based? query param?)"
+    checked: false
+---

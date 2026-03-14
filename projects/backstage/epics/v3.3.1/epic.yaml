@@ -1,48 +1,25 @@
 version: "3.3.1"
-title: "Fixes"
+title: "Hot Reload for External YAML"
 status: backlog
 started: null
 priority: patch
 squad: backstage
 
 description: |
-  Minor fixes for Backstage UI - hot reload for external YAML files, markdown visualization improvements
+  Auto-reload Backstage UI when YAML files change (no manual restart needed during grooming)
 
 tasks:
-  - group: "Hot Reload for External YAML"
-    items:
-      - text: "Add chokidar dependency (npm install chokidar)"
-        checked: false
-      - text: "Create app/lib/watch-projects.js (file watcher)"
-        checked: false
-      - text: "Watch projects/**/*.yaml for changes"
-        checked: false
-      - text: "Revalidate /projects route on change"
-        checked: false
-      - text: "Test: Edit epic.yaml → browser auto-reloads"
-        checked: false
-  
-  - group: "Agents Section Broken"
-    items:
-      - text: "Investigate: Agents section worked before, broken now"
-        checked: false
-      - text: "Check what changed (git log, recent commits)"
-        checked: false
-      - text: "Fix agents listing/display"
-        checked: false
-      - text: "Test: Agents section shows correctly"
-        checked: false
-  
-  - group: "Markdown Visualization"
-    items:
-      - text: "Shop for better visualizers (react-markdown alternatives)"
-        checked: false
-      - text: "Markdown fullscreen option (expand note to full viewport)"
-        checked: false
-      - text: "Open file/copy text/copy link/return actions (note toolbar)"
-        checked: false
-      - text: "Markdown permalink (how? hash-based? query param?)"
-        checked: false
+  - text: "Add chokidar dependency (npm install chokidar)"
+    checked: false
+  - text: "Create app/lib/watch-projects.js (file watcher)"
+    checked: false
+  - text: "Watch projects/**/*.yaml for changes"
+    checked: false
+  - text: "Revalidate /projects route on change"
+    checked: false
+  - text: "Test: Edit epic.yaml → browser auto-reloads"
+    checked: false
+---
 
 notes: |
   ## Context (Grooming Session 2026-03-12)
