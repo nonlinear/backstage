@@ -1,0 +1,154 @@
+---
+version: "0.37.0"
+name: "Mac Studio Recovery Protocol"
+status: active
+type: minor
+created: 2026-03-13
+started: 2026-03-13
+completed: null
+
+goal: "Document complete Time Machine recovery procedure for Mac Studio replacement (trial by fire)"
+
+tasks:
+  - group: "Pre-Wipe Checklist"
+    items:
+      - text: "Verify Time Machine backup recent (<24h)"
+        checked: false
+      - text: "Document all Tailscale device names + IPs"
+        checked: false
+      - text: "Export OpenClaw config (openclaw.json + .env)"
+        checked: false
+      - text: "Verify all Docker containers backed up (~/Apps/)"
+        checked: false
+      - text: "List all LaunchAgents (~/Library/LaunchAgents/)"
+        checked: false
+      - text: "Document all Homebrew packages (brew list > packages.txt)"
+        checked: false
+      - text: "Export SSH keys (if not in Time Machine)"
+        checked: false
+      - text: "Document NAS credentials + connection details"
+        checked: false
+  
+  - group: "Recovery Steps (Sequential)"
+    items:
+      - text: "1. Boot new Mac Studio, run Migration Assistant → Time Machine"
+        checked: false
+      - text: "2. Verify user account restored (~/ files intact)"
+        checked: false
+      - text: "3. Install Homebrew (/bin/bash -c '$(curl...)')"
+        checked: false
+      - text: "4. Restore Homebrew packages (brew bundle or manual install)"
+        checked: false
+      - text: "5. Install Tailscale (brew install tailscale)"
+        checked: false
+      - text: "6. Authenticate Tailscale (tailscale up --operator=$USER)"
+        checked: false
+      - text: "7. Verify Tailscale hostname (studio.adal-rigel.ts.net)"
+        checked: false
+      - text: "8. Restore Docker containers (cd ~/Apps && docker compose up -d)"
+        checked: false
+      - text: "9. Install OpenClaw (npm install -g openclaw)"
+        checked: false
+      - text: "10. Restore OpenClaw config (~/.openclaw/openclaw.json)"
+        checked: false
+      - text: "11. Start OpenClaw gateway (~/Desktop/openclaw-recovery.sh)"
+        checked: false
+      - text: "12. Verify all LaunchAgents loaded (launchctl list)"
+        checked: false
+      - text: "13. Test all services (Backstage, Librarian, Kavita, etc.)"
+        checked: false
+      - text: "14. Verify Tailscale serve status (all ports exposed)"
+        checked: false
+  
+  - group: "Validation Tests"
+    items:
+      - text: "Access Backstage via Tailscale (iPad/iPhone)"
+        checked: false
+      - text: "Access Kavita via Tailscale (test reading progress)"
+        checked: false
+      - text: "Test OpenClaw Matrix DMs (agents responding)"
+        checked: false
+      - text: "Verify NAS mount (smb://media.adal-rigel.ts.net/media)"
+        checked: false
+      - text: "Test voice commands (Hey Jarvis)"
+        checked: false
+  
+  - group: "Documentation"
+    items:
+      - text: "Create recovery-protocol.md (step-by-step guide)"
+        checked: false
+      - text: "Document gotchas (what failed, how to fix)"
+        checked: false
+      - text: "Create pre-wipe checklist (printable)"
+        checked: false
+      - text: "Test recovery on clean macOS install (VM or test machine)"
+        checked: false
+
+notes: |
+  ## Context (2026-03-13)
+  
+  **Situation:** Mac Studio needs to be "returned" and re-purchased under company entity (tax purposes)
+  **Risk:** First real Time Machine recovery test (trial by fire)
+  **Consequence of failure:** Nicholas stranded without infrastructure (work blocked)
+  
+  ## Critical Services to Restore
+  
+  **Must work immediately:**
+  - OpenClaw gateway (main + agents)
+  - Backstage (project management)
+  - Tailscale (remote access)
+  - Docker containers (Kavita, Home Assistant, Paperless)
+  
+  **Nice to have:**
+  - LaunchAgents (auto-start services)
+  - Homebrew packages
+  - SSH keys
+  
+  ## Time Machine Backup Coverage
+  
+  **What's backed up:**
+  - ~/Apps/ (Docker volumes + configs)
+  - ~/.openclaw/ (gateway config)
+  - ~/Backstage/ (project files)
+  - ~/Documents/ (personal notes, connections, skills)
+  - ~/Library/LaunchAgents/ (auto-start configs)
+  
+  **What's NOT backed up (needs manual):**
+  - Homebrew itself (reinstall)
+  - Tailscale (reinstall + re-auth)
+  - Docker Desktop (reinstall)
+  
+  ## Recovery Philosophy
+  
+  **Sequential steps:**
+  1. Restore user data (Time Machine)
+  2. Restore system tools (Homebrew, Tailscale, Docker)
+  3. Restore services (OpenClaw, containers, LaunchAgents)
+  4. Validate (test all critical paths)
+  
+  **Document everything:**
+  - What worked out of the box
+  - What required manual steps
+  - What failed + how to fix
+  
+  **Trial by fire = learning opportunity:**
+  - First real disaster recovery test
+  - Validates backup strategy
+  - Exposes gaps in documentation
+  
+  ## Success Criteria
+  
+  - [ ] Nicholas can access Backstage from iPad (remote)
+  - [ ] Nicholas can read ebooks via Kavita (remote)
+  - [ ] OpenClaw agents respond in Matrix
+  - [ ] Voice commands work (Home Assistant)
+  - [ ] All services auto-start on boot
+  - [ ] Recovery completed in <4 hours
+  
+  ## Post-Recovery
+  
+  - Document lessons learned
+  - Update backup strategy (if gaps found)
+  - Create automated recovery script (if possible)
+  - Share recovery protocol (help others)
+---
