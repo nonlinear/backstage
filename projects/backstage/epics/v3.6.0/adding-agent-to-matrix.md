@@ -362,6 +362,120 @@ Qual é o seu workspace? (caminho completo)
 
 ---
 
+## Step 11: Configure Display Name + Avatar (Visual Identity)
+
+**Problem:** Bot shows as "openclaw_bot" in all rooms → hard to tell which agent is responding.
+
+**Solution:** Per-room display name + avatar via `openclaw.json`.
+
+---
+
+### Add displayName + avatarUrl to openclaw.json
+
+**File:** `~/.openclaw/openclaw.json`
+
+**Add fields to each room:**
+```json
+{
+  "channels": {
+    "matrix": {
+      "groups": {
+        "!EQyjalpjgFwRZGsril:studio.adal-rigel.ts.net": {
+          "agentId": "business-analyst",
+          "displayName": "Business Analyst",  // ← ADDED
+          "avatarUrl": null                   // ← ADDED (optional)
+        },
+        "!iqgFkKJjjQONmFQfvb:studio.adal-rigel.ts.net": {
+          "agentId": "design-engineer",
+          "displayName": "Design Engineer",   // ← ADDED
+          "avatarUrl": "mxc://studio.../avatar.png"  // ← ADDED (optional)
+        }
+      }
+    }
+  }
+}
+```
+
+**Fields:**
+- `displayName`: Name shown in Matrix client (e.g., "Business Analyst")
+- `avatarUrl`: Matrix content URI (mxc://...) or `null`
+
+**Fallback:** If `displayName` missing, uses `agentId`.
+
+---
+
+### How It Works
+
+**matrixDisplayCache.ts** applies display name + avatar automatically:
+
+**Flow:**
+1. Agent about to send reply
+2. `applyMatrixDisplayCached` called
+3. Reads `displayName` + `avatarUrl` from `openclaw.json`
+4. Checks cache (timestamp-based)
+5. If changed or cache miss → PUT `m.room.member` state
+6. Updates cache
+7. Agent sends reply → appears as "Business Analyst" (not "openclaw_bot")
+
+**Cache invalidation:**
+- Based on `openclaw.json` mtime
+- PUT only when config changes or cache miss
+- Efficient (no redundant API calls)
+
+---
+
+### Verification
+
+**After restart, send message:**
+```
+Hello! Who are you?
+```
+
+**Check Matrix client:**
+- Sender should show "Business Analyst" (not "openclaw_bot")
+- Avatar (if configured) should display
+
+**Check logs:**
+```bash
+openclaw logs --limit 50 | grep MatrixDisplay
+```
+
+**Expected:**
+```
+[MatrixDisplay] Applied display/avatar for room !EQyj...
+```
+
+**Or (if cache hit):**
+```
+[MatrixDisplay] Cache hit for room !EQyj..., agent business-analyst
+```
+
+---
+
+### Adding Avatars (Optional)
+
+**Upload avatar to Matrix:**
+
+```bash
+# 1. Upload image file
+curl -X POST "http://localhost:8008/_matrix/media/r0/upload" \
+  -H "Authorization: Bearer $BOT_TOKEN" \
+  -H "Content-Type: image/png" \
+  --data-binary @avatar.png
+
+# Response:
+{"content_uri":"mxc://studio.adal-rigel.ts.net/MEDIA_ID"}
+
+# 2. Add to openclaw.json
+"avatarUrl": "mxc://studio.adal-rigel.ts.net/MEDIA_ID"
+
+# 3. Restart gateway
+```
+
+**Recommended:** Start with `null`, add avatars later when agents fully differentiated.
+
+---
+
 ## Troubleshooting
 
 ### Bot doesn't respond
@@ -466,7 +580,9 @@ Before marking Matrix setup complete:
 - [ ] Bot invited and joined room
 - [ ] agent.yaml has matrix_room field
 - [ ] openclaw.json has room in groups with agentId
+- [ ] openclaw.json has displayName + avatarUrl fields
 - [ ] handler.ts fix applied (manual sessionKey)
+- [ ] matrixDisplayCache.ts integrated
 - [ ] Gateway restarted with recovery script
 - [ ] openclaw status shows Matrix OK
 - [ ] Test message sent
@@ -474,6 +590,8 @@ Before marking Matrix setup complete:
 - [ ] Session key starts with agent:AGENTNAME:matrix:...
 - [ ] Bot responds in room
 - [ ] Bot reports correct workspace path
+- [ ] Bot displays correct name (e.g., "Business Analyst", not "openclaw_bot")
+- [ ] Logs show [MatrixDisplay] Applied or Cache hit
 
 ---
 

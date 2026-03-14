@@ -14,6 +14,35 @@ This guide walks through creating a new OpenClaw agent, from CLI setup to worksp
 
 ---
 
+## Agent Lifecycle (Status)
+
+Agents progress through 3 lifecycle stages:
+
+### **draft** (brainstorming)
+- Just an idea
+- No agent.yaml
+- No workspace
+- Documented in agent ideas list
+
+### **configured** (stem cell, clone)
+- agent.yaml exists
+- Workspace created (`~/Backstage/agents/DOMAIN/AGENT`)
+- SOUL.md generic (template)
+- No Matrix room yet
+- No displayName/avatar
+- **"Clone ready to differentiate"**
+
+### **active** (fully differentiated)
+- Matrix room created
+- openclaw.json configured (agentId + displayName + avatarUrl)
+- SOUL.md personalized (not template)
+- Skills/MCPs/Library configured
+- **"Fully functional, unique identity"**
+
+**This guide creates `configured` agents.** See `activating-agent.md` for activation checklist.
+
+---
+
 ## Step 1: Create Agent via CLI
 
 ```bash
@@ -81,25 +110,25 @@ mv ~/.openclaw/agents/business-analyst ~/Backstage/agents/meta/
 ---
 name: "Agent Name"
 description: "What this agent does"
-status: active  # or: backlog, planning
-matrix_room: null  # Add later (see adding-agent-to-matrix.md)
+status: configured  # draft, configured, or active
+matrix_room: null  # Add when activating (see activating-agent.md)
 ---
 ```
 
-**Example (Business Analyst):**
+**Example (Business Analyst - configured stage):**
 ```yaml
 ---
 name: "Business Analyst"
 description: "Product management, epics, roadmaps, stakeholder communication"
-status: active
+status: configured
 matrix_room: "!EQyjalpjgFwRZGsril:studio.adal-rigel.ts.net"
 ---
 ```
 
 **Status values:**
-- `active` - Agent running, available for messages
-- `planning` - Agent being designed, not active
-- `backlog` - Agent defined but not started
+- `draft` - Just an idea, no workspace yet
+- `configured` - Workspace exists, generic template, no Matrix
+- `active` - Fully differentiated, Matrix room, unique identity
 
 ---
 
@@ -260,10 +289,14 @@ openclaw agents list
 
 ## Next Steps
 
-1. **Add to Matrix:** See `adding-agent-to-matrix.md`
+**Agent now in `configured` state (stem cell, ready to differentiate).**
+
+**To activate (make fully functional):**
+1. **Activate agent:** See `activating-agent.md` (Matrix room, displayName, avatar)
 2. **Configure skills:** Add skill symlinks to agent workspace
 3. **Set up tools:** Configure API access in agent's .env
-4. **Test workflows:** Run through common tasks
+4. **Personalize SOUL.md:** Make unique (not template)
+5. **Test workflows:** Run through common tasks
 
 ---
 

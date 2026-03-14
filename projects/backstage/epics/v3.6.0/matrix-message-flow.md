@@ -23,6 +23,7 @@ flowchart TD
     SESSION[Manual sessionKey<br/>agent:AGENTID:matrix:channel:ROOMID]
     AGENT[Agent Workspace<br/>~/Backstage/agents/DOMAIN/AGENT]
     RESPONSE[Agent processes<br/>generates response]
+    DISPLAY[Apply Display Name<br/>matrixDisplayCache.ts]
     SEND[Bot sends reply<br/>back to room]
     
     USER --> SYNAPSE
@@ -32,7 +33,8 @@ flowchart TD
     CONFIG --> SESSION
     SESSION --> AGENT
     AGENT --> RESPONSE
-    RESPONSE --> SEND
+    RESPONSE --> DISPLAY
+    DISPLAY --> SEND
     SEND --> SYNAPSE
     SYNAPSE --> USER
 ```
@@ -244,6 +246,53 @@ Qual é o seu workspace? (caminho completo)
   "content": "~/Backstage/agents/meta/business-analyst"
 }
 ```
+
+---
+
+### 7.5. Apply Display Name + Avatar (Visual Identity)
+
+**Component:** `matrixDisplayCache.ts`
+
+**Why:** Bot shows as "openclaw_bot" in all rooms by default. Need to differentiate visually per agent.
+
+**Flow:**
+
+**1. Read config:**
+```typescript
+const cfg = loadOpenClawConfig(); // ~/.openclaw/openclaw.json
+const roomConfig = cfg.groups[roomId];
+const displayName = roomConfig.displayName || roomConfig.agentId;
+const avatarUrl = roomConfig.avatarUrl;
+```
+
+**2. Check cache:**
+```typescript
+const cached = displayCache[roomId];
+if (cached.jsonMtime === currentMtime && cached.displayName === displayName) {
+  console.debug("[MatrixDisplay] Cache hit");
+  return; // Skip PUT
+}
+```
+
+**3. Apply via PUT (if needed):**
+```bash
+PUT http://localhost:8008/_matrix/client/r0/rooms/!EQyj.../state/m.room.member/@openclaw_bot:...
+Authorization: Bearer BOT_TOKEN
+
+{
+  "displayname": "Business Analyst",
+  "avatar_url": null
+}
+```
+
+**4. Update cache:**
+```typescript
+displayCache[roomId] = { displayName, avatarUrl, jsonMtime };
+```
+
+**Result:** Bot now appears as "Business Analyst" in this room (not "openclaw_bot").
+
+**Cache invalidation:** Based on `openclaw.json` mtime → PUT only when config changes.
 
 ---
 
