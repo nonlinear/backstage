@@ -1,51 +1,58 @@
 ---
+version: "0.21.0"
 name: "Business Model for Commons"
 goal: "Define no-paywall revenue model, agent hierarchy, legal structure for commons-focused design studio"
 status: backlog
-type: "minor"
+type: minor
 created: 2026-02-21
 started: null
 completed: null
+
 tasks:
-  # Foundational Strategy
-  - text: "Answer intake questions (vision, services, target audience)"
-    checked: false
-  - text: "Define revenue streams (donations, grants, partnerships)"
-    checked: false
-  - text: "Document metrics that matter (engagement, impact, not conversion)"
-    checked: false
+  - group: "Foundational Strategy"
+    items:
+      - text: "Answer intake questions (vision, services, target audience)"
+        checked: false
+      - text: "Define revenue streams (donations, grants, partnerships)"
+        checked: false
+      - text: "Document metrics that matter (engagement, impact, not conversion)"
+        checked: false
   
-  # Legal Structure
-  - text: "Research entity types (nonprofit, cooperative, LLC, sole proprietorship)"
-    checked: false
-  - text: "Determine jurisdiction (US, Brazil, dual?)"
-    checked: false
-  - text: "Research tax implications (nonprofit status, grant eligibility)"
-    checked: false
+  - group: "Legal Structure"
+    items:
+      - text: "Research entity types (nonprofit, cooperative, LLC, sole proprietorship)"
+        checked: false
+      - text: "Determine jurisdiction (US, Brazil, dual?)"
+        checked: false
+      - text: "Research tax implications (nonprofit status, grant eligibility)"
+        checked: false
   
-  # Agent Hierarchy
-  - text: "Map agent roles (Business Strategist → HR Bot → others)"
-    checked: false
-  - text: "Define agent communication workflow (drafts → questions → approval)"
-    checked: false
-  - text: "Document agent spawning order (which roles, which order)"
-    checked: false
-  - text: "HR bot prototype (skill gap detection, book suggestions)"
-    checked: false
+  - group: "Agent Hierarchy"
+    items:
+      - text: "Map agent roles (Business Strategist → HR Bot → others)"
+        checked: false
+      - text: "Define agent communication workflow (drafts → questions → approval)"
+        checked: false
+      - text: "Document agent spawning order (which roles, which order)"
+        checked: false
+      - text: "HR bot prototype (skill gap detection, book suggestions)"
+        checked: false
   
-  # Knowledge Base
-  - text: "Index canonical books in Librarian (Business Strategy)"
-    checked: false
-  - text: "Index canonical books in Librarian (Commons & Nonprofits)"
-    checked: false
-  - text: "Index canonical books in Librarian (Design Studios)"
-    checked: false
+  - group: "Knowledge Base (Librarian Integration)"
+    items:
+      - text: "Index canonical books: Business Strategy"
+        checked: false
+      - text: "Index canonical books: Commons & Nonprofits"
+        checked: false
+      - text: "Index canonical books: Design Studios"
+        checked: false
   
-  # Future Automation
-  - text: "Design task metadata structure (assignee, blockers)"
-    checked: false
-  - text: "Document autonomous task assignment protocol"
-    checked: false
-  - text: "Prepare for Open Project migration (task assignment features)"
-    checked: false
+  - group: "Future Automation"
+    items:
+      - text: "Design task metadata structure (assignee, blockers)"
+        checked: false
+      - text: "Document autonomous task assignment protocol"
+        checked: false
+      - text: "Prepare for Open Project migration (task assignment features)"
+        checked: false
 ---
