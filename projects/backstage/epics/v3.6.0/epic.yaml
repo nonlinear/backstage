@@ -31,6 +31,8 @@ tasks:
     checked: false
   - text: "Agents on active status: DM on Matrix"
     checked: true
+  - text: "Display name per-room (bot shows agent name, not 'openclaw_bot') - BLOCKED: SDK method unclear"
+    checked: false
   - text: "Squad group with @ mention support"
     checked: false
   - text: "Squad rooms: auto-invite agents when status → active"
