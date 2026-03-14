@@ -1,124 +1,118 @@
+---
 version: "2.9.0"
-title: "Pomo Timer"
-status: backlog
-started: null
+name: "pomo skill"
+status: active
+started: 2026-03-13
 squad: personal
 
 description: |
-  Visual timer that opens on each Pomodoro session, always-on-top window.
-  Shows countdown, progress bar, current epic/task name.
+  Device-native timer triggers via iOS Shortcuts (works on iPad/iPhone).
+  Pomo skill creates calendar event, triggers native timer on user's device.
 
 tasks:
-  - group: "Timer UI"
+  - group: "Device-Native Timer Trigger"
     items:
-      - text: "Create always-on-top window"
+      - text: "Research iOS Shortcuts API (URL scheme or x-callback-url)"
         checked: false
-      - text: "Display countdown (MM:SS format)"
+      - text: "Create shortcut: 'Start Pomodoro' (25min, 45min, custom)"
         checked: false
-      - text: "Progress bar (visual time remaining)"
+      - text: "Test triggering from Safari (iOS URL scheme)"
         checked: false
-      - text: "Show current epic/task name"
+      - text: "Integrate with pomo skill (generate trigger URL)"
         checked: false
-      - text: "Clean, minimal design (not distracting)"
+      - text: "Fallback: manual timer start if automation fails"
         checked: false
   
-  - group: "Integration"
+  - group: "Cross-Device Support"
     items:
-      - text: "Launch from pomo skill automatically"
+      - text: "Detect device type (iPad/iPhone vs Mac)"
         checked: false
-      - text: "Close automatically when Pomodoro ends"
+      - text: "iPad/iPhone: trigger iOS Shortcuts timer"
         checked: false
-      - text: "5-min warning notification"
+      - text: "Mac: trigger macOS timer (caffeinate + terminal alert?)"
         checked: false
-      - text: "Completion notification"
+      - text: "Document manual timer setup (if automation unavailable)"
         checked: false
   
-  - group: "Tech Stack"
+  - group: "Reflection Integration"
     items:
-      - text: "Research: Electron vs Tauri vs native"
+      - text: "5-min warning notification (Google Calendar reminder)"
         checked: false
-      - text: "Implement timer app"
+      - text: "Completion notification (Calendar event alert)"
         checked: false
-      - text: "Package as standalone executable"
+      - text: "Reflection prompt (Telegram message or Calendar event notes field)"
+        checked: false
+      - text: "Update Calendar event with reflection (via API)"
         checked: false
 
 notes: |
-  ## Context (2026-03-12)
+  ## Epic Refactor (2026-03-13)
   
-  **Triggered by:** Pomodoro grooming session
-  **User quote:** "no futuro a gente cria um timer app"
+  **Original plan:** Always-on-top desktop timer app (Electron/Tauri/Swift)
+  **Problem:** Won't work on iPad (Nicholas's primary device during work)
+  **New approach:** Device-native timer triggers (iOS Shortcuts, macOS built-in)
   
-  **Current limitation:**
-  - macOS notifications only (not visible during work)
-  - No visual countdown (can't see time remaining)
-  - Calendar event created but not shown
+  ## Why Device-Based
   
-  ## Design Requirements
+  **iPad usage pattern:**
+  - Primary device during Pomodoro sessions
+  - Backstage UI open in browser
+  - Desktop app won't run on iPadOS
   
-  **Always-on-top window:**
-  - Stays visible over all apps
-  - Small, unobtrusive
-  - Corner of screen (user-configurable?)
+  **iOS Shortcuts advantages:**
+  - Native to device (already installed)
+  - Siri integration ("Hey Siri, start Pomodoro")
+  - Timer notifications work across devices
+  - No custom app development needed
   
-  **Display:**
-  - Countdown: MM:SS (e.g., "23:45")
-  - Progress bar (visual fill)
-  - Epic/task name: "🍅 Grooming" or "🍅 v3.7.0 - Fixes"
+  ## Implementation Strategy
   
-  **Behavior:**
-  - Opens when `pomo` starts
-  - Updates every second
-  - ⏰ 5-min warning (visual + sound?)
-  - ⏱️ Completion (visual + sound + reflection prompt)
-  - Closes after reflection submitted
+  **1. iOS Shortcuts (iPad/iPhone):**
   
-  ## Tech Stack Options
-  
-  **Option 1: Electron**
-  - Pro: Web tech (HTML/CSS/JS), easy to build
-  - Con: Heavy (100+ MB for simple timer)
-  
-  **Option 2: Tauri**
-  - Pro: Lightweight (Rust + web frontend), <10 MB
-  - Con: Needs Rust setup
-  
-  **Option 3: Native (Swift)**
-  - Pro: Smallest, fastest, macOS-native
-  - Con: Swift learning curve
-  
-  **Recommendation:** Start with Tauri (good balance)
-  
-  ## Integration with Pomo Skill
-  
-  **Launch:**
-  ```bash
-  # In pomo skill, after Calendar event created:
-  open ~/Apps/pomo-timer.app --args \
-    --duration 1500 \
-    --epic "Grooming" \
-    --calendar-id "3ereknsu7kib91qtavo00kdmro"
+  Create shortcut "Start Pomodoro":
+  ```
+  Input: Duration (25min, 45min, custom)
+  Actions:
+    - Start Timer (duration)
+    - Show notification ("Pomodoro started - focus time!")
   ```
   
-  **Communication:**
-  - Timer reads args (duration, epic name, calendar ID)
-  - On completion → trigger reflection prompt
-  - On reflection submit → update Calendar event notes
+  **Trigger from pomo skill:**
+  - Generate URL: `shortcuts://run-shortcut?name=Start%20Pomodoro&input=25`
+  - User clicks link in Backstage UI → opens Shortcuts → starts timer
+  - Fallback: Manual timer start if URL scheme fails
+  
+  **2. macOS (when on Mac):**
+  - Use `caffeinate -u -t 1500` (keep Mac awake, 25min)
+  - Terminal notification: `osascript -e 'display notification "Pomodoro complete!"'`
+  - Or: macOS built-in Timer app
+  
+  **3. Google Calendar Integration (existing):**
+  - Calendar event created (shows in iPad widget)
+  - 5-min warning = Calendar reminder
+  - Completion = Calendar alert
+  - Reflection = update event notes field
+  
+  ## Removed Sections
+  
+  **Timer UI group:** Won't work on iPad, removed
+  **Integration group (old):** Replaced with device-native trigger
+  **Tech Stack group:** No custom app needed, removed
   
   ## Success Criteria
   
-  - [ ] Timer opens automatically on `pomo` start
-  - [ ] Always visible during work (on top)
-  - [ ] Shows accurate countdown
-  - [ ] Visual progress bar
-  - [ ] 5-min warning works
+  - [ ] iOS Shortcut "Start Pomodoro" created
+  - [ ] URL trigger works from Safari (iPad)
+  - [ ] Timer starts on device (iPad/iPhone/Mac)
+  - [ ] 5-min warning notification works
   - [ ] Completion notification works
-  - [ ] Reflection prompt triggered
+  - [ ] Reflection prompt works (Telegram or Calendar)
   - [ ] Calendar event updated with reflection
   
   ## Future Enhancements
   
-  - Pause/resume timer
-  - Custom durations (15min, 30min, 45min)
-  - Sound effects (tick-tock, completion bell)
-  - Theme customization
-  - Stats (Pomodoros completed today/week)
+  - Siri integration ("Hey Siri, start Pomodoro")
+  - Automatic device detection (skip manual trigger)
+  - Stats tracking (Pomodoros completed via Calendar API)
+  - Break timer ("Start 5-min break" shortcut)
+---
