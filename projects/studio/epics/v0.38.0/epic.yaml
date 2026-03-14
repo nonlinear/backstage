@@ -8,7 +8,7 @@ created: 2026-03-10
 started: 2026-03-10
 completed: null
 tasks:
-  # Phase 1: Port Alignment (CRITICAL)
+  # Phase 1: Port Alignment ✅
   - text: "Align Backstage to 3004 everywhere (package.json, LaunchAgent, PM2, docs)"
     checked: true
   - text: "Verify Tailscale serve :3004 matches local :3004"
@@ -18,7 +18,7 @@ tasks:
   - text: "Update all docs (ports.md, kuma.md, persistent-services.md)"
     checked: true
   
-  # Phase 2: Production Mode Always-On Services
+  # Phase 2: Production Mode Always-On Services ✅
   - text: "Research: LaunchAgent vs PM2 for macOS services (keychain access, boot persistence)"
     checked: true
   - text: "Convert Backstage to production mode (npm run build + npm start)"
@@ -40,43 +40,39 @@ tasks:
   - text: "Test: Reboot → verify all services auto-start on correct ports"
     checked: true
   
-  # Phase 3: Auto-Heal System
-  - text: "Fix Kuma: Get monitoring working (local :3001 or :3011?)"
+  # Phase 3: Uptime Monitoring (Basic)
+  - text: "Access Kuma web UI (https://media.adal-rigel.ts.net:3001)"
     checked: false
-  - text: "Configure Kuma monitors for all critical services"
-    checked: false
-  - text: "Create auto-heal script (triggered by Kuma failure)"
-    checked: false
-  - text: "Test: Kill Backstage → Kuma detects → auto-heal restarts → Telegram alert"
-    checked: false
+    subtasks:
+      - text: "Verify admin credentials work"
+        checked: false
+      - text: "Check existing monitors (if any)"
+        checked: false
   
-  # Phase 4: Port Stability Check
-  - text: "Create check: port local = port Tailscale (read ports.md as source)"
+  - text: "Configure Kuma monitors for Mac Studio services"
     checked: false
-  - text: "Run check daily (cronjob or Backstage health check)"
-    checked: false
-  - text: "FAIL loudly if drift detected (Telegram alert)"
-    checked: false
-  - text: "Test: Manually break port → check detects → alert fires"
-    checked: false
+    subtasks:
+      - text: "Add Backstage monitor (https://studio.adal-rigel.ts.net:3004)"
+        checked: false
+      - text: "Add Librarian monitor (https://studio.adal-rigel.ts.net:8766)"
+        checked: false
+      - text: "Set check interval: 30 seconds"
+        checked: false
+      - text: "Set alert threshold: down for 60 seconds (2 failed checks)"
+        checked: false
   
-  # Phase 5: Travel Safety Validation
-  - text: "Simulate travel: Access all services via Tailscale ONLY (no local network)"
+  - text: "Test monitors detect downtime"
     checked: false
-  - text: "Document: What to do if service down while traveling"
-    checked: false
-  - text: "Create remote recovery script (SSH + port-hammer + restart)"
-    checked: false
-  - text: "Test recovery: SSH from iPhone → run script → verify service restored"
-    checked: false
+    subtasks:
+      - text: "Kill Backstage (launchctl stop)"
+        checked: false
+      - text: "Verify Kuma detects as DOWN within 60s"
+        checked: false
+      - text: "Restart Backstage (launchctl start)"
+        checked: false
+      - text: "Verify Kuma detects as UP"
+        checked: false
   
-  # Phase 6: Prevention Architecture
-  - text: "Document: Why ports drift (Tailscale proxy, orphaned sockets, PM2 restarts)"
-    checked: false
-  - text: "Single source of truth: ports.md drives ALL configurations"
-    checked: false
-  - text: "Executable validation: services read ports.md at startup"
-    checked: false
-  - text: "Immutability enforcement: FAIL if service tries wrong port"
-    checked: false
+  - text: "Document Kuma setup (connections/uptime-kuma.md already updated)"
+    checked: true
 ---
