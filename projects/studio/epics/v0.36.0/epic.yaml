@@ -24,6 +24,10 @@ tasks:
     checked: true
   - text: "Create backstage-robust-start.sh (port-hammer + health checks + auto-recover)"
     checked: true
+  - text: "LaunchAgent wrapper pattern (turn off Tailscale proxy before start, re-enable after)"
+    checked: true
+  - text: "Document LaunchAgent+Tailscale pattern (connections/launchagent-tailscale.md)"
+    checked: true
   - text: "Test: Reboot → verify all services auto-start on correct ports"
     checked: false
   
