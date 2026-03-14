@@ -1,11 +1,114 @@
 ---
-version: "v0.36.0"
+version: "0.36.0"
 name: "Design Strategy"
 goal: "AI agent architecture and design strategy consolidation from talk sessions"
 status: active
-type: "architecture"
+type: architecture
 created: 2026-03-06
 started: 2026-03-06
 completed: null
-tasks: []
+
+tasks:
+  - group: "Check Library Architecture"
+    items:
+      - text: "Define check file format (YAML metadata + external code)"
+        checked: false
+      - text: "Create check directory structure (executor.py, fixtures/, README.md)"
+        checked: false
+      - text: "Implement determinism levels (strict, contextual, LLM-assisted)"
+        checked: false
+      - text: "Design quality profile system (design-default-v1, avoid YAML duplication)"
+        checked: false
+      - text: "Decide check storage location (~/Documents/checks/ vs separate repo)"
+        checked: false
+  
+  - group: "Agent Organization (Synthetic Company Model)"
+    items:
+      - text: "Define agent structure (name, library, checks, APIs, repository, journal)"
+        checked: false
+      - text: "Implement domain-based organization (UXR, Design, Dev, Marketing, Legal, etc.)"
+        checked: false
+      - text: "Design proactive participation model (self-nominate, decline epics)"
+        checked: false
+      - text: "Create epic participation protocol (all applicable domains MUST participate)"
+        checked: false
+      - text: "Decide agent naming (role titles vs actual names)"
+        checked: false
+  
+  - group: "PM Tool Integration (OpenProject/Plane)"
+    items:
+      - text: "Define separation of concerns (PM layer vs Orchestration layer)"
+        checked: false
+      - text: "Design task declaration format (domain, checks, success_criteria)"
+        checked: false
+      - text: "Implement agent workflow (pick task → load checks → execute → update status)"
+        checked: false
+      - text: "Create API integration (last mile, not rebuilding existing tools)"
+        checked: false
+      - text: "Implement Gantt for past & future (planning + audit)"
+        checked: false
+  
+  - group: "Pipeline Evolution Strategy"
+    items:
+      - text: "Phase 1: High maintenance (Nicholas approves everything)"
+        checked: false
+      - text: "Phase 2: Plateau (≥90% auto-approve, checks robust)"
+        checked: false
+      - text: "Phase 3: Sample-based review (trust + spot checks, Nicholas exits loop)"
+        checked: false
+      - text: "Define maturity metrics (when to transition phases)"
+        checked: false
+  
+  - group: "Librarian Integration"
+    items:
+      - text: "Design topic research → check proposal workflow"
+        checked: false
+      - text: "Implement human validation (proposals not auto-executable)"
+        checked: false
+      - text: "Create check proposal format (research → YAML spec → validation)"
+        checked: false
+      - text: "Prevent self-mutating governance (no arbitrary check generation)"
+        checked: false
+  
+  - group: "Execution Model"
+    items:
+      - text: "Phase 1: Python-based checks (standard I/O, JSON in/out)"
+        checked: false
+      - text: "Phase 2: Container-per-check (stdin → JSON, stdout → JSON, exit code)"
+        checked: false
+      - text: "Implement CI/CD compatibility (fixture testing, snapshots)"
+        checked: false
+      - text: "Design execution isolation (sandbox safety)"
+        checked: false
+  
+  - group: "Open Decisions (Deferred)"
+    items:
+      - text: "Repository structure (one repo per agent vs monorepo)"
+        checked: false
+      - text: "Orchestrator scenario simulation (what-if analysis implementation)"
+        checked: false
+      - text: "Mobile app (iPhone status viewer - build or defer)"
+        checked: false
+
+notes: |
+  ## Context
+  
+  Consolidates decisions from talk2.md (2026-02-23) into actionable architecture.
+  
+  ## Key Philosophy
+  
+  **Check library = Company DNA** (reusable, modular, portable)
+  **Agents = employees** (human or AI doesn't matter, highly auditable)
+  **PM tool + Orchestration** (separation of concerns, last mile integration)
+  
+  ## Source Documents
+  
+  - talk2-decisions.md (architectural decisions)
+  - design-strategy-distilled.md (consolidated strategy)
+  - ai-agents-domains.md (domain definitions)
+  
+  ## Related Epics
+  
+  - v4.0.0 (Checkpoints) - implements check execution
+  - v3.5.0 (Agent framework) - implements agent lifecycle
 ---
