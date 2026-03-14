@@ -1,0 +1,49 @@
+---
+version: "4.0.1"
+name: "Checkpoints GUI"
+goal: "Visualize checkpoint execution, agent status, and check results"
+status: backlog
+type: minor
+created: 2026-03-01
+started: null
+completed: null
+
+tasks:
+  # Agent Visualization
+  - text: "Design agent status visualization (active, idle, failed)"
+    checked: false
+  - text: "Implement agent activity logs (execution history)"
+    checked: false
+  
+  # Check Results Dashboard
+  - text: "Design check results dashboard (pass/fail/skip)"
+    checked: false
+  - text: "Implement check history view (timeline, reruns)"
+    checked: false
+  
+  # Checkpoint Compliance
+  - text: "Design checkpoint compliance dashboard (status per epic/project)"
+    checked: false
+  - text: "Implement checkpoint history view (audit trail)"
+    checked: false
+  - text: "Visualize trigger conditions (when/why checkpoint executed)"
+    checked: false
+  
+  # Documentation
+  - text: "Document GUI patterns (component reuse)"
+    checked: false
+
+notes: |
+  ## Epic Merge (2026-03-13)
+  
+  Merged v2.3.0 (checkpoints GUI) + v2.7.0 (Checkpoints GUI)
+  - Same goal: visualize checkpoint system
+  - Eliminated redundancy (combined tasks)
+  - GUI epic immediately follows parent (v4.0.0 Checkpoints → v4.0.1 Checkpoints GUI)
+  
+  ## Design Philosophy
+  
+  GUI follows implementation (v4.0.0 must complete first).
+  Real-time updates (WebSocket or polling).
+  Accessible visualization (color-blind safe, keyboard nav).
+---
