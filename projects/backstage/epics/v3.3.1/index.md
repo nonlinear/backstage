@@ -1,91 +1,10 @@
-# v3.7.0: Fixes (Current vs Notes, Hot Reload)
+# v3.3.1: Hot Reload
 
-## 1. Current Card State Bug
-
-### Problem
-
-Current state (which card is selected) is conflated with Notes tab (which content is shown).
-
-**Current behavior (WRONG):**
-- `.current` class auto-opens notes tab
-- `.current` changes width to 500px
-- If current, clicking tasks tab reverts to notes
-
-**Expected:**
-- Current = visual indicator only (which card selected)
-- Notes = content display (independent of current state)
-
-### Implementation
-
-**File:** `app/components/EpicCard.tsx` (or similar)
-
-**Find code like this (WRONG):**
-```tsx
-<div className={`epic-card ${isCurrent ? 'current' : ''}`}>
-  {isCurrent && <NotesContent />}  {/* ❌ Auto-opens notes */}
-</div>
-
-.current {
-  width: 500px;  /* ❌ Changes width */
-}
-```
-
-**Change to (CORRECT):**
-```tsx
-<div className={`epic-card ${isCurrent ? 'current' : ''}`}>
-  {activeTab === 'notes' && <NotesContent />}  {/* ✅ Notes only if tab selected */}
-  {activeTab === 'tasks' && <TasksContent />}  {/* ✅ Tasks work on current card */}
-</div>
-
-.current {
-  /* No width change - let tab content decide */
-  border: 2px solid blue;  /* Visual indicator only */
-}
-
-.notes-tab {
-  width: 600px;  /* ✅ Width only when notes tab active */}
-```
-
-**Separate state variables:**
-```tsx
-const [currentCardId, setCurrentCardId] = useState(null);  // Which card
-const [activeTab, setActiveTab] = useState('tasks');       // Which tab
-```
-
-**Click handlers:**
-```tsx
-// Click card → set current (doesn't change tab)
-const handleCardClick = (id) => {
-  setCurrentCardId(id);
-  // Don't change activeTab here!
-};
-
-// Click notes tab → set tab (independent)
-const handleNotesClick = () => {
-  setActiveTab('notes');
-};
-
-// Click tasks tab → set tab (should work even if current)
-const handleTasksClick = () => {
-  setActiveTab('tasks');
-};
-```
-
-### Test Cases
-
-1. **Click tasks tab on current card → should show tasks**
-2. **Click notes tab on non-current card → should become current + show notes**
-3. **Current card width → should NOT change (only border/highlight)**
+**Goal:** Auto-reload Backstage UI when YAML files change (no manual restart during grooming)
 
 ---
 
-## 2. Hot Reload for External YAML
-
-### Problem
-
-Next.js only watches `app/` folder. Changes to `~/Backstage/projects/**/*.yaml` don't trigger reload.
-
-### Implementation
+## Implementation Code Examples
 
 **Step 1: Install chokidar**
 ```bash

@@ -1,5 +1,5 @@
 version: "3.3.1"
-title: "Hot Reload for External YAML"
+name: "Hot Reload"
 status: backlog
 started: null
 priority: patch
@@ -10,16 +10,35 @@ description: |
   Auto-reload Backstage UI when YAML files change (no manual restart needed during grooming)
 
 tasks:
-  - text: "Add chokidar dependency (npm install chokidar)"
+  - text: "Install chokidar dependency (npm install chokidar)"
     checked: false
   - text: "Create app/lib/watch-projects.js (file watcher)"
     checked: false
   - text: "Watch projects/**/*.yaml for changes"
     checked: false
-  - text: "Revalidate /projects route on change"
+  - text: "Revalidate /projects route on change (revalidatePath)"
+    checked: false
+  - text: "Import watcher in layout.tsx or next.config.js"
     checked: false
   - text: "Test: Edit epic.yaml → browser auto-reloads"
     checked: false
+  - text: "Verify console shows file change notifications"
+    checked: false
+
+notes: |
+  ## Implementation Guide
+  
+  See index.md for full code examples:
+  - chokidar watch pattern
+  - revalidatePath usage
+  - Import methods (layout vs next.config)
+  
+  ## Why This Matters
+  
+  Before: Edit YAML → manual restart → wait 10s → see change
+  After: Edit YAML → instant browser reload
+  
+  Impact: Grooming 10x faster (no context switching to terminal)
 ---
 
 notes: |
