@@ -18,17 +18,25 @@ tasks:
   - text: "Update all docs (ports.md, kuma.md, persistent-services.md)"
     checked: false
   
-  # Phase 2: Socket Orphan Prevention
-  - text: "Research: Why do sockets become orphaned?"
+  # Phase 2: Production Mode Always-On Services
+  - text: "Research: LaunchAgent vs PM2 for macOS services (keychain access, boot persistence)"
     checked: true
-  - text: "Implement port-hammer.sh for all services (clean before start)"
-    checked: true
-  - text: "Create backstage-robust-start.sh (port-hammer + health checks + auto-recover)"
-    checked: true
-  - text: "LaunchAgent wrapper pattern (turn off Tailscale proxy before start, re-enable after)"
-    checked: true
-  - text: "Document LaunchAgent+Tailscale pattern (connections/launchagent-tailscale.md)"
-    checked: true
+  - text: "Convert Backstage to production mode (npm run build + npm start)"
+    checked: false
+  - text: "Convert Librarian to production mode (npm run build + npm start)"
+    checked: false
+  - text: "Create LaunchAgent .plist for Backstage (com.nonlinear.backstage.plist)"
+    checked: false
+  - text: "Create LaunchAgent .plist for Librarian (com.nonlinear.librarian.plist)"
+    checked: false
+  - text: "Bootstrap LaunchAgents (launchctl bootstrap, verify KeepAlive + RunAtLoad)"
+    checked: false
+  - text: "Test local access (http://localhost:3004, http://localhost:8766)"
+    checked: false
+  - text: "Test remote access (https://studio.adal-rigel.ts.net:3004, https://studio.adal-rigel.ts.net:8766)"
+    checked: false
+  - text: "Document LaunchAgent setup (connections/launchagent-production.md)"
+    checked: false
   - text: "Test: Reboot → verify all services auto-start on correct ports"
     checked: false
   

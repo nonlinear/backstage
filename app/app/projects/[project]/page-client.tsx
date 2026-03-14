@@ -39,7 +39,7 @@ interface ProjectPageClientProps {
   projectEpicCount: number
   activeCount: number
   backlogCount: number
-  doneCount: number
+  publishedCount: number
   allProjectsEpicCounts: Record<string, number>
   epics: Epic[]
 }
@@ -55,7 +55,7 @@ export function ProjectPageClient({
   projectEpicCount,
   activeCount,
   backlogCount,
-  doneCount,
+  publishedCount,
   allProjectsEpicCounts,
   epics 
 }: ProjectPageClientProps) {
@@ -234,7 +234,7 @@ export function ProjectPageClient({
             projectType={projectType}
             activeCount={activeCount}
             backlogCount={backlogCount}
-            doneCount={doneCount}
+            publishedCount={publishedCount}
             checks={projectChecks}
           />
           
