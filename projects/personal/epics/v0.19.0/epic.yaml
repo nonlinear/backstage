@@ -1,43 +1,70 @@
 ---
-name: "HA Fixes (Guest Mode + Calendar + Curtains)"
-goal: "Home Assistant improvements: guest privacy mode, calendar automations, curtain sync"
+version: "0.19.0"
+name: "Home Assistant"
+goal: "Home Assistant improvements: guest privacy, calendar automations, curtain sync"
 status: backlog
-type: "minor"
+type: minor
 created: 2026-02-15
 started: null
 completed: null
+
 tasks:
-  # Guest Mode Scene
-  - text: "Define guest mode privacy rules (what guests can/cannot control)"
-    checked: false
-  - text: "Configure guest mode scene (cameras off, bedroom unlocked, thermostat set)"
-    checked: false
-  - text: "Create input_boolean.guest_mode toggle"
-    checked: false
-  - text: "Test guest mode activation/deactivation"
-    checked: false
-  - text: "Decide: disable voice commands or create guest profile"
-    checked: false
+  - group: "Guest Mode (Privacy Scene)"
+    items:
+      - text: "Define privacy rules (what guests can/cannot control)"
+        checked: false
+      - text: "Configure guest mode scene (cameras off, bedroom unlocked, thermostat set)"
+        checked: false
+      - text: "Create input_boolean.guest_mode toggle (switch in dashboard)"
+        checked: false
+      - text: "Decide: disable voice commands or create guest profile"
+        checked: false
+      - text: "Test activation/deactivation (verify cameras off, access restored)"
+        checked: false
   
-  # Calendar Integration
-  - text: "Choose calendar: Google Calendar (easy) or CalDAV (self-hosted)"
-    checked: false
-  - text: "Set up calendar integration in HA"
-    checked: false
-  - text: "Configure calendar dashboard card (show upcoming events)"
-    checked: false
-  - text: "Create calendar automations (pre-heat before meetings, etc.)"
-    checked: false
-  - text: "Test calendar automation triggers"
-    checked: false
+  - group: "Calendar Integration"
+    items:
+      - text: "Choose calendar: Google Calendar (easy) or CalDAV (self-hosted)"
+        checked: false
+      - text: "Set up calendar integration in HA (config flow)"
+        checked: false
+      - text: "Configure calendar dashboard card (show upcoming events)"
+        checked: false
+      - text: "Create automations (pre-heat before meetings, lights for events)"
+        checked: false
+      - text: "Test automation triggers (verify event detection)"
+        checked: false
   
-  # Curtain Sync
-  - text: "Decide curtain trigger: email, sunrise, or presence"
-    checked: false
-  - text: "Configure curtain automation (chosen trigger)"
-    checked: false
-  - text: "Test curtain sync (open/close based on trigger)"
-    checked: false
-  - text: "Add manual override (dashboard control)"
-    checked: false
+  - group: "Curtain Sync"
+    items:
+      - text: "Decide trigger: email, sunrise, or presence"
+        checked: false
+      - text: "Configure automation (chosen trigger → open/close curtains)"
+        checked: false
+      - text: "Add manual override (dashboard control + voice command)"
+        checked: false
+      - text: "Test sync (verify curtains respond to trigger)"
+        checked: false
+
+notes: |
+  ## Task Group Organization
+  
+  **Guest Mode:** Privacy for visitors (cameras off, controlled access)
+  **Calendar Integration:** Context-aware automations (meetings, events)
+  **Curtain Sync:** Automated light control (morning/night routines)
+  
+  ## Why Home Assistant
+  
+  Central control for:
+  - Voice commands (Nabu Casa Voice PE)
+  - Automation (scenes, schedules, triggers)
+  - Remote access (Tailscale + companion app)
+  
+  ## Context
+  
+  **Current HA setup:**
+  - Server: NAS (http://media.adal-rigel.ts.net:8123)
+  - Voice: "Hey Jarvis" (Nabu Casa Voice PE)
+  - Devices: Lights, climate, covers, switches
+  - Access: iPad/iPhone via Tailscale
 ---
