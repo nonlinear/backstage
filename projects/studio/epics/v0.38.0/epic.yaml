@@ -2,7 +2,7 @@
 version: "v0.38.0"
 name: "App Healing"
 goal: "Apps run unimpeded, via Tailscale, so they are always accessible"
-status: completed
+status: done
 type: "minor"
 created: 2026-03-10
 started: 2026-03-10
@@ -21,7 +21,7 @@ tasks:
       - text: "Update all docs (ports.md, kuma.md, persistent-services.md)"
         checked: true
   
-  # ✅ Phase 2: Production Mode Always-On Services
+  # ✅ Phase 2: Production LaunchAgent Setup
   - text: "Phase 2: Production LaunchAgent Setup"
     checked: true
     subtasks:
@@ -46,25 +46,67 @@ tasks:
       - text: "Test: Reboot → verify auto-start on correct ports"
         checked: true
   
-  # ✅ Phase 3: Uptime Kuma Monitoring
-  - text: "Phase 3: Uptime Kuma Monitoring Setup"
-    checked: true
+  # 🔄 Phase 3: Monitoring Infrastructure
+  - text: "Phase 3: Monitoring Infrastructure"
+    checked: false
     subtasks:
+      # Container Setup
       - text: "Fix DNS in Kuma container (add MagicDNS 100.100.100.100)"
-        checked: true
-      - text: "Backup existing monitors (export backup.json)"
-        checked: true
-      - text: "Recreate container with --dns flag"
         checked: true
       - text: "Test DNS resolution (ping studio.adal-rigel.ts.net → 100.80.21.16)"
         checked: true
+      - text: "Recreate container with --dns flag"
+        checked: true
+      
+      # Monitor Configuration
       - text: "Configure node health monitors (ping studio + media)"
         checked: false
       - text: "Configure Mac Studio service monitors (Backstage, Librarian)"
         checked: false
       - text: "Configure NAS service monitors (Kavita, Komga, SearXNG, Paperless, HA)"
         checked: false
+      
+      # Testing
       - text: "Test monitor detection (kill Backstage, verify alert)"
+        checked: false
+      - text: "Configure Telegram notifications"
+        checked: false
+  
+  # 🔄 Phase 4: Auto-Recovery
+  - text: "Phase 4: Auto-Recovery System"
+    checked: false
+    subtasks:
+      - text: "Create auto-heal script (triggered by Kuma failure)"
+        checked: false
+      - text: "Test: Kill Backstage → Kuma detects → auto-heal restarts"
+        checked: false
+      - text: "Configure Telegram alerts on service down/up"
+        checked: false
+  
+  # 🔄 Phase 5: Port Stability Checks
+  - text: "Phase 5: Port Drift Detection"
+    checked: false
+    subtasks:
+      - text: "Create check: port local = port Tailscale (read ports.md as source)"
+        checked: false
+      - text: "Run check daily (cronjob or Backstage health check)"
+        checked: false
+      - text: "FAIL loudly if drift detected (Telegram alert)"
+        checked: false
+      - text: "Test: Manually break port → check detects → alert fires"
+        checked: false
+  
+  # 🔄 Phase 6: Travel Safety
+  - text: "Phase 6: Remote Recovery"
+    checked: false
+    subtasks:
+      - text: "Simulate travel: Access all services via Tailscale ONLY (no local network)"
+        checked: false
+      - text: "Document: What to do if service down while traveling"
+        checked: false
+      - text: "Create remote recovery script (SSH + port-hammer + restart)"
+        checked: false
+      - text: "Test recovery: SSH from iPhone → run script → verify service restored"
         checked: false
   
   # ✅ Documentation
