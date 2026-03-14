@@ -1,6 +1,6 @@
 ---
 version: "3.3.2"
-title: "Fix Agents Section"
+name: "Agents GUI"
 status: backlog
 started: null
 priority: patch
