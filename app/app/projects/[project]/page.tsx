@@ -27,7 +27,7 @@ export default async function ProjectPage({
   let projectType = 'undefined'
   let projectName = project
   let projectDescription = ''
-  let projectTier = 1
+  let projectTier = 'experimental'
   
   try {
     const content = fs.readFileSync(projectPath, 'utf-8')
@@ -35,7 +35,7 @@ export default async function ProjectPage({
     projectType = metadata.type || 'undefined'
     projectName = metadata.name || project
     projectDescription = metadata.description || ''
-    projectTier = metadata.tier || 1
+    projectTier = metadata.tier || 'experimental'
   } catch (err) {
     console.error(`Error reading ${projectPath}:`, err)
   }
