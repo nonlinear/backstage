@@ -45,6 +45,17 @@ tasks:
         checked: false
       - text: "Test: Agents section shows correctly"
         checked: false
+  
+  - group: "Markdown Visualization"
+    items:
+      - text: "Shop for better visualizers (react-markdown alternatives)"
+        checked: false
+      - text: "Markdown fullscreen option (expand note to full viewport)"
+        checked: false
+      - text: "Open file/copy text/copy link/return actions (note toolbar)"
+        checked: false
+      - text: "Markdown permalink (how? hash-based? query param?)"
+        checked: false
 
 notes: |
   ## Context (Grooming Session 2026-03-12)
