@@ -87,6 +87,12 @@
 - Avalanche calculator (which to pay first)
 - Progress visualization (debt-free date projection)
 
+**Alternative to evaluate:**
+- **Sure** (https://github.com/we-promise/sure) - Modern self-hosted budgeting app
+- Compare with Actual Budget (features, UX, performance)
+- Test Docker deployment, API, mobile support
+- Decide: keep Actual, migrate to Sure, or run both
+
 ---
 
 ## Phase 5: Tax Automation (Read-Only)

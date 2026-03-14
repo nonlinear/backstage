@@ -58,6 +58,10 @@ tasks:
     checked: false
   - text: "Monthly budget review automation (OpenClaw pulls report)"
     checked: false
+  - text: "Install & test Sure (https://github.com/we-promise/sure)"
+    checked: false
+  - text: "Compare Sure vs Actual Budget (features, UX, self-hosted)"
+    checked: false
   
   # Phase 5: Tax Automation (Read-Only)
   - text: "Research IRS.gov login flow (2FA handling)"
