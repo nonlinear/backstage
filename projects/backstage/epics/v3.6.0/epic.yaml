@@ -9,6 +9,12 @@ completed: null
 tasks:
   - text: "Agent and squad template (yaml + soul.md + ENFORCEMENT.md)"
     checked: true
+  - text: "Agent lifecycle system (draft → configured → active)"
+    checked: true
+  - text: "Matrix routing per-room (agentId override, manual sessionKey)"
+    checked: true
+  - text: "Matrix integration docs (adding-agent, adding-to-matrix, message-flow)"
+    checked: true
   - text: "Values composite watcher (org → squad → agent → .values.md)"
     checked: false
   - text: "Library composite watcher (org → squad → agent → .library.md)"
