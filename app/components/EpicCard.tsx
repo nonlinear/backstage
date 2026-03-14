@@ -97,7 +97,7 @@ export function EpicCard({
       <div id={version} className="scroll-mt-4" />
       <Card 
         onClick={onCardClick}
-        className={`relative flex-shrink-0 transition-all duration-300 cursor-pointer w-[300px] ${status === 'done' ? 'done' : ''} ${status === 'active' ? 'active' : ''} ${status === 'done' && !isCurrentEpic ? 'opacity-50' : 'opacity-100'} h-full overflow-y-auto`}
+        className={`relative flex-shrink-0 transition-all duration-300 cursor-pointer w-[300px] ${status === 'done' ? 'done' : ''} ${status === 'active' ? 'active' : ''} ${status === 'archive' ? 'archive' : ''} ${(status === 'done' || status === 'archive') && !isCurrentEpic ? 'opacity-50' : 'opacity-100'} h-full overflow-y-auto`}
       >
       {/* Status badge top-right (absolute) */}
       <Badge variant="outline" className="absolute top-4 right-4 text-xs capitalize">
