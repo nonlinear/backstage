@@ -8,58 +8,73 @@ created: 2026-03-10
 started: 2026-03-10
 completed: null
 tasks:
-  # Phase 1: Port Alignment ✅
-  - text: "Align Backstage to 3004 everywhere (package.json, LaunchAgent, PM2, docs)"
+  # ✅ Phase 1: Port Alignment
+  - text: "Phase 1: Port Alignment"
     checked: true
-  - text: "Verify Tailscale serve :3004 matches local :3004"
-    checked: true
-  - text: "Fix Kuma port confusion (3001 vs 3010 vs 3011)"
-    checked: true
-  - text: "Update all docs (ports.md, kuma.md, persistent-services.md)"
-    checked: true
+    subtasks:
+      - text: "Align Backstage to 3004 everywhere (package.json, LaunchAgent, docs)"
+        checked: true
+      - text: "Verify Tailscale serve :3004 matches local :3004"
+        checked: true
+      - text: "Fix Kuma port confusion (confirmed NAS port 3001)"
+        checked: true
+      - text: "Update all docs (ports.md, kuma.md, persistent-services.md)"
+        checked: true
   
-  # Phase 2: Production Mode Always-On Services ✅
-  - text: "Research: LaunchAgent vs PM2 for macOS services (keychain access, boot persistence)"
+  # ✅ Phase 2: Production Mode Always-On Services
+  - text: "Phase 2: Production LaunchAgent Setup"
     checked: true
-  - text: "Convert Backstage to production mode (npm run build + npm start)"
-    checked: true
-  - text: "Convert Librarian to production mode (npm run build + npm start)"
-    checked: true
-  - text: "Create LaunchAgent .plist for Backstage (com.nonlinear.backstage.plist)"
-    checked: true
-  - text: "Create LaunchAgent .plist for Librarian (com.nonlinear.librarian.plist)"
-    checked: true
-  - text: "Bootstrap LaunchAgents (launchctl bootstrap, verify KeepAlive + RunAtLoad)"
-    checked: true
-  - text: "Test local access (http://localhost:3004, http://localhost:8766)"
-    checked: true
-  - text: "Test remote access (https://studio.adal-rigel.ts.net:3004, https://studio.adal-rigel.ts.net:8766)"
-    checked: true
-  - text: "Document LaunchAgent setup (connections/launchagent-production.md)"
-    checked: true
-  - text: "Test: Reboot → verify all services auto-start on correct ports"
-    checked: true
+    subtasks:
+      - text: "Research: LaunchAgent vs PM2 for macOS services"
+        checked: true
+      - text: "Convert Backstage to production mode (npm run build + npm start)"
+        checked: true
+      - text: "Convert Librarian to production mode (npm run build + npm start)"
+        checked: true
+      - text: "Create LaunchAgent .plist for Backstage (com.nonlinear.backstage.plist)"
+        checked: true
+      - text: "Create LaunchAgent .plist for Librarian (com.nonlinear.librarian.plist)"
+        checked: true
+      - text: "Bootstrap LaunchAgents (launchctl bootstrap)"
+        checked: true
+      - text: "Test local access (http://localhost:3004, http://localhost:8766)"
+        checked: true
+      - text: "Test remote access (https://studio.adal-rigel.ts.net:3004, :8766)"
+        checked: true
+      - text: "Document LaunchAgent setup (connections/launchagent-production.md)"
+        checked: true
+      - text: "Test: Reboot → verify auto-start on correct ports"
+        checked: true
   
-  # Phase 3: Monitoring & Auto-Recovery
-  - text: "Fix Kuma: Get monitoring working (local :3001 or :3011?)"
-    checked: true
-  
-  - text: "Configure Kuma monitors for all critical services"
+  # 🔄 Phase 3: Uptime Kuma Monitoring
+  - text: "Phase 3: Uptime Kuma Monitoring Setup"
     checked: false
+    subtasks:
+      - text: "Fix DNS in Kuma container (add MagicDNS 100.100.100.100)"
+        checked: false
+      - text: "Backup existing monitors (export backup.json)"
+        checked: false
+      - text: "Recreate container with --dns flag"
+        checked: false
+      - text: "Test DNS resolution (nslookup studio.adal-rigel.ts.net)"
+        checked: false
+      - text: "Configure node health monitors (ping studio + media)"
+        checked: false
+      - text: "Configure Mac Studio service monitors (Backstage, Librarian)"
+        checked: false
+      - text: "Configure NAS service monitors (Kavita, Komga, SearXNG, Paperless, HA)"
+        checked: false
+      - text: "Test monitor detection (kill Backstage, verify alert)"
+        checked: false
   
-  - text: "Create auto-heal script (triggered by Kuma failure)"
-    checked: true
-  
-  - text: "Create check: port local = port Tailscale (read ports.md as source)"
+  # 📚 Documentation
+  - text: "Documentation"
     checked: false
-  
-  # Future work (moved to separate epics or backlog)
-  # - Run check daily (cronjob or Backstage health check)
-  # - FAIL loudly if drift detected (Telegram alert)
-  # - Test: Manually break port → check detects → alert fires
-  # - Test: Kill Backstage → Kuma detects → auto-heal restarts → Telegram alert
-  # - Simulate travel: Access all services via Tailscale ONLY (no local network)
-  # - Document: What to do if service down while traveling
-  # - Create remote recovery script (SSH + port-hammer + restart)
-  # - Test recovery: SSH from iPhone → run script → verify service restored
+    subtasks:
+      - text: "Document port drift causes (connections/port-drift.md)"
+        checked: true
+      - text: "Update Kuma connection docs (connections/uptime-kuma.md)"
+        checked: true
+      - text: "Document monitoring strategy (MagicDNS + hostnames)"
+        checked: false
 ---
