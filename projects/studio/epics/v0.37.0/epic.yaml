@@ -1,58 +1,72 @@
 ---
-version: "v0.37.0"
+version: "0.37.0"
 name: "Local LLM Infrastructure"
-goal: "Self-hosted LLM inference (Qwen, MLX, llama.cpp) for speed, privacy, cost savings"
+goal: "Self-hosted LLM inference (Qwen, llama.cpp) for speed, privacy, cost savings"
 status: active
-type: "major"
+type: major
 created: 2026-02-24
 started: 2026-02-24
 completed: null
+
 tasks:
-  # Phase 1: Download + Test
-  - text: "Install llama.cpp (CMake build with Metal)"
-    checked: true
-  - text: "Download Qwen-Coder 7B Q4_K_M (~4GB)"
-    checked: false
-  - text: "Download Qwen-Coder 32B Q4_K_M (~20GB)"
-    checked: false
-  - text: "Download Qwen 72B Instruct (FP16 or Q4_K_M)"
-    checked: false
-  - text: "Test inference (benchmark speed/quality)"
-    checked: false
-  - text: "Start llama-server (port 8080)"
-    checked: false
-  - text: "OpenClaw integration test"
-    checked: false
+  - group: "Setup (llama.cpp)"
+    items:
+      - text: "Install llama.cpp (CMake build with Metal)"
+        checked: true
+      - text: "Download Qwen-Coder 7B Q4_K_M (~4GB)"
+        checked: false
+      - text: "Download Qwen-Coder 32B Q4_K_M (~20GB)"
+        checked: false
+      - text: "Download Qwen 72B Instruct (FP16 or Q4_K_M)"
+        checked: false
+      - text: "Start llama-server (port 8080)"
+        checked: false
   
-  # Phase 2: Agent Integration
-  - text: "Configure model routing (workflow → model)"
-    checked: false
-  - text: "Test Defense workflow (Nicholas iterating)"
-    checked: false
-  - text: "Test Secretaria (instant clerical)"
-    checked: false
-  - text: "Monitor: speed, accuracy, RAM usage"
-    checked: false
+  - group: "Testing & Benchmarking"
+    items:
+      - text: "Test inference (benchmark speed/quality)"
+        checked: false
+      - text: "OpenClaw integration test (local model as backend)"
+        checked: false
+      - text: "Monitor: speed, accuracy, RAM usage"
+        checked: false
   
-  # Phase 3: Scale
-  - text: "Test unassisted agents (overnight work)"
-    checked: false
-  - text: "Optimize cache/memory"
-    checked: false
-  - text: "Measure: cost savings, quality maintained"
-    checked: false
+  - group: "Agent Integration"
+    items:
+      - text: "Configure model routing (workflow → model)"
+        checked: false
+      - text: "Test Defense workflow (Nicholas iterating, prioritize speed)"
+        checked: false
+      - text: "Test Secretaria (instant clerical tasks)"
+        checked: false
+      - text: "Test unassisted agents (overnight work, high reasoning)"
+        checked: false
   
-  # MLX Testing (2026-02-26)
-  - text: "Download 122B MLX (nightmedia/Qwen3.5-122B-A10B-Text-mxfp4-mlx)"
-    checked: false
-  - text: "Download 35B MLX (Heretic version)"
-    checked: false
-  - text: "Download 27B MLX (mlx-community/Qwen3.5-27B-heretic-8bit)"
-    checked: false
-  - text: "Benchmark all 3 MLX models (tokens/sec, RAM)"
-    checked: false
-  - text: "Test night shift tasks (5 reminders completion time)"
-    checked: false
-  - text: "Finalize model allocation strategy"
-    checked: false
+  - group: "Optimization & Scale"
+    items:
+      - text: "Optimize cache/memory (reduce RAM footprint)"
+        checked: false
+      - text: "Measure: cost savings vs cloud, quality maintained"
+        checked: false
+      - text: "Finalize model allocation strategy (7B/32B/72B per use case)"
+        checked: false
+
+notes: |
+  ## MLX Removed (2026-03-13)
+  
+  MLX-specific tasks removed (not production-ready).
+  Focus: llama.cpp only (proven, stable, Metal-optimized).
+  
+  ## Model Strategy
+  
+  **Supervised (Assisted):**
+  - Defense (Nicholas iterating): Qwen 7B (fast latency)
+  - Secretaria (clerical): Qwen 7B (speed > reasoning)
+  
+  **Unsupervised (Unassisted):**
+  - Development, UXR, Legal, Marketing: Qwen 32B (high reasoning)
+  - Complex reasoning: Qwen 72B (when 32B insufficient)
+  
+  **Strategic:**
+  - Epic planning, >32k context: Claude Sonnet 4.5 (cloud, via GitHub Copilot)
 ---
