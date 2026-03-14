@@ -1,41 +1,79 @@
 ---
+version: "2.7.0"
 name: "Meshtastic"
 goal: "Build resilient community infrastructure (mesh networks, mutual aid, off-grid communication)"
 status: backlog
-type: "major"
+type: major
 created: 2026-03-12
 started: null
 completed: null
+
 tasks:
-  # Phase 1: Hardware
-  - text: "Buy T-Beam or Heltec V3 devices (2-3 nodes)"
-    checked: false
-  - text: "Flash Meshtastic firmware"
-    checked: false
-  - text: "Test basic mesh (home + backpack + bike)"
-    checked: false
+  - group: "Hardware Setup"
+    items:
+      - text: "Buy T-Beam or Heltec V3 devices (2-3 nodes)"
+        checked: false
+      - text: "Flash Meshtastic firmware (via CLI or web flasher)"
+        checked: false
+      - text: "Test basic mesh (home + backpack + bike nodes)"
+        checked: false
   
-  # Phase 2: Network Setup
-  - text: "Configure channels (community, emergency, mutual aid)"
-    checked: false
-  - text: "Set up MQTT bridge (mesh → internet gateway)"
-    checked: false
-  - text: "Test range (urban environment)"
-    checked: false
+  - group: "Network Configuration"
+    items:
+      - text: "Configure channels (community, emergency, mutual aid)"
+        checked: false
+      - text: "Set up MQTT bridge (mesh → internet gateway)"
+        checked: false
+      - text: "Test range (urban environment, obstacles)"
+        checked: false
   
-  # Phase 3: Community Onboarding
-  - text: "Document setup guide (non-technical)"
-    checked: false
-  - text: "Host workshop (install + configure)"
-    checked: false
-  - text: "Create mutual aid directory (neighbors, resources)"
-    checked: false
+  - group: "Community Onboarding"
+    items:
+      - text: "Document setup guide (non-technical, accessibility focus)"
+        checked: false
+      - text: "Host workshop (install + configure + test)"
+        checked: false
+      - text: "Create mutual aid directory (neighbors, resources, skills)"
+        checked: false
   
-  # Phase 4: Integration
-  - text: "OpenClaw Meshtastic skill (send/receive messages)"
-    checked: false
-  - text: "Emergency alerts (broadcast to mesh)"
-    checked: false
-  - text: "Offline-first apps (maps, schedules, contacts)"
-    checked: false
+  - group: "Integration & Automation"
+    items:
+      - text: "OpenClaw Meshtastic skill (send/receive messages via API)"
+        checked: false
+      - text: "Emergency alerts (broadcast to mesh from automation)"
+        checked: false
+      - text: "Offline-first apps (maps, schedules, contacts sync)"
+        checked: false
+
+notes: |
+  ## Epic Merge (2026-03-13)
+  
+  Merged v2.2.0 (Meshtastic, empty) + v2.7.0 (Meshtastic, complete)
+  - Same name, same goal
+  - v2.2.0 had no tasks (placeholder)
+  - v2.7.0 had full implementation plan
+  - Organized into 4 task groups
+  
+  ## Why Meshtastic
+  
+  **Resilience:** Off-grid communication when internet/cell fails
+  **Community:** Mutual aid coordination (disasters, protests, power outages)
+  **Autonomy:** Decentralized, encrypted, no corporate control
+  
+  ## Use Cases
+  
+  - Emergency alerts (neighborhood watch, medical, fire)
+  - Mutual aid coordination (who needs what, who can help)
+  - Community events (coordination without internet)
+  - Protest safety (encrypted, off-grid comms)
+  
+  ## Hardware Options
+  
+  - **T-Beam:** GPS, LoRa, battery, solar-ready (~$50)
+  - **Heltec V3:** Smaller, lighter, cheaper (~$30)
+  - Both: ESP32, 915MHz LoRa, Meshtastic compatible
+  
+  ## Philosophy
+  
+  Infrastructure = mutual aid. Networks = community power.
 ---
