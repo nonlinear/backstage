@@ -14,9 +14,9 @@ tasks:
   - text: "Verify Tailscale serve :3004 matches local :3004"
     checked: true
   - text: "Fix Kuma port confusion (3001 vs 3010 vs 3011)"
-    checked: false
+    checked: true
   - text: "Update all docs (ports.md, kuma.md, persistent-services.md)"
-    checked: false
+    checked: true
   
   # Phase 2: Production Mode Always-On Services
   - text: "Research: LaunchAgent vs PM2 for macOS services (keychain access, boot persistence)"
@@ -38,7 +38,7 @@ tasks:
   - text: "Document LaunchAgent setup (connections/launchagent-production.md)"
     checked: true
   - text: "Test: Reboot → verify all services auto-start on correct ports"
-    checked: false
+    checked: true
   
   # Phase 3: Auto-Heal System
   - text: "Fix Kuma: Get monitoring working (local :3001 or :3011?)"
