@@ -1,8 +1,8 @@
-version: "0.3.0"
+version: "0.0.3"
 title: "Fixes"
-status: active
-started: 2026-03-12
-priority: minor
+status: backlog
+started: null
+priority: patch
 squad: backstage
 
 description: |
