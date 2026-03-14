@@ -8,34 +8,45 @@ created: null
 started: null
 completed: null
 tasks:
+  # Setup
+  - text: "Purchase Hazel license (if not already owned)"
+    checked: false
+  - text: "Install exiftool (brew install exiftool)"
+    checked: false
+  
+  # Shortcuts Automation (iOS/macOS)
   - text: "Create Shortcuts automation (screenshot → get location → tag EXIF)"
     checked: false
   - text: "Test accuracy (does location tag correctly?)"
     checked: false
   - text: "Test battery impact (is it noticeable?)"
     checked: false
-  - text: "Purchase Hazel license (if not already owned)"
-    checked: false
-  - text: "Install exiftool (brew install exiftool)"
-    checked: false
+  
+  # Hazel Automation (macOS)
   - text: "Create Hazel rule (watch Screenshots folder)"
     checked: false
   - text: "Write shell script (get location → tag EXIF)"
     checked: false
   - text: "Test automation (take screenshot, verify EXIF tagged)"
     checked: false
+  
+  # Privacy & Controls
   - text: "Test screenshot sharing (is GPS EXIF visible to others?)"
     checked: false
   - text: "Document when to disable (privacy mode, work screenshots)"
     checked: false
   - text: "Create toggle (enable/disable automation easily)"
     checked: false
+  
+  # Fine-Tuning
   - text: "Adjust accuracy (exact vs approximate location)"
     checked: false
   - text: "Monitor battery impact (continuous vs on-demand)"
     checked: false
   - text: "Add timestamp metadata (when screenshot taken)"
     checked: false
+  
+  # Documentation
   - text: "Document setup (README for future reference)"
     checked: false
 ---
