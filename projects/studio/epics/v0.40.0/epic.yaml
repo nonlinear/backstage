@@ -1,5 +1,5 @@
 ---
-version: v2.1.0
+version: "v0.40.0"
 name: "Uptime Alerts + NAS Production Hardening"
 goal: "Production-grade NAS infrastructure: monitoring (Uptime Kuma), alerts (Telegram), backups, auto-recovery"
 status: active

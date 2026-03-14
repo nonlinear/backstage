@@ -1,73 +1,11 @@
 ---
-name: "App Healing"
-goal: "Apps run unimpeded, via Tailscale, so they are always accessible"
+version: "v0.36.0"
+name: "Design Strategy"
+goal: "AI agent architecture and design strategy consolidation from talk sessions"
 status: active
-type: "minor"
-created: 2026-03-10
-started: 2026-03-10
+type: "architecture"
+created: 2026-03-06
+started: 2026-03-06
 completed: null
-tasks:
-  # Phase 1: Port Alignment (CRITICAL)
-  - text: "Align Backstage to 3004 everywhere (package.json, LaunchAgent, PM2, docs)"
-    checked: true
-  - text: "Verify Tailscale serve :3004 matches local :3004"
-    checked: true
-  - text: "Fix Kuma port confusion (3001 vs 3010 vs 3011)"
-    checked: false
-  - text: "Update all docs (ports.md, kuma.md, persistent-services.md)"
-    checked: false
-  
-  # Phase 2: Socket Orphan Prevention
-  - text: "Research: Why do sockets become orphaned?"
-    checked: true
-  - text: "Implement port-hammer.sh for all services (clean before start)"
-    checked: true
-  - text: "Create backstage-robust-start.sh (port-hammer + health checks + auto-recover)"
-    checked: true
-  - text: "LaunchAgent wrapper pattern (turn off Tailscale proxy before start, re-enable after)"
-    checked: true
-  - text: "Document LaunchAgent+Tailscale pattern (connections/launchagent-tailscale.md)"
-    checked: true
-  - text: "Test: Reboot → verify all services auto-start on correct ports"
-    checked: false
-  
-  # Phase 3: Auto-Heal System
-  - text: "Fix Kuma: Get monitoring working (local :3001 or :3011?)"
-    checked: false
-  - text: "Configure Kuma monitors for all critical services"
-    checked: false
-  - text: "Create auto-heal script (triggered by Kuma failure)"
-    checked: false
-  - text: "Test: Kill Backstage → Kuma detects → auto-heal restarts → Telegram alert"
-    checked: false
-  
-  # Phase 4: Port Stability Check
-  - text: "Create check: port local = port Tailscale (read ports.md as source)"
-    checked: false
-  - text: "Run check daily (cronjob or Backstage health check)"
-    checked: false
-  - text: "FAIL loudly if drift detected (Telegram alert)"
-    checked: false
-  - text: "Test: Manually break port → check detects → alert fires"
-    checked: false
-  
-  # Phase 5: Travel Safety Validation
-  - text: "Simulate travel: Access all services via Tailscale ONLY (no local network)"
-    checked: false
-  - text: "Document: What to do if service down while traveling"
-    checked: false
-  - text: "Create remote recovery script (SSH + port-hammer + restart)"
-    checked: false
-  - text: "Test recovery: SSH from iPhone → run script → verify service restored"
-    checked: false
-  
-  # Phase 6: Prevention Architecture
-  - text: "Document: Why ports drift (Tailscale proxy, orphaned sockets, PM2 restarts)"
-    checked: false
-  - text: "Single source of truth: ports.md drives ALL configurations"
-    checked: false
-  - text: "Executable validation: services read ports.md at startup"
-    checked: false
-  - text: "Immutability enforcement: FAIL if service tries wrong port"
-    checked: false
+tasks: []
 ---
