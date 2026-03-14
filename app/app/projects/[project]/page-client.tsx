@@ -82,6 +82,7 @@ export function ProjectPageClient({
   const [project, setProject] = useState(projectSlug)
   const [currentEpicVersion, setActiveEpicVersion] = useState<string | null>(null)
   const [selectedNoteByEpic, setSelectedNoteByEpic] = useState<Record<string, string>>({})
+  const [activeTabByEpic, setActiveTabByEpic] = useState<Record<string, "tasks" | "notes">>({})
   const hasInitialized = useRef(false)
   
   // Read hash on mount to open Notes tab automatically (client-side only, run once)
@@ -122,6 +123,7 @@ export function ProjectPageClient({
   }
   
   const handleEpicTabChange = (version: string, tab: "tasks" | "notes") => {
+    setActiveTabByEpic(prev => ({ ...prev, [version]: tab }))
     setActiveEpicVersion(tab === "notes" ? version : null)
     
     // Update URL hash when Notes tab opened
@@ -248,7 +250,7 @@ export function ProjectPageClient({
               tasks={epic.tasks}
               notesCount={epic.notesCount}
               notesList={epic.notesList}
-              activeTab="tasks"
+              activeTab={activeTabByEpic[epic.version] || "tasks"}
               isCurrentEpic={currentEpicVersion === epic.version}
               selectedNote={selectedNoteByEpic[epic.version]}
               onTabChange={(tab) => handleEpicTabChange(epic.version, tab)}
