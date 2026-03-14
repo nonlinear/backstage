@@ -1,0 +1,34 @@
+---
+name: "Passaporte Brasileiro"
+goal: "Renovar passaporte brasileiro via Consulado-Geral NY"
+status: active
+type: "minor"
+created: 2026-03-14
+started: 2026-03-14
+completed: null
+tasks:
+  - text: "Tirar foto 2x2 polegadas (fundo branco)"
+    checked: false
+  - text: "Localizar certidão de nascimento ou casamento (original)"
+    checked: false
+  - text: "Localizar passaporte brasileiro anterior (obrigatório se válido)"
+    checked: false
+  - text: "Obter Certidão de Quitação Eleitoral"
+    checked: false
+  - text: "Obter Certificado de Reservista (homens 18-45 anos)"
+    checked: false
+  - text: "Verificar regularidade do CPF"
+    checked: false
+  - text: "Preencher formulário online MRE"
+    checked: false
+  - text: "Aguardar validação do formulário"
+    checked: false
+  - text: "Agendar atendimento presencial via e-consular"
+    checked: false
+  - text: "Obter money order USPS $120"
+    checked: false
+  - text: "Comparecer ao Consulado com documentos completos"
+    checked: false
+  - text: "Receber passaporte no mesmo dia"
+    checked: false
+---
