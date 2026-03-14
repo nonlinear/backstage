@@ -22,21 +22,21 @@ tasks:
   - text: "Research: LaunchAgent vs PM2 for macOS services (keychain access, boot persistence)"
     checked: true
   - text: "Convert Backstage to production mode (npm run build + npm start)"
-    checked: false
+    checked: true
   - text: "Convert Librarian to production mode (npm run build + npm start)"
-    checked: false
+    checked: true
   - text: "Create LaunchAgent .plist for Backstage (com.nonlinear.backstage.plist)"
-    checked: false
+    checked: true
   - text: "Create LaunchAgent .plist for Librarian (com.nonlinear.librarian.plist)"
-    checked: false
+    checked: true
   - text: "Bootstrap LaunchAgents (launchctl bootstrap, verify KeepAlive + RunAtLoad)"
-    checked: false
+    checked: true
   - text: "Test local access (http://localhost:3004, http://localhost:8766)"
-    checked: false
+    checked: true
   - text: "Test remote access (https://studio.adal-rigel.ts.net:3004, https://studio.adal-rigel.ts.net:8766)"
     checked: false
   - text: "Document LaunchAgent setup (connections/launchagent-production.md)"
-    checked: false
+    checked: true
   - text: "Test: Reboot → verify all services auto-start on correct ports"
     checked: false
   
