@@ -40,39 +40,26 @@ tasks:
   - text: "Test: Reboot → verify all services auto-start on correct ports"
     checked: true
   
-  # Phase 3: Uptime Monitoring (Basic)
-  - text: "Access Kuma web UI (https://media.adal-rigel.ts.net:3001)"
-    checked: false
-    subtasks:
-      - text: "Verify admin credentials work"
-        checked: false
-      - text: "Check existing monitors (if any)"
-        checked: false
-  
-  - text: "Configure Kuma monitors for Mac Studio services"
-    checked: false
-    subtasks:
-      - text: "Add Backstage monitor (https://studio.adal-rigel.ts.net:3004)"
-        checked: false
-      - text: "Add Librarian monitor (https://studio.adal-rigel.ts.net:8766)"
-        checked: false
-      - text: "Set check interval: 30 seconds"
-        checked: false
-      - text: "Set alert threshold: down for 60 seconds (2 failed checks)"
-        checked: false
-  
-  - text: "Test monitors detect downtime"
-    checked: false
-    subtasks:
-      - text: "Kill Backstage (launchctl stop)"
-        checked: false
-      - text: "Verify Kuma detects as DOWN within 60s"
-        checked: false
-      - text: "Restart Backstage (launchctl start)"
-        checked: false
-      - text: "Verify Kuma detects as UP"
-        checked: false
-  
-  - text: "Document Kuma setup (connections/uptime-kuma.md already updated)"
+  # Phase 3: Monitoring & Auto-Recovery
+  - text: "Fix Kuma: Get monitoring working (local :3001 or :3011?)"
     checked: true
+  
+  - text: "Configure Kuma monitors for all critical services"
+    checked: false
+  
+  - text: "Create auto-heal script (triggered by Kuma failure)"
+    checked: true
+  
+  - text: "Create check: port local = port Tailscale (read ports.md as source)"
+    checked: false
+  
+  # Future work (moved to separate epics or backlog)
+  # - Run check daily (cronjob or Backstage health check)
+  # - FAIL loudly if drift detected (Telegram alert)
+  # - Test: Manually break port → check detects → alert fires
+  # - Test: Kill Backstage → Kuma detects → auto-heal restarts → Telegram alert
+  # - Simulate travel: Access all services via Tailscale ONLY (no local network)
+  # - Document: What to do if service down while traveling
+  # - Create remote recovery script (SSH + port-hammer + restart)
+  # - Test recovery: SSH from iPhone → run script → verify service restored
 ---
