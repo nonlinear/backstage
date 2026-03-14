@@ -3,6 +3,7 @@ title: "Hot Reload for External YAML"
 status: backlog
 started: null
 priority: patch
+type: patch
 squad: backstage
 
 description: |

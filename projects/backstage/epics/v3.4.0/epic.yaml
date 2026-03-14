@@ -1,37 +1,26 @@
 ---
-version: v3.4.0
-name: "Enforcing checkpoints"
-goal: "Implement checkpoint execution and enforcement system"
-status: backlog
-type: "major"
-created: 2026-02-27
-started: 2026-02-27
+name: "MCP setup"
+goal: "Configure Model Context Protocol infrastructure for agent tool access (Reddit, GitHub, etc.)"
+status: active
+type: "minor"
+created: 2026-03-09
+started: 2026-03-09
 completed: null
 tasks:
-  - text: "Create modes.md"
-    checked: true
-  - text: "Create check-anatomy.md"
-    checked: true
-  - text: "Migrate personal to studio"
-    checked: true
-  - text: "Restructure (projects/, v prefix, index.md)"
-    checked: true
-  - text: "Refactor backstage skill (parse-epics.sh, checks-composite.sh, backstage.sh)"
-    checked: true
-  - text: "Fix defasado checks (4 failed: detect-obsolete-references.sh, backstage-structure.sh, context-files.sh, + 1 unknown)"
+  - text: "Research MCP server options (reddit-mcp-buddy, mcp-reddit, others)"
     checked: false
-  - text: "Checks logic (do we need id? Can we go on without it?)"
+  - text: "Test Reddit MCP locally (npx, verify API works)"
     checked: false
-  - text: "Migrate global and local checks"
+  - text: "Create Dockerfile for Reddit MCP"
     checked: false
-  - text: "Projects.yaml"
+  - text: "Add to docker-compose.yml (~/Apps/)"
     checked: false
-  - text: "Projects check"
+  - text: "Configure OpenClaw gateway to use MCP via HTTP/stdio"
     checked: false
-  - text: "Epics check"
+  - text: "Test: Fetch Reddit opinions for shadcn/ui"
     checked: false
-  - text: "Decide on UI framework"
+  - text: "Document in connections/reddit-mcp.md"
     checked: false
-  - text: "Migrate other projects"
+  - text: "(Optional) Add more MCPs to container (GitHub, HackerNews, etc.)"
     checked: false
 ---

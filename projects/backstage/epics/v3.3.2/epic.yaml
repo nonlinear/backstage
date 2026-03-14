@@ -4,6 +4,7 @@ title: "Fix Agents Section"
 status: backlog
 started: null
 priority: patch
+type: patch
 squad: backstage
 
 description: |

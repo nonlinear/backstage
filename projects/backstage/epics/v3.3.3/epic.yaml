@@ -4,6 +4,7 @@ title: "Markdown Visualization Improvements"
 status: backlog
 started: null
 priority: patch
+type: patch
 squad: backstage
 
 description: |

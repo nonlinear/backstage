@@ -1,0 +1,37 @@
+---
+version: v3.4.0
+name: "Enforcing checkpoints"
+goal: "Implement checkpoint execution and enforcement system"
+status: backlog
+type: "major"
+created: 2026-02-27
+started: 2026-02-27
+completed: null
+tasks:
+  - text: "Create modes.md"
+    checked: true
+  - text: "Create check-anatomy.md"
+    checked: true
+  - text: "Migrate personal to studio"
+    checked: true
+  - text: "Restructure (projects/, v prefix, index.md)"
+    checked: true
+  - text: "Refactor backstage skill (parse-epics.sh, checks-composite.sh, backstage.sh)"
+    checked: true
+  - text: "Fix defasado checks (4 failed: detect-obsolete-references.sh, backstage-structure.sh, context-files.sh, + 1 unknown)"
+    checked: false
+  - text: "Checks logic (do we need id? Can we go on without it?)"
+    checked: false
+  - text: "Migrate global and local checks"
+    checked: false
+  - text: "Projects.yaml"
+    checked: false
+  - text: "Projects check"
+    checked: false
+  - text: "Epics check"
+    checked: false
+  - text: "Decide on UI framework"
+    checked: false
+  - text: "Migrate other projects"
+    checked: false
+---

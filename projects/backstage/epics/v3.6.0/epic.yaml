@@ -1,50 +1,60 @@
 ---
-name: "agent framework"
-goal: "Create agents, squads, and communications"
-status: active
+version: v3.8.0
+name: "Extensions"
+goal: "Browse skills, MCPs, and read markdown docs in fullscreen reader"
+status: backlog
 type: "minor"
-created: 2026-03-11
-started: 2026-03-11
+created: 2026-03-12
+started: null
 completed: null
 tasks:
-  - text: "Agent and squad template (yaml + soul.md + ENFORCEMENT.md)"
-    checked: true
-  - text: "Agent lifecycle system (draft → configured → active)"
-    checked: true
-  - text: "Matrix routing per-room (agentId override, manual sessionKey)"
-    checked: true
-  - text: "Matrix integration docs (adding-agent, adding-to-matrix, message-flow)"
-    checked: true
-  - text: "Values composite watcher (org → squad → agent → .values.md)"
-    checked: false
-  - text: "Library composite watcher (org → squad → agent → .library.md)"
-    checked: false
-  - text: "Ensure OpenClaw sees agents folder (config + discovery)"
-    checked: false
-  - text: "Duplicate squads and agents from affordances list"
-    checked: true
-  - text: "Organize values across organization, squad, agent yaml"
-    checked: false
-  - text: "Agent and squad status (active/backlog filtering)"
-    checked: false
-  - text: "Skill install, affordances management"
-    checked: false
-  - text: "Librarian topics install, affordances, testing"
-    checked: false
-  - text: "MCP install, affordances management"
-    checked: false
-  - text: "Matrix webhook (ISOLATED per agent)"
-    checked: false
-  - text: "Agents on active status: DM on Matrix"
-    checked: true
-  - text: "Display name per-room (bot shows agent name, not 'openclaw_bot') - BLOCKED: SDK method unclear"
-    checked: false
-  - text: "Squad group with @ mention support"
-    checked: false
-  - text: "Squad rooms: auto-invite agents when status → active"
-    checked: false
-  - text: "Squad rooms: @all support (bot detects, notifies all squad agents)"
-    checked: false
-  - text: "TODO: How we enforce each new agent (active status) - future: check"
-    checked: false
+  - group: "Skills Browser"
+    items:
+      - text: "Scan workspace skills/ directory (parse SKILL.md frontmatter)"
+        checked: false
+      - text: "Display skills table (name, description, triggers, version)"
+        checked: false
+      - text: "Filter/search skills by name or trigger"
+        checked: false
+      - text: "Click skill → view full SKILL.md (read-only)"
+        checked: false
+      - text: "Show skill status (installed, symlink path, errors)"
+        checked: false
+  
+  - group: "MCP Browser"
+    items:
+      - text: "List installed MCPs (scan ~/.openclaw/ config)"
+        checked: false
+      - text: "Display MCP metadata (name, version, capabilities)"
+        checked: false
+      - text: "Show MCP status (running, stopped, error)"
+        checked: false
+      - text: "Link to MCP docs/README (if available)"
+        checked: false
+  
+  - group: "Markdown Reader"
+    items:
+      - text: "Fullscreen markdown viewer component"
+        checked: false
+      - text: "Syntax highlighting (code blocks)"
+        checked: false
+      - text: "Table of contents (auto-generated from headers)"
+        checked: false
+      - text: "Dark mode toggle"
+        checked: false
+      - text: "Print/export to PDF"
+        checked: false
+      - text: "Search within document (Cmd+F)"
+        checked: false
+  
+  - group: "Integration"
+    items:
+      - text: "Add /extensions route (Next.js)"
+        checked: false
+      - text: "Tab switcher: Skills | MCPs | Reader"
+        checked: false
+      - text: "Link from epic notes → markdown reader (full SKILL.md)"
+        checked: false
+      - text: "Keyboard shortcuts (Esc = exit reader, / = search)"
+        checked: false
 ---

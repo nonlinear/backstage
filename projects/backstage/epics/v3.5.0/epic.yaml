@@ -1,0 +1,50 @@
+---
+name: "agent framework"
+goal: "Create agents, squads, and communications"
+status: active
+type: "minor"
+created: 2026-03-11
+started: 2026-03-11
+completed: null
+tasks:
+  - text: "Agent and squad template (yaml + soul.md + ENFORCEMENT.md)"
+    checked: true
+  - text: "Agent lifecycle system (draft → configured → active)"
+    checked: true
+  - text: "Matrix routing per-room (agentId override, manual sessionKey)"
+    checked: true
+  - text: "Matrix integration docs (adding-agent, adding-to-matrix, message-flow)"
+    checked: true
+  - text: "Values composite watcher (org → squad → agent → .values.md)"
+    checked: false
+  - text: "Library composite watcher (org → squad → agent → .library.md)"
+    checked: false
+  - text: "Ensure OpenClaw sees agents folder (config + discovery)"
+    checked: false
+  - text: "Duplicate squads and agents from affordances list"
+    checked: true
+  - text: "Organize values across organization, squad, agent yaml"
+    checked: false
+  - text: "Agent and squad status (active/backlog filtering)"
+    checked: false
+  - text: "Skill install, affordances management"
+    checked: false
+  - text: "Librarian topics install, affordances, testing"
+    checked: false
+  - text: "MCP install, affordances management"
+    checked: false
+  - text: "Matrix webhook (ISOLATED per agent)"
+    checked: false
+  - text: "Agents on active status: DM on Matrix"
+    checked: true
+  - text: "Display name per-room (bot shows agent name, not 'openclaw_bot') - BLOCKED: SDK method unclear"
+    checked: false
+  - text: "Squad group with @ mention support"
+    checked: false
+  - text: "Squad rooms: auto-invite agents when status → active"
+    checked: false
+  - text: "Squad rooms: @all support (bot detects, notifies all squad agents)"
+    checked: false
+  - text: "TODO: How we enforce each new agent (active status) - future: check"
+    checked: false
+---
