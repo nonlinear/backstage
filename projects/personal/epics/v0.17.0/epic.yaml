@@ -1,5 +1,5 @@
 ---
-name: "Salesman"
+name: "Buyer agent"
 goal: "Automação para compra e venda de produtos (price watching, eBay, marketplaces)"
 status: backlog
 type: "minor"
