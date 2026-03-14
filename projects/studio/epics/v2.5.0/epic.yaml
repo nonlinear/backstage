@@ -1,65 +1,73 @@
 ---
-name: "Grant Advisor"
+version: "2.5.0"
+name: "grant agent"
 goal: "Automated grant proposal generation from PM tool roadmaps (API-driven)"
 status: backlog
-type: "major"
+type: major
 created: 2026-03-12
 started: null
 completed: null
+
 tasks:
-  # Workflow Development
-  - text: "Build generate-grant-proposal skill (PM API → Marp slides → PDF)"
-    checked: false
-  - text: "Create budget-calculator skill (hours × rate, resource costs)"
-    checked: false
-  - text: "Build monitor-grants skill (scrape grant databases, filter by domain)"
-    checked: false
+  - group: "PM Tool Integration"
+    items:
+      - text: "Evaluate PM tool APIs (OpenProject, Leantime, Taiga)"
+        checked: false
+      - text: "Choose PM tool (Gantt export, budget tracking, time tracking, API)"
+        checked: false
+      - text: "Configure API access (CRUD, webhooks)"
+        checked: false
+      - text: "Test data export (tasks → deliverables, timeline → Gantt)"
+        checked: false
   
-  # PM Tool Integration
-  - text: "Evaluate PM tool APIs (OpenProject, Leantime, Taiga)"
-    checked: false
-  - text: "Choose PM tool (Gantt export, budget tracking, time tracking, API)"
-    checked: false
-  - text: "Configure API access (CRUD, webhooks)"
-    checked: false
-  - text: "Test data export (tasks → deliverables, timeline → Gantt)"
-    checked: false
+  - group: "Workflow Development (Skills)"
+    items:
+      - text: "Build generate-grant-proposal skill (PM API → Marp slides → PDF)"
+        checked: false
+      - text: "Create budget-calculator skill (hours × rate, resource costs)"
+        checked: false
+      - text: "Build monitor-grants skill (scrape grant databases, filter by domain)"
+        checked: false
   
-  # Output Formats
-  - text: "Build Marp slide generator (title, problem, solution, Gantt, budget, impact)"
-    checked: false
-  - text: "Build Mermaid Gantt renderer (from PM tool timeline)"
-    checked: false
-  - text: "Configure PDF export (puppeteer/playwright, 300 DPI, embedded fonts)"
-    checked: false
-  - text: "Test full pipeline (PM tool → API → slides → PDF)"
-    checked: false
+  - group: "Output Generation"
+    items:
+      - text: "Build Marp slide generator (title, problem, solution, Gantt, budget, impact)"
+        checked: false
+      - text: "Build Mermaid Gantt renderer (from PM tool timeline)"
+        checked: false
+      - text: "Configure PDF export (puppeteer/playwright, 300 DPI, embedded fonts)"
+        checked: false
+      - text: "Test full pipeline (PM tool → API → slides → PDF)"
+        checked: false
   
-  # Grant Monitoring
-  - text: "Identify grant databases (Foundation Center, Grants.gov, etc.)"
-    checked: false
-  - text: "Build scraper (monitor opportunities, filter by domain)"
-    checked: false
-  - text: "Configure alerts (Telegram notification when relevant grant appears)"
-    checked: false
-  - text: "Test opportunity detection (scrape → filter → alert)"
-    checked: false
+  - group: "Grant Monitoring"
+    items:
+      - text: "Identify grant databases (Foundation Center, Grants.gov, etc.)"
+        checked: false
+      - text: "Build scraper (monitor opportunities, filter by domain)"
+        checked: false
+      - text: "Configure alerts (Telegram notification when relevant grant appears)"
+        checked: false
+      - text: "Test opportunity detection (scrape → filter → alert)"
+        checked: false
   
-  # Disrupt Roadmap Protocol
-  - text: "Build epic creation API (add grant-funded epics to PM tool)"
-    checked: false
-  - text: "Configure approval workflow (Grant Advisor → Orchestrator → approval)"
-    checked: false
-  - text: "Test disrupt protocol (opportunity → epic → proposal)"
-    checked: false
+  - group: "Disrupt Roadmap Protocol"
+    items:
+      - text: "Build epic creation API (add grant-funded epics to PM tool)"
+        checked: false
+      - text: "Configure approval workflow (Grant Advisor → Orchestrator → approval)"
+        checked: false
+      - text: "Test disrupt protocol (opportunity → epic → proposal)"
+        checked: false
   
-  # Success Metrics
-  - text: "Track proposal speed (<1 hour from roadmap to PDF)"
-    checked: false
-  - text: "Track submission deadlines (100% compliance)"
-    checked: false
-  - text: "Track approval rate (>30% grants submitted → funded)"
-    checked: false
-  - text: "Calculate funding secured ($X/year)"
-    checked: false
+  - group: "Success Metrics"
+    items:
+      - text: "Track proposal speed (<1 hour from roadmap to PDF)"
+        checked: false
+      - text: "Track submission deadlines (100% compliance)"
+        checked: false
+      - text: "Track approval rate (>30% grants submitted → funded)"
+        checked: false
+      - text: "Calculate funding secured ($X/year)"
+        checked: false
 ---
