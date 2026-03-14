@@ -52,7 +52,7 @@ export function ProjectCard({
         
         <div className="space-y-1 text-sm text-muted-foreground">
           <p><span className="font-medium">Type:</span> {projectType}</p>
-          <p><span className="font-medium">Epics:</span> {totalEpics} total — {activeCount} active, {publishedCount} done, {backlogCount} backlog{archiveCount > 0 ? `, ${archiveCount} archived` : ''}</p>
+          <p><span className="font-medium">Epics:</span> {totalEpics} total — {activeCount} active, {publishedCount} done, {backlogCount} backlog{archiveCount > 0 ? `, ${archiveCount} archive` : ''}</p>
         </div>
         
         {checks.length > 0 && (
