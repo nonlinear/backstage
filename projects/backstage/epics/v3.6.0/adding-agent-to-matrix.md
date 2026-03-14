@@ -362,19 +362,20 @@ Qual é o seu workspace? (caminho completo)
 
 ---
 
-## Step 11: Configure Display Name + Avatar (Visual Identity)
+## Step 11: Display Name Per-Room (BLOCKED - Deferred)
 
 **Problem:** Bot shows as "openclaw_bot" in all rooms → hard to tell which agent is responding.
 
-**Solution:** Per-room display name + avatar via `openclaw.json`.
+**Status:** ⚠️ **IMPLEMENTATION BLOCKED**
 
----
+**Attempts made (2026-03-13):**
+1. Tried `client.http.authedRequest()` → `.http` undefined (not public API)
+2. Tried `client.sendStateEvent()` → no visible effect
+3. Multiple OpenAI consultations → SDK behavior unclear
 
-### Add displayName + avatarUrl to openclaw.json
+**Theory:** Per-room display name should work via `m.room.member` state event, but Matrix bot SDK method unclear.
 
-**File:** `~/.openclaw/openclaw.json`
-
-**Add fields to each room:**
+**Fields added to openclaw.json (for future):**
 ```json
 {
   "channels": {
@@ -382,6 +383,25 @@ Qual é o seu workspace? (caminho completo)
       "groups": {
         "!EQyjalpjgFwRZGsril:studio.adal-rigel.ts.net": {
           "agentId": "business-analyst",
+          "displayName": "Business Analyst",  // ← Not applied yet
+          "avatarUrl": null
+        }
+      }
+    }
+  }
+}
+```
+
+**Defer until:**
+- Matrix bot SDK documentation clarifies per-room displayname
+- Alternative approach identified (multiple bot users?)
+- Or accept "openclaw_bot" for all agents (routing still works!)
+
+**Workaround:** Room names already show agent identity ("Business Analyst" room, "Design Engineer" room).
+
+---
+
+## Troubleshooting
           "displayName": "Business Analyst",  // ← ADDED
           "avatarUrl": null                   // ← ADDED (optional)
         },
@@ -575,23 +595,20 @@ tailscale serve --https=8008 off
 
 Before marking Matrix setup complete:
 
-- [ ] Synapse responds on http://localhost:8008
-- [ ] Matrix room created
-- [ ] Bot invited and joined room
-- [ ] agent.yaml has matrix_room field
-- [ ] openclaw.json has room in groups with agentId
-- [ ] openclaw.json has displayName + avatarUrl fields
-- [ ] handler.ts fix applied (manual sessionKey)
-- [ ] matrixDisplayCache.ts integrated
-- [ ] Gateway restarted with recovery script
-- [ ] openclaw status shows Matrix OK
-- [ ] Test message sent
-- [ ] Logs show effectiveAgentId = correct agent
-- [ ] Session key starts with agent:AGENTNAME:matrix:...
-- [ ] Bot responds in room
-- [ ] Bot reports correct workspace path
-- [ ] Bot displays correct name (e.g., "Business Analyst", not "openclaw_bot")
-- [ ] Logs show [MatrixDisplay] Applied or Cache hit
+- [x] Synapse responds on http://localhost:8008
+- [x] Matrix room created
+- [x] Bot invited and joined room
+- [x] agent.yaml has matrix_room field
+- [x] openclaw.json has room in groups with agentId
+- [x] handler.ts fix applied (manual sessionKey)
+- [x] Gateway restarted with recovery script
+- [x] openclaw status shows Matrix OK
+- [x] Test message sent
+- [x] Logs show effectiveAgentId = correct agent
+- [x] Session key starts with agent:AGENTNAME:matrix:...
+- [x] Bot responds in room
+- [x] Bot reports correct workspace path
+- [ ] Display name per-room (BLOCKED - deferred to future)
 
 ---
 
