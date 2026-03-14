@@ -1,0 +1,289 @@
+---
+name: "New Useful Apps"
+goal: "Evaluate new self-hosted apps from PikaPods catalog for potential deployment"
+status: active
+type: "minor"
+created: 2026-03-14
+started: 2026-03-14
+completed: null
+tasks:
+  # Automation & Workflows
+  - text: "Evaluate [Activepieces](https://github.com/activepieces/activepieces) - Workflow automation (Zapier alternative)"
+    checked: false
+  - text: "Evaluate [Automatisch](https://automatisch.io/) - Workflow automation (IFTTT/Zapier alternative)"
+    checked: false
+  - text: "Evaluate [n8n](https://github.com/n8n-io/n8n) - Workflow automation (node-based)"
+    checked: false
+  
+  # Finance & Budgeting
+  - text: "Evaluate [Actual](https://actualbudget.org/) - Privacy-focused finance app (already testing)"
+    checked: false
+  - text: "Evaluate [DumbBudget](https://github.com/DumbWareio/DumbBudget) - Simple budgeting with PIN protection"
+    checked: false
+  - text: "Evaluate [Firefly III](https://www.firefly-iii.org/) - Personal finance manager"
+    checked: false
+  - text: "Evaluate [Paisa](https://paisa.fyi/) - Personal finance (ledger-based)"
+    checked: false
+  - text: "Evaluate [Sure](https://github.com/we-promise/sure) - Financial planning platform (already in backlog)"
+    checked: false
+  - text: "Evaluate [Wealthfolio](https://wealthfolio.app) - Portfolio management"
+    checked: false
+  
+  # Notes & Knowledge Management
+  - text: "Evaluate [Blinko](https://blinko.mintlify.app/) - Note tool with AI retrieval"
+    checked: false
+  - text: "Evaluate [flatnotes](https://github.com/Dullage/flatnotes) - Markdown notes (flat folder)"
+    checked: false
+  - text: "Evaluate [Joplin](https://joplinapp.org/) - Open source note-taking"
+    checked: false
+  - text: "Evaluate [Memos](https://usememos.com/) - Twitter-like notes with OpenAI"
+    checked: false
+  - text: "Evaluate [NoteDiscovery](https://www.notediscovery.com) - Knowledge base with graph view"
+    checked: false
+  - text: "Evaluate [SilverBullet](https://silverbullet.md/) - Personal knowledge management"
+    checked: false
+  - text: "Evaluate [TriliumNext](https://triliumnext.github.io/Docs/) - Hierarchical note-taking"
+    checked: false
+  
+  # Documentation & Wikis
+  - text: "Evaluate [Answer](https://answer.dev/) - Community Q&A (Stack Overflow-like)"
+    checked: false
+  - text: "Evaluate [BookStack](https://www.bookstackapp.com/) - Documentation platform"
+    checked: false
+  - text: "Evaluate [Docmost](https://docmost.com/) - Collaborative wiki (Confluence/Notion alternative)"
+    checked: false
+  - text: "Evaluate [HedgeDoc](https://hedgedoc.org/) - Collaborative markdown editor"
+    checked: false
+  - text: "Evaluate [Wiki.js](https://js.wiki/) - Modern wiki app"
+    checked: false
+  
+  # Media Management
+  - text: "Evaluate [Airsonic Advanced](https://github.com/kagemomiji/airsonic-advanced) - Music streamer"
+    checked: false
+  - text: "Evaluate [Audiobookshelf](https://www.audiobookshelf.org/) - Audiobook/podcast server"
+    checked: false
+  - text: "Evaluate [Gonic](https://github.com/sentriz/gonic) - Music streaming (Subsonic API)"
+    checked: false
+  - text: "Evaluate [Immich](https://immich.app/) - Google Photos alternative"
+    checked: false
+  - text: "Evaluate [Kavita](https://www.kavitareader.com/) - Ebook/manga library (already have)"
+    checked: false
+  - text: "Evaluate [Komga](https://komga.org/) - Comics/manga server (already have)"
+    checked: false
+  - text: "Evaluate [Lychee](https://lycheeorg.dev/) - Photo management system"
+    checked: false
+  - text: "Evaluate [Navidrome](https://www.navidrome.org/) - Music server"
+    checked: false
+  - text: "Evaluate [PhotoPrism](https://photoprism.app/) - AI-powered photo gallery"
+    checked: false
+  - text: "Evaluate [Photoview](https://photoview.github.io/) - Simple photo gallery"
+    checked: false
+  - text: "Evaluate [Storyteller](https://storyteller-platform.gitlab.io/storyteller/) - Ebooks + audiobooks sync"
+    checked: false
+  
+  # Bookmarks & Read Later
+  - text: "Evaluate [Karakeep](https://karakeep.app/) - Bookmark-everything with AI tagging"
+    checked: false
+  - text: "Evaluate [Linkding](https://github.com/sissbruecker/linkding) - Simple bookmark service"
+    checked: false
+  - text: "Evaluate [Linkwarden](https://linkwarden.app/) - Collaborative bookmark manager"
+    checked: false
+  - text: "Evaluate [Readeck](https://readeck.org/en/) - Save web content for later"
+    checked: false
+  - text: "Evaluate [Shiori](https://github.com/go-shiori/shiori) - Bookmarks manager (Pocket clone)"
+    checked: false
+  - text: "Evaluate [Wallabag](https://www.wallabag.org) - Save web pages for later reading"
+    checked: false
+  
+  # RSS Readers
+  - text: "Evaluate [CommaFeed](https://github.com/Athou/commafeed/) - RSS reader (Google Reader-inspired)"
+    checked: false
+  - text: "Evaluate [FreshRSS](https://freshrss.org/) - RSS aggregator"
+    checked: false
+  - text: "Evaluate [Fusion](https://github.com/0x2E/fusion) - Lightweight RSS reader"
+    checked: false
+  - text: "Evaluate [Miniflux](https://miniflux.app/) - Minimalist RSS reader"
+    checked: false
+  - text: "Evaluate [RSS-Bridge](https://rss-bridge.github.io/rss-bridge/) - Generate RSS from websites"
+    checked: false
+  - text: "Evaluate [RSSHub](https://docs.rsshub.app) - RSS aggregator (everything to RSS)"
+    checked: false
+  
+  # Project Management & CRM
+  - text: "Evaluate [Fider](https://fider.io/) - Feedback portal (collect customer feedback)"
+    checked: false
+  - text: "Evaluate [Monica](https://www.monicahq.com/) - Personal CRM"
+    checked: false
+  - text: "Evaluate [Twenty CRM](https://twenty.com/) - Modern CRM platform"
+    checked: false
+  - text: "Evaluate [WeKan](https://wekan.github.io/) - Kanban board"
+    checked: false
+  
+  # Database & No-Code
+  - text: "Evaluate [Baserow](https://baserow.io/) - Online database (no-code)"
+    checked: false
+  - text: "Evaluate [Directus](https://directus.io/) - Real-time API for SQL databases"
+    checked: false
+  - text: "Evaluate [NocoDB](https://www.nocodb.com/) - Database → spreadsheet"
+    checked: false
+  - text: "Evaluate [Pocketbase](https://pocketbase.io/) - Simple backend (database, auth, files)"
+    checked: false
+  
+  # File Sharing & Storage
+  - text: "Evaluate [Gokapi](https://gokapi.readthedocs.io/en/latest/index.html) - Share files with expiration"
+    checked: false
+  - text: "Evaluate [Nextcloud](https://nextcloud.com/) - Comprehensive file sharing/groupware"
+    checked: false
+  - text: "Evaluate [Pydio Cells](https://pydio.com/) - File sharing platform"
+    checked: false
+  - text: "Evaluate [Seafile](https://www.seafile.com/) - File sync/share (Dropbox alternative)"
+    checked: false
+  
+  # Monitoring & Analytics
+  - text: "Evaluate [Beszel](https://beszel.dev/) - Lightweight server monitoring"
+    checked: false
+  - text: "Evaluate [Bugsink](https://www.bugsink.com/) - Error tracking (Sentry-compatible)"
+    checked: false
+  - text: "Evaluate [Changedetection](https://github.com/dgtlmoon/changedetection.io) - Website change monitoring (already have)"
+    checked: false
+  - text: "Evaluate [Checkmate](https://checkmate.so/) - Uptime monitoring"
+    checked: false
+  - text: "Evaluate [GlitchTip](https://glitchtip.com/) - Error tracking (Sentry alternative)"
+    checked: false
+  - text: "Evaluate [Matomo](https://matomo.org/) - Analytics platform"
+    checked: false
+  - text: "Evaluate [SerpBear](https://docs.serpbear.com/) - SEO position tracking"
+    checked: false
+  - text: "Evaluate [Umami](https://umami.is/) - Website analytics (Google Analytics alternative)"
+    checked: false
+  - text: "Evaluate [Uptime Kuma](https://github.com/louislam/uptime-kuma) - Uptime monitoring (already have)"
+    checked: false
+  
+  # Communication & Chat
+  - text: "Evaluate [Convos](https://convos.chat/) - IRC in browser (always online)"
+    checked: false
+  - text: "Evaluate [Mattermost](https://mattermost.com/) - Team chat (Slack alternative)"
+    checked: false
+  - text: "Evaluate [Rocket.Chat](https://rocket.chat/) - Communications platform"
+    checked: false
+  - text: "Evaluate [The Lounge](https://thelounge.chat/) - Web IRC client"
+    checked: false
+  
+  # Code & Development
+  - text: "Evaluate [ByteStash](https://github.com/jordan-dalby/ByteStash) - Code snippet manager"
+    checked: false
+  - text: "Evaluate [Code Server](https://coder.com/docs/code-server/latest) - VS Code in browser"
+    checked: false
+  - text: "Evaluate [Forgejo](https://forgejo.org/) - Git service (Gitea fork)"
+    checked: false
+  - text: "Evaluate [Gitea](https://gitea.io/en-us/) - Self-hosted Git service"
+    checked: false
+  - text: "Evaluate [Jupyter](https://jupyter.org/) - Interactive notebooks"
+    checked: false
+  
+  # Scheduling & Calendar
+  - text: "Evaluate [Cal.com](https://cal.com/) - Appointment scheduling (Calendly alternative)"
+    checked: false
+  - text: "Evaluate [Rallly](https://rallly.co/) - Schedule group meetings"
+    checked: false
+  
+  # Security & Passwords
+  - text: "Evaluate [Keycloak](https://www.keycloak.org/) - Identity & access management"
+    checked: false
+  - text: "Evaluate [PasswordPusher](https://github.com/pglombardo/PasswordPusher) - Securely share passwords"
+    checked: false
+  - text: "Evaluate [PrivateBin](https://privatebin.info/) - Pastebin with zero knowledge"
+    checked: false
+  - text: "Evaluate [Vaultwarden](https://github.com/dani-garcia/vaultwarden) - Bitwarden server (Rust)"
+    checked: false
+  
+  # Document Management
+  - text: "Evaluate [Paperless-ngx](https://docs.paperless-ngx.com) - Document management (already have)"
+    checked: false
+  - text: "Evaluate [PdfDing](https://www.pdfding.com/) - PDF manager/viewer/editor"
+    checked: false
+  - text: "Evaluate [Stirling PDF](https://www.stirlingpdf.com/) - PDF operations (split, merge, convert)"
+    checked: false
+  
+  # Dashboards & Startpages
+  - text: "Evaluate [Dashy](https://dashy.to/) - Startpage for server"
+    checked: false
+  - text: "Evaluate [Homarr](https://homarr.dev/) - Modern dashboard for apps/services"
+    checked: false
+  - text: "Evaluate [Homer](https://github.com/bastienwirtz/homer) - Static homepage for services"
+    checked: false
+  
+  # Utilities
+  - text: "Evaluate [ArchiveBox](https://archivebox.io/) - Web archiving (URLs → offline archive)"
+    checked: false
+  - text: "Evaluate [Excalidraw](https://excalidraw.com/) - Collaborative whiteboard"
+    checked: false
+  - text: "Evaluate [Grocy](https://grocy.info/) - Groceries & household management"
+    checked: false
+  - text: "Evaluate [HomeBox](https://homebox.software/) - Inventory manager (track belongings)"
+    checked: false
+  - text: "Evaluate [Journiv](https://www.journiv.com) - Privacy-first journaling"
+    checked: false
+  - text: "Evaluate [LubeLogger](https://lubelogger.com) - Vehicle maintenance tracker"
+    checked: false
+  - text: "Evaluate [MicroBin](https://microbin.eu/) - Pastebin web app"
+    checked: false
+  - text: "Evaluate [Snipe-IT](https://snipeitapp.com/) - IT asset management"
+    checked: false
+  - text: "Evaluate [Traggo](https://traggo.net/) - Tag-based time tracking"
+    checked: false
+  - text: "Evaluate [Tududi](https://tududi.com) - Simple to-do list"
+    checked: false
+  
+  # Email & Newsletters
+  - text: "Evaluate [FreeScout](https://freescout.net/) - Help desk solution"
+    checked: false
+  - text: "Evaluate [Listmonk](https://listmonk.app/) - Mailing list/newsletter manager"
+    checked: false
+  - text: "Evaluate [Notifuse](https://www.notifuse.com/) - Emailing platform (newsletters/transactional)"
+    checked: false
+  - text: "Evaluate [Roundcube](https://roundcube.net/) - Browser-based email client"
+    checked: false
+  
+  # Forums & Community
+  - text: "Evaluate [Flarum](https://flarum.org/) - Discussion platform"
+    checked: false
+  - text: "Evaluate [Haven](https://havenweb.org/) - Private blog with RSS"
+    checked: false
+  
+  # Design & Creativity
+  - text: "Evaluate [Chevereto](https://chevereto.com/) - Image hosting script"
+    checked: false
+  - text: "Evaluate [Penpot](https://penpot.app/) - Design tool (Figma alternative)"
+    checked: false
+  - text: "Evaluate [Pinry](https://pinry.github.io/pinry/) - Image board (save/tag/share)"
+    checked: false
+  - text: "Evaluate [Slink](https://slinkapp.io/) - Image hosting with user management"
+    checked: false
+  
+  # Data & Analytics
+  - text: "Evaluate [Metabase](https://www.metabase.com/) - Ask questions from data"
+    checked: false
+  
+  # Other
+  - text: "Evaluate [BookLore](https://github.com/booklore-app/booklore) - Book library management"
+    checked: false
+  - text: "Evaluate [Calibre Web](https://github.com/janeczku/calibre-web) - Web UI for Calibre"
+    checked: false
+  - text: "Evaluate [Etherpad](https://etherpad.org/) - Collaborative document editor"
+    checked: false
+  - text: "Evaluate [Ghost](https://ghost.org/) - Blogging platform"
+    checked: false
+  - text: "Evaluate [Gotify](https://gotify.net/) - Push notifications"
+    checked: false
+  - text: "Evaluate [Mealie](https://mealie.io/) - Recipe management"
+    checked: false
+  - text: "Evaluate [MediaWiki](https://www.mediawiki.org/wiki/MediaWiki) - Wiki software (Wikipedia)"
+    checked: false
+  - text: "Evaluate [My Idlers](https://github.com/cp6/my-idlers) - Server/domain info tracker"
+    checked: false
+  - text: "Evaluate [WeddingShare](https://docs.wedding-share.org/) - Share wedding photos"
+    checked: false
+  - text: "Evaluate [WordPress](https://wordpress.org/) - Blogging platform"
+    checked: false
+---
