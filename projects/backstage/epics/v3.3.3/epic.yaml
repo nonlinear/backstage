@@ -1,6 +1,6 @@
 ---
 version: "3.3.3"
-title: "Markdown Visualization Improvements"
+name: "Markdown visualization"
 status: backlog
 started: null
 priority: patch
