@@ -1,23 +1,59 @@
 ---
-version: v3.4.0
-name: "Enforcing checkpoints"
-goal: "Implement checkpoint execution and enforcement system"
+version: "4.0.0"
+name: "Checkpoints"
+goal: "Research, design, and implement checkpoint execution system - declarative policy, versionable, auditable, hierarchical governance"
 status: backlog
-type: "major"
-created: 2026-02-27
+type: major
+created: 2026-02-26
 started: 2026-02-27
 completed: null
+
 tasks:
-  - text: "Create modes.md"
+  # Research Phase
+  - text: "Research OPA (hierarchical policies, conflict resolution, audit logs)"
+    checked: false
+  - text: "Research Temporal (workflow orchestration, event triggers, retry patterns)"
+    checked: false
+  - text: "Research TLA+ (formal verification, state consistency, edge cases)"
+    checked: false
+  - text: "Document findings in checkpoint-research.md"
     checked: true
-  - text: "Create check-anatomy.md"
+  - text: "Compare approaches (what to adopt, what to avoid)"
+    checked: false
+  
+  # Design Phase
+  - text: "Design Minimal Viable Checkpoint (MVC) architecture"
+    checked: false
+  - text: "Define agent domains (scope boundaries)"
+    checked: false
+  - text: "Design check architecture (check-anatomy.md)"
     checked: true
-  - text: "Migrate personal to studio"
+  - text: "Design checkpoint enforcement architecture (modes.md)"
     checked: true
+  - text: "Document agent-check relationship"
+    checked: false
+  
+  # Implementation Phase (Execution Framework)
+  - text: "Implement agent runtime"
+    checked: false
+  - text: "Implement check execution framework"
+    checked: false
+  - text: "Implement watchers"
+    checked: false
+  - text: "Design git commit structure"
+    checked: false
+  - text: "Implement composable YAML generation"
+    checked: false
+  
+  # Migration & Refactoring (Already Done)
   - text: "Restructure (projects/, v prefix, index.md)"
     checked: true
   - text: "Refactor backstage skill (parse-epics.sh, checks-composite.sh, backstage.sh)"
     checked: true
+  - text: "Migrate personal to studio"
+    checked: true
+  
+  # Checks Implementation
   - text: "Fix defasado checks (4 failed: detect-obsolete-references.sh, backstage-structure.sh, context-files.sh, + 1 unknown)"
     checked: false
   - text: "Checks logic (do we need id? Can we go on without it?)"
@@ -30,8 +66,35 @@ tasks:
     checked: false
   - text: "Epics check"
     checked: false
+  
+  # UI & Migration
   - text: "Decide on UI framework"
     checked: false
   - text: "Migrate other projects"
     checked: false
+
+notes: |
+  ## Epic Merge (2026-03-13)
+  
+  Merged v2.0.0 (Backstage as Checkpoints) + v4.0.0 (Enforcing checkpoints)
+  - Same goal: checkpoint system research + implementation
+  - v2.0.0 = research focus
+  - v4.0.0 = implementation focus
+  - Combined into single major epic: v4.0.0 "Checkpoints"
+  
+  ## Research Notes
+  
+  See checkpoint-research.md for OPA/Temporal/TLA+ findings.
+  
+  ## Design Docs
+  
+  - check-anatomy.md: Check structure, validation, execution
+  - modes.md: Checkpoint execution modes (enforce, report, dev)
+  - architecture.md: System architecture (from v2.0.0)
+  - glossary.md: Terminology (from v2.0.0)
+  
+  ## Implementation Status
+  
+  Phase 1 complete (restructure + refactor).
+  Phase 2 pending (check execution framework).
 ---
