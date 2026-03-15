@@ -1,13 +1,9 @@
----
-type: pillar
-trigger: before-proposals
-scope: all-agents
----
-
 # Research Before Internal Ideas
 
 ## Principle
 **Look outward before looking inward. Silent stakeholders exist.**
+
+> Research is epistemological anti-drift
 
 ## Philosophy (Epistemological)
 **We don't know everything. Environment contains truths we haven't discovered.**
