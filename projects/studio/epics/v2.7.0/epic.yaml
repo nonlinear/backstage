@@ -1,0 +1,540 @@
+---
+version: v2.7.0
+name: "Mattermost Agent Integration"
+status: active
+created: 2026-03-15
+updated: 2026-03-15 11:05 EDT
+priority: P1
+category: messaging
+
+summary: |
+  Replace Matrix with Mattermost for multi-agent chat routing.
+  
+  Matrix proved too complex (encryption bugs, sync issues, room routing failures).
+  Mattermost is simpler, better documented, already working.
+  
+  Goal: Business Analyst + Design Engineer bots responding in dedicated channels,
+  with OpenClaw Gateway routing messages correctly.
+
+context:
+  - Matrix abandoned after 5h debugging (encryption, sync, room routing all broken)
+  - Mattermost container already running, accessible via Tailscale
+  - Admin user exists: nonlinear (system_admin)
+  - Team: studio
+  - Channels: #business-analyst, #design-engineer
+  - DMs: Silent (bots only respond in channels)
+
+decisions:
+  - date: 2026-03-15 06:00
+    decision: "Abandon Matrix, use Mattermost instead"
+    rationale: |
+      Matrix issues stacked up:
+      - Encryption causing sync failures
+      - Room routing config too complex
+      - Bot invites failing (bad request errors)
+      - 5+ hours debugging with no resolution
+      
+      Mattermost advantages:
+      - Already working (container healthy, UI accessible)
+      - Better OpenClaw plugin docs
+      - Simpler config (no encryption, clear routing)
+      - Industry-standard team chat (easier to maintain)
+  
+  - date: 2026-03-15 13:47
+    decision: "Use Bot Accounts (NOT Personal Access Tokens)"
+    rationale: |
+      Bot Accounts (System Console → Bot Accounts):
+      - Dedicated user for automation
+      - Has own username (@business-analyst, @design-engineer)
+      - Own token (revokable without affecting humans)
+      - Perfect for agents with distinct identities
+      - Creates perfect audit trail
+      
+      Personal Access Tokens (PAT):
+      - Herits user permissions (confusing)
+      - Appears as you talking (bad auditability)
+      - Revoking token breaks automation
+      
+      System has agents with own identities → Bot Accounts correct choice.
+  
+  - date: 2026-03-15 13:47
+    decision: "Use Multi-Account config (NOT single bot with routing)"
+    rationale: |
+      Multi-Account (each agent = 1 bot):
+      {
+        "accounts": {
+          "business-analyst": {"botToken": "TOKEN_A"},
+          "design-engineer": {"botToken": "TOKEN_B"}
+        }
+      }
+      
+      Advantages:
+      - Natural conversations (each bot has identity)
+      - Better auditability (who said what)
+      - Error isolation (1 bot breaks ≠ all break)
+      - Separate permissions
+      - Aligns with agent bidding architecture (epic phases)
+      
+      Single bot with routing:
+      - All messages from @openclaw (confusing)
+      - Poor audit trail
+      - All agents look identical
+      
+      Multi-account fits naturally with epic grooming system.
+  
+  - date: 2026-03-15 13:47
+    decision: "Bot tokens do NOT expire automatically"
+    rationale: |
+      Good news: Bot tokens persist until manually revoked/regenerated.
+      
+      OpenClaw won't break unexpectedly.
+      
+      Best practice:
+      - Store in ~/Documents/personal/.env (not git)
+      - Document renewal process (for future rotation)
+  
+  - date: 2026-03-15 13:47
+    decision: "Incremental rollout (1 bot → 2 bots → routing → automation)"
+    rationale: |
+      Step 1: 1 bot (@business-analyst), 1 channel (#ai-test), verify response
+      Step 2: 2 bots (@business-analyst, @design-engineer)
+      Step 3: Routing per channel
+      Step 4: Epic automation (later, in v4.1.0 implementation)
+      
+      Don't build everything at once. Validate each step.
+
+tasks:
+  - id: T1
+    text: "Fix Mattermost port blocking (Tailscale proxy conflict)"
+    status: done
+    date: 2026-03-15 06:19
+    notes: |
+      Problem: Container running but port 8065 not accessible
+      Cause: Tailscale serve proxy holding port
+      Fix:
+        tailscale serve --https=8065 off
+        docker-compose down && docker-compose up -d
+        tailscale serve --bg --https=8065 http://localhost:8065
+      
+      Result:
+      - http://localhost:8065 ✓
+      - https://studio.adal-rigel.ts.net:8065 ✓
+
+  - id: T2
+    text: "Create Mattermost bot accounts"
+    status: in-progress
+    assignee: nicholas
+    notes: |
+      Via Mattermost System Console → Integrations → Bot Accounts:
+      
+      Bot 1: business-analyst
+      - Display Name: "Business Analyst"
+      - Description: "Business Analysis Agent - Product Strategy & Requirements"
+      - Generate Personal Access Token
+      
+      Bot 2: design-engineer
+      - Display Name: "Design Engineer"  
+      - Description: "Design Engineering Agent - UX/UI/Frontend"
+      - Avatar: 🎨 (or custom image if available)
+      - Generate Personal Access Token
+      
+      CRITICAL: Use Bot Accounts (not PAT from user account)
+      - Creates distinct identities (@business-analyst, @design-engineer)
+      - Perfect audit trail (who said what)
+      - Tokens revokable without affecting humans
+      
+      Awaiting tokens from Nicholas.
+
+  - id: T3
+    text: "Install OpenClaw Mattermost plugin"
+    status: todo
+    blocked-by: T2
+    command: "openclaw plugins install @openclaw/mattermost"
+
+  - id: T4
+    text: "Save bot tokens to .env"
+    status: todo
+    blocked-by: T2
+    notes: |
+      Add to ~/Documents/personal/.env:
+      
+      MATTERMOST_BOT_TOKEN_BUSINESS_ANALYST=...
+      MATTERMOST_BOT_TOKEN_DESIGN_ENGINEER=...
+      MATTERMOST_URL=http://localhost:8065
+
+  - id: T5
+    text: "Get channel IDs for routing"
+    status: todo
+    blocked-by: T2
+    notes: |
+      Channel IDs are 26-character alphanumeric strings.
+      
+      Method 1 (UI - easiest):
+      - Open channel in browser
+      - URL: https://studio.../channels/ABC123XYZ
+      - ABC123XYZ = channel ID
+      
+      Method 2 (API):
+      - GET /api/v4/teams/{team_id}/channels
+      - Find channels by name
+      
+      Method 3 (mmctl CLI if installed):
+      - mmctl channel list studio
+      
+      Channels needed:
+      - #business-analyst → channel ID
+      - #design-engineer → channel ID
+      
+      Create mapping file:
+      ~/Backstage/projects/studio/mattermost-channels.json
+      {
+        "business-analyst": "CHANNEL_ID_1",
+        "design-engineer": "CHANNEL_ID_2"
+      }
+
+  - id: T6
+    text: "Configure OpenClaw Mattermost routing (multi-account)"
+    status: todo
+    blocked-by: [T3, T4, T5]
+    notes: |
+      Edit ~/.openclaw/openclaw.json:
+      
+      ARCHITECTURE: Multi-account (each agent = 1 bot)
+      
+      {
+        "channels": {
+          "mattermost": {
+            "enabled": true,
+            "baseUrl": "http://localhost:8065",
+            "dmPolicy": "pairing",
+            "chatmode": "oncall",
+            "accounts": {
+              "business-analyst": {
+                "name": "Business Analyst",
+                "botToken": "$MATTERMOST_BOT_TOKEN_BUSINESS_ANALYST",
+                "groups": {
+                  "CHANNEL_ID_BUSINESS_ANALYST": {
+                    "enabled": true,
+                    "requireMention": false
+                  }
+                }
+              },
+              "design-engineer": {
+                "name": "Design Engineer",
+                "botToken": "$MATTERMOST_BOT_TOKEN_DESIGN_ENGINEER",
+                "groups": {
+                  "CHANNEL_ID_DESIGN_ENGINEER": {
+                    "enabled": true,
+                    "requireMention": false
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+      
+      WHY multi-account:
+      - Each bot has distinct identity
+      - Natural conversations (@business-analyst vs @design-engineer)
+      - Better auditability
+      - Error isolation
+      - Aligns with epic grooming architecture (agents bid separately)
+
+  - id: T7
+    text: "Restart OpenClaw Gateway with Mattermost config"
+    status: todo
+    blocked-by: T6
+    command: "~/Desktop/openclaw-recovery.sh"
+
+  - id: T8
+    text: "Test messaging in #business-analyst channel"
+    status: todo
+    blocked-by: T7
+    notes: |
+      Send message in #business-analyst, verify:
+      - business-analyst bot responds
+      - design-engineer bot does NOT respond
+
+  - id: T9
+    text: "Test messaging in #design-engineer channel"
+    status: todo
+    blocked-by: T7
+    notes: |
+      Send message in #design-engineer, verify:
+      - design-engineer bot responds
+      - business-analyst bot does NOT respond
+
+  - id: T10
+    text: "Document Mattermost setup in connections/"
+    status: todo
+    blocked-by: [T8, T9]
+    notes: |
+      Create ~/Documents/personal/connections/mattermost.md with:
+      - Bot account creation steps
+      - Token generation
+      - OpenClaw config examples
+      - Channel routing logic
+      - Troubleshooting tips
+
+artifacts:
+  - path: ~/Apps/mattermost/docker-compose.yml
+    type: docker-compose
+    description: "Mattermost + PostgreSQL container config"
+  
+  - path: ~/Documents/personal/.env
+    type: env
+    description: "Mattermost bot tokens (encrypted)"
+  
+  - path: ~/.openclaw/openclaw.json
+    type: config
+    description: "OpenClaw Mattermost routing config"
+
+risks:
+  - risk: "Multi-account config complexity"
+    mitigation: "Start with single default account, add second if needed"
+  
+  - risk: "Channel ID vs user ID ambiguity"
+    mitigation: "Use explicit prefixes (channel:ID, user:ID) per docs"
+  
+  - risk: "Bot token expiration"
+    mitigation: "Document token generation process for renewal"
+
+references:
+  - url: https://docs.openclaw.ai/channels/mattermost
+    description: "Official OpenClaw Mattermost plugin docs"
+  
+  - url: http://localhost:8065
+    description: "Mattermost instance (local)"
+  
+  - url: https://studio.adal-rigel.ts.net:8065
+    description: "Mattermost instance (Tailscale)"
+
+blockers: []
+
+success-criteria:
+  - Business Analyst bot responds in #business-analyst (not other channels)
+  - Design Engineer bot responds in #design-engineer (not other channels)
+  - Bots silent in DMs
+  - Zero manual intervention after Mac reboot
+  - Full documentation in connections/mattermost.md
+
+estimated-completion: 2026-03-15 (same day - straightforward config)
+
+  - id: T11
+    text: "Verify bots are in correct channels"
+    status: todo
+    blocked-by: T2
+    notes: |
+      After creating bots, ensure they're members of channels.
+      
+      Method 1 (UI):
+      - Go to #business-analyst
+      - Type: /invite @business-analyst
+      - If already member: Mattermost notifies
+      
+      Method 2 (API):
+      - GET /api/v4/channels/CHANNEL_ID/members
+      - Check if bot user_id present
+      
+      Method 3 (Test):
+      - Mention bot: @business-analyst hello
+      - If responds: bot is in channel
+      
+      Repeat for @design-engineer in #design-engineer
+
+  - id: T12
+    text: "Test bot identity differentiation"
+    status: todo
+    blocked-by: [T8, T9]
+    notes: |
+      Verify bots have distinct identities:
+      
+      Visual checks:
+      - [ ] Display names different (Business Analyst vs Design Engineer)
+      - [ ] Avatars different (if set)
+      - [ ] Usernames clear (@business-analyst vs @design-engineer)
+      
+      Functional checks:
+      - [ ] Message in #business-analyst → only business-analyst responds
+      - [ ] Message in #design-engineer → only design-engineer responds
+      - [ ] Messages clearly attributed (no confusion about who said what)
+      
+      Audit trail test:
+      - Export channel history
+      - Verify each bot's messages tagged correctly
+      - Confirm no identity bleed (both appearing as same user)
+
+technical_notes:
+  bot_accounts_vs_pat: |
+    Bot Accounts (CORRECT for this system):
+    - Created via System Console → Bot Accounts
+    - Dedicated automation user
+    - Own username (@botname)
+    - Own token (revokable independently)
+    - Perfect for agents with distinct identities
+    
+    Personal Access Tokens (WRONG):
+    - Token from human user account
+    - Messages appear as that user
+    - Inherits user permissions (confusing)
+    - Revoke token = break automation
+    - Bad audit trail
+    
+    System has agents = use Bot Accounts.
+  
+  multi_account_architecture: |
+    Why multi-account (not single bot with routing):
+    
+    Multi-account:
+    - Each agent = 1 Mattermost bot
+    - Natural identity (@business-analyst talks, @design-engineer talks)
+    - Audit trail perfect (who said what)
+    - Error isolation (1 bot breaks ≠ all break)
+    - Separate permissions possible
+    - Fits epic grooming (agents bid independently)
+    
+    Single bot:
+    - All messages from @openclaw
+    - Internal routing decides which agent logic runs
+    - Confusing conversations (all same voice)
+    - Poor auditability
+    - Agents look identical
+    
+    For system with distinct agent personas → multi-account correct.
+  
+  channel_id_discovery: |
+    Channel IDs = 26-char alphanumeric strings
+    
+    UI method (easiest):
+    1. Open channel in browser
+    2. URL: https://studio.../channels/ABC123XYZ
+    3. ABC123XYZ = channel ID
+    
+    API method:
+    - GET /api/v4/teams/{team_id}/channels
+    - Parse JSON, find by name
+    
+    mmctl method (if installed):
+    - mmctl channel list TEAM_NAME
+    
+    Store mapping:
+    - Create ~/Backstage/projects/studio/mattermost-channels.json
+    - Map channel names → IDs
+    - Reference in config
+  
+  debugging_non_response: |
+    Checklist when bot doesn't respond:
+    
+    1. Bot in channel?
+       - /invite @botname (UI)
+       - GET /channels/{id}/members (API)
+    
+    2. Token valid?
+       - Check .env has correct token
+       - Verify Authorization: Bearer TOKEN works
+    
+    3. Websocket connected?
+       - Bots listen via websocket events (event: posted)
+       - Check Gateway logs for connection
+    
+    4. Routing correct?
+       - openclaw.json has channel ID mapped
+       - agentId matches bot account name
+    
+    5. Logs:
+       - /tmp/openclaw/openclaw-YYYY-MM-DD.log
+       - ~/Library/Logs (macOS)
+       - docker logs (if containerized)
+    
+    6. Permissions:
+       - Bot needs: post:channels, read:channels, read:posts
+       - Check System Console → Bot Accounts → Permissions
+  
+  message_formats_supported: |
+    Mattermost supports:
+    
+    ✅ Plain text
+    ✅ Markdown (bold, italic, code, lists)
+    ✅ Code blocks (```language)
+    ✅ Attachments (images, PDFs, files)
+    ✅ Interactive buttons (Approve/Reject, etc.)
+    
+    OpenClaw Mattermost plugin likely supports:
+    - Text ✅
+    - Markdown ✅
+    - Buttons ❓ (depends on plugin version)
+    - Complex attachments ❓ (depends on plugin)
+    
+    For epic grooming use case:
+    - Text + Markdown = sufficient
+    - Buttons useful later (Approve epic for night-shift? [Yes] [No])
+  
+  token_expiration: |
+    Good news: Bot tokens do NOT expire automatically.
+    
+    Tokens only invalid if:
+    - Manually revoked
+    - Manually regenerated
+    - Bot account deleted
+    
+    OpenClaw won't break unexpectedly.
+    
+    Best practice:
+    - Store in ~/Documents/personal/.env (NOT git)
+    - Document renewal process (for security rotation)
+    - No automatic expiration monitoring needed
+  
+  incremental_rollout_plan: |
+    Don't build everything at once. Validate each step.
+    
+    Step 1: Single bot test
+    - Create @business-analyst
+    - Create #ai-test channel
+    - Configure OpenClaw (single account)
+    - Test: send message → bot responds
+    - Validate: identity, audit trail
+    
+    Step 2: Add second bot
+    - Create @design-engineer
+    - Keep both in #ai-test
+    - Verify: both respond (differentiated)
+    
+    Step 3: Channel routing
+    - Create #business-analyst, #design-engineer
+    - Configure multi-account routing
+    - Test: each bot only responds in own channel
+    
+    Step 4: Epic automation (future - v4.1.0)
+    - Grooming rooms auto-created
+    - Agent bidding
+    - Decision capture
+    - Night-shift orchestration
+
+future_enhancements:
+  - title: "Slash commands for agents"
+    description: |
+      Custom commands in Mattermost:
+      /epic decision "Use YOLOv8"
+      /task @cv-engineer "Evaluate accuracy"
+      
+      Bot captures to epic.yaml automatically.
+  
+  - title: "Webhooks for auto-channel creation"
+    description: |
+      Epic enters grooming phase → webhook triggers → Mattermost room created
+      Fully automated, no manual channel creation.
+  
+  - title: "Bot conversation summarization"
+    description: |
+      After grooming session:
+      Bot reads channel history → extracts decisions → updates epic.yaml
+      LLM-powered decision extraction from natural discussion.
+  
+  - title: "Interactive approval buttons"
+    description: |
+      Epic ready for night-shift?
+      [Approve] [Send back to grooming]
+      
+      Buttons in Mattermost trigger state transitions.
+

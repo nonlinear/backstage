@@ -1,0 +1,361 @@
+---
+version: v2.6.0
+name: "Hardening Reboot (Emergency)"
+status: active
+created: 2026-03-14
+updated: 2026-03-14 21:30 EDT
+priority: P0
+category: infrastructure
+
+summary: |
+  Emergency epic to achieve 100% reliable boot/reboot of all Studio services.
+  Triggered by catastrophic reboot failures: Matrix sync not starting, Tailscale
+  port conflicts, LaunchAgent crashes, Gateway suicide loops.
+  
+  Goal: ZERO manual intervention after reboot. Services ALWAYS come up.
+  
+  SOLUTION CHOSEN: Docker Compose (not pm2)
+
+decisions:
+  - date: 2026-03-14 21:30
+    decision: "Use Docker Compose for production deployment (not pm2)"
+    rationale: |
+      pm2 + Next.js dev mode = incompatible (restart loops).
+      Docker provides:
+      - Proper process isolation
+      - Health checks without false positives
+      - Dependency management (databases start before apps)
+      - No port conflict issues (each service in container)
+      - Future-proof (add services via YAML)
+      - Industry standard (better than LaunchAgents + pm2)
+
+tasks:
+  - id: T1
+    text: "Add output: 'standalone' to Next.js configs"
+    status: done
+    notes: |
+      Files updated:
+      - ~/Backstage/app/next.config.ts
+      - ~/Documents/librarian/app/next.config.ts
+      
+  - id: T2
+    text: "Create production Dockerfiles"
+    status: done
+    notes: |
+      Multi-stage builds created:
+      - ~/Backstage/app/Dockerfile
+      - ~/Documents/librarian/app/Dockerfile
+      
+      Features:
+      - Alpine Linux (small image)
+      - Multi-stage (deps → builder → runner)
+      - Health checks built-in
+      - Non-root user (security)
+      - Standalone Next.js output
+      
+  - id: T3
+    text: "Create docker-compose.yml"
+    status: done
+    file: ~/.studio/docker-compose.yml
+    notes: |
+      Services included:
+      - Backstage (3004)
+      - Librarian (8766)
+      - Matrix Synapse (8008)
+      - PostgreSQL (internal)
+      - Uptime Kuma (3001) - optional monitoring
+      
+      Features:
+      - Health checks (all services)
+      - Dependency management (db before synapse)
+      - Auto-restart (unless-stopped)
+      - Log rotation (10MB x 3 files)
+      - Read-only volume mounts (content dirs)
+      
+  - id: T4
+    text: "Create Tailscale proxy manager script"
+    status: done
+    file: ~/bin/tailscale-proxies.sh
+    notes: |
+      Commands:
+      - enable: Turn on HTTPS proxies
+      - disable: Turn off all proxies
+      - status: Show current config
+      
+      Manages ports: 3004, 8766, 8008
+      
+  - id: T5
+    text: "Create master Docker boot script"
+    status: done
+    file: ~/bin/studio-docker-boot.sh
+    notes: |
+      Boot phases:
+      1. Pre-flight (Docker running, Tailscale ready)
+      2. Disable Tailscale proxies (prevent conflicts)
+      3. Start Docker services (compose up -d)
+      4. Wait for health checks (60s)
+      5. Enable Tailscale proxies
+      6. Verify all services healthy
+      
+      Logs to: ~/.studio/logs/docker-boot-*.log
+      
+  - id: T6
+    text: "Create Docker setup documentation"
+    status: done
+    file: ~/.studio/DOCKER-SETUP.md
+    notes: |
+      Comprehensive guide:
+      - First-time setup (build images, create .env)
+      - Day-to-day operations (start/stop/logs)
+      - Tailscale integration
+      - Health checks
+      - Auto-boot on Mac restart
+      - Troubleshooting playbook
+      - Future enhancements (OpenClaw Docker, Kubernetes)
+      
+  - id: T7
+    text: "Test pm2 approach (FAILED)"
+    status: done
+    file: ~/Backstage/projects/studio/epics/v2.6.0/pm2-test-results.md
+    notes: |
+      Result: ❌ Infinite restart loop
+      
+      Cause: Next.js dev exits immediately → pm2 sees crash
+      
+      Tried:
+      - wait_ready config (stuck waiting)
+      - min_uptime: 10s (process exits before threshold)
+      
+      Conclusion: pm2 incompatible with Next.js dev mode
+      
+  - id: T8
+    text: "Build Docker images (first-time setup)"
+    status: pending
+    notes: |
+      Commands (Nicholas runs):
+      cd ~/.studio
+      docker-compose build backstage
+      docker-compose build librarian
+      docker-compose pull
+      
+  - id: T9
+    text: "First Docker boot test"
+    status: pending
+    notes: |
+      Commands (Nicholas runs):
+      ~/bin/studio-docker-boot.sh
+      
+      OR manually:
+      cd ~/.studio
+      docker-compose up -d
+      sleep 60
+      docker-compose ps
+      ~/bin/tailscale-proxies.sh enable
+      
+  - id: T10
+    text: "Verify services accessible"
+    status: pending
+    notes: |
+      Check local:
+      - curl http://localhost:3004
+      - curl http://localhost:8766
+      - curl http://localhost:8008
+      
+      Check Tailscale:
+      - https://studio.adal-rigel.ts.net:3004
+      - https://studio.adal-rigel.ts.net:8766
+      - https://studio.adal-rigel.ts.net:8008
+      
+  - id: T11
+    text: "REBOOT TEST #1"
+    status: pending
+    notes: |
+      After first successful boot:
+      1. Verify all services up
+      2. Reboot Mac
+      3. Wait for Docker auto-start
+      4. Check services (should auto-start)
+      5. Document any failures
+      
+  - id: T12
+    text: "Fix Matrix sync initialization bug"
+    status: blocked
+    notes: |
+      ROOT CAUSE: Bot logs in but sync loop never starts.
+      
+      This is SEPARATE from boot reliability.
+      Can be fixed AFTER Docker deployment working.
+      
+  - id: T13
+    text: "Set up Uptime Kuma monitors (optional)"
+    status: pending
+    notes: |
+      Access: http://localhost:3001
+      
+      Add monitors:
+      - Backstage HTTP (localhost:3004)
+      - Librarian HTTP (localhost:8766)
+      - Matrix HTTP (localhost:8008)
+      - OpenClaw HTTP (localhost:18789)
+      
+      Configure Telegram alerts
+      
+  - id: T14
+    text: "Enable auto-boot via Docker Desktop settings"
+    status: pending
+    notes: |
+      Docker Desktop preferences:
+      ✅ Start Docker Desktop when you log in
+      ✅ Start Docker Compose services automatically
+      
+      OR create LaunchAgent (if more control needed)
+
+files_created:
+  - path: ~/Backstage/app/Dockerfile
+    description: "Backstage production image (multi-stage)"
+    
+  - path: ~/Backstage/app/next.config.ts
+    description: "Next.js config with standalone output"
+    
+  - path: ~/Documents/librarian/app/Dockerfile
+    description: "Librarian production image (multi-stage)"
+    
+  - path: ~/Documents/librarian/app/next.config.ts
+    description: "Next.js config with standalone output"
+    
+  - path: ~/.studio/docker-compose.yml
+    description: "Complete service orchestration (5 services)"
+    
+  - path: ~/bin/tailscale-proxies.sh
+    description: "Tailscale HTTPS proxy manager (enable/disable/status)"
+    
+  - path: ~/bin/studio-docker-boot.sh
+    description: "Master boot script (all phases)"
+    
+  - path: ~/.studio/DOCKER-SETUP.md
+    description: "Complete Docker deployment guide"
+    
+  - path: ~/Backstage/projects/studio/epics/v2.6.0/pm2-test-results.md
+    description: "pm2 test failure analysis"
+    
+  - path: ~/Backstage/projects/studio/epics/v2.6.0/epic.yaml
+    description: "Epic tracking (this file)"
+
+next_steps: |
+  ## IMMEDIATE (Nicholas runs - NO assistant execution)
+  
+  1. Build Docker images:
+     ```bash
+     cd ~/.studio
+     docker-compose build
+     ```
+     
+  2. First boot:
+     ```bash
+     ~/bin/studio-docker-boot.sh
+     ```
+     
+  3. Verify services:
+     ```bash
+     docker-compose ps
+     curl http://localhost:3004
+     curl http://localhost:8766
+     ```
+     
+  4. Check Tailscale URLs (iPad/iPhone):
+     - https://studio.adal-rigel.ts.net:3004
+     - https://studio.adal-rigel.ts.net:8766
+     
+  5. If all healthy → REBOOT TEST
+  
+  ## MEDIUM-TERM (after boot working)
+  
+  - Set up Uptime Kuma monitors
+  - Configure Telegram alerts
+  - Enable Docker auto-start in preferences
+  - Fix Matrix sync bug (separate investigation)
+  
+  ## LONG-TERM (future enhancements)
+  
+  - Dockerize OpenClaw Gateway
+  - Prometheus + Grafana metrics
+  - Off-site backups automation
+  - Blue-green deployments
+
+blockers:
+  - id: B1
+    text: "Matrix sync loop not starting (root cause unknown)"
+    impact: "Matrix agents don't receive messages after reboot"
+    status: "DEFERRED - fix after Docker working"
+    workaround: "Manual Gateway restart after boot (temporary)"
+
+metrics:
+  - name: "Boot success rate"
+    baseline: "0% (all services crashed)"
+    target: "100% (zero manual intervention)"
+    
+  - name: "Time to healthy"
+    baseline: "Unknown (manual recovery 2+ hours)"
+    target: "<2 minutes (automated)"
+    
+  - name: "Services requiring manual restart"
+    baseline: "3/3 (Backstage, Librarian, Gateway)"
+    target: "0/3"
+
+notes: |
+  ## pm2 Test Failure (2026-03-14 21:27-21:30)
+  
+  **What happened:**
+  - Installed pm2 globally
+  - Created ecosystem config
+  - Started services
+  - Immediate restart loop (4-9 restarts in <1 minute)
+  
+  **Why:**
+  - Next.js `npm run dev` exits immediately (hands off to webpack)
+  - pm2 sees exit < 10s min_uptime → considers "crashed"
+  - Restarts forever
+  
+  **Tried:**
+  - wait_ready: true (stuck "waiting for ready")
+  - Removing wait_ready (still restart loop)
+  
+  **Conclusion:**
+  pm2 NOT compatible with Next.js dev mode.
+  Production mode (npm start) would work, but dev mode required for hot reload.
+  
+  Docker Compose = better solution (containers persist, health checks work).
+  
+  ## Docker Compose Advantages
+  
+  ✅ **Process isolation** (no pm2 quirks)
+  ✅ **Health checks** (HTTP-based, no false positives)
+  ✅ **Dependency management** (PostgreSQL before Synapse)
+  ✅ **Port conflict immunity** (each service isolated)
+  ✅ **Future-proof** (add services via YAML)
+  ✅ **Industry standard** (Docker >> LaunchAgents)
+  ✅ **Reproducible** (Git-track compose file)
+  ✅ **Observable** (logs, health status, monitoring)
+  
+  ## Philosophy Shift
+  
+  FROM: "Fix each service individually with LaunchAgents"
+  TO: "Orchestrate all services as unified containerized stack"
+  
+  FROM: "pm2 for process management"
+  TO: "Docker Compose for service orchestration"
+  
+  FROM: "Manual Tailscale proxy management"
+  TO: "Scripted proxy enable/disable (boot-safe)"
+
+related_epics:
+  - v0.38.0: "App Healing" (port alignment, LaunchAgents - REPLACED)
+  - v3.5.0: "Matrix Integration" (agent framework, routing fix)
+
+references:
+  - ~/.studio/DOCKER-SETUP.md (complete setup guide)
+  - ~/.studio/docker-compose.yml (service definitions)
+  - ~/bin/studio-docker-boot.sh (master boot script)
+  - ~/bin/tailscale-proxies.sh (proxy manager)
+  - ~/Backstage/projects/studio/epics/v2.6.0/pm2-test-results.md (pm2 failure analysis)
+---

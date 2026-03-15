@@ -1,0 +1,278 @@
+---
+version: v4.2.0
+name: "Graph Visualization (Mermaid Rasterization)"
+status: backlog
+created: 2026-03-15
+updated: 2026-03-15 13:55 EDT
+priority: P3
+category: tooling
+
+summary: |
+  Mattermost cannot render Mermaid diagrams natively.
+  Need way to rasterize graphs (Mermaid → PNG/SVG) for display in chat.
+  
+  Goal: Bots can post visual diagrams during epic grooming discussions.
+  Enable stakeholders to see workflows, architectures, decision trees in Mattermost.
+
+context:
+  - Mattermost supports: text, markdown, images (attachments)
+  - Mattermost does NOT support: Mermaid diagram rendering
+  - Epic grooming discussions benefit from visual diagrams
+  - Stakeholders need to see architecture/workflow/decision trees
+  - Current: diagrams only in Backstage (not visible in chat)
+
+problem: |
+  As Mattermost can't render Mermaid, we need a way to rasterize graphs for display.
+  
+  Use cases:
+  1. Bot posts epic workflow diagram in grooming channel
+  2. Agent explains architecture with visual
+  3. Decision tree shown during discussion
+  4. Stakeholders see diagram without leaving Mattermost
+
+decisions:
+  - date: 2026-03-15 13:55
+    decision: "Create dedicated epic for graph visualization (not bundle with v2.7.0)"
+    rationale: |
+      Mattermost integration (v2.7.0) = foundational (bots working)
+      Graph visualization = enhancement (nice-to-have, not blocker)
+      
+      Separate concerns: messaging vs rendering.
+
+approaches:
+  approach_1_mermaid_cli:
+    tool: "mermaid-cli (mmdc)"
+    install: "npm install -g @mermaid-js/mermaid-cli"
+    usage: |
+      # Generate PNG from Mermaid file
+      mmdc -i diagram.mmd -o diagram.png
+      
+      # Generate SVG
+      mmdc -i diagram.mmd -o diagram.svg -f svg
+      
+      # Inline string
+      echo "graph TD; A-->B" | mmdc -o output.png
+    
+    pros:
+      - Official Mermaid tool
+      - High quality output
+      - Supports all Mermaid syntax
+    
+    cons:
+      - Requires headless browser (Puppeteer)
+      - Heavy dependency
+      - Slow for batch generation
+  
+  approach_2_mermaid_ink:
+    tool: "mermaid.ink (web service)"
+    usage: |
+      # URL-based rendering
+      https://mermaid.ink/img/BASE64_ENCODED_DIAGRAM
+      
+      # Bot generates URL, posts in Mattermost
+      # Mattermost fetches and displays image
+    
+    pros:
+      - No local dependencies
+      - Fast (no local rendering)
+      - Simple URL generation
+    
+    cons:
+      - Requires external service
+      - Privacy concerns (diagrams sent to mermaid.ink)
+      - Dependency on third-party uptime
+  
+  approach_3_backstage_endpoint:
+    tool: "Backstage API endpoint"
+    usage: |
+      # Backstage renders Mermaid server-side
+      POST /api/render/mermaid
+      { "source": "graph TD; A-->B" }
+      
+      # Returns PNG/SVG
+      # Bot uploads to Mattermost
+    
+    pros:
+      - Self-hosted (privacy)
+      - Integrated with Backstage
+      - Can reuse for other tools
+    
+    cons:
+      - Requires Backstage API extension
+      - Need headless browser or mermaid-cli on server
+      - More implementation work
+  
+  approach_4_pregenerated_assets:
+    tool: "Git-tracked PNGs"
+    usage: |
+      # Epic authors create diagram.mmd
+      # Pre-commit hook generates diagram.png
+      # Both committed to git
+      # Bot references existing PNG
+    
+    pros:
+      - No runtime rendering
+      - Versioned with epic
+      - Fast (no generation delay)
+    
+    cons:
+      - Manual step (pre-commit hook)
+      - Stale images if Mermaid updated
+      - Git bloat (binary PNGs)
+
+recommended_approach: |
+  Start with Approach 2 (mermaid.ink) for prototype.
+  
+  Why:
+  - Zero local dependencies
+  - Works immediately
+  - Bot generates URL, Mattermost displays
+  - Good enough for grooming discussions
+  
+  Later migrate to Approach 3 (Backstage endpoint) for:
+  - Privacy (self-hosted)
+  - Integration with epic system
+  - Custom styling/branding
+
+tasks:
+  - id: T1
+    text: "Research Mermaid rendering options"
+    status: backlog
+    notes: |
+      Evaluate:
+      - mermaid-cli (mmdc)
+      - mermaid.ink
+      - Backstage API endpoint
+      - Pre-generated assets
+      
+      Decide on approach.
+  
+  - id: T2
+    text: "Prototype: Bot posts Mermaid via mermaid.ink"
+    status: backlog
+    blocked-by: T1
+    notes: |
+      Test script:
+      1. Bot receives Mermaid source
+      2. Base64 encode
+      3. Generate mermaid.ink URL
+      4. Post URL as image in Mattermost
+      5. Verify: Mattermost displays diagram
+  
+  - id: T3
+    text: "Integrate with epic grooming workflow"
+    status: backlog
+    blocked-by: T2
+    notes: |
+      Epic YAML has mermaid field:
+      
+      epic:
+        diagrams:
+          workflow: |
+            graph TD
+            A[Intake] --> B[Grooming]
+            B --> C[Ready]
+      
+      Bot reads epic.yaml → generates diagram → posts in grooming channel.
+  
+  - id: T4
+    text: "Build Backstage Mermaid rendering endpoint"
+    status: backlog
+    notes: |
+      POST /api/render/mermaid
+      Request: { "source": "graph TD; A-->B", "format": "png|svg" }
+      Response: image blob
+      
+      Implementation:
+      - Use mermaid-cli or Puppeteer
+      - Cache rendered images
+      - Return PNG/SVG
+  
+  - id: T5
+    text: "Document bot diagram posting capability"
+    status: backlog
+    blocked-by: [T2, T3]
+    notes: |
+      Update connections/mattermost.md:
+      - How to post diagrams
+      - Mermaid syntax reference
+      - Bot commands (/diagram, /workflow)
+      - Examples
+
+integration_points:
+  mattermost_v2_7_0:
+    - Bots can post images (attachments)
+    - URLs auto-expand (mermaid.ink images display)
+    - No code changes needed in v2.7.0
+  
+  epic_phases_v4_1_0:
+    - Grooming phase benefits most
+    - Diagrams help ambiguity resolution
+    - Visual architecture discussions
+    - Decision trees for complex choices
+  
+  backstage_ui:
+    - Epic detail page shows Mermaid natively
+    - Same diagrams in Backstage + Mattermost
+    - Single source of truth (epic.yaml)
+
+use_cases:
+  grooming_workflow:
+    trigger: "Epic enters grooming phase"
+    flow: |
+      1. Bot reads epic.diagrams.workflow
+      2. Generates mermaid.ink URL (or renders via Backstage API)
+      3. Posts in grooming channel:
+         "Epic workflow for discussion:
+          [diagram image]
+          Source: epic.yaml"
+      4. Stakeholders see visual during discussion
+  
+  architecture_explanation:
+    trigger: "Agent explains technical design"
+    flow: |
+      Agent: "Here's the proposed architecture:"
+      [posts Mermaid diagram as image]
+      Stakeholders: discuss, refine, approve
+  
+  decision_tree:
+    trigger: "Complex decision with multiple paths"
+    flow: |
+      Nicholas: "Should we use approach A or B?"
+      Bot: "Here's the decision tree:"
+      [shows diagram with trade-offs]
+      Team: discusses, picks path
+
+future_enhancements:
+  - Bot command: `/diagram graph TD; A-->B` (inline rendering)
+  - Epic templates with pre-made diagrams
+  - Interactive diagrams (click nodes → expand details)
+  - Diagram versioning (track changes over grooming sessions)
+  - Auto-generate diagrams from epic tasks (task graph)
+
+references:
+  - mermaid-cli: https://github.com/mermaid-js/mermaid-cli
+  - mermaid.ink: https://mermaid.ink
+  - Mermaid docs: https://mermaid.js.org
+  - Backstage Mermaid plugin: (if exists)
+
+dependencies:
+  - v2.7.0: Mattermost Agent Integration (bots must work first)
+  - v4.1.0: Epic Phases (grooming workflow context)
+
+success_criteria:
+  - Bot can post Mermaid diagrams in Mattermost channels
+  - Stakeholders see visuals during grooming discussions
+  - Diagrams version-controlled in epic.yaml
+  - <5 second render time (acceptable UX)
+  - Privacy-preserving (self-hosted preferred over mermaid.ink long-term)
+
+estimated_completion: "TBD (backlog - prototype with mermaid.ink = 1 day, Backstage API = 1 week)"
+
+notes: |
+  Created because Mattermost cannot render Mermaid natively.
+  
+  Grooming discussions benefit from visual diagrams.
+  Stakeholders need to see architecture/workflows without leaving chat.
+  
+  Start simple (mermaid.ink), migrate to self-hosted (Backstage API) later.

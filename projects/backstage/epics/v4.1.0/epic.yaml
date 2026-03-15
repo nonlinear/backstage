@@ -1,0 +1,488 @@
+---
+version: v4.1.0
+name: "Epic Phases"
+status: backlog
+created: 2026-03-15
+updated: 2026-03-15 13:38 EDT
+priority: P2
+category: workflow
+
+summary: |
+  Formalize epic lifecycle phases with clear transitions, tooling, and governance.
+  
+  Epic phases define when/how epics move through the pipeline, who participates,
+  and what artifacts are required at each stage.
+  
+  Goal: Create STRUCTURE that ALLOWS AI-assisted product development pipeline.
+  Separate thinking (intake) → alignment (grooming) → execution (night shift).
+  
+  Mattermost is PIVOTAL for grooming phase. Implementation comes later.
+
+context:
+  - Current: Epics have status (backlog, active, done) but no formal phases
+  - Need: Clear process for ambiguity resolution, stakeholder alignment, task breakdown
+  - Future: Night-shift autonomous execution requires "ready" state validation
+  
+philosophy: |
+  This is an AI-assisted Product Development Pipeline.
+  
+  Separation of concerns:
+  1. THINKING (intake) - formulate problem, define goals
+  2. ALIGNMENT (grooming) - resolve ambiguity, validate feasibility
+  3. EXECUTION (night shift) - agents work autonomously
+  
+  Nicholas's role evolves:
+  - Not executor anymore
+  - Architect / Philosopher / Product Owner
+  - Formulates problems, validates solutions, decides direction
+  - Agents do the rest
+  
+  This mirrors how Pixar/Apple/SpaceX organize decisions, but automated with agents.
+
+phases:
+  - phase: backlog
+    description: "Idea parada. Existe mas ninguém trabalhando."
+    entry: "Epic created, not yet prioritized"
+    exit: "Prioritized for intake"
+    artifacts:
+      - Epic YAML (minimal - pode ser só uma frase)
+    participants: []
+    objective: "Guardar ideias, priorizar depois, não gastar energia ainda"
+    
+  - phase: intake
+    description: "Nicholas + Business Analyst write epic brief (THINKING)"
+    entry: "Epic prioritized from backlog"
+    exit: "Brief complete, ready for grooming"
+    artifacts:
+      - Epic YAML with summary, context, goals
+      - Problem statement
+      - Objective (what we want to achieve)
+      - Constraints (known limitations)
+      - Success criteria draft
+    participants:
+      - Nicholas (author)
+      - business-analyst (co-author)
+    activities:
+      - Write what problem exists
+      - Define what objective we want
+      - Identify known constraints
+      - Draft success criteria
+    output: "Intenção clara (não tem tasks ainda, não tem sala ainda)"
+    
+  - phase: grooming
+    description: "Ambiguity resolution via Mattermost (ALIGNMENT)"
+    subtitle: "Heart of the system - where magic happens"
+    entry: "Intake complete, brief exists"
+    exit: "All stakeholders satisfied, tasks assigned per agent, ZERO ambiguity"
+    artifacts:
+      - Mattermost room link (discussion archive)
+      - Agent bids (who wants to join, why)
+      - Task breakdown (per agent with deliverables)
+      - Quality control criteria
+      - Tool access verified
+      - Ambiguity resolution log
+      - Architecture decisions
+      - Library/framework choices
+      - Risk assessment
+    participants:
+      - Nicholas (facilitator)
+      - Agents who bid to join
+      - Auto-invited: business-analyst (always)
+    activities:
+      agent_bidding:
+        - Agents analyze epic
+        - Each agent decides: "I should join" or "not relevant"
+        - Example bids:
+          - "@cv-engineer: I should join (computer vision expertise)"
+          - "@security-engineer: I should join (compliance validation)"
+          - "@devops: maybe relevant (deployment concerns)"
+      
+      room_creation:
+        - Create Mattermost room: `#grooming-PROJECT-EPIC_SLUG`
+        - Invite: Nicholas + approved agents
+        - Room becomes discussion hub
+      
+      discussion:
+        - Technical debate
+        - Feasibility validation
+        - Library/framework selection
+        - Risk identification
+        - Regulatory constraints review
+        - Architecture proposals
+        - Agents bring: papers, libraries, standards, best practices
+      
+      task_breakdown:
+        - Define tasks per agent
+        - Assign ownership
+        - Define deliverables
+        - Set quality gates
+        - Verify tool access (APIs, credentials, permissions)
+      
+      example_tasks:
+        - "Task 1 — CV agent: evaluate YOLO vs Detectron, report accuracy"
+        - "Task 2 — DevOps: test GPU pipeline, measure throughput"
+        - "Task 3 — Security: review dataset compliance, document risks"
+        - "Task 4 — Nicholas: approve architecture choice"
+    
+    objective: "Remove TODA ambiguidade. Everyone satisfied, everyone knows their responsibility."
+    critical: "Mattermost is PIVOTAL here. This is where alignment happens."
+    
+  - phase: ready
+    description: "Ready for night-shift unsupervised execution (EXECUTION PREP)"
+    entry: "Grooming complete, all tasks clear"
+    exit: "Epic queued for night-shift orchestrator"
+    artifacts:
+      - Clear task list (no ambiguity)
+      - Agent assignments locked
+      - Quality control criteria defined
+      - Success criteria finalized
+      - Execution order defined
+      - Rollback plan documented
+    participants:
+      - Nicholas (final approval to proceed)
+    validation:
+      questions:
+        - "Zero ambiguous tasks? (no 'what does X mean?')"
+        - "All tool access verified?"
+        - "Success criteria measurable?"
+        - "Rollback plan exists?"
+        - "Dependencies resolved?"
+      gate: "If any validation fails → back to grooming"
+    objective: "Epic pronto pra rodar sozinho. Não existe mais discussão conceitual. Só execução."
+    
+  - phase: night-shift
+    description: "Agents execute tasks autonomously (EXECUTION)"
+    subtitle: "Operational stage - async, semi-autonomous"
+    entry: "Epic in ready queue, orchestrator picks it up"
+    exit: "All tasks completed, ready for approval"
+    artifacts:
+      - Task completion reports
+      - Code commits
+      - Test results
+      - Performance metrics
+      - Mattermost updates (progress logs)
+    participants:
+      - Agents (execute assigned tasks)
+      - Orchestrator (coordinates execution)
+      - Nicholas (supervises OR leaves autonomous)
+    activities:
+      execution:
+        - "agent → task → report"
+        - "agent → next task → report"
+        - Agents work on tasks
+        - Make commits
+        - Publish results
+        - Report progress to Mattermost
+      
+      coordination:
+        - Orchestrator sequences tasks
+        - Handles dependencies
+        - Escalates blockers to Nicholas
+        - Logs everything to Mattermost
+      
+      example_output:
+        - "CV agent: tested YOLOv8 → accuracy 0.84"
+        - "DevOps: pipeline running on GPU, 120fps"
+        - "Security: compliance approved, no PII leakage"
+    
+    mattermost_role: "Log, reports, coordination hub"
+    nicholas_role: "Supervise OR leave autonomous (his choice)"
+    
+  - phase: approval
+    description: "Validation before marking done"
+    entry: "All tasks completed"
+    exit: "Approval granted OR issues found (back to night-shift)"
+    artifacts:
+      - QA report
+      - Test results
+      - Performance benchmarks
+      - Security scan results
+    participants:
+      - Nicholas (final approval)
+      - QA agent (automated checks)
+      - Security agent (compliance validation)
+    validation:
+      automated_checks:
+        - "tests passed?"
+        - "security approved?"
+        - "performance above threshold?"
+        - "documentation complete?"
+      manual_approval:
+        - Nicholas reviews output
+        - Approves OR requests changes
+    gate: "If fails → back to night-shift with feedback"
+    
+  - phase: done
+    description: "Epic complete, artifacts archived"
+    entry: "Approval granted"
+    exit: "Epic archived, room closed"
+    artifacts:
+      - Final documentation
+      - Code/app artifacts
+      - Architecture notes
+      - Marketing/product info (if applicable)
+      - Deployment guide
+      - Lessons learned
+      - Mattermost room export
+      - Git commit links
+    participants:
+      - Nicholas (final review)
+      - Agents (post-mortem contributors)
+    activities:
+      - Archive Mattermost room
+      - Document lessons learned
+      - Update project roadmap
+      - Announce completion (if public-facing)
+    objective: "Epic concluído. Everything documented, room archived, knowledge preserved."
+
+workflows:
+  agent_bidding:
+    trigger: "Epic enters grooming phase"
+    process: |
+      1. Broadcast to all agents: "Epic X entering grooming, bid if interested"
+      2. Agents respond: "I want to join because [reason]"
+      3. Nicholas reviews bids, approves/rejects
+      4. Approved agents invited to Mattermost room
+      5. Grooming session begins
+    rationale: "Agents self-select based on capability/interest, not top-down assignment"
+  
+  mattermost_integration:
+    trigger: "Epic enters grooming phase"
+    process: |
+      1. Bot creates private Mattermost channel: #grooming-PROJECT-EPIC
+      2. Bot invites: Nicholas + approved agents
+      3. Bot posts agenda: ambiguity questions from intake
+      4. Discussion happens (text, voice, screen share)
+      5. Bot monitors for decisions (keywords: "DECISION:", "/epic decision")
+      6. Bot updates epic.yaml with decisions
+      7. When grooming done: Bot archives room, moves epic to ready
+    future: "Automated moderation, agenda posting, decision extraction"
+  
+  quality_control:
+    checkpoints:
+      - phase: grooming
+        check: "All ambiguity questions answered?"
+      - phase: ready
+        check: "Agent has tool access verified?"
+      - phase: done
+        check: "Success criteria met?"
+    automation: "Eventually automated checks, for now manual Nicholas approval"
+
+risks:
+  - risk: "Agent bidding creates too many participants (coordination overhead)"
+    mitigation: "Cap grooming room at 5 agents max, prioritize by capability match"
+  
+  - risk: "Grooming phase drags on (analysis paralysis)"
+    mitigation: "Time-box grooming: 1 week max, force decision at deadline"
+  
+  - risk: "Mattermost rooms proliferate (15+ active epics = 15 rooms)"
+    mitigation: "Archive rooms immediately when epic moves to ready"
+  
+  - risk: "Decisions in Mattermost not captured in epic.yaml"
+    mitigation: "Bot automation + manual fallback (Nicholas copies decisions)"
+
+future_work:
+  phase_1_foundation:
+    - Epic phase field added to schema (backlog → intake → grooming → ready → night-shift → approval → done)
+    - Backstage UI shows current phase
+    - Epic detail page links to Mattermost room (if grooming/later)
+  
+  phase_2_mattermost_integration:
+    - Bot creates Mattermost room when epic enters grooming
+    - Bot invites approved agents
+    - Bot posts grooming agenda automatically
+    - Decisions captured from Mattermost → epic.yaml
+  
+  phase_3_agent_bidding:
+    - Agents notified when epic enters grooming
+    - Agents bid via UI or Mattermost command
+    - Nicholas approves/rejects bids
+    - Approved agents auto-invited to room
+  
+  phase_4_orchestration:
+    - Night-shift orchestrator picks "ready" epics
+    - Executes tasks in sequence
+    - Reports progress to Mattermost
+    - Escalates blockers automatically
+  
+  phase_5_quality_gates:
+    - Automated checks before phase transitions
+    - Pre-flight validation before night-shift
+    - Approval workflows (manual + automated)
+  
+  timeline: "Build incrementally. Phase 1 = schema + UI. Rest = as needed."
+
+dependencies:
+  - Mattermost Agent Integration (v2.7.0) - bots must work first
+  - Backstage UI - epic detail page shows phase + Mattermost link
+  - OpenClaw routing - agents receive grooming invitations
+
+references:
+  - Epic v2.7.0: Mattermost Agent Integration (foundational)
+  - Backstage projects: ~/Backstage/projects/*/epics/
+  - Mattermost docs: https://docs.mattermost.com
+
+success_criteria:
+  foundation:
+    - Epic phases documented in schema
+    - Phases visible in Backstage UI
+    - Clear transition criteria defined
+  
+  mattermost_integration:
+    - Grooming phase creates Mattermost room (manual OR automated)
+    - 3+ epics successfully groomed via Mattermost
+    - Decisions captured from room → epic.yaml
+  
+  execution:
+    - Night-shift executes "ready" epics with <10% failure rate
+    - Agents work autonomously without Nicholas intervention
+    - Quality gates prevent ambiguous epics from entering night-shift
+  
+  organizational:
+    - Nicholas spends <20% time executing, >80% thinking/validating
+    - Agents handle tactical work, Nicholas handles strategic decisions
+    - System scales: can handle 10+ concurrent epics across projects
+
+estimated_completion: "TBD (backlog - build incrementally as needed)"
+
+notes: |
+  This epic defines STRUCTURE, not implementation.
+  
+  Mattermost integration (v2.7.0) is foundational.
+  Epic phases come later, built incrementally.
+  
+  Philosophy: Nicholas evolves from executor → architect/product owner.
+  AI-assisted product development pipeline mirrors how mature companies work,
+  but automated with agents instead of humans.
+  
+  Pixar/Apple/SpaceX analogy: they separate thinking → alignment → execution.
+  This system does the same, but agents handle execution autonomously.
+
+architecture_decisions:
+  - date: 2026-03-15 13:40
+    decision: "Epic rooms only exist during Grooming phase"
+    rationale: |
+      Grooming = discussion (needs chat)
+      Execution = work (happens in code, not chat)
+      
+      Mixing creates noise. Keep system clean and auditabile.
+      
+      Lifecycle:
+      - Backlog/Intake → no channel
+      - Grooming → channel created
+      - Ready/Night-shift → channel archived
+      - Done → channel remains archived (auditability)
+      
+      Result: 200 backlog epics = maybe 3 active grooming channels
+  
+  - date: 2026-03-15 13:40
+    decision: "Always use private channels (never public)"
+    rationale: |
+      - Less noise
+      - Decisions may be confidential
+      - Stakeholders explicit (no random participants)
+      
+      1 epic = 1 private channel
+  
+  - date: 2026-03-15 13:40
+    decision: "Use epic ID for channel names (not version)"
+    rationale: |
+      Epic names/versions change. IDs don't.
+      
+      Good: `epic-034`, `grooming-034`
+      Bad: `grooming-v2.7.0-mattermost` (version changes)
+      
+      Enables stable links even if epic details evolve.
+  
+  - date: 2026-03-15 13:40
+    decision: "Mattermost = decision system (NOT task system)"
+    rationale: |
+      Chat stores human reasoning (why decisions were made).
+      Tasks live in Backstage epic.yaml (source of truth).
+      Work happens in code/infra/pipelines.
+      
+      Separation of concerns:
+      - Mattermost: discussion, decisions, context
+      - Backstage: tasks, ownership, progress
+      - Code: implementation
+      
+      Prevents chat becoming messy task tracker.
+  
+  - date: 2026-03-15 13:40
+    decision: "Capture decisions via explicit commands (not scraping)"
+    rationale: |
+      Automatic scraping creates false positives.
+      
+      Use commands:
+      - `/decision Use YOLOv8 instead of Detectron`
+      - `/task @cv-engineer evaluate YOLO accuracy`
+      
+      Bot saves to epic.yaml immediately.
+      Clear signal (not inference from chat noise).
+  
+  - date: 2026-03-15 13:40
+    decision: "Minimal auditability: channel_id + url in epic.yaml"
+    rationale: |
+      Mattermost already has:
+      - Full history
+      - Export API
+      - Permanent links
+      
+      Epic only needs:
+        mattermost_channel_id: xyz
+        mattermost_url: https://...
+      
+      3 months later: open link, see full discussion.
+      No need for duplicate storage.
+  
+  - date: 2026-03-15 13:40
+    decision: "Auto-invite stakeholders: nicholas, business-analyst, orchestrator"
+    rationale: |
+      Always present in grooming:
+      - Nicholas (facilitator, final decisions)
+      - business-analyst (co-author from intake)
+      - orchestrator (coordinates execution later)
+      
+      Others enter via bidding (agent chooses to participate).
+  
+  - date: 2026-03-15 13:40
+    decision: "Meetings use external tools (Zoom/Jitsi), link posted to channel"
+    rationale: |
+      Mattermost = context hub (not video platform).
+      
+      Flow:
+      - Google Calendar creates meeting
+      - Link posted to Mattermost channel
+      - Video happens elsewhere
+      - Discussion returns to channel
+      
+      Don't over-integrate. Use best tool for each job.
+
+key_insights:
+  organizational_memory: |
+    3 months later: "Why did we decide X?"
+    System answers: "Because library Y didn't support GPU (see epic-034 channel)"
+    
+    This is real auditability. Companies pay millions for this capability.
+  
+  pixar_analogy: |
+    Grooming + Night-shift pipeline mirrors Pixar film production:
+    - Pre-production (grooming): story, art, technical feasibility
+    - Production (night-shift): animators execute approved plan
+    - Post-production (approval): QA, polish, final sign-off
+    
+    Separation of thinking → alignment → execution is NOT unique to software.
+    Mature creative organizations discover this pattern independently.
+  
+  nicholas_role_evolution: |
+    Before: Executor (writes code, fixes bugs, deploys)
+    After: Architect / Philosopher / Product Owner
+    
+    Nicholas formulates problems, validates solutions, decides direction.
+    Agents handle tactical execution.
+    
+    Time allocation shift:
+    - <20% executing
+    - >80% thinking/validating
+    
+    This is the natural evolution of senior technical leadership.
