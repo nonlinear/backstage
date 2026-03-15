@@ -2,11 +2,11 @@
 version: "0.36.0"
 name: "Design Strategy"
 goal: "AI agent architecture and design strategy consolidation from talk sessions"
-status: active
+status: done
 type: architecture
 created: 2026-03-06
 started: 2026-03-06
-completed: null
+completed: 2026-03-15
 
 tasks:
   - group: "Check Library Architecture"
@@ -80,15 +80,6 @@ tasks:
         checked: false
       - text: "Design execution isolation (sandbox safety)"
         checked: true
-  
-  - group: "Open Decisions (Deferred)"
-    items:
-      - text: "Repository structure (one repo per agent vs monorepo)"
-        checked: false
-      - text: "Orchestrator scenario simulation (what-if analysis implementation)"
-        checked: false
-      - text: "Mobile app (iPhone status viewer - build or defer)"
-        checked: false
 
 notes: |
   ## Context
