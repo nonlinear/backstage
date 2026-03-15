@@ -3,7 +3,7 @@ import path from 'path'
 import yaml from 'js-yaml'
 import { getNoteTitles } from './note-titles'
 
-const BACKSTAGE_ROOT = path.join(process.env.HOME!, 'Backstage/projects')
+const BACKSTAGE_ROOT = process.env.BACKSTAGE_ROOT || path.join(process.env.HOME!, 'Backstage/projects')
 
 /**
  * Get list of all project slugs
