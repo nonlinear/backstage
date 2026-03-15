@@ -570,3 +570,32 @@ completion:
     **Access:**
     - http://localhost:8065
     - https://studio.adal-rigel.ts.net:8065
+
+  - title: "Agent names and avatars (cosmetic polish)"
+    description: |
+      Give each bot a distinct visual identity in Mattermost:
+      
+      **Agent names:**
+      - business-analyst → "Ana" (Portuguese: analyst)
+      - design-engineer → "Davi" (Portuguese: David, designer)
+      
+      **Avatars:**
+      - Generate AI avatars (Midjourney, DALL-E, or custom illustrations)
+      - Upload via Mattermost API (PUT /api/v4/users/{id}/image)
+      - Store in ~/Backstage/agents/{domain}/{agent-id}/avatar.png
+      
+      **Why:**
+      - Humanizes agents (easier to relate to)
+      - Visual differentiation at a glance
+      - Professional appearance in meetings
+      
+      **Implementation:**
+      1. Choose agent names (Nicholas decides)
+      2. Generate avatar images (AI or commissioned)
+      3. Upload via API:
+         curl -X PUT http://localhost:8065/api/v4/users/BOT_ID/image \
+           -H "Authorization: Bearer $ADMIN_TOKEN" \
+           -F "image=@avatar.png"
+      4. Update display names (System Console → Bot Accounts)
+      
+      **Future epic:** v2.7.1 (Agent Identity Polish)
