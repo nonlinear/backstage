@@ -10,3 +10,13 @@ category: what-we-dont-do
 ❌ **Planned obsolescence** - We build to last  
 ❌ **Efficiency spirals** - Human vision comes first  
 ❌ **Black boxes** - Everything is transparent  
+
+
+
+## What we do
+
+We build for community, not markets
+
+- Open source by default
+- Documentation as product
+- Collaborative ethos (grants, volunteers, co-creation)

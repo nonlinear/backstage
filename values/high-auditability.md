@@ -7,7 +7,7 @@ scope: all-agents
 # High Auditability (Legibility to Future Selves)
 
 ## Principle
-**We forget. Machines forget. Everything must be traceable.**
+**Humans forget. Machines forget. Everything must be traceable.**
 
 ## Rule
 **Every edit = commit with WHY (not just WHAT)**

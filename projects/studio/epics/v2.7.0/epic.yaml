@@ -122,21 +122,28 @@ tasks:
 
   - id: T2
     text: "Create Mattermost bot accounts"
-    status: in-progress
-    assignee: nicholas
+    status: done
+    date: 2026-03-15 15:34
     notes: |
-      Via Mattermost System Console → Integrations → Bot Accounts:
+      ✅ Created via Mattermost API:
       
       Bot 1: business-analyst
+      - User ID: bmcwnkarq7yoznwmnfzhmd15rh
+      - Token: cd31hqmqgigtdeydyhwpzcyebo
       - Display Name: "Business Analyst"
-      - Description: "Business Analysis Agent - Product Strategy & Requirements"
-      - Generate Personal Access Token
+      - Description: "Business Analysis Agent - Requirements, stakeholders, ambiguity resolution"
       
       Bot 2: design-engineer
-      - Display Name: "Design Engineer"  
+      - User ID: 9taw3rubt7y68b5adbhj3zja3a
+      - Token: 7rrgkhr5zfne8xmn6jhqrxwidr
+      - Display Name: "Design Engineer"
       - Description: "Design Engineering Agent - UX/UI/Frontend"
-      - Avatar: 🎨 (or custom image if available)
-      - Generate Personal Access Token
+      
+      Channels created:
+      - #business-analyst (fh1zeqyiupbg5yy5gaa1a6ejoc)
+      - #design-engineer (z3ou7gk39ifb8nnjei3xnpq4ue)
+      
+      Tokens saved to ~/Documents/personal/.env
       
       CRITICAL: Use Bot Accounts (not PAT from user account)
       - Creates distinct identities (@business-analyst, @design-engineer)
