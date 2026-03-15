@@ -1,0 +1,340 @@
+version: v2.8.0
+name: "Parity Skill (Anti-Drift)"
+status: backlog
+created: 2026-03-15
+updated: 2026-03-15 15:12 EDT
+priority: P2
+category: skills
+tags: [parity, anti-drift, debugging, agent-alignment]
+
+summary: |
+  Skill to investigate and ensure maximum parity between all agents and humans.
+  
+  **Trigger:** When Nicholas says "parity" or "paridade"
+  **Action:** STOP everything, investigate what's different, fix drift
+  
+  **Goal:** Everyone (Nicholas, agents, UI, data) sees the SAME thing.
+
+problem: |
+  Reality drift = agents and humans see different states.
+  
+  Examples:
+  - Backstage UI shows "0 projects" but files exist
+  - Agent reads YAML, Nicholas sees old data
+  - Container uses old code, local dev uses new code
+  - API returns cached data, files updated
+  - Timestamps mismatch (UTC vs EDT)
+  - File paths differ (container vs host)
+  
+  **Consequence:** Wasted time debugging "why doesn't it work?"
+  **Root cause:** No automated parity checks.
+
+context:
+  anti_drift_philosophy: |
+    Drift = silent divergence between expected state and actual state.
+    
+    **Drift sources:**
+    - Cached data (browser, API, container)
+    - Stale builds (Docker layers, Next.js)
+    - Path mismatches (container vs host)
+    - Time zones (UTC vs local)
+    - File extensions (.yml vs .yaml)
+    - Env vars (missing, wrong, stale)
+    
+    **Anti-drift = continuous alignment checks.**
+  
+  parity_definition: |
+    Parity = identical state across all observers.
+    
+    **Observers:**
+    - Nicholas (browser, terminal, files)
+    - Agents (OpenClaw, Backstage API, skills)
+    - UI (Backstage, Librarian, dashboards)
+    - Data (YAML files, git, database)
+    
+    **Parity checks:**
+    - Same file content (host vs container)
+    - Same API response (cached vs fresh)
+    - Same timestamps (UTC normalized)
+    - Same paths (env vars resolved)
+    - Same code (git commit hash match)
+
+  trigger_protocol: |
+    When Nicholas says "parity" or "paridade":
+    
+    1. STOP current work immediately
+    2. Agent asks: "Parity check on WHAT?"
+       - UI vs data?
+       - Container vs host?
+       - API vs files?
+       - Agent state vs Nicholas expectations?
+    
+    3. Run parity checks (see tasks below)
+    4. Report discrepancies
+    5. Fix drift (rebuild, clear cache, sync files)
+    6. Verify parity restored
+    7. Document what drifted + why
+    8. Resume work
+
+use_cases:
+  backstage_project_count:
+    problem: "UI shows 0 projects, but files exist"
+    parity_check:
+      - Host files: ls ~/Backstage/projects/ | wc -l
+      - Container files: docker exec backstage ls /app/projects | wc -l
+      - API response: curl /api/projects | jq '.projects | length'
+    
+    drift_source: "Container volume mount mismatch"
+    fix: "Add BACKSTAGE_ROOT env var, rebuild container"
+  
+  yaml_extension_mismatch:
+    problem: "Code expects .yaml, files are .yml"
+    parity_check:
+      - Host: find . -name "*.yml" | wc -l
+      - Code: grep -r "\.yaml" app/ | wc -l
+    
+    drift_source: "Mixed file extensions"
+    fix: "Rename all .yml → .yaml, update code"
+  
+  stale_container_build:
+    problem: "New code committed, container still old"
+    parity_check:
+      - Git commit: git rev-parse HEAD
+      - Container build: docker inspect backstage | jq '.Created'
+      - Code hash: docker exec backstage cat /app/.git/HEAD
+    
+    drift_source: "Cached Docker layers"
+    fix: "docker-compose build --no-cache"
+  
+  api_cache_stale:
+    problem: "API returns old data after file edit"
+    parity_check:
+      - File mtime: stat -f "%Sm" epic.yaml
+      - API timestamp: curl /api/epics | jq '.updated'
+    
+    drift_source: "Next.js cache"
+    fix: "Hard refresh browser, restart container"
+
+tasks:
+  - id: T1
+    text: "Design parity check script (parity.sh)"
+    status: backlog
+    notes: |
+      Script should:
+      - Accept context: --ui, --container, --api, --files
+      - Run checks relevant to context
+      - Output: PASS/FAIL + discrepancies
+      - Exit code: 0 = parity, 1 = drift
+      
+      Example:
+      ./parity.sh --container
+      → Check: host files vs container files
+      → Check: git commit vs container build date
+      → Report: "Container 2 commits behind"
+  
+  - id: T2
+    text: "Parity checks: Backstage UI vs data"
+    status: backlog
+    checks:
+      - Project count (UI vs API vs files)
+      - Epic count (UI vs YAML vs API)
+      - Status (UI vs epic.yaml)
+      - Timestamps (UI vs file mtime)
+  
+  - id: T3
+    text: "Parity checks: Container vs host"
+    status: backlog
+    checks:
+      - Volume mounts (paths match?)
+      - File counts (host vs container)
+      - Env vars (set correctly?)
+      - Git commit (host vs container)
+  
+  - id: T4
+    text: "Parity checks: API responses vs files"
+    status: backlog
+    checks:
+      - API /projects vs projects/ directory
+      - API /epics vs epics/**/*.yaml
+      - Cache freshness (Last-Modified headers)
+  
+  - id: T5
+    text: "Parity checks: Time zones"
+    status: backlog
+    checks:
+      - System timezone (host vs container)
+      - Timestamps in YAML (UTC vs local)
+      - API timestamps (UTC normalized?)
+  
+  - id: T6
+    text: "Parity checks: File extensions"
+    status: backlog
+    checks:
+      - find . -name "*.yml" (should be 0)
+      - All YAML files use .yaml
+      - Code references .yaml (not .yml)
+  
+  - id: T7
+    text: "Document parity skill in SKILL.md"
+    status: backlog
+    location: "~/.openclaw/workspace/skills/parity/SKILL.md"
+    notes: |
+      Skill should:
+      - Trigger on "parity" or "paridade"
+      - Ask Nicholas what to check
+      - Run relevant parity checks
+      - Report discrepancies
+      - Propose fixes
+      - Verify parity restored
+  
+  - id: T8
+    text: "Integrate parity checks into Backstage health endpoint"
+    status: backlog
+    notes: |
+      Add /api/health/parity endpoint:
+      - Check container vs host file counts
+      - Check API cache freshness
+      - Check git commit vs build date
+      - Return: { "parity": true/false, "drift": [...] }
+  
+  - id: T9
+    text: "Pre-deploy parity check (CI/CD gate)"
+    status: backlog
+    notes: |
+      Before deploying container:
+      - Run parity.sh --all
+      - Fail deploy if drift detected
+      - Force rebuild if code changed
+  
+  - id: T10
+    text: "Parity dashboard (visual drift monitor)"
+    status: backlog
+    notes: |
+      Real-time dashboard showing:
+      - Container build age
+      - Git commits ahead/behind
+      - File count mismatches
+      - Cache staleness
+      - Alerts when drift > threshold
+
+approaches:
+  approach_1_manual_checklist:
+    description: "Nicholas runs parity checks manually when suspicious"
+    pros:
+      - Simple, no automation needed
+      - Flexible (check what matters)
+    cons:
+      - Easy to forget
+      - No proactive drift detection
+  
+  approach_2_skill_trigger:
+    description: "Agent skill activates on 'parity' keyword"
+    pros:
+      - Quick invocation
+      - Agent-guided checks
+    cons:
+      - Reactive (not proactive)
+      - Requires Nicholas to notice drift
+  
+  approach_3_automated_health_checks:
+    description: "Continuous parity monitoring (cron job, health endpoint)"
+    pros:
+      - Proactive drift detection
+      - Alerts before problems surface
+    cons:
+      - More complexity
+      - False positives possible
+  
+  approach_4_ci_cd_gate:
+    description: "Block deploys if parity checks fail"
+    pros:
+      - Prevents deploying drifted state
+      - Forces fixes before production
+    cons:
+      - Slows deploy pipeline
+      - Needs reliable checks
+
+recommended_approach: |
+  Start with Approach 2 (skill trigger) + manual checks.
+  
+  Later add Approach 3 (health endpoint) for proactive monitoring.
+  
+  CI/CD gate (Approach 4) only if drift becomes frequent problem.
+
+success_criteria:
+  - Parity skill responds to "parity" keyword
+  - Checks cover: UI, container, API, files, time zones
+  - Reports discrepancies clearly
+  - Proposes fixes (rebuild, clear cache, sync)
+  - Verifies parity restored
+  - Documented in SKILL.md
+  - Integrated into Backstage health checks (future)
+
+examples:
+  example_1_ui_drift:
+    trigger: "Nicholas: 'parity - Backstage shows 0 projects'"
+    agent_response: |
+      Checking parity: Backstage UI vs data
+      
+      Host files: 17 projects in ~/Backstage/projects/
+      Container files: 17 projects in /app/projects/
+      API response: 0 projects
+      
+      DRIFT DETECTED: API returns 0, files show 17
+      
+      Likely cause: Container using wrong path (process.env.HOME)
+      Fix: Add BACKSTAGE_ROOT env var, rebuild container
+      
+      Proceed with fix?
+  
+  example_2_cache_drift:
+    trigger: "Nicholas: 'paridade - mudei epic.yaml mas UI não atualiza'"
+    agent_response: |
+      Checking parity: API cache vs files
+      
+      File mtime: 2026-03-15 15:10 EDT
+      API cached: 2026-03-15 14:50 EDT
+      
+      DRIFT DETECTED: API cache 20 minutes stale
+      
+      Fix: Hard refresh browser (Cmd+Shift+R)
+      Or: Restart container (clears Next.js cache)
+      
+      Trying hard refresh first...
+  
+  example_3_no_drift:
+    trigger: "Nicholas: 'parity check antes de commitar'"
+    agent_response: |
+      Checking parity: All systems
+      
+      ✅ Host files match container files
+      ✅ API response matches file count
+      ✅ Git commit matches container build
+      ✅ No .yml files (all .yaml)
+      ✅ Timestamps UTC-normalized
+      
+      PARITY CONFIRMED. Safe to commit.
+
+future_enhancements:
+  - Auto-detect drift (no keyword needed)
+  - Parity score (0-100%, how aligned?)
+  - Drift history (when did divergence start?)
+  - Predictive alerts ("Container build getting old, rebuild soon?")
+  - Cross-project parity (Backstage vs Librarian vs NAS)
+
+dependencies:
+  - Backstage API health endpoint (future)
+  - Docker healthcheck (verify parity)
+  - Git hooks (pre-commit parity check)
+
+references:
+  - Anti-drift principles (Cybernetics)
+  - Continuous alignment (DevOps best practices)
+  - Idempotent systems (infrastructure as code)
+
+notes: |
+  Created 2026-03-15 during Backstage emergency patch.
+  
+  Nicholas: "quando falamos parity, ou paridade, paramos tudo e investigamos como ter o maximo de paridade entre todos os agentes e humanos, pra que estejamos vendo a mesma coisa."
+  
+  **Philosophy:** Parity = anti-drift. Drift = silent killer of trust.

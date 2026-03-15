@@ -1,0 +1,205 @@
+version: v4.0.2
+name: "YAML Emergency Patch"
+status: done
+created: 2026-03-15
+completed: 2026-03-15 15:11 EDT
+updated: 2026-03-15 15:12 EDT
+priority: P0
+category: maintenance
+tags: [emergency, patch, yaml, semantic-versioning]
+
+summary: |
+  Emergency patch to standardize ALL YAML files to `.yaml` extension.
+  Container couldn't find projects because code expected `.yaml` but files were `.yml`.
+  
+  **Semantic versioning:** Patch (v4.0.1 → v4.0.2) because:
+  - No new features
+  - No breaking changes
+  - Bug fix only (file extension standardization)
+
+problem: |
+  Backstage UI showing "Projects: 0" after container restart.
+  
+  Root cause:
+  - Code used `process.env.HOME` → `/root/Backstage/projects` (container)
+  - Volume mount: `~/Backstage/projects` → `/app/projects`
+  - Path mismatch: code looked in wrong directory
+  
+  Secondary issue:
+  - Mixed `.yml` and `.yaml` extensions (168 `.yml` files)
+  - Code expected `.yaml` after standardization
+  - YAML parser error: `paperless-ingestion/project.yaml` had frontmatter `---` delimiters
+
+decisions:
+  - date: 2026-03-15 15:07
+    decision: "ALL YAML files must use `.yaml` extension (not `.yml`)"
+    rationale: |
+      Industry standard = `.yaml` (YAML Ain't Markup Language)
+      Consistency across all projects
+      Avoid parser confusion
+      
+  - date: 2026-03-15 15:07
+    decision: "Emergency patch = semantic versioning PATCH increment"
+    rationale: |
+      No new features → not MINOR
+      No breaking changes → not MAJOR
+      Bug fix only → PATCH (v4.0.1 → v4.0.2)
+
+tasks:
+  - id: T1
+    text: "Add BACKSTAGE_ROOT env var to docker-compose.yml"
+    status: done
+    completed: 2026-03-15 15:05
+    notes: |
+      Added: BACKSTAGE_ROOT=/app/projects
+      Container now uses env var instead of hardcoded path.
+  
+  - id: T2
+    text: "Update code to use process.env.BACKSTAGE_ROOT"
+    status: done
+    completed: 2026-03-15 15:05
+    notes: |
+      Files updated:
+      - app/api/projects/route.ts
+      - app/app/projects/[project]/page.tsx (fallback path)
+      
+      Code: const BACKSTAGE_ROOT = process.env.BACKSTAGE_ROOT || path.join(...)
+  
+  - id: T3
+    text: "Rename ALL .yml files to .yaml"
+    status: done
+    completed: 2026-03-15 15:08
+    notes: |
+      Command: find . -name "*.yml" -exec bash -c 'mv "$1" "${1%.yml}.yaml"' _ {} \;
+      
+      Result:
+      - 168 .yml files renamed
+      - 300 .yaml files total
+      - Zero .yml remaining
+  
+  - id: T4
+    text: "Update code references: .yml → .yaml"
+    status: done
+    completed: 2026-03-15 15:08
+    notes: |
+      Files updated:
+      - app/app/projects/[project]/page.tsx (project.yml → project.yaml)
+      - app/api/projects/route.ts (project.yml → project.yaml)
+      - lib/epics.ts (project.yml → project.yaml)
+  
+  - id: T5
+    text: "Fix YAML parse error (paperless-ingestion/project.yaml)"
+    status: done
+    completed: 2026-03-15 15:11
+    notes: |
+      Problem: Frontmatter delimiters (---) confused YAML parser
+      Error: "unidentified alias *Purpose:**"
+      
+      Fix: Remove frontmatter, move content to `purpose` field
+      
+      Before:
+      ---
+      name: paperless ingestion
+      ---
+      **Purpose:** ...
+      
+      After:
+      name: paperless ingestion
+      purpose: |
+        **Purpose:** ...
+  
+  - id: T6
+    text: "Rebuild container with --no-cache"
+    status: done
+    completed: 2026-03-15 15:10
+    notes: |
+      Ensured fresh build with updated code.
+      docker-compose build --no-cache backstage
+  
+  - id: T7
+    text: "Verify projects API returns data"
+    status: done
+    completed: 2026-03-15 15:11
+    notes: |
+      curl http://localhost:3004/api/projects | jq -r '.projects[] | .name'
+      
+      Result: Backstage, Studio, Research Exchange, Agregore (flagship)
+  
+  - id: T8
+    text: "Re-enable Tailscale proxy"
+    status: done
+    completed: 2026-03-15 15:11
+    notes: |
+      tailscale serve --bg --https=3004 http://localhost:3004
+      
+      Accessible: https://studio.adal-rigel.ts.net:3004
+
+commits:
+  - sha: 1a66ea1
+    message: "Before emergency patch: rename all .yml to .yaml"
+    date: 2026-03-15 15:07
+  
+  - sha: 0ff4347
+    message: "Emergency patch: rename all .yml to .yaml + update code references"
+    date: 2026-03-15 15:08
+    files:
+      - projects/**/*.yml → *.yaml (168 files)
+      - app/app/projects/[project]/page.tsx
+      - app/api/projects/route.ts
+      - lib/epics.ts
+  
+  - sha: 4d97f45
+    message: "Fix paperless-ingestion/project.yaml: remove frontmatter delimiters (YAML parse error)"
+    date: 2026-03-15 15:11
+    files:
+      - projects/paperless-ingestion/project.yaml
+
+what_worked:
+  - Git commit before renaming (safety net)
+  - find + bash -c for bulk rename (reliable)
+  - docker-compose build --no-cache (ensured fresh build)
+  - Incremental fixes (env var → rename → parse error)
+
+what_failed:
+  - Initial rebuild used cached layers (old code)
+  - Tailscale proxy blocked port during rebuild (repeated issue)
+  - Local dev server (PID 885) blocked port after Tailscale off
+
+lessons_learned:
+  - Always `--no-cache` for critical container rebuilds
+  - Check `lsof -ti :PORT` BEFORE docker-compose up (catch local servers)
+  - Tailscale serve pattern: off → start container → re-enable serve
+  - Semantic versioning: PATCH for bug fixes, MINOR for features, MAJOR for breaking changes
+  - YAML frontmatter (`---`) not universal (some parsers fail)
+
+known_issues:
+  - epicCount returns null (separate bug, not blocker)
+  - Tailscale serve auto-off needed before container restart (manual step)
+
+future_work:
+  - Script: auto-detect port blockers before docker-compose up
+  - Pre-commit hook: reject .yml files (enforce .yaml)
+  - YAML linter: detect frontmatter delimiters in project.yaml files
+  - Container health check: verify /api/projects returns >0 projects
+
+references:
+  - Semantic Versioning: https://semver.org
+  - YAML spec: https://yaml.org/spec/1.2.2/
+  - Docker Compose docs: https://docs.docker.com/compose/
+  - Tailscale serve: https://tailscale.com/kb/1242/tailscale-serve
+
+success_criteria:
+  - ✅ All .yml files renamed to .yaml
+  - ✅ Code references updated
+  - ✅ Container builds successfully
+  - ✅ /api/projects returns project list
+  - ✅ Backstage UI accessible (localhost + Tailscale)
+  - ✅ No YAML parse errors
+  - ✅ Committed to git (3 commits)
+
+notes: |
+  Emergency patch completed in ~15 minutes.
+  
+  Nicholas triggered with: "no geral, TUDO deveria ser yaml. emergency patch no backstage?"
+  
+  Patch successful. Backstage functional. Ready to work.
