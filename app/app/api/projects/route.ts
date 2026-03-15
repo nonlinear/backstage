@@ -22,7 +22,7 @@ export async function GET() {
       .map(dirent => dirent.name)
     
     const projects = projectDirs.map(projectDir => {
-      const projectYamlPath = path.join(BACKSTAGE_ROOT, projectDir, 'project.yml')
+      const projectYamlPath = path.join(BACKSTAGE_ROOT, projectDir, 'project.yaml')
       
       let projectData: ProjectYaml = {
         name: projectDir,

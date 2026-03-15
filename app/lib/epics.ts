@@ -280,7 +280,7 @@ export function getProjectBranch(projectSlug: string): string {
  * Get checks list for a project
  */
 export function getProjectChecks(projectSlug: string): string[] {
-  const projectPath = path.join(BACKSTAGE_ROOT, projectSlug, 'project.yml')
+  const projectPath = path.join(BACKSTAGE_ROOT, projectSlug, 'project.yaml')
   
   try {
     const content = fs.readFileSync(projectPath, 'utf-8')
