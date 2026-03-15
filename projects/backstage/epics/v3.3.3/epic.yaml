@@ -1,6 +1,6 @@
 ---
 version: "3.3.3"
-name: "Markdown visualization"
+name: "markdown is king"
 status: backlog
 started: null
 priority: patch
@@ -8,15 +8,24 @@ type: patch
 squad: backstage
 
 description: |
-  Improve markdown note viewing experience - better visualizer, fullscreen, actions, permalinks
+  Improve markdown note viewing experience - better visualizer, fullscreen, pinned notes, actions, permalinks
 
 tasks:
-  - text: "Shop for better visualizers (react-markdown alternatives)"
-    checked: false
-  - text: "Markdown fullscreen option (expand note to full viewport)"
-    checked: false
-  - text: "Open file/copy text/copy link/return actions (note toolbar)"
-    checked: false
-  - text: "Markdown permalink (how? hash-based? query param?)"
-    checked: false
+  - group: "Visualizer"
+    items:
+      - text: "Shop for better visualizers (react-markdown alternatives)"
+        checked: false
+      - text: "Markdown fullscreen option (expand note to full viewport)"
+        checked: false
+      - text: "Open file/copy text/copy link/return actions (note toolbar)"
+        checked: false
+      - text: "Markdown permalink (how? hash-based? query param?)"
+        checked: false
+  
+  - group: "Pinned Notes"
+    items:
+      - text: "On fullscreen, possibility to pin a note"
+        checked: false
+      - text: "Pinned notes menu, with just notes as cards, with possibility to fullscreen"
+        checked: false
 ---
