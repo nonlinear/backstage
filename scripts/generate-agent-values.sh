@@ -58,3 +58,22 @@ done
 
 echo ""
 echo "✅ All agent .values.md files generated"
+
+# FUTURE INTEGRATION (Epic v3.3.1 - Hot Reload):
+#
+# When Backstage has file watcher, trigger this script on:
+# - values/**/*.md changes
+# - squads/**/values/**/*.md changes
+# - organization.yaml changes
+# - squads/**/squad.yaml changes
+#
+# Watcher example (chokidar):
+#   const watcher = chokidar.watch([
+#     'values/**/*.md',
+#     'squads/**/values/**/*.md',
+#     'organization.yaml',
+#     'squads/**/squad.yaml'
+#   ]);
+#   watcher.on('change', () => {
+#     exec('./scripts/generate-agent-values.sh');
+#   });
