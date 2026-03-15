@@ -1,96 +1,26 @@
-version: "0.27.0"
-title: "Cover Extraction"
+---
+name: "Cover Extraction"
+goal: "Extract EPUB covers automatically, store in covers/ folder for GUI display"
 status: active
+type: "minor"
+created: 2026-03-10
 started: 2026-03-10
-squad: librarian
-
-description: |
-  Extract EPUB covers automatically, store in covers/ folder (not hidden, committed to git)
-  Scan books/ recursively, skip covers/ folder to avoid processing extracted images
-  Generate .jpg covers at 300px width for GUI display
-
+completed: null
 tasks:
-  - group: "Cover Extraction Implementation"
-    items:
-      - text: "Create covers/ folder (visible, not hidden)"
-        checked: false
-      - text: "Update extract-covers.py to output to covers/"
-        checked: false
-      - text: "Filter scan to skip covers/ folder (if 'covers' in p.parts: continue)"
-        checked: false
-      - text: "Test: extract covers → verify in covers/"
-        checked: false
-      - text: "Commit covers/ to git (no .gitignore)"
-        checked: false
-      - text: "Update GUI to load covers from covers/ folder"
-        checked: false
-  
-  - group: "Documentation"
-    items:
-      - text: "Document covers/ strategy in epic notes"
-        checked: false
-      - text: "Update README with covers/ location"
-        checked: false
-
-notes: |
-  ## Design Decision: covers/ Folder (2026-03-12)
-  
-  **Location:** `~/Documents/librarian/covers/`
-  
-  **Strategy:**
-  - **Visible folder** (NOT hidden with `.`)
-  - **Committed to git** (NOT in .gitignore)
-  - **Scan filter:** Skip `covers/` when scanning books
-  
-  **Why visible:**
-  - Need to commit covers for GUI (part of repo)
-  - Hidden folders (`.covers/`) would need explicit gitignore exception
-  - Simpler to keep visible and filter during scan
-  
-  **Scan filter implementation:**
-  ```python
-  epubs = [
-      p for p in books_dir.rglob('*.epub')
-      if 'covers' not in p.parts  # Skip covers/ folder
-  ]
-  ```
-  
-  ## File Structure
-  
-  ```
-  ~/Documents/librarian/
-    ├── books/
-    │   ├── AI/
-    │   │   └── policy/
-    │   │       └── book.epub
-    │   └── ...
-    ├── covers/           # Extracted covers (committed)
-    │   ├── ABC123.jpg
-    │   └── XYZ789.jpg
-    ├── librarian.db
-    └── .library-index.json
-  ```
-  
-  ## Cover Naming
-  
-  **Format:** Hash of relative path (same as current)
-  - `books/AI/policy/book.epub` → `covers/ABC123.jpg`
-  - Ensures unique filenames
-  - No filesystem path issues
-  
-  ## Git Strategy
-  
-  **DO commit:**
-  - `covers/*.jpg` (GUI needs them)
-  
-  **DO NOT gitignore:**
-  - Covers are part of the repo (not temp files)
-  
-  ## Success Criteria
-  
-  - [ ] `covers/` folder exists
-  - [ ] `extract-covers.py` outputs to `covers/`
-  - [ ] Book scan skips `covers/` folder
-  - [ ] GUI loads covers from `covers/`
-  - [ ] Covers committed to git
-  - [ ] No .gitignore for covers/
+  - text: "Create covers/ folder (visible, not hidden)"
+    checked: false
+  - text: "Update extract-covers.py to output to covers/"
+    checked: false
+  - text: "Filter scan to skip covers/ folder (if 'covers' in p.parts: continue)"
+    checked: false
+  - text: "Test: extract covers → verify in covers/"
+    checked: false
+  - text: "Commit covers/ to git (no .gitignore)"
+    checked: false
+  - text: "Update GUI to load covers from covers/ folder"
+    checked: false
+  - text: "Document covers/ strategy in epic notes"
+    checked: false
+  - text: "Update README with covers/ location"
+    checked: false
+---
