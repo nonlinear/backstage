@@ -61,3 +61,23 @@ epubs = [
 - [ ] GUI loads covers from `covers/`
 - [ ] Covers committed to git
 - [ ] No .gitignore for covers/
+
+---
+
+## Implementation (2026-03-15)
+
+**Covers extracted:** 179/281 EPUBs (102 failed - no cover found or corrupt file)
+
+**Docker volume mount added:**
+```yaml
+volumes:
+  - ${HOME}/Documents/librarian/covers:/app/public/covers:ro
+```
+
+**Files:**
+- `~/.studio/docker-compose.yml` (librarian service)
+- `~/Documents/librarian/covers/` (179 .jpg/.png/.jpeg files)
+
+**Verified:** http://localhost:8766/covers/{hash}.{ext} returns 200 OK
+
+**Status:** Task completed ✅
