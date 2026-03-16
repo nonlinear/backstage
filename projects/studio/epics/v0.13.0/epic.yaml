@@ -7,139 +7,76 @@ type: "minor"
 created: null
 started: null
 completed: null
-tasks:
-  - text: "Choose storage method (Keychain vs encrypted file)"
-    checked: false
-  - text: "Implement token save/load functions"
-    checked: false
-  - text: "Add token refresh automation (check expiry daily)"
-    checked: false
-  - text: "Create .gitignore rules (block /tokens/, /secrets/)"
-    checked: false
-  - text: "Audit existing files for accidental token leaks"
-    checked: false
-  - text: "Test: save Graph API token, reload after restart"
-    checked: false
-  - text: "Document: How to rotate tokens if compromised"
-    checked: false
-  - text: "Choose obfuscated path (e.g., .config/system-prefs)"
-    checked: false
-  - text: "Create migration script (mv + symlink)"
-    checked: false
-  - text: "Update hardcoded paths in all scripts"
-    checked: false
-  - text: "Test: OpenClaw boots and finds data"
-    checked: false
-  - text: "Document: Real location of workspace"
-    checked: false
-  - text: "Create encrypted DMG for workspace"
-    checked: false
-  - text: "Script: auto-mount with Touch ID on OpenClaw start"
-    checked: false
-  - text: "Script: auto-dismount on screen lock/idle (15min)"
-    checked: false
-  - text: "Test: Access data without auth (should fail)"
-    checked: false
-  - text: "Document: Unlock workspace if biometrics fail"
-    checked: false
-  - text: "Install imagesnap + CoreLocationCLI"
-    checked: false
-  - text: "Create stealth alert script"
-    checked: false
-  - text: "Integrate with fswatch (file monitoring)"
-    checked: false
-  - text: "Test: Trigger alert, verify SMS received"
-    checked: false
-  - text: "Configure Telegram bot token (encrypted)"
-    checked: false
-  - text: "Implement offline queue (send when network returns)"
-    checked: false
-  - text: "Document: Disable surveillance when lending device"
-    checked: false
-  - text: "Change port from 18789 to random high port"
-    checked: false
-  - text: "Update webchat URL"
-    checked: false
-  - text: "Document port change in connections"
-    checked: false
-  - text: "Test: verify webchat works on new port"
-    checked: false
-  - text: "Install Fail2ban on NAS"
-    checked: false
-  - text: "Configure SSH jail (3 failures = 24h ban)"
-    checked: false
-  - text: "Test: trigger false login attempts, verify ban"
-    checked: false
-  - text: "Document in connections/nas-security.md"
-    checked: false
-  - text: "Install UFW on NAS"
-    checked: false
-  - text: "Configure firewall rules"
-    checked: false
-  - text: "Test: verify services accessible from LAN"
-    checked: false
-  - text: "Document in connections/nas-firewall.md"
-    checked: false
-  - text: "Create security audit skill"
-    checked: false
-  - text: "Daily cron job: analyze logs, report suspicious activity"
-    checked: false
-  - text: "Alert via Telegram if anomalies detected"
-    checked: false
-  - text: "Weekly security report"
-    checked: false
-  - text: "Choose monitoring approach (launchd/systemd)"
-    checked: false
-  - text: "Create watchdog script"
-    checked: false
-  - text: "Test: kill OpenClaw, verify alert + auto-restart"
-    checked: false
-  - text: "Monitor NAS Docker containers"
-    checked: false
-  - text: "Document in connections/openclaw-monitoring.md"
-    checked: false
 
-  - group: "Beginner Security Resources"
+tasks:
+  - group: "Token Management"
     items:
-      - text: "Review [ClosedPaw beginner setup guide](https://www.closedpaw.info/openclawguide/) - Tab 1 only (security basics)"
+      - text: "Choose storage method (Keychain vs encrypted file)"
         checked: false
-        note: "Surface-level intro (Tailscale, prompt injection warnings). Official docs go deeper."
+      - text: "Implement token save/load functions"
+        checked: false
+      - text: "Add token refresh automation (check expiry daily)"
+        checked: false
+      - text: "Create .gitignore rules (block /tokens/, /secrets/)"
+        checked: false
+      - text: "Audit existing files for accidental token leaks"
+        checked: false
+      - text: "Test: save Graph API token, reload after restart"
+        checked: false
+      - text: "Document: How to rotate tokens if compromised"
+        checked: false
   
-  - group: "OpenClaw Security Hardening"
-    reference: "https://docs.openclaw.ai/gateway/security"
+  - group: "Workspace Obfuscation"
     items:
-      - text: "Run `openclaw security audit` (baseline check)"
+      - text: "Choose obfuscated path (e.g., .config/system-prefs)"
         checked: false
-      - text: "Run `openclaw security audit --deep` (live Gateway probe)"
+      - text: "Create migration script (mv + symlink)"
         checked: false
-      - text: "Apply hardened baseline config (60-second hardening)"
+      - text: "Update hardcoded paths in all scripts"
         checked: false
-      - text: "Set gateway.mode: local, bind: loopback"
+      - text: "Test: OpenClaw boots and finds data"
         checked: false
-      - text: "Set gateway.auth.mode: token (long random token)"
+      - text: "Document: Real location of workspace"
         checked: false
-      - text: "Set session.dmScope: per-channel-peer (isolate DMs)"
+  
+  - group: "Encrypted Storage"
+    items:
+      - text: "Create encrypted DMG for workspace"
         checked: false
-      - text: "Set tools.profile: messaging (disable automation/runtime/fs by default)"
+      - text: "Script: auto-mount with Touch ID on OpenClaw start"
         checked: false
-      - text: "Set tools.deny: [group:automation, group:runtime, group:fs, sessions_spawn, sessions_send]"
+      - text: "Script: auto-dismount on screen lock/idle (15min)"
         checked: false
-      - text: "Set tools.fs.workspaceOnly: true (prevent directory traversal)"
+      - text: "Test: Access data without auth (should fail)"
         checked: false
-      - text: "Set tools.exec.security: deny, ask: always"
+      - text: "Document: Unlock workspace if biometrics fail"
         checked: false
-      - text: "Set tools.elevated.enabled: false"
+  
+  - group: "Stealth Alerts"
+    items:
+      - text: "Install imagesnap + CoreLocationCLI"
         checked: false
-      - text: "Fix any CRITICAL findings from audit (fs perms, gateway bind/auth, Tailscale Funnel)"
+      - text: "Create stealth alert script"
         checked: false
-      - text: "Fix WARN findings (browser control exposure, plugin allowlists)"
+      - text: "Integrate with fswatch (file monitoring)"
         checked: false
-      - text: "Review credential storage locations (~/.openclaw/credentials/)"
+      - text: "Test: Unauthorized access triggers photo + location"
         checked: false
-      - text: "Verify ~/.openclaw permissions (not world-readable/writable)"
+      - text: "Document: Review alerts (where photos saved)"
         checked: false
-      - text: "Document trust boundary (personal assistant model, not multi-tenant)"
-        checked: false
-      - text: "Re-run audit after hardening (verify all critical issues fixed)"
-        checked: false
+
+deliverables:
+  - "Token storage (Keychain or encrypted file)"
+  - "Obfuscated workspace path"
+  - "Encrypted DMG with Touch ID auto-mount"
+  - "Stealth alerts (photo + location on breach)"
+
+notes: |
+  Security layers (defense in depth):
+  1. Token management (prevent accidental leaks)
+  2. Workspace obfuscation (hide sensitive data)
+  3. Encrypted storage (require biometric unlock)
+  4. Stealth alerts (detect unauthorized access)
+  
+  Goal: Make system dependable for sensitive operations.
 ---
