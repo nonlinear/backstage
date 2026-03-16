@@ -194,7 +194,6 @@ stateDiagram-v2
     [*] --> backlog: 1️⃣ Create
     backlog --> intake: 2️⃣ Prioritize
     intake --> grooming: 3️⃣ Brief done
-    grooming --> grooming: More discussion
     grooming --> ready: 4️⃣ Zero ambiguities
     ready --> grooming: 5️⃣ Found ambiguity
     ready --> done: 6️⃣ Tasks complete
