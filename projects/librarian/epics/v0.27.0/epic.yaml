@@ -1,28 +1,32 @@
 ---
 name: "Cover Extraction"
 goal: "Extract EPUB covers automatically, store in covers/ folder for GUI display"
-status: done
+status: active
 type: "minor"
 created: 2026-03-10
 started: 2026-03-10
-completed: 2026-03-16
+completed: null
 tasks:
   - text: "Create covers/ folder (visible, not hidden)"
     checked: true
-  - text: "Update extract-covers.py to output to covers/"
+  - text: "Update extract-covers.py to output to covers/ with hash naming"
     checked: true
-  - text: "Filter scan to skip covers/ folder (if 'covers' in p.parts: continue)"
-    checked: false
-  - text: "Test: extract covers → verify in covers/"
-    checked: true
-  - text: "Commit covers/ to git (no .gitignore)"
-    checked: true
-  - text: "Update GUI to load covers from covers/ folder"
-    checked: false
-  - text: "Document covers/ strategy in epic notes"
-    checked: true
-  - text: "Update README with covers/ location"
-    checked: false
   - text: "Delete duplicate covers from books/TOPIC/*"
     checked: true
+  - text: "Document covers/ strategy in epic notes"
+    checked: true
+  - text: "Install Playwright for visual testing"
+    checked: false
+  - text: "Run GUI + screenshot current state (see what's broken)"
+    checked: false
+  - text: "Update scan to add cover_hash to .library-index.json"
+    checked: false
+  - text: "Update GUI to read cover_hash from index and serve from /covers/"
+    checked: false
+  - text: "Update scan to delete orphan covers (EPUBs removed)"
+    checked: false
+  - text: "Test visually via Playwright screenshot (covers render)"
+    checked: false
+  - text: "Update README with covers/ location"
+    checked: false
 ---
