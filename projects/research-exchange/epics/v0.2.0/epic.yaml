@@ -1,57 +1,24 @@
 ---
-version: v0.2.0
-name: Config Design Engineer
-status: active
-created: 2026-03-13
+name: "Steps Structure (Vanilla MUI)"
+goal: "Rebuild all 15 ReX steps in vanilla MUI (desktop, no theming yet)"
+status: backlog
 type: minor
-goal: "Configure design-engineer agent with complete framework, skills, MCPs, values, and library before activation"
+
 tasks:
-  - text: "Define agent role & responsibilities (UI/UX implementation)"
-    checked: true
-  - text: "Review library topics (design/, usability/, creativity/), can add other topics if useful"
+  - text: "Setup Vite + React + MUI project"
     checked: false
-  - text: "Define decision boundaries (when to act vs ask)"
-    checked: true
-  - text: "Select core values (from organization values list)"
-    checked: true
-  - text: "Define design-specific values (accessibility, consistency, etc.)"
-    checked: true
-  - text: "Create .values.md template"
-    checked: true
-  - text: "Identify required skills (design-discrepancy, ui-ux-design, peekaboo)"
-    checked: true
-  - text: "Install missing skills via ClawHub"
+  - text: "Configure React Router (/, /steps/:id, /components/:name)"
     checked: false
-  - text: "Document skill triggers in agent SOUL.md"
+  - text: "Implement Step 1-5 (My Submissions → Title)"
     checked: false
-  - text: "Test skill execution"
+  - text: "Implement Step 6-10 (Abstract → Match Organizations)"
     checked: false
-  - text: "Research Figma MCP (read/validate designs)"
+  - text: "Implement Step 11-15 (Additional Info → Confetti)"
     checked: false
-  - text: "Research Chrome MCP (screenshot, inspect)"
+  - text: "Copy/content matching original ReX"
     checked: false
-  - text: "Research available MCPs (MCP Hub links)"
+  - text: "Configure GitHub Pages deployment (GitHub Actions)"
     checked: false
-  - text: "Document MCP usage patterns"
-    checked: false
-  - text: "Identify missing library topics"
-    checked: false
-  - text: "Add foundational design books via librarian"
-    checked: false
-  - text: "Document library structure in .library.md"
-    checked: false
-  - text: "Write SOUL.md personality & tone"
-    checked: false
-  - text: "Define example interactions"
-    checked: false
-  - text: "Define trigger phrases"
-    checked: false
-  - text: "Define handoff protocols (to other agents)"
-    checked: false
-  - text: "Validate agent.yaml schema"
-    checked: false
-  - text: "Test Matrix DM room"
-    checked: false
-  - text: "Verify values injection"
+  - text: "Verify all permalinks work (/steps/7, etc.)"
     checked: false
 ---

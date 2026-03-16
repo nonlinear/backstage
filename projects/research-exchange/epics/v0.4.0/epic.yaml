@@ -1,0 +1,24 @@
+---
+name: "Responsive (Mobile/Tablet)"
+goal: "Adapt all 15 steps for smaller screens (mobile/tablet breakpoints)"
+status: backlog
+type: minor
+
+tasks:
+  - text: "Define breakpoints (mobile < 600px, tablet 600-960px, desktop > 960px)"
+    checked: false
+  - text: "Extract mobile variants from Figma (ReX steps mobile layouts)"
+    checked: false
+  - text: "Update theme with responsive overrides (spacing, font sizes)"
+    checked: false
+  - text: "Adapt Step 1-5 for mobile (collapsible nav, stacked layout)"
+    checked: false
+  - text: "Adapt Step 6-10 for mobile"
+    checked: false
+  - text: "Adapt Step 11-15 for mobile"
+    checked: false
+  - text: "Test on real devices (iPhone, iPad, Android)"
+    checked: false
+  - text: "Deploy responsive build to GitHub Pages"
+    checked: false
+---

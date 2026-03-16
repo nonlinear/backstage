@@ -1,53 +1,20 @@
 ---
-version: v0.3.0
-name: True Parity
-status: active
-created: 2026-03-16
+name: "ReX Theme Layer"
+goal: "Create MUI theme that transforms vanilla steps into ReX visual style"
+status: backlog
 type: minor
-goal: "Guarantee agent visual verification BEFORE marking UI work done"
+
 tasks:
-  - text: "Research visual regression testing (Chromatic, Percy, Applitools)"
+  - text: "Extract design tokens from Figma (colors, fonts, spacing, radii)"
     checked: false
-  - text: "Research component development tools (Storybook)"
+  - text: "Create rexTheme.ts (MUI theme object)"
     checked: false
-  - text: "Research UI snapshot testing (Jest image snapshots)"
+  - text: "Override component defaults (Button variants, TextField styling, etc.)"
     checked: false
-  - text: "Research git hook patterns (pre-commit, pre-push)"
+  - text: "Apply theme to all 15 steps (verify visual similarity)"
     checked: false
-  - text: "Document findings in notes.md"
+  - text: "Document theme structure (what controls what)"
     checked: false
-  - text: "Define 'UI work' (what counts as UI change)"
-    checked: false
-  - text: "Define verification steps (Playwright + assertions + screenshot)"
-    checked: false
-  - text: "Define task completion criteria"
-    checked: false
-  - text: "Update AGENTS.md with protocol"
-    checked: false
-  - text: "Document examples of compliant workflow"
-    checked: false
-  - text: "Create Playwright test: covers render correctly"
-    checked: false
-  - text: "Create Playwright test: no broken images"
-    checked: false
-  - text: "Create Playwright test: books list loads"
-    checked: false
-  - text: "Assertions prevent false 'done'"
-    checked: false
-  - text: "Screenshot comparison (optional)"
-    checked: false
-  - text: "Choose enforcement approach (AGENTS.md protocol vs git hook vs CI)"
-    checked: false
-  - text: "Implement chosen enforcement mechanism"
-    checked: false
-  - text: "Test: try to mark done without verification → should fail"
-    checked: false
-  - text: "Update AGENTS.md: UI Verification Protocol"
-    checked: false
-  - text: "Document Playwright setup per-project"
-    checked: false
-  - text: "Add to connections/ (if reusable pattern)"
-    checked: false
-  - text: "Verify Librarian v0.27.0 covers using new protocol"
+  - text: "Visual regression test (screenshot Figma vs implementation)"
     checked: false
 ---

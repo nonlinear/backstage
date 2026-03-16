@@ -1,24 +1,20 @@
 ---
-version: v0.1.0
-name: "Foundation"
-goal: "Setup ReX in MUI project foundation"
-status: backlog
-type: "minor"
-created: null
-started: null
-completed: null
+name: "Component Inventory & MUI Mapping"
+goal: "Map every ReX component to best MUI equivalent, document decisions"
+status: intake
+type: minor
+
 tasks:
-  - text: "Storybook or not?"
+  - text: "Extract component list from Figma Steps canvas (all 15 steps)"
     checked: false
-  - text: "React + MUI?"
+  - text: "Create mapping doc: ReX component → MUI component + variant + props"
     checked: false
-  - text: "Parity (design vs implementation)"
+  - text: "Identify gaps (ReX features not available in MUI out-of-box)"
     checked: false
-  - text: "Agents needed (which squad/agents for this work?)"
+  - text: "Prototype 2-3 mapped components (proof of concept)"
     checked: false
-  - text: "Collect inventory (existing ReX components)"
+  - text: "Document mapping decisions (why this MUI variant chosen)"
     checked: false
-  - text: "GitHub repo setup"
+  - text: "Define visual similarity threshold (not pixel-perfect, but recognizable)"
     checked: false
-  - text: "GitHub Pages deployment?"
-    checked: false
+---

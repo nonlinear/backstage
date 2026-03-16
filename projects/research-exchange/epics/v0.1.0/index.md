@@ -1,112 +1,75 @@
-# Epic Notes
+# Component Inventory & MUI Mapping
 
-> Version, name, status → see `epic.yaml`
-
----
-
-## Context
-
-ReX in MUI = Redesign/rebuild ReX submission system components in Material-UI.
-
-**Current state:** Wiley uses legacy ReX UI (jQuery era?)
-
-**Goal:** Modernize with React + MUI component library.
+**Status:** Intake (design-engineer + Nicholas)
 
 ---
 
-## Open Questions
+## Problem
 
-### Storybook or not?
+ReX submission system has 15 steps with modular, Lego-style components. Need to map each ReX component to best Material-UI equivalent before rebuilding.
 
-**Pros (Storybook):**
-- Component isolation (develop/test independently)
-- Documentation auto-generated
-- Design review easier (designers see live components)
-- Industry standard (team familiarity)
-
-**Cons:**
-- Additional setup/maintenance
-- Overkill if small component count
-
-**Decision:** TBD
+**Why mapping first:** Validate MUI covers ReX needs, identify gaps early, avoid rework.
 
 ---
 
-### React + MUI?
+## Scope
 
-**Assumed stack:**
-- React (component framework)
-- Material-UI (MUI) for design system
-- TypeScript? (type safety)
+**In scope:**
+- Inventory all components from Figma (Steps canvas, 15 folders)
+- Map to MUI components + variants
+- Prototype 2-3 components (validate mapping works)
+- Document decisions (why TextField vs Input, which Button variant, etc.)
 
-**Verify:**
-- Is MUI v5 or v6?
-- Wiley's design system = MUI compliant?
-- Custom theme needed?
-
----
-
-### Parity (Design vs Implementation)
-
-**What needs parity:**
-- Figma designs → MUI components
-- Legacy ReX → new ReX (feature parity)
-- Accessibility (WCAG compliance)
-
-**Tracking:**
-- connections/parity.md strategy applies here
-- Document what works vs what failed
-
----
-
-### Agents Needed
-
-**Which squad/agents:**
-- Design squad (UXR, Design, Animator?)
-- Engineering squad (Defense, Meta?)
-- Marketing? (if public-facing docs)
-
-**Decision:** TBD (depends on scope)
-
----
-
-### Collect Inventory
-
-**What exists:**
-- ReX submission forms (affiliation, funder, etc.)
-- Error states, validation
-- Multi-step workflows
-
-**Action:**
-- Audit legacy ReX (screenshot flows)
-- List components (forms, buttons, modals, etc.)
-- Prioritize (what to build first)
-
----
-
-### GitHub Repo + Pages
-
-**Repo structure:**
-- `/components` (MUI components)
-- `/stories` (Storybook if yes)
-- `/docs` (setup, usage)
-
-**GitHub Pages:**
-- Deploy Storybook publicly?
-- Or internal only (Wiley firewall)?
-
-**Decision:** TBD
+**Out of scope:**
+- Theming (v0.3.0)
+- Full implementation (v0.2.0)
+- Mobile variants (v0.4.0)
 
 ---
 
 ## Success Criteria
 
-- ✅ Foundation decisions made (Storybook yes/no, stack confirmed)
-- ✅ Inventory complete (know what to build)
-- ✅ Repo created + first component committed
-- ✅ Agents assigned (who does what)
-- ✅ Parity strategy documented
+- [ ] Complete mapping doc (component → MUI equivalent)
+- [ ] Gap analysis documented (what MUI doesn't cover)
+- [ ] 2-3 prototype components deployed (GitHub Pages)
+- [ ] Visual similarity threshold defined ("recognizable, not pixel-perfect")
+- [ ] Mapping decisions documented (template for other components)
 
 ---
 
-**Next:** Answer open questions, create ROADMAP.md for ReX in MUI
+## Resources
+
+**Figma:**
+- File: `CmAtBaedooTgME20c0pE7s` (ReX Components)
+- Node: Steps canvas (`594:31935`)
+- API access: `~/Documents/personal/.env` (FIGMA_TOKEN)
+
+**Reference:**
+- 15 folders: `/Users/nonlinear/Documents/wiley/storybook/reference/ReX steps/`
+- SVG exports (desktop/mobile, variations, error states)
+
+**MUI:**
+- Docs: https://mui.com/material-ui/
+- Component API: https://mui.com/material-ui/api/
+
+---
+
+## Stakeholders
+
+**Primary:**
+- Nicholas (product owner, knows ReX inside-out)
+- design-engineer (mapping work, prototypes)
+
+**Future:**
+- front-end-engineer (full implementation in v0.2.0)
+- QA (visual regression testing)
+
+---
+
+## Next Steps
+
+1. Extract component list from Figma (API or manual)
+2. Create spreadsheet: ReX component | MUI component | Variant | Props | Notes
+3. Prototype Button, TextField, Card (most common)
+4. Deploy to GitHub Pages (validate permalinks work)
+5. Document template for remaining components
