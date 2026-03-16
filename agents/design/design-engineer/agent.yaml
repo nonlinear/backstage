@@ -7,15 +7,19 @@ tools: []
 skills: []
 mcps: []
 library:
-  - technology/computer-vision
-  - technology/hugo
-  - technology/internet-of-things
-  - technology/threejs
-  - technology/vscode
-  - technology/web-animation
-  - design/data-visualization
-  - design/generative
-  - design/interaction
-  - design/usability
+  # Technology
+  - technology_computer_vision
+  - technology_hugo
+  - technology_internet_of_things
+  - technology_threejs
+  - technology_vscode
+  - technology_web_animation
+  
+  # Design
+  - design_data_visualization
+  - design_generative
+  - design_interaction
+  - design_usability_general
+  - design_usability_rosenfeld
 values: []
 ---

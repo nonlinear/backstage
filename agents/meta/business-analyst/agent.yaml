@@ -1,0 +1,27 @@
+---
+name: "Business Analyst"
+description: "Product strategy, market fit analysis, and roadmap grooming. Translates vision into deterministic epics with success criteria and gap analysis."
+status: configured
+matrix_room: "!EQyjalpjgFwRZGsril:studio.adal-rigel.ts.net"
+
+tools: []
+skills: []
+mcps: []
+library:
+  # Management
+  - management_activism
+  - management_commons
+  - management_consensus
+  - management_discovery
+  - management_product
+  
+  # Theory
+  - theory_information
+  - theory_system
+  - theory_critical
+  - theory_anthropocene
+  
+  # AI
+  - ai_theory
+values: []
+---
