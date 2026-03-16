@@ -1,0 +1,21 @@
+---
+name: "Mattermost Agent Integration"
+goal: "Enable agents to participate in Mattermost channels for grooming sessions"
+status: intake
+type: major
+created: 2026-03-16
+started: 2026-03-16
+completed: null
+
+tasks:
+  - text: "Diagnose why bots don't receive channel events (WebSocket subscription)"
+    checked: false
+  - text: "Fix plugin event filtering for oncall mode + mentions"
+    checked: false
+  - text: "Test bot responds to @mention in public/private channels"
+    checked: false
+  - text: "Document bot setup for new agents (permissions, config)"
+    checked: false
+  - text: "Verify multiple gateways don't conflict (separate bot tokens)"
+    checked: false
+---

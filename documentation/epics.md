@@ -22,91 +22,86 @@ epics/v2.7.0/
 
 ## epic.yaml Format
 
+**Critical:** Version is in folder name (`epics/v2.7.0/`), NOT in YAML frontmatter.
+
+**DRY principle:** Don't repeat what the folder structure already says.
+
+---
+
 ### Minimal (Backlog)
 
 ```yaml
 ---
-version: v2.7.0
 name: "Epic Name"
-status: backlog
-created: 2026-03-16
-type: minor
 goal: "One-line description of what we want"
+status: backlog
+type: minor
+created: 2026-03-16
+started: null
+completed: null
 tasks: []
 ---
 ```
 
 **Required fields:**
-- `version` - Epic identifier (v{major}.{minor}.{patch})
 - `name` - Display name
-- `status` - `backlog`, `active`, `done`, `archive`
-- `created` - Date (YYYY-MM-DD)
+- `goal` - One-line summary (what success looks like)
+- `status` - `backlog`, `intake`, `grooming`, `ready`, `done`
 - `type` - `minor`, `major`, `patch`
-- `goal` - One-line summary
-- `tasks` - Array (can be empty)
+- `created` - Date (YYYY-MM-DD)
+- `started` - Date OR `null`
+- `completed` - Date OR `null`
+- `tasks` - Array (can be empty `[]`)
+
+**Location:** `~/Backstage/projects/{PROJECT}/epics/v{X.Y.Z}/epic.yaml`
+
+**Version:** In folder name ONLY (`v2.7.0`), NOT in YAML
 
 ---
 
-### Full (Active/Grooming)
+### Full (Grooming/Active)
 
 ```yaml
 ---
-version: v2.7.0
 name: "Mattermost Agent Integration"
-status: active
+goal: "Enable agents to participate in Mattermost channels for grooming sessions"
+status: grooming
+type: major
 created: 2026-03-16
 started: 2026-03-16
 completed: null
-updated: 2026-03-16 15:56 EDT
-priority: P0
-category: integration
-type: major
-
-summary: |
-  Multi-line summary explaining the epic.
-  Context, motivation, high-level approach.
-
-goal: |
-  What success looks like (measurable outcome).
-  Keep this crisp - detailed context goes in index.md.
 
 tasks:
-  - text: "Task description (action verb + deliverable)"
+  - text: "Diagnose WebSocket event filtering (design-engineer)"
     checked: false
-  - text: "Another task"
+  - text: "Test bot permissions in Mattermost (security-ops)"
+    checked: false
+  - text: "Document setup for new agents (technical-writer)"
     checked: true
-    notes: "Optional explanation or context for this task"
-
-scope: |
-  What's included, what's excluded.
-  
-  In scope:
-  - Feature X
-  - Integration Y
-  
-  Out of scope:
-  - Feature Z (deferred to v3.0.0)
-
-dependencies:
-  - Epic v1.5.0 - Foundation (must complete first)
-  - External API access (requires credentials)
-
-references:
-  - OpenClaw docs: https://docs.openclaw.ai
-  - Related issue: #123
-
-success_criteria:
-  - "Agents respond to mentions in public channels"
-  - "Bot creates grooming rooms automatically"
-  - "Zero manual configuration per agent"
-
-estimated_completion: "2026-03-20"
-
-notes: |
-  Brief inline notes (implementation hints, gotchas).
-  Long technical details → notes.md file.
+    notes: "Added to agents.md"
 ---
 ```
+
+**Optional additions:**
+- `notes` - Brief inline notes (long notes → separate `notes.md`)
+- Task `notes` - Context for specific task
+
+> 🔜 **Future fields:**
+> ```yaml
+> tasks:
+>   - text: "..."
+>     checked: false
+>     responsible: design-engineer  # Agent assignment
+>     description: "Detailed context"
+>     tests: "Command to verify completion"
+> ```
+
+**What NOT to include:**
+- ❌ `version` - Already in folder name
+- ❌ `summary` - Use separate `index.md` for long-form content
+- ❌ `context` - Use `index.md`
+- ❌ `architecture_decisions` - Use `decisions.md`
+- ❌ Markdown headers/sections - YAML is metadata only
 
 ---
 
@@ -210,110 +205,203 @@ tasks:
 
 ## Epic Lifecycle
 
-### 1. Backlog (Idea)
+```mermaid
+stateDiagram-v2
+    [*] --> backlog: Create epic
+    backlog --> intake: Prioritize
+    intake --> grooming: Brief complete
+    grooming --> ready: Zero ambiguities
+    ready --> done: All tasks completed
+    done --> [*]
+    
+    grooming --> grooming: More discussion needed
+    ready --> grooming: Found ambiguity
+    
+    note right of backlog
+        Created, not picked up yet
+    end note
+    
+    note right of intake
+        Nicholas + business-analyst
+        write down the basics
+    end note
+    
+    note right of grooming
+        Agents bid as stakeholders
+        Discussion until exhaustion
+        Branch: v{version}
+    end note
+    
+    note right of ready
+        Night shift ready
+        Zero ambiguities
+        All tools/permissions verified
+    end note
+    
+    note right of done
+        Passes checks
+        Merge to main
+    end note
+```
 
-**State:** Exists but not prioritized
+---
+
+### 1. backlog
+
+**State:** Created, not picked up yet
 
 **Minimal YAML:**
 ```yaml
-version: v2.7.0
+---
 name: "Epic Name"
+goal: "One sentence describing outcome"
 status: backlog
-created: 2026-03-16
 type: minor
-goal: "One sentence"
+created: 2026-03-16
+started: null
+completed: null
 tasks: []
+---
 ```
 
-**Artifacts:** Epic YAML only (no channel, no assignments)
+**Who:** Nobody (idea parking lot)
+
+**Artifacts:** Epic YAML only (no branch, no channel, no assignments)
+
+**Exit criteria:** Nicholas prioritizes it for intake
 
 ---
 
-### 2. Intake (Thinking)
+### 2. intake
 
-**State:** Being refined by Nicholas + business-analyst
+**State:** Nicholas + business-analyst write down the basics
 
-**Additions:**
-- `summary` - Multi-line explanation
-- `context` - Why this epic exists
-- `dependencies` - Blockers identified
-- `success_criteria` - Draft goals
+**Who:** Nicholas (author) + business-analyst (co-author)
+
+**Activities:**
+- Write problem statement
+- Define objective
+- Identify constraints
+- Draft success criteria
+
+**Additions to YAML:**
+- `summary` - Multi-line explanation (optional)
+- `context` - Why this epic exists (optional)
+- `dependencies` - Blockers identified (optional)
 
 **Artifacts:**
-- Epic YAML with expanded fields
+- Epic YAML with expanded goal/context
 - Problem statement clarified
-- Constraints documented
+- No tasks yet, no Mattermost room yet
+
+**Exit criteria:** Brief complete, ready for stakeholder discussion
 
 ---
 
-### 3. Grooming (Alignment)
+### 3. grooming
 
-**State:** Ambiguity resolution via Mattermost
+**State:** Discussion until exhaustion (zero ambiguities)
 
-**Additions:**
-- `tasks` - Populated with agent assignments
-- `mattermost_channel_id` - Discussion room link
-- `architecture_decisions` - Key choices documented
-- `risks` - Identified and mitigated
+**Who:** Nicholas (facilitator) + agents who bid + business-analyst (always)
+
+**Git:** Branch created: `epic/v{version}` (e.g., `epic/v2.7.0`)
+
+**Agent bidding:**
+- Agents analyze epic
+- Bid if relevant: "I should join because {reason}"
+- Agents act as **quality control** for their disciplines
+- Approved agents invited to Mattermost room
+
+**Mattermost:** Private channel `#grooming-{PROJECT}-{EPIC_ID}` created
+
+**Activities:**
+- Technical debate
+- Feasibility validation
+- Architecture decisions
+- Risk identification
+- Task breakdown (per agent)
+- Diagrams, specs finalized
+
+**Additions to YAML:**
+```yaml
+tasks:
+  - text: "Task description (assigned to agent or Nicholas)"
+    checked: false
+```
+
+> 🔜 **Future:** Tasks will have `responsible` (agent select), `description`, `tests` (to prove completion)
 
 **Artifacts:**
-- Mattermost room: `#grooming-{PROJECT}-{EPIC_ID}`
-- Agent bids recorded
-- Task breakdown finalized
-- All ambiguity resolved
+- Mattermost room with full discussion
+- Diagrams (Mermaid, architecture)
+- Specs documented
+- Tasks assigned per agent (or Nicholas for supervision)
+- All ambiguities resolved
 
-**Channel lifecycle:**
-- Created when epic enters grooming
-- Archived when epic moves to ready/active
-- Permanent link in epic.yaml for auditability
-
----
-
-### 4. Ready (Execution Prep)
-
-**State:** All tasks clear, ready for autonomous execution
-
-**Validation:**
+**Exit criteria:** 
 - Zero ambiguous tasks
-- Tool access verified
-- Success criteria finalized
-- Rollback plan exists
-
-**Artifacts:**
-- Grooming channel archived
-- Tasks locked (no more changes without re-grooming)
+- Agents have all tools and permissions they need
+- Epic can be executed **unsupervised** (night shift ready)
 
 ---
 
-### 5. Active (Execution)
+### 4. ready (for night shift)
 
-**State:** Agents working on tasks
+**State:** Agents work on tasks in order until completion
 
-**Updates:**
-- `started` - Date set
-- `tasks[].checked` - Marked as completed
-- `updated` - Timestamp on changes
+**Who:** Agents (execute) + Nicholas (supervise OR fully autonomous)
+
+**Git:** Work happens on branch `epic/v{version}`
+
+**Mattermost:** Channel archived (discussion done, now execution)
+
+**Activities:**
+- Agents work on assigned tasks sequentially
+- Commit code, run tests, report progress
+- Nicholas may have "review work" tasks
+
+> 🔜 **Future:** "Create presentation to defend your ideas" tasks before review
+
+**Review cycle:**
+- Nicholas reviews work
+- Either: pass (merge) OR request changes (better checks, etc.)
 
 **Artifacts:**
 - Code commits
 - Test results
-- Progress updates (in Mattermost OR task notes)
+- Progress updates
+- Implementation artifacts
+
+**Exit criteria:** All tasks `checked: true`, passes quality checks
 
 ---
 
-### 6. Done (Complete)
+### 5. done
 
-**State:** All tasks completed, approved
+**State:** Task passes checks, merged to main
 
-**Final updates:**
-- `completed` - Date set
-- `status: done`
-- All tasks `checked: true`
+**Who:** Nicholas (final approval) + QA (automated checks)
+
+**Git:** Branch `epic/v{version}` merged to `main`
+
+**YAML updates:**
+```yaml
+status: done
+completed: 2026-03-20
+tasks:
+  - text: "..."
+    checked: true  # All tasks completed
+```
+
+> 🔜 **Future:** Automated checks enforce task completion before merge
 
 **Artifacts:**
-- Final documentation
-- Lessons learned (in `notes.md` or `key_insights`)
-- Mattermost room export (if applicable)
+- Merged code
+- Closed Mattermost room (archived for audit)
+- Lessons learned (optional)
+- Documentation updated
+
+**Exit criteria:** Epic complete, artifacts archived
 
 ---
 
