@@ -1,6 +1,6 @@
 ---
 name: "Object Cleanup (Surface Management)"
-goal: "Surface values, MCPs, skills, and tagged notes for easier organization"
+goal: "Surface values, MCPs, skills, connections, and tagged notes for easier organization"
 status: backlog
 type: "minor"
 created: 2026-03-15
@@ -12,6 +12,7 @@ scope: |
   - Values (organization/squad/agent)
   - MCPs (squad-level)
   - Skills (organization/squad/agent)
+  - Connections (service integration docs)
   - Tagged notes (hardcoded list initially, GUI later)
   
   Each object type needs:
@@ -73,6 +74,30 @@ tasks:
     checked: false
     notes: "Scan agent/skills/, verify each symlink target exists"
   
+  # Connections Management
+  - text: "List connections: Show all service integration docs"
+    checked: false
+    notes: "ls ~/Documents/personal/connections/*.md, show service name + status"
+  
+  - text: "Add connection: Create new connection documentation"
+    checked: false
+    notes: |
+      Template (connections/SERVICE.md):
+      - Service name + URL
+      - Auth method (API key, OAuth, Basic)
+      - Endpoints used
+      - Credentials location (.env variables)
+      - Example usage
+      - Gotchas/known issues
+  
+  - text: "Remove connection: Archive old connection docs"
+    checked: false
+    notes: "Move to connections/archive/ (deprecated services)"
+  
+  - text: "Validate connections: Check all .env credentials exist"
+    checked: false
+    notes: "Read connections/*.md, extract .env vars, verify each exists in .env"
+  
   # Tagged Notes Management
   - text: "List tagged notes: Hardcoded list initially (GUI later)"
     checked: false
@@ -117,6 +142,12 @@ CLI_commands:
     - "backstage skills remove SKILL [--org|--squad SQUAD|--agent AGENT]"
     - "backstage skills validate"
   
+  connections:
+    - "backstage connections list"
+    - "backstage connections add SERVICE"
+    - "backstage connections remove SERVICE"
+    - "backstage connections validate"
+  
   notes:
     - "backstage notes list [--tag TAG]"
     - "backstage notes add --tag TAG --text TEXT [--epic EPIC]"
@@ -129,6 +160,8 @@ future_enhancements:
   - Bulk operations (add skill to multiple agents)
   - Dependency tracking (which agents use which values?)
   - Usage analytics (most-used skills, least-used values)
+  - Connection health check (test API endpoints)
+  - Credential rotation reminders (token expiration)
 
 notes: |
   Make invisible configuration visible.
@@ -136,4 +169,6 @@ notes: |
   
   Start with CLI, migrate to GUI later.
   Hardcoded tag list initially (prevent tag sprawl).
+  
+  Connections = critical (avoid re-asking for credentials).
 ---
