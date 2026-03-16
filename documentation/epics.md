@@ -639,7 +639,137 @@ mattermost_url: "http://localhost:8065/..."
 
 ---
 
-## Tools
+## Creating a New Epic
+
+### Step 1: Find Next Version
+
+```bash
+# List existing epics, get latest version
+ls ~/Backstage/projects/{PROJECT}/epics/ | grep -E "^v[0-9]" | sort -V | tail -1
+# Example output: v4.2.0
+
+# Next version:
+# - Minor feature: v4.3.0 (most common)
+# - Major breaking: v5.0.0 (rare)
+# - Patch/fix: v4.2.1 (small tweaks)
+```
+
+### Step 2: Create Epic Folder & Branch
+
+```bash
+cd ~/Backstage
+mkdir -p projects/{PROJECT}/epics/v4.3.0
+git checkout -b epic/v4.3.0
+```
+
+### Step 3: Write epic.yaml (Minimal)
+
+```yaml
+---
+name: "Epic Name"
+goal: "One-line outcome description"
+status: intake
+type: major
+created: 2026-03-16
+started: 2026-03-16
+completed: null
+
+tasks:
+  - text: "First task description"
+    checked: false
+  - text: "Second task description"
+    checked: false
+---
+```
+
+**Save as:** `projects/{PROJECT}/epics/v4.3.0/epic.yaml`
+
+**Rules:**
+- NO `version` field (folder name is source of truth)
+- `status: intake` (backlog = not started, intake = actively refining)
+- `type: major` for foundational work, `minor` for features, `patch` for fixes
+- `started: 2026-03-16` if you're working on it NOW (else `null`)
+
+### Step 4: Write index.md (Context)
+
+```markdown
+# Epic Name
+
+**Status:** Description of current state
+
+---
+
+## Problem
+
+What problem are we solving? Why does this epic exist?
+
+---
+
+## Current State
+
+What works, what doesn't, what's been diagnosed.
+
+---
+
+## Success Criteria
+
+- [ ] Measurable outcome 1
+- [ ] Measurable outcome 2
+
+---
+
+## Stakeholders
+
+Who's involved, who will work on this.
+
+---
+
+## Next Steps
+
+Immediate actions to move forward.
+```
+
+**Save as:** `projects/{PROJECT}/epics/v4.3.0/index.md`
+
+### Step 5: Commit
+
+```bash
+cd ~/Backstage
+git add projects/{PROJECT}/epics/v4.3.0/
+git commit -m "epic: v4.3.0 Epic Name (intake)
+
+Brief description of problem and approach.
+
+Status: intake
+Type: major/minor/patch
+
+Tasks:
+- Task 1
+- Task 2"
+```
+
+### Step 6: Transition to Grooming (When Ready)
+
+1. Update `epic.yaml`:
+   ```yaml
+   status: grooming
+   ```
+
+2. Create Mattermost channel: `#grooming-{PROJECT}-{EPIC_ID}`
+
+3. Agents bid to join (quality control for their disciplines)
+
+4. Discussion until zero ambiguities
+
+5. Finalize tasks (assign to agents)
+
+6. Exit criteria: Can be executed unsupervised (night shift ready)
+
+---
+
+## Tools (Future)
+
+> 🔜 **These commands don't exist yet, but will simplify the process:**
 
 ### Create epic
 ```bash
@@ -655,13 +785,13 @@ backstage epic task "Implement X"
 
 ### Update status
 ```bash
-backstage epic status active
+backstage epic status grooming
 backstage epic complete
 ```
 
 ### View
 ```bash
-backstage read epics/v2.7.0/epic.yaml
+backstage read epics/v4.3.0/epic.yaml
 # Renders in terminal (Mermaid diagrams, tables, etc.)
 ```
 
