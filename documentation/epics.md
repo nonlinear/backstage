@@ -194,12 +194,11 @@ stateDiagram-v2
     [*] --> backlog: Create epic
     backlog --> intake: Prioritize
     intake --> grooming: Brief complete
-    grooming --> ready: Zero ambiguities
+    grooming --> grooming: More discussion needed
+    grooming --> ready: Zero ambiguities resolved
+    ready --> grooming: Found ambiguity/blocker
     ready --> done: All tasks completed
     done --> [*]
-    
-    grooming --> grooming: More discussion needed
-    ready --> grooming: Found ambiguity
     
     note right of backlog
         Created, not picked up yet
@@ -213,13 +212,14 @@ stateDiagram-v2
     note right of grooming
         Agents bid as stakeholders
         Discussion until exhaustion
-        Branch: v{version}
+        Branch: epic/v{version}
+        MUST resolve ALL ambiguities
     end note
     
     note right of ready
-        Night shift ready
-        Zero ambiguities
-        All tools/permissions verified
+        Night shift execution
+        CAN FAIL: ambiguity found → back to grooming
+        Zero tolerance for unclear tasks
     end note
     
     note right of done
@@ -330,6 +330,13 @@ tasks:
 
 **State:** Agents work on tasks in order until completion
 
+**Entry criteria (STRICT):**
+- ✅ Zero ambiguous tasks
+- ✅ All tools and permissions verified
+- ✅ Each task has clear deliverable
+- ✅ Success criteria measurable
+- ✅ No open questions from grooming
+
 **Who:** Agents (execute) + Nicholas (supervise OR fully autonomous)
 
 **Git:** Work happens on branch `epic/v{version}`
@@ -354,6 +361,45 @@ tasks:
 - Implementation artifacts
 
 **Exit criteria:** All tasks `checked: true`, passes quality checks
+
+---
+
+#### When Ready Fails (Back to Grooming)
+
+**Triggers:**
+- Agent encounters ambiguity during execution
+- Tool/permission missing (wasn't verified in grooming)
+- Task deliverable unclear ("what does 'working' mean?")
+- Success criteria not measurable
+- Dependency discovered that wasn't discussed
+
+**Process:**
+1. Agent stops work immediately (don't guess)
+2. Update `status: grooming` in epic.yaml
+3. Re-open Mattermost channel (or create new thread)
+4. Document what was ambiguous: "Task X unclear because..."
+5. Discuss until resolved
+6. Update tasks with clarifications
+7. Verify ALL other tasks still clear
+8. Return to `status: ready` only when zero ambiguities again
+
+**Example failure:**
+```yaml
+# Task during grooming:
+- text: "Implement WebSocket filtering"
+  checked: false
+
+# Agent during ready phase:
+# "Wait, filter WHICH events? All channels? Only mentions?"
+# → STOP, back to grooming
+
+# After grooming clarification:
+- text: "Filter WebSocket events: keep DMs + channel mentions, discard other channel traffic"
+  checked: false
+  notes: "Mention detection: rawText.includes('@' + botUsername)"
+```
+
+**Goal:** Zero tolerance for ambiguity. Better to return to grooming than execute wrong solution.
 
 ---
 
