@@ -1,0 +1,109 @@
+---
+name: "Memory System (Hebbian Architecture)"
+goal: "Implement neurologically-inspired memory system (replay, consolidate, prune)"
+status: active
+type: "research"
+created: 2026-03-15
+started: 2026-02-11
+completed: null
+
+scope: |
+  Memory = index, not storage (Hebbian: fire together → wire together)
+  
+  Three-phase cycle (sleep analogy):
+  1. Replay - Read MEMORY.md + recent memory/YYYY-MM-DD.md files
+  2. Consolidate - Extract patterns, update AGENTS.md/SOUL.md/VISION.md
+  3. Prune - Delete noise, keep connections + insights
+  
+  Philosophy: Systems that cannot forget cannot generalize.
+
+research_basis: |
+  Librarian findings 2026-02-11
+  See: ~/Documents/personal/research/librarian-research-findings.md
+  
+  Key insight: Memory = links > exhaustive content
+  Compression > exhaustive logs
+
+tasks:
+  - text: "Document memory protocol in AGENTS.md"
+    checked: true
+    notes: "Hebbian section added 2026-02-26"
+  
+  - text: "Implement daily memory files (memory/YYYY-MM-DD.md)"
+    checked: true
+    notes: "Active since 2026-02-11"
+  
+  - text: "MEMORY.md as long-term index (not chronicle)"
+    checked: true
+    notes: "Updated 2026-02-26 with index pattern"
+  
+  - text: "Consolidation script (extract patterns → update core files)"
+    checked: false
+    notes: "Manual for now, automate later"
+  
+  - text: "Pruning protocol (when to delete daily files)"
+    checked: false
+    notes: "Keep recent (7 days), compress/archive older"
+  
+  - text: "Cross-reference system (link daily → MEMORY.md → core files)"
+    checked: false
+    notes: "Manual links working, auto-linking future"
+  
+  - text: "Test: Memory survives compaction (context loss recovery)"
+    checked: true
+    notes: "Session startup protocol reads memory files first"
+
+deliverables:
+  - "memory/ folder with daily logs"
+  - "MEMORY.md long-term index"
+  - "AGENTS.md memory protocol section"
+  - "Session startup: read memory files (ritual activation)"
+
+architecture:
+  daily_files:
+    location: "~/.openclaw/workspace/memory/YYYY-MM-DD.md"
+    purpose: "Raw session logs (decisions, commits, learnings)"
+    retention: "7 days active, then compress/archive"
+  
+  long_term_index:
+    location: "~/.openclaw/workspace/MEMORY.md"
+    purpose: "Index to connections, not exhaustive storage"
+    updates: "Weekly consolidation (extract patterns from daily files)"
+  
+  core_files:
+    AGENTS_md: "Protocols, rules, workflows (learned from experience)"
+    SOUL_md: "Personality, behavior (evolves from interactions)"
+    VISION_md: "Ethics, principles (stable, rarely changes)"
+
+three_phase_cycle:
+  replay:
+    - "Read MEMORY.md (long-term index)"
+    - "Read memory/YYYY-MM-DD.md (recent sessions)"
+    - "Load context (who am I, what happened recently)"
+  
+  consolidate:
+    - "Extract patterns from daily files"
+    - "Update AGENTS.md (new protocols learned)"
+    - "Update SOUL.md (personality refinements)"
+    - "Update MEMORY.md (new cross-references)"
+  
+  prune:
+    - "Delete noise (redundant logs, obsolete notes)"
+    - "Keep connections (cross-references, insights)"
+    - "Archive old daily files (compress, move to archive/)"
+
+future_enhancements:
+  - Automated consolidation script (weekly cron)
+  - Auto-pruning old daily files (>30 days → archive)
+  - Semantic search across memory files (find relevant past context)
+  - Memory drift detection (core files diverging from practice)
+
+notes: |
+  Research-driven architecture (Librarian findings on memory systems).
+  
+  Hebbian principle: Fire together → wire together.
+  Memory = connections, not storage.
+  
+  Active since 2026-02-11, documented 2026-02-26.
+  Manual consolidation for now, automate when stable.
+---
