@@ -191,42 +191,24 @@ tasks:
 
 ```mermaid
 stateDiagram-v2
-    [*] --> backlog: Create epic
-    backlog --> intake: Prioritize
-    intake --> grooming: Brief complete
-    grooming --> grooming: More discussion needed
-    grooming --> ready: Zero ambiguities resolved
-    ready --> grooming: Found ambiguity/blocker
-    ready --> done: All tasks completed
+    [*] --> backlog: 1️⃣ Create
+    backlog --> intake: 2️⃣ Prioritize
+    intake --> grooming: 3️⃣ Brief done
+    grooming --> grooming: More discussion
+    grooming --> ready: 4️⃣ Zero ambiguities
+    ready --> grooming: 5️⃣ Found ambiguity
+    ready --> done: 6️⃣ Tasks complete
     done --> [*]
-    
-    note right of backlog
-        Created, not picked up yet
-    end note
-    
-    note right of intake
-        Nicholas + business-analyst
-        write down the basics
-    end note
-    
-    note right of grooming
-        Agents bid as stakeholders
-        Discussion until exhaustion
-        Branch: epic/v{version}
-        MUST resolve ALL ambiguities
-    end note
-    
-    note right of ready
-        Night shift execution
-        CAN FAIL: ambiguity found → back to grooming
-        Zero tolerance for unclear tasks
-    end note
-    
-    note right of done
-        Passes checks
-        Merge to main
-    end note
 ```
+
+**Stages:**
+
+1️⃣ **backlog** - Created, not picked up yet  
+2️⃣ **intake** - Nicholas + business-analyst write basics  
+3️⃣ **grooming** - Agents bid, discuss until zero ambiguities (branch: `epic/v{version}`)  
+4️⃣ **ready** - Night shift execution (strict: zero tolerance for ambiguity)  
+5️⃣ **Failure path** - Ambiguity found during execution → back to grooming  
+6️⃣ **done** - Passes checks, merge to main
 
 ---
 
