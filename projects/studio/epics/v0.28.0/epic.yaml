@@ -17,4 +17,7 @@ tasks:
     checked: false
   - text: "Test with Wiley project (add RPM-specific topics)"
     checked: false
+  - text: "Add topic descriptions (help agents choose WHICH topic WHEN)"
+    checked: false
+    notes: "Future: descriptions.yaml or README.md per topic. Agent knows context before consulting librarian."
 ---
