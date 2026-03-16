@@ -1,0 +1,130 @@
+---
+version: v0.3.0
+name: True Parity
+status: active
+created: 2026-03-16
+type: minor
+---
+
+# Epic v0.3.0: True Parity
+
+**Goal:** Guarantee agent visual verification BEFORE marking UI work done.
+
+**Context:** Agent marked Librarian v0.27.0 done without visual verification → merged broken code to main. Need protocol + tooling to prevent this.
+
+---
+
+## Problem Statement
+
+**Core issue:** Developing UI/frontend without visual feedback = irresponsible, causes breakage.
+
+**What went wrong (2026-03-16):**
+- Agent edited Librarian covers code
+- Claimed "done" without seeing UI render
+- Merged to main
+- Covers actually broken (confirmed via Playwright screenshot)
+
+**Root cause:** No enforcement of visual verification before task completion.
+
+---
+
+## Requirements
+
+1. **Visual verification BEFORE claiming done** (mandatory)
+2. **Low friction** (can't add 10min overhead per change)
+3. **Reliable** (not "works sometimes")
+4. **Automated/scriptable** (part of workflow, not manual)
+5. **Agent-executable** (LLM can run, not just human)
+
+---
+
+## Constraints
+
+**What agent CAN'T do:**
+- See interactive browser window (`headless=False`)
+- Visual inspection like human
+
+**What agent CAN do:**
+- Run Playwright headless tests
+- Capture screenshots (bitmap)
+- DOM inspection (HTML/accessibility tree)
+- Automated assertions (`expect()`)
+
+---
+
+## Tasks
+
+### 1. Research Industry Solutions
+- [ ] Visual regression testing (Chromatic, Percy, Applitools)
+- [ ] Component development tools (Storybook)
+- [ ] UI snapshot testing (Jest image snapshots)
+- [ ] Git hook patterns (pre-commit, pre-push)
+- [ ] Document findings in notes.md
+
+### 2. Protocol Definition
+- [ ] Define "UI work" (what counts as UI change)
+- [ ] Define verification steps (Playwright + assertions + screenshot)
+- [ ] Define task completion criteria
+- [ ] Update AGENTS.md with protocol
+- [ ] Examples of compliant workflow
+
+### 3. Playwright Test Suite (Librarian)
+- [ ] Test: covers render correctly
+- [ ] Test: no broken images
+- [ ] Test: books list loads
+- [ ] Assertions prevent false "done"
+- [ ] Screenshot comparison (optional)
+
+### 4. Enforcement Mechanism
+- [ ] Option A: AGENTS.md protocol (trust-based)
+- [ ] Option B: Git hook (technical enforcement)
+- [ ] Option C: CI check (GitHub Actions)
+- [ ] Choose approach + implement
+- [ ] Test: try to mark done without verification → should fail
+
+### 5. Documentation
+- [ ] Update AGENTS.md: UI Verification Protocol
+- [ ] Document Playwright setup per-project
+- [ ] Add to connections/ (if reusable pattern)
+- [ ] Epic notes: lessons learned
+
+---
+
+## Research Notes
+
+**Attempted solutions:**
+- ❌ Chrome Relay (OpenClaw) - buggy, unreliable
+- ⚠️ Playwright screenshots - works but manual
+
+**Discussion 2026-03-16:**
+- Nicholas: `headless=False` útil para debug, mas não garante paridade do agente
+- Agent: Paridade real = headless + assertions + screenshot + enforcement
+- Commits = sem restrição (quebrado OK dentro de branch)
+- Afirmações (task ✓) = require verification
+
+**Key insight:**
+> "o que o teste garante eh a aFIRMACAO que foi concluido, ticking the task."
+
+---
+
+## Success Criteria
+
+- [ ] Agent can NEVER mark UI task done without visual verification
+- [ ] Playwright tests exist for all UI projects
+- [ ] Protocol documented in AGENTS.md
+- [ ] Enforcement mechanism active (chosen + tested)
+- [ ] Librarian v0.27.0 covers verified + fixed using new protocol
+
+---
+
+## Dependencies
+
+**Related epics:**
+- Librarian v0.27.0 (Cover Extraction) - testing ground for protocol
+
+**Blocks:**
+- Future UI epics (all must follow protocol)
+
+---
+
+**Next:** Task 1 (Research Industry Solutions)
