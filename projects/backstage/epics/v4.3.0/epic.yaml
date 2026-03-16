@@ -3,9 +3,6 @@ name: "Mattermost Agent Integration"
 goal: "Enable agents to participate in Mattermost channels for grooming sessions"
 status: intake
 type: major
-created: 2026-03-16
-started: 2026-03-16
-completed: null
 
 tasks:
   - text: "Diagnose why bots don't receive channel events (WebSocket subscription)"

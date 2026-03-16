@@ -36,9 +36,6 @@ name: "Epic Name"
 goal: "One-line description of what we want"
 status: backlog
 type: minor
-created: 2026-03-16
-started: null
-completed: null
 tasks: []
 ---
 ```
@@ -48,14 +45,17 @@ tasks: []
 - `goal` - One-line summary (what success looks like)
 - `status` - `backlog`, `intake`, `grooming`, `ready`, `done`
 - `type` - `minor`, `major`, `patch`
-- `created` - Date (YYYY-MM-DD)
-- `started` - Date OR `null`
-- `completed` - Date OR `null`
 - `tasks` - Array (can be empty `[]`)
 
 **Location:** `~/Backstage/projects/{PROJECT}/epics/v{X.Y.Z}/epic.yaml`
 
-**Version:** In folder name ONLY (`v2.7.0`), NOT in YAML
+**What's tracked by Git (NOT in YAML):**
+- `created` - First commit timestamp
+- `started` - Branch creation date
+- `completed` - Merge to main date
+- `updated` - Every commit
+
+**DRY principle:** Don't duplicate what Git already tracks.
 
 ---
 
@@ -67,9 +67,6 @@ name: "Mattermost Agent Integration"
 goal: "Enable agents to participate in Mattermost channels for grooming sessions"
 status: grooming
 type: major
-created: 2026-03-16
-started: 2026-03-16
-completed: null
 
 tasks:
   - text: "Diagnose WebSocket event filtering (design-engineer)"
@@ -111,48 +108,35 @@ tasks:
 
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
-| `version` | string | ✅ | Epic ID (v{major}.{minor}.{patch}) |
 | `name` | string | ✅ | Display name |
-| `status` | enum | ✅ | `backlog`, `active`, `done`, `archive` |
-| `created` | date | ✅ | YYYY-MM-DD |
+| `goal` | string | ✅ | One-line summary (what success looks like) |
+| `status` | enum | ✅ | `backlog`, `intake`, `grooming`, `ready`, `done` |
 | `type` | enum | ✅ | `minor`, `major`, `patch` |
-| `goal` | string | ✅ | One-line summary |
 | `tasks` | array | ✅ | Can be empty `[]` |
 
-### Optional Metadata
+### Optional Fields
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `started` | date | When work began (YYYY-MM-DD) |
-| `completed` | date | When work finished (YYYY-MM-DD) |
-| `updated` | datetime | Last edit (YYYY-MM-DD HH:MM TZ) |
-| `priority` | string | P0 (critical), P1 (high), P2 (medium), P3 (low) |
-| `category` | string | E.g., `integration`, `tooling`, `workflow` |
+| `notes` | string | Brief inline notes (long notes → `notes.md`) |
+| Task `notes` | string | Context for specific task |
 
-### Content Fields
+> 🔜 **Future task fields:**
+> - `responsible` - Agent assignment
+> - `description` - Detailed context
+> - `tests` - Command to verify completion
 
-| Field | Type | Description |
-|-------|------|-------------|
-| `summary` | string | Multi-line explanation (keep <500 words) |
-| `scope` | string | What's in/out of scope |
-| `dependencies` | array | Blockers (other epics, external factors) |
-| `references` | array | Links (docs, issues, PRs) |
-| `success_criteria` | array | Measurable outcomes |
-| `estimated_completion` | date | Target date (YYYY-MM-DD) |
-| `notes` | string | Brief inline notes |
+### Tracked by Git (NOT in YAML)
 
-### Extended Fields (Complex Epics)
+| What | How |
+|------|-----|
+| Version | Folder name (`epics/v4.3.0/`) |
+| Created | First commit timestamp |
+| Started | Branch creation date |
+| Completed | Merge to main date |
+| Updated | Every commit |
 
-| Field | Type | Description |
-|-------|------|-------------|
-| `context` | string | Background (why this epic exists) |
-| `philosophy` | string | Guiding principles |
-| `phases` | array | Workflow stages (for process epics) |
-| `workflows` | object | Process definitions |
-| `risks` | array | Known risks + mitigations |
-| `future_work` | object | Next iterations |
-| `architecture_decisions` | array | ADRs (date, decision, rationale) |
-| `key_insights` | object | Learnings / wisdom |
+**Rationale:** DRY - don't duplicate what Git already tracks perfectly.
 
 ---
 
@@ -257,9 +241,6 @@ name: "Epic Name"
 goal: "One sentence describing outcome"
 status: backlog
 type: minor
-created: 2026-03-16
-started: null
-completed: null
 tasks: []
 ---
 ```
@@ -387,7 +368,6 @@ tasks:
 **YAML updates:**
 ```yaml
 status: done
-completed: 2026-03-20
 tasks:
   - text: "..."
     checked: true  # All tasks completed
@@ -402,6 +382,8 @@ tasks:
 - Documentation updated
 
 **Exit criteria:** Epic complete, artifacts archived
+
+**Timeline:** Git commit history shows when branch created → merged
 
 ---
 
@@ -670,9 +652,6 @@ name: "Epic Name"
 goal: "One-line outcome description"
 status: intake
 type: major
-created: 2026-03-16
-started: 2026-03-16
-completed: null
 
 tasks:
   - text: "First task description"
@@ -685,10 +664,10 @@ tasks:
 **Save as:** `projects/{PROJECT}/epics/v4.3.0/epic.yaml`
 
 **Rules:**
-- NO `version` field (folder name is source of truth)
-- `status: intake` (backlog = not started, intake = actively refining)
-- `type: major` for foundational work, `minor` for features, `patch` for fixes
-- `started: 2026-03-16` if you're working on it NOW (else `null`)
+- NO `version` field (folder name = source of truth)
+- NO `created`, `started`, `completed` (Git tracks this)
+- `status: intake` if actively refining (else `backlog`)
+- `type: major` for foundational, `minor` for features, `patch` for fixes
 
 ### Step 4: Write index.md (Context)
 
