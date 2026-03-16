@@ -1,7 +1,14 @@
 ---
-name: "Nonlinear Studio"
-type: "synthetic-company"
-mission: "Artifacts for the commons - tools, systems, research built with rigor, elegance, and honesty"
+name: "Organization"
+description: "Global organization-wide configuration"
+
+skills:
+  - backstage
+  - librarian
+  - github
+  - summarize
+  - tmux
+  - remove-ambiguity
 
 values:
   - autonomy
