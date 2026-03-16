@@ -1,0 +1,139 @@
+---
+name: "Object Cleanup (Surface Management)"
+goal: "Surface values, MCPs, skills, and tagged notes for easier organization"
+status: backlog
+type: "minor"
+created: 2026-03-15
+started: null
+completed: null
+
+scope: |
+  Make invisible objects visible for management:
+  - Values (organization/squad/agent)
+  - MCPs (squad-level)
+  - Skills (organization/squad/agent)
+  - Tagged notes (hardcoded list initially, GUI later)
+  
+  Each object type needs:
+  - List command (show what exists)
+  - Add command (create new)
+  - Remove command (delete/archive)
+  - Validate command (check integrity)
+  - Document usage (README or CLI help)
+
+tasks:
+  # Values Management
+  - text: "List values: Show all organization values with descriptions"
+    checked: false
+    notes: "Read values/*.md, display name + first paragraph"
+  
+  - text: "Add value: Create new value file in values/"
+    checked: false
+    notes: "Template: name, description, examples, anti-patterns"
+  
+  - text: "Remove value: Archive value (move to values/archive/)"
+    checked: false
+    notes: "Don't delete (git history), move to archive folder"
+  
+  - text: "Validate values: Check all agent .values.md reference existing files"
+    checked: false
+    notes: "Scan .values.md, verify each value file exists"
+  
+  # MCPs Management
+  - text: "List MCPs: Show all installed MCPs with status"
+    checked: false
+    notes: "npm list -g | grep mcp, show package + command + installed?"
+  
+  - text: "Add MCP: Install MCP + add to squad.yaml"
+    checked: false
+    notes: "npm install -g PACKAGE, update squad.yaml mcps: [], run composite.sh"
+  
+  - text: "Remove MCP: Uninstall MCP + remove from squad.yaml"
+    checked: false
+    notes: "npm uninstall -g PACKAGE, remove from squad.yaml, regenerate .mcps.md"
+  
+  - text: "Validate MCPs: Check squad.yaml MCPs are installed"
+    checked: false
+    notes: "Read squad.yaml mcps:[], verify each is installed (which COMMAND)"
+  
+  # Skills Management
+  - text: "List skills: Show all available skills with descriptions"
+    checked: false
+    notes: "ls ~/Backstage/skills/, read SKILL.md frontmatter"
+  
+  - text: "Add skill: Symlink skill to organization/squad/agent"
+    checked: false
+    notes: "Update YAML skills:[], run composite.sh (creates symlink)"
+  
+  - text: "Remove skill: Remove from YAML, delete symlink"
+    checked: false
+    notes: "Remove from YAML, run composite.sh (removes symlink)"
+  
+  - text: "Validate skills: Check all symlinks point to existing skills"
+    checked: false
+    notes: "Scan agent/skills/, verify each symlink target exists"
+  
+  # Tagged Notes Management
+  - text: "List tagged notes: Hardcoded list initially (GUI later)"
+    checked: false
+    notes: |
+      Hardcoded tags (examples):
+      - #idea
+      - #todo
+      - #blocked
+      - #question
+      - #decision
+      
+      Scan epic-notes/, ROADMAP.md, memory/ for tags.
+  
+  - text: "Add tagged note: Create note with tag"
+    checked: false
+    notes: "Prompt: tag, text, location (epic? roadmap? memory?)"
+  
+  - text: "Remove tagged note: Archive or mark done"
+    checked: false
+    notes: "Move to archive/ or add ✅ prefix"
+  
+  - text: "Validate tagged notes: Check all tags are in allowed list"
+    checked: false
+    notes: "Scan for #TAG, verify TAG in hardcoded list (prevent typos)"
+
+CLI_commands:
+  values:
+    - "backstage values list"
+    - "backstage values add NAME"
+    - "backstage values remove NAME"
+    - "backstage values validate"
+  
+  mcps:
+    - "backstage mcps list"
+    - "backstage mcps add PACKAGE [--squad SQUAD]"
+    - "backstage mcps remove PACKAGE [--squad SQUAD]"
+    - "backstage mcps validate"
+  
+  skills:
+    - "backstage skills list"
+    - "backstage skills add SKILL [--org|--squad SQUAD|--agent AGENT]"
+    - "backstage skills remove SKILL [--org|--squad SQUAD|--agent AGENT]"
+    - "backstage skills validate"
+  
+  notes:
+    - "backstage notes list [--tag TAG]"
+    - "backstage notes add --tag TAG --text TEXT [--epic EPIC]"
+    - "backstage notes remove ID"
+    - "backstage notes validate"
+
+future_enhancements:
+  - Web UI for object management (add/remove via browser)
+  - Tag autocomplete (suggest existing tags)
+  - Bulk operations (add skill to multiple agents)
+  - Dependency tracking (which agents use which values?)
+  - Usage analytics (most-used skills, least-used values)
+
+notes: |
+  Make invisible configuration visible.
+  Reduce friction: list → add → remove → validate.
+  
+  Start with CLI, migrate to GUI later.
+  Hardcoded tag list initially (prevent tag sprawl).
+---
