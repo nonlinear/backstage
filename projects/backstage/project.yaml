@@ -1,16 +1,4 @@
 name: "Backstage"
 tier: flagship
-type: undefined
-description: "Backstage project lorem ipsum dolor sit amet"
-checks:
-  - dogfooding.md
-  - dual-layer-global.sh
-  - dual-layer-project.sh
-  - global-vs-project.md
-  - mermaid-sync.sh
-  - pre-merge-tasks.sh
-  - skill-workflow.md
-  - templates.md
-  - version-from-branch.sh
-  - version-sync.sh
-  - version-tracking.md
+status: active
+description: "Agent infrastructure, composite system, multi-gateway architecture"

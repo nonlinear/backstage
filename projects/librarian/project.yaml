@@ -1,9 +1,4 @@
 name: "Librarian"
-tier: experimental
-type: undefined
-description: "Librarian project"
-checks:
-  - arch-workflow.md
-  - byob-setup.md
-  - gitignore-local.sh
-  - versioning.md
+tier: flagship
+status: active
+description: "Local book research system, library topics, semantic search"

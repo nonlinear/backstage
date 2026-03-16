@@ -1,4 +1,4 @@
 name: "Studio"
 tier: flagship
-type: undefined
-description: "Studio project"
+status: active
+description: "OpenClaw gateway, memory system, Docker services, Tailscale infrastructure"
