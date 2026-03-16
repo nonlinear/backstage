@@ -7,21 +7,19 @@ type: minor
 goal: "Configure design-engineer agent with complete framework, skills, MCPs, values, and library before activation"
 tasks:
   - text: "Define agent role & responsibilities (UI/UX implementation)"
+    checked: true
+  - text: "Review library topics (design/, usability/, creativity/), can add other topics if useful"
     checked: false
   - text: "Define decision boundaries (when to act vs ask)"
-    checked: false
-  - text: "Define collaboration patterns (with UXR, business-analyst)"
-    checked: false
-  - text: "Define output formats (code, Figma updates, design tokens)"
-    checked: false
+    checked: true
   - text: "Select core values (from organization values list)"
-    checked: false
+    checked: true
   - text: "Define design-specific values (accessibility, consistency, etc.)"
-    checked: false
+    checked: true
   - text: "Create .values.md template"
-    checked: false
+    checked: true
   - text: "Identify required skills (design-discrepancy, ui-ux-design, peekaboo)"
-    checked: false
+    checked: true
   - text: "Install missing skills via ClawHub"
     checked: false
   - text: "Document skill triggers in agent SOUL.md"
@@ -35,8 +33,6 @@ tasks:
   - text: "Research available MCPs (MCP Hub links)"
     checked: false
   - text: "Document MCP usage patterns"
-    checked: false
-  - text: "Review library topics (design/, usability/, creativity/)"
     checked: false
   - text: "Identify missing library topics"
     checked: false
