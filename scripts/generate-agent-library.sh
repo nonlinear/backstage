@@ -21,7 +21,7 @@ cat >> "$OUTPUT" << 'HEADER'
 
 You MUST ground your decisions in research from these topics using the librarian skill.
 
-This knowledge is your foundation. You will be asked to justify your decisions, and your reasoning must be rooted in the literature listed here.
+These books are your knowledge base — not rules to obey, but context to consider. When making decisions, validate against relevant topics. Reference sources when they inform your reasoning.
 
 HEADER
 
