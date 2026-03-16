@@ -1,3 +1,9 @@
+---
+service: "LLM Models"
+description: "Choose model for task (reasoning/speed/cost), understand model capabilities, or configure model settings (temperature/tokens)"
+providers: "GitHub Copilot, Ollama (local)"
+---
+
 # Models - LLM Model Management
 
 **Location:** `~/Models/` (261GB total)

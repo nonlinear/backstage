@@ -1,3 +1,10 @@
+---
+service: "Tempo (Jira Timesheet)"
+description: "Log billable hours, sync Tempo with Jira issues, submit timesheets, or troubleshoot Tempo API"
+api: "Tempo REST API"
+auth: "Bearer token (.env)"
+---
+
 # Tempo API Connection
 
 **Service:** Tempo Timesheets (Jira plugin)  

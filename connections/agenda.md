@@ -1,3 +1,9 @@
+---
+service: Agenda
+description: "View daily dashboard (Jira tasks, calendar, moon phase, memory, Wiley links), refresh agenda data, or check work priorities"
+host: "localhost:8765"
+---
+
 # Agenda App - Epic Notes
 
 **Status:** Active development  

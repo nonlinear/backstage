@@ -1,3 +1,10 @@
+---
+service: Mattermost
+description: "Access team chat, set up agent bot tokens, create channels/teams, troubleshoot OpenClaw integration, or manage multi-agent communication"
+host: "localhost:8065"
+tailscale: "studio.adal-rigel.ts.net:8065"
+---
+
 # Mattermost - Open Source Team Chat
 
 **Type:** Self-hosted team collaboration platform  

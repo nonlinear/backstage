@@ -1,3 +1,10 @@
+---
+service: Portainer
+description: "Manage Docker containers via UI, update images, view logs, restart services, or troubleshoot container issues (NAS)"
+host: "192.168.1.152:9443"
+tailscale: "media.adal-rigel.ts.net:9443"
+---
+
 # Portainer - Docker Management UI
 
 **Web UI:** [local](https://192.168.1.152:9443) | [remote](https://media.adal-rigel.ts.net:9443)  

@@ -1,3 +1,9 @@
+---
+service: "OpenClaw Skills"
+description: "Create custom skills, understand skill architecture, publish skills to ClawHub, or troubleshoot skill loading"
+system: "AgentSkills spec"
+---
+
 # OpenClaw Skills - Best Practices
 
 **Source:** Analysis of 6 official skills (weather, github, imsg, peekaboo, summarize, apple-notes)

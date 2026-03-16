@@ -1,3 +1,7 @@
+---
+description: "Research before action. Read connections/ docs before improvising. External knowledge > internal assumptions"
+---
+
 # Research Before Internal Ideas
 
 ## Principle

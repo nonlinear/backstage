@@ -1,198 +1,268 @@
-# Tailscale Remote Access - Mac Studio Services
+---
+service: Tailscale
+description: "Expose Mac Studio/NAS services remotely, configure Pi-hole DNS, troubleshoot connection issues, or check which devices are online"
+hostname: "studio.adal-rigel.ts.net"
+status: active
+---
 
-**Last updated:** 2026-03-09 13:15 EDT
+# Tailscale Remote Access
 
-**Philosophy:** Port without Tailscale = useless. All services must be remotely accessible (server + travel use case).
-
-**Network:**
-- **Local:** `localhost`
-- **Tailscale:** `studio.adal-rigel.ts.net`
-
-**NAS services:** All accessible via `media.adal-rigel.ts.net` (automatic Tailscale exposure)
+**Admin console:** https://login.tailscale.com/admin  
+**Mac Studio hostname:** `studio.adal-rigel.ts.net`  
+**NAS hostname:** `media.adal-rigel.ts.net`
 
 ---
 
-## 🏴 Critical Services (Always Running + Exposed)
+## Quick Reference
 
-| Service | Port | Local URL | Tailscale URL | Status |
-|---------|------|-----------|---------------|--------|
-| **Backstage UI** | 3004 | http://localhost:3004 | https://studio.adal-rigel.ts.net:3004 | ✅ HTTPS |
-| **OpenClaw Control** | 18789 | http://localhost:18789 | https://studio.adal-rigel.ts.net:18789 | ✅ HTTPS |
-| **Uptime Kuma** | 3011 | http://localhost:3011 | https://studio.adal-rigel.ts.net:3011 | ✅ HTTPS |
-
-**CRITICAL RULE:** These services must ALWAYS be online and Tailscale-exposed. Port stability check will FAIL if any are down or missing Tailscale proxy.
-
----
-
-## Other Mac Studio Services
-
-| Service | Port | Local URL | Tailscale URL | Status |
-|---------|------|-----------|---------------|--------|
-| **Mattermost** (chat) | 8065 | http://localhost:8065 | https://studio.adal-rigel.ts.net:8065 | ✅ HTTPS |
-| **Matrix** (Synapse) | 8008 | http://localhost:8008 | https://studio.adal-rigel.ts.net:8008 | ✅ HTTPS |
-| **Kavita** (ebooks) | 5007 | http://localhost:5007 | https://studio.adal-rigel.ts.net:5007 | ⚠️ HTTP |
-| **Komga** (comics) | 5008 | http://localhost:5008 | https://studio.adal-rigel.ts.net:5008 | ⚠️ HTTP |
-| **SearXNG** (search) | 8889 | http://localhost:8889 | http://studio.adal-rigel.ts.net:8889 | ⚠️ HTTP |
-| **Zulip** (chat) | 8090 | http://localhost:8090 | https://studio.adal-rigel.ts.net:8090 | ⚠️ HTTP |
-| **VNC/Screen Sharing** | 5900 | — | vnc://studio.adal-rigel.ts.net:5900 | ⚠️ Not enabled |
-
-**Port Notes:** 
-- **All ports:** Same locally and via Tailscale (no confusing mappings)
-- **HTTPS preferred** for secure remote access (especially on iPad/iPhone)
-- **HTTP services** work but not encrypted (use with caution on public networks)
-
----
-
-## 📱 iPad/iPhone Access
-
-**Active devices:**
-- iPad Mini (6th gen) - `100.117.167.48` ✅ Online
-- iPhone 11 - Check `tailscale status`
-
-**Quick links for Safari bookmarks:**
-- **Backstage:** https://studio.adal-rigel.ts.net:3004
-- **OpenClaw:** https://studio.adal-rigel.ts.net:18789
-- **Uptime Kuma:** https://studio.adal-rigel.ts.net:3011
-- **Kavita (ebooks):** https://studio.adal-rigel.ts.net:5007
-- **Komga (comics):** https://studio.adal-rigel.ts.net:5008
-
-**How to use:**
-1. Ensure Tailscale app is connected on iPad/iPhone
-2. Open Safari and navigate to any URL above
-3. Services respond as if local (secure Tailscale tunnel)
-
-**Why this matters:** Nicholas travels with iPad - remote access to Backstage/OpenClaw is CRITICAL for work continuity.
-
----
-
-## Tailscale Network Configuration
-
-### Subnet Routes (ENABLED)
-
-**TODAS as portas do Mac Studio estão acessíveis via Tailscale automaticamente!**
-
-- **Configuração:** `tailscale up --accept-routes --advertise-routes=192.168.0.0/16 --hostname=studio`
-- **Status:** Subnet routes aprovadas no admin console
-- **Acesso:** Qualquer porta no Mac Studio acessível via `studio.adal-rigel.ts.net:PORT` ou `100.80.21.16:PORT`
-- **Segurança:** Apenas dispositivos autorizados na Tailnet têm acesso (Nicholas only)
-
-**Exemplos:**
-- VNC: `vnc://studio.adal-rigel.ts.net:5900`
-- SSH: `ssh nonlinear@studio.adal-rigel.ts.net`
-- Qualquer serviço: `http://studio.adal-rigel.ts.net:PORT`
-
-### Tailscale Serve Configuration (Web Services)
-
-**Current config:**
-```
-https://studio.adal-rigel.ts.net → http://localhost:18789 (OpenClaw)
-http://studio.adal-rigel.ts.net:5007 → http://localhost:5007 (Kavita)
-http://studio.adal-rigel.ts.net:8087 → http://localhost:8087 (OpenProject)
+**Expose service via Tailscale:**
+```bash
+tailscale serve --bg --https=PORT http://localhost:PORT
 ```
 
-**Check what's served:**
+**Check exposed services:**
 ```bash
 tailscale serve status
 ```
 
-**Expose new service:**
+**Remove service:**
 ```bash
-# As HTTPS root (no port)
-tailscale serve https:443 http://localhost:PORT
+tailscale serve --https=PORT off
+```
 
-# As specific port
-tailscale serve http:PORT http://localhost:PORT
-
-# Remove exposure
-tailscale serve reset
+**Check Tailscale status:**
+```bash
+tailscale status
 ```
 
 ---
 
-## Common Tasks
+## Devices on Tailnet
 
-### Check if service is running
-```bash
-docker ps | grep <service-name>
-```
-
-### Test connectivity
-```bash
-# Local
-curl -I http://localhost:<PORT>
-
-# Tailscale
-curl -I http://studio.adal-rigel.ts.net:<PORT>
-```
-
-### Restart service
-```bash
-docker restart <container-name>
-```
+| Device | Hostname | IP | Status |
+|--------|----------|-----|--------|
+| Mac Studio | studio.adal-rigel.ts.net | 100.80.21.16 | ✅ |
+| NAS | media.adal-rigel.ts.net | 100.85.217.51 | ✅ |
+| iPhone 11 | iphone-11 | 100.87.213.56 | ✅ |
+| iPad Mini | ipad-mini-6th-gen-wificellular | 100.70.187.120 | ✅ |
 
 ---
 
-## Port Conflicts
+## Mac Studio Services (Exposed)
 
-**To avoid:** Check this file before assigning new ports.
+### Critical (Always Running)
+
+**OpenClaw Gateway:**
+```bash
+tailscale serve --bg --https=18789 http://localhost:18789
+```
+Access: https://studio.adal-rigel.ts.net:18789
+
+**Backstage (personal projects):**
+```bash
+tailscale serve --bg --https=3004 http://localhost:3004
+```
+Access: https://studio.adal-rigel.ts.net:3004
+
+**Mattermost (team chat):**
+```bash
+tailscale serve --bg --https=8065 http://localhost:8065
+```
+Access: https://studio.adal-rigel.ts.net:8065
+
+**Librarian (book browser):**
+```bash
+tailscale serve --bg --https=8766 http://localhost:8766
+```
+Access: https://studio.adal-rigel.ts.net:8766
+
+**Shelfmark (Calibre alternative):**
+```bash
+tailscale serve --bg --https=8085 http://localhost:8085
+```
+Access: https://studio.adal-rigel.ts.net:8085
 
 ---
 
-## See Also
+## NAS Services (Exposed)
 
-- `connections/docker.md` - Mac container management
-- `connections/tailscale.md` - Tailscale configuration
+**See:** `connections/nas.md` for full list
 
-| **Backstage UI** | 3004 | http://localhost:3004 | https://studio.adal-rigel.ts.net:3004 |
-| **Zulip** | 8090 | http://localhost:8090 | https://studio.adal-rigel.ts.net:8090 |
-
----
-
-## Auto-Start no Boot
-
-**Script:** `~/Documents/scripts/tailscale-serve-autostart.sh`
-
-**LaunchAgent:** `~/Library/LaunchAgents/com.nonlinear.tailscale-serve.plist`
-
-**O que faz:**
-1. Aguarda Tailscale estar online (até 30s)
-2. Reseta config anterior (limpar duplicatas)
-3. Expõe todos os serviços automaticamente
-
-**Serviços expostos:**
-- OpenClaw (HTTPS root)
-- Backstage UI (porta 3004, HTTPS)
-- Uptime Kuma (porta 3011, HTTPS)
-- Kavita (porta 5007)
-- Komga (porta 5008)
-- OpenProject (porta 8087)
-- SearXNG (porta 8889)
-- Zulip (porta 8090)
-
-**Logs:**
-- stdout: `/tmp/tailscale-serve.log`
-- stderr: `/tmp/tailscale-serve-error.log`
-
-**Rodar manualmente:**
-```bash
-~/Documents/scripts/tailscale-serve-autostart.sh
-```
-
-**Desativar auto-start:**
-```bash
-launchctl unload ~/Library/LaunchAgents/com.nonlinear.tailscale-serve.plist
-```
-
-**Reativar:**
-```bash
-launchctl load ~/Library/LaunchAgents/com.nonlinear.tailscale-serve.plist
-```
+**Most used:**
+- Kavita (books): https://media.adal-rigel.ts.net:5000
+- Komga (comics): https://media.adal-rigel.ts.net:25600
+- Jellyfin (movies): https://media.adal-rigel.ts.net:8096
+- Home Assistant: https://media.adal-rigel.ts.net:8123
+- Paperless-ngx (docs): https://media.adal-rigel.ts.net:8010
 
 ---
 
-**Updated:** 2026-03-09 13:15 EDT
+## Pi-hole Integration (Network-wide Ad Blocking)
 
-**See also:**
-- `connections/ports.md` - Port management protocol (hammer + start + expose)
-- `connections/docker.md` - Container management
-- `scripts/port-start.sh` - Automated service startup with Tailscale exposure
+**✅ CONFIGURED:** Global Nameservers = Pi-hole (`192.168.1.152`)
+
+**What this means:**
+- ALL devices on tailnet use Pi-hole automatically (when Tailscale ON)
+- iPhone, iPad, MacBook → ads blocked **outside home** (4G, public WiFi)
+- Zero config per device
+
+### How Configured
+
+1. Tailscale admin → https://login.tailscale.com/admin/dns
+2. DNS → Nameservers → **Global nameservers**
+3. Add: `192.168.1.152` (Pi-hole local IP)
+4. **Primary DNS:** Pi-hole (ads blocked)
+5. **Fallback DNS:** 1.1.1.1 (Cloudflare - if NAS offline)
+
+### Trade-offs
+
+**Battery:**
+- Slight increase (DNS queries route through Tailscale)
+- ~5-10% more drain on mobile (depends on usage)
+
+**Latency:**
+- +10-50ms per DNS query (depends on NAS location)
+- Negligible for browsing, noticeable for gaming
+
+**Privacy:**
+- All DNS queries visible to Pi-hole (but you own it)
+- Better than ISP/Google seeing queries
+
+### Test Pi-hole via Tailscale
+
+```bash
+# From any Tailscale device (outside home network)
+nslookup pi.hole
+
+# Should resolve to 192.168.1.152 (Pi-hole)
+```
+
+**Query logs:** http://192.168.1.152:8053/admin → Query Log
+
+---
+
+## Troubleshooting
+
+### Port Not Accessible From Other Tailscale Devices
+
+**Symptom:**
+- `https://studio.adal-rigel.ts.net:PORT` → connection refused
+- `tailscale serve status` shows service exposed
+- Local `http://localhost:PORT` works fine
+
+**Possible causes:**
+
+**1. Tailscale serve proxy not running:**
+```bash
+tailscale serve status | grep PORT
+# If missing → re-expose
+tailscale serve --bg --https=PORT http://localhost:PORT
+```
+
+**2. Service not listening on localhost:**
+```bash
+lsof -i :PORT
+# Should show process bound to 127.0.0.1:PORT or 0.0.0.0:PORT
+```
+
+**3. Firewall blocking:**
+```bash
+# macOS firewall check
+/usr/libexec/ApplicationFirewall/socketfilterfw --getglobalstate
+# Should be off or allow Tailscale
+```
+
+**4. Tailscale not connected:**
+```bash
+tailscale status
+# Should show "online" + list of devices
+```
+
+**5. HTTPS vs HTTP confusion:**
+- Tailscale serve = HTTPS proxy (auto TLS)
+- Local service = HTTP only
+- Use `https://studio.adal-rigel.ts.net:PORT` (not http)
+
+### Service Appears "Down" After Reboot
+
+**Cause:** Tailscale serve bindings don't persist across reboots
+
+**Solution:** See `connections/mac-studio-boot.md` for LaunchDaemon setup
+
+**Temporary fix:**
+```bash
+# Re-expose all services manually
+tailscale serve --bg --https=18789 http://localhost:18789
+tailscale serve --bg --https=3004 http://localhost:3004
+tailscale serve --bg --https=8065 http://localhost:8065
+tailscale serve --bg --https=8766 http://localhost:8766
+tailscale serve --bg --https=8085 http://localhost:8085
+```
+
+### DNS Not Resolving via Pi-hole
+
+**Check Global Nameservers:**
+```bash
+# Tailscale admin console
+https://login.tailscale.com/admin/dns
+# Should show 192.168.1.152 (Pi-hole)
+```
+
+**Test DNS query:**
+```bash
+nslookup pi.hole
+# Should resolve to 192.168.1.152
+
+nslookup google.com
+# Should show query went through Pi-hole
+```
+
+**If not working:**
+1. Verify NAS online: `ping 192.168.1.152`
+2. Verify Pi-hole running: `curl http://192.168.1.152:8053`
+3. Check Tailscale connection: `tailscale status`
+4. Flush DNS cache (macOS): `sudo dscacheutil -flushcache`
+
+### Tailscale Disconnects Frequently (Mobile)
+
+**iOS/iPadOS behavior:**
+- Tailscale disconnects when app backgrounded (battery saving)
+- Enable "Always On VPN" in iOS Settings → VPN
+
+**Battery optimization:**
+- Global DNS = slight battery drain
+- Disable Tailscale when not needed (toggle in Control Center)
+
+---
+
+## Best Practices
+
+**Expose services:**
+- Use `--bg` flag (background, survives terminal close)
+- Use HTTPS port matching local port (easier to remember)
+- Document in `connections/ports.md`
+
+**Security:**
+- Tailnet = trusted network (all devices you control)
+- Don't expose sensitive services without auth (use app-level auth)
+- Use Tailscale ACLs for multi-user tailnets
+
+**Monitoring:**
+- Check `tailscale serve status` after reboot
+- Monitor exposed ports in `connections/ports.md`
+- Use Uptime Kuma for service health checks
+
+---
+
+## Related
+
+- `connections/mac-studio-boot.md` - Persistent service exposure via LaunchDaemon
+- `connections/pi-hole.md` - Pi-hole configuration + blocklists
+- `connections/nas.md` - NAS services overview
+- `connections/ports.md` - Port allocation reference
+
+---
+
+**Docs:** https://tailscale.com/kb/  
+**Serve guide:** https://tailscale.com/kb/1242/tailscale-serve/  
+**DNS guide:** https://tailscale.com/kb/1054/dns/

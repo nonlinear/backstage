@@ -1,3 +1,9 @@
+---
+service: "OpenClaw Security Audit"
+description: "Review security posture, check exposed services, audit permissions, or harden OpenClaw configuration"
+scope: "Security hardening + risk assessment"
+---
+
 # OpenClaw Security Audit - 2026-02-10
 
 **Based on:** https://www.instagram.com/p/DUVvUMrEQnh/ (Matt Ganzak security tips)

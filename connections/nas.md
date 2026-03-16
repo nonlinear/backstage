@@ -1,3 +1,10 @@
+---
+service: NAS
+description: "Access media services (Kavita, Jellyfin, Komga), run Docker commands, check disk space, manage SMB shares, or troubleshoot NAS services"
+host: "192.168.1.152"
+tailscale: "media.adal-rigel.ts.net"
+---
+
 # NAS - Home Media Server
 
 **Host:** `192.168.1.152` (local) / `media.adal-rigel.ts.net` (Tailscale)  

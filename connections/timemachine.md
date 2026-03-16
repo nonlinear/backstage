@@ -1,3 +1,9 @@
+---
+service: "Time Machine"
+description: "Restore files from backup, configure Time Machine targets, check backup status, or troubleshoot backup failures"
+platform: macOS
+---
+
 # Time Machine - Mac Studio → NAS Backup
 
 **Destination:** OpenMediaVault NAS (daddy)  

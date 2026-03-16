@@ -1,3 +1,9 @@
+---
+service: Docker
+description: "Manage containers, check running services, restart containers, view logs, or understand app locations (~/Apps/)"
+location: "~/Apps/"
+---
+
 # Docker - Container Management
 
 **All Docker apps live in:** `~/Apps/`

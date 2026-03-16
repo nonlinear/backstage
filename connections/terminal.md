@@ -1,3 +1,9 @@
+---
+service: Terminal
+description: "Configure shell (zsh), manage aliases, troubleshoot PATH issues, or customize terminal environment"
+shell: zsh
+---
+
 # Terminal - Shared Sessions (tmux)
 
 **Purpose:** Nicholas + Kin see/control same terminal simultaneously

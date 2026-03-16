@@ -1,3 +1,9 @@
+---
+service: MCP
+description: "Set up Model Context Protocol servers, configure MCP clients, or integrate external tools with LLMs"
+protocol: "Model Context Protocol"
+---
+
 # MCP (Model Context Protocol) - Connection Guide
 
 **What:** Protocol for AI assistants to access external tools/services via standardized interface

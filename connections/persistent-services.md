@@ -1,3 +1,9 @@
+---
+service: "Persistent Services"
+description: "Manage localhost servers (Agenda 8765, Librarian 8766), start/stop background services, or troubleshoot LaunchAgents"
+manager: "localhost-manager.sh"
+---
+
 # Persistent Services Setup (Mac Studio)
 
 **Goal:** ALL critical services ALWAYS ON (survive reboots)

@@ -1,3 +1,9 @@
+---
+service: "Local LLM"
+description: "Use Qwen models (7B/14B/32B/72B), configure Ollama, manage model contexts, or troubleshoot local inference"
+models: "Qwen2.5-Coder (7B/14B/32B), Qwen2.5 (72B)"
+---
+
 # LLM Models - Local Setup
 
 **What:** Download, manage, and run local LLM models (llama.cpp, GGUF)

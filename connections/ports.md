@@ -1,3 +1,9 @@
+---
+service: "Port Allocation"
+description: "Check which port is assigned to which service, avoid port conflicts, or document new service ports"
+scope: "Mac Studio + NAS port registry"
+---
+
 # Port Management Protocol
 
 **Philosophy:** 

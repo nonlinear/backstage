@@ -1,3 +1,9 @@
+---
+service: "Chrome Relay"
+description: "Automate browser (snapshots, clicks, forms), compare UI with design (Figma vs live), capture screenshots with accessibility tree, or test WCAG compliance"
+extension: "OpenClaw Browser Relay"
+---
+
 # Chrome Relay - Browser Control
 
 **What it is:** OpenClaw Browser Relay extension for Chrome automation (snapshots, clicks, form filling, etc.)

@@ -1,3 +1,10 @@
+---
+service: Jira
+description: "Read tasks, check deadlines, search issues (JQL), update issue status/assignee/description (requires confirmation), or batch update issues"
+api: "REST API v3"
+auth: "Basic Auth (email + API token in .env)"
+---
+
 # Jira Integration
 
 **What it is:** Atlassian Jira REST API v3 for issue tracking, task management, project planning.

@@ -1,6 +1,6 @@
 ---
 name: "Organization"
-description: "Global organization-wide configuration"
+description: "Organization-wide configuration"
 
 skills:
   - backstage
@@ -15,10 +15,11 @@ values:
   - brevity
   - commons
   - DRY
-  - high-auditability
+  - high auditability
   - identity
-  - night-shift
-  - no-ambiguity
+  - less is more
+  - night shift
+  - remove ambiguity
   - parity
   - research
 ---

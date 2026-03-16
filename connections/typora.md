@@ -1,3 +1,9 @@
+---
+service: Typora
+description: "Edit markdown files, configure Typora themes, troubleshoot rendering, or automate markdown workflows"
+app: Typora
+---
+
 # Typora Auto-Reload
 
 **Problem:** Typora doesn't auto-reload files in OneDrive.

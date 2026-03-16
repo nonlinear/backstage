@@ -1,3 +1,9 @@
+---
+service: "macOS Automation"
+description: "Use AppleScript, control System Events, manage apps (Finder/Safari/etc), or automate macOS workflows"
+platform: macOS
+---
+
 # macOS Automation & Tricks
 
 **What:** Native macOS commands, automation, config tweaks

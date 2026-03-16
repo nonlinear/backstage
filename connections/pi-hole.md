@@ -1,477 +1,341 @@
+---
+service: Pi-hole
+description: "Block ads network-wide, add blocklists/regex, configure DNS, troubleshoot ad blocking, or set up Tailscale remote ad-blocking"
+host: "192.168.1.152:8053"
+tailscale: "media.adal-rigel.ts.net:8053"
+status: active
+---
+
 # Pi-hole - Network-wide Ad Blocking
 
-**Status:** ✅ INSTALLED (2026-02-10)  
 **Web UI:** `http://192.168.1.152:8053/admin` (local) | `http://media.adal-rigel.ts.net:8053/admin` (remote)  
 **DNS:** `192.168.1.152:53` (UDP/TCP)  
 **Password:** (in Proton Pass)
 
-**🌐 Tailscale Global DNS:** ✅ CONFIGURED (todos no tailnet = Pi-hole automático)
+---
+
+## Quick Reference
+
+**Common tasks:**
+- Add blocklist: Admin → Group Management → Adlists → Add URL → Update Gravity
+- Add regex: Admin → Domains → Regex Filters → Add pattern
+- Whitelist domain: Admin → Whitelist → Add domain
+- View logs: Admin → Query Log
+
+**Test blocking:**
+```bash
+nslookup ads.example.com 192.168.1.152
+# Should return 0.0.0.0 if blocked
+```
 
 ---
 
-## 🌐 Tailscale Integration (Remote Ad-blocking)
+## Tailscale Integration (Remote Ad-blocking)
 
-**✅ CONFIGURED (2026-02-10):** Global Nameservers = Pi-hole (`192.168.1.152`)
+**✅ CONFIGURED:** Global Nameservers = Pi-hole (`192.168.1.152`)
 
-**O que isso significa:**
-- **TODOS no tailnet usam Pi-hole automaticamente** (quando Tailscale ON)
-- iPhone, iPad, MacBook → ads bloqueados **fora de casa** (4G, WiFi pública)
-- Zero config por device (global nameserver = aplica pra todos)
+**What this means:**
+- ALL devices on tailnet use Pi-hole automatically (when Tailscale ON)
+- iPhone, iPad, MacBook → ads blocked **outside home** (4G, public WiFi)
+- Zero config per device (global nameserver applies to all)
 
-**Como foi configurado:**
-1. Tailscale admin console → https://login.tailscale.com/admin/dns
+**How configured:**
+1. Tailscale admin → https://login.tailscale.com/admin/dns
 2. DNS → Nameservers → **Global nameservers**
 3. Add: `192.168.1.152` (Pi-hole local IP)
-4. **Primary DNS:** Pi-hole (ads bloqueados)
-5. **Fallback DNS:** 1.1.1.1 (Cloudflare - se NAS offline)
+4. **Primary DNS:** Pi-hole (ads blocked)
+5. **Fallback DNS:** 1.1.1.1 (Cloudflare - if NAS offline)
 
-**Novo device entra no tailnet:**
-- ✅ Automaticamente usa Pi-hole (sem configurar nada)
-- Basta ter Tailscale app instalado + logado no tailnet
+**New device joins tailnet:**
+- ✅ Automatically uses Pi-hole (no configuration)
+- Just install Tailscale app + login to tailnet
 
-**See:** `connections/tailscale-pihole.md` for full testing guide + trade-offs (battery, latency)
-
----
-
-## What Pi-hole Does
-
-- **Network-wide ad blocking** (DNS-level)
-- **YouTube ads** (partial - depends on blocklists)
-- **Tracker blocking** (telemetry, analytics, malware)
-- **Single point of control** (all devices protected)
+**Trade-offs:**
+- **Battery:** Slight increase (DNS queries route through Tailscale)
+- **Latency:** +10-50ms (depends on NAS location)
+- **Privacy:** All DNS queries visible to Pi-hole (but you own it)
 
 ---
 
 ## Installation (Docker on NAS)
 
+**Current setup:**
 ```bash
-# SSH into NAS
-ssh nonlinear@192.168.1.152
-
-# Run Pi-hole container
-sudo docker run -d \
+docker run -d \
   --name pihole \
-  -p 53:53/tcp -p 53:53/udp \
-  -p 8053:80/tcp \
-  -e TZ="America/New_York" \
-  -e WEBPASSWORD="$NAS_PASS" \
-  -v pihole_config:/etc/pihole \
-  -v dnsmasq_config:/etc/dnsmasq.d \
-  --dns=1.1.1.1 \
-  --dns=1.0.0.1 \
-  --restart=unless-stopped \
+  --restart unless-stopped \
+  -p 8053:80 \
+  -p 53:53/tcp \
+  -p 53:53/udp \
+  -e TZ=America/New_York \
+  -e WEBPASSWORD=$(cat ~/.pihole_pass) \
+  -v /opt/pihole/etc:/etc/pihole \
+  -v /opt/pihole/dnsmasq.d:/etc/dnsmasq.d \
   pihole/pihole:latest
-
-# Check if running
-sudo docker ps | grep pihole
 ```
 
-**Port mapping:**
-- DNS: `53` → `53` (UDP/TCP)
-- Web UI: `80` (container) → `8053` (host) — avoid conflict with OMV
+**Ports:**
+- `8053` → Web UI (avoid conflict with other services)
+- `53` → DNS (UDP + TCP)
 
 ---
 
-## Router Configuration
+## Blocklists
 
-**After Pi-hole is running:**
+### Recommended Lists
 
-1. **Router DNS settings:**
-   - Primary DNS: `192.168.1.152`
-   - Secondary DNS: `1.1.1.1` (fallback)
-
-2. **Or per-device** (if router doesn't support):
-   - macOS: System Settings → Network → DNS → `192.168.1.152`
-   - iOS/iPadOS: Settings → WiFi → DNS → Manual → `192.168.1.152`
-
----
-
-## Pi-hole API
-
-**Base URL:** `http://192.168.1.152:8053/admin/api.php`
-
-### Authentication Methods
-
-**1. Session-based (Web UI login):**
-```bash
-# Login and get session ID
-PASSWORD="your_password_here"
-SESSION=$(curl -s -X POST "http://192.168.1.152:8053/admin/api.php" \
-  -d "login" \
-  -d "pw=$PASSWORD" \
-  | jq -r '.session.sid')
-
-# Use session in subsequent requests
-curl "http://192.168.1.152:8053/admin/api.php?summaryRaw&sid=$SESSION"
+**General ads + tracking:**
 ```
-
-**2. API Token (recommended for scripts):**
-```bash
-# Get API token from Web UI:
-# Settings → API → Show API token
-
-API_TOKEN="your_token_here"
-
-# Use token in requests
-curl "http://192.168.1.152:8053/admin/api.php?summaryRaw&auth=$API_TOKEN"
-```
-
-**3. Direct password (works for some endpoints):**
-```bash
-PASSWORD="your_password_here"
-curl "http://192.168.1.152:8053/admin/api.php?summaryRaw&auth=$PASSWORD"
-```
-
----
-
-### Common API Endpoints
-
-#### Statistics
-
-**Summary (unauthenticated):**
-```bash
-curl "http://192.168.1.152:8053/admin/api.php?summary"
-```
-
-**Detailed stats (requires auth):**
-```bash
-curl "http://192.168.1.152:8053/admin/api.php?summaryRaw&auth=$API_TOKEN"
-```
-
-**Top domains:**
-```bash
-# Top blocked
-curl "http://192.168.1.152:8053/admin/api.php?topItems&auth=$API_TOKEN"
-
-# Top allowed
-curl "http://192.168.1.152:8053/admin/api.php?topItems=10&auth=$API_TOKEN"
-```
-
-**Query log:**
-```bash
-curl "http://192.168.1.152:8053/admin/api.php?getAllQueries&auth=$API_TOKEN"
-```
-
----
-
-#### Domain Management
-
-**Add to allowlist:**
-```bash
-curl -X POST "http://192.168.1.152:8053/admin/api.php" \
-  -d "list=white" \
-  -d "add=example.com" \
-  -d "auth=$API_TOKEN"
-```
-
-**Add to blocklist:**
-```bash
-curl -X POST "http://192.168.1.152:8053/admin/api.php" \
-  -d "list=black" \
-  -d "add=ads.example.com" \
-  -d "auth=$API_TOKEN"
-```
-
-**Remove from list:**
-```bash
-curl -X POST "http://192.168.1.152:8053/admin/api.php" \
-  -d "list=white" \
-  -d "sub=example.com" \
-  -d "auth=$API_TOKEN"
-```
-
-**Get current lists:**
-```bash
-# Allowlist
-curl "http://192.168.1.152:8053/admin/api.php?list=white&auth=$API_TOKEN"
-
-# Blocklist
-curl "http://192.168.1.152:8053/admin/api.php?list=black&auth=$API_TOKEN"
-```
-
----
-
-#### Adlist Management
-
-**Note:** Adlists (blocklist URLs) are NOT directly manageable via API.
-
-**Workarounds:**
-
-**1. Direct file edit (via Docker exec):**
-```bash
-# Add adlists to config file
-echo "$NAS_PASS" | ssh $NAS_USER@$NAS_HOST "sudo -S docker exec pihole bash -c 'cat >> /etc/pihole/adlists.list << EOF
-https://big.oisd.nl/
-https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/wildcard/pro.plus.txt
-EOF
-'"
-
-# Update Gravity to apply
-echo "$NAS_PASS" | ssh $NAS_USER@$NAS_HOST "sudo -S docker exec pihole pihole -g"
-```
-
-**2. Database edit (advanced):**
-```bash
-# Requires sqlite3 in container (may not be available)
-echo "$NAS_PASS" | ssh $NAS_USER@$NAS_HOST "sudo -S docker exec pihole sqlite3 /etc/pihole/gravity.db \"INSERT INTO adlist (address, enabled, comment) VALUES ('https://example.com/list.txt', 1, 'My List');\""
-```
-
-**3. Web UI (manual):**
-- Settings → Adlists → Add new adlist
-
----
-
-#### Gravity (Update Blocklists)
-
-**Update gravity (download + process blocklists):**
-```bash
-# Via API (requires auth)
-curl -X POST "http://192.168.1.152:8053/admin/api.php?updateGravity&auth=$API_TOKEN"
-
-# Via CLI (preferred)
-echo "$NAS_PASS" | ssh $NAS_USER@$NAS_HOST "sudo -S docker exec pihole pihole -g"
-```
-
----
-
-#### Enable/Disable Pi-hole
-
-**Disable (temporarily allow all queries):**
-```bash
-# Disable for 60 seconds
-curl -X POST "http://192.168.1.152:8053/admin/api.php" \
-  -d "disable=60" \
-  -d "auth=$API_TOKEN"
-
-# Disable indefinitely
-curl -X POST "http://192.168.1.152:8053/admin/api.php" \
-  -d "disable" \
-  -d "auth=$API_TOKEN"
-```
-
-**Enable:**
-```bash
-curl -X POST "http://192.168.1.152:8053/admin/api.php" \
-  -d "enable" \
-  -d "auth=$API_TOKEN"
-```
-
----
-
-#### DNS Records
-
-**Add custom DNS record:**
-```bash
-curl -X POST "http://192.168.1.152:8053/admin/api.php" \
-  -d "customdns" \
-  -d "action=add" \
-  -d "ip=192.168.1.100" \
-  -d "domain=myserver.local" \
-  -d "auth=$API_TOKEN"
-```
-
-**Remove custom DNS:**
-```bash
-curl -X POST "http://192.168.1.152:8053/admin/api.php" \
-  -d "customdns" \
-  -d "action=delete" \
-  -d "ip=192.168.1.100" \
-  -d "domain=myserver.local" \
-  -d "auth=$API_TOKEN"
-```
-
----
-
-### Getting API Token
-
-**Via Web UI:**
-1. Login to http://192.168.1.152:8053/admin
-2. Settings → API/Web Interface → Show API token
-3. Copy token (long string)
-
-**Store token:**
-```bash
-# In .env
-echo 'PIHOLE_TOKEN="your_token_here"' >> ~/.openclaw/workspace/.env
-```
-
----
-
-### Complete Script Example
-
-```bash
-#!/bin/bash
-source ~/.openclaw/workspace/.env
-
-PIHOLE_HOST="192.168.1.152:8053"
-API_TOKEN="$PIHOLE_TOKEN"  # from .env
-
-# Get summary
-echo "📊 Pi-hole Summary:"
-curl -s "http://$PIHOLE_HOST/admin/api.php?summaryRaw&auth=$API_TOKEN" | jq .
-
-# Get top blocked domains
-echo ""
-echo "🚫 Top Blocked:"
-curl -s "http://$PIHOLE_HOST/admin/api.php?topItems=5&auth=$API_TOKEN" | jq '.top_ads'
-
-# Check if domain is blocked
-DOMAIN="doubleclick.net"
-echo ""
-echo "🔍 Checking $DOMAIN:"
-curl -s "http://$PIHOLE_HOST/admin/api.php?domain=$DOMAIN&auth=$API_TOKEN" | jq .
-```
-
----
-
-### API Limitations
-
-❌ **No direct adlist management** - Must edit `/etc/pihole/adlists.list` file  
-❌ **No bulk operations** - One domain at a time  
-⚠️ **Authentication inconsistent** - Some endpoints work without auth, others don't  
-⚠️ **Documentation sparse** - Official API docs limited
-
-**Best practices:**
-- Use CLI (`pihole` command) for complex operations
-- Use API for stats/monitoring
-- Edit config files directly for bulk changes
-
----
-
-### CLI Commands (via Docker)
-
-**Preferred method for management tasks:**
-
-```bash
-# Set password
-echo "$NAS_PASS" | ssh $NAS_USER@$NAS_HOST "sudo -S docker exec pihole pihole setpassword 'newpass'"
-
-# Update gravity
-echo "$NAS_PASS" | ssh $NAS_USER@$NAS_HOST "sudo -S docker exec pihole pihole -g"
-
-# Query domain
-echo "$NAS_PASS" | ssh $NAS_USER@$NAS_HOST "sudo -S docker exec pihole pihole -q doubleclick.net"
-
-# Add to allowlist
-echo "$NAS_PASS" | ssh $NAS_USER@$NAS_HOST "sudo -S docker exec pihole pihole allow example.com"
-
-# Add to blocklist
-echo "$NAS_PASS" | ssh $NAS_USER@$NAS_HOST "sudo -S docker exec pihole pihole deny ads.example.com"
-
-# View status
-echo "$NAS_PASS" | ssh $NAS_USER@$NAS_HOST "sudo -S docker exec pihole pihole status"
-
-# Tail logs
-echo "$NAS_PASS" | ssh $NAS_USER@$NAS_HOST "sudo -S docker exec pihole pihole -t"
-```
-
-**Full CLI help:**
-```bash
-echo "$NAS_PASS" | ssh $NAS_USER@$NAS_HOST "sudo -S docker exec pihole pihole -h"
-```
-
----
-
-## Recommended Blocklists
-
-**Add manually in Web UI (Settings → Adlists) or via file edit:**
-
-```bash
-# Add all at once
-echo "$NAS_PASS" | ssh $NAS_USER@$NAS_HOST "sudo -S docker exec pihole bash -c 'cat >> /etc/pihole/adlists.list << \"LISTS\"
-https://big.oisd.nl/
-https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/wildcard/pro.plus.txt
-https://raw.githubusercontent.com/kboghdady/youTube_ads_4_pi-hole/master/black.list
 https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
-https://v.firebog.net/hosts/Easylist.txt
-https://v.firebog.net/hosts/AdguardDns.txt
-LISTS
-'"
-
-# Update Gravity to apply
-echo "$NAS_PASS" | ssh $NAS_USER@$NAS_HOST "sudo -S docker exec pihole pihole -g"
+https://raw.githubusercontent.com/anudeepND/blacklist/master/adservers.txt
 ```
 
-**List descriptions:**
-- **OISD Big** - Comprehensive (ads, trackers, malware) ~1M domains
-- **Hagezi Pro++** - Aggressive blocking, privacy-focused
-- **YouTube Ads** - Experimental YouTube ad blocking (partial)
-- **Steven Black** - Popular hosts file ~79k domains
-- **EasyList** - Web ads (AdBlock Plus format)
-- **AdGuard DNS** - Ads + trackers
+**Malware + phishing:**
+```
+https://raw.githubusercontent.com/DandelionSprout/adfilt/master/Alternate%20versions%20Anti-Malware%20List/AntiMalwareHosts.txt
+```
 
-**After adding:** Tools → Update Gravity (or `pihole -g` via CLI)
+**YouTube ads (partial):**
+```
+https://raw.githubusercontent.com/kboghdady/youTube_ads_4_pi-hole/master/youtubelist.txt
+```
+
+**Social media tracking:**
+```
+https://raw.githubusercontent.com/lightswitch05/hosts/master/ads-and-tracking-extended.txt
+```
+
+### IoT Telemetry Blocklists
+
+**Amazon Alexa tracking:**
+```
+https://raw.githubusercontent.com/anudeepND/blacklist/master/adservers.txt
+```
+Blocks: `device-metrics-us.amazon.com`, `avs-alexa-na.amazon.com` (Alexa still works)
+
+**Google Home / Chromecast:**
+```
+https://raw.githubusercontent.com/lightswitch05/hosts/master/ads-and-tracking-extended.txt
+```
+Blocks: `googleadservices.com`, `doubleclick.net`, `firebase-settings.crashlytics.com`
+
+**Samsung Smart TV:**
+```
+https://raw.githubusercontent.com/Perflyst/PiHoleBlocklist/master/SmartTV-AGH.txt
+```
+Blocks: `samsungads.com`, `samsungosp.com`, `samsungqbe.com`
+
+**LG Smart TV:**
+```
+https://raw.githubusercontent.com/Perflyst/PiHoleBlocklist/master/SmartTV.txt
+```
+Blocks: `lgsmartad.com`, `smartshare.lgtvsdp.com`
+
+**Roku tracking:**
+```
+https://raw.githubusercontent.com/Perflyst/PiHoleBlocklist/master/SmartTV.txt
+```
+Blocks: `scribe.logs.roku.com`, `austin.logs.roku.com`
+
+**How to add:**
+1. Pi-hole Admin → Group Management → Adlists
+2. Paste URL → Add
+3. Tools → Update Gravity
 
 ---
 
-## Access Web UI
+## Regex Filters
 
-**Local:** `http://192.168.1.152:8053/admin`  
-**Remote (Tailscale):** `http://media.adal-rigel.ts.net:8053/admin`
+### Anti-Tracking Patterns
 
-**Login:**
-- Password: (in Proton Pass - set via `pihole setpassword`)
+**Block telemetry (Microsoft, Google, Apple):**
+```regex
+^(.+[_.-])?telemetry[_.-]
+^(.+[_.-])?tracking[_.-]
+^(.+[_.-])?analytics[_.-]
+^(.+[_.-])?metrics[_.-]
+```
+Blocks: `telemetry.microsoft.com`, `tracking.google.com`, `app-analytics.apple.com`
 
-**Get API token:**
-- Web UI → Settings → API → Show API token
-- Store in `.env`: `PIHOLE_TOKEN="..."`
+**Block Google Ads:**
+```regex
+^(.+[_.-])?doubleclick[_.-]
+^(.+[_.-])?googlesyndication[_.-]
+^(.+[_.-])?googleadservices[_.-]
+```
+Blocks: `doubleclick.net`, `googlesyndication.com`, `googleadservices.com`
+
+**Block Facebook tracking:**
+```regex
+^(.+[_.-])?facebook[_.-].*analytics
+^(.+[_.-])?fbcdn[_.-].*tracking
+^(.+[_.-])?graph\.facebook
+```
+Blocks: `analytics.facebook.com`, `tracking.fbcdn.net`, `graph.facebook.com`
+
+**Block crypto miners:**
+```regex
+^(.+[_.-])?coinhive[_.-]
+^(.+[_.-])?cryptoloot[_.-]
+^(.+[_.-])?coin-hive[_.-]
+```
+
+### Amazon Block (Nuclear Option)
+
+**Blocks EVERYTHING Amazon-related:**
+```regex
+(^|\.)amazon\.
+(^|\.)amazonaws\.com$
+(^|\.)amazonalexa\.
+(^|\.)amazontrust\.
+```
+
+**Side effects:**
+- ❌ Amazon shopping (won't open)
+- ❌ AWS services (if you use them)
+- ❌ Alexa (stops working)
+- ❌ Any app/service using AWS backend
+
+**This is INTENTIONAL.** Fuck Amazon. 🏴
+
+**How to apply:**
+1. Pi-hole Admin → Group Management → Domains → Regex Filters
+2. Add each regex above
+3. Save → Tools → Update Gravity
+
+**Test:**
+```bash
+nslookup amazon.com 192.168.1.152
+# Should return 0.0.0.0 (blocked)
+```
+
+**Rollback:**
+```bash
+ssh $NAS_USER@$NAS_HOST
+sqlite3 /etc/pihole/gravity.db "DELETE FROM domainlist WHERE comment LIKE '%Block%Amazon%';"
+pihole restartdns reload-lists
+```
+
+---
+
+## Regex Best Practices
+
+**⚠️ Regex = power + risk:**
+- Too aggressive = sites break
+- Test gradually
+- If something breaks → whitelist specific domain
+
+**Example false positive:**
+- Regex: `^(.+[_.-])?analytics[_.-]`
+- Blocks: `google-analytics.com` ✅
+- BUT ALSO: `myapp-analytics.internal.company.com` ❌
+
+**Solution:** Whitelist the specific broken domain
+
+**Test regex before adding:**
+1. Pi-hole → Tools → Query Lists
+2. Enter domain (ex: `telemetry.microsoft.com`)
+3. See if regex would catch it
 
 ---
 
 ## Common Tasks
 
-### Check DNS is working
+### View Query Logs
 ```bash
-# From MacBook
-dig @192.168.1.152 google.com
+# Web UI
+http://192.168.1.152:8053/admin → Query Log
 
-# Should show Pi-hole as resolver
+# CLI (SSH into NAS)
+pihole -t
 ```
 
-### View logs
+### Whitelist a Domain
 ```bash
-echo "$NAS_PASS" | ssh $NAS_USER@$NAS_HOST "sudo -S docker logs pihole"
+# Web UI
+Admin → Whitelist → Add domain
+
+# CLI
+pihole -w example.com
 ```
 
-### Restart Pi-hole
+### Update Blocklists
 ```bash
-echo "$NAS_PASS" | ssh $NAS_USER@$NAS_HOST "sudo -S docker restart pihole"
+# Web UI
+Tools → Update Gravity
+
+# CLI
+pihole -g
 ```
 
-### Update blocklists
-- Web UI → Tools → Update Gravity
+### Check Status
+```bash
+# Web UI
+Dashboard shows queries/blocked %
 
----
+# CLI
+pihole status
+```
 
-## Limitations
-
-**YouTube ads:**
-- ❌ In-video ads (CANNOT block - same domain as video)
-- ✅ Banner ads, sidebar ads, homepage ads
-- ✅ Tracking, analytics, telemetry
-
-**Workaround for YouTube:**
-- Browser extension: uBlock Origin
-- Alternative frontend: Invidious, FreeTube
-- YouTube Premium (paid)
+### Restart DNS
+```bash
+pihole restartdns
+```
 
 ---
 
 ## Troubleshooting
 
-**DNS not working:**
-1. Check container is running: `sudo docker ps | grep pihole`
-2. Check port 53 is listening: `sudo netstat -tulpn | grep :53`
-3. Check router DNS settings
-4. Flush DNS cache on devices
+**Pi-hole not blocking:**
+1. Check device DNS: `nslookup pi.hole` (should resolve if using Pi-hole)
+2. Flush DNS cache: `sudo dscacheutil -flushcache` (macOS)
+3. Update gravity: `pihole -g`
 
-**Web UI not accessible:**
-1. Check port 8053: `curl http://192.168.1.152:8053`
-2. Check container logs: `sudo docker logs pihole`
+**Site broken after adding blocklist/regex:**
+1. Query Log → find blocked domain
+2. Whitelist specific domain (not entire blocklist)
+3. Test again
+
+**Tailscale devices not using Pi-hole:**
+1. Verify Global Nameservers configured: https://login.tailscale.com/admin/dns
+2. Check Tailscale status: `tailscale status`
+3. Test DNS: `nslookup pi.hole` (should resolve to 192.168.1.152)
+
+---
+
+## Statistics
+
+**Dashboard:** http://192.168.1.152:8053/admin
+
+Shows:
+- Queries today
+- Blocked today (%)
+- Clients
+- Top blocked domains
+- Query types (A, AAAA, PTR)
+
+---
+
+## Backup / Restore
+
+**Backup (teleporter):**
+1. Settings → Teleporter
+2. Backup → Download `.tar.gz`
+3. Store in `~/Documents/personal/backups/pihole/`
+
+**Restore:**
+1. Settings → Teleporter
+2. Restore → Upload `.tar.gz`
 
 ---
 
 ## Related
 
-- See: `connections/ssh.md` for NAS SSH access
-- See: `code/media.md` for all NAS services
+- `connections/nas.md` - NAS services overview
+- `connections/tailscale.md` - Tailscale configuration
+- Source: https://github.com/pi-hole/pi-hole
+- Regex patterns: https://github.com/mmotti/pihole-regex
+
+---
+
+**Philosophy:** Self-hosted, anti-corporate, anarchist infrastructure. Fuck surveillance capitalism. 🏴

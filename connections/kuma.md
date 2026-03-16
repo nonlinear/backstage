@@ -1,3 +1,9 @@
+---
+service: "Uptime Kuma"
+description: "Monitor service health, configure uptime checks, set up Telegram alerts, or view service status dashboard"
+host: "192.168.1.152:3001"
+---
+
 # Uptime Kuma
 
 **Port:** 3001 (fixed, never change)

@@ -1,3 +1,10 @@
+---
+service: "Home Assistant"
+description: "Control lights/covers/climate, check device status, add automations, use voice commands (Hey Jarvis), or troubleshoot smart home devices"
+host: "192.168.1.152:8123"
+tailscale: "media.adal-rigel.ts.net:8123"
+---
+
 # Home Assistant - Smart Home Control
 
 **Web UI:** [local](http://192.168.1.152:8123) | [remote](http://media.adal-rigel.ts.net:8123)  

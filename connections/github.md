@@ -1,3 +1,9 @@
+---
+service: GitHub
+description: "Clone repos, push commits, check SSH auth, troubleshoot git operations, or manage GitHub CLI (gh) authentication"
+auth: "SSH key"
+---
+
 # GitHub Connection
 
 ## Authentication

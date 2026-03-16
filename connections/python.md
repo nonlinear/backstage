@@ -1,3 +1,9 @@
+---
+service: Python
+description: "Manage virtual environments (venv), resolve package conflicts, troubleshoot Python scripts, or check Python version"
+location: "~/.venv (global venv)"
+---
+
 # Python Paths - Environment Setup
 
 **Problem:** Multiple Python versions causing import errors.

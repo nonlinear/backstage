@@ -1,3 +1,9 @@
+---
+service: OneDrive
+description: "Access Wiley work files, sync Excel/PowerPoint, troubleshoot OneDrive sync, or manage work documents"
+sync: "~/OneDrive - Wiley"
+---
+
 # OneDrive Connection
 
 **Problem:** OneDrive sync delay (2-10 min) breaks instant paridade.

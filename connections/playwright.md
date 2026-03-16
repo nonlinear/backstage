@@ -1,3 +1,9 @@
+---
+service: Playwright
+description: "Write UI tests, capture screenshots, verify frontend changes, or automate browser testing for Next.js/React apps"
+framework: "Playwright (Chromium)"
+---
+
 # connections/playwright.md
 
 **What:** Browser automation and testing framework (industry standard)

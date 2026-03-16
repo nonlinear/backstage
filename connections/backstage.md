@@ -1,3 +1,10 @@
+---
+service: Backstage
+description: "Access personal project dashboard, manage epic notes, view roadmaps, or check project health/status"
+host: "localhost:3004"
+tailscale: "studio.adal-rigel.ts.net:3004"
+---
+
 # Backstage Connection Guide
 
 ## Service Information

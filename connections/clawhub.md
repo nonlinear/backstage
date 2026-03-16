@@ -1,3 +1,9 @@
+---
+service: ClawHub
+description: "Search, install, update, or publish agent skills from clawhub.com using the npm-installed clawhub CLI"
+cli: clawhub
+---
+
 # ClawHub - Skill Publishing
 
 **Platform:** https://clawhub.com

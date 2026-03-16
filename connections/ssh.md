@@ -1,3 +1,9 @@
+---
+service: SSH
+description: "Connect to NAS, troubleshoot SSH keys, configure SSH config, or automate SSH commands with sshpass"
+targets: "NAS (192.168.1.152)"
+---
+
 # SSH - NAS Access
 
 **Host:** `192.168.1.152` (local) / `media.adal-rigel.ts.net` (Tailscale)  

@@ -1,3 +1,10 @@
+---
+service: Kavita
+description: "Read ebooks (EPUB/PDF), manage library, sync reading progress, or troubleshoot Kavita server (NAS)"
+host: "192.168.1.152:5000"
+tailscale: "media.adal-rigel.ts.net:5000"
+---
+
 # Kavita - Ebook Reader
 
 **Purpose:** Self-hosted ebook/comic reader with web interface

@@ -1,3 +1,10 @@
+---
+service: Figma
+description: "Read design files, fetch component specs (colors/fonts/spacing), compare design vs live system, or run design discrepancy exercises"
+api: "REST API (read-only)"
+auth: "Personal Access Token (.env)"
+---
+
 # Figma API Integration
 
 **What it is:** Figma REST API for design file access, component specs, asset library.

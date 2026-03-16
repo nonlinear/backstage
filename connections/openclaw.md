@@ -1,3 +1,10 @@
+---
+service: OpenClaw
+description: "Access Control UI remotely (iPad/iPhone), troubleshoot gateway connection, configure auth tokens, or restart gateway safely (~/Desktop/openclaw-recovery.sh)"
+host: "localhost:18789"
+tailscale: "studio.adal-rigel.ts.net:18789"
+---
+
 # OpenClaw - Control UI Remote Access
 
 **Last updated:** 2026-03-09 13:37 EDT
