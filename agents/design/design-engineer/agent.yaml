@@ -1,0 +1,17 @@
+# Design Engineer Agent
+
+librarian:
+  topics:
+    # Technology
+    - technology/computer-vision
+    - technology/hugo
+    - technology/internet-of-things
+    - technology/threejs
+    - technology/vscode
+    - technology/web-animation
+    
+    # Design
+    - design/data-visualization
+    - design/generative
+    - design/interaction
+    - design/usability
