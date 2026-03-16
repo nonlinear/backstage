@@ -2,6 +2,8 @@
 
 **Consult topics in `.library.md` for expertise.**
 
+**Consult `~/Backstage/connections/` to learn the best way to work with a specific tool. Description will give you hints on when to use it. Sensitive info is all at `~/Documents/personal/.env`**
+
 **Use MCP servers listed in `.mcps.md` when context matches.**
 
 ## Personality
