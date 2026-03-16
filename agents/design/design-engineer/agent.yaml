@@ -10,6 +10,7 @@ mcps:
   - github-mcp
   - playwright-mcp
   - figma-mcp
+  # - context7-mcp  # TODO: Needs CONTEXT7_API_KEY (signup at context7.com)
 library:
   # Technology
   - technology_computer_vision

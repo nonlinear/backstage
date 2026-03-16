@@ -67,3 +67,13 @@ MCP
   esac
 done <<< "$MCPS"
 
+    context7-mcp)
+      cat >> "$OUTPUT" << 'MCP'
+## context7-mcp
+**Capabilities:** Up-to-date code documentation for frameworks (React, MUI, Next.js, etc.)
+**When to use:** Need current API docs, component props, patterns for specific framework/library
+**Triggers:** documentation, code docs, mui, react, next.js, framework api
+**Requires:** CONTEXT7_API_KEY (signup at context7.com)
+
+MCP
+      ;;
