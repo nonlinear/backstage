@@ -1,5 +1,5 @@
 #!/bin/bash
-# Master composite script: sync skills, values, library for all agents
+# Master composite script: sync skills, values, library, mcps for all agents
 
 AGENT_DIR=$1
 
@@ -28,5 +28,8 @@ AGENT_NAME=$(basename "$AGENT_DIR")
 
 # 3. Sync library (composite list)
 ~/Backstage/scripts/generate-agent-library.sh "$AGENT_DIR" >/dev/null 2>&1
+
+# 4. Sync MCPs (composite list)
+~/Backstage/scripts/generate-agent-mcps.sh "$AGENT_DIR" >/dev/null 2>&1
 
 echo "✅ $AGENT_NAME"

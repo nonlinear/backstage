@@ -4,7 +4,8 @@ description: "Software engineering, code architecture, and implementation. Write
 status: draft
 
 tools: []
-skills: []
+skills:
+  - tmux
 mcps: []
 library: []
 values: []

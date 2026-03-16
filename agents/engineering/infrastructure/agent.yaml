@@ -4,7 +4,8 @@ description: "DevOps, automation, and system reliability. Manages containers, mo
 status: draft
 
 tools: []
-skills: []
+skills:
+  - tmux
 mcps: []
 library: []
 values: []

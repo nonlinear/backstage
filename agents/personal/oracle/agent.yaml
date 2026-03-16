@@ -4,7 +4,8 @@ description: "Divination, interpretation, and reflective guidance. Reads I Ching
 status: draft
 
 tools: []
-skills: []
+skills:
+  - i-ching
 mcps: []
 library: []
 values: []

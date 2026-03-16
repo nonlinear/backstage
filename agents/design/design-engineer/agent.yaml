@@ -4,8 +4,12 @@ description: "Design engineering agent"
 status: active
 
 tools: []
-skills: []
-mcps: []
+skills:
+  - tmux
+mcps:
+  - github-mcp
+  - playwright-mcp
+  - figma-mcp
 library:
   # Technology
   - technology_computer_vision
