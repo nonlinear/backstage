@@ -1,0 +1,55 @@
+---
+name: "Groups and Statuses"
+goal: "List object relationships + status checks"
+status: backlog
+type: "minor"
+created: 2026-03-15
+started: null
+completed: null
+
+tasks:
+  - group: "Object Relationships"
+    items:
+      - text: "Map list object hierarchy (Mermaid)"
+        checked: false
+      - text: "Document object dependencies (what depends on what)"
+        checked: false
+      - text: "Define cascading behaviors (delete epic → archive tasks?)"
+        checked: false
+  
+  - group: "Status Lifecycle"
+    items:
+      - text: "Define valid statuses per object type (epic, task, project, agent)"
+        checked: false
+      - text: "Document status transitions (backlog → active → done)"
+        checked: false
+      - text: "Map required checks per transition (can't close epic with open tasks)"
+        checked: false
+  
+  - group: "Validation Rules"
+    items:
+      - text: "Prevent invalid status changes (no backlog → done without active)"
+        checked: false
+      - text: "Enforce object consistency (epic can't be done if tasks incomplete)"
+        checked: false
+      - text: "Add validation to CLI commands (backstage epic complete <id>)"
+        checked: false
+
+deliverables:
+  - "object-relationships.md (Mermaid diagram)"
+  - "status-lifecycle.md (state machine + checks)"
+  - "validation-rules.md (rules engine)"
+
+notes: |
+  List objects: Organization, Squad, Project, Epic, Task, Agent, Value, Skill, MCP, Connection
+  
+  Status types:
+  - Epic: backlog, active, done, archived
+  - Task: unchecked, checked
+  - Project: backlog, active, paused, done
+  - Agent: active, retired
+  
+  Key question: What checks run when status changes?
+  Example: Epic backlog → active = check dependencies exist
+  Example: Epic active → done = check all tasks complete
+---

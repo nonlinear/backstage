@@ -1,0 +1,73 @@
+---
+name: "Surface Objects"
+goal: "Surface vision, agents, skills, MCPs, pinned notes"
+status: backlog
+type: "minor"
+created: 2026-03-15
+started: null
+completed: null
+
+tasks:
+  - group: "Vision Surfacing"
+    items:
+      - text: "Display organization vision (~/Backstage/organization.yaml)"
+        checked: false
+      - text: "Display squad vision (~/Backstage/squads/{squad}/squad.yaml)"
+        checked: false
+      - text: "Display project vision (~/Backstage/projects/{project}/project.yaml)"
+        checked: false
+  
+  - group: "Agent Surfacing"
+    items:
+      - text: "List all agents (~/Backstage/agents/**/agent.yaml)"
+        checked: false
+      - text: "Filter by status (active, retired)"
+        checked: false
+      - text: "Show agent metadata (squad, skills, values, library, MCPs)"
+        checked: false
+  
+  - group: "Skills Surfacing"
+    items:
+      - text: "List skills by scope (organization, squad, agent)"
+        checked: false
+      - text: "Show skill triggers + descriptions"
+        checked: false
+      - text: "Link to SKILL.md files"
+        checked: false
+  
+  - group: "MCPs Surfacing"
+    items:
+      - text: "List MCPs by scope (organization, squad, agent)"
+        checked: false
+      - text: "Show MCP capabilities + when to use"
+        checked: false
+      - text: "Link to connections/mcp.md"
+        checked: false
+  
+  - group: "Pinned Notes"
+    items:
+      - text: "Hardcode initial list (epic-notes, ROADMAP, etc.)"
+        checked: false
+      - text: "Make configurable (organization.yaml or project.yaml)"
+        checked: false
+      - text: "Support per-project pinning"
+        checked: false
+
+deliverables:
+  - "Vision page (organization + squad + project)"
+  - "Agents page (list + filter + metadata)"
+  - "Skills page (composite view)"
+  - "MCPs page (composite view)"
+  - "Pinned notes navigation"
+
+notes: |
+  Goal: Make invisible objects visible in Backstage UI.
+  
+  Current state:
+  - Vision exists in YAML but not surfaced
+  - Agents exist but no central list
+  - Skills/MCPs hidden in filesystem
+  - Pinned notes hardcoded in code
+  
+  Future: GUI for adding/removing/editing objects.
+---
