@@ -1,60 +1,57 @@
 ---
-version: v3.8.0
-name: "Extensions"
-goal: "Browse skills, MCPs, and read markdown docs in fullscreen reader"
+name: "Composite Watcher System"
+goal: "Auto-regenerate composite files (.values.md, .library.md, .mcps.md) when YAML changes"
 status: backlog
 type: "minor"
-created: 2026-03-12
+created: 2026-03-15
 started: null
 completed: null
+
 tasks:
-  - group: "Skills Browser"
-    items:
-      - text: "Scan workspace skills/ directory (parse SKILL.md frontmatter)"
-        checked: false
-      - text: "Display skills table (name, description, triggers, version)"
-        checked: false
-      - text: "Filter/search skills by name or trigger"
-        checked: false
-      - text: "Click skill → view full SKILL.md (read-only)"
-        checked: false
-      - text: "Show skill status (installed, symlink path, errors)"
-        checked: false
+  - text: "Design watcher architecture (what to watch, when to regenerate)"
+    checked: false
+  - text: "Detect changes to organization.yaml, squad.yaml, agent.yaml"
+    checked: false
+  - text: "Detect changes to values/ folder (new/edited value files)"
+    checked: false
+  - text: "Trigger composite.sh for affected agents (single agent or squad)"
+    checked: false
+  - text: "Debounce rapid changes (don't regenerate 10x for 10 edits)"
+    checked: false
+  - text: "Log watcher activity (what changed, what regenerated)"
+    checked: false
+  - text: "Test: Edit organization.yaml → all agents regenerate"
+    checked: false
+  - text: "Test: Edit squad.yaml → squad agents regenerate"
+    checked: false
+  - text: "Test: Edit agent.yaml → single agent regenerates"
+    checked: false
+  - text: "Test: Add value file → all agents regenerate"
+    checked: false
+  - text: "Document in docs/agent-composite-system.md (watcher section)"
+    checked: false
+
+scope: |
+  Watch filesystem for changes:
+  - organization.yaml
+  - squads/*/squad.yaml
+  - agents/*/*/agent.yaml
+  - values/*.md
   
-  - group: "MCP Browser"
-    items:
-      - text: "List installed MCPs (scan ~/.openclaw/ config)"
-        checked: false
-      - text: "Display MCP metadata (name, version, capabilities)"
-        checked: false
-      - text: "Show MCP status (running, stopped, error)"
-        checked: false
-      - text: "Link to MCP docs/README (if available)"
-        checked: false
+  On change → run composite.sh for affected scope:
+  - organization.yaml change → composite.sh all
+  - squad.yaml change → composite.sh all agents in squad
+  - agent.yaml change → composite.sh <agent>
+  - values/*.md change → composite.sh all (org values changed)
   
-  - group: "Markdown Reader"
-    items:
-      - text: "Fullscreen markdown viewer component"
-        checked: false
-      - text: "Syntax highlighting (code blocks)"
-        checked: false
-      - text: "Table of contents (auto-generated from headers)"
-        checked: false
-      - text: "Dark mode toggle"
-        checked: false
-      - text: "Print/export to PDF"
-        checked: false
-      - text: "Search within document (Cmd+F)"
-        checked: false
+  Tools:
+  - fswatch (macOS) or inotify (Linux)
+  - Debounce: wait 2s after last change before regenerating
+  - Run in background (LaunchAgent or systemd service)
+
+notes: |
+  Currently composite.sh must be run manually after YAML edits.
+  Watcher automates this (DRY, low metabolic cost).
   
-  - group: "Integration"
-    items:
-      - text: "Add /extensions route (Next.js)"
-        checked: false
-      - text: "Tab switcher: Skills | MCPs | Reader"
-        checked: false
-      - text: "Link from epic notes → markdown reader (full SKILL.md)"
-        checked: false
-      - text: "Keyboard shortcuts (Esc = exit reader, / = search)"
-        checked: false
+  Future: Extend to library topics, MCP additions (when registry changes).
 ---

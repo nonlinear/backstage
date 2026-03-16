@@ -6,39 +6,73 @@ type: "minor"
 created: 2026-03-11
 started: 2026-03-11
 completed: null
+
 tasks:
+  # ✅ Core Structure (DONE)
   - text: "Agent and squad template (yaml + soul.md + ENFORCEMENT.md)"
     checked: true
   - text: "Agent lifecycle system (draft → configured → active)"
     checked: true
+  - text: "Duplicate squads and agents from affordances list"
+    checked: true
+  
+  # ✅ Composite System (DONE)
+  - text: "Values composite script (org → squad → agent → .values.md)"
+    checked: true
+  - text: "Library composite script (org → squad → agent → .library.md)"
+    checked: true
+  - text: "Skills composite script (org → squad → agent → symlinks)"
+    checked: true
+  - text: "MCP composite script (org → squad → agent → .mcps.md)"
+    checked: true
+  - text: "Master composite.sh (runs all composite scripts)"
+    checked: true
+  - text: "All SOUL.md reference .values.md, .library.md, .mcps.md"
+    checked: true
+  
+  # ✅ Skills Management (DONE)
+  - text: "Skill install and affordances management"
+    checked: true
+  - text: "Organization-level skills (6 global)"
+    checked: true
+  
+  # ✅ Library Topics (DONE)
+  - text: "Librarian topics install and affordances"
+    checked: true
+  - text: "Library topics for business-analyst (11 topics)"
+    checked: true
+  - text: "Library topics for design-engineer (11 topics)"
+    checked: true
+  
+  # ✅ MCP Infrastructure (DONE)
+  - text: "MCP install and affordances management"
+    checked: true
+  - text: "5 MCPs installed (github, playwright, figma, context7, storybook)"
+    checked: true
+  - text: "design squad MCPs configured (playwright + figma)"
+    checked: true
+  
+  # ✅ Matrix/Mattermost (DONE)
   - text: "Matrix routing per-room (agentId override, manual sessionKey)"
     checked: true
   - text: "Matrix integration docs (adding-agent, adding-to-matrix, message-flow)"
     checked: true
-  - text: "Values composite watcher (org → squad → agent → .values.md)"
-    checked: false
-  - text: "Library composite watcher (org → squad → agent → .library.md)"
-    checked: false
-  - text: "Ensure OpenClaw sees agents folder (config + discovery)"
-    checked: false
-  - text: "Duplicate squads and agents from affordances list"
+  - text: "Agents on active status: DM on Matrix/Mattermost"
     checked: true
+  
+  # ❌ Pending (NOT in this epic)
   - text: "Organize values across organization, squad, agent yaml"
     checked: false
+    notes: "Values already organized - maybe needs docs?"
   - text: "Agent and squad status (active/backlog filtering)"
     checked: false
-  - text: "Skill install, affordances management"
+    notes: "Manual status management works - automation future?"
+  - text: "Ensure OpenClaw sees agents folder (config + discovery)"
     checked: false
-  - text: "Librarian topics install, affordances, testing"
+    notes: "Working via explicit config - auto-discovery future?"
+  - text: "Display name per-room (bot shows agent name, not 'openclaw_bot')"
     checked: false
-  - text: "MCP install, affordances management"
-    checked: false
-  - text: "Matrix webhook (ISOLATED per agent)"
-    checked: false
-  - text: "Agents on active status: DM on Matrix"
-    checked: true
-  - text: "Display name per-room (bot shows agent name, not 'openclaw_bot') - BLOCKED: SDK method unclear"
-    checked: false
+    notes: "BLOCKED: SDK method unclear"
   - text: "Squad group with @ mention support"
     checked: false
   - text: "Squad rooms: auto-invite agents when status → active"
@@ -47,4 +81,20 @@ tasks:
     checked: false
   - text: "TODO: How we enforce each new agent (active status) - future: check"
     checked: false
+
+deliverables:
+  - "22 agents created (4 squads: admin, design, engineering, marketing, personal, resources)"
+  - "Composite system (values, library, skills, MCPs)"
+  - "Scripts: generate-agent-values.sh, generate-agent-library.sh, sync-agent-skills.sh, generate-agent-mcps.sh, composite.sh"
+  - "5 MCPs installed + documented"
+  - "Matrix/Mattermost integration working"
+  - "Documentation: agent-composite-system.md"
+
+notes: |
+  Most tasks DONE. Remaining tasks = future enhancements (not blockers).
+  Watcher system separated to v3.6.0.
+  
+  Status assessment needed:
+  - Are pending tasks actually needed?
+  - Or can we mark epic DONE and move enhancements to future epics?
 ---
