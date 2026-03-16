@@ -1,277 +1,254 @@
-# Backstage Agent Configuration
+# Agent Configuration Guide
 
-**Status:** Current state documented (2026-03-16)
+**Location:** `~/Backstage/agents/{SQUAD}/{AGENT}/`
 
-## Architecture Overview
+**Composition:** 3-layer merge (organization → squad → agent)
 
-Agents are **composites** built from three YAML layers:
+---
 
-1. **organization.yaml** - Global/org-wide settings
-2. **squad.yaml** - Squad-specific configuration  
-3. **agent.yaml** - Individual agent configuration
+## Configuration Objects
 
-Generated files (`.values.md`, `.library.md`, `.mcps.md`) are created by `composite.sh`.
+Four types of configuration, each merged from organization/squad/agent levels:
+
+1. **Skills** - Tools and capabilities
+2. **MCPs** - Model Context Protocol servers
+3. **Values** - Behavioral constraints
+4. **Library** - Knowledge topics to consult
+
+---
+
+## Composition System
+
+### Current: Merge Only
+
+Organization → Squad → Agent (additive merge)
+
+```yaml
+# organization.yaml
+skills: [backstage, librarian, github]
+
+# squad/design/squad.yaml
+skills: [figma, typography]
+
+# squad/design/design-engineer/agent.yaml
+skills: [playwright]
+
+# Result: [backstage, librarian, github, figma, typography, playwright]
+```
+
+### Future: Deny List
+
+> 🔜 **Agent > Squad > Organization precedence**
+> 
+> ```yaml
+> # organization.yaml
+> skills: [github, slack]
+> 
+> # agent.yaml
+> skills: [github]
+> deny_skills: [slack]  # Agent refuses slack access
+> 
+> # Result: [github] (agent denial wins)
+> ```
+
+---
+
+## 1. Skills
+
+**Source:** `~/Backstage/skills/` (organization-level)
+
+**Mechanism:** Symlinks in agent workspace
+
+```bash
+~/Backstage/agents/design/design-engineer/skills/
+├── backstage -> ~/Backstage/skills/backstage/
+├── librarian -> ~/Backstage/skills/librarian/
+├── github -> ~/Backstage/skills/github/
+└── figma -> ~/Backstage/skills/figma/
+```
+
+**Why symlinks:** No duplication, single source of truth per skill.
+
+**Script:** `scripts/composite.sh` generates symlinks based on YAML configs.
+
+---
+
+## 2. MCPs (Model Context Protocol)
+
+**Status:** Not currently configured (all YAMLs have `mcps: []`)
+
+**Process:**
+1. Install MCP server in Docker MCP container
+2. Add to organization/squad/agent YAML: `mcps: [github-mcp]`
+3. Composite generates `.mcps.md` (reference doc for agent)
+
+**Supported MCPs:**
+- `github-mcp` - GitHub API access
+- `playwright-mcp` - Browser automation
+- `figma-mcp` - Figma API
+- `context7-mcp` - Context management
+
+**Location:** Configured in OpenClaw Gateway (not Backstage YAMLs)
+
+**Script:** `scripts/generate-agent-mcps.sh`
+
+---
+
+## 3. Values
+
+**Purpose:** Behavioral constraints for agents
+
+**Mechanism:** Append organization → squad → agent values into `.values.md`
+
+**Referenced in:** `SOUL.md` (first line: "Use the values defined in `.values.md` as constraints.")
+
+**Example composite:**
+
+```yaml
+# organization.yaml
+values:
+  - "Prioritize user needs over business metrics"
+  - "Fail fast, learn faster"
+
+# squad/design/squad.yaml
+values:
+  - "Form follows function"
+  - "Accessible by default"
+
+# agent.yaml
+values:
+  - "Code as documentation"
+```
+
+**Result `.values.md`:**
+```markdown
+# Values
+
+## Organization
+- Prioritize user needs over business metrics
+- Fail fast, learn faster
+
+## Squad (design)
+- Form follows function
+- Accessible by default
+
+## Agent (design-engineer)
+- Code as documentation
+```
+
+**Script:** `scripts/generate-agent-values.sh`
+
+---
+
+## 4. Library
+
+**Purpose:** Define WHICH topics agent MUST consult (via librarian skill)
+
+**Mechanism:** Composite lists topics from organization/squad/agent, generates `.library.md`
+
+**Referenced in:** `SOUL.md` ("Consult topics in `.library.md` for expertise.")
+
+**Example composite:**
+
+```yaml
+# organization.yaml
+library:
+  - backstage-architecture
+  - git-workflow
+
+# squad/design/squad.yaml
+library:
+  - design-systems
+  - accessibility
+
+# agent.yaml
+library:
+  - react-patterns
+  - css-grid
+```
+
+**Result `.library.md`:**
+```markdown
+# Library Topics
+
+Consult these topics when relevant:
+
+- backstage-architecture
+- git-workflow
+- design-systems
+- accessibility
+- react-patterns
+- css-grid
+
+Use `librarian` skill to retrieve topic content.
+```
+
+**Script:** `scripts/generate-agent-library.sh`
+
+**Skill:** `librarian` (organization-level, all agents have access)
 
 ---
 
 ## File Structure
 
 ```
-~/Backstage/
-├── organization.yaml          # Org-level config
-├── scripts/
-│   ├── composite.sh           # Master sync (runs all generators)
-│   ├── sync-agent-skills.sh   # Symlink skills
-│   ├── generate-agent-values.sh
-│   ├── generate-agent-library.sh
-│   └── generate-agent-mcps.sh
-├── agents/
-│   ├── design/
-│   │   ├── squad.yaml         # Design squad config
-│   │   ├── design-engineer/
-│   │   │   ├── agent.yaml     # Individual agent config
-│   │   │   ├── .values.md     # Generated (composite)
-│   │   │   ├── .library.md    # Generated (composite)
-│   │   │   ├── .mcps.md       # Generated (composite)
-│   │   │   ├── SOUL.md        # Hand-written
-│   │   │   ├── AGENTS.md      # Hand-written
-│   │   │   └── ...
+~/Backstage/agents/design/design-engineer/
+├── agent.yaml              # Agent-specific config
+├── SOUL.md                 # Personality (references .values.md, .library.md)
+├── .values.md              # Generated: composite values
+├── .library.md             # Generated: composite library topics
+├── .mcps.md                # Generated: MCP reference (currently empty)
+├── skills/                 # Symlinks to ~/Backstage/skills/
+│   ├── backstage -> ...
+│   ├── librarian -> ...
+│   └── github -> ...
+├── AGENTS.md               # Workspace rules (read-only)
+├── USER.md                 # Human context
+├── TOOLS.md                # Local notes (camera names, SSH, etc.)
+└── memory/                 # Daily logs
+    └── 2026-03-16.md
 ```
 
 ---
 
-## Configuration Fields
+## Scripts
 
-### organization.yaml
+All located in `~/Backstage/scripts/`:
 
-**Current content:**
-```yaml
-name: "Organization"
-description: "Organization-wide configuration"
+- `composite.sh` - Main orchestrator (calls all generators)
+- `generate-agent-values.sh` - Merges values → `.values.md`
+- `generate-agent-library.sh` - Merges library → `.library.md`
+- `generate-agent-mcps.sh` - Lists MCPs → `.mcps.md`
 
-skills:
-  - backstage
-  - librarian
-  - github
-  - summarize
-  - tmux
-  - remove-ambiguity
-
-values:
-  - autonomy
-  - brevity
-  - commons
-  - DRY
-  - high auditability
-  - identity
-  - less is more
-  - night shift
-  - remove ambiguity
-  - parity
-  - research
+**Run after editing YAML:**
+```bash
+cd ~/Backstage
+./scripts/composite.sh
 ```
 
-**Fields:**
-- `skills[]` - Skills available to ALL agents
-- `values[]` - Values enforced org-wide
-- `mcps[]` - **NOT PRESENT** (no org-level MCPs configured)
+---
+
+## Precedence (Future)
+
+When deny lists implemented:
+
+**Agent > Squad > Organization**
+
+Most specific configuration wins. Agent can refuse organization-level defaults.
+
+**Use case:** Security-sensitive agent denies network access granted at org level.
 
 ---
 
-### squad.yaml
+## Examples
 
-**Example (design squad):**
-```yaml
-name: "Design Squad"
-description: "User research, visual design, UX copy, and animation"
-status: active
+**Simple agent:** `agents/research/librarian/` (minimal config, inherits most from org)
 
-tools: []
-skills: []
-mcps: []
-library:
-  - design_usability_general
-  - design_usability_rosenfeld
-  - creativity_art_direction
-  - creativity_brand_strategy
-  - creativity_writing
-  - design_character
-  - design_circular
-  - design_data_visualization
-  - design_generative
-  - design_interaction
-  - design_system
-  - design_theory
-  - design_typography
-values: []
-```
-
-**Fields:**
-- `tools[]` - Squad-specific tools
-- `skills[]` - Squad-specific skills (empty = inherit org)
-- `mcps[]` - **EMPTY** (no squad MCPs configured)
-- `library[]` - Expertise topics for squad
-- `values[]` - Squad-specific values (empty = inherit org)
-
-**Status across all squads:**
-- design: `mcps: []`
-- engineering: `mcps: []`
-- marketing: `mcps: []`
-- personal: `mcps: []`
-- resources: `mcps: []`
-- template: `mcps: []`
+**Complex agent:** `agents/design/design-engineer/` (many skills, custom values, extended library)
 
 ---
 
-### agent.yaml
-
-**Example (design-engineer):**
-```yaml
-name: "Design Engineer"
-description: "Design engineering agent"
-status: active
-
-tools: []
-skills:
-  - tmux
-mcps: []  # Inherits: github-mcp (org), playwright-mcp + figma-mcp (squad)
-library:
-  - technology_computer_vision
-  - technology_hugo
-  - technology_internet_of_things
-  - technology_threejs
-  - technology_vscode
-  - technology_web_animation
-  - design_data_visualization
-  - design_generative
-  - design_interaction
-  - design_usability_general
-  - design_usability_rosenfeld
-values: []
-```
-
-**Fields:**
-- `tools[]` - Agent-specific tools
-- `skills[]` - Agent-specific skills (merges with org + squad)
-- `mcps[]` - **EMPTY** (comment is aspirational, not implemented)
-- `library[]` - Agent-specific expertise (merges with squad)
-- `values[]` - Agent-specific values (merges with org + squad)
-
----
-
-## Composite Generation Process
-
-**Command:** `~/Backstage/scripts/composite.sh <agent_dir>`  
-**Or:** `composite.sh all` (runs for all agents)
-
-**Steps:**
-
-1. **sync-agent-skills.sh** - Symlinks skills from `~/Backstage/skills/` to agent dir
-2. **generate-agent-values.sh** - Merges values from org → squad → agent into `.values.md`
-3. **generate-agent-library.sh** - Merges library topics into `.library.md`
-4. **generate-agent-mcps.sh** - Merges MCPs from org → squad → agent into `.mcps.md`
-
-**Merge order:** organization → squad → agent (deduplicated)
-
----
-
-## MCP Configuration (CURRENT STATE)
-
-**Configured in YAMLs:**
-- organization.yaml: No `mcps` field
-- squad.yaml: `mcps: []` (empty array)
-- agent.yaml: `mcps: []` (empty array)
-
-**Result:**
-- `generate-agent-mcps.sh` produces `.mcps.md` with "No MCP servers configured"
-- MCPs are NOT running (no processes, not in OpenClaw status)
-
-**Supported MCPs (in script, not enabled):**
-- `github-mcp` - GitHub API (repos, issues, PRs, code search)
-- `playwright-mcp` - Browser automation, screenshots
-- `figma-mcp` - Figma layout/component extraction
-- `context7-mcp` - Framework documentation (requires API key)
-
-**Why MCPs don't work:**
-- YAMLs have empty arrays
-- `.mcps.md` is documentation only (not executable config)
-- OpenClaw doesn't read `.mcps.md` to start MCPs
-- MCPs need to be configured elsewhere (OpenClaw config, not Backstage YAMLs)
-
----
-
-## Skills Configuration (CURRENT STATE)
-
-**Configured in YAMLs:**
-- organization.yaml: `skills: [backstage, librarian, github, summarize, tmux, remove-ambiguity]`
-- squad.yaml (design): `skills: []` (inherits org)
-- agent.yaml (design-engineer): `skills: [tmux]` (adds to org list)
-
-**Available skills (system-wide):**
-- From `/opt/homebrew/lib/node_modules/openclaw/skills/`:
-  - apple-notes, apple-reminders, clawhub, gh-issues, github, healthcheck
-  - node-connect, skill-creator, summarize, tmux, video-frames, weather
-
-**Custom skills (Backstage):**
-- From `~/Backstage/skills/`:
-  - add-to-project, backstage, librarian, remove-ambiguity, etc.
-
-**Symlinks:**
-- `sync-agent-skills.sh` creates symlinks in agent dir
-- Example: `design-engineer/skills/tmux` → `~/Backstage/skills/tmux/`
-
-**Skills WORK because:**
-- OpenClaw loads skills from agent workspace
-- Skills have `SKILL.md` with instructions
-- Agent reads `SKILL.md` when triggered
-
----
-
-## Values & Library (CURRENT STATE)
-
-**Values:**
-- Defined in `organization.yaml` and optionally in `squad.yaml`/`agent.yaml`
-- Merged into `.values.md` by `generate-agent-values.sh`
-- Example values: autonomy, brevity, commons, DRY, high auditability, parity
-
-**Library:**
-- Defined in `squad.yaml` and `agent.yaml`
-- Merged into `.library.md` by `generate-agent-library.sh`
-- Contains expertise topics (e.g., `design_usability_general`, `technology_threejs`)
-- Agent consults `.library.md` for domain knowledge
-
----
-
-## Gap: MCPs Not Integrated
-
-**Problem:**
-- Backstage YAMLs define `mcps: []` but it's empty
-- `.mcps.md` is generated but only contains documentation
-- OpenClaw doesn't automatically start MCPs based on `.mcps.md`
-
-**Missing link:**
-- OpenClaw config (`~/.config/openclaw/config.yaml` or Gateway config) needs MCP server definitions
-- MCPs must be started as processes (via `npx`, stdio, or stdio+npx transports)
-- `.mcps.md` should reference running MCPs, not define them
-
-**To fix (requires investigation):**
-- Find OpenClaw MCP configuration location
-- Define MCP servers in OpenClaw config (not Backstage YAML)
-- Update Backstage YAMLs to list which MCPs each agent uses
-- Regenerate `.mcps.md` to document available MCPs
-- Test that OpenClaw exposes MCP tools to agent sessions
-
----
-
-## Summary
-
-**What works:**
-- ✅ Skills (org + custom)
-- ✅ Values (composite merge)
-- ✅ Library (composite merge)
-- ✅ Composite generation (`composite.sh`)
-
-**What doesn't work:**
-- ❌ MCPs (YAMLs empty, no OpenClaw integration)
-
-**Next:** Investigate OpenClaw MCP configuration, then enable MCPs.b
+> 🔜 **Future enhancements:**
+> - Deny lists (`deny_skills`, `deny_mcps`, `deny_values`)
+> - Project-level library (inherit topics from assigned projects)
+> - Conditional skills (enable only when working on specific projects)
