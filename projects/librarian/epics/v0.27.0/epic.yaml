@@ -8,19 +8,21 @@ started: 2026-03-10
 completed: null
 tasks:
   - text: "Create covers/ folder (visible, not hidden)"
-    checked: false
+    checked: true
   - text: "Update extract-covers.py to output to covers/"
-    checked: false
+    checked: true
   - text: "Filter scan to skip covers/ folder (if 'covers' in p.parts: continue)"
     checked: false
   - text: "Test: extract covers → verify in covers/"
-    checked: false
+    checked: true
   - text: "Commit covers/ to git (no .gitignore)"
-    checked: false
+    checked: true
   - text: "Update GUI to load covers from covers/ folder"
     checked: false
   - text: "Document covers/ strategy in epic notes"
-    checked: false
+    checked: true
   - text: "Update README with covers/ location"
     checked: false
+  - text: "Delete duplicate covers from books/TOPIC/*"
+    checked: true
 ---
