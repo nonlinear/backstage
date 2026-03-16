@@ -272,51 +272,82 @@ tasks: ["✅ Task"]
 
 ---
 
-## CRITICAL: Epic YAML Format (Learned 2026-03-15)
+## CRITICAL: Epic YAML Format (STANDARD - enforced 2026-03-16)
 
-**Backstage UI ONLY reads simple format. Notes = waste.**
+**Backstage UI parser requires EXACT format. Deviations = epic invisible.**
 
-**CORRECT (appears in UI):**
+**MANDATORY fields:**
 ```yaml
 ---
-name: "Epic Name"
-goal: "Brief one-line description"
-status: done
-type: "minor"
-created: 2026-03-15
-started: 2026-03-15
-completed: 2026-03-15
-tasks:
-  - text: "Task description"
-    checked: true
+version: v0.1.0               # REQUIRED (epic identifier)
+name: "Epic Name"             # REQUIRED (display name)
+status: backlog               # REQUIRED (backlog|active|done)
+type: minor                   # REQUIRED (minor|major|patch)
+created: 2026-03-15           # REQUIRED (YYYY-MM-DD)
+started: null                 # OPTIONAL (null or YYYY-MM-DD)
+completed: null               # OPTIONAL (null or YYYY-MM-DD)
+goal: "Brief description"     # REQUIRED (one-line summary)
+tasks:                        # REQUIRED (can be empty list)
+  - text: "Task description"  # REQUIRED per task
+    checked: false            # REQUIRED per task (true|false)
 ---
 ```
 
-**WRONG (breaks UI, epic invisible):**
+**Status values:**
+- `backlog` - not started
+- `active` - currently working
+- `done` - completed
+
+**Type values:**
+- `minor` - feature/improvement
+- `major` - breaking change/large scope
+- `patch` - bugfix/small change
+
+**Task format (ONLY valid syntax):**
 ```yaml
+tasks:
+  - text: "Task description"
+    checked: false
+  - text: "Another task"
+    checked: true
+```
+
+**WRONG (breaks UI parsing):**
+```yaml
+# ❌ Missing version field
+---
+name: "Epic Name"
+status: active
+---
+
+# ❌ Markdown headers inside YAML
 ---
 version: v2.7.0
 name: "Epic Name"
-status: done
-summary: |
-  Long paragraph...
-context:
-  - Multiple sections...
+---
+# Epic v2.7.0
+## Context
+...
+
+# ❌ Extra fields (ignored or breaks parser)
+---
+version: v2.7.0
+summary: "Long text..."
+context: ["Multiple sections"]
 decisions:
   - date: 2026-03-15
     decision: "..."
-    rationale: |
-      Pages of text...
-tasks:
-  - id: T1
-    text: "..."
-    status: done
-    notes: |
-      More paragraphs...
 technical_notes:
-  key: |
-    Even more text...
+  key: "More text..."
 ---
+
+# ❌ Wrong task format
+tasks: ["Simple string"]          # Missing text:/checked: keys
+tasks:
+  - "✅ Task with emoji"          # Wrong format
+  - id: T1                        # Extra fields
+    text: "Task"
+    status: done                  # Wrong key (use checked:)
 ```
 
 **Why it breaks:**
@@ -346,6 +377,64 @@ epics/vX.Y.Z/
 
 ---
 
+## Lessons Learned (2026-03-16)
+
+**What I did WRONG today:**
+- Created research-exchange v0.2.0 using Markdown sections inside YAML
+- Created research-exchange v0.3.0 using Markdown sections inside YAML
+- Both epics INVISIBLE in Backstage UI
+- Ignored the skill's own documentation
+
+**What I learned:**
+- Backstage parser ONLY reads YAML tasks format
+- Markdown sections (### 1. Task Group) = ignored completely
+- Epic appears in UI ONLY if `version:` field exists
+- Must use `text:` + `checked:` format (NOT Markdown checkboxes in YAML)
+
+**Corrected format (research-exchange v0.2.0 & v0.3.0):**
+```yaml
+---
+version: v0.2.0
+name: Config Design Engineer
+status: active
+created: 2026-03-13
+type: minor
+goal: "Configure design-engineer agent..."
+tasks:
+  - text: "Define agent role & responsibilities"
+    checked: false
+  - text: "Select core values"
+    checked: false
+---
+```
+
+**Before (WRONG - epic invisible):**
+```yaml
+---
+version: v0.2.0
+name: Config Design Engineer
+status: active
+---
+
+# Epic v0.2.0: Config Design Engineer
+
+### 1. Define Framework
+- [ ] Agent role & responsibilities
+- [ ] Decision boundaries
+```
+
+**Why it broke:**
+- Markdown inside YAML = parser stops at `---` 
+- Tasks not in YAML = UI can't render checkboxes
+- No `version:` field = epic not found by router
+
+**Rule I violated:**
+> "epic.yaml = metadata ONLY. Everything else = separate .md files."
+
+**Trust the skill documentation. It exists for this reason.**
+
+---
+
 **Created:** 2026-03-12  
-**Updated:** 2026-03-15 (epic format parity)  
+**Updated:** 2026-03-16 (lessons learned: YAML tasks mandatory)  
 **Location:** `~/.openclaw/workspace/skills/add-to-project/SKILL.md`
