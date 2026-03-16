@@ -16,13 +16,38 @@ if [ ! -f "$AGENT_YAML" ]; then
   exit 1
 fi
 
-# Read MCPs from agent.yaml
-MCPS=$(yq eval '.mcps[]' "$AGENT_YAML" 2>/dev/null)
+# Extract squad name from path: ~/Backstage/agents/SQUAD/AGENT/
+SQUAD_NAME=$(basename $(dirname "$AGENT_DIR"))
+SQUAD_YAML=~/Backstage/squads/$SQUAD_NAME/squad.yaml
 
+ORG_YAML=~/Backstage/organization.yaml
+
+# Collect MCPs (organization → squad → agent, deduplicated)
+MCPS=""
+
+# 1. Organization MCPs
+if [ -f "$ORG_YAML" ]; then
+  MCPS="$MCPS $(yq eval '.mcps[]' "$ORG_YAML" 2>/dev/null | tr '\n' ' ')"
+fi
+
+# 2. Squad MCPs
+if [ -f "$SQUAD_YAML" ]; then
+  MCPS="$MCPS $(yq eval '.mcps[]' "$SQUAD_YAML" 2>/dev/null | tr '\n' ' ')"
+fi
+
+# 3. Agent MCPs
+MCPS="$MCPS $(yq eval '.mcps[]' "$AGENT_YAML" 2>/dev/null | tr '\n' ' ')"
+
+# Deduplicate
+MCPS=$(echo "$MCPS" | tr ' ' '\n' | grep -v '^$' | sort -u | tr '\n' ' ')
+
+# If no MCPs, create empty file
 if [ -z "$MCPS" ]; then
-  echo "# MCP Servers" > "$OUTPUT"
-  echo "" >> "$OUTPUT"
-  echo "No MCP servers configured for this agent." >> "$OUTPUT"
+  cat > "$OUTPUT" << 'HEADER'
+# MCP Servers
+
+No MCP servers configured for this agent.
+HEADER
   exit 0
 fi
 
@@ -35,7 +60,7 @@ Use these tools when context matches. They're already installed and configured.
 HEADER
 
 # Add each MCP with details
-while IFS= read -r mcp; do
+for mcp in $MCPS; do
   case "$mcp" in
     github-mcp)
       cat >> "$OUTPUT" << 'MCP'
@@ -64,16 +89,16 @@ MCP
 
 MCP
       ;;
-  esac
-done <<< "$MCPS"
-
     context7-mcp)
       cat >> "$OUTPUT" << 'MCP'
 ## context7-mcp
 **Capabilities:** Up-to-date code documentation for frameworks (React, MUI, Next.js, etc.)
 **When to use:** Need current API docs, component props, patterns for specific framework/library
 **Triggers:** documentation, code docs, mui, react, next.js, framework api
-**Requires:** CONTEXT7_API_KEY (signup at context7.com)
+**Note:** Requires CONTEXT7_API_KEY (signup at context7.com)
 
 MCP
       ;;
+  esac
+done
+

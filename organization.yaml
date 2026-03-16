@@ -10,6 +10,9 @@ skills:
   - tmux
   - remove-ambiguity
 
+mcps:
+  - github-mcp
+
 values:
   - autonomy
   - brevity

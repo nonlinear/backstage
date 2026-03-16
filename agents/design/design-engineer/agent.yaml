@@ -6,11 +6,7 @@ status: active
 tools: []
 skills:
   - tmux
-mcps:
-  - github-mcp
-  - playwright-mcp
-  - figma-mcp
-  # - context7-mcp  # TODO: Needs CONTEXT7_API_KEY (signup at context7.com)
+mcps: []  # Inherits: github-mcp (org), playwright-mcp + figma-mcp (squad)
 library:
   # Technology
   - technology_computer_vision
