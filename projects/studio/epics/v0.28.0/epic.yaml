@@ -1,32 +1,20 @@
 ---
-name: "Docker Backup Strategy"
-goal: "Automated daily backups for Docker containers with databases to prevent data loss like Kavita incident"
-status: done
-completed: 2026-03-13
+name: "Project-Level Library Topics"
+goal: "Agents inherit library topics from projects they work on (context-aware knowledge)"
+status: backlog
 type: "minor"
-created: 2026-02-25
+created: 2026-03-15
 started: null
+completed: null
 tasks:
-  - text: "Time Machine configured (automatic backups)"
-    checked: true
-  - text: "~/Apps/ visible to Time Machine (moved from hidden location)"
-    checked: true
-  - text: "All Docker volumes backed up (Kavita, Paperless, Home Assistant)"
-    checked: true
-  - text: "Auto-commit cronjob (daily git backup for configs)"
-    checked: true
-  - text: "Verified restore (Kavita recovery from backup successful)"
-    checked: true
-
-notes: |
-  ## Epic Completion (2026-03-13)
-  
-  Resolved via Time Machine + git auto-commit:
-  - Time Machine: hourly backups of ~/Apps/ (Docker volumes included)
-  - Git auto-commit: daily config backups (compositions, .env)
-  - Verified recovery: Kavita restored from backup after container deletion
-  
-  No additional docker-backup.sh needed - Time Machine already handles this.
-  
-  Closed as done - infrastructure already solves this.
+  - text: "Design project.yaml schema (add library: [] field)"
+    checked: false
+  - text: "Update generate-agent-library.sh (read project library if agent assigned)"
+    checked: false
+  - text: "Composite order: organization → squad → project → agent"
+    checked: false
+  - text: "Document in AGENTS.md (Project Library Protocol)"
+    checked: false
+  - text: "Test with Wiley project (add RPM-specific topics)"
+    checked: false
 ---

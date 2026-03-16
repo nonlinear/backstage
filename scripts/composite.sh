@@ -26,7 +26,7 @@ AGENT_NAME=$(basename "$AGENT_DIR")
 # 2. Sync values (composite content)
 ~/Backstage/scripts/generate-agent-values.sh "$AGENT_DIR" >/dev/null 2>&1
 
-# 3. Sync library (composite - TBD, placeholder for now)
-# ~/Backstage/scripts/generate-agent-library.sh "$AGENT_DIR" >/dev/null 2>&1
+# 3. Sync library (composite list)
+~/Backstage/scripts/generate-agent-library.sh "$AGENT_DIR" >/dev/null 2>&1
 
 echo "✅ $AGENT_NAME"
