@@ -3,96 +3,59 @@ version: v0.2.0
 name: Config Design Engineer
 status: active
 created: 2026-03-13
+type: minor
+goal: "Configure design-engineer agent with complete framework, skills, MCPs, values, and library before activation"
+tasks:
+  - text: "Define agent role & responsibilities (UI/UX implementation)"
+    checked: false
+  - text: "Define decision boundaries (when to act vs ask)"
+    checked: false
+  - text: "Define collaboration patterns (with UXR, business-analyst)"
+    checked: false
+  - text: "Define output formats (code, Figma updates, design tokens)"
+    checked: false
+  - text: "Select core values (from organization values list)"
+    checked: false
+  - text: "Define design-specific values (accessibility, consistency, etc.)"
+    checked: false
+  - text: "Create .values.md template"
+    checked: false
+  - text: "Identify required skills (design-discrepancy, ui-ux-design, peekaboo)"
+    checked: false
+  - text: "Install missing skills via ClawHub"
+    checked: false
+  - text: "Document skill triggers in agent SOUL.md"
+    checked: false
+  - text: "Test skill execution"
+    checked: false
+  - text: "Research Figma MCP (read/validate designs)"
+    checked: false
+  - text: "Research Chrome MCP (screenshot, inspect)"
+    checked: false
+  - text: "Research available MCPs (MCP Hub links)"
+    checked: false
+  - text: "Document MCP usage patterns"
+    checked: false
+  - text: "Review library topics (design/, usability/, creativity/)"
+    checked: false
+  - text: "Identify missing library topics"
+    checked: false
+  - text: "Add foundational design books via librarian"
+    checked: false
+  - text: "Document library structure in .library.md"
+    checked: false
+  - text: "Write SOUL.md personality & tone"
+    checked: false
+  - text: "Define example interactions"
+    checked: false
+  - text: "Define trigger phrases"
+    checked: false
+  - text: "Define handoff protocols (to other agents)"
+    checked: false
+  - text: "Validate agent.yaml schema"
+    checked: false
+  - text: "Test Matrix DM room"
+    checked: false
+  - text: "Verify values injection"
+    checked: false
 ---
-
-# Epic v0.2.0: Config Design Engineer
-
-**Goal:** Configure design-engineer agent with complete framework, skills, MCPs, values, and library.
-
-**Context:** Design-engineer agent exists but needs full configuration before activation.
-
----
-
-## Tasks
-
-### 1. Define Framework
-- [ ] Agent role & responsibilities (UI/UX implementation)
-- [ ] Decision boundaries (when to act vs ask)
-- [ ] Collaboration patterns (with UXR, business-analyst)
-- [ ] Output formats (code, Figma updates, design tokens)
-
-### 2. Define Values
-- [ ] Core values (from organization values list)
-- [ ] Design-specific values (accessibility, consistency, etc.)
-- [ ] Create `.values.md` template
-- [ ] Link to composite generator (future)
-
-### 3. Define Skills
-- [ ] Required skills (design-discrepancy, ui-ux-design, peekaboo)
-- [ ] Install missing skills via ClawHub
-- [ ] Document skill triggers in agent SOUL.md
-- [ ] Test skill execution
-
-### 4. Define MCPs
-- [ ] Figma MCP (read/validate designs)
-- [ ] Chrome MCP (screenshot, inspect)
-- [ ] Research available MCPs (MCP Hub links)
-- [ ] Document MCP usage patterns
-
-### 5. Review Library
-- [ ] Current topics: design/, usability/, creativity/
-- [ ] Missing topics (identify gaps)
-- [ ] Add foundational books (via librarian)
-- [ ] Document library structure in `.library.md`
-
-### 6. Define Prompt
-- [ ] SOUL.md personality & tone
-- [ ] Example interactions
-- [ ] Trigger phrases
-- [ ] Handoff protocols (to other agents)
-
-### 7. Lint & Tests
-- [ ] Validate agent.yaml schema
-- [ ] Test Matrix DM room
-- [ ] Test skill execution
-- [ ] Test library consultation
-- [ ] Verify values injection
-
----
-
-## Dependencies
-
-**Blocked by:**
-- Matrix setup (epic v3.6.0 in backstage project)
-
-**Blocks:**
-- Agent activation (status: backlog → active)
-
----
-
-## Research Notes
-
-**MCP Hub links:**
-- (To be added - Nicholas mentioned 2 MCP links in agent docs)
-
-**Values list:**
-- brevity, parity-contract, auditability, research, honesty (organization-wide)
-- Design-specific values TBD
-
-**Library structure:**
-- Current: `~/Documents/librarian/books/design/`
-- Topics: design_usability_general, design_system, design_typography, etc.
-
----
-
-## Success Criteria
-
-- [ ] design-engineer agent fully configured
-- [ ] All tasks checked
-- [ ] Test message in Matrix room → agent responds
-- [ ] Agent can execute skills, consult library, apply values
-- [ ] Documentation complete (agent.yaml, SOUL.md, .values.md, .library.md)
-
----
-
-**Next:** Start with task 1 (Define Framework)
