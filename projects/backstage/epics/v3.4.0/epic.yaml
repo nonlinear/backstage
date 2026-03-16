@@ -1,7 +1,7 @@
 ---
 name: "MCP setup"
 goal: "Configure Model Context Protocol infrastructure for agent tool access (Reddit, GitHub, etc.)"
-status: completed
+status: done
 type: "minor"
 created: 2026-03-09
 started: 2026-03-09
