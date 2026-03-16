@@ -1,11 +1,11 @@
 ---
 name: "Cover Extraction"
 goal: "Extract EPUB covers automatically, store in covers/ folder for GUI display"
-status: active
+status: done
 type: "minor"
 created: 2026-03-10
 started: 2026-03-10
-completed: null
+completed: 2026-03-16
 tasks:
   - text: "Create covers/ folder (visible, not hidden)"
     checked: true
