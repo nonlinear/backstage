@@ -196,7 +196,7 @@ Tasks:
 ## Anti-Patterns
 
 ### ❌ Markdown inside YAML
-Breaks UI parser. Use plain text or move to `index.md`.
+Breaks UI parser. Use plain text in YAML, move formatting to `index.md`.
 
 ### ❌ Vague tasks
 ```yaml
@@ -208,7 +208,7 @@ Breaks UI parser. Use plain text or move to `index.md`.
 ```
 
 ### ❌ Epic as knowledge dump
-Keep `epic.yaml` < 1KB. Split content into `.md` files.
+Keep `epic.yaml` < 1KB. Split long content into `.md` files.
 
 ---
 
@@ -219,5 +219,7 @@ Keep `epic.yaml` < 1KB. Split content into `.md` files.
 
 ---
 
-**Created:** 2026-03-16  
-**Location:** `~/Backstage/documentation/epics.md`
+> 🔜 **Future enhancements:**
+> - `backstage epic create` CLI command
+> - Task fields: `responsible` (agent), `description`, `tests`
+> - Automated checks before merge (enforce task completion)
