@@ -15,7 +15,7 @@ npm run dev -- --host 0.0.0.0
 ```
 
 **Access:**
-- Nicholas: `http://mac-studio.adal-rigel.ts.net:3000`
+- Nicholas: `http://studio.adal-rigel.ts.net:3000`
 - Hot reload: automatic (< 100ms)
 
 **Pros:**
@@ -54,9 +54,9 @@ docker run -d -p 8091:80 --name rex-v1 --restart unless-stopped rex-mui:v1
 ```
 
 **Access:**
-- v1: `http://mac-studio.adal-rigel.ts.net:8091`
-- v2: `http://mac-studio.adal-rigel.ts.net:8092`
-- v3: `http://mac-studio.adal-rigel.ts.net:8093`
+- v1: `http://studio.adal-rigel.ts.net:8091`
+- v2: `http://studio.adal-rigel.ts.net:8092`
+- v3: `http://studio.adal-rigel.ts.net:8093`
 
 **Pros:**
 - Production build (optimized)
@@ -102,7 +102,7 @@ docker run -d -p 8092:80 --name rex-step-1-v2 rex-mui:step-1-v2
 
 2. Nicholas accesses via Tailscale
    ```
-   http://mac-studio.adal-rigel.ts.net:3000
+   http://studio.adal-rigel.ts.net:3000
    ```
 
 3. Real-time collaboration:
@@ -120,7 +120,7 @@ docker run -d -p 8092:80 --name rex-step-1-v2 rex-mui:step-1-v2
 
 5. Permanent URL available:
    ```
-   http://mac-studio.adal-rigel.ts.net:8092
+   http://studio.adal-rigel.ts.net:8092
    ```
 
 6. Compare with previous:

@@ -143,7 +143,7 @@ Vite dev server → src/components/ → Agent edits → Hot reload (< 100ms)
 ```bash
 cd ~/Documents/wiley/Research\ Exchange
 npm run dev -- --host 0.0.0.0
-# Nicholas accesses: http://mac-studio.adal-rigel.ts.net:3000
+# Nicholas accesses: http://studio.adal-rigel.ts.net:3000
 ```
 
 **Why:** Same pattern as Simon's Datasette → instant visual feedback.
