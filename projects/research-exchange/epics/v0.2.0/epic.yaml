@@ -7,18 +7,20 @@ type: minor
 tasks:
   - text: "Setup Vite + React + MUI project"
     checked: false
-  - text: "Configure React Router (/, /steps/:id, /components/:name)"
+    notes: "Next.js already exists, verify Vite compatibility or keep Next"
+  - text: "Configure dev server (host 0.0.0.0 for Tailscale access)"
     checked: false
+  - text: "Setup Docker + Nginx for production preview"
+    checked: false
+    notes: "See deployment.md for Dockerfile and workflow"
   - text: "Implement Step 1-5 (My Submissions → Title)"
     checked: false
   - text: "Implement Step 6-10 (Abstract → Match Organizations)"
     checked: false
   - text: "Implement Step 11-15 (Additional Info → Confetti)"
     checked: false
-  - text: "Copy/content matching original ReX"
+  - text: "Setup Playwright component testing (code-based, not screenshot)"
     checked: false
-  - text: "Configure GitHub Pages deployment (GitHub Actions)"
-    checked: false
-  - text: "Verify all permalinks work (/steps/7, etc.)"
+  - text: "Verify paridade (Nicholas can access dev server via Tailscale)"
     checked: false
 ---
