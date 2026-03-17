@@ -92,9 +92,9 @@ stateDiagram-v2
 
 1️⃣ **backlog** - Created, not picked up  
 2️⃣ **intake** - Nicholas + business-analyst write basics  
-3️⃣ **grooming** - Agents bid, discuss until zero ambiguities (branch: `epic/v{version}`)  
-4️⃣ **ready** - Night shift execution (strict: zero tolerance for ambiguity)  
-5️⃣ **Failure** - Ambiguity found → back to grooming  
+3️⃣ **grooming** - Agents bid (declare stakeholder interest), discuss in Mattermost until zero ambiguities (branch: `epic/v{version}`)  
+4️⃣ **ready** - Zero ambiguities = agents consulted libraries + all tasks assignable + tool permissions confirmed  
+5️⃣ **Failure** - Ambiguity found during night shift → document in `notes.md`, back to grooming  
 6️⃣ **done** - Passes checks, merge to main
 
 ---
@@ -164,18 +164,92 @@ Tasks:
 
 ---
 
+## Grooming Process
+
+**Who:** Agents declare stakeholder interest ("I need to be stakeholder here")
+
+**Where:** Mattermost grooming rooms (project-specific channels)
+
+**What:** 
+- Agents ask clarifying questions
+- Shape epic direction
+- Consult respective library topics
+- Identify ambiguities
+
+**When done:**
+- All agent questions answered
+- Tasks are assignable (atomic, clear)
+- Tool permissions confirmed
+- Documented in epic/task files
+
+**Output:** `status: ready` (zero ambiguities)
+
+---
+
+## Subtasks
+
+Tasks cascade (task 2 starts when task 1 done).
+
+Break large tasks during grooming:
+
+```yaml
+# BEFORE (too large)
+- text: "Implement auth system"
+  checked: false
+
+# AFTER (atomic)
+- text: "Configure OAuth provider"
+  checked: false
+- text: "Implement JWT tokens"
+  checked: false
+- text: "Add refresh token logic"
+  checked: false
+```
+
+Stakeholders decide granularity during grooming.
+
+---
+
 ## When Ready Fails
 
-**If agent encounters ambiguity during execution:**
+**If agent encounters ambiguity during night shift:**
 
 1. STOP immediately (don't guess)
 2. Update `status: grooming` in epic.yaml
-3. Re-open Mattermost discussion
-4. Document: "Task X unclear because..."
-5. Resolve ambiguity
+3. Document in `notes.md`: "Task X unclear because..."
+4. Re-open Mattermost discussion
+5. Resolve ambiguity (consult libraries, ask questions)
 6. Return to `status: ready`
 
-**Philosophy:** Zero tolerance for ambiguity. Better to return to grooming than execute wrong solution.
+**Discovery loop:** Night shift may find NEW ambiguities. Iterate.
+
+**Lock in gains:** Meta agent reviews failures → suggests check improvements.
+
+---
+
+> 🔜 **TDD for Tasks (Future)**
+>
+> Tasks should follow test-driven development pattern:
+>
+> 1. **Red phase:** Write task describing success criteria
+> 2. **Confirm fail:** Verify task NOT complete (check fails)
+> 3. **Green phase:** Work on task until check passes
+> 4. **Mark checked:** Only when evidence confirms completion
+>
+> Example:
+> ```yaml
+> # BEFORE work
+> - text: "Add test coverage >80%"
+>   checked: false
+>
+> # Run check → FAIL (65% coverage)
+> # Work on tests
+> # Run check → PASS (82% coverage)
+>
+> # AFTER work
+> - text: "Add test coverage >80%"
+>   checked: true
+> ```
 
 ---
 
@@ -209,6 +283,24 @@ Breaks UI parser. Use plain text in YAML, move formatting to `index.md`.
 
 ### ❌ Epic as knowledge dump
 Keep `epic.yaml` < 1KB. Split long content into `.md` files.
+
+---
+
+## Auditability
+
+**Discussion:** Mattermost (ephemeral, searchable)  
+**Documentation:** Epic files (permanent, versioned)
+
+High auditability enables:
+- Commit history (what changed, when)
+- Mattermost room history (why decisions made)
+- Epic notes (context, constraints)
+
+Meta agent uses this to suggest process improvements:
+- More/fewer checks
+- Install apps for validation
+- Reorder workflow steps
+- Add library topics for best practices
 
 ---
 

@@ -12,6 +12,15 @@ Central project management system. Single source of truth for projects, epics, t
 **Project**  
 Collection of related epics. Location: `~/Backstage/projects/{PROJECT}/`
 
+Examples: `backstage`, `librarian`, `studio`, `personal`
+
+**Squad**  
+Group of agents with shared domain expertise. Squads provide checks, skills, library topics to members.
+
+Examples: `meta`, `design`, `development`, `marketing`, `resources`, `personal`
+
+Structure: `~/Backstage/agents/{SQUAD}/squad.yaml`
+
 **Epic**  
 Unit of work with version, tasks, status. Structure: `epics/v{X.Y.Z}/`
 
