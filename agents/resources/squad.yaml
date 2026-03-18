@@ -1,0 +1,17 @@
+---
+name: "Resources Squad"
+description: "Legal, financial, grant advisory, and security"
+status: active
+
+tools: []
+skills: []
+mcps: []
+library:
+  - finances_debt
+  - finances_mortgage
+  - finances_taxes
+  - cybersecurity_applied
+  - cybersecurity_history
+  - cybersecurity_strategy
+values: []
+---

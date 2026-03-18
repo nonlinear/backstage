@@ -1,8 +1,13 @@
 ---
 name: "Business Analyst"
 description: "Product strategy, market fit analysis, and roadmap grooming. Translates vision into deterministic epics with success criteria and gap analysis."
-status: configured
+status: connected
+squad: admin
 matrix_room: "!EQyjalpjgFwRZGsril:studio.adal-rigel.ts.net"
+mattermost_channel: "fh1zeqyiupbg5yy5gaa1a6ejoc"
+mattermost_bot_id: "bmcwnkarq7yoznwmnfzhmd15rh"
+mattermost_token: "cd31hqmqgigtdeydyhwpzcyebo"
+port: 18811
 
 tools: []
 skills: []

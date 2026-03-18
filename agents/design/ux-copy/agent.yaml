@@ -1,7 +1,11 @@
 ---
-name: "UX Copy"
-description: "Microcopy, tone consistency, and interface writing. Crafts clear, brief, actionable text for buttons, errors, tooltips, and onboarding flows."
-status: draft
+name: "Ux Copy"
+description: "Ux Copy agent (OpenClaw)"
+status: connected
+mattermost_channel: "f4obw5rg37ypby7uexwb4brj7c"
+mattermost_bot_id: "xj47muibtprn3gnpi9jzawdnzo"
+mattermost_token: "353xrrfp3bd8ujg7zas8xirsuy"
+port: 18794
 
 tools: []
 skills: []

@@ -1,7 +1,11 @@
 ---
 name: "Growth"
-description: "Acquisition analytics, funnel optimization, and experiment design. Tracks metrics, validates A/B tests, identifies conversion bottlenecks and growth levers."
-status: draft
+description: "Growth agent (OpenClaw)"
+status: connected
+mattermost_channel: "od3nsuxenpbyzmnb1sa5h611zo"
+mattermost_bot_id: "me1htfpywpduiyufkhdh17yy6o"
+mattermost_token: "9gr95xgrqbdbtjo3ire49tgrnw"
+port: 18799
 
 tools: []
 skills: []

@@ -1,11 +1,14 @@
 ---
 name: "Development"
-description: "Software engineering, code architecture, and implementation. Writes clean code, maintains test coverage, ensures quality and compliance standards."
-status: draft
+description: "Development agent (OpenClaw)"
+status: connected
+mattermost_channel: "gok4a679nbge9pbtruizfa13or"
+mattermost_bot_id: "s5h9orm8k3ngjnmb83zwittnfw"
+mattermost_token: "bni6ryg6pb88zdrx1k6c3r7h3w"
+port: 18796
 
 tools: []
-skills:
-  - tmux
+skills: []
 mcps: []
 library: []
 values: []

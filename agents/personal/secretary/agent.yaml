@@ -1,7 +1,11 @@
 ---
 name: "Secretary"
-description: "Clerical support, file management, and calendar coordination. Organizes documents, schedules reminders, maintains memory logs with precision and speed."
-status: draft
+description: "Secretary agent (OpenClaw)"
+status: connected
+mattermost_channel: "nicmcaki6fyc8rigbkqn44gspy"
+mattermost_bot_id: "tqmpde7ubtgmbrf9csp6sqj11a"
+mattermost_token: "n9dapzy83fykx8n3je5d8a558a"
+port: 18805
 
 tools: []
 skills: []

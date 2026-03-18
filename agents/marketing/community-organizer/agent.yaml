@@ -1,7 +1,11 @@
 ---
 name: "Community Organizer"
-description: "Community engagement, moderation, and relationship building. Welcomes newcomers, facilitates discussions, fosters belonging and participatory culture."
-status: draft
+description: "Community Organizer agent (OpenClaw)"
+status: connected
+mattermost_channel: "fxqnhg35rb8u88wgu6ghmygtjy"
+mattermost_bot_id: "uf34gj7biid1ik7ayk1eq55g3r"
+mattermost_token: "mkfxzh84wpgq7deemb5dsaazbc"
+port: 18800
 
 tools: []
 skills: []

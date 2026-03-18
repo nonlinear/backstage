@@ -6,6 +6,7 @@ status: active
 tools: []
 skills:
   - tmux
+  - mui-mcp
 mcps: []  # Inherits: github-mcp (org), playwright-mcp + figma-mcp (squad)
 library:
   # Technology

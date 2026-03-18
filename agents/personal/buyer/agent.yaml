@@ -1,7 +1,11 @@
 ---
 name: "Buyer"
-description: "Product research, price comparison, and deal hunting. Finds best value options, tracks price history, evaluates quality vs cost trade-offs."
-status: draft
+description: "Buyer agent (OpenClaw)"
+status: connected
+mattermost_channel: "ub1ja3tfmpb9zq688iwcmnjwtc"
+mattermost_bot_id: "ytr4w7m3i7gzmrfp3mxbas719h"
+mattermost_token: "n6s8rrptq38sjqgm6hybqgbcsa"
+port: 18806
 
 tools: []
 skills: []

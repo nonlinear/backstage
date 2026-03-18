@@ -1,7 +1,11 @@
 ---
 name: "Grant Advisor"
-description: "Fundraising strategy, grant proposal writing, and RFP alignment. Identifies opportunities, crafts compelling narratives, ensures budget compliance and timeline fit."
-status: draft
+description: "Grant Advisor agent (OpenClaw)"
+status: connected
+mattermost_channel: "9k5tcsceupd83bheg337kbh1er"
+mattermost_bot_id: "um18ycmmh7fifgm3ff17ryx77a"
+mattermost_token: "ji3wtj5q6idi58n5phufj5d86a"
+port: 18802
 
 tools: []
 skills: []

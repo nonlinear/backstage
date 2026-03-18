@@ -1,7 +1,11 @@
 ---
-name: "UXR"
-description: "User research, validation studies, and behavioral analysis. Runs surveys, analyzes feedback, validates assumptions with methodology rigor."
-status: draft
+name: "Uxr"
+description: "Uxr agent (OpenClaw)"
+status: connected
+mattermost_channel: "d4r3oswoht8k3gsatkstq9886r"
+mattermost_bot_id: "6y7ec3a3ct8ntd19nib58pgj1a"
+mattermost_token: "u678n8zynjb7ub977isufygd1o"
+port: 18793
 
 tools: []
 skills: []

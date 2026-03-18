@@ -1,0 +1,19 @@
+---
+name: "Personal Squad"
+description: "Personal productivity, health, travel, fitness, and divination"
+status: active
+
+tools: []
+skills: []
+mcps: []
+library:
+  - fitness
+  - magick_chaos
+  - magick_familiars
+  - magick_i_ching
+  - magick_manifestation
+  - magick_moon
+  - magick_self-metaprogramming
+  - magick_tarot
+values: []
+---

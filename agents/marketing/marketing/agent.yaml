@@ -1,7 +1,11 @@
 ---
 name: "Marketing"
-description: "Brand voice, campaign execution, and messaging strategy. Crafts narratives, manages social presence, ensures consistent tone across channels."
-status: draft
+description: "Marketing agent (OpenClaw)"
+status: connected
+mattermost_channel: "afz86u8najfm8jh64u5cyayeqe"
+mattermost_bot_id: "1gtpfe31pjn4zfa9bm8i4iweoc"
+mattermost_token: "oa7h7gu7ejy4iepjqaomfr8xay"
+port: 18798
 
 tools: []
 skills: []

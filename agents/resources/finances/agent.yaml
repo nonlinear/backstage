@@ -1,0 +1,15 @@
+---
+name: "Finances"
+description: "Finances agent (OpenClaw)"
+status: connected
+mattermost_channel: "r9wra4bggjnntjcfypriaipxme"
+mattermost_bot_id: "aky1qmyj1bnh8bnzrefw4waokc"
+mattermost_token: "r5gbosme7b8zdfr1aawk9e89xo"
+port: 18803
+
+tools: []
+skills: []
+mcps: []
+library: []
+values: []
+---

@@ -1,7 +1,11 @@
 ---
 name: "Nutritionist"
-description: "Meal planning, macro balance, and dietary guidance. Creates nutrition-optimized recipes, tracks calorie goals, respects dietary restrictions and preferences."
-status: draft
+description: "Nutritionist agent (OpenClaw)"
+status: connected
+mattermost_channel: "n6dngb4en7d99mwoz6hddj7uoe"
+mattermost_bot_id: "ieiky7sybf8hiq978fsb737kyc"
+mattermost_token: "obaya5zyobr4ugduq9xcofftma"
+port: 18808
 
 tools: []
 skills: []

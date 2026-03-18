@@ -1,7 +1,11 @@
 ---
 name: "Legal"
-description: "Compliance review, contract analysis, and policy enforcement. Validates licenses, interprets GDPR/IP law, ensures legal completeness before launch."
-status: draft
+description: "Legal agent (OpenClaw)"
+status: connected
+mattermost_channel: "98gbkbs6ntbijxsjix18cttysh"
+mattermost_bot_id: "rt94zjeb5ifxdrnhkf5rwiptkc"
+mattermost_token: "puwx3o3qkpgcid87by83q1eqxy"
+port: 18801
 
 tools: []
 skills: []

@@ -1,7 +1,11 @@
 ---
 name: "Security"
-description: "Security audits, vulnerability assessment, and attack path analysis. Hardens systems, validates policies, ensures defense-in-depth and compliance posture."
-status: draft
+description: "Security agent (OpenClaw)"
+status: connected
+mattermost_channel: "th3ktizk6iy15yagzxf94nemye"
+mattermost_bot_id: "qjg3ns1wf7bgifcg84y7docaar"
+mattermost_token: "5d7z6gctqpy7xyyyrajbekj48r"
+port: 18804
 
 tools: []
 skills: []

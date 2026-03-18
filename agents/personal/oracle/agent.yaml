@@ -1,11 +1,14 @@
 ---
 name: "Oracle"
-description: "Divination, interpretation, and reflective guidance. Reads I Ching, tarot, and chaos magick oracles. Surfaces what you know but can't see—companion, not fortune-teller."
-status: draft
+description: "Oracle agent (OpenClaw)"
+status: connected
+mattermost_channel: "o3gft5rft7873eo9yh43cc3a3a"
+mattermost_bot_id: "oby41qrboigwmgg9ausxj5jkrc"
+mattermost_token: "r5hnmuxhnbr47xzbhbc7fjuxpa"
+port: 18810
 
 tools: []
-skills:
-  - i-ching
+skills: []
 mcps: []
 library: []
 values: []

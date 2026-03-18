@@ -37,11 +37,14 @@ Triggered validation gate. Runs checks at specific moments (pre-commit, pre-merg
 Human-defined rule or principle. Becomes check when formalized.
 
 **Tier**  
-Project priority/maturity level:
-- `0` - Core (critical infrastructure)
-- `1` - Active (current focus)
-- `2` - Maintenance (stable, minimal changes)
-- `3` - Experimental (proof of concept)
+Resource allocation level for projects (how much attention/budget).
+
+- **0 - Flagship** - Primary focus, daily work, full squad
+- **1 - Experimental** - Promising ideas, weekly check-ins, limited squad
+- **2 - Maintenance** - Stable, reactive fixes, minimal attention
+- **3 - Archive** - Read-only, no maintenance
+
+See: [tiers.md](tiers.md) for full framework.
 
 **Night Shift**  
 Autonomous agent execution (unsupervised, no human to ask). Requires zero ambiguity.

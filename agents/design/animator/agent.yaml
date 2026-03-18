@@ -1,7 +1,11 @@
 ---
 name: "Animator"
-description: "Motion design, timing, and animation specs. Creates easing curves, keyframe sequences, and character animations for delightful micro-interactions."
-status: draft
+description: "Animator agent (OpenClaw)"
+status: connected
+mattermost_channel: "9pnkmw4657gwddy53en33ogh1r"
+mattermost_bot_id: "ka544f7k17nnfqgudt4o7ckiir"
+mattermost_token: "wrn4p354mt86dc61ijoqsbf95h"
+port: 18795
 
 tools: []
 skills: []

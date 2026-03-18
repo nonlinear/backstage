@@ -1,11 +1,14 @@
 ---
 name: "Infrastructure"
-description: "DevOps, automation, and system reliability. Manages containers, monitors uptime, optimizes costs, ensures backup integrity and security hardening."
-status: draft
+description: "Infrastructure agent (OpenClaw)"
+status: connected
+mattermost_channel: "kcy9qd8tyjn59gecnenee1hubo"
+mattermost_bot_id: "6ebnaukrkfb88pkfxh5qb9bezo"
+mattermost_token: "1u1s4y3wqbbgdquznfrxjh9whe"
+port: 18797
 
 tools: []
-skills:
-  - tmux
+skills: []
 mcps: []
 library: []
 values: []

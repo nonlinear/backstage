@@ -1,0 +1,18 @@
+---
+name: "Engineering Squad"
+description: "Software development and infrastructure operations"
+status: active
+
+tools: []
+skills: []
+mcps: []
+library:
+  - technology_computer_vision
+  - technology_hugo
+  - technology_internet_of_things
+  - technology_processing
+  - technology_threejs
+  - technology_vscode
+  - technology_web_animation
+values: []
+---

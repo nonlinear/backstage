@@ -1,0 +1,26 @@
+---
+name: Development
+description: Engineering squad - code, architecture, technical implementation
+emoji: 💻
+
+agents:
+  - development
+  - infrastructure
+
+library:
+  - technology
+
+skills:
+  - github
+  - docker
+  - code-review
+  - ci-cd
+
+checks:
+  - code-quality
+  - test-coverage
+  - security
+
+values:
+  - code-is-cheap
+---

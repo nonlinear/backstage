@@ -1,0 +1,24 @@
+---
+name: "Design Squad"
+description: "User research, visual design, UX copy, and animation"
+status: active
+
+tools: []
+skills: []
+mcps: []
+library:
+  - design_usability_general
+  - design_usability_rosenfeld
+  - creativity_art_direction
+  - creativity_brand_strategy
+  - creativity_writing
+  - design_character
+  - design_circular
+  - design_data_visualization
+  - design_generative
+  - design_interaction
+  - design_system
+  - design_theory
+  - design_typography
+values: []
+---

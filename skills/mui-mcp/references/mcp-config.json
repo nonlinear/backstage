@@ -1,0 +1,6 @@
+{
+  "name": "mui-mcp",
+  "command": "npx",
+  "args": ["-y", "@mui/mcp@latest"],
+  "env": {}
+}

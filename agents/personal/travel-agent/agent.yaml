@@ -1,7 +1,11 @@
 ---
 name: "Travel Agent"
-description: "Trip planning, itinerary optimization, and logistics coordination. Researches destinations, books accommodations, ensures budget and safety constraints."
-status: draft
+description: "Travel Agent agent (OpenClaw)"
+status: connected
+mattermost_channel: "hf1x4denk7gideocgm9e1hzb9r"
+mattermost_bot_id: "acm1xm7x3bdpuc1w1xyxcqemty"
+mattermost_token: "itajk3aeajdfifhnbqnf66h67r"
+port: 18807
 
 tools: []
 skills: []
